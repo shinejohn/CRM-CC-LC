@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "HOOK-013",
+    "week": 13,
+    "day": 13,
+    "type": "HOOK",
+    "title": "Free Trial Offer",
+    "subject": "Free Trial Offer",
+    "landing_page": "social-posting-trial",
+    "template": "trial-offer",
+    "description": "Free Trial Offer - Get user to take immediate action"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-013",
+    "landing_page_slug": "social-posting-trial",
+    "url": "/learn/social-posting-trial",
+    "template_id": "trial-offer",
+    "template_name": "Free Trial Offer",
+    "slide_count": 5,
+    "duration_seconds": 40,
+    "primary_cta": "signup_free",
+    "secondary_cta": "schedule_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Excited, helpful",
+    "ai_goal": "Get user to take immediate action",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/social-posting-trial/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week10-hook",
+    "utm_content": "HOOK-013"
+  },
+  "template": {
+    "template_id": "trial-offer",
+    "name": "Free Trial Offer",
+    "slides": 5,
+    "duration": 40,
+    "purpose": "hook",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "social-posting-trial",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/social-posting-trial/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

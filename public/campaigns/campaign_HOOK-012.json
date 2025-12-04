@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "HOOK-012",
+    "week": 12,
+    "day": 12,
+    "type": "HOOK",
+    "title": "Influencer Application",
+    "subject": "Influencer Application",
+    "landing_page": "influencer-program",
+    "template": "influencer-application",
+    "description": "Influencer Application - Get user to take immediate action"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-012",
+    "landing_page_slug": "influencer-program",
+    "url": "/learn/influencer-program",
+    "template_id": "influencer-application",
+    "template_name": "Influencer Application",
+    "slide_count": 6,
+    "duration_seconds": 50,
+    "primary_cta": "signup_free",
+    "secondary_cta": "schedule_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Excited, helpful",
+    "ai_goal": "Get user to take immediate action",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/influencer-program/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week9-hook",
+    "utm_content": "HOOK-012"
+  },
+  "template": {
+    "template_id": "influencer-application",
+    "name": "Influencer Application",
+    "slides": 6,
+    "duration": 50,
+    "purpose": "hook",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "influencer-program",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/influencer-program/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

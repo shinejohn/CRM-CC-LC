@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "HOOK-003",
+    "week": 3,
+    "day": 3,
+    "type": "HOOK",
+    "title": "Coupon Creator",
+    "subject": "Coupon Creator",
+    "landing_page": "create-coupon",
+    "template": "coupon-creator",
+    "description": "Coupon Creator - Get user to take immediate action"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-003",
+    "landing_page_slug": "create-coupon",
+    "url": "/learn/create-coupon",
+    "template_id": "coupon-creator",
+    "template_name": "Coupon Creator",
+    "slide_count": 5,
+    "duration_seconds": 35,
+    "primary_cta": "signup_free",
+    "secondary_cta": "schedule_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Excited, helpful",
+    "ai_goal": "Get user to take immediate action",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/create-coupon/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week2-hook",
+    "utm_content": "HOOK-003"
+  },
+  "template": {
+    "template_id": "coupon-creator",
+    "name": "Coupon Creator",
+    "slides": 5,
+    "duration": 35,
+    "purpose": "hook",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "create-coupon",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/create-coupon/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

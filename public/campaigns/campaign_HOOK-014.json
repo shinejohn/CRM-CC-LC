@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "HOOK-014",
+    "week": 14,
+    "day": 14,
+    "type": "HOOK",
+    "title": "Seasonal Promotion",
+    "subject": "Seasonal Promotion",
+    "landing_page": "holiday-events",
+    "template": "seasonal-promotion",
+    "description": "Seasonal Promotion - Get user to take immediate action"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-014",
+    "landing_page_slug": "holiday-events",
+    "url": "/learn/holiday-events",
+    "template_id": "seasonal-promotion",
+    "template_name": "Seasonal Promotion",
+    "slide_count": 5,
+    "duration_seconds": 40,
+    "primary_cta": "signup_free",
+    "secondary_cta": "schedule_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Excited, helpful",
+    "ai_goal": "Get user to take immediate action",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/holiday-events/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week10-hook",
+    "utm_content": "HOOK-014"
+  },
+  "template": {
+    "template_id": "seasonal-promotion",
+    "name": "Seasonal Promotion",
+    "slides": 5,
+    "duration": 40,
+    "purpose": "hook",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "holiday-events",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/holiday-events/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

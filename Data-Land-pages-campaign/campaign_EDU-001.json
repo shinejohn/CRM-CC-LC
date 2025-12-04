@@ -1,0 +1,152 @@
+{
+  "campaign": {
+    "id": "EDU-001",
+    "week": 1,
+    "day": 2,
+    "type": "Educational",
+    "title": "SEO is Dead for SMBs",
+    "subject": "Google SEO is broken for small businesses - here's the truth",
+    "landing_page": "seo-reality-check",
+    "template": "educational",
+    "description": "Explain how AI search is replacing traditional SEO and what SMBs should do"
+  },
+  "landing_page": {
+    "campaign_id": "EDU-001",
+    "landing_page_slug": "seo-reality-check",
+    "url": "/learn/seo-reality-check",
+    "template_id": "educational",
+    "template_name": "Educational Content",
+    "slide_count": 7,
+    "duration_seconds": 75,
+    "primary_cta": "download_guide",
+    "secondary_cta": "start_trial",
+    "ai_persona": "Sarah",
+    "ai_tone": "Knowledgeable, patient",
+    "ai_goal": "Build trust through education",
+    "data_capture_fields": "name, email, business_name, industry, current_challenges",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/seo-reality-check/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "education",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week1-educational",
+    "utm_content": "EDU-001"
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 75,
+    "purpose": "education",
+    "audio_required": true
+  },
+  "slides": [
+    {
+      "template_id": "educational",
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "content_type": "topic_intro",
+      "requires_personalization": true,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "template_id": "educational",
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "content_type": "key_concept",
+      "requires_personalization": false,
+      "audio_file": "slide-02-concept.mp3"
+    },
+    {
+      "template_id": "educational",
+      "slide_num": 3,
+      "component": "DataSlide",
+      "content_type": "statistics",
+      "requires_personalization": false,
+      "audio_file": "slide-03-data.mp3"
+    },
+    {
+      "template_id": "educational",
+      "slide_num": 4,
+      "component": "ComparisonSlide",
+      "content_type": "before_after",
+      "requires_personalization": true,
+      "audio_file": "slide-04-comparison.mp3"
+    },
+    {
+      "template_id": "educational",
+      "slide_num": 5,
+      "component": "ActionSlide",
+      "content_type": "what_to_do",
+      "requires_personalization": true,
+      "audio_file": "slide-05-action.mp3"
+    },
+    {
+      "template_id": "educational",
+      "slide_num": 6,
+      "component": "ResourceSlide",
+      "content_type": "resources",
+      "requires_personalization": false,
+      "audio_file": "slide-06-resources.mp3"
+    },
+    {
+      "template_id": "educational",
+      "slide_num": 7,
+      "component": "CTASlide",
+      "content_type": "next_steps",
+      "requires_personalization": true,
+      "audio_file": "slide-07-cta.mp3"
+    }
+  ],
+  "presentation": {
+    "id": "seo-reality-check",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/seo-reality-check/audio/",
+      "format": "mp3"
+    },
+    "slides": [
+      {
+        "id": 1,
+        "component": "HeroSlide",
+        "audioFile": "slide-01-intro.mp3",
+        "requiresPersonalization": true
+      },
+      {
+        "id": 2,
+        "component": "ConceptSlide",
+        "audioFile": "slide-02-concept.mp3",
+        "requiresPersonalization": false
+      },
+      {
+        "id": 3,
+        "component": "DataSlide",
+        "audioFile": "slide-03-data.mp3",
+        "requiresPersonalization": false
+      },
+      {
+        "id": 4,
+        "component": "ComparisonSlide",
+        "audioFile": "slide-04-comparison.mp3",
+        "requiresPersonalization": true
+      },
+      {
+        "id": 5,
+        "component": "ActionSlide",
+        "audioFile": "slide-05-action.mp3",
+        "requiresPersonalization": true
+      },
+      {
+        "id": 6,
+        "component": "ResourceSlide",
+        "audioFile": "slide-06-resources.mp3",
+        "requiresPersonalization": false
+      },
+      {
+        "id": 7,
+        "component": "CTASlide",
+        "audioFile": "slide-07-cta.mp3",
+        "requiresPersonalization": true
+      }
+    ]
+  }
+}

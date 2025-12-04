@@ -1,0 +1,166 @@
+{
+  "campaign": {
+    "id": "HOWTO-001",
+    "week": 1,
+    "day": 4,
+    "type": "How-To",
+    "title": "Command Center Basics",
+    "subject": "Your Command Center is ready - here's how to use it",
+    "landing_page": "command-center-basics",
+    "template": "tutorial",
+    "description": "Basic walkthrough of Command Center features"
+  },
+  "landing_page": {
+    "campaign_id": "HOWTO-001",
+    "landing_page_slug": "command-center-basics",
+    "url": "/learn/command-center-basics",
+    "template_id": "tutorial",
+    "template_name": "How-To Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 60,
+    "primary_cta": "start_trial",
+    "secondary_cta": "contact_sales",
+    "ai_persona": "Emma",
+    "ai_tone": "Helpful, step-by-step",
+    "ai_goal": "Guide user through process",
+    "data_capture_fields": "name, email, business_name, setup_preferences",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/command-center-basics/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "engagement",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week1-how-to",
+    "utm_content": "HOWTO-001"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "How-To Tutorial",
+    "slides": 8,
+    "duration": 60,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
+  "slides": [
+    {
+      "template_id": "tutorial",
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "content_type": "tutorial_intro",
+      "requires_personalization": true,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "template_id": "tutorial",
+      "slide_num": 2,
+      "component": "OverviewSlide",
+      "content_type": "what_youll_learn",
+      "requires_personalization": false,
+      "audio_file": "slide-02-overview.mp3"
+    },
+    {
+      "template_id": "tutorial",
+      "slide_num": 3,
+      "component": "StepSlide",
+      "content_type": "step_1",
+      "requires_personalization": false,
+      "audio_file": "slide-03-step1.mp3"
+    },
+    {
+      "template_id": "tutorial",
+      "slide_num": 4,
+      "component": "StepSlide",
+      "content_type": "step_2",
+      "requires_personalization": false,
+      "audio_file": "slide-04-step2.mp3"
+    },
+    {
+      "template_id": "tutorial",
+      "slide_num": 5,
+      "component": "StepSlide",
+      "content_type": "step_3",
+      "requires_personalization": false,
+      "audio_file": "slide-05-step3.mp3"
+    },
+    {
+      "template_id": "tutorial",
+      "slide_num": 6,
+      "component": "DemoSlide",
+      "content_type": "live_demo",
+      "requires_personalization": true,
+      "audio_file": "slide-06-demo.mp3"
+    },
+    {
+      "template_id": "tutorial",
+      "slide_num": 7,
+      "component": "TipsSlide",
+      "content_type": "pro_tips",
+      "requires_personalization": true,
+      "audio_file": "slide-07-tips.mp3"
+    },
+    {
+      "template_id": "tutorial",
+      "slide_num": 8,
+      "component": "CTASlide",
+      "content_type": "try_it_now",
+      "requires_personalization": true,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "presentation": {
+    "id": "command-center-basics",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/command-center-basics/audio/",
+      "format": "mp3"
+    },
+    "slides": [
+      {
+        "id": 1,
+        "component": "HeroSlide",
+        "audioFile": "slide-01-intro.mp3",
+        "requiresPersonalization": true
+      },
+      {
+        "id": 2,
+        "component": "OverviewSlide",
+        "audioFile": "slide-02-overview.mp3",
+        "requiresPersonalization": false
+      },
+      {
+        "id": 3,
+        "component": "StepSlide",
+        "audioFile": "slide-03-step1.mp3",
+        "requiresPersonalization": false
+      },
+      {
+        "id": 4,
+        "component": "StepSlide",
+        "audioFile": "slide-04-step2.mp3",
+        "requiresPersonalization": false
+      },
+      {
+        "id": 5,
+        "component": "StepSlide",
+        "audioFile": "slide-05-step3.mp3",
+        "requiresPersonalization": false
+      },
+      {
+        "id": 6,
+        "component": "DemoSlide",
+        "audioFile": "slide-06-demo.mp3",
+        "requiresPersonalization": true
+      },
+      {
+        "id": 7,
+        "component": "TipsSlide",
+        "audioFile": "slide-07-tips.mp3",
+        "requiresPersonalization": true
+      },
+      {
+        "id": 8,
+        "component": "CTASlide",
+        "audioFile": "slide-08-cta.mp3",
+        "requiresPersonalization": true
+      }
+    ]
+  }
+}

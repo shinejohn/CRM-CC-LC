@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "HOOK-005",
+    "week": 5,
+    "day": 5,
+    "type": "HOOK",
+    "title": "Classified Ad Posting",
+    "subject": "Classified Ad Posting",
+    "landing_page": "post-classified",
+    "template": "classified-posting",
+    "description": "Classified Ad Posting - Get user to take immediate action"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-005",
+    "landing_page_slug": "post-classified",
+    "url": "/learn/post-classified",
+    "template_id": "classified-posting",
+    "template_name": "Classified Ad Posting",
+    "slide_count": 5,
+    "duration_seconds": 35,
+    "primary_cta": "signup_free",
+    "secondary_cta": "schedule_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Excited, helpful",
+    "ai_goal": "Get user to take immediate action",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/post-classified/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week4-hook",
+    "utm_content": "HOOK-005"
+  },
+  "template": {
+    "template_id": "classified-posting",
+    "name": "Classified Ad Posting",
+    "slides": 5,
+    "duration": 35,
+    "purpose": "hook",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "post-classified",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/post-classified/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

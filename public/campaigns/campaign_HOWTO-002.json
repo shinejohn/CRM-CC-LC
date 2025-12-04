@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "HOWTO-002",
+    "week": 2,
+    "day": 2,
+    "type": "HOWTO",
+    "title": "How-To Tutorial",
+    "subject": "How-To Tutorial",
+    "landing_page": "create-article",
+    "template": "tutorial",
+    "description": "How-To Tutorial - Guide user through process"
+  },
+  "landing_page": {
+    "campaign_id": "HOWTO-002",
+    "landing_page_slug": "create-article",
+    "url": "/learn/create-article",
+    "template_id": "tutorial",
+    "template_name": "How-To Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 60,
+    "primary_cta": "start_trial",
+    "secondary_cta": "contact_sales",
+    "ai_persona": "Emma",
+    "ai_tone": "Helpful, step-by-step",
+    "ai_goal": "Guide user through process",
+    "data_capture_fields": "name, email, business_name, setup_preferences",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/create-article/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "engagement",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week2-how-to",
+    "utm_content": "HOWTO-002"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "How-To Tutorial",
+    "slides": 8,
+    "duration": 60,
+    "purpose": "howto",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "create-article",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/create-article/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

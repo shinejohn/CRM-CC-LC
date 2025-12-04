@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "EDU-015",
+    "week": 15,
+    "day": 15,
+    "type": "EDU",
+    "title": "AI Employee Introduction",
+    "subject": "AI Employee Introduction",
+    "landing_page": "ai-employees-explained",
+    "template": "ai-intro",
+    "description": "AI Employee Introduction - Build trust through education"
+  },
+  "landing_page": {
+    "campaign_id": "EDU-015",
+    "landing_page_slug": "ai-employees-explained",
+    "url": "/learn/ai-employees-explained",
+    "template_id": "ai-intro",
+    "template_name": "AI Employee Introduction",
+    "slide_count": 9,
+    "duration_seconds": 90,
+    "primary_cta": "download_guide",
+    "secondary_cta": "start_trial",
+    "ai_persona": "Sarah",
+    "ai_tone": "Knowledgeable, patient",
+    "ai_goal": "Build trust through education",
+    "data_capture_fields": "name, email, business_name, industry, current_challenges",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-employees-explained/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "education",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week11-educational",
+    "utm_content": "EDU-015"
+  },
+  "template": {
+    "template_id": "ai-intro",
+    "name": "AI Employee Introduction",
+    "slides": 9,
+    "duration": 90,
+    "purpose": "edu",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "ai-employees-explained",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/ai-employees-explained/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "HOOK-015",
+    "week": 15,
+    "day": 15,
+    "type": "HOOK",
+    "title": "Business Nomination",
+    "subject": "Business Nomination",
+    "landing_page": "business-nomination",
+    "template": "nomination",
+    "description": "Business Nomination - Get user to take immediate action"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-015",
+    "landing_page_slug": "business-nomination",
+    "url": "/learn/business-nomination",
+    "template_id": "nomination",
+    "template_name": "Business Nomination",
+    "slide_count": 5,
+    "duration_seconds": 35,
+    "primary_cta": "signup_free",
+    "secondary_cta": "schedule_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Excited, helpful",
+    "ai_goal": "Get user to take immediate action",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/business-nomination/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week11-hook",
+    "utm_content": "HOOK-015"
+  },
+  "template": {
+    "template_id": "nomination",
+    "name": "Business Nomination",
+    "slides": 5,
+    "duration": 35,
+    "purpose": "hook",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "business-nomination",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/business-nomination/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "HOOK-002",
+    "week": 2,
+    "day": 2,
+    "type": "HOOK",
+    "title": "Event Posting Guide",
+    "subject": "Event Posting Guide",
+    "landing_page": "post-your-event",
+    "template": "event-posting",
+    "description": "Event Posting Guide - Get user to take immediate action"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-002",
+    "landing_page_slug": "post-your-event",
+    "url": "/learn/post-your-event",
+    "template_id": "event-posting",
+    "template_name": "Event Posting Guide",
+    "slide_count": 5,
+    "duration_seconds": 40,
+    "primary_cta": "signup_free",
+    "secondary_cta": "schedule_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Excited, helpful",
+    "ai_goal": "Get user to take immediate action",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/post-your-event/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week1-hook",
+    "utm_content": "HOOK-002"
+  },
+  "template": {
+    "template_id": "event-posting",
+    "name": "Event Posting Guide",
+    "slides": 5,
+    "duration": 40,
+    "purpose": "hook",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "post-your-event",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/post-your-event/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

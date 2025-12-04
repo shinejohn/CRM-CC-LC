@@ -1,0 +1,61 @@
+id,week,day,type,title,subject,landing_page,template,description
+HOOK-001,1,1,Hook,Free Business Listing Alert,Your business is already in our directory - claim it now,claim-your-listing,claim-listing,Show SMB their auto-generated listing and invite them to claim/polish it for free
+EDU-001,1,2,Educational,SEO is Dead for SMBs,Google SEO is broken for small businesses - here's the truth,seo-reality-check,educational,Explain how AI search is replacing traditional SEO and what SMBs should do
+HOOK-002,1,3,Hook,Local Event Spotlight,Your competitors are promoting events here - where are yours?,post-your-event,event-posting,Show local events and invite them to post theirs
+HOWTO-001,1,4,How-To,Command Center Basics,Your Command Center is ready - here's how to use it,command-center-basics,tutorial,Basic walkthrough of Command Center features
+EDU-002,1,5,Educational,AI Marketing Basics,AI marketing for beginners: What every local business needs to know,ai-marketing-101,educational,Intro to AI marketing concepts in simple terms
+HOOK-003,2,1,Hook,Coupon Creator,Create your first coupon in 60 seconds - free trial,create-coupon,coupon-creator,Interactive coupon creation with instant preview
+EDU-003,2,2,Educational,AI as Marketing Tool,How to use AI as your 24/7 marketing assistant,ai-marketing-assistant,educational,Show practical AI marketing applications for SMBs
+HOWTO-002,2,3,How-To,Create Your First Article,Get featured in Day.News - submit your story in 5 minutes,create-article,tutorial,Step-by-step article submission tutorial
+HOWTO-003,2,4,How-To,Event Creation Guide,Post your next event - it takes 3 minutes,event-creation-guide,tutorial,Complete event posting walkthrough
+EDU-004,2,5,Educational,AI Operations Overview,Running a leaner business with AI: Operations simplified,ai-operations-guide,educational,Overview of AI for business operations
+HOOK-004,3,1,Hook,Day.News Feature,Want to be featured in Day.News? Here's how,get-featured,feature-application,Application to get featured story on Day.News
+HOWTO-004,3,2,How-To,Premium Venue Setup,Make your business a Premium Venue - get discovered,premium-venue-setup,tutorial,Premium venue listing configuration
+EDU-005,3,3,Educational,AI Search Discovery,How AI will find (or ignore) your business in 2025,ai-search-visibility,educational,"Explain how ChatGPT, Gemini, Claude reference local businesses"
+HOWTO-005,3,4,How-To,Performer Profile,Are you a performer? Get discovered by venues,performer-registration,tutorial,Performer profile creation and venue matching
+HOWTO-006,3,5,How-To,Announcement Posting,Share your news - post an announcement today,post-announcement,tutorial,Business announcement creation guide
+HOOK-005,4,1,Hook,Classified Ads Free Trial,"Post a free classified ad - reach 50,000+ locals",post-classified,classified-posting,Free classified ad posting offer
+EDU-006,4,2,Educational,Community Marketing Power,Why community platforms beat social media for local business,community-marketing,educational,Compare community platform ROI vs social media
+HOWTO-007,4,3,How-To,Multi-Community Management,Expand your reach - manage multiple communities,multi-community-guide,tutorial,Managing presence across multiple communities
+HOWTO-008,4,4,How-To,AI Sales Agent Setup,Set up your AI salesperson - never miss a lead,ai-sales-setup,tutorial,AI sales agent configuration walkthrough
+EDU-007,4,5,Educational,Reputation in AI Age,Your online reputation in the AI age - what's changed,reputation-ai-age,educational,How AI aggregators affect business reputation
+HOOK-006,5,1,Hook,CRM Integration Offer,Connect your CRM - free 30-day automation,crm-integration,integration,CRM integration setup with automation benefits
+HOWTO-009,5,2,How-To,Dashboard Tour,Master your dashboard - complete video tour,dashboard-tour,tutorial,Complete dashboard navigation tutorial
+EDU-008,5,3,Educational,AI Customer Service,AI customer service: What it can (and can't) do for you,ai-customer-service,educational,Realistic expectations for AI customer service
+HOWTO-010,5,4,How-To,Social Media Connection,Connect all your social accounts in one place,social-connection-guide,tutorial,Social media account integration
+HOWTO-011,5,5,How-To,Email Marketing Setup,Set up your first email campaign - 10 minute guide,email-marketing-setup,tutorial,Email campaign creation walkthrough
+HOOK-007,6,1,Hook,Featured Listing Upgrade,Get featured at the top of search results - limited spots,featured-listing,upgrade-offer,Featured listing upgrade with scarcity
+EDU-009,6,2,Educational,Voice AI Revolution,Voice AI is changing how customers find businesses,voice-ai-guide,educational,How voice assistants affect local discovery
+HOWTO-012,6,3,How-To,Review Response Guide,Respond to reviews like a pro - AI assistance included,review-response-guide,tutorial,AI-assisted review response training
+HOWTO-013,6,4,How-To,Automated Posting,Set it and forget it - automate your social posts,automated-posting-guide,tutorial,Social posting automation setup
+EDU-010,6,5,Educational,Local vs National SEO,Local SEO vs National SEO - why the rules are different,local-seo-guide,educational,Local SEO strategy for SMBs
+HOOK-008,7,1,Hook,Newsletter Advertising,"Your ad in our newsletter - 5,000 subscribers waiting",newsletter-advertising,advertising-offer,Show newsletter samples and advertising options
+HOWTO-014,7,2,How-To,Customer Survey Tool,Get customer feedback automatically - here's how,customer-survey-setup,tutorial,Automated customer survey configuration
+HOOK-009,7,3,Hook,Community Sponsor Program,[City] is looking for community sponsors - be seen everywhere,become-sponsor,sponsor-application,Highlight sponsor benefits and visibility across platforms
+HOWTO-015,7,4,How-To,Analytics Deep Dive,Understand your analytics - what the numbers mean,analytics-guide,tutorial,Analytics interpretation and action planning
+EDU-011,7,5,Educational,AI Content Creation,Let AI write your content - but keep your voice,ai-content-guide,educational,AI content creation best practices
+HOOK-010,8,1,Hook,Article Embed Ads,Your ad embedded in local news articles - new opportunity,article-advertising,advertising-offer,Show how ads appear within relevant news content
+HOOK-011,8,2,Hook,Expert Directory,Join our Community Expert directory - get referrals,expert-registration,expert-application,Invite service professionals to register as community experts
+HOWTO-016,8,3,How-To,Lead Capture Forms,Capture more leads with smart forms - setup guide,lead-capture-guide,tutorial,Lead capture form creation and optimization
+EDU-012,8,4,Educational,Future-Proofing Business,Future-proof your business: The next 5 years of local marketing,future-proof-guide,educational,Strategic planning for AI-driven future
+HOWTO-017,8,5,How-To,Appointment Booking,Let customers book appointments 24/7 - setup in 5 minutes,appointment-booking-setup,tutorial,Online booking system configuration
+HOOK-012,9,1,Hook,Community Influencer,Become a Community Influencer - lead local conversations,influencer-program,influencer-application,Recruit local thought leaders as community influencers
+HOWTO-018,9,2,How-To,Invoice Automation,Automate your invoicing - get paid faster,invoice-automation-guide,tutorial,AI-powered invoicing setup
+EDU-013,9,3,Educational,Data Privacy Basics,Customer data privacy - what you need to know in 2025,data-privacy-guide,educational,Data privacy compliance for small businesses
+HOWTO-019,9,4,How-To,SMS Marketing Setup,Text message marketing - setup your first campaign,sms-marketing-guide,tutorial,SMS marketing campaign configuration
+HOWTO-020,9,5,How-To,Custom FAQ Builder,Build your business FAQ - AI handles the questions,faq-builder-guide,tutorial,AI FAQ system configuration
+HOOK-013,10,1,Hook,Social Media Posts,We'll post about your business on social media - free trial,social-posting-trial,trial-offer,Offer trial of automated social posting service
+EDU-014,10,2,Educational,Competitive Intelligence,Know what your competitors are doing - AI insights,competitive-intelligence,educational,Competitive monitoring and analysis tools
+HOWTO-021,10,3,How-To,Google Integration,Connect Google Business Profile - sync everything,google-integration-guide,tutorial,Google Business Profile integration setup
+HOOK-014,10,4,Hook,Holiday Event Promotion,Holiday season is coming - book your event listing NOW,holiday-events,seasonal-promotion,Seasonal event promotion push with urgency
+HOWTO-022,10,5,How-To,Workflow Automation,Automate your daily tasks - workflow builder guide,workflow-automation-guide,tutorial,Custom workflow automation creation
+EDU-015,11,1,Educational,AI Employee Deep Dive,AI employees explained - what they really do for you,ai-employees-explained,ai-intro,Comprehensive AI employee capabilities overview
+HOOK-015,11,2,Hook,Business of the Month,Nominate your business for Business of the Month,business-nomination,nomination,Business of the Month nomination and benefits
+HOWTO-023,11,3,How-To,Report Generation,Generate professional reports automatically,report-generation-guide,tutorial,Automated business report creation
+HOWTO-024,11,4,How-To,Customer Segmentation,Know your customers - segmentation made easy,customer-segmentation-guide,tutorial,Customer segmentation and targeting
+HOWTO-025,11,5,How-To,Advanced AI Training,Train your AI to sound like you - advanced customization,ai-training-guide,tutorial,Advanced AI personalization
+HOWTO-026,12,1,How-To,Integration Marketplace,Connect your favorite tools - integration marketplace,integration-marketplace,tutorial,Third-party integration options
+HOWTO-027,12,2,How-To,Team Collaboration,Add team members - collaborate efficiently,team-collaboration-guide,tutorial,Team member management and permissions
+HOWTO-028,12,3,How-To,Content Calendar,Plan your content - calendar management guide,content-calendar-guide,tutorial,Content planning and scheduling
+HOWTO-029,12,4,How-To,ROI Tracking,Track your ROI - see what's working,roi-tracking-guide,tutorial,ROI measurement and optimization
+HOWTO-030,12,5,How-To,Success Playbook,Your 90-day success playbook - what's next,success-playbook,tutorial,Complete success roadmap and next steps

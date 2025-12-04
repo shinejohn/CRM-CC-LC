@@ -1,0 +1,12 @@
+{
+  "name": "ai-handler",
+  "version": "1.0.0",
+  "description": "AI Conversation Handler using OpenRouter",
+  "main": "index.js",
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.0.0",
+    "@aws-sdk/client-rds-data": "^3.0.0"
+  }
+}
+
+
