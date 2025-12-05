@@ -3,8 +3,8 @@ import { BarChartIcon, PieChartIcon, TableIcon, ChevronDownIcon, DownloadIcon, R
 export const DataReportPanel = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [timeRange, setTimeRange] = useState('week');
-  // Mock data for demonstration purposes
-  const mockData = {
+  // Mock data for demonstration purposes - COMMENTED OUT PER USER REQUEST
+  const mockData = null; /* {
     overview: {
       meetingCount: 24,
       totalDuration: '32h 45m',
@@ -84,7 +84,9 @@ export const DataReportPanel = () => {
       metric: 'Balanced',
       trend: 'neutral'
     }]
-  };
+  }; */
+  
+  // TODO: Connect to real API endpoint for meeting analytics data
   // Bar chart component for topic distribution
   const BarChart = ({
     data
