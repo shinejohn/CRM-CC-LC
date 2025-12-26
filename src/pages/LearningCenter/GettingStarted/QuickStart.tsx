@@ -1,7 +1,7 @@
 import React from 'react';
 import { LearningLayout } from '@/components/LearningCenter/Layout/LearningLayout';
 import { CheckCircle, Circle, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 export const GettingStartedQuickStartPage: React.FC = () => {
   const breadcrumbs = [

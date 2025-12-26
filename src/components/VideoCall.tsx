@@ -17,15 +17,8 @@ export const VideoCall = () => {
   const [recordingData, setRecordingData] = useState(null);
   const [isFacilitatorPresent, setIsFacilitatorPresent] = useState(true);
   const [isChatCollapsed, setIsChatCollapsed] = useState(false);
-  const [messages, setMessages] = useState([{
-    sender: 'AI Facilitator',
-    text: 'Welcome to the meeting! How can I help today?',
-    isAI: true
-  }, {
-    sender: 'You',
-    text: 'Can we discuss the project timeline?',
-    isAI: false
-  }]);
+  // TODO: Connect to real API endpoint for messages
+  const [messages, setMessages] = useState<Array<{ sender: string; text: string; isAI: boolean }>>([]);
   const addMessage = message => {
     setMessages([...messages, message]);
   };
@@ -35,29 +28,11 @@ export const VideoCall = () => {
   const handleRecordingComplete = data => {
     setRecordingData(data);
   };
-  const participants = [{
-    id: 1,
-    name: 'John Doe',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-  }, {
-    id: 2,
-    name: 'Jane Smith',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-  }, {
-    id: 3,
-    name: 'Alex Johnson',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-  }];
-  const notes = [{
-    category: 'Action Items',
-    items: ['Schedule follow-up meeting with design team', 'Share project timeline with stakeholders', 'Prepare Q3 budget proposal']
-  }, {
-    category: 'Key Decisions',
-    items: ['Approved new marketing strategy', 'Postponed product launch to Q4', 'Hired two new developers for mobile team']
-  }, {
-    category: 'Questions & Issues',
-    items: ['How will the new pricing model affect current customers?', 'Need clarification on the scope of Phase 2', 'Resource allocation for international expansion']
-  }];
+  // TODO: Connect to real API endpoint for participants
+  const participants: Array<{ id: number; name: string; image: string }> = [];
+  
+  // TODO: Connect to real API endpoint for notes
+  const notes: Array<{ category: string; items: string[] }> = [];
   return <div className="flex flex-col h-screen">
       {/* Main Navigation Header */}
       <MainNavigationHeader />

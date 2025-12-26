@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { LearningLayout } from '@/components/LearningCenter/Layout/LearningLayout';
 import { Search, Play, ExternalLink, Filter, ChevronRight } from 'lucide-react';
 import { campaignApi, type CampaignLandingPage } from '@/services/learning/campaign-api';

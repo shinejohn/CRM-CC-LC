@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, FileText, Edit2, Eye, Trash2 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { knowledgeApi } from '@/services/learning/knowledge-api';
 import { SourceBadge } from '../Common/SourceBadge';
 import { ValidationIndicator } from '../Common/ValidationIndicator';

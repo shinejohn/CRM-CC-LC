@@ -51,7 +51,7 @@ class ApiClient {
     // Add tenant ID if available
     const tenantId = localStorage.getItem('tenant_id');
     if (tenantId) {
-      defaultHeaders['X-Tenant-Id'] = tenantId;
+      defaultHeaders['X-Tenant-ID'] = tenantId;
     }
 
     const config: RequestInit = {
@@ -111,7 +111,7 @@ class ApiClient {
 
     const headers: HeadersInit = {};
     if (token) headers['Authorization'] = `Bearer ${token}`;
-    if (tenantId) headers['X-Tenant-Id'] = tenantId;
+    if (tenantId) headers['X-Tenant-ID'] = tenantId;
 
     const response = await fetch(url, {
       method: 'POST',

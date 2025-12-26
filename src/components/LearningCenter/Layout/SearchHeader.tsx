@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Search, X, Mic, Sparkles } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { knowledgeApi } from '@/services/learning/knowledge-api';
 import type { SearchResult } from '@/types/learning';
 

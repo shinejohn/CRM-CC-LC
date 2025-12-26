@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router';
 import { PresentationCall } from './pages/PresentationCall';
 import { DataReportCall } from './pages/DataReportCall';
 import { MarketingReportPage } from './pages/MarketingReportPage';
@@ -12,6 +12,31 @@ import { LoginPage } from './pages/LoginPage';
 import { SignUpPage } from './pages/SignUpPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { SchedulePage } from './pages/SchedulePage';
+
+// Marketing Pages
+import { CommunityInfluencerPage } from './pages/Marketing/CommunityInfluencerPage';
+import { CommunityExpertPage } from './pages/Marketing/CommunityExpertPage';
+import { SponsorsPage } from './pages/Marketing/SponsorsPage';
+import { AdsPage } from './pages/Marketing/AdsPage';
+
+// Action Pages
+import { ArticlePage } from './pages/Action/ArticlePage';
+import { EventsPage } from './pages/Action/EventsPage';
+import { ClassifiedsPage } from './pages/Action/ClassifiedsPage';
+import { AnnouncementsPage } from './pages/Action/AnnouncementsPage';
+import { CouponsPage } from './pages/Action/CouponsPage';
+import { IncentivesPage } from './pages/Action/IncentivesPage';
+import { TicketsPage } from './pages/Action/TicketsPage';
+import { AIPage } from './pages/Action/AIPage';
+
+// Business Pages
+import { SurveyPage } from './pages/Business/SurveyPage';
+import { SubscriptionsPage } from './pages/Business/SubscriptionsPage';
+import { TodosPage } from './pages/Business/TodosPage';
+import { DashboardPage } from './pages/Business/DashboardPage';
+
+// User Pages
+import { SponsorPage } from './pages/SponsorPage';
 
 // Learning Center Pages
 import { LearningCenterIndexPage } from './pages/LearningCenter/Index';
@@ -28,6 +53,10 @@ import { GettingStartedIndexPage } from './pages/LearningCenter/GettingStarted/I
 import { GettingStartedOverviewPage } from './pages/LearningCenter/GettingStarted/Overview';
 import { GettingStartedQuickStartPage } from './pages/LearningCenter/GettingStarted/QuickStart';
 import { PlaceholderPage } from './pages/LearningCenter/Placeholder';
+
+// CRM Pages
+import { CustomerListPage } from './pages/CRM/Customers/List';
+import { CustomerDetailPage } from './pages/CRM/Customers/Detail';
 
 export function AppRouter() {
   return (
@@ -46,6 +75,35 @@ export function AppRouter() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/schedule" element={<SchedulePage />} />
+
+        {/* Marketing Plan Routes */}
+        <Route path="/community-influencer" element={<CommunityInfluencerPage />} />
+        <Route path="/community-expert" element={<CommunityExpertPage />} />
+        <Route path="/sponsors" element={<SponsorsPage />} />
+        <Route path="/ads" element={<AdsPage />} />
+
+        {/* Action Menu Routes */}
+        <Route path="/article" element={<ArticlePage />} />
+        <Route path="/events" element={<EventsPage />} />
+        <Route path="/classifieds" element={<ClassifiedsPage />} />
+        <Route path="/announcements" element={<AnnouncementsPage />} />
+        <Route path="/coupons" element={<CouponsPage />} />
+        <Route path="/incentives" element={<IncentivesPage />} />
+        <Route path="/tickets" element={<TicketsPage />} />
+        <Route path="/ai" element={<AIPage />} />
+
+        {/* Business Profile Routes */}
+        <Route path="/survey" element={<SurveyPage />} />
+        <Route path="/subscriptions" element={<SubscriptionsPage />} />
+        <Route path="/todos" element={<TodosPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+
+        {/* User Menu Routes */}
+        <Route path="/sponsor" element={<SponsorPage />} />
+
+        {/* CRM Routes */}
+        <Route path="/crm/customers" element={<CustomerListPage />} />
+        <Route path="/crm/customers/:id" element={<CustomerDetailPage />} />
 
         {/* Learning Center Routes */}
         <Route path="/learning" element={<LearningCenterIndexPage />} />

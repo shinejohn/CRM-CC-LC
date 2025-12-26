@@ -3,36 +3,8 @@ import { ChevronLeftIcon, ChevronRightIcon, PlusIcon, ClockIcon, UsersIcon, Vide
 export const CalendarView = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
-  // Mock scheduled calls data
-  const scheduledCalls = [{
-    id: 1,
-    title: 'Team Weekly Sync',
-    date: new Date(2023, 5, 15, 10, 0),
-    duration: 60,
-    participants: 5,
-    type: 'video'
-  }, {
-    id: 2,
-    title: 'Client Presentation',
-    date: new Date(2023, 5, 18, 14, 30),
-    duration: 45,
-    participants: 3,
-    type: 'presentation'
-  }, {
-    id: 3,
-    title: 'Project Review',
-    date: new Date(2023, 5, 22, 11, 0),
-    duration: 90,
-    participants: 8,
-    type: 'report'
-  }, {
-    id: 4,
-    title: 'Marketing Strategy',
-    date: new Date(2023, 5, 25, 9, 0),
-    duration: 60,
-    participants: 4,
-    type: 'marketing'
-  }];
+  // TODO: Connect to real API endpoint for scheduled calls data
+  const scheduledCalls: Array<{ id: number; title: string; date: Date; duration: number; participants: number; type: string }> = [];
   const getMonthData = date => {
     const year = date.getFullYear();
     const month = date.getMonth();

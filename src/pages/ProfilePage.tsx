@@ -5,17 +5,18 @@ import { UserIcon, SettingsIcon, BellIcon, KeyIcon, LogOutIcon, CameraIcon, Edit
 export const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState('profile');
   const [isEditing, setIsEditing] = useState(false);
+  // TODO: Connect to real API endpoint for user data
   const [userData, setUserData] = useState({
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    phone: '+1 (555) 123-4567',
-    company: 'Acme Inc.',
-    role: 'Product Manager',
-    location: 'San Francisco, CA',
-    timezone: 'Pacific Time (PT)',
-    bio: 'Product manager with 5+ years of experience in SaaS and AI products. Passionate about user-centered design and data-driven decision making.',
-    profilePicture: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    company: '',
+    role: '',
+    location: '',
+    timezone: '',
+    bio: '',
+    profilePicture: ''
   });
   const [formData, setFormData] = useState({
     ...userData
@@ -42,36 +43,8 @@ export const ProfilePage = () => {
     });
     setIsEditing(false);
   };
-  // Mock activity data
-  const activityData = [{
-    id: 1,
-    type: 'call',
-    title: 'Team Weekly Sync',
-    date: '2023-06-15 10:00',
-    duration: '60 min'
-  }, {
-    id: 2,
-    type: 'file',
-    title: 'Uploaded presentation-final.pdf',
-    date: '2023-06-14 15:30'
-  }, {
-    id: 3,
-    type: 'call',
-    title: 'Client Presentation',
-    date: '2023-06-10 14:30',
-    duration: '45 min'
-  }, {
-    id: 4,
-    type: 'file',
-    title: 'Downloaded meeting-notes.txt',
-    date: '2023-06-10 16:15'
-  }, {
-    id: 5,
-    type: 'call',
-    title: 'Product Demo',
-    date: '2023-06-05 11:00',
-    duration: '90 min'
-  }];
+  // TODO: Connect to real API endpoint for activity data
+  const activityData: Array<{ id: number; type: string; title: string; date: string; duration?: string }> = [];
   return <div className="flex flex-col h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-gray-800 text-white p-4 flex justify-between items-center">

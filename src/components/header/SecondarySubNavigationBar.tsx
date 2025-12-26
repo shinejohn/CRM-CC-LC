@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { StarIcon } from 'lucide-react';
 export const SecondarySubNavigationBar = () => {
   const links = [{

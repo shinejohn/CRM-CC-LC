@@ -1,7 +1,7 @@
 import React from 'react';
 import { LearningLayout } from '@/components/LearningCenter/Layout/LearningLayout';
 import { BookOpen, Search, GraduationCap, FileText, BarChart3, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 export const LearningCenterIndexPage: React.FC = () => {
   const breadcrumbs = [{ label: 'Learning Center' }];

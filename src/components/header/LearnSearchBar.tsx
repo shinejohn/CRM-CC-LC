@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { SearchIcon, BookOpenIcon, ChevronDownIcon, GraduationCapIcon, FileTextIcon, VideoIcon, HeadphonesIcon, UsersIcon, AwardIcon, TrendingUpIcon, LightbulbIcon } from 'lucide-react';
 export const LearnSearchBar = () => {
   const [isLearnOpen, setIsLearnOpen] = useState(false);
@@ -8,7 +8,7 @@ export const LearnSearchBar = () => {
     path: '/business-profile'
   }, {
     label: 'FAQs',
-    path: '/faqs'
+    path: '/learning/faqs'
   }, {
     label: 'Survey',
     path: '/survey'

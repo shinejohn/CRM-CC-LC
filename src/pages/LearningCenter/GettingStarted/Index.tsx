@@ -1,7 +1,7 @@
 import React from 'react';
 import { LearningLayout } from '@/components/LearningCenter/Layout/LearningLayout';
 import { BookOpen, PlayCircle, FileText, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 export const GettingStartedIndexPage: React.FC = () => {
   const breadcrumbs = [

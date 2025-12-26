@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { FibonaccoPlayer } from '@/components/LearningCenter/Presentation/FibonaccoPlayer';
 import { campaignApi, type CampaignData } from '@/services/learning/campaign-api';
 import type { Presentation } from '@/types/learning';
+import { trackLandingPageView } from '@/services/crm/conversion-tracking';
 
 export const CampaignLandingPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -16,6 +17,11 @@ export const CampaignLandingPage: React.FC = () => {
   useEffect(() => {
     if (slug) {
       loadCampaign();
+      // Track landing page view
+      trackLandingPageView(slug, undefined, undefined, undefined, {
+        timestamp: new Date().toISOString(),
+        referrer: document.referrer,
+      }).catch((err) => console.error('Failed to track landing page view:', err));
     }
   }, [slug]);
 
@@ -50,8 +56,8 @@ export const CampaignLandingPage: React.FC = () => {
     
     // Track conversion
     if (landing_page.crm_tracking) {
-      // TODO: Track conversion event
-      console.log('Conversion tracked:', {
+      // Track conversion event via conversion tracking service
+      trackLandingPageView(slug!, undefined, undefined, undefined, {
         goal: landing_page.conversion_goal,
         campaign: landing_page.campaign_id,
         utm: {
@@ -60,7 +66,8 @@ export const CampaignLandingPage: React.FC = () => {
           campaign: landing_page.utm_campaign,
           content: landing_page.utm_content,
         },
-      });
+        cta_type: primary_cta,
+      }).catch((err) => console.error('Failed to track conversion:', err));
     }
 
     // Handle different CTA types

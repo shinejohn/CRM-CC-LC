@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router';
 import { ArrowLeft, Plus, GripVertical, Edit2, Trash2 } from 'lucide-react';
 import { LearningLayout } from '@/components/LearningCenter/Layout/LearningLayout';
 import { surveyApi } from '@/services/learning/survey-api';

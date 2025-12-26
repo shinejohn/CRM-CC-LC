@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\PresentationController;
 use App\Http\Controllers\Api\CampaignController;
+use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\ConversationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,5 +79,33 @@ Route::prefix('v1')->group(function () {
         Route::get('/', [CampaignController::class, 'index']);
         Route::get('/{slug}', [CampaignController::class, 'show']);
     });
+    
+    // CRM API - Customers
+    Route::prefix('customers')->group(function () {
+        Route::get('/', [CustomerController::class, 'index']);
+        Route::post('/', [CustomerController::class, 'store']);
+        Route::get('/slug/{slug}', [CustomerController::class, 'showBySlug']);
+        Route::get('/{id}', [CustomerController::class, 'show']);
+        Route::put('/{id}', [CustomerController::class, 'update']);
+        Route::delete('/{id}', [CustomerController::class, 'destroy']);
+        Route::put('/{id}/business-context', [CustomerController::class, 'updateBusinessContext']);
+        Route::get('/{id}/ai-context', [CustomerController::class, 'getAiContext']);
+    });
+    
+    // CRM API - Conversations
+    Route::prefix('conversations')->group(function () {
+        Route::get('/', [ConversationController::class, 'index']);
+        Route::post('/', [ConversationController::class, 'store']);
+        Route::get('/{id}', [ConversationController::class, 'show']);
+        Route::put('/{id}', [ConversationController::class, 'update']);
+        Route::post('/{id}/end', [ConversationController::class, 'end']);
+        Route::post('/{id}/messages', [ConversationController::class, 'addMessage']);
+        Route::get('/{id}/messages', [ConversationController::class, 'messages']);
+    });
 });
+
+
+
+
+
 

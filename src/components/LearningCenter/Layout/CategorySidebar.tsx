@@ -9,7 +9,7 @@ import {
   ChevronDown,
   Settings,
 } from 'lucide-react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router';
 
 interface SidebarSection {
   id: string;

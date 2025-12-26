@@ -1,7 +1,7 @@
 import React from 'react';
 import { LearningLayout } from '@/components/LearningCenter/Layout/LearningLayout';
 import { FileText, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 interface PlaceholderPageProps {
   title: string;

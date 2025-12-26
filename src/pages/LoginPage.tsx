@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 import { LogInIcon, EyeIcon, EyeOffIcon, AlertCircleIcon } from 'lucide-react';
 export const LoginPage = () => {
   const [formData, setFormData] = useState({

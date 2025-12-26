@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { 
   ChevronDownIcon, 
   UserCircleIcon, 
@@ -57,7 +57,7 @@ export const NewMainHeader = () => {
   // Business Profile dropdown
   const businessProfile = [
     { label: 'Profile', path: '/profile' },
-    { label: 'FAQ', path: '/faqs' },
+    { label: 'FAQ', path: '/learning/faqs' },
     { label: 'Survey', path: '/survey' },
     { label: 'Subscriptions', path: '/subscriptions' },
     { label: 'Todos', path: '/todos' },

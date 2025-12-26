@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 export const BrandBar = () => {
   return <div className="bg-gradient-to-r from-slate-800 to-slate-700 border-b-4 border-amber-400 py-4 px-6 shadow-md">
       <div className="flex items-center justify-between">
