@@ -10,6 +10,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Only enable PostgreSQL extensions if using PostgreSQL
+        // Skip in testing environment (SQLite) or other databases
+        if (DB::getDriverName() !== 'pgsql') {
+            return;
+        }
+
         // Enable PostgreSQL extensions
         DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
         DB::statement('CREATE EXTENSION IF NOT EXISTS "pg_trgm"');
