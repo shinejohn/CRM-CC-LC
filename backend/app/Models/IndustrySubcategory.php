@@ -31,3 +31,8 @@ class IndustrySubcategory extends Model
     }
 }
 
+
+
+
+
+

@@ -1,0 +1,10 @@
+# Scan results - exclude from git (these can be large)
+*.json
+*.txt
+*.html
+*.xml
+*.csv
+
+# Keep summary files
+!summary.md
+!COMBINED_SUMMARY.md

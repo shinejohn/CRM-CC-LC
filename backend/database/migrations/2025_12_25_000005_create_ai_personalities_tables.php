@@ -14,7 +14,7 @@ return new class extends Migration
     {
         // AI Personalities
         Schema::create('ai_personalities', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('id')->primary();
             $table->uuid('tenant_id');
             
             $table->string('name');
@@ -67,7 +67,7 @@ return new class extends Migration
 
         // Personality Assignments (which personality handles which customer)
         Schema::create('personality_assignments', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('id')->primary();
             $table->uuid('personality_id');
             $table->uuid('customer_id');
             $table->uuid('tenant_id');
@@ -111,7 +111,7 @@ return new class extends Migration
 
         // Personality Conversation History
         Schema::create('personality_conversations', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('id')->primary();
             $table->uuid('personality_id');
             $table->uuid('conversation_id'); // Links to existing conversations table
             $table->uuid('tenant_id');

@@ -135,3 +135,8 @@ DATABASE_URL=postgresql://postgres:password@postgres.railway.internal:5432/railw
 
 **Internal connection configured! Railway handles this automatically.** 🚂
 
+
+
+
+
+

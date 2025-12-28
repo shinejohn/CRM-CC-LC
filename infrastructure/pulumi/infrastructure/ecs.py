@@ -18,6 +18,8 @@ def create_ecs_cluster(
     database_secret_arn: pulumi.Input[str],
     redis_endpoint: pulumi.Input[str],
     redis_port: pulumi.Input[int],
+    api_secrets: dict = None,
+    target_group_arn: pulumi.Input[str] = None,
 ):
     """Create ECS Fargate cluster for Laravel backend"""
     
@@ -124,15 +126,8 @@ def create_ecs_cluster(
         f"{project_name}-ecs-sg",
         description="Security group for ECS tasks",
         vpc_id=vpc_id,
-        ingress=[
-            aws.ec2.SecurityGroupIngressArgs(
-                description="HTTP from ALB",
-                from_port=80,
-                to_port=80,
-                protocol="tcp",
-                cidr_blocks=["10.0.0.0/16"],
-            ),
-        ],
+        # Ingress rules will be added by ALB security group rule
+        # No direct ingress rules needed here
         egress=[
             aws.ec2.SecurityGroupEgressArgs(
                 from_port=0,
@@ -161,11 +156,12 @@ def create_ecs_cluster(
         memory="1024",
         execution_role_arn=execution_role.arn,
         task_role_arn=task_role.arn,
-        container_definitions=pulumi.Output.all(
+        container_definitions = pulumi.Output.all(
             database_url,
             database_secret_arn,
             redis_endpoint,
             redis_port,
+            log_group.name,
         ).apply(
             lambda args: json.dumps([
                 {
@@ -185,6 +181,8 @@ def create_ecs_cluster(
                         {"name": "REDIS_PORT", "value": str(args[3])},
                         {"name": "CACHE_DRIVER", "value": "redis"},
                         {"name": "QUEUE_CONNECTION", "value": "redis"},
+                        {"name": "SESSION_DRIVER", "value": "redis"},
+                        {"name": "LOG_CHANNEL", "value": "stderr"},
                     ],
                     "secrets": [
                         {
@@ -194,6 +192,10 @@ def create_ecs_cluster(
                         {
                             "name": "DB_HOST",
                             "valueFrom": f"{args[1]}:DB_HOST::",
+                        },
+                        {
+                            "name": "DB_PORT",
+                            "valueFrom": f"{args[1]}:DB_PORT::",
                         },
                         {
                             "name": "DB_DATABASE",
@@ -211,7 +213,7 @@ def create_ecs_cluster(
                     "logConfiguration": {
                         "logDriver": "awslogs",
                         "options": {
-                            "awslogs-group": log_group.name,
+                            "awslogs-group": args[4],
                             "awslogs-region": aws.config.region,
                             "awslogs-stream-prefix": "ecs",
                         },
@@ -225,7 +227,18 @@ def create_ecs_cluster(
         },
     )
     
-    # Create ECS service
+    # Note: ALB target group attachment will be done in alb.py
+    # Service is created without load balancer here, will be attached later
+    
+    # Configure load balancer if target group is provided
+    load_balancer_config = None
+    if target_group_arn:
+        load_balancer_config = [aws.ecs.ServiceLoadBalancerArgs(
+            target_group_arn=target_group_arn,
+            container_name="laravel",
+            container_port=80,
+        )]
+    
     service = aws.ecs.Service(
         f"{project_name}-service",
         name=f"{project_name}-service",
@@ -238,10 +251,11 @@ def create_ecs_cluster(
             subnets=[s.id for s in private_subnets],
             security_groups=[ecs_sg.id],
         ),
+        load_balancers=load_balancer_config,
         tags={
             "Name": f"{project_name}-service",
             "Environment": environment,
         },
     )
     
-    return cluster, service, task_definition
+    return cluster, service, task_definition, ecs_sg

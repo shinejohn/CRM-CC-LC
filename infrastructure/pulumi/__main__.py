@@ -4,6 +4,7 @@ Main entry point for infrastructure deployment
 """
 
 import pulumi
+import pulumi_aws as aws
 from infrastructure.vpc import create_vpc
 from infrastructure.vpc_existing import use_existing_vpc
 from infrastructure.rds import create_rds
@@ -69,19 +70,6 @@ redis_cluster = create_redis(
     security_group_tags={"Name": f"{project_name}-redis-sg"},
 )
 
-# Create ECS Cluster
-ecs_cluster, ecs_service, task_definition = create_ecs_cluster(
-    project_name=project_name,
-    environment=environment,
-    vpc_id=vpc.id,
-    public_subnets=public_subnets,
-    private_subnets=private_subnets,
-    database_url=rds_cluster.endpoint,
-    database_secret_arn=rds_secret.arn,
-    redis_endpoint=redis_cluster.primary_endpoint_address,
-    redis_port=redis_cluster.port,
-)
-
 # Create S3 buckets
 s3_buckets = create_s3_buckets(
     project_name=project_name,
@@ -95,14 +83,49 @@ cloudfront_distribution = create_cloudfront(
     s3_bucket=s3_buckets["frontend"],
 )
 
-# Create Application Load Balancer
-alb = create_alb(
+# Create Application Load Balancer (before ECS to get target group)
+alb, target_group, alb_sg = create_alb(
     project_name=project_name,
     environment=environment,
     vpc_id=vpc.id,
     public_subnets=public_subnets,
-    ecs_service=ecs_service,
 )
+
+# Create ECS Cluster (with ALB target group)
+ecs_cluster, ecs_service, task_definition, ecs_sg = create_ecs_cluster(
+    project_name=project_name,
+    environment=environment,
+    vpc_id=vpc.id,
+    public_subnets=public_subnets,
+    private_subnets=private_subnets,
+    database_url=rds_cluster.endpoint,
+    database_secret_arn=rds_secret.arn,
+    redis_endpoint=redis_cluster.primary_endpoint_address,
+    redis_port=redis_cluster.port,
+    api_secrets={
+        'openai': api_secrets['openai'],
+        'elevenlabs': api_secrets['elevenlabs'],
+        'openrouter': api_secrets['openrouter'],
+    },
+    target_group_arn=target_group.arn,
+)
+
+# Allow ALB to communicate with ECS tasks
+aws.ec2.SecurityGroupRule(
+    f"{project_name}-alb-to-ecs",
+    type="ingress",
+    from_port=80,
+    to_port=80,
+    protocol="tcp",
+    source_security_group_id=alb_sg.id,
+    security_group_id=ecs_sg.id,
+    description="Allow ALB to communicate with ECS tasks",
+)
+
+# Update ECS service to use load balancer
+# Note: This requires updating the service after ALB is created
+# For now, the service is created without load balancer
+# You can attach it manually or update the service definition
 
 # Export outputs
 pulumi.export("vpc_id", vpc.id)

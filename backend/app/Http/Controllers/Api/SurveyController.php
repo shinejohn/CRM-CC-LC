@@ -123,4 +123,83 @@ class SurveyController extends Controller
             'message' => 'Survey question deleted successfully'
         ]);
     }
+    
+    /**
+     * Create survey section
+     */
+    public function storeSection(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'display_order' => 'nullable|integer',
+            'is_required' => 'nullable|boolean',
+            'is_conditional' => 'nullable|boolean',
+            'condition_config' => 'nullable|array',
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+        
+        $section = SurveySection::create([
+            'tenant_id' => $request->input('tenant_id', '00000000-0000-0000-0000-000000000000'),
+            'name' => $request->name,
+            'description' => $request->description,
+            'display_order' => $request->display_order ?? 0,
+            'is_required' => $request->is_required ?? false,
+            'is_conditional' => $request->is_conditional ?? false,
+            'condition_config' => $request->condition_config,
+        ]);
+        
+        return response()->json([
+            'data' => $section,
+            'message' => 'Survey section created successfully'
+        ], 201);
+    }
+    
+    /**
+     * Update survey section
+     */
+    public function updateSection(Request $request, string $id): JsonResponse
+    {
+        $section = SurveySection::findOrFail($id);
+        
+        $validator = Validator::make($request->all(), [
+            'name' => 'sometimes|string|max:255',
+            'description' => 'nullable|string',
+            'display_order' => 'nullable|integer',
+            'is_required' => 'nullable|boolean',
+            'is_conditional' => 'nullable|boolean',
+            'condition_config' => 'nullable|array',
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 422);
+        }
+        
+        $section->update($request->all());
+        
+        return response()->json([
+            'data' => $section->fresh(),
+            'message' => 'Survey section updated successfully'
+        ]);
+    }
+    
+    /**
+     * Delete survey section
+     */
+    public function destroySection(string $id): JsonResponse
+    {
+        $section = SurveySection::findOrFail($id);
+        $section->delete();
+        
+        return response()->json([
+            'message' => 'Survey section deleted successfully'
+        ]);
+    }
 }

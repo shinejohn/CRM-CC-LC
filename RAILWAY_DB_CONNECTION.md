@@ -88,3 +88,8 @@ psql "postgresql://username:password@trolley.proxy.rlwy.net:53826/railway" < inf
 
 **Ready to set up database!** 🗄️
 
+
+
+
+
+

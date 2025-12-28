@@ -49,9 +49,30 @@ class CampaignController extends Controller
      */
     public function show(string $slug): JsonResponse
     {
+        // Try to find campaign file
         $campaignFile = public_path("campaigns/campaign_{$slug}.json");
         
         if (!file_exists($campaignFile)) {
+            // Try alternative naming
+            $campaignFile = public_path("campaigns/{$slug}.json");
+        }
+        
+        if (!file_exists($campaignFile)) {
+            // Try loading from master JSON
+            $masterFile = public_path('campaigns/landing_pages_master.json');
+            if (file_exists($masterFile)) {
+                $masterData = json_decode(file_get_contents($masterFile), true);
+                if ($masterData && isset($masterData['landing_pages'])) {
+                    foreach ($masterData['landing_pages'] as $page) {
+                        if (($page['landing_page_slug'] ?? null) === $slug) {
+                            return response()->json([
+                                'data' => $this->formatCampaignData($page),
+                            ]);
+                        }
+                    }
+                }
+            }
+            
             return response()->json([
                 'error' => 'Campaign not found'
             ], 404);
@@ -66,7 +87,25 @@ class CampaignController extends Controller
         }
         
         return response()->json([
-            'data' => $campaign,
+            'data' => $this->formatCampaignData($campaign),
         ]);
+    }
+    
+    /**
+     * Format campaign data for API response
+     */
+    protected function formatCampaignData(array $data): array
+    {
+        return [
+            'slug' => $data['landing_page_slug'] ?? $data['slug'] ?? null,
+            'campaign_id' => $data['campaign_id'] ?? null,
+            'title' => $data['title'] ?? $data['template_name'] ?? null,
+            'type' => $data['type'] ?? $data['campaign_type'] ?? null,
+            'landing_page' => $data['landing_page'] ?? $data,
+            'presentation' => $data['presentation'] ?? null,
+            'ai_persona' => $data['ai_persona'] ?? null,
+            'slide_count' => $data['slide_count'] ?? null,
+            'duration_seconds' => $data['duration_seconds'] ?? null,
+        ];
     }
 }

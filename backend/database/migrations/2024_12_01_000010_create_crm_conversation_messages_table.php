@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('conversation_messages', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('id')->primary();
             $table->uuid('conversation_id');
             
             $table->string('role', 20); // 'user', 'assistant', 'system'

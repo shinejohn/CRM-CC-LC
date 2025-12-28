@@ -30,3 +30,8 @@ class IndustryCategory extends Model
     }
 }
 
+
+
+
+
+

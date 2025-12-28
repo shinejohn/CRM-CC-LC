@@ -113,3 +113,8 @@ If connection works, you'll see database information.
 
 **Database host configured! Just need password from Railway.** 🔐
 
+
+
+
+
+

@@ -86,3 +86,8 @@ echo "  1. Set up environment variables (see RAILWAY_ENV_VARIABLES.md)"
 echo "  2. Configure application settings"
 echo "  3. Deploy application"
 
+
+
+
+
+

@@ -37,3 +37,8 @@ class GeneratePendingEmbeddings extends Command
     }
 }
 
+
+
+
+
+

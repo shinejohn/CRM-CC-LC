@@ -14,7 +14,7 @@ return new class extends Migration
     {
         // Ad templates
         Schema::create('ad_templates', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('id')->primary();
             $table->uuid('tenant_id');
             
             $table->string('name');
@@ -39,7 +39,7 @@ return new class extends Migration
 
         // Generated ads
         Schema::create('generated_ads', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('id')->primary();
             $table->uuid('tenant_id');
             
             $table->string('name');

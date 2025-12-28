@@ -70,3 +70,8 @@ echo "Next steps:"
 echo "  1. Verify .env has correct database connection"
 echo "  2. Run: php artisan migrate"
 
+
+
+
+
+

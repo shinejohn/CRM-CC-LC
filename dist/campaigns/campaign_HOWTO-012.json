@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "HOWTO-012",
+    "week": 12,
+    "day": 12,
+    "type": "HOWTO",
+    "title": "How-To Tutorial",
+    "subject": "How-To Tutorial",
+    "landing_page": "review-response-guide",
+    "template": "tutorial",
+    "description": "How-To Tutorial - Guide user through process"
+  },
+  "landing_page": {
+    "campaign_id": "HOWTO-012",
+    "landing_page_slug": "review-response-guide",
+    "url": "/learn/review-response-guide",
+    "template_id": "tutorial",
+    "template_name": "How-To Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 60,
+    "primary_cta": "start_trial",
+    "secondary_cta": "contact_sales",
+    "ai_persona": "Emma",
+    "ai_tone": "Helpful, step-by-step",
+    "ai_goal": "Guide user through process",
+    "data_capture_fields": "name, email, business_name, setup_preferences",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/review-response-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "engagement",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week6-how-to",
+    "utm_content": "HOWTO-012"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "How-To Tutorial",
+    "slides": 8,
+    "duration": 60,
+    "purpose": "howto",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "review-response-guide",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/review-response-guide/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

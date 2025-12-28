@@ -155,3 +155,8 @@ React Frontend (Current) → REST API → Laravel Backend
 
 **My Recommendation:** Keep the current architecture and just add the Laravel backend API. The Learning Center works great as a standalone React app, and we can add the Laravel backend without changing the frontend.
 
+
+
+
+
+

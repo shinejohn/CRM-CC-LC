@@ -1,0 +1,7 @@
+encryptionsalt: v1:0shjod8sxcM=:v1:86wvnEzT7xG5EWEV:G7BDlT8OMr06hDHYIx8gEkr2GEL/PQ==
+config:
+  aws:region: us-east-1
+  learning-center:project_name: learning-center
+  learning-center:environment: production
+  learning-center:use_existing_vpc: "true"
+  learning-center:existing_vpc_id: vpc-0bd7af2b44fd55130

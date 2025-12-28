@@ -129,3 +129,8 @@ SELECT COUNT(*) FROM knowledge_base;
 
 **Ready to run migrations!** 🚀
 
+
+
+
+
+

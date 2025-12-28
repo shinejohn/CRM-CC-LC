@@ -72,3 +72,8 @@ echo "  1. Add DB_PASSWORD to .env (get from Railway dashboard)"
 echo "  2. Test connection: php artisan db:show"
 echo "  3. Run migrations: php artisan migrate"
 
+
+
+
+
+

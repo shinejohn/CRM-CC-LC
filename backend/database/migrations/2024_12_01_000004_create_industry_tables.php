@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('industry_categories', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('id')->primary();
             $table->string('name', 255);
             $table->string('code', 100)->unique();
             $table->string('parent_industry', 100)->nullable();
@@ -21,7 +21,7 @@ return new class extends Migration
         });
         
         Schema::create('industry_subcategories', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('id')->primary();
             $table->uuid('industry_id');
             $table->string('name', 255);
             $table->string('code', 100);
@@ -43,4 +43,9 @@ return new class extends Migration
         Schema::dropIfExists('industry_categories');
     }
 };
+
+
+
+
+
 

@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "HOOK-007",
+    "week": 7,
+    "day": 7,
+    "type": "HOOK",
+    "title": "Upgrade Offer",
+    "subject": "Upgrade Offer",
+    "landing_page": "featured-listing",
+    "template": "upgrade-offer",
+    "description": "Upgrade Offer - Get user to take immediate action"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-007",
+    "landing_page_slug": "featured-listing",
+    "url": "/learn/featured-listing",
+    "template_id": "upgrade-offer",
+    "template_name": "Upgrade Offer",
+    "slide_count": 7,
+    "duration_seconds": 55,
+    "primary_cta": "signup_free",
+    "secondary_cta": "schedule_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Excited, helpful",
+    "ai_goal": "Get user to take immediate action",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/featured-listing/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week6-hook",
+    "utm_content": "HOOK-007"
+  },
+  "template": {
+    "template_id": "upgrade-offer",
+    "name": "Upgrade Offer",
+    "slides": 7,
+    "duration": 55,
+    "purpose": "hook",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "featured-listing",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/featured-listing/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "HOWTO-022",
+    "week": 22,
+    "day": 22,
+    "type": "HOWTO",
+    "title": "How-To Tutorial",
+    "subject": "How-To Tutorial",
+    "landing_page": "workflow-automation-guide",
+    "template": "tutorial",
+    "description": "How-To Tutorial - Guide user through process"
+  },
+  "landing_page": {
+    "campaign_id": "HOWTO-022",
+    "landing_page_slug": "workflow-automation-guide",
+    "url": "/learn/workflow-automation-guide",
+    "template_id": "tutorial",
+    "template_name": "How-To Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 60,
+    "primary_cta": "start_trial",
+    "secondary_cta": "contact_sales",
+    "ai_persona": "Emma",
+    "ai_tone": "Helpful, step-by-step",
+    "ai_goal": "Guide user through process",
+    "data_capture_fields": "name, email, business_name, setup_preferences",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/workflow-automation-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "engagement",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week10-how-to",
+    "utm_content": "HOWTO-022"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "How-To Tutorial",
+    "slides": 8,
+    "duration": 60,
+    "purpose": "howto",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "workflow-automation-guide",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/workflow-automation-guide/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

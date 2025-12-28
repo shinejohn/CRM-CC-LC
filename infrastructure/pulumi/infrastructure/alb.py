@@ -12,7 +12,6 @@ def create_alb(
     environment: str,
     vpc_id: pulumi.Input[str],
     public_subnets: list,
-    ecs_service: aws.ecs.Service,
 ):
     """Create Application Load Balancer for ECS service"""
     
@@ -91,7 +90,8 @@ def create_alb(
         },
     )
     
-    # Create HTTP listener
+    # Create HTTP listener (forward to target group)
+    # Note: If listener already exists, it will be updated in-place
     http_listener = aws.lb.Listener(
         f"{project_name}-http-listener",
         load_balancer_arn=alb.arn,
@@ -99,21 +99,19 @@ def create_alb(
         protocol="HTTP",
         default_actions=[
             aws.lb.ListenerDefaultActionArgs(
-                type="redirect",
-                redirect=aws.lb.ListenerDefaultActionRedirectArgs(
-                    port="443",
-                    protocol="HTTPS",
-                    status_code="HTTP_301",
+                type="forward",
+                forward=aws.lb.ListenerDefaultActionForwardArgs(
+                    target_groups=[
+                        aws.lb.ListenerDefaultActionForwardTargetGroupArgs(
+                            arn=target_group.arn,
+                        ),
+                    ],
                 ),
             ),
         ],
     )
     
     # Note: HTTPS listener would require ACM certificate
-    # For now, HTTP listener redirects (or use self-signed cert for dev)
+    # For production, add HTTPS listener with ACM certificate
     
-    # Attach target group to ECS service
-    # This would be done via ECS service configuration
-    # For now, we'll note this in the outputs
-    
-    return alb
+    return alb, target_group, alb_sg

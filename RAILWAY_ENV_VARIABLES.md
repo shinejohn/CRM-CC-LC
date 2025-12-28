@@ -200,3 +200,8 @@ QUEUE_CONNECTION="redis"
 
 **All variables documented and ready to configure!** 🔐
 
+
+
+
+
+

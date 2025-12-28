@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('survey_sections', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('id')->primary();
             $table->uuid('tenant_id');
             $table->string('name', 255);
             $table->text('description')->nullable();
@@ -27,7 +27,7 @@ return new class extends Migration
         });
         
         Schema::create('survey_questions', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('id')->primary();
             $table->uuid('section_id');
             $table->text('question_text');
             $table->text('help_text')->nullable();
@@ -74,4 +74,9 @@ return new class extends Migration
         Schema::dropIfExists('survey_sections');
     }
 };
+
+
+
+
+
 

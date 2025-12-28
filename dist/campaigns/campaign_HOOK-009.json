@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "HOOK-009",
+    "week": 9,
+    "day": 9,
+    "type": "HOOK",
+    "title": "Sponsor Application",
+    "subject": "Sponsor Application",
+    "landing_page": "become-sponsor",
+    "template": "sponsor-application",
+    "description": "Sponsor Application - Get user to take immediate action"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-009",
+    "landing_page_slug": "become-sponsor",
+    "url": "/learn/become-sponsor",
+    "template_id": "sponsor-application",
+    "template_name": "Sponsor Application",
+    "slide_count": 7,
+    "duration_seconds": 60,
+    "primary_cta": "signup_free",
+    "secondary_cta": "schedule_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Excited, helpful",
+    "ai_goal": "Get user to take immediate action",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/become-sponsor/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week7-hook",
+    "utm_content": "HOOK-009"
+  },
+  "template": {
+    "template_id": "sponsor-application",
+    "name": "Sponsor Application",
+    "slides": 7,
+    "duration": 60,
+    "purpose": "hook",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "become-sponsor",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/become-sponsor/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

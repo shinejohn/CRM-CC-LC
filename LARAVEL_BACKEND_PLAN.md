@@ -278,3 +278,8 @@ composer require guzzlehttp/guzzle          # HTTP client
 
 **Perfect approach!** Keep Learning Center frontend, build Laravel REST API backend. 🚀
 
+
+
+
+
+

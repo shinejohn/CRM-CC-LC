@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "HOOK-010",
+    "week": 10,
+    "day": 10,
+    "type": "HOOK",
+    "title": "Advertising Offer",
+    "subject": "Advertising Offer",
+    "landing_page": "article-advertising",
+    "template": "advertising-offer",
+    "description": "Advertising Offer - Get user to take immediate action"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-010",
+    "landing_page_slug": "article-advertising",
+    "url": "/learn/article-advertising",
+    "template_id": "advertising-offer",
+    "template_name": "Advertising Offer",
+    "slide_count": 6,
+    "duration_seconds": 50,
+    "primary_cta": "signup_free",
+    "secondary_cta": "schedule_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Excited, helpful",
+    "ai_goal": "Get user to take immediate action",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/article-advertising/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week8-hook",
+    "utm_content": "HOOK-010"
+  },
+  "template": {
+    "template_id": "advertising-offer",
+    "name": "Advertising Offer",
+    "slides": 6,
+    "duration": 50,
+    "purpose": "hook",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "article-advertising",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/article-advertising/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

@@ -37,3 +37,8 @@ class ProcessEmbeddings extends Command
     }
 }
 
+
+
+
+
+

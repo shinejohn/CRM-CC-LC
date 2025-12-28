@@ -14,7 +14,7 @@ return new class extends Migration
     {
         // Content templates
         Schema::create('content_templates', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('id')->primary();
             $table->uuid('tenant_id');
             
             $table->string('name');
@@ -36,7 +36,7 @@ return new class extends Migration
 
         // Generated content
         Schema::create('generated_content', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('id')->primary();
             $table->uuid('tenant_id');
             
             $table->string('title');
@@ -80,7 +80,7 @@ return new class extends Migration
 
         // Content versions (versioning system)
         Schema::create('content_versions', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('id')->primary();
             $table->uuid('content_id');
             $table->uuid('tenant_id');
             
@@ -107,7 +107,7 @@ return new class extends Migration
 
         // Content workflow history
         Schema::create('content_workflow_history', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('uuid_generate_v4()'));
+            $table->uuid('id')->primary();
             $table->uuid('content_id');
             $table->uuid('tenant_id');
             

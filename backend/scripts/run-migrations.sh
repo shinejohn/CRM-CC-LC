@@ -44,3 +44,8 @@ echo "Next steps:"
 echo "  - Verify tables: php artisan db:show"
 echo "  - Test API: php artisan serve"
 
+
+
+
+
+

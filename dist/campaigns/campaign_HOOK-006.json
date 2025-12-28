@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "HOOK-006",
+    "week": 6,
+    "day": 6,
+    "type": "HOOK",
+    "title": "Integration Setup",
+    "subject": "Integration Setup",
+    "landing_page": "crm-integration",
+    "template": "integration",
+    "description": "Integration Setup - Get user to take immediate action"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-006",
+    "landing_page_slug": "crm-integration",
+    "url": "/learn/crm-integration",
+    "template_id": "integration",
+    "template_name": "Integration Setup",
+    "slide_count": 6,
+    "duration_seconds": 45,
+    "primary_cta": "signup_free",
+    "secondary_cta": "schedule_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Excited, helpful",
+    "ai_goal": "Get user to take immediate action",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/crm-integration/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week5-hook",
+    "utm_content": "HOOK-006"
+  },
+  "template": {
+    "template_id": "integration",
+    "name": "Integration Setup",
+    "slides": 6,
+    "duration": 45,
+    "purpose": "hook",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "crm-integration",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/crm-integration/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}

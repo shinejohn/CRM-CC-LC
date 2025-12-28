@@ -1,12 +1,19 @@
 import React from 'react';
 import { LearningLayout } from '@/components/LearningCenter/Layout/LearningLayout';
-import { BookOpen, Search, GraduationCap, FileText, BarChart3, ArrowRight } from 'lucide-react';
+import { BookOpen, Search, GraduationCap, FileText, BarChart3, ArrowRight, ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router';
 
 export const LearningCenterIndexPage: React.FC = () => {
   const breadcrumbs = [{ label: 'Learning Center' }];
 
   const quickLinks = [
+    {
+      title: 'Service Catalog',
+      description: 'Browse and purchase services for your business',
+      href: '/learning/services',
+      icon: <ShoppingCart size={24} />,
+      color: 'green',
+    },
     {
       title: 'Campaign Landing Pages',
       description: 'View all 60 email campaign landing pages',

@@ -1,0 +1,52 @@
+{
+  "campaign": {
+    "id": "EDU-004",
+    "week": 4,
+    "day": 4,
+    "type": "EDU",
+    "title": "Educational Content",
+    "subject": "Educational Content",
+    "landing_page": "ai-operations-guide",
+    "template": "educational",
+    "description": "Educational Content - Build trust through education"
+  },
+  "landing_page": {
+    "campaign_id": "EDU-004",
+    "landing_page_slug": "ai-operations-guide",
+    "url": "/learn/ai-operations-guide",
+    "template_id": "educational",
+    "template_name": "Educational Content",
+    "slide_count": 7,
+    "duration_seconds": 75,
+    "primary_cta": "download_guide",
+    "secondary_cta": "start_trial",
+    "ai_persona": "Sarah",
+    "ai_tone": "Knowledgeable, patient",
+    "ai_goal": "Build trust through education",
+    "data_capture_fields": "name, email, business_name, industry, current_challenges",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-operations-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "education",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week2-educational",
+    "utm_content": "EDU-004"
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 75,
+    "purpose": "edu",
+    "audio_required": true
+  },
+  "slides": [],
+  "presentation": {
+    "id": "ai-operations-guide",
+    "audio": {
+      "baseUrl": "https://cdn.fibonacco.com/presentations/ai-operations-guide/audio/",
+      "format": "mp3"
+    },
+    "slides": []
+  }
+}
