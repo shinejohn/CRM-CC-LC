@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class GeneratedPresentation extends Model
 {
-    use HasUuids;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'tenant_id',
@@ -43,4 +44,9 @@ class GeneratedPresentation extends Model
         return $this->belongsTo(PresentationTemplate::class, 'template_id');
     }
 }
+
+
+
+
+
 
