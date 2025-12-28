@@ -37,6 +37,22 @@ import { DashboardPage } from './pages/Business/DashboardPage';
 
 // User Pages
 import { SponsorPage } from './pages/SponsorPage';
+import { CommunityInfluencerPage } from './pages/Marketing/CommunityInfluencerPage';
+import { CommunityExpertPage } from './pages/Marketing/CommunityExpertPage';
+import { SponsorsPage } from './pages/Marketing/SponsorsPage';
+import { AdsPage } from './pages/Marketing/AdsPage';
+import { ArticlePage } from './pages/Action/ArticlePage';
+import { EventsPage } from './pages/Action/EventsPage';
+import { ClassifiedsPage } from './pages/Action/ClassifiedsPage';
+import { AnnouncementsPage } from './pages/Action/AnnouncementsPage';
+import { CouponsPage } from './pages/Action/CouponsPage';
+import { IncentivesPage } from './pages/Action/IncentivesPage';
+import { TicketsPage } from './pages/Action/TicketsPage';
+import { AIPage } from './pages/Action/AIPage';
+import { SurveyPage } from './pages/Business/SurveyPage';
+import { SubscriptionsPage } from './pages/Business/SubscriptionsPage';
+import { TodosPage } from './pages/Business/TodosPage';
+import { DashboardPage } from './pages/Business/DashboardPage';
 
 // Learning Center Pages
 import { LearningCenterIndexPage } from './pages/LearningCenter/Index';
@@ -53,10 +69,28 @@ import { GettingStartedIndexPage } from './pages/LearningCenter/GettingStarted/I
 import { GettingStartedOverviewPage } from './pages/LearningCenter/GettingStarted/Overview';
 import { GettingStartedQuickStartPage } from './pages/LearningCenter/GettingStarted/QuickStart';
 import { PlaceholderPage } from './pages/LearningCenter/Placeholder';
+import { ServiceCatalogPage } from './pages/LearningCenter/Services/Catalog';
+import { ServiceDetailPage } from './pages/LearningCenter/Services/Detail';
+import { ServiceCheckoutPage } from './pages/LearningCenter/Services/Checkout';
+import { OrderConfirmationPage } from './pages/LearningCenter/Services/OrderConfirmation';
 
 // CRM Pages
+import { CrmDashboardPage } from './pages/CRM/Dashboard';
 import { CustomerListPage } from './pages/CRM/Customers/List';
 import { CustomerDetailPage } from './pages/CRM/Customers/Detail';
+import { InterestAnalyticsPage } from './pages/CRM/Analytics/Interest';
+import { PurchaseAnalyticsPage } from './pages/CRM/Analytics/Purchases';
+import { LearningAnalyticsPage } from './pages/CRM/Analytics/Learning';
+import { CampaignListPage } from './pages/CRM/Campaigns/List';
+import { OutboundDashboardPage } from './pages/Outbound/Dashboard';
+import { CreateEmailCampaignPage } from './pages/Outbound/Email/Create';
+import { CreatePhoneCampaignPage } from './pages/Outbound/Phone/Create';
+import { CreateSmsCampaignPage } from './pages/Outbound/SMS/Create';
+import { CommandCenterDashboardPage } from './pages/CommandCenter/Dashboard';
+import { AIPersonalitiesDashboardPage } from './pages/AIPersonalities/Dashboard';
+import { AIPersonalityDetailPage } from './pages/AIPersonalities/Detail';
+import { AIPersonalityAssignPage } from './pages/AIPersonalities/Assign';
+import { AIPersonalityContactsPage } from './pages/AIPersonalities/Contacts';
 
 export function AppRouter() {
   return (
@@ -93,6 +127,7 @@ export function AppRouter() {
         <Route path="/ai" element={<AIPage />} />
 
         {/* Business Profile Routes */}
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/survey" element={<SurveyPage />} />
         <Route path="/subscriptions" element={<SubscriptionsPage />} />
         <Route path="/todos" element={<TodosPage />} />
@@ -102,8 +137,29 @@ export function AppRouter() {
         <Route path="/sponsor" element={<SponsorPage />} />
 
         {/* CRM Routes */}
+        <Route path="/crm" element={<CrmDashboardPage />} />
+        <Route path="/crm/dashboard" element={<CrmDashboardPage />} />
         <Route path="/crm/customers" element={<CustomerListPage />} />
         <Route path="/crm/customers/:id" element={<CustomerDetailPage />} />
+        <Route path="/crm/analytics/interest" element={<InterestAnalyticsPage />} />
+        <Route path="/crm/analytics/purchases" element={<PurchaseAnalyticsPage />} />
+        <Route path="/crm/analytics/learning" element={<LearningAnalyticsPage />} />
+        <Route path="/crm/campaigns" element={<CampaignListPage />} />
+
+        {/* Outbound Campaign Routes */}
+        <Route path="/outbound" element={<OutboundDashboardPage />} />
+        <Route path="/outbound/email/create" element={<CreateEmailCampaignPage />} />
+        <Route path="/outbound/phone/create" element={<CreatePhoneCampaignPage />} />
+        <Route path="/outbound/sms/create" element={<CreateSmsCampaignPage />} />
+
+        {/* Command Center Routes */}
+        <Route path="/command-center" element={<CommandCenterDashboardPage />} />
+
+        {/* AI Personalities Routes */}
+        <Route path="/ai-personalities" element={<AIPersonalitiesDashboardPage />} />
+        <Route path="/ai-personalities/:id" element={<AIPersonalityDetailPage />} />
+        <Route path="/ai-personalities/assign" element={<AIPersonalityAssignPage />} />
+        <Route path="/ai-personalities/contacts" element={<AIPersonalityContactsPage />} />
 
         {/* Learning Center Routes */}
         <Route path="/learning" element={<LearningCenterIndexPage />} />
@@ -180,6 +236,12 @@ export function AppRouter() {
         {/* Campaign Landing Pages */}
         <Route path="/learning/campaigns" element={<CampaignListPage />} />
         <Route path="/campaigns" element={<CampaignListPage />} />
+
+        {/* Service Catalog Routes */}
+        <Route path="/learning/services" element={<ServiceCatalogPage />} />
+        <Route path="/learning/services/checkout" element={<ServiceCheckoutPage />} />
+        <Route path="/learning/services/:id" element={<ServiceDetailPage />} />
+        <Route path="/learning/services/orders/:id/success" element={<OrderConfirmationPage />} />
         
         {/* Campaign Landing Pages - Catch-all must be LAST */}
         <Route path="/learn/:slug" element={<CampaignLandingPage />} />

@@ -292,7 +292,12 @@ export const ProfilePage = () => {
                     <h2 className="text-lg font-medium">Recent Activity</h2>
                   </div>
                   <div className="divide-y divide-gray-200">
-                    {activityData.map(activity => <div key={activity.id} className="p-6">
+                    {activityData.length === 0 ? (
+                      <div className="p-6 text-center text-gray-500">
+                        <p>No recent activity. Connect to API to view activity data.</p>
+                      </div>
+                    ) : (
+                      activityData.map(activity => <div key={activity.id} className="p-6">
                         <div className="flex items-start">
                           <div className="flex-shrink-0">
                             <div className={`p-2 rounded-full ${activity.type === 'call' ? 'bg-green-100' : 'bg-blue-100'}`}>
@@ -313,7 +318,8 @@ export const ProfilePage = () => {
                               </p>}
                           </div>
                         </div>
-                      </div>)}
+                      </div>)
+                    )}
                   </div>
                 </div>}
               {activeTab === 'settings' && <div className="bg-white shadow rounded-lg overflow-hidden">

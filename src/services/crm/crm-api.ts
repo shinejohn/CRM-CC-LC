@@ -2,7 +2,27 @@
 // CRM API SERVICE
 // ============================================
 
-import { apiClient, PaginatedResponse } from '../learning/api-client';
+import { apiClient, type PaginatedResponse } from '../learning/api-client';
+
+// Export helper functions for use in other files
+export async function listCustomers(params?: {
+  search?: string;
+  industry_category?: string;
+  lead_score_min?: number;
+  per_page?: number;
+  page?: number;
+}): Promise<Customer[]> {
+  const response = await customerApi.list(
+    params || {},
+    params?.page || 1,
+    params?.per_page || 20
+  );
+  return response.data;
+}
+
+export async function getCustomer(id: string): Promise<Customer> {
+  return customerApi.get(id);
+}
 
 // ============================================
 // TYPES
