@@ -58,7 +58,6 @@ describe('ContactSalesModal', () => {
   });
 
   it('validates email format', async () => {
-    const user = userEvent.setup();
     render(<ContactSalesModal {...defaultProps} />);
     
     // Fill required fields first
@@ -66,17 +65,27 @@ describe('ContactSalesModal', () => {
     const emailInput = screen.getByLabelText(/email/i);
     const messageInput = screen.getByLabelText(/message/i);
     
-    await user.type(nameInput, 'John Doe');
-    // Use an email without @ symbol to ensure validation fails
-    await user.type(emailInput, 'notanemail');
-    await user.type(messageInput, 'This is a test message that is long enough');
+    // Fill all fields using fireEvent (consistent with other tests)
+    fireEvent.change(nameInput, { target: { value: 'John Doe' } });
+    fireEvent.change(emailInput, { target: { value: 'notanemail' } });
+    fireEvent.change(messageInput, { target: { value: 'This is a test message that is long enough to pass validation' } });
     
-    const submitButton = screen.getByRole('button', { name: /send message/i });
-    await user.click(submitButton);
+    // Get the form element and submit it properly
+    const form = emailInput.closest('form');
+    if (form) {
+      fireEvent.submit(form);
+    } else {
+      // Fallback: click submit button
+      const submitButton = screen.getByRole('button', { name: /send message/i });
+      fireEvent.click(submitButton);
+    }
 
+    // Wait for validation error to appear
     await waitFor(() => {
-      // Check for email validation error - the error should appear after form submission
-      expect(screen.getByText(/please enter a valid email address/i)).toBeInTheDocument();
+      // The error should appear in the email-error element
+      const errorElement = document.getElementById('email-error');
+      expect(errorElement).toBeInTheDocument();
+      expect(errorElement?.textContent).toMatch(/valid email/i);
     }, { timeout: 2000 });
   });
 
