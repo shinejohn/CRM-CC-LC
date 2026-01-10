@@ -1,0 +1,95 @@
+{
+  "campaign": {
+    "id": "HOWTO-009",
+    "week": 5,
+    "day": 30,
+    "type": "How-To",
+    "title": "Dashboard Tour",
+    "subject": "Your dashboard explained: find everything in 5 minutes",
+    "landing_page": "dashboard-tour",
+    "template": "tutorial",
+    "description": "Complete walkthrough of the command center dashboard"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Your Dashboard Tour",
+      "content": {"headline": "Everything You Need, One Place", "subhead": "5-minute dashboard walkthrough"},
+      "narration": "Welcome to your dashboard tour. In the next five minutes, you'll know exactly where everything is and how to use it. Your entire business presence—managed from one place.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "OverviewSlide",
+      "title": "Dashboard Overview",
+      "content": {"sections": ["Quick Stats", "Action Items", "Recent Activity", "Navigation Menu"]},
+      "narration": "Here's your dashboard layout. At the top: quick stats showing your key metrics at a glance. Below that: action items—things that need your attention. Recent activity showing what's happened. And your navigation menu to access everything else.",
+      "duration_seconds": 25,
+      "audio_file": "slide-02-overview.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Quick Stats",
+      "content": {"feature": "Quick Stats Bar", "metrics": ["Profile views", "Inquiries", "Reviews", "Events"]},
+      "narration": "Your quick stats bar shows profile views this week, new inquiries, recent reviews, and upcoming events. Click any stat to see details. Green arrows mean you're up from last week, red means down.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-stats.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Action Items",
+      "content": {"feature": "Action Items", "examples": ["Reviews to respond to", "Listings to update", "Events to post", "Content to approve"]},
+      "narration": "Action items are things that need your attention. Reviews waiting for response, listings that need updating, events to post, content to approve. We prioritize them by importance. Clear these regularly to keep everything running smoothly.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-actions.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Navigation",
+      "content": {"sections": ["Listings", "Events", "Content", "Reviews", "Analytics", "Settings"]},
+      "narration": "Your navigation menu. Listings: manage your business profiles. Events: create and manage events. Content: articles, posts, announcements. Reviews: monitor and respond. Analytics: see your performance data. Settings: customize your experience.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-nav.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide", 
+      "title": "Analytics Deep Dive",
+      "content": {"feature": "Analytics", "reports": ["Traffic sources", "Engagement", "Conversions", "Trends"]},
+      "narration": "Click Analytics for deeper insights. Traffic sources show where visitors come from. Engagement shows how they interact. Conversions track actions like calls and clicks. Trends show your performance over time. Export any report as needed.",
+      "duration_seconds": 30,
+      "audio_file": "slide-06-analytics.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "TipsSlide",
+      "title": "Pro Tips",
+      "content": {"tips": ["Check dashboard daily (2 min)", "Clear action items weekly", "Review analytics monthly", "Use keyboard shortcuts for speed"]},
+      "narration": "Pro tips for your dashboard. Check it daily—takes two minutes. Clear action items weekly so nothing falls through cracks. Review analytics monthly to spot trends. And learn the keyboard shortcuts for speed—press question mark to see them all.",
+      "duration_seconds": 25,
+      "audio_file": "slide-07-tips.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Explore Your Dashboard",
+      "content": {"cta_primary": {"label": "Go to Dashboard", "action": "open_dashboard"}, "cta_secondary": {"label": "Watch Video Tour", "action": "watch_video"}},
+      "narration": "Ready to explore? Go to your dashboard now and try navigating to each section. Or watch the full video tour for a detailed walkthrough. Your command center is ready—time to take control.",
+      "duration_seconds": 20,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_educational": {
+      "subject": "Your dashboard explained: find everything in 5 minutes",
+      "preview_text": "Quick tour of your command center",
+      "body": "Hey {{first_name}},\n\nYour dashboard has everything you need in one place.\n\n5-minute tour:\n→ Quick stats at a glance\n→ Action items that need attention\n→ Navigation to all features\n→ Analytics and insights\n\n[TAKE THE DASHBOARD TOUR →]\n\nPro tip: Check it daily (takes 2 minutes) to stay on top of everything.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {"leads_to": ["HOWTO-010", "HOWTO-015"], "follows": "HOWTO-008"}
+}

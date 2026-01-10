@@ -1,0 +1,171 @@
+{
+  "campaign": {
+    "id": "HOOK-003",
+    "week": 2,
+    "day": 10,
+    "type": "Hook",
+    "title": "Create a Coupon",
+    "subject": "We drafted a coupon for {{business_name}} - publish it?",
+    "landing_page": "create-coupon",
+    "template": "coupon-creator",
+    "description": "Show SMB a pre-made coupon based on their business type and invite them to publish"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-003",
+    "landing_page_slug": "create-coupon",
+    "url": "/coupons/new/{{business_slug}}",
+    "template_id": "coupon-creator",
+    "template_name": "Coupon Creator",
+    "slide_count": 5,
+    "duration_seconds": 75,
+    "primary_cta": "publish_coupon",
+    "secondary_cta": "customize_coupon",
+    "ai_persona": "Sarah",
+    "ai_tone": "Excited, value-focused",
+    "ai_goal": "Get user to publish their first coupon",
+    "data_capture_fields": "name, email, business_name, offer_type",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/create-coupon/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "coupon_published",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week2-hook",
+    "utm_content": "HOOK-003"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "PersonalizedHeroSlide",
+      "title": "Your Coupon Is Ready",
+      "content": {
+        "headline": "We Created a Coupon for {{business_name}}",
+        "subhead": "Ready to drive new customers through your door",
+        "visual": "Coupon mockup with their business name",
+        "stat_highlight": "Coupons get {{avg_redemptions}} redemptions on average"
+      },
+      "narration": "Hey {{first_name}}, we did something for you. We created a coupon for {{business_name}}. It's ready to publish and start driving new customers through your door. Coupons on our platform get {{avg_redemptions}} redemptions on average. Want to see what we made?",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-hero.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "CouponPreviewSlide",
+      "title": "Your Coupon Preview",
+      "content": {
+        "headline": "Here's What We Created",
+        "coupon_preview": {
+          "offer": "{{suggested_offer}}",
+          "value": "{{suggested_value}}",
+          "terms": "{{suggested_terms}}",
+          "expiry": "Valid for 30 days",
+          "redemption": "Show this coupon",
+          "status": "Draft - Ready to Publish"
+        },
+        "note": "Edit any of this. Change the offer, the terms, the expiration—whatever you want."
+      },
+      "narration": "Here's what we created: {{suggested_offer}}. {{suggested_value}} off for new customers. Valid for thirty days. Of course, you can edit any of this—change the offer amount, the terms, the expiration. This is just a starting point based on what works well for {{business_category}} businesses.",
+      "duration_seconds": 20,
+      "audio_file": "slide-02-preview.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ResultsSlide",
+      "title": "Coupons Drive Real Results",
+      "content": {
+        "headline": "What Coupons Actually Do",
+        "results": [
+          {"metric": "{{avg_redemptions}}", "label": "average redemptions per coupon"},
+          {"metric": "{{avg_new_customers}}", "label": "become repeat customers"},
+          {"metric": "{{avg_spend_increase}}", "label": "spend more than coupon value"},
+          {"metric": "Free", "label": "to publish, always"}
+        ],
+        "insight": "Coupons don't just discount—they introduce. Most redeemers become regulars."
+      },
+      "narration": "Here's what coupons actually do. On average, {{avg_redemptions}} people redeem each coupon. Of those, {{avg_new_customers}} percent become repeat customers. And here's the best part: people who use coupons typically spend {{avg_spend_increase}} more than the coupon value. You're not losing money—you're gaining customers. And publishing is completely free.",
+      "duration_seconds": 25,
+      "audio_file": "slide-03-results.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "DistributionSlide",
+      "title": "Where Your Coupon Goes",
+      "content": {
+        "headline": "Maximum Visibility, Zero Extra Work",
+        "distribution": [
+          {"channel": "Coupon Directory", "reach": "{{directory_reach}} monthly visitors"},
+          {"channel": "Community Newsletter", "reach": "{{newsletter_reach}} subscribers"},
+          {"channel": "Your Business Listing", "reach": "Featured prominently"},
+          {"channel": "AI Discovery", "reach": "Recommended to searchers"}
+        ],
+        "note": "One publish → everywhere that matters"
+      },
+      "narration": "When you publish your coupon, it doesn't just sit somewhere hoping to be found. It goes to our coupon directory—{{directory_reach}} people check it monthly. It gets featured in our community newsletter—{{newsletter_reach}} subscribers. It shows up prominently on your business listing. And it becomes part of what AI knows about you. One publish, maximum visibility.",
+      "duration_seconds": 20,
+      "audio_file": "slide-04-distribution.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "CTASlide",
+      "title": "Publish Your Coupon",
+      "content": {
+        "headline": "Ready to Get New Customers?",
+        "cta_primary": {
+          "label": "Publish This Coupon",
+          "action": "publish_coupon",
+          "description": "Go live with our suggested offer"
+        },
+        "cta_secondary": {
+          "label": "Customize First",
+          "action": "edit_coupon",
+          "description": "Change the offer before publishing"
+        },
+        "trust": "Free forever • Edit anytime • Pause anytime",
+        "urgency": "Coupons published today go live in tonight's newsletter"
+      },
+      "narration": "Ready to get new customers? Click 'Publish This Coupon' to go live with our suggested offer. Or click 'Customize First' if you want to change anything. It's free, you can edit anytime, pause anytime, and coupons published today go live in tonight's newsletter. Let's get people through your door.",
+      "duration_seconds": 15,
+      "audio_file": "slide-05-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_hook": {
+      "subject": "We drafted a coupon for {{business_name}} - publish it?",
+      "preview_text": "{{suggested_value}} off to drive new customers",
+      "body": "Hey {{first_name}},\n\nWe created something for {{business_name}}:\n\n🎟️ {{suggested_offer}}\n{{suggested_value}} off for new customers\n\nThis is ready to publish and start driving people through your door.\n\n[SEE YOUR COUPON →]\n\nHere's what happens when you publish:\n\n✓ Featured in our coupon directory ({{directory_reach}} monthly visitors)\n✓ Included in our community newsletter ({{newsletter_reach}} subscribers)\n✓ Displayed on your business listing\n✓ Found by AI when people search for deals\n\nCoupons on our platform get {{avg_redemptions}} redemptions on average.\n\nPublishing is free. Edit anytime. Pause anytime.\n\n[PUBLISH YOUR COUPON →]\n\n{{sender_name}}\nFibonacco\n\nP.S. Coupons published today go live in tonight's newsletter."
+    }
+  },
+  "personalization": {
+    "required_fields": ["first_name", "business_name", "business_slug", "business_category"],
+    "generated_fields": {
+      "suggested_offer": {
+        "restaurant": "First Visit Special",
+        "retail": "New Customer Discount",
+        "service": "First Service Special", 
+        "fitness": "First Month Free",
+        "salon": "New Client Welcome",
+        "default": "New Customer Special"
+      },
+      "suggested_value": {
+        "restaurant": "15%",
+        "retail": "20%",
+        "service": "$25",
+        "fitness": "50%",
+        "salon": "20%",
+        "default": "15%"
+      },
+      "suggested_terms": {
+        "restaurant": "Valid on orders over $30. Dine-in only.",
+        "retail": "Valid on purchases over $50. Excludes sale items.",
+        "service": "Valid for new customers. One per household.",
+        "fitness": "Valid for first month. New members only.",
+        "salon": "Valid for new clients. One service.",
+        "default": "Valid for new customers only."
+      }
+    }
+  },
+  "connections": {
+    "leads_to": ["HOWTO-006"],
+    "follows": "HOOK-002",
+    "related": ["HOOK-004", "HOOK-007"]
+  }
+}

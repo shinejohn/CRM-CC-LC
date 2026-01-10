@@ -1,14 +1,14 @@
 {
   "campaign": {
     "id": "HOWTO-007",
-    "week": 7,
-    "day": 7,
-    "type": "HOWTO",
-    "title": "How-To Tutorial",
-    "subject": "How-To Tutorial",
+    "week": 4,
+    "day": 18,
+    "type": "How-To",
+    "title": "Multi-Community Guide",
+    "subject": "Expand your reach to multiple communities",
     "landing_page": "multi-community-guide",
     "template": "tutorial",
-    "description": "How-To Tutorial - Guide user through process"
+    "description": "How to list in multiple geographic areas and manage presence"
   },
   "landing_page": {
     "campaign_id": "HOWTO-007",
@@ -17,36 +17,216 @@
     "template_id": "tutorial",
     "template_name": "How-To Tutorial",
     "slide_count": 8,
-    "duration_seconds": 60,
-    "primary_cta": "start_trial",
-    "secondary_cta": "contact_sales",
-    "ai_persona": "Emma",
-    "ai_tone": "Helpful, step-by-step",
-    "ai_goal": "Guide user through process",
-    "data_capture_fields": "name, email, business_name, setup_preferences",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/multi-community-guide/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "engagement",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week4-how-to",
-    "utm_content": "HOWTO-007"
+    "duration_seconds": 300,
+    "primary_cta": "expand_reach",
+    "secondary_cta": "see_communities"
   },
-  "template": {
-    "template_id": "tutorial",
-    "name": "How-To Tutorial",
-    "slides": 8,
-    "duration": 60,
-    "purpose": "howto",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "multi-community-guide",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/multi-community-guide/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "TutorialIntroSlide",
+      "title": "Expand Your Reach",
+      "content": {
+        "headline": "Be Found in Multiple Communities",
+        "subhead": "Reach customers beyond your immediate area",
+        "expectations": {
+          "time": "15 minutes",
+          "difficulty": "Intermediate",
+          "outcome": "Presence in multiple communities"
+        }
+      },
+      "narration": "Ready to expand beyond your immediate area? In the next fifteen minutes, you'll learn how to establish presence in multiple communities—reaching customers in neighboring towns, surrounding areas, or anywhere you serve.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "When Multi-Community Makes Sense",
+      "content": {
+        "headline": "Should You Expand?",
+        "good_fit": [
+          {
+            "scenario": "Service area business",
+            "example": "You travel to customers (plumbers, landscapers)"
+          },
+          {
+            "scenario": "Regional draw",
+            "example": "People travel to you (restaurants, attractions)"
+          },
+          {
+            "scenario": "Multiple locations",
+            "example": "You have more than one physical location"
+          },
+          {
+            "scenario": "B2B services",
+            "example": "You serve businesses across areas"
+          }
+        ],
+        "not_ideal": "Hyper-local businesses with no interest in wider reach"
+      },
+      "narration": "First, let's make sure multi-community presence makes sense for you. Good fit: You're a service-area business like a plumber or landscaper who travels to customers. You have regional draw—people travel to you, like a restaurant or attraction. You have multiple physical locations. Or you offer B2B services across areas. If you're hyper-local with no interest in wider reach, focus on one community first.",
+      "duration_seconds": 35,
+      "audio_file": "slide-02-when.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Step 1: Identify Your Communities",
+      "content": {
+        "headline": "Step 1: Choose Your Communities",
+        "location": "Dashboard → Profile → Communities",
+        "considerations": [
+          "Where do your current customers come from?",
+          "What areas do you actually serve well?",
+          "Where are competitors not yet visible?",
+          "What communities neighbor your primary area?"
+        ],
+        "recommendation": "Start with 2-3 communities, then expand"
+      },
+      "narration": "Step one: Identify which communities to join. Go to Dashboard, Profile, Communities. Think about where your current customers come from. What areas can you actually serve well? Where are competitors not yet visible? What communities neighbor your primary area? My recommendation: start with two to three communities, prove you can serve them well, then expand.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-step1.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Step 2: Request Community Access",
+      "content": {
+        "headline": "Step 2: Request Access to Each Community",
+        "process": [
+          {
+            "step": "Search for community by name or location"
+          },
+          {
+            "step": "Click 'Request to Join'"
+          },
+          {
+            "step": "Verify you serve this area (brief explanation)"
+          },
+          {
+            "step": "Wait for approval (usually same day)"
+          }
+        ],
+        "note": "Some communities have requirements—check before requesting"
+      },
+      "narration": "Step two: Request access to each community. Search for the community by name or location. Click 'Request to Join.' You'll need to briefly verify that you actually serve this area—just a sentence or two. Approval usually happens the same day. Some communities have specific requirements, so check before requesting.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-step2.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Step 3: Customize for Each Community",
+      "content": {
+        "headline": "Step 3: Tailor Your Presence",
+        "customizations": [
+          {
+            "element": "Service area description",
+            "why": "Be specific about what you serve in that area"
+          },
+          {
+            "element": "Local references",
+            "why": "Mention landmarks, neighborhoods you work in"
+          },
+          {
+            "element": "Relevant reviews",
+            "why": "Highlight reviews from that community"
+          },
+          {
+            "element": "Community-specific offers",
+            "why": "Optional: special deals for that area"
+          }
+        ],
+        "warning": "Don't copy/paste identical content—make it relevant"
+      },
+      "narration": "Step three: Customize your presence for each community. Don't just copy and paste. Tailor your service area description—be specific about what you serve in that area. Add local references—mention neighborhoods and landmarks. Highlight reviews from customers in that community. Consider community-specific offers if relevant. Generic content looks spammy. Relevant content builds trust.",
+      "duration_seconds": 35,
+      "audio_file": "slide-05-step3.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "Step 4: Manage Multi-Community Content",
+      "content": {
+        "headline": "Step 4: Post to Multiple Communities",
+        "options": [
+          {
+            "option": "All communities",
+            "use": "Announcements relevant everywhere"
+          },
+          {
+            "option": "Select communities",
+            "use": "Events or offers in specific areas"
+          },
+          {
+            "option": "Primary only",
+            "use": "Hyper-local content"
+          }
+        ],
+        "workflow": "Create content → Select distribution → Preview → Publish",
+        "tip": "Set defaults to save time on routine posts"
+      },
+      "narration": "Step four: Manage content across communities. When you create content, you choose where it goes. All communities—for announcements relevant everywhere. Select communities—for events or offers in specific areas. Primary only—for hyper-local content. Create, select distribution, preview, publish. Set your defaults to save time on routine posts.",
+      "duration_seconds": 30,
+      "audio_file": "slide-06-step4.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "StepSlide",
+      "title": "Step 5: Track Performance by Community",
+      "content": {
+        "headline": "Step 5: See What's Working Where",
+        "location": "Dashboard → Insights → By Community",
+        "metrics": [
+          "Views per community",
+          "Inquiries by source community",
+          "Content engagement by community",
+          "Conversion rate by community"
+        ],
+        "action": "Double down on communities that perform; reconsider those that don't"
+      },
+      "narration": "Step five: Track performance by community. Go to Dashboard, Insights, and select 'By Community.' You'll see views, inquiries, engagement, and conversions broken down by each community. This tells you where to double down and where to reconsider. Some communities will outperform others—that's valuable information.",
+      "duration_seconds": 30,
+      "audio_file": "slide-07-step5.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Expand Your Reach",
+      "content": {
+        "headline": "Ready to Reach More Communities?",
+        "cta_primary": {
+          "label": "Explore Communities",
+          "action": "browse_communities"
+        },
+        "cta_secondary": {
+          "label": "See Community Map",
+          "action": "view_map"
+        },
+        "reminder": "Start with 2-3 communities. Expand once you're established."
+      },
+      "narration": "Ready to reach more communities? Click 'Explore Communities' to see what's available in your region. Or view the community map to find neighboring areas. Remember: start with two to three communities, establish presence, then expand. Your reach is about to grow.",
+      "duration_seconds": 20,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_tutorial": {
+      "subject": "Expand your reach to multiple communities",
+      "preview_text": "Reach customers beyond your immediate area",
+      "body": "Hey {{first_name}},\n\nDo your customers come from more than one area?\n\nIf you:\n• Travel to customers (service business)\n• Draw from multiple towns (destination business)\n• Have more than one location\n• Serve businesses across areas\n\n...then multi-community presence can significantly expand your reach.\n\n[EXPAND YOUR REACH →]\n\n15-minute guide to listing in multiple communities without managing multiple accounts.\n\n{{sender_name}}\nFibonacco"
+    }
+  },
+  "connections": {
+    "leads_to": [],
+    "follows": [
+      "EDU-003",
+      "HOWTO-006"
+    ],
+    "related": [
+      "HOWTO-001",
+      "HOWTO-009"
+    ]
   }
 }

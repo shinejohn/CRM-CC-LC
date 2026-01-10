@@ -1,0 +1,5 @@
+encryptionsalt: v1:ojOvcB6bmbo=:v1:/4cxQ3LVr4ePcLgT:Vo7PCpxWaVDkYLmFj8A9ZqFJYNIGdQ==
+config:
+  learning-center:project_name: learning-center
+  learning-center:environment: dev
+  aws:region: us-east-1

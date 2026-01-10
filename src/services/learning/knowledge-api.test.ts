@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import * as knowledgeApi from './knowledge-api';
+import { knowledgeApi } from './knowledge-api';
 
 // Mock the API client
 vi.mock('./api-client', () => ({
@@ -8,6 +8,7 @@ vi.mock('./api-client', () => ({
     post: vi.fn(),
     put: vi.fn(),
     delete: vi.fn(),
+    upload: vi.fn(),
   },
 }));
 
@@ -18,46 +19,26 @@ describe('knowledge-api', () => {
     vi.clearAllMocks();
   });
 
-  describe('list', () => {
-    it('should fetch knowledge items', async () => {
-      const mockData = {
-        data: [
-          { id: '1', title: 'Test 1', content: 'Content 1' },
-          { id: '2', title: 'Test 2', content: 'Content 2' },
-        ],
-      };
+  describe('getKnowledge', () => {
+    it('should fetch a single knowledge item', async () => {
+      const mockData = { id: '1', title: 'Test', content: 'Content' };
 
       vi.mocked(apiClient.get).mockResolvedValue(mockData);
 
-      const result = await knowledgeApi.list();
+      const result = await knowledgeApi.getKnowledge('1');
 
-      expect(apiClient.get).toHaveBeenCalledWith('/knowledge');
-      expect(result).toEqual(mockData.data);
+      expect(apiClient.get).toHaveBeenCalledWith('/learning/knowledge/1');
+      expect(result).toEqual(mockData);
     });
 
     it('should handle errors', async () => {
       vi.mocked(apiClient.get).mockRejectedValue(new Error('API Error'));
 
-      await expect(knowledgeApi.list()).rejects.toThrow('API Error');
+      await expect(knowledgeApi.getKnowledge('1')).rejects.toThrow();
     });
   });
 
-  describe('get', () => {
-    it('should fetch a single knowledge item', async () => {
-      const mockData = {
-        data: { id: '1', title: 'Test', content: 'Content' },
-      };
-
-      vi.mocked(apiClient.get).mockResolvedValue(mockData);
-
-      const result = await knowledgeApi.get('1');
-
-      expect(apiClient.get).toHaveBeenCalledWith('/knowledge/1');
-      expect(result).toEqual(mockData.data);
-    });
-  });
-
-  describe('create', () => {
+  describe('createKnowledge', () => {
     it('should create a knowledge item', async () => {
       const newItem = {
         title: 'New Item',
@@ -65,79 +46,92 @@ describe('knowledge-api', () => {
         category_id: 'cat-1',
       };
 
-      const mockResponse = {
-        data: { id: '1', ...newItem },
-      };
+      const mockResponse = { id: '1', ...newItem };
 
       vi.mocked(apiClient.post).mockResolvedValue(mockResponse);
 
-      const result = await knowledgeApi.create(newItem);
+      const result = await knowledgeApi.createKnowledge(newItem);
 
-      expect(apiClient.post).toHaveBeenCalledWith('/knowledge', newItem);
-      expect(result).toEqual(mockResponse.data);
+      expect(apiClient.post).toHaveBeenCalledWith('/learning/knowledge', newItem);
+      expect(result).toEqual(mockResponse);
     });
   });
 
-  describe('update', () => {
+  describe('updateKnowledge', () => {
     it('should update a knowledge item', async () => {
       const updates = {
         title: 'Updated Title',
         content: 'Updated Content',
       };
 
-      const mockResponse = {
-        data: { id: '1', ...updates },
-      };
+      const mockResponse = { id: '1', ...updates };
 
       vi.mocked(apiClient.put).mockResolvedValue(mockResponse);
 
-      const result = await knowledgeApi.update('1', updates);
+      const result = await knowledgeApi.updateKnowledge('1', updates);
 
-      expect(apiClient.put).toHaveBeenCalledWith('/knowledge/1', updates);
-      expect(result).toEqual(mockResponse.data);
+      expect(apiClient.put).toHaveBeenCalledWith('/learning/knowledge/1', updates);
+      expect(result).toEqual(mockResponse);
     });
   });
 
-  describe('delete', () => {
+  describe('deleteKnowledge', () => {
     it('should delete a knowledge item', async () => {
       vi.mocked(apiClient.delete).mockResolvedValue(undefined);
 
-      await knowledgeApi.delete('1');
+      await knowledgeApi.deleteKnowledge('1');
 
-      expect(apiClient.delete).toHaveBeenCalledWith('/knowledge/1');
+      expect(apiClient.delete).toHaveBeenCalledWith('/learning/knowledge/1');
     });
   });
 
-  describe('vote', () => {
-    it('should vote on a knowledge item', async () => {
-      const mockResponse = {
-        data: { id: '1', helpful_count: 1 },
-      };
-
-      vi.mocked(apiClient.post).mockResolvedValue(mockResponse);
-
-      const result = await knowledgeApi.vote('1', true);
-
-      expect(apiClient.post).toHaveBeenCalledWith('/knowledge/1/vote', { helpful: true });
-      expect(result).toEqual(mockResponse.data);
-    });
-  });
-
-  describe('listCategories', () => {
+  describe('getCategories', () => {
     it('should fetch FAQ categories', async () => {
+      const mockData = [
+        { id: '1', name: 'Category 1' },
+        { id: '2', name: 'Category 2' },
+      ];
+
+      vi.mocked(apiClient.get).mockResolvedValue(mockData);
+
+      const result = await knowledgeApi.getCategories();
+
+      expect(apiClient.get).toHaveBeenCalledWith('/learning/categories');
+      expect(result).toEqual(mockData);
+    });
+  });
+
+  describe('getFAQs', () => {
+    it('should fetch FAQs with filters', async () => {
       const mockData = {
         data: [
-          { id: '1', name: 'Category 1' },
-          { id: '2', name: 'Category 2' },
+          { id: '1', question: 'Test 1', answer: 'Answer 1' },
+          { id: '2', question: 'Test 2', answer: 'Answer 2' },
         ],
+        meta: {
+          current_page: 1,
+          last_page: 1,
+          per_page: 25,
+          total: 2,
+        },
       };
 
       vi.mocked(apiClient.get).mockResolvedValue(mockData);
 
-      const result = await knowledgeApi.listCategories();
+      const result = await knowledgeApi.getFAQs({ category: 'cat-1' }, 1, 25);
 
-      expect(apiClient.get).toHaveBeenCalledWith('/faq-categories');
-      expect(result).toEqual(mockData.data);
+      expect(apiClient.get).toHaveBeenCalled();
+      expect(result).toEqual(mockData);
+    });
+  });
+
+  describe('markHelpful', () => {
+    it('should mark FAQ as helpful', async () => {
+      vi.mocked(apiClient.post).mockResolvedValue(undefined);
+
+      await knowledgeApi.markHelpful('1');
+
+      expect(apiClient.post).toHaveBeenCalledWith('/learning/faqs/1/helpful');
     });
   });
 });

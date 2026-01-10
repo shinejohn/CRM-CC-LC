@@ -1,0 +1,202 @@
+{
+  "campaign": {
+    "id": "EDU-003",
+    "week": 3,
+    "day": 15,
+    "type": "Educational",
+    "title": "The Publishing Network",
+    "subject": "One listing. Found everywhere. Here's how.",
+    "landing_page": "publishing-network",
+    "template": "educational",
+    "description": "Explain how DN, DTG, GEC, Alphasite work together for maximum visibility"
+  },
+  "landing_page": {
+    "campaign_id": "EDU-003",
+    "landing_page_slug": "publishing-network",
+    "url": "/learn/publishing-network",
+    "template_id": "educational",
+    "template_name": "Educational Content",
+    "slide_count": 7,
+    "duration_seconds": 180,
+    "primary_cta": "connect_presence",
+    "secondary_cta": "download_article",
+    "ai_persona": "Sarah",
+    "ai_tone": "Knowledgeable, exciting, empowering",
+    "ai_goal": "Show the power of connected presence",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/publishing-network/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "education",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week3-educational",
+    "utm_content": "EDU-003"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "The Invisible Web",
+      "content": {
+        "headline": "What If You Could Be Everywhere AI Looks?",
+        "subhead": "Not by being on every platform. By being connected to them.",
+        "visual": "Web of connections with business at center"
+      },
+      "narration": "What if you could be everywhere AI looks for businesses? Not by maintaining a hundred different accounts. Not by posting constantly on every platform. What if there was a way to be connected to all the places that matter—from one place? There is. Let me show you.",
+      "duration_seconds": 20,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "The Old Way",
+      "content": {
+        "headline": "The Exhausting Old Way",
+        "problems": [
+          {"icon": "tired", "text": "Maintain profiles on 10+ platforms"},
+          {"icon": "clock", "text": "Post constantly or disappear"},
+          {"icon": "dollar", "text": "Pay each platform to be seen"},
+          {"icon": "broken", "text": "Nothing connects to anything"}
+        ],
+        "result": "Burnout, inconsistency, invisibility"
+      },
+      "narration": "The old way was exhausting. Maintain separate profiles on Facebook, Instagram, Google, Yelp, ten other platforms. Post constantly on each one or your reach disappears. Pay each platform separately to be seen. And none of it connects—each platform is its own silo. The result? Burnout. Inconsistency. And still, invisibility.",
+      "duration_seconds": 30,
+      "audio_file": "slide-02-old-way.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "The Publishing Network",
+      "content": {
+        "headline": "One Presence. Multiple Touchpoints.",
+        "network": [
+          {"name": "Daily News", "type": "Local journalism", "icon": "newspaper"},
+          {"name": "Directory", "type": "Business listings", "icon": "building"},
+          {"name": "Events Calendar", "type": "Community events", "icon": "calendar"},
+          {"name": "Alphasite", "type": "Your home base", "icon": "home"}
+        ],
+        "connection": "All connected. All feeding each other. All feeding AI.",
+        "visual": "Four platforms with visible connections between them"
+      },
+      "narration": "The publishing network works differently. Four platforms, all connected. Daily News—local journalism people actually read. The Directory—business listings that AI trusts. Events Calendar—where people look for what's happening. And Alphasite—your authoritative home base. They're not separate silos. They're connected. What you do in one place echoes across all of them. And all of them feed AI.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-network.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "How It Works",
+      "content": {
+        "headline": "Post Once, Appear Everywhere",
+        "example_flow": [
+          {"action": "You post an event", "result": "Appears on Events Calendar"},
+          {"action": "Calendar syncs", "result": "Event shows on your Directory listing"},
+          {"action": "News picks up", "result": "Event mentioned in community roundup"},
+          {"action": "AI learns", "result": "All touchpoints confirm you're active"}
+        ],
+        "key_point": "One action. Four signals. AI sees a business worth recommending."
+      },
+      "narration": "Here's how it works. You post an event—takes two minutes. That event appears on the Events Calendar, where locals are looking for things to do. The calendar syncs to your directory listing, showing you're active. If it's newsworthy, the news picks it up in the community roundup. AI sees all four touchpoints and learns: this is an active, trusted, real business. One action. Four signals. That's the power of connection.",
+      "duration_seconds": 35,
+      "audio_file": "slide-04-how-it-works.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ComparisonSlide",
+      "title": "Connected vs Disconnected",
+      "content": {
+        "headline": "The Visibility Multiplier",
+        "comparison": {
+          "disconnected": {
+            "label": "Disconnected Business",
+            "touchpoints": 2,
+            "ai_signals": "Weak",
+            "monthly_reach": "~200",
+            "effort": "High (manage everything separately)"
+          },
+          "connected": {
+            "label": "Connected Business",
+            "touchpoints": 8,
+            "ai_signals": "Strong",
+            "monthly_reach": "~2,000+",
+            "effort": "Low (one dashboard)"
+          }
+        },
+        "multiplier": "10x visibility. Same amount of work."
+      },
+      "narration": "Look at the difference. A disconnected business has maybe two touchpoints—website and Google. Weak AI signals. Reaches maybe 200 people a month. And it takes constant effort to maintain. A connected business has eight or more touchpoints. Strong AI signals. Reaches 2,000 or more per month. And it's less work because everything flows from one place. Ten times the visibility. Same amount of work. That's the multiplier effect.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-comparison.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "ProofSlide",
+      "title": "Real Example",
+      "content": {
+        "headline": "From Invisible to Everywhere",
+        "case_study": {
+          "business": "Local yoga studio",
+          "before": "Website + Instagram. 300 monthly views. Zero AI mentions.",
+          "action": "Connected to publishing network",
+          "after": "8 touchpoints. 3,400 monthly views. AI recommends regularly.",
+          "time": "Setup took 2 hours. Runs itself now."
+        },
+        "quote": "I used to spend 10 hours a week on social media. Now I spend 1 hour and get 10x the results."
+      },
+      "narration": "Real example. A local yoga studio. Before: website and Instagram. Three hundred monthly views. Zero AI mentions. They connected to the publishing network—took about two hours to set up. After: eight touchpoints, thirty-four hundred monthly views, and AI recommends them regularly. The owner told me: 'I used to spend ten hours a week on social media. Now I spend one hour and get ten times the results.' That's what connected presence does.",
+      "duration_seconds": 35,
+      "audio_file": "slide-06-proof.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "CTASlide",
+      "title": "Connect Your Presence",
+      "content": {
+        "headline": "Ready to Be Everywhere?",
+        "time_estimate": "2 hours to set up. Runs itself after.",
+        "cta_primary": {
+          "label": "Connect Your Presence",
+          "action": "start_connection",
+          "description": "Step-by-step setup guide"
+        },
+        "cta_secondary": {
+          "label": "Download the Full Article",
+          "action": "download_article",
+          "description": "The Invisible Web: How to Be Everywhere AI Looks"
+        }
+      },
+      "narration": "Ready to be everywhere AI looks? It takes about two hours to set up—then it runs itself. Click 'Connect Your Presence' for the step-by-step setup guide. Or download the full article for a deeper dive into how the publishing network works. One presence. Multiple touchpoints. Found everywhere. Let's make it happen.",
+      "duration_seconds": 20,
+      "audio_file": "slide-07-cta.mp3"
+    }
+  ],
+  "article": {
+    "title": "The Invisible Web: How to Be Everywhere AI Looks",
+    "subtitle": "The publishing network that makes one listing appear in eight places",
+    "word_count": 2100,
+    "content": "# The Invisible Web: How to Be Everywhere AI Looks\n\n**The publishing network that makes one listing appear in eight places**\n\n---\n\nJenna was exhausted.\n\nShe ran a yoga studio. A good one. Loyal students, great reviews, a real sense of community. But her marketing was killing her.\n\nEvery day: post on Instagram. Update Facebook. Check Google Business for reviews. Monitor Yelp. Update the website. Send the newsletter. Post in local Facebook groups.\n\nTen hours a week, minimum. Sometimes more.\n\nAnd for what? Her reach kept shrinking. Instagram showed her posts to fewer and fewer followers. Facebook wanted her to pay to reach her own audience. Google buried her unless she bought ads.\n\n\"I became a full-time social media manager,\" she told me. \"And I'm supposed to be a yoga instructor.\"\n\nThe worst part? After all that work, when her friend asked ChatGPT for yoga studio recommendations, Jenna's studio didn't come up.\n\nTen hours a week of marketing. Invisible to AI.\n\n---\n\n## The Fragmentation Problem\n\nJenna's situation is the norm, not the exception.\n\nThe internet promised connection. Instead, it delivered fragmentation. Every platform is its own silo. Every account is separate. Nothing talks to anything else.\n\nYou post on Instagram—Facebook doesn't know. You update Google—Yelp doesn't know. You have events—nobody outside your email list knows.\n\nAnd AI? AI looks at all these separate signals and sees... noise. Inconsistency. A business that exists here but not there. Active on one platform, dormant on another.\n\n**Fragmentation isn't just exhausting. It makes you invisible.**\n\n---\n\n## What Your Parents Had\n\nThink about what local businesses had fifty years ago.\n\nThe newspaper. Everyone in town read the same paper. If your business was mentioned, everyone knew.\n\nThe Yellow Pages. One directory. Everyone used it. If you were listed, you could be found.\n\nThe community bulletin board. One place for events. Everyone checked it.\n\nMain Street. One place where commerce happened. Foot traffic meant discovery.\n\nThese weren't separate, competing platforms. They were **shared infrastructure**. Connected. Reinforcing. If you were part of the community, you were visible to the community.\n\nThen that infrastructure was dismantled. Newspapers died. Yellow Pages became irrelevant. Main Street emptied. Community gave way to a million fragmented digital channels.\n\n---\n\n## Rebuilding the Infrastructure\n\nWhat if we rebuilt that infrastructure? Not as nostalgia, but as something better—something that combines the connection of the old world with the reach of the new?\n\nThat's what the publishing network is.\n\n**Four platforms. All connected. All feeding each other.**\n\n### Daily News\nLocal journalism that people actually read. News about the community, for the community. When your business is mentioned here, it's a trust signal that echoes everywhere.\n\n### The Directory\nA comprehensive business directory—structured, verified, designed for both humans and AI. Not a review site that holds your reputation hostage. A directory you control.\n\n### Events Calendar\nThe go-to source for what's happening in town. Post an event here, and it's visible to everyone looking for things to do. Connected to your directory listing. Amplified through news.\n\n### Alphasite\nYour authoritative home base. Not just a website—a hub that connects to everything. Structured so AI understands exactly who you are, what you do, and why you matter.\n\n---\n\n## How Connection Works\n\nHere's the magic: these platforms aren't silos. They're connected.\n\n**Example: You post an event.**\n\n1. The event appears on the Events Calendar\n2. It automatically syncs to your Directory listing (\"Upcoming Events\")\n3. If it's notable, the news includes it in the weekly community roundup\n4. Your Alphasite shows the event on your home base\n5. AI sees four different signals all confirming you're active and relevant\n\n**One action. Four touchpoints. That's the multiplier.**\n\nOr try this: You get mentioned in a news article.\n\n1. The article links to your Directory listing\n2. Your listing shows \"As seen in Daily News\"\n3. Your Alphasite displays the news mention\n4. AI sees you're being covered by journalism—a major trust signal\n\n**You didn't do anything extra. The network amplified you automatically.**\n\n---\n\n## The Visibility Math\n\nLet's compare two businesses. Same quality. Same service. Different approaches.\n\n**Business A: Disconnected**\n- Website: ~100 visits/month\n- Google Business: ~100 views/month\n- Instagram: ~200 reach/month (and declining)\n- Total touchpoints: 3\n- AI signals: Weak (only 2 sources)\n- Total monthly reach: ~400\n- Time investment: 10+ hours/week\n\n**Business B: Connected**\n- Directory listing: ~300 views/month\n- News mentions: ~500 readers/mention\n- Events calendar: ~200 views/event\n- Alphasite: ~400 visits/month\n- Social (syndicated from Alphasite): ~600 reach/month\n- Total touchpoints: 8+\n- AI signals: Strong (multiple authoritative sources)\n- Total monthly reach: ~2,000+\n- Time investment: 2-3 hours/week\n\n**Five times the reach. One-quarter the effort.**\n\nAnd that's before the AI effect. When AI starts recommending Business B (because it's visible in trusted sources), the reach compounds.\n\n---\n\n## Jenna's Transformation\n\nRemember Jenna, the exhausted yoga instructor?\n\nShe connected to the publishing network. Took about two hours to set everything up.\n\nShe claimed her directory listing. Complete, accurate, with photos and class schedule.\n\nShe started posting events to the calendar—her workshops, special classes, community events.\n\nShe set up her Alphasite to syndicate content automatically.\n\nShe submitted a news tip about her studio's fifth anniversary—they ran a short piece.\n\n**Six weeks later:**\n\n- Monthly reach: from 300 to 3,400\n- Time spent on marketing: from 10 hours/week to 1 hour/week\n- AI recommendations: appearing regularly in ChatGPT and other assistants\n- New student inquiries: up 40%\n\n\"I finally feel like I'm being seen,\" she told me. \"And I'm not exhausted anymore. I post once, and it goes everywhere. I forgot what that felt like—to be visible without burning out.\"\n\n---\n\n## The AI Amplifier\n\nHere's what makes the publishing network especially powerful in the AI age:\n\n**AI trusts networks over lone signals.**\n\nA single website is one voice claiming to be good. AI is skeptical.\n\nBut a business that appears in news + directory + events + has an authoritative home base? That's multiple independent signals all confirming the same thing. AI trusts that.\n\n**AI values freshness.**\n\nA website that hasn't changed in months looks abandoned. But a business with recent events, news mentions, and activity? That's alive. AI prioritizes living businesses.\n\n**AI rewards structure.**\n\nThe publishing network is structured for AI comprehension. It's not just content—it's structured data that AI can parse, understand, and act on.\n\nWhen you're connected to the publishing network, you're not just visible to humans. You're optimized for the way AI discovers and recommends businesses.\n\n---\n\n## Getting Connected\n\nReady to stop being fragmented and start being connected?\n\nHere's the path:\n\n**Step 1: Claim your Directory listing (10 minutes)**\nYour foundation. Complete every field. This is what everything else connects to.\n\n**Step 2: Set up your Alphasite (30 minutes)**\nYour home base. Connect it to your directory. Set up auto-syndication.\n\n**Step 3: Post your first event (5 minutes)**\nGet something on the calendar. Workshops, sales, community events—anything.\n\n**Step 4: Submit a news tip (10 minutes)**\nAnything newsworthy? Anniversary, new offering, community involvement? Let the news know.\n\n**Step 5: Let the network work (ongoing)**\nOnce connected, the network amplifies you automatically. Check in weekly. Post when you have something. Let the connections do the heavy lifting.\n\nTotal setup time: ~2 hours\nOngoing time: 1-2 hours/week\nResult: 5-10x your current visibility\n\n---\n\n**Ready to be everywhere AI looks?**\n\n**[CONNECT YOUR PRESENCE: STEP-BY-STEP GUIDE →]**\n\n---\n\n*One presence. Multiple touchpoints. Found everywhere.*"
+  },
+  "emails": {
+    "email_1_educational": {
+      "subject": "One listing. Found everywhere. Here's how.",
+      "preview_text": "The publishing network that multiplies your visibility",
+      "body": "Hey {{first_name}},\n\nQuick question: How many separate platforms are you maintaining right now?\n\nFacebook. Instagram. Google. Your website. Maybe Yelp. Maybe a few others.\n\nEach one separate. Each one demanding time. None of them talking to each other.\n\nWhat if there was a way to be everywhere—without maintaining everywhere?\n\nI put together a 3-minute presentation on how the publishing network works. One presence, multiple touchpoints, found everywhere.\n\n[WATCH THE PRESENTATION →]\n\nA yoga studio went from 300 monthly reach to 3,400—while cutting their marketing time from 10 hours/week to 1.\n\nThat's what connected presence does.\n\n{{sender_name}}\nFibonacco\n\nP.S. Full article included if you want the deep dive. It's called \"The Invisible Web.\""
+    },
+    "email_2a_engaged": {
+      "subject": "Ready to connect your presence?",
+      "preview_text": "2 hours to set up, runs itself after",
+      "body": "Hey {{first_name}},\n\nYou watched the presentation on the publishing network. Here's the quick recap:\n\n• 4 platforms, all connected\n• Post once, appear everywhere\n• AI sees multiple signals = trusts you more\n• 5-10x visibility, 1/4 the effort\n\nReady to get {{business_name}} connected?\n\nThe setup guide walks you through it:\n\n[CONNECT YOUR PRESENCE →]\n\n~2 hours to set up. Then it runs itself.\n\n{{sender_name}}\n\nP.S. Most businesses see measurable results within 30 days."
+    },
+    "email_2b_reengage": {
+      "subject": "Stop maintaining 10 platforms",
+      "preview_text": "There's a better way",
+      "body": "Hey {{first_name}},\n\nStill maintaining separate profiles on a bunch of different platforms?\n\nThere's a better way.\n\nThe publishing network connects everything:\n→ Post once, appear in 4+ places\n→ Everything syncs automatically\n→ AI sees you everywhere (because you are)\n→ 10x visibility, fraction of the time\n\n3 minutes to understand it:\n\n[WATCH THE PRESENTATION →]\n\nOr skip to setup:\n\n[CONNECT YOUR PRESENCE →]\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": ["HOWTO-006", "HOWTO-007"],
+    "follows": "EDU-002",
+    "related": ["EDU-001", "HOOK-004"]
+  }
+}

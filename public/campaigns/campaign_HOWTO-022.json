@@ -1,52 +1,174 @@
 {
   "campaign": {
     "id": "HOWTO-022",
-    "week": 22,
-    "day": 22,
-    "type": "HOWTO",
-    "title": "How-To Tutorial",
-    "subject": "How-To Tutorial",
+    "week": 10,
+    "day": 69,
+    "type": "How-To",
+    "title": "Workflow Automation Guide",
+    "subject": "Automate repetitive tasks and save 10+ hours weekly",
     "landing_page": "workflow-automation-guide",
-    "template": "tutorial",
-    "description": "How-To Tutorial - Guide user through process"
+    "template": "tutorial"
   },
-  "landing_page": {
-    "campaign_id": "HOWTO-022",
-    "landing_page_slug": "workflow-automation-guide",
-    "url": "/learn/workflow-automation-guide",
-    "template_id": "tutorial",
-    "template_name": "How-To Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 60,
-    "primary_cta": "start_trial",
-    "secondary_cta": "contact_sales",
-    "ai_persona": "Emma",
-    "ai_tone": "Helpful, step-by-step",
-    "ai_goal": "Guide user through process",
-    "data_capture_fields": "name, email, business_name, setup_preferences",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/workflow-automation-guide/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "engagement",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week10-how-to",
-    "utm_content": "HOWTO-022"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "How-To Tutorial",
-    "slides": 8,
-    "duration": 60,
-    "purpose": "howto",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "workflow-automation-guide",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/workflow-automation-guide/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Workflow Automation",
+      "content": {
+        "headline": "Stop Doing Tasks Manually",
+        "subhead": "Automate repetitive work in 30 minutes"
+      },
+      "narration": "Every repetitive task you do manually is time stolen from growing your business. Workflow automation handles the routine so you can focus on what matters. Let's automate your biggest time drains.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "OverviewSlide",
+      "title": "What You'll Automate",
+      "content": {
+        "topics": [
+          "Identifying automation opportunities",
+          "Building your first workflow",
+          "Testing and refining",
+          "Expanding automation"
+        ]
+      },
+      "narration": "We'll identify your best automation opportunities, build your first workflow step by step, test and refine until it works perfectly, then show you how to expand automation across your business.",
+      "duration_seconds": 20,
+      "audio_file": "slide-02-overview.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Step 1: Find Opportunities",
+      "content": {
+        "action": "Identify Repetitive Tasks",
+        "good_candidates": [
+          "Same action triggered by same event",
+          "Multi-step processes you do often",
+          "Tasks that follow consistent rules",
+          "Data entry between systems"
+        ],
+        "examples": [
+          "New inquiry → Send welcome email",
+          "Appointment booked → Send confirmation + reminder",
+          "Invoice paid → Send thank you + request review"
+        ]
+      },
+      "narration": "Find automation opportunities. Good candidates: same action triggered by same event, multi-step processes you do frequently, tasks following consistent rules, data entry between systems. Examples: new inquiry triggers welcome email, booking triggers confirmation and reminder sequence, payment triggers thank you and review request.",
+      "duration_seconds": 40,
+      "audio_file": "slide-03-opportunities.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Step 2: Build the Workflow",
+      "content": {
+        "action": "Create Your First Automation",
+        "components": [
+          "Trigger: What starts the automation",
+          "Conditions: When should it run (optional)",
+          "Actions: What happens automatically"
+        ],
+        "example": {
+          "trigger": "New form submission",
+          "condition": "If service = consultation",
+          "actions": [
+            "Send confirmation email",
+            "Create calendar hold",
+            "Notify team member",
+            "Add to CRM"
+          ]
+        }
+      },
+      "narration": "Build your workflow with three components. Trigger: what starts it—like a form submission. Conditions: optional filters for when it should run—like only for consultation requests. Actions: what happens automatically—send email, create calendar hold, notify team, add to CRM. One trigger can kick off multiple actions.",
+      "duration_seconds": 40,
+      "audio_file": "slide-04-build.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Step 3: Test Thoroughly",
+      "content": {
+        "action": "Verify It Works",
+        "testing_checklist": [
+          "Run with test data first",
+          "Check each action completed",
+          "Verify timing is correct",
+          "Test edge cases",
+          "Monitor first 10 real triggers"
+        ]
+      },
+      "narration": "Test thoroughly before going live. Run with test data first. Check that each action completed correctly. Verify timing between steps is right. Test edge cases—what if a field is empty? Monitor the first ten real triggers to catch any issues. Better to find problems in testing than with real customers.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-test.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "Step 4: Expand and Optimize",
+      "content": {
+        "action": "Scale Your Automation",
+        "next_workflows": [
+          "Customer onboarding sequence",
+          "Follow-up after service",
+          "Re-engagement for inactive customers",
+          "Review request timing",
+          "Recurring appointment reminders"
+        ],
+        "track": "Hours saved per workflow"
+      },
+      "narration": "Once your first workflow runs smoothly, expand. Customer onboarding sequences. Follow-up after service completion. Re-engagement campaigns for inactive customers. Optimized review request timing. Recurring appointment reminders. Track hours saved per workflow—most businesses save ten to fifteen hours weekly with five to seven automations.",
+      "duration_seconds": 35,
+      "audio_file": "slide-06-expand.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "TipsSlide",
+      "title": "Pro Tips",
+      "content": {
+        "tips": [
+          "Start with one workflow, master it, then add more",
+          "Add delays between actions (feels more human)",
+          "Include error notifications so you know if something breaks",
+          "Review automations quarterly—business changes"
+        ]
+      },
+      "narration": "Automation pro tips. Start with one workflow, master it, then add more. Add delays between actions—immediate feels robotic, spaced out feels human. Include error notifications so you know if something breaks. Review automations quarterly as your business evolves.",
+      "duration_seconds": 30,
+      "audio_file": "slide-07-tips.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Start Automating",
+      "content": {
+        "cta_primary": {
+          "label": "Build First Workflow",
+          "action": "create_workflow"
+        },
+        "cta_secondary": {
+          "label": "See Workflow Templates",
+          "action": "view_templates"
+        }
+      },
+      "narration": "Ready to reclaim your time? Build your first workflow now. Or browse templates for common automations you can activate immediately. Every hour you automate is an hour you get back.",
+      "duration_seconds": 20,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_educational": {
+      "subject": "Automate repetitive tasks and save 10+ hours weekly",
+      "preview_text": "Stop doing tasks manually",
+      "body": "Hey {{first_name}},\n\nEvery repetitive task is time stolen from growth.\n\nAutomate:\n✓ New inquiry → Welcome email\n✓ Booking → Confirmation + reminders\n✓ Payment → Thank you + review request\n✓ Service complete → Follow-up sequence\n\n[BUILD YOUR FIRST WORKFLOW →]\n\nMost businesses save 10-15 hours/week with 5-7 automations.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-025"
+    ],
+    "follows": "HOWTO-021"
   }
 }

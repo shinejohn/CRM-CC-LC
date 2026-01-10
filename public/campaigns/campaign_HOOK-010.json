@@ -1,52 +1,205 @@
 {
   "campaign": {
     "id": "HOOK-010",
-    "week": 10,
-    "day": 10,
-    "type": "HOOK",
-    "title": "Advertising Offer",
-    "subject": "Advertising Offer",
+    "week": 8,
+    "day": 51,
+    "type": "Hook",
+    "title": "Article Advertising",
+    "subject": "Get a feature article written about {{business_name}}",
     "landing_page": "article-advertising",
     "template": "advertising-offer",
-    "description": "Advertising Offer - Get user to take immediate action"
+    "description": "Sponsored article/advertorial opportunity"
   },
-  "landing_page": {
-    "campaign_id": "HOOK-010",
-    "landing_page_slug": "article-advertising",
-    "url": "/learn/article-advertising",
-    "template_id": "advertising-offer",
-    "template_name": "Advertising Offer",
-    "slide_count": 6,
-    "duration_seconds": 50,
-    "primary_cta": "signup_free",
-    "secondary_cta": "schedule_demo",
-    "ai_persona": "Sarah",
-    "ai_tone": "Excited, helpful",
-    "ai_goal": "Get user to take immediate action",
-    "data_capture_fields": "name, email, business_name, industry",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/article-advertising/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "signup",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week8-hook",
-    "utm_content": "HOOK-010"
-  },
-  "template": {
-    "template_id": "advertising-offer",
-    "name": "Advertising Offer",
-    "slides": 6,
-    "duration": 50,
-    "purpose": "hook",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "article-advertising",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/article-advertising/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Your Story, Told Well",
+      "content": {
+        "headline": "A Feature Article About Your Business",
+        "subhead": "Published on our news platform, promoted everywhere"
+      },
+      "narration": "Imagine a feature article about your business. Not an ad—an actual story. Your journey, your expertise, what makes you different. Published on our news platform, promoted across all channels. This is the kind of exposure that builds real credibility.",
+      "duration_seconds": 18,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "What You Get",
+      "content": {
+        "headline": "Feature Article Package",
+        "included": [
+          {
+            "item": "Professional interview",
+            "detail": "30-minute conversation about your business"
+          },
+          {
+            "item": "Written article",
+            "detail": "800-1200 words, professionally edited"
+          },
+          {
+            "item": "Photography",
+            "detail": "Professional photos of your business"
+          },
+          {
+            "item": "Publication",
+            "detail": "Featured on news site homepage"
+          },
+          {
+            "item": "Newsletter feature",
+            "detail": "Highlighted to 10,000+ subscribers"
+          },
+          {
+            "item": "Social promotion",
+            "detail": "Shared across all social channels"
+          },
+          {
+            "item": "Permanent placement",
+            "detail": "Article stays live indefinitely"
+          }
+        ]
+      },
+      "narration": "Here's what you get. A professional interview—thirty minutes about your business, your story, your expertise. A written article, eight hundred to twelve hundred words, professionally edited. Professional photography of your business. Publication featured on our news site homepage. Newsletter feature to ten thousand plus subscribers. Social promotion across all channels. And permanent placement—the article stays live indefinitely, building your credibility forever.",
+      "duration_seconds": 40,
+      "audio_file": "slide-02-package.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "Why This Works",
+      "content": {
+        "headline": "Earned Media Credibility, Without the Wait",
+        "advantages": [
+          {
+            "advantage": "Third-party credibility",
+            "why": "Not an ad—an article on a news platform"
+          },
+          {
+            "advantage": "SEO value",
+            "why": "Authoritative backlink to your site"
+          },
+          {
+            "advantage": "Social proof",
+            "why": "'As featured in...' adds legitimacy"
+          },
+          {
+            "advantage": "Shareable asset",
+            "why": "Share with prospects, on social, in proposals"
+          },
+          {
+            "advantage": "AI discoverable",
+            "why": "News article = trusted source for AI"
+          }
+        ]
+      },
+      "narration": "Why does this work so well? Third-party credibility—this isn't an ad, it's an article on a news platform. SEO value—you get an authoritative backlink to your site. Social proof—'As featured in' adds legitimacy. Shareable asset—share with prospects, on social, in proposals. And AI discoverability—remember, news articles are trusted sources that AI recommends from. One article, multiple benefits.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-why.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "Article Preview",
+      "content": {
+        "headline": "Sample Article Structure",
+        "structure": [
+          {
+            "section": "The Hook",
+            "content": "Compelling opening about your unique story"
+          },
+          {
+            "section": "The Background",
+            "content": "How you got started, your journey"
+          },
+          {
+            "section": "What Makes You Different",
+            "content": "Your approach, philosophy, specialization"
+          },
+          {
+            "section": "Customer Impact",
+            "content": "Stories of people you've helped"
+          },
+          {
+            "section": "What's Next",
+            "content": "Your vision, upcoming offerings"
+          },
+          {
+            "section": "How to Connect",
+            "content": "Contact info and next steps"
+          }
+        ]
+      },
+      "narration": "Here's how we structure your article. We start with a hook—a compelling opening about your unique story. Then background—how you got started, your journey. What makes you different—your approach, philosophy, specialization. Customer impact—stories of people you've helped. What's next—your vision and upcoming offerings. And how to connect—clear next steps for interested readers.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-structure.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ProofSlide",
+      "title": "Article Results",
+      "content": {
+        "headline": "What Feature Articles Deliver",
+        "examples": [
+          {
+            "business": "Financial advisor",
+            "result": "Article generated 14 consultation requests in first month",
+            "ongoing": "Still generating leads 8 months later"
+          },
+          {
+            "business": "Restaurant",
+            "result": "47% traffic spike the week article published",
+            "quote": "People came in with the article on their phone"
+          },
+          {
+            "business": "Contractor",
+            "result": "Uses article in every proposal",
+            "impact": "Close rate improved 23%"
+          }
+        ]
+      },
+      "narration": "What do feature articles deliver? A financial advisor got fourteen consultation requests in the first month—and the article is still generating leads eight months later. A restaurant saw a forty-seven percent traffic spike the week the article published. People came in with the article on their phone. A contractor uses his article in every proposal—his close rate improved twenty-three percent. This is content that keeps working.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-results.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "CTASlide",
+      "title": "Get Your Article",
+      "content": {
+        "headline": "Ready for Your Feature Story?",
+        "cta_primary": {
+          "label": "Book Your Article",
+          "action": "book_article"
+        },
+        "cta_secondary": {
+          "label": "See Sample Articles",
+          "action": "view_samples"
+        },
+        "urgency": "Limited to 4 feature articles per month to maintain quality"
+      },
+      "narration": "Ready for your feature story? Book your article now. We limit feature articles to four per month to maintain quality, so spots fill up. Or see sample articles first to see the level of content we produce. Your story, told well, working for your business forever.",
+      "duration_seconds": 20,
+      "audio_file": "slide-06-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_hook": {
+      "subject": "Get a feature article written about {{business_name}}",
+      "preview_text": "Your story, professionally told",
+      "body": "Hey {{first_name}},\n\nImagine a feature article about {{business_name}}.\n\nNot an ad—a real story about your journey, expertise, and what makes you different.\n\nPackage includes:\n✓ Professional interview\n✓ 800-1200 word article\n✓ Professional photography\n✓ Homepage feature\n✓ Newsletter to 10,000+\n✓ Social promotion\n✓ Permanent placement\n\n[LEARN MORE →]\n\nOne financial advisor got 14 consultation requests from a single article—still generating leads 8 months later.\n\n{{sender_name}}\nFibonacco"
+    },
+    "email_3_hook": {
+      "subject": "Here's how your {{business_name}} article could look",
+      "preview_text": "Article concept ready for you",
+      "body": "Hey {{first_name}},\n\nWe drafted a concept for your {{business_name}} feature article:\n\n[SEE YOUR ARTICLE CONCEPT →]\n\nThis is the angle we'd take based on what makes your business unique.\n\nLimited to 4 articles/month. Ready to book?\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "follows": "HOOK-009",
+    "related": [
+      "HOOK-008",
+      "HOOK-011"
+    ]
   }
 }

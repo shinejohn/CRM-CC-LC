@@ -1,0 +1,155 @@
+{
+  "campaign": {
+    "id": "EDU-014",
+    "week": 10,
+    "day": 68,
+    "type": "Educational",
+    "title": "AI Customer Service",
+    "subject": "Your customers expect instant responses. Here's how to deliver.",
+    "landing_page": "ai-customer-service",
+    "template": "educational",
+    "description": "Using AI to provide 24/7 customer service without hiring more staff"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "The Response Time Problem",
+      "content": {
+        "headline": "Customers Expect Instant Responses",
+        "stats": {
+          "expectation": "90% of customers rate 'immediate' response as important",
+          "definition": "'Immediate' means 10 minutes or less for most",
+          "reality": "Average small business response time: 12+ hours",
+          "consequence": "59% will try a competitor if no quick response"
+        }
+      },
+      "narration": "Customers expect instant responses—ninety percent rate it as important. 'Immediate' means ten minutes or less to most customers. Average small business response time? Twelve hours or more. And fifty-nine percent will try a competitor if they don't get a quick response. The gap between expectation and reality is costing you customers.",
+      "duration_seconds": 25,
+      "audio_file": "slide-01-problem.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "AI Customer Service",
+      "content": {
+        "headline": "AI Can Handle Customer Service 24/7",
+        "capabilities": [
+          {"capability": "Instant responses", "detail": "Under 30 seconds, any time"},
+          {"capability": "Answer common questions", "detail": "Hours, pricing, services, policies"},
+          {"capability": "Book appointments", "detail": "Check availability, schedule, confirm"},
+          {"capability": "Handle complaints", "detail": "Initial response, escalation when needed"},
+          {"capability": "Follow up", "detail": "Post-service check-ins, review requests"}
+        ]
+      },
+      "narration": "AI can handle customer service twenty-four seven. Instant responses—under thirty seconds, any time of day or night. Answer common questions about hours, pricing, services, policies. Book appointments—check availability, schedule, send confirmations. Handle initial complaint responses, escalate when needed. Follow up automatically—post-service check-ins, review requests. All without adding staff.",
+      "duration_seconds": 35,
+      "audio_file": "slide-02-capabilities.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "Customer Experience",
+      "content": {
+        "headline": "What Customers Actually Experience",
+        "experience": [
+          {"touchpoint": "Website chat", "experience": "Instant answers, not 'someone will get back to you'"},
+          {"touchpoint": "Facebook message", "experience": "Same AI, consistent answers"},
+          {"touchpoint": "Text inquiry", "experience": "Real conversation, not canned responses"},
+          {"touchpoint": "After-hours call", "experience": "Voicemail? No—answered and helped"},
+          {"touchpoint": "Email question", "experience": "Response in minutes, not days"}
+        ]
+      },
+      "narration": "What do customers actually experience? Website chat—instant answers, not 'someone will get back to you.' Facebook message—same AI, consistent answers across channels. Text inquiry—a real conversation, not canned responses. After-hours call—not voicemail, actually answered and helped. Email question—response in minutes, not days. Every touchpoint covered, every time.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-experience.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "Human + AI",
+      "content": {
+        "headline": "AI Handles Routine, Humans Handle Important",
+        "division": {
+          "ai_handles": ["Standard questions (70-80% of inquiries)", "Appointment scheduling", "Basic info requests", "Initial complaint acknowledgment", "Routine follow-ups"],
+          "humans_handle": ["Complex problems", "Angry or upset customers", "High-value opportunities", "Unique situations", "Relationship building"]
+        },
+        "result": "Your team has time for what matters"
+      },
+      "narration": "This isn't about replacing humans—it's about freeing them. AI handles the routine: standard questions, scheduling, basic info, initial acknowledgments, routine follow-ups. That's seventy to eighty percent of inquiries. Humans handle what matters: complex problems, upset customers, high-value opportunities, unique situations, relationship building. Your team has time for what only humans can do.",
+      "duration_seconds": 35,
+      "audio_file": "slide-04-division.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ProofSlide",
+      "title": "Real Results",
+      "content": {
+        "case_study": {
+          "business": "Medical spa, 2 locations",
+          "before": "3-4 hour average response time, missed after-hours inquiries",
+          "after": "Under 2 minute response time, 24/7 coverage",
+          "results": {
+            "response_time": "98% improvement",
+            "bookings": "31% increase",
+            "satisfaction": "Customer satisfaction up 27%",
+            "staff_time": "Front desk saved 15 hours/week"
+          },
+          "quote": "We're booking appointments at 11pm now. That never happened before."
+        }
+      },
+      "narration": "Real results. Medical spa with two locations. Before: three to four hour average response time, missing all after-hours inquiries. After: under two minute response time, twenty-four seven coverage. Results: ninety-eight percent improvement in response time, thirty-one percent more bookings, customer satisfaction up twenty-seven percent, front desk saved fifteen hours a week. The owner told us: 'We're booking appointments at 11pm now. That never happened before.'",
+      "duration_seconds": 35,
+      "audio_file": "slide-05-proof.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "ActionSlide",
+      "title": "Getting Started",
+      "content": {
+        "headline": "Start with Your Highest-Volume Questions",
+        "steps": [
+          {"step": 1, "action": "List your 10 most common questions"},
+          {"step": 2, "action": "Create answers for each"},
+          {"step": 3, "action": "Set up AI on your highest-traffic channel"},
+          {"step": 4, "action": "Monitor and refine for 2 weeks"},
+          {"step": 5, "action": "Expand to other channels"}
+        ]
+      },
+      "narration": "Start with your highest-volume questions. Step one: list your ten most common questions. Step two: create clear answers for each. Step three: set up AI on your highest-traffic channel—probably website or Facebook. Step four: monitor and refine for two weeks. Step five: expand to other channels. Start simple, prove it works, then scale.",
+      "duration_seconds": 30,
+      "audio_file": "slide-06-start.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "CTASlide",
+      "title": "Set Up AI Customer Service",
+      "content": {
+        "headline": "Ready for 24/7 Customer Service?",
+        "cta_primary": {
+          "label": "Set Up AI Service",
+          "action": "setup_service"
+        },
+        "cta_secondary": {
+          "label": "See a Demo",
+          "action": "view_demo"
+        }
+      },
+      "narration": "Ready for twenty-four seven customer service? Set up AI service now—start with your top questions and expand from there. Or see a demo to see how it actually works. Your customers expect instant responses. Now you can deliver.",
+      "duration_seconds": 20,
+      "audio_file": "slide-07-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_educational": {
+      "subject": "Your customers expect instant responses. Here's how to deliver.",
+      "preview_text": "24/7 customer service without adding staff",
+      "body": "Hey {{first_name}},\n\n90% of customers expect 'immediate' responses.\n\nImmediate = 10 minutes or less.\n\nAverage small business response time? 12+ hours.\n\n59% will try a competitor if you're slow.\n\nAI can close this gap:\n✓ Instant responses, 24/7\n✓ Answer common questions\n✓ Book appointments\n✓ Handle initial complaints\n✓ Follow up automatically\n\n[WATCH THE 3-MINUTE GUIDE →]\n\nOne medical spa went from 3-4 hour response time to under 2 minutes—and bookings jumped 31%.\n\n{{sender_name}}\nFibonacco"
+    }
+  },
+  "connections": {
+    "leads_to": ["HOWTO-008"],
+    "follows": "EDU-013",
+    "related": ["EDU-006", "EDU-008"]
+  }
+}

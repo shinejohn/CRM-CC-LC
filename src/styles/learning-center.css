@@ -1,0 +1,822 @@
+/* ============================================
+   LEARNING CENTER DESIGN TOKENS
+   Agent A - Wave 1: Design System Foundation
+   ============================================ */
+
+:root {
+  /* Primary Palette - Knowledge/Learning Focus */
+  --lc-primary: #6366f1;          /* Indigo - wisdom, learning */
+  --lc-primary-light: #818cf8;
+  --lc-primary-dark: #4f46e5;
+  --lc-primary-bg: #eef2ff;
+  
+  /* Secondary - Validation/Trust */
+  --lc-secondary: #10b981;        /* Emerald - verified, trusted */
+  --lc-secondary-light: #34d399;
+  --lc-secondary-dark: #059669;
+  
+  /* Accent - Attention/Action */
+  --lc-accent: #f59e0b;           /* Amber - needs attention */
+  --lc-accent-light: #fbbf24;
+  --lc-accent-dark: #d97706;
+  
+  /* Source Colors */
+  --source-google: #4285f4;
+  --source-serpapi: #10b981;
+  --source-website: #8b5cf6;
+  --source-owner: #f59e0b;
+  
+  /* Validation Status */
+  --status-verified: #10b981;
+  --status-unverified: #6b7280;
+  --status-disputed: #ef4444;
+  --status-outdated: #f59e0b;
+  
+  /* Surfaces */
+  --lc-bg: #f8fafc;
+  --lc-surface: #ffffff;
+  --lc-surface-hover: #f1f5f9;
+  --lc-surface-active: #e2e8f0;
+  
+  /* Typography */
+  --lc-text: #1e293b;
+  --lc-text-secondary: #64748b;
+  --lc-text-muted: #94a3b8;
+  
+  /* Borders */
+  --lc-border: #e2e8f0;
+  --lc-border-focus: var(--lc-primary);
+  
+  /* Shadows */
+  --lc-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --lc-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --lc-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --lc-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --lc-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+  
+  /* Spacing */
+  --lc-sidebar-width: 280px;
+  --lc-sidebar-collapsed: 64px;
+  --lc-header-height: 64px;
+  
+  /* Transitions */
+  --lc-transition-fast: 150ms ease;
+  --lc-transition: 200ms ease;
+  --lc-transition-slow: 300ms ease;
+  
+  /* Border Radius */
+  --lc-radius-sm: 4px;
+  --lc-radius-md: 8px;
+  --lc-radius-lg: 12px;
+  --lc-radius-xl: 16px;
+  --lc-radius-2xl: 24px;
+  --lc-radius-full: 9999px;
+}
+
+/* Dark Mode */
+.dark {
+  --lc-bg: #0f172a;
+  --lc-surface: #1e293b;
+  --lc-surface-hover: #334155;
+  --lc-surface-active: #475569;
+  --lc-text: #f1f5f9;
+  --lc-text-secondary: #94a3b8;
+  --lc-text-muted: #64748b;
+  --lc-border: #334155;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Surface utilities */
+.lc-surface {
+  background-color: var(--lc-surface);
+  border: 1px solid var(--lc-border);
+  border-radius: var(--lc-radius-md);
+}
+
+.lc-surface-hover:hover {
+  background-color: var(--lc-surface-hover);
+}
+
+.lc-surface-active {
+  background-color: var(--lc-surface-active);
+}
+
+/* Text utilities */
+.lc-text-primary {
+  color: var(--lc-text);
+}
+
+.lc-text-secondary {
+  color: var(--lc-text-secondary);
+}
+
+.lc-text-muted {
+  color: var(--lc-text-muted);
+}
+
+/* Border utilities */
+.lc-border {
+  border-color: var(--lc-border);
+}
+
+.lc-border-focus:focus {
+  border-color: var(--lc-border-focus);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--lc-primary-bg);
+}
+
+/* Shadow utilities */
+.lc-shadow-sm {
+  box-shadow: var(--lc-shadow-sm);
+}
+
+.lc-shadow {
+  box-shadow: var(--lc-shadow);
+}
+
+.lc-shadow-md {
+  box-shadow: var(--lc-shadow-md);
+}
+
+.lc-shadow-lg {
+  box-shadow: var(--lc-shadow-lg);
+}
+
+.lc-shadow-xl {
+  box-shadow: var(--lc-shadow-xl);
+}
+
+/* Transition utilities */
+.lc-transition {
+  transition: all var(--lc-transition);
+}
+
+.lc-transition-fast {
+  transition: all var(--lc-transition-fast);
+}
+
+.lc-transition-slow {
+  transition: all var(--lc-transition-slow);
+}
+
+/* Radius utilities */
+.lc-radius-sm {
+  border-radius: var(--lc-radius-sm);
+}
+
+.lc-radius-md {
+  border-radius: var(--lc-radius-md);
+}
+
+.lc-radius-lg {
+  border-radius: var(--lc-radius-lg);
+}
+
+.lc-radius-xl {
+  border-radius: var(--lc-radius-xl);
+}
+
+.lc-radius-2xl {
+  border-radius: var(--lc-radius-2xl);
+}
+
+.lc-radius-full {
+  border-radius: var(--lc-radius-full);
+}
+
+/* ============================================
+   COMPONENT-SPECIFIC STYLES
+   ============================================ */
+
+/* Learning Center Layout */
+.learning-center-layout {
+  background-color: var(--lc-bg);
+  min-height: 100vh;
+}
+
+.learning-center-sidebar {
+  width: var(--lc-sidebar-width);
+  background-color: var(--lc-surface);
+  border-right: 1px solid var(--lc-border);
+}
+
+.learning-center-header {
+  height: var(--lc-header-height);
+  background-color: var(--lc-surface);
+  border-bottom: 1px solid var(--lc-border);
+}
+
+/* Source Badge Colors */
+.source-badge-google {
+  background-color: var(--source-google);
+  color: white;
+}
+
+.source-badge-serpapi {
+  background-color: var(--source-serpapi);
+  color: white;
+}
+
+.source-badge-website {
+  background-color: var(--source-website);
+  color: white;
+}
+
+.source-badge-owner {
+  background-color: var(--source-owner);
+  color: white;
+}
+
+/* Validation Status Colors */
+.status-verified {
+  color: var(--status-verified);
+}
+
+.status-unverified {
+  color: var(--status-unverified);
+}
+
+.status-disputed {
+  color: var(--status-disputed);
+}
+
+.status-outdated {
+  color: var(--status-outdated);
+}
+
+/* ============================================
+   ANIMATIONS (Wave 2: Enhanced)
+   ============================================ */
+
+@keyframes lc-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes lc-slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes lc-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes lc-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes lc-scale-up {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes lc-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes lc-shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes lc-bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes lc-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.lc-animate-fade-in {
+  animation: lc-fade-in var(--lc-transition-slow) ease-out;
+}
+
+.lc-animate-slide-in-right {
+  animation: lc-slide-in-right var(--lc-transition-slow) ease-out;
+}
+
+.lc-animate-slide-in-left {
+  animation: lc-slide-in-left var(--lc-transition-slow) ease-out;
+}
+
+.lc-animate-scale-in {
+  animation: lc-scale-in var(--lc-transition-slow) ease-out;
+}
+
+.lc-animate-scale-up {
+  animation: lc-scale-up var(--lc-transition-slow) ease-out;
+}
+
+.lc-animate-pulse {
+  animation: lc-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.lc-animate-shimmer {
+  animation: lc-shimmer 2s infinite linear;
+  background: linear-gradient(
+    to right,
+    var(--lc-surface-hover) 0%,
+    var(--lc-surface-active) 50%,
+    var(--lc-surface-hover) 100%
+  );
+  background-size: 1000px 100%;
+}
+
+.lc-animate-bounce-subtle {
+  animation: lc-bounce-subtle 0.6s ease-in-out;
+}
+
+/* ============================================
+   MICRO-INTERACTIONS (Wave 4)
+   ============================================ */
+
+/* Hover Effects */
+.lc-hover-lift {
+  transition: transform var(--lc-transition), box-shadow var(--lc-transition);
+}
+
+.lc-hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--lc-shadow-md);
+}
+
+.lc-hover-glow {
+  transition: box-shadow var(--lc-transition);
+}
+
+.lc-hover-glow:hover {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.lc-hover-scale {
+  transition: transform var(--lc-transition-fast);
+}
+
+.lc-hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.lc-hover-scale:active {
+  transform: scale(0.98);
+}
+
+/* Button press effect */
+.lc-button-press:active {
+  transform: scale(0.95);
+}
+
+/* Focus ring */
+.lc-focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* Loading shimmer effect */
+.lc-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--lc-surface) 0%,
+    var(--lc-surface-hover) 50%,
+    var(--lc-surface) 100%
+  );
+  background-size: 2000px 100%;
+  animation: lc-shimmer 2s infinite;
+}
+
+/* Smooth transitions for all interactive elements */
+button,
+a,
+input,
+select,
+textarea {
+  transition: all var(--lc-transition);
+}
+
+/* Stagger animation delays */
+.lc-stagger-1 { animation-delay: 50ms; }
+.lc-stagger-2 { animation-delay: 100ms; }
+.lc-stagger-3 { animation-delay: 150ms; }
+.lc-stagger-4 { animation-delay: 200ms; }
+.lc-stagger-5 { animation-delay: 250ms; }
+
+/* ============================================
+   RESPONSIVE UTILITIES (Wave 4)
+   ============================================ */
+
+/* Mobile-first breakpoints */
+@media (max-width: 640px) {
+  .learning-center-sidebar {
+    width: 100%;
+    max-width: 100vw;
+  }
+  
+  .lc-text-responsive {
+    font-size: 0.875rem;
+  }
+  
+  .lc-padding-responsive {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .learning-center-sidebar {
+    width: 240px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .learning-center-sidebar {
+    width: var(--lc-sidebar-width);
+  }
+}
+
+/* Touch-friendly targets */
+@media (hover: none) and (pointer: coarse) {
+  button, a, input[type="checkbox"], input[type="radio"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Focus visible for better accessibility */
+*:focus-visible {
+  outline: 2px solid var(--lc-primary);
+  outline-offset: 2px;
+  border-radius: var(--lc-radius-sm);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY ENHANCEMENTS (Wave 5)
+   ============================================ */
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Focus visible improvements */
+*:focus-visible {
+  outline: 2px solid var(--lc-primary);
+  outline-offset: 2px;
+  border-radius: var(--lc-radius-sm);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --lc-border: #000000;
+    --lc-text: #000000;
+    --lc-surface: #ffffff;
+  }
+  
+  .dark {
+    --lc-border: #ffffff;
+    --lc-text: #ffffff;
+    --lc-surface: #000000;
+  }
+  
+  button,
+  a {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Touch target sizes (WCAG 2.5.5) */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  a,
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="button"],
+  input[type="submit"],
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Focus trap for modals */
+.focus-trap {
+  position: relative;
+}
+
+.focus-trap:focus-within {
+  outline: 2px solid var(--lc-primary);
+  outline-offset: 4px;
+}
+
+/* Skip links */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--lc-primary);
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 100;
+  border-radius: var(--lc-radius-md);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ARIA live regions */
+[aria-live] {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+[aria-live="polite"] {
+  position: static;
+  left: auto;
+  width: auto;
+  height: auto;
+}
+
+[aria-live="assertive"] {
+  position: static;
+  left: auto;
+  width: auto;
+  height: auto;
+}
+
+/* Landmark roles styling */
+[role="banner"],
+[role="navigation"],
+[role="main"],
+[role="complementary"],
+[role="contentinfo"],
+[role="search"],
+[role="form"] {
+  outline: none;
+}
+
+[role="banner"]:focus,
+[role="navigation"]:focus,
+[role="main"]:focus,
+[role="complementary"]:focus,
+[role="contentinfo"]:focus,
+[role="search"]:focus,
+[role="form"]:focus {
+  outline: 2px dashed var(--lc-primary);
+  outline-offset: 4px;
+}
+
+/* Button states for accessibility */
+button:disabled,
+button[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+button:disabled:focus,
+button[aria-disabled="true"]:focus {
+  outline: 2px solid var(--lc-text-muted);
+}
+
+/* Loading states */
+[aria-busy="true"] {
+  position: relative;
+  pointer-events: none;
+}
+
+[aria-busy="true"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid var(--lc-primary);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: lc-rotate 0.6s linear infinite;
+}
+
+/* Error states */
+[aria-invalid="true"],
+[aria-errormessage] {
+  border-color: var(--status-disputed);
+}
+
+[aria-invalid="true"]:focus,
+[aria-errormessage]:focus {
+  outline-color: var(--status-disputed);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+/* Expandable/collapsible content */
+[aria-expanded="false"] + [role="region"] {
+  display: none;
+}
+
+[aria-expanded="true"] + [role="region"] {
+  display: block;
+}
+
+/* Hidden content */
+[hidden],
+[aria-hidden="true"] {
+  display: none !important;
+}
+
+/* Required field indicators */
+[aria-required="true"]::before {
+  content: "*";
+  color: var(--status-disputed);
+  margin-right: 4px;
+}
+
+/* Status messages */
+[role="status"],
+[role="alert"] {
+  padding: 12px;
+  border-radius: var(--lc-radius-md);
+  margin-bottom: 16px;
+}
+
+[role="alert"] {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--status-disputed);
+  color: var(--status-disputed);
+}
+
+[role="status"] {
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid var(--status-verified);
+  color: var(--status-verified);
+}
+
+/* Keyboard navigation indicators */
+.keyboard-user *:focus {
+  outline: 2px solid var(--lc-primary);
+  outline-offset: 2px;
+}
+
+.mouse-user *:focus {
+  outline: none;
+}
+
+/* Detect keyboard navigation */
+body:not(.keyboard-user) *:focus {
+  outline: none;
+}
+
+/* Campaign landing page specific accessibility */
+.campaign-landing-page {
+  min-height: 100vh;
+  position: relative;
+}
+
+.campaign-landing-page [role="main"] {
+  min-height: calc(100vh - 200px);
+}
+
+/* CTA button accessibility */
+.cta-button {
+  position: relative;
+  min-height: 48px;
+  min-width: 120px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.cta-button:focus {
+  outline: 3px solid var(--lc-primary);
+  outline-offset: 3px;
+}
+
+.cta-button:active {
+  transform: scale(0.98);
+}
+
+/* Presentation player accessibility */
+.presentation-player {
+  position: relative;
+}
+
+.presentation-player [role="region"] {
+  outline: none;
+}
+
+.presentation-player [role="region"]:focus {
+  outline: 2px dashed var(--lc-primary);
+  outline-offset: 4px;
+}
+
+/* Loading spinner accessibility */
+.loading-spinner {
+  display: inline-block;
+}
+
+.loading-spinner[aria-hidden="true"] {
+  display: none;
+}
+
+/* Error message accessibility */
+.error-message {
+  color: var(--status-disputed);
+  font-weight: 500;
+}
+
+.error-message[role="alert"] {
+  padding: 16px;
+  background-color: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid var(--status-disputed);
+  border-radius: var(--lc-radius-md);
+}
+

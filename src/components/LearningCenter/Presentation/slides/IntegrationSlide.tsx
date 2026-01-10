@@ -1,0 +1,54 @@
+import React from 'react';
+import { Link } from 'lucide-react';
+
+interface IntegrationSlideProps {
+  content: {
+    headline: string;
+    integrations?: Array<{ name: string; description?: string }>;
+    visual?: string;
+  };
+  isActive: boolean;
+  theme?: 'blue' | 'green' | 'purple' | 'orange';
+}
+
+export const IntegrationSlide: React.FC<IntegrationSlideProps> = ({
+  content,
+  isActive,
+  theme = 'blue',
+}) => {
+  const themeColors = {
+    blue: 'bg-gradient-to-br from-blue-50 to-indigo-100',
+    green: 'bg-gradient-to-br from-emerald-50 to-teal-100',
+    purple: 'bg-gradient-to-br from-purple-50 to-pink-100',
+    orange: 'bg-gradient-to-br from-orange-50 to-red-100',
+  };
+
+  return (
+    <div
+      className={`
+        w-full h-full flex items-center justify-center p-12
+        ${themeColors[theme]}
+        ${isActive ? 'opacity-100' : 'opacity-0'}
+        transition-opacity duration-500
+      `}
+    >
+      <div className="max-w-4xl mx-auto w-full">
+        <Link size={64} className="mx-auto mb-6 text-blue-600 animate-fade-in" />
+        <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center animate-fade-in" style={{ animationDelay: '0.1s' }}>
+          {content.headline}
+        </h2>
+        {content.integrations && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {content.integrations.map((integration, index) => (
+              <div key={index} className="bg-white rounded-lg p-6 shadow-md animate-fade-in" style={{ animationDelay: `${0.2 + index * 0.1}s` }}>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{integration.name}</h3>
+                {integration.description && <p className="text-gray-600">{integration.description}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+

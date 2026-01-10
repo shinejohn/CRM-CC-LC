@@ -1,52 +1,158 @@
 {
   "campaign": {
     "id": "HOWTO-013",
-    "week": 13,
-    "day": 13,
-    "type": "HOWTO",
-    "title": "How-To Tutorial",
-    "subject": "How-To Tutorial",
+    "week": 6,
+    "day": 39,
+    "type": "How-To",
+    "title": "Automated Posting Guide",
+    "subject": "Set up auto-posting and never miss a day",
     "landing_page": "automated-posting-guide",
-    "template": "tutorial",
-    "description": "How-To Tutorial - Guide user through process"
+    "template": "tutorial"
   },
-  "landing_page": {
-    "campaign_id": "HOWTO-013",
-    "landing_page_slug": "automated-posting-guide",
-    "url": "/learn/automated-posting-guide",
-    "template_id": "tutorial",
-    "template_name": "How-To Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 60,
-    "primary_cta": "start_trial",
-    "secondary_cta": "contact_sales",
-    "ai_persona": "Emma",
-    "ai_tone": "Helpful, step-by-step",
-    "ai_goal": "Guide user through process",
-    "data_capture_fields": "name, email, business_name, setup_preferences",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/automated-posting-guide/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "engagement",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week6-how-to",
-    "utm_content": "HOWTO-013"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "How-To Tutorial",
-    "slides": 8,
-    "duration": 60,
-    "purpose": "howto",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "automated-posting-guide",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/automated-posting-guide/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Automated Posting",
+      "content": {
+        "headline": "Post Consistently Without the Work",
+        "subhead": "Set up auto-posting in 10 minutes"
+      },
+      "narration": "Consistency is key to social media success, but posting daily is exhausting. Automated posting solves this—schedule once, post automatically, stay visible without daily effort.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "OverviewSlide",
+      "title": "What You'll Set Up",
+      "content": {
+        "topics": [
+          "Content categories",
+          "Posting schedule",
+          "Approval workflow",
+          "Performance tracking"
+        ]
+      },
+      "narration": "We'll set up content categories so posts are varied, your posting schedule for optimal times, an approval workflow so you stay in control, and performance tracking to see what works.",
+      "duration_seconds": 20,
+      "audio_file": "slide-02-overview.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Step 1: Content Categories",
+      "content": {
+        "action": "Set Up Categories",
+        "categories": [
+          "Educational (tips, how-tos)",
+          "Behind-the-scenes",
+          "Customer spotlights",
+          "Promotions",
+          "Community/Local"
+        ]
+      },
+      "narration": "First, set up content categories. Educational content like tips and how-tos. Behind-the-scenes showing your work. Customer spotlights and testimonials. Promotional content about offers. Community and local connection posts. AI will rotate through these for variety.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-categories.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Step 2: Posting Schedule",
+      "content": {
+        "action": "Set Frequency",
+        "options": [
+          "Daily (recommended)",
+          "5x per week",
+          "3x per week"
+        ],
+        "timing": "AI picks optimal times based on your audience"
+      },
+      "narration": "Set your posting frequency. Daily is recommended for maximum visibility. Five times per week if that feels like too much. Three times per week as a minimum. Don't worry about picking times—AI analyzes when your audience is active and posts then.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-schedule.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Step 3: Approval Workflow",
+      "content": {
+        "action": "Choose Your Control Level",
+        "options": [
+          "Auto-post (hands-off)",
+          "Review daily batch",
+          "Approve each post"
+        ],
+        "recommended": "Review daily batch - 5 min/day"
+      },
+      "narration": "Choose your control level. Auto-post is completely hands-off. Review daily batch lets you approve tomorrow's posts in one sitting—takes about five minutes. Approve each post gives maximum control. We recommend daily batch review—good balance of control and efficiency.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-approval.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "Step 4: Train Your AI",
+      "content": {
+        "action": "Feed AI Your Voice",
+        "inputs": [
+          "Your best past posts",
+          "Competitor examples you like",
+          "Words/phrases you use",
+          "Topics to avoid"
+        ]
+      },
+      "narration": "Train the AI on your voice. Share your best past posts as examples. Show competitor examples you like the style of. List words and phrases you commonly use. Specify topics to avoid. The more you train, the better the content matches your voice.",
+      "duration_seconds": 30,
+      "audio_file": "slide-06-train.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "TipsSlide",
+      "title": "Pro Tips",
+      "content": {
+        "tips": [
+          "Start with 3x/week, increase once comfortable",
+          "Review posts on Sunday for the week ahead",
+          "Add personal posts occasionally—don't be 100% automated",
+          "Check analytics monthly to refine categories"
+        ]
+      },
+      "narration": "Pro tips for automated posting. Start with three times per week and increase once you're comfortable with the quality. Review posts on Sunday for the week ahead—one session handles everything. Add personal posts occasionally so you're not one hundred percent automated. Check analytics monthly to see which categories perform best.",
+      "duration_seconds": 30,
+      "audio_file": "slide-07-tips.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Start Automating",
+      "content": {
+        "cta_primary": {
+          "label": "Set Up Auto-Posting",
+          "action": "setup_auto"
+        },
+        "cta_secondary": {
+          "label": "See Sample Posts",
+          "action": "view_samples"
+        }
+      },
+      "narration": "Ready to automate? Set up auto-posting now and start generating consistent content. Or see sample posts first to see the quality you can expect. Consistency without the grind—that's the goal.",
+      "duration_seconds": 20,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_educational": {
+      "subject": "Set up auto-posting and never miss a day",
+      "preview_text": "Consistency without the daily grind",
+      "body": "Hey {{first_name}},\n\nConsistency is key to social media. But posting daily is exhausting.\n\nAuto-posting solves this:\n✓ AI creates varied content\n✓ Posts at optimal times\n✓ You review in 5 min/day\n✓ Never miss a day again\n\n[SET UP AUTO-POSTING →]\n\nStart with 3x/week, increase once comfortable.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-028"
+    ],
+    "follows": "HOWTO-012"
   }
 }

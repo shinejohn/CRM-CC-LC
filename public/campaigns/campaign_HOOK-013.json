@@ -1,52 +1,176 @@
 {
   "campaign": {
     "id": "HOOK-013",
-    "week": 13,
-    "day": 13,
-    "type": "HOOK",
-    "title": "Free Trial Offer",
-    "subject": "Free Trial Offer",
+    "week": 10,
+    "day": 65,
+    "type": "Hook",
+    "title": "Free Social Posting Trial",
+    "subject": "We'll post to your social media for free this week—see how it works",
     "landing_page": "social-posting-trial",
     "template": "trial-offer",
-    "description": "Free Trial Offer - Get user to take immediate action"
+    "description": "Free trial of AI social media posting service"
   },
-  "landing_page": {
-    "campaign_id": "HOOK-013",
-    "landing_page_slug": "social-posting-trial",
-    "url": "/learn/social-posting-trial",
-    "template_id": "trial-offer",
-    "template_name": "Free Trial Offer",
-    "slide_count": 5,
-    "duration_seconds": 40,
-    "primary_cta": "signup_free",
-    "secondary_cta": "schedule_demo",
-    "ai_persona": "Sarah",
-    "ai_tone": "Excited, helpful",
-    "ai_goal": "Get user to take immediate action",
-    "data_capture_fields": "name, email, business_name, industry",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/social-posting-trial/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "signup",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week10-hook",
-    "utm_content": "HOOK-013"
-  },
-  "template": {
-    "template_id": "trial-offer",
-    "name": "Free Trial Offer",
-    "slides": 5,
-    "duration": 40,
-    "purpose": "hook",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "social-posting-trial",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/social-posting-trial/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Free Social Posting",
+      "content": {
+        "headline": "We'll Handle Your Social Media This Week",
+        "subhead": "Free trial—no credit card, no commitment"
+      },
+      "narration": "What if someone handled your social media for a week—for free? No credit card, no commitment. Just to show you what's possible. That's exactly what we're offering. Let us post for you this week and see the difference.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "What You Get",
+      "content": {
+        "headline": "Your Free Trial Includes",
+        "included": [
+          {
+            "item": "5 posts created",
+            "detail": "Custom content for your business"
+          },
+          {
+            "item": "Posted to your channels",
+            "detail": "Facebook, Instagram, or both"
+          },
+          {
+            "item": "Your voice and brand",
+            "detail": "Trained on your business"
+          },
+          {
+            "item": "Optimal timing",
+            "detail": "Posted when your audience is active"
+          },
+          {
+            "item": "Performance report",
+            "detail": "See how posts performed at week's end"
+          }
+        ],
+        "value": "Worth $150+ if you hired someone"
+      },
+      "narration": "Here's what your free trial includes. Five posts created—custom content for your business, not generic templates. Posted to your channels—Facebook, Instagram, or both. Trained on your voice and brand. Posted at optimal times when your audience is most active. And a performance report at the end showing how posts performed. This is worth a hundred fifty dollars or more if you hired someone. Yours free to try.",
+      "duration_seconds": 35,
+      "audio_file": "slide-02-included.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "Sample Posts",
+      "content": {
+        "headline": "Here's What We'd Post for {{business_name}}",
+        "samples": [
+          {
+            "day": "Monday",
+            "type": "Behind-the-scenes",
+            "example": "Meet the team / See how we work"
+          },
+          {
+            "day": "Wednesday",
+            "type": "Tip or value",
+            "example": "Quick tip related to your expertise"
+          },
+          {
+            "day": "Friday",
+            "type": "Customer spotlight",
+            "example": "Success story or testimonial"
+          },
+          {
+            "day": "Saturday",
+            "type": "Community",
+            "example": "Weekend plans / Local connection"
+          },
+          {
+            "day": "Sunday",
+            "type": "Soft sell",
+            "example": "Reminder of services / Special offer"
+          }
+        ]
+      },
+      "narration": "Here's what we'd post for your business. Monday: behind-the-scenes content—meet the team, see how you work. Wednesday: a tip or value post related to your expertise. Friday: customer spotlight—a success story or testimonial. Saturday: community connection—weekend plans, local tie-in. Sunday: soft sell—reminder of services or a special offer. Variety that keeps your audience engaged.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-samples.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "How It Works",
+      "content": {
+        "headline": "Simple Setup Process",
+        "steps": [
+          {
+            "step": 1,
+            "action": "Sign up (2 minutes)",
+            "detail": "Basic info about your business"
+          },
+          {
+            "step": 2,
+            "action": "Connect accounts",
+            "detail": "Secure connection to your social profiles"
+          },
+          {
+            "step": 3,
+            "action": "Review first posts",
+            "detail": "Approve before they go live"
+          },
+          {
+            "step": 4,
+            "action": "We post all week",
+            "detail": "You focus on your business"
+          },
+          {
+            "step": 5,
+            "action": "Get your report",
+            "detail": "See the results, decide if you want to continue"
+          }
+        ]
+      },
+      "narration": "Here's how it works. Sign up in two minutes—just basic info about your business. Connect your accounts—secure connection to your social profiles. Review the first posts—you approve before anything goes live. We post all week while you focus on your business. Get your performance report at the end and decide if you want to continue. Zero risk, all upside.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-process.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "CTASlide",
+      "title": "Start Your Trial",
+      "content": {
+        "headline": "Ready to Try It Free?",
+        "cta_primary": {
+          "label": "Start Free Trial",
+          "action": "start_trial"
+        },
+        "cta_secondary": {
+          "label": "See More Examples",
+          "action": "view_examples"
+        },
+        "assurance": "No credit card required. Cancel anytime. Posts require your approval."
+      },
+      "narration": "Ready to try it free? Start your trial now—no credit card required, cancel anytime, and every post requires your approval before it goes live. Or see more examples first. Either way, this is your chance to see what consistent social media could do for your business—without lifting a finger.",
+      "duration_seconds": 20,
+      "audio_file": "slide-05-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_hook": {
+      "subject": "We'll post to your social media for free this week—see how it works",
+      "preview_text": "No credit card, no commitment",
+      "body": "Hey {{first_name}},\n\nWhat if someone handled {{business_name}}'s social media for a week—for free?\n\nNo credit card. No commitment.\n\nYour free trial includes:\n✓ 5 posts created for your business\n✓ Posted to Facebook, Instagram, or both\n✓ Trained on your voice and brand\n✓ Performance report at the end\n\n[START YOUR FREE TRIAL →]\n\nWorth $150+ if you hired someone. Free to try.\n\n{{sender_name}}\nFibonacco"
+    },
+    "email_3_hook": {
+      "subject": "Your first social post is drafted—take a look",
+      "preview_text": "Preview what we'd post for {{business_name}}",
+      "body": "Hey {{first_name}},\n\nWe drafted what your first social post would look like:\n\n[SEE YOUR POST PREVIEW →]\n\nThis is the style and quality we'd bring to {{business_name}}'s social media all week.\n\nApprove to start your free trial, or tell us what you'd change.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "follows": "HOOK-012",
+    "related": [
+      "EDU-007",
+      "HOWTO-010"
+    ]
   }
 }

@@ -1,14 +1,14 @@
 {
   "campaign": {
     "id": "HOWTO-004",
-    "week": 4,
-    "day": 4,
-    "type": "HOWTO",
-    "title": "How-To Tutorial",
-    "subject": "How-To Tutorial",
+    "week": 2,
+    "day": 11,
+    "type": "How-To",
+    "title": "Premium Venue Setup",
+    "subject": "Turn your location into a destination (venue profile guide)",
     "landing_page": "premium-venue-setup",
     "template": "tutorial",
-    "description": "How-To Tutorial - Guide user through process"
+    "description": "For venues and locations: full profile optimization guide"
   },
   "landing_page": {
     "campaign_id": "HOWTO-004",
@@ -17,36 +17,276 @@
     "template_id": "tutorial",
     "template_name": "How-To Tutorial",
     "slide_count": 8,
-    "duration_seconds": 60,
-    "primary_cta": "start_trial",
-    "secondary_cta": "contact_sales",
+    "duration_seconds": 420,
+    "primary_cta": "optimize_venue",
+    "secondary_cta": "schedule_photoshoot",
     "ai_persona": "Emma",
-    "ai_tone": "Helpful, step-by-step",
-    "ai_goal": "Guide user through process",
-    "data_capture_fields": "name, email, business_name, setup_preferences",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/premium-venue-setup/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "engagement",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week3-how-to",
-    "utm_content": "HOWTO-004"
+    "ai_tone": "Professional, detailed",
+    "ai_goal": "Complete venue profile optimization"
   },
-  "template": {
-    "template_id": "tutorial",
-    "name": "How-To Tutorial",
-    "slides": 8,
-    "duration": 60,
-    "purpose": "howto",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "premium-venue-setup",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/premium-venue-setup/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "TutorialIntroSlide",
+      "title": "Turn Your Venue Into a Destination",
+      "content": {
+        "headline": "The Complete Venue Profile Guide",
+        "subhead": "Everything you need to stand out and get booked",
+        "expectations": {
+          "time": "20 minutes",
+          "difficulty": "Intermediate",
+          "outcome": "A venue profile that converts lookers into bookers"
+        }
+      },
+      "narration": "If you have a physical location—a restaurant, event space, retail store, fitness studio, anything—this guide is for you. In twenty minutes, you'll have a venue profile that doesn't just show up in searches, but actually gets people through your door. Let's turn your location into a destination.",
+      "duration_seconds": 25,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "What Makes Venues Stand Out",
+      "content": {
+        "headline": "The Venue Profile That Wins",
+        "key_elements": [
+          {
+            "element": "Professional Photos",
+            "impact": "10x more engagement than phone photos"
+          },
+          {
+            "element": "Complete Amenities",
+            "impact": "Answer every question before they ask"
+          },
+          {
+            "element": "Virtual Tour",
+            "impact": "3x longer time on page"
+          },
+          {
+            "element": "Clear Capacity/Pricing",
+            "impact": "Qualified leads only"
+          },
+          {
+            "element": "Social Proof",
+            "impact": "Reviews and past events build trust"
+          }
+        ],
+        "truth": "People book venues they can visualize themselves in."
+      },
+      "narration": "Here's what makes venues stand out. Professional photos get ten times more engagement than phone snapshots. Complete amenities answer every question before they ask. A virtual tour keeps people on your page three times longer. Clear capacity and pricing means you only get qualified leads. And social proof—reviews and past events—builds trust. The truth is: people book venues they can visualize themselves in.",
+      "duration_seconds": 40,
+      "audio_file": "slide-02-standout.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Step 1: Photo Gallery",
+      "content": {
+        "headline": "Step 1: Build Your Photo Gallery",
+        "photo_types": [
+          {
+            "type": "Hero Shot",
+            "desc": "Your best, most impressive angle"
+          },
+          {
+            "type": "Space Shots",
+            "desc": "Different areas, different setups"
+          },
+          {
+            "type": "Detail Shots",
+            "desc": "Features that make you special"
+          },
+          {
+            "type": "In-Use Shots",
+            "desc": "Events happening, people enjoying"
+          },
+          {
+            "type": "Exterior",
+            "desc": "Finding you, parking, entrance"
+          }
+        ],
+        "minimum": "8 photos minimum, 15-20 ideal",
+        "pro_tip": "Hire a photographer. $200-400 investment pays off forever."
+      },
+      "narration": "Step one: build your photo gallery. You need several types. A hero shot—your best, most impressive angle. Space shots showing different areas and setups. Detail shots of features that make you special. In-use shots of events happening and people enjoying. And exterior shots for finding you. Aim for eight photos minimum, fifteen to twenty is ideal. Pro tip: hire a photographer. Two to four hundred dollars is an investment that pays off forever.",
+      "duration_seconds": 45,
+      "audio_file": "slide-03-photos.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Step 2: Complete Your Amenities",
+      "content": {
+        "headline": "Step 2: List Every Amenity",
+        "amenity_categories": [
+          {
+            "category": "Space Details",
+            "examples": "Capacity, square footage, room types"
+          },
+          {
+            "category": "Technical",
+            "examples": "AV equipment, WiFi, power outlets"
+          },
+          {
+            "category": "Comfort",
+            "examples": "A/C, heating, seating, accessibility"
+          },
+          {
+            "category": "Services",
+            "examples": "Catering, setup, cleanup, coordination"
+          },
+          {
+            "category": "Policies",
+            "examples": "Noise limits, hours, parking, outside vendors"
+          }
+        ],
+        "tip": "Every amenity you add is a search term you can be found by."
+      },
+      "narration": "Step two: list every amenity. And I mean every one. Space details—capacity, square footage, room types. Technical features—AV equipment, WiFi, power. Comfort—AC, heating, seating, accessibility. Services you offer—catering, setup, cleanup. And policies—noise limits, hours, parking. Here's why this matters: every amenity you add is a search term you can be found by. 'Venue with projector.' 'Space with wheelchair access.' Be findable.",
+      "duration_seconds": 45,
+      "audio_file": "slide-04-amenities.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Step 3: Pricing & Packages",
+      "content": {
+        "headline": "Step 3: Be Clear on Pricing",
+        "pricing_tips": [
+          "Show starting prices even if you customize",
+          "Create 2-3 packages for different needs",
+          "List what's included vs. extra",
+          "Be upfront about deposits and minimums",
+          "Add 'Request Quote' for complex pricing"
+        ],
+        "example_packages": [
+          {
+            "name": "Basic",
+            "includes": "Space only, bring your own everything"
+          },
+          {
+            "name": "Standard",
+            "includes": "Space + tables/chairs + AV"
+          },
+          {
+            "name": "Full Service",
+            "includes": "Everything including coordination"
+          }
+        ]
+      },
+      "narration": "Step three: be clear on pricing. I know it's tempting to hide prices and force inquiries, but that just annoys people. Show starting prices even if you customize. Create two to three packages for different needs and budgets. List what's included versus what costs extra. Be upfront about deposits and minimums. For complex pricing, add a 'Request Quote' option. Transparency builds trust and saves you time with unqualified leads.",
+      "duration_seconds": 45,
+      "audio_file": "slide-05-pricing.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "Step 4: Social Proof",
+      "content": {
+        "headline": "Step 4: Show That Others Trust You",
+        "proof_types": [
+          {
+            "type": "Reviews",
+            "how": "Request after every event"
+          },
+          {
+            "type": "Past Events",
+            "how": "Photo gallery with permission"
+          },
+          {
+            "type": "Client Logos",
+            "how": "Companies/organizations you've hosted"
+          },
+          {
+            "type": "Media Mentions",
+            "how": "Press, blogs, features"
+          },
+          {
+            "type": "Certifications",
+            "how": "Any relevant credentials"
+          }
+        ],
+        "request_script": "Would you mind sharing your experience? It helps other event planners find us."
+      },
+      "narration": "Step four: show that others trust you. Collect reviews—request them after every event with a simple message: 'Would you mind sharing your experience? It helps other event planners find us.' Create a past events gallery with photos from previous bookings, with permission. Display client logos if you've hosted companies or organizations. Add any media mentions. Show certifications. Every piece of proof reduces someone's hesitation to book.",
+      "duration_seconds": 40,
+      "audio_file": "slide-06-proof.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "StepSlide",
+      "title": "Step 5: Enable Easy Booking",
+      "content": {
+        "headline": "Step 5: Make Booking Frictionless",
+        "booking_features": [
+          {
+            "feature": "Availability Calendar",
+            "benefit": "People see open dates instantly"
+          },
+          {
+            "feature": "Instant Quote",
+            "benefit": "Get estimate without waiting"
+          },
+          {
+            "feature": "Tour Scheduling",
+            "benefit": "One-click to book a walkthrough"
+          },
+          {
+            "feature": "Inquiry Form",
+            "benefit": "Capture all info you need upfront"
+          },
+          {
+            "feature": "Response Time",
+            "benefit": "Show your average response time"
+          }
+        ],
+        "warning": "Every day you take to respond, you lose 30% of leads."
+      },
+      "narration": "Step five: make booking frictionless. Enable an availability calendar so people see open dates instantly. Offer instant quotes if your pricing allows. Add one-click tour scheduling for walkthroughs. Create an inquiry form that captures everything you need upfront. And here's a critical one: respond fast. Every day you take to respond, you lose thirty percent of leads. Set up notifications so you never miss an inquiry.",
+      "duration_seconds": 40,
+      "audio_file": "slide-07-booking.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Optimize Your Venue",
+      "content": {
+        "headline": "Ready to Get Booked More?",
+        "cta_primary": {
+          "label": "Optimize My Venue Profile",
+          "action": "open_venue_editor"
+        },
+        "cta_secondary": {
+          "label": "Schedule a Free Photoshoot Consult",
+          "action": "schedule_photo_consult"
+        },
+        "checklist": [
+          "8+ professional photos",
+          "All amenities listed",
+          "Clear pricing/packages",
+          "Reviews and past events",
+          "Easy booking enabled"
+        ]
+      },
+      "narration": "Ready to get booked more? Click 'Optimize My Venue Profile' and we'll walk you through each element. Your checklist: eight-plus professional photos, all amenities listed, clear pricing, reviews and past events, easy booking enabled. Or if you need photos first, schedule a free consult with one of our photography partners. Your venue deserves to be seen. Let's make it irresistible.",
+      "duration_seconds": 25,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_tutorial": {
+      "subject": "Turn your location into a destination (venue profile guide)",
+      "preview_text": "20 minutes to a profile that converts",
+      "body": "Hey {{first_name}},\n\nIf {{business_name}} has a physical location where people come to you—a restaurant, event space, studio, store, anything—this guide is for you.\n\nI put together a 20-minute walkthrough for creating a venue profile that actually converts lookers into bookers:\n\n✓ Building a photo gallery that wows\n✓ Listing amenities so you're found by every search\n✓ Pricing strategies that work\n✓ Social proof that builds trust\n✓ Enabling frictionless booking\n\n[START THE VENUE GUIDE →]\n\nPeople book venues they can visualize themselves in. Let's make {{business_name}} impossible to resist.\n\n{{sender_name}}\nFibonacco"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOOK-004"
+    ],
+    "follows": "HOWTO-003",
+    "related": [
+      "HOWTO-005",
+      "HOWTO-017"
+    ]
   }
 }

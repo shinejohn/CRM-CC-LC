@@ -3,6 +3,7 @@ import { Search, X, Mic, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import { knowledgeApi } from '@/services/learning/knowledge-api';
 import type { SearchResult } from '@/types/learning';
+import { trackNavigate } from '@/utils/navigation-tracker';
 
 export const SearchHeader: React.FC = () => {
   const [query, setQuery] = useState('');
@@ -42,6 +43,12 @@ export const SearchHeader: React.FC = () => {
 
   const handleResultClick = (result: SearchResult) => {
     // Navigate to the appropriate page based on result type
+    const targetPath = result.category === 'faq' 
+      ? `/learning/faqs/${result.id}`
+      : `/learning/articles/${result.id}`;
+    // #region agent log
+    trackNavigate(targetPath, 'SearchHeader');
+    // #endregion
     if (result.category === 'faq') {
       navigate(`/learning/faqs/${result.id}`);
     } else {
@@ -56,24 +63,34 @@ export const SearchHeader: React.FC = () => {
       setShowResults(false);
       setQuery('');
     } else if (e.key === 'Enter' && query.trim()) {
-      navigate(`/learning/search?q=${encodeURIComponent(query)}`);
+      const targetPath = `/learning/search?q=${encodeURIComponent(query)}`;
+      // #region agent log
+      trackNavigate(targetPath, 'SearchHeader');
+      // #endregion
+      navigate(targetPath);
       setShowResults(false);
     }
   };
 
   return (
     <div className="relative">
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="flex items-center gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+        <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
           {/* Search input */}
-          <div className="flex-1 relative">
+          <div className="flex-1 relative min-w-0">
             <div className="relative">
+              <label htmlFor="knowledge-search" className="sr-only">
+                Search knowledge base
+              </label>
               <Search
                 size={20}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                className="absolute left-3 top-1/2 -translate-y-1/2 lc-text-muted lc-transition pointer-events-none"
+                style={{ color: 'var(--lc-text-muted)' }}
+                aria-hidden="true"
               />
               <input
-                type="text"
+                id="knowledge-search"
+                type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
@@ -81,10 +98,21 @@ export const SearchHeader: React.FC = () => {
                 placeholder="Search knowledge base..."
                 className="
                   w-full pl-10 pr-10 py-2.5
-                  border border-gray-300 rounded-lg
-                  focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                  lc-border lc-radius-lg
+                  lc-border-focus
                   text-sm
+                  lc-transition
+                  lc-surface
                 "
+                style={{
+                  borderColor: 'var(--lc-border)',
+                  backgroundColor: 'var(--lc-surface)',
+                  color: 'var(--lc-text)',
+                }}
+                aria-label="Search knowledge base"
+                aria-expanded={showResults}
+                aria-controls="search-results"
+                aria-autocomplete="list"
               />
               {query && (
                 <button
@@ -92,7 +120,8 @@ export const SearchHeader: React.FC = () => {
                     setQuery('');
                     setShowResults(false);
                   }}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 lc-text-muted hover:lc-text-primary lc-transition rounded-md hover:bg-gray-100 p-1 focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2"
+                  aria-label="Clear search"
                 >
                   <X size={16} />
                 </button>
@@ -101,39 +130,53 @@ export const SearchHeader: React.FC = () => {
 
             {/* Search results dropdown */}
             {showResults && (results.length > 0 || isSearching) && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
+              <div 
+                id="search-results"
+                role="listbox"
+                className="absolute top-full left-0 right-0 mt-2 lc-surface lc-border lc-radius-lg lc-shadow-lg z-50 max-h-96 overflow-y-auto lc-animate-scale-in"
+                style={{
+                  backgroundColor: 'var(--lc-surface)',
+                  borderColor: 'var(--lc-border)',
+                }}
+              >
                 {isSearching ? (
-                  <div className="p-4 text-center text-gray-500 text-sm">
+                  <div className="p-4 text-center lc-text-secondary text-sm lc-animate-pulse" role="status" aria-live="polite">
                     Searching...
                   </div>
                 ) : (
                   <>
-                    <div className="p-2 border-b border-gray-200">
-                      <div className="flex items-center gap-2 text-xs text-gray-600">
-                        <Sparkles size={12} />
-                        <span>{results.length} results found</span>
+                    <div className="p-2 border-b lc-border">
+                      <div className="flex items-center gap-2 text-xs lc-text-secondary">
+                        <Sparkles size={12} style={{ color: 'var(--lc-primary)' }} aria-hidden="true" />
+                        <span>{results.length} result{results.length !== 1 ? 's' : ''} found</span>
                       </div>
                     </div>
                     <div className="py-2">
-                      {results.map((result) => (
+                      {results.map((result, index) => (
                         <button
                           key={result.id}
                           onClick={() => handleResultClick(result)}
                           className="
-                            w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors
-                            border-b border-gray-100 last:border-b-0
+                            w-full text-left px-4 py-3 lc-surface-hover lc-transition
+                            border-b lc-border last:border-b-0
+                            focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2
                           "
+                          style={{
+                            animationDelay: `${index * 50}ms`,
+                          }}
+                          role="option"
+                          aria-label={`${result.title}, ${result.category}, ${Math.round(result.similarity_score * 100)}% match`}
                         >
-                          <div className="font-medium text-sm text-gray-900 mb-1">
+                          <div className="font-medium text-sm lc-text-primary mb-1 truncate">
                             {result.title}
                           </div>
-                          <div className="text-xs text-gray-600 line-clamp-2">
+                          <div className="text-xs lc-text-secondary line-clamp-2">
                             {result.content.substring(0, 150)}...
                           </div>
-                          <div className="flex items-center gap-2 mt-2">
-                            <span className="text-xs text-gray-500">{result.category}</span>
-                            <span className="text-xs text-gray-400">•</span>
-                            <span className="text-xs text-gray-500">
+                          <div className="flex items-center gap-2 mt-2 flex-wrap">
+                            <span className="text-xs lc-text-muted">{result.category}</span>
+                            <span className="text-xs lc-text-muted" aria-hidden="true">•</span>
+                            <span className="text-xs lc-text-muted">
                               {Math.round(result.similarity_score * 100)}% match
                             </span>
                           </div>
@@ -141,13 +184,14 @@ export const SearchHeader: React.FC = () => {
                       ))}
                     </div>
                     {query && (
-                      <div className="p-2 border-t border-gray-200">
+                      <div className="p-2 border-t lc-border">
                         <button
                           onClick={() => {
                             navigate(`/learning/search?q=${encodeURIComponent(query)}`);
                             setShowResults(false);
                           }}
-                          className="w-full text-sm text-indigo-600 hover:text-indigo-700 font-medium py-2"
+                          className="w-full text-sm font-medium py-2 lc-transition hover:lc-text-primary focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2"
+                          style={{ color: 'var(--lc-primary)' }}
                         >
                           View all results →
                         </button>
@@ -160,39 +204,60 @@ export const SearchHeader: React.FC = () => {
           </div>
 
           {/* Search type toggle */}
-          <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
+          <div 
+            className="flex items-center gap-1 sm:gap-2 lc-radius-lg p-1 flex-shrink-0"
+            style={{ backgroundColor: 'var(--lc-surface-hover)' }}
+            role="group"
+            aria-label="Search type"
+          >
             <button
               onClick={() => setSearchType('semantic')}
               className={`
-                px-3 py-1.5 text-xs font-medium rounded transition-colors
+                px-2 sm:px-3 py-1.5 text-xs font-medium lc-radius-md lc-transition
+                focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2
                 ${
                   searchType === 'semantic'
-                    ? 'bg-white text-indigo-600 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'lc-shadow-sm'
+                    : 'lc-text-secondary hover:lc-text-primary'
                 }
               `}
+              style={{
+                backgroundColor: searchType === 'semantic' ? 'var(--lc-surface)' : 'transparent',
+                color: searchType === 'semantic' ? 'var(--lc-primary)' : undefined,
+              }}
+              aria-pressed={searchType === 'semantic'}
             >
-              Semantic
+              <span className="hidden sm:inline">Semantic</span>
+              <span className="sm:hidden">S</span>
             </button>
             <button
               onClick={() => setSearchType('keyword')}
               className={`
-                px-3 py-1.5 text-xs font-medium rounded transition-colors
+                px-2 sm:px-3 py-1.5 text-xs font-medium lc-radius-md lc-transition
+                focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2
                 ${
                   searchType === 'keyword'
-                    ? 'bg-white text-indigo-600 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'lc-shadow-sm'
+                    : 'lc-text-secondary hover:lc-text-primary'
                 }
               `}
+              style={{
+                backgroundColor: searchType === 'keyword' ? 'var(--lc-surface)' : 'transparent',
+                color: searchType === 'keyword' ? 'var(--lc-primary)' : undefined,
+              }}
+              aria-pressed={searchType === 'keyword'}
             >
-              Keyword
+              <span className="hidden sm:inline">Keyword</span>
+              <span className="sm:hidden">K</span>
             </button>
           </div>
 
           {/* Voice search button */}
           <button
-            className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-2 lc-text-secondary hover:lc-text-primary lc-surface-hover lc-radius-lg lc-transition focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2 flex-shrink-0"
             title="Voice search"
+            aria-label="Voice search"
+            style={{ backgroundColor: 'transparent' }}
           >
             <Mic size={20} />
           </button>
@@ -200,14 +265,27 @@ export const SearchHeader: React.FC = () => {
 
         {/* Quick filters */}
         <div className="mt-3 flex items-center gap-2 flex-wrap">
-          <span className="text-xs text-gray-500">Quick filters:</span>
-          <button className="text-xs px-2 py-1 bg-indigo-50 text-indigo-700 rounded hover:bg-indigo-100 transition-colors">
+          <span className="text-xs lc-text-muted">Quick filters:</span>
+          <button 
+            className="text-xs px-2 py-1 lc-radius-md lc-transition focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2"
+            style={{
+              backgroundColor: 'var(--lc-primary-bg)',
+              color: 'var(--lc-primary-dark)',
+            }}
+            aria-label="Filter by FAQs"
+          >
             FAQs
           </button>
-          <button className="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors">
+          <button 
+            className="text-xs px-2 py-1 lc-surface-hover lc-text-secondary lc-radius-md lc-transition focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2"
+            aria-label="Filter by Articles"
+          >
             Articles
           </button>
-          <button className="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors">
+          <button 
+            className="text-xs px-2 py-1 lc-surface-hover lc-text-secondary lc-radius-md lc-transition focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2"
+            aria-label="Show verified only"
+          >
             Verified only
           </button>
         </div>
@@ -216,8 +294,9 @@ export const SearchHeader: React.FC = () => {
       {/* Click outside to close */}
       {showResults && (
         <div
-          className="fixed inset-0 z-40"
+          className="fixed inset-0 z-40 lc-transition-fast"
           onClick={() => setShowResults(false)}
+          aria-hidden="true"
         />
       )}
     </div>

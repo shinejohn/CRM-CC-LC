@@ -1,0 +1,163 @@
+{
+  "campaign": {
+    "id": "HOOK-007",
+    "week": 5,
+    "day": 32,
+    "type": "Hook",
+    "title": "Featured Listing Upgrade",
+    "subject": "Your listing could be getting 5x more views",
+    "landing_page": "featured-listing",
+    "template": "upgrade-offer",
+    "description": "Compare current views to featured average, offer upgrade"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-007",
+    "landing_page_slug": "featured-listing",
+    "url": "/upgrade/featured",
+    "template_id": "upgrade-offer",
+    "template_name": "Upgrade Offer",
+    "slide_count": 7,
+    "duration_seconds": 150,
+    "primary_cta": "upgrade_now",
+    "secondary_cta": "compare_plans"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "ComparisonHeroSlide",
+      "title": "Your Visibility Gap",
+      "content": {
+        "headline": "{{business_name}}: Your Visibility Gap",
+        "comparison": {
+          "your_views": "{{current_monthly_views}}",
+          "featured_average": "{{featured_average_views}}",
+          "multiplier": "{{visibility_multiplier}}x"
+        },
+        "visual": "Side-by-side comparison bars"
+      },
+      "narration": "Let's look at the numbers for {{business_name}}. Your current monthly views: {{current_monthly_views}}. Featured listings in your category average {{featured_average_views}} views. That's a {{visibility_multiplier}}x difference. Here's how to close that gap.",
+      "duration_seconds": 20,
+      "audio_file": "slide-01-gap.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "BenefitsSlide",
+      "title": "What Featured Gets You",
+      "content": {
+        "headline": "Featured Listing Benefits",
+        "benefits": [
+          {"icon": "star", "benefit": "Priority placement", "detail": "Top of search results and category"},
+          {"icon": "badge", "benefit": "Featured badge", "detail": "Instant trust signal"},
+          {"icon": "newspaper", "benefit": "News eligibility", "detail": "Considered for feature stories"},
+          {"icon": "chart", "benefit": "Enhanced analytics", "detail": "See who's viewing and why"},
+          {"icon": "megaphone", "benefit": "Social amplification", "detail": "Promoted to our audience"},
+          {"icon": "robot", "benefit": "AI priority", "detail": "Weighted higher in AI recommendations"}
+        ]
+      },
+      "narration": "What does Featured get you? Priority placement—top of search results and your category. A Featured badge—an instant trust signal. News eligibility—you're considered for feature stories. Enhanced analytics—see who's viewing and why. Social amplification—promoted to our entire audience. And AI priority—weighted higher when AI makes recommendations.",
+      "duration_seconds": 35,
+      "audio_file": "slide-02-benefits.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ProofSlide",
+      "title": "Featured Results",
+      "content": {
+        "headline": "What Featured Businesses See",
+        "metrics": [
+          {"metric": "View increase", "average": "+487%", "range": "3x-8x typical"},
+          {"metric": "Inquiry increase", "average": "+312%", "range": "Varies by category"},
+          {"metric": "AI recommendations", "average": "+5x", "note": "More AI mentions"},
+          {"metric": "ROI", "average": "12:1", "note": "Average return on upgrade cost"}
+        ]
+      },
+      "narration": "The results speak for themselves. Featured businesses see an average four hundred eighty-seven percent increase in views—three to eight times typical. Inquiries increase by three hundred twelve percent on average. AI recommendations increase by five times. And the ROI? Twelve to one on average. For every dollar spent on Featured, businesses see twelve back.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-proof.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "PreviewSlide",
+      "title": "Your Featured Preview",
+      "content": {
+        "headline": "Here's How You'd Appear",
+        "preview": {
+          "business_name": "{{business_name}}",
+          "badge": "FEATURED",
+          "position": "Top of {{category}} results",
+          "enhanced_profile": true,
+          "ai_priority": true
+        },
+        "note": "This is ready to activate"
+      },
+      "narration": "Here's how {{business_name}} would appear as a Featured listing. Your name with the Featured badge. Top position in {{category}} results. Enhanced profile with all the bells and whistles. Priority in AI recommendations. This preview is ready to activate whenever you say go.",
+      "duration_seconds": 25,
+      "audio_file": "slide-04-preview.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "PricingSlide",
+      "title": "Simple Pricing",
+      "content": {
+        "headline": "Featured Pricing",
+        "options": [
+          {"plan": "Monthly", "price": "${{monthly_price}}/mo", "commitment": "Cancel anytime"},
+          {"plan": "Annual", "price": "${{annual_price}}/mo", "savings": "Save {{annual_savings}}%", "commitment": "Billed annually"}
+        ],
+        "includes": "All Featured benefits included in both plans",
+        "guarantee": "30-day satisfaction guarantee"
+      },
+      "narration": "Pricing is simple. Monthly: {{monthly_price}} dollars per month, cancel anytime. Or go annual at {{annual_price}} per month and save {{annual_savings}} percent. Both plans include all Featured benefits. And there's a thirty-day satisfaction guarantee—if you don't see results, we'll make it right.",
+      "duration_seconds": 25,
+      "audio_file": "slide-05-pricing.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "TestimonialSlide",
+      "title": "Featured Success Story",
+      "content": {
+        "quote": "Featured paid for itself in the first week. I was skeptical, but the numbers don't lie—I'm getting calls I never got before.",
+        "author": "{{testimonial_name}}",
+        "business": "{{testimonial_business}}",
+        "category": "{{similar_category}}",
+        "result": "{{testimonial_result}}"
+      },
+      "narration": "Don't just take our word for it. {{testimonial_name}} from {{testimonial_business}} said: 'Featured paid for itself in the first week. I was skeptical, but the numbers don't lie—I'm getting calls I never got before.' They saw {{testimonial_result}} after upgrading.",
+      "duration_seconds": 25,
+      "audio_file": "slide-06-testimonial.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "CTASlide",
+      "title": "Upgrade to Featured",
+      "content": {
+        "headline": "Ready for {{visibility_multiplier}}x More Visibility?",
+        "cta_primary": {
+          "label": "Upgrade to Featured",
+          "action": "upgrade_now"
+        },
+        "cta_secondary": {
+          "label": "Compare All Plans",
+          "action": "compare_plans"
+        },
+        "urgency": "Featured spots in {{category}} are limited",
+        "guarantee": "30-day satisfaction guarantee"
+      },
+      "narration": "Ready for {{visibility_multiplier}}x more visibility? Click 'Upgrade to Featured' to activate now. Or compare all plans if you want to see other options. Featured spots in {{category}} are limited—don't let competitors take yours. Remember: thirty-day satisfaction guarantee. No risk, all upside.",
+      "duration_seconds": 20,
+      "audio_file": "slide-07-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_hook": {
+      "subject": "Your listing could be getting 5x more views",
+      "preview_text": "See the visibility gap",
+      "body": "Hey {{first_name}},\n\nI looked at {{business_name}}'s listing performance.\n\nYour monthly views: {{current_monthly_views}}\nFeatured average in {{category}}: {{featured_average_views}}\n\nThat's a {{visibility_multiplier}}x gap.\n\nFeatured businesses see:\n• +487% more views\n• +312% more inquiries  \n• 5x more AI recommendations\n• 12:1 average ROI\n\n[SEE YOUR FEATURED PREVIEW →]\n\nYour Featured listing is ready to activate. The gap is closable.\n\n{{sender_name}}\nFibonacco\n\nP.S. 30-day satisfaction guarantee. If it doesn't work, we'll make it right."
+    }
+  },
+  "connections": {
+    "leads_to": [],
+    "follows": ["EDU-005", "HOWTO-012"],
+    "related": ["HOOK-004", "HOOK-009"]
+  }
+}

@@ -1,52 +1,220 @@
 {
   "campaign": {
     "id": "HOOK-004",
-    "week": 4,
-    "day": 4,
-    "type": "HOOK",
-    "title": "Feature Application",
-    "subject": "Feature Application",
+    "week": 3,
+    "day": 17,
+    "type": "Hook",
+    "title": "Get Featured",
+    "subject": "Apply to be featured in this week's spotlight",
     "landing_page": "get-featured",
     "template": "feature-application",
-    "description": "Feature Application - Get user to take immediate action"
+    "description": "Invite business to apply for featured placement in directory/news"
   },
   "landing_page": {
     "campaign_id": "HOOK-004",
     "landing_page_slug": "get-featured",
-    "url": "/learn/get-featured",
+    "url": "/apply/featured",
     "template_id": "feature-application",
     "template_name": "Feature Application",
     "slide_count": 6,
-    "duration_seconds": 50,
-    "primary_cta": "signup_free",
-    "secondary_cta": "schedule_demo",
+    "duration_seconds": 120,
+    "primary_cta": "apply_now",
+    "secondary_cta": "learn_more",
     "ai_persona": "Sarah",
-    "ai_tone": "Excited, helpful",
-    "ai_goal": "Get user to take immediate action",
-    "data_capture_fields": "name, email, business_name, industry",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/get-featured/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "signup",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week3-hook",
-    "utm_content": "HOOK-004"
+    "ai_tone": "Exciting, exclusive, opportunity-focused",
+    "ai_goal": "Get application submission"
   },
-  "template": {
-    "template_id": "feature-application",
-    "name": "Feature Application",
-    "slides": 6,
-    "duration": 50,
-    "purpose": "hook",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "get-featured",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/get-featured/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "You've Been Nominated",
+      "content": {
+        "headline": "{{business_name}} Has Been Nominated",
+        "subhead": "For this week's Featured Business Spotlight",
+        "visual": "Spotlight/stage imagery with business name",
+        "badge": "NOMINATED"
+      },
+      "narration": "Great news—{{business_name}} has been nominated for this week's Featured Business Spotlight. This is a real opportunity. Let me show you what featured businesses get.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-nominated.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "BenefitsSlide",
+      "title": "What Featured Businesses Get",
+      "content": {
+        "headline": "Featured Businesses Get:",
+        "benefits": [
+          {
+            "icon": "star",
+            "benefit": "Top placement in directory",
+            "detail": "First thing people see"
+          },
+          {
+            "icon": "newspaper",
+            "benefit": "Feature in local news",
+            "detail": "Story about your business"
+          },
+          {
+            "icon": "megaphone",
+            "benefit": "Social media spotlight",
+            "detail": "Shared to our audience"
+          },
+          {
+            "icon": "chart",
+            "benefit": "5x average visibility",
+            "detail": "Vs. standard listings"
+          },
+          {
+            "icon": "badge",
+            "benefit": "Featured badge",
+            "detail": "Permanent trust signal"
+          }
+        ]
+      },
+      "narration": "Featured businesses get serious benefits. Top placement in the directory—the first thing people see. A feature story in local news. Spotlight on our social media to our entire audience. Five times the average visibility of standard listings. And a permanent 'Featured' badge on your profile—a trust signal that lasts.",
+      "duration_seconds": 30,
+      "audio_file": "slide-02-benefits.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ProofSlide",
+      "title": "Featured Business Results",
+      "content": {
+        "headline": "What Our Featured Businesses See",
+        "stats": [
+          {
+            "metric": "Average view increase",
+            "value": "487%",
+            "timeframe": "during feature week"
+          },
+          {
+            "metric": "Inquiry increase",
+            "value": "312%",
+            "timeframe": "during feature week"
+          },
+          {
+            "metric": "Lasting visibility boost",
+            "value": "+45%",
+            "timeframe": "ongoing after feature"
+          }
+        ],
+        "testimonial": {
+          "quote": "Our feature week brought more new customers than the previous 3 months combined.",
+          "author": "Featured Business Owner"
+        }
+      },
+      "narration": "The results speak for themselves. Featured businesses see an average four hundred eighty-seven percent increase in views during their feature week. Three hundred twelve percent more inquiries. And a lasting visibility boost of forty-five percent that continues after the feature ends. One owner told us their feature week brought more new customers than the previous three months combined.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-proof.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ProcessSlide",
+      "title": "How It Works",
+      "content": {
+        "headline": "The Feature Process",
+        "steps": [
+          {
+            "num": 1,
+            "step": "Submit application",
+            "time": "5 minutes"
+          },
+          {
+            "num": 2,
+            "step": "Our team reviews",
+            "time": "24-48 hours"
+          },
+          {
+            "num": 3,
+            "step": "If selected, we contact you",
+            "time": "For brief interview"
+          },
+          {
+            "num": 4,
+            "step": "Feature goes live",
+            "time": "Within 1 week"
+          }
+        ],
+        "note": "Not everyone is selected—we feature businesses that serve the community well"
+      },
+      "narration": "Here's how it works. Submit your application—takes about five minutes. Our team reviews within twenty-four to forty-eight hours. If you're selected, we'll contact you for a brief interview. Then your feature goes live within a week. I'll be honest: not everyone is selected. We feature businesses that genuinely serve the community well. But you've been nominated, which means someone thought {{business_name}} qualifies.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-process.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ApplicationSlide",
+      "title": "Application Preview",
+      "content": {
+        "headline": "We Just Need a Few Things",
+        "fields": [
+          {
+            "field": "What makes your business special?",
+            "type": "Short answer"
+          },
+          {
+            "field": "How do you serve the community?",
+            "type": "Short answer"
+          },
+          {
+            "field": "Recent photo of business/team",
+            "type": "Upload"
+          },
+          {
+            "field": "Best time to contact you",
+            "type": "Dropdown"
+          }
+        ],
+        "time_estimate": "5 minutes to complete"
+      },
+      "narration": "The application is simple. Tell us what makes your business special. How you serve the community. Upload a recent photo of your business or team. And let us know the best time to contact you. Five minutes total. We're not looking for perfect answers—we're looking for authentic businesses worth featuring.",
+      "duration_seconds": 25,
+      "audio_file": "slide-05-application.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "CTASlide",
+      "title": "Apply Now",
+      "content": {
+        "headline": "Your Nomination Is Open",
+        "urgency": "Featured spots fill quickly—apply this week",
+        "cta_primary": {
+          "label": "Apply for Feature",
+          "action": "submit_application"
+        },
+        "cta_secondary": {
+          "label": "Maybe Later",
+          "action": "save_nomination"
+        },
+        "reassurance": "Free to apply • No commitment • We'll follow up within 48 hours"
+      },
+      "narration": "Your nomination is open now. Featured spots fill quickly, so I'd recommend applying this week. Click 'Apply for Feature' to submit your application. It's free, there's no commitment, and we'll follow up within forty-eight hours. {{business_name}} has been nominated. The only question is whether you'll accept.",
+      "duration_seconds": 20,
+      "audio_file": "slide-06-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_hook": {
+      "subject": "Apply to be featured in this week's spotlight",
+      "preview_text": "{{business_name}} has been nominated",
+      "body": "Hey {{first_name}},\n\n{{business_name}} has been nominated for our Featured Business Spotlight.\n\nThis isn't spam. Someone thought your business deserves to be highlighted.\n\nFeatured businesses get:\n✓ Top placement in directory\n✓ Feature story in local news\n✓ Social media spotlight\n✓ 5x average visibility\n✓ Permanent 'Featured' badge\n\nThe numbers: Featured businesses see 487% more views and 312% more inquiries during their feature week.\n\n[APPLY FOR FEATURE →]\n\nApplication takes 5 minutes. We review within 48 hours.\n\nNot everyone is selected—but you've been nominated.\n\n{{sender_name}}\nFibonacco"
+    },
+    "email_reminder": {
+      "subject": "Your feature nomination expires soon",
+      "preview_text": "5 minutes to apply",
+      "body": "Hey {{first_name}},\n\nQuick reminder: {{business_name}}'s nomination for our Featured Business Spotlight is still open.\n\nFeatured spots fill quickly, and nominations don't last forever.\n\nIf you want:\n→ 5x visibility\n→ News feature about your business\n→ Social media spotlight\n→ Permanent 'Featured' badge\n\n...the application takes 5 minutes:\n\n[APPLY NOW →]\n\nWe review within 48 hours.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-006"
+    ],
+    "follows": "EDU-003",
+    "related": [
+      "HOOK-007",
+      "HOOK-009"
+    ]
   }
 }

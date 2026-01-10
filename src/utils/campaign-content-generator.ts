@@ -263,8 +263,8 @@ function generateEducationalCampaignSlides(
     });
   }
   
-  // Final Slide: CTA
-  if (slideCount > 6) {
+  // Slide 7: CTA (always include if slideCount >= 7)
+  if (slideCount >= 7) {
     slides.push({
       id: slideCount,
       component: 'CTASlide',
@@ -275,9 +275,34 @@ function generateEducationalCampaignSlides(
           text: landingPage.primary_cta === 'download_guide' ? 'Download Guide' : 'Get Started',
           action: landingPage.primary_cta,
         },
+        secondaryCTA: landingPage.secondary_cta ? {
+          text: landingPage.secondary_cta === 'start_trial' ? 'Start Free Trial' : 'Schedule Demo',
+          action: landingPage.secondary_cta,
+        } : undefined,
       },
       audioUrl: audioBaseUrl ? `${audioBaseUrl}slide-${String(slideCount).padStart(2, '0')}.mp3` : undefined,
       requiresPersonalization: true,
+    });
+  }
+  
+  // Ensure we have exactly slideCount slides
+  // Fill any gaps with SolutionSlide
+  while (slides.length < slideCount) {
+    const nextId = slides.length + 1;
+    slides.push({
+      id: nextId,
+      component: 'SolutionSlide',
+      content: {
+        title: `Key Point ${nextId - 1}`,
+        solution: campaign.description || 'Important information for your business success',
+        benefits: [
+          'Valuable insights',
+          'Actionable strategies',
+          'Proven results',
+        ],
+      },
+      audioUrl: audioBaseUrl ? `${audioBaseUrl}slide-${String(nextId).padStart(2, '0')}.mp3` : undefined,
+      requiresPersonalization: false,
     });
   }
   

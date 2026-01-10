@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
 import { LayoutGridIcon, VideoIcon, PresentationIcon, BarChart2Icon, TrendingUpIcon, BriefcaseIcon, DatabaseIcon, FileTextIcon, NetworkIcon, FolderIcon, CalendarIcon } from 'lucide-react';
+import { trackLinkClick } from '@/utils/navigation-tracker';
 export const AccountManagerButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const links = [{
@@ -69,7 +70,15 @@ export const AccountManagerButton = () => {
           <div className="grid grid-cols-2 gap-3">
             {links.map(link => {
           const Icon = link.icon;
-          return <Link key={link.path} to={link.path} className="flex items-center space-x-3 px-4 py-3 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 rounded-lg transition-all duration-150 border border-transparent hover:border-blue-200 hover:shadow-md group">
+          return <Link 
+                  key={link.path} 
+                  to={link.path} 
+                  onClick={() => {
+                    // #region agent log
+                    trackLinkClick(link.path, 'AccountManagerButton');
+                    // #endregion
+                  }}
+                  className="flex items-center space-x-3 px-4 py-3 text-sm text-slate-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 rounded-lg transition-all duration-150 border border-transparent hover:border-blue-200 hover:shadow-md group">
                   <Icon size={20} className={`${link.color} group-hover:scale-110 transition-transform duration-200`} />
                   <span className="font-semibold">{link.label}</span>
                 </Link>;

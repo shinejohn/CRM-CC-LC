@@ -1,52 +1,151 @@
 {
   "campaign": {
     "id": "HOOK-015",
-    "week": 15,
-    "day": 15,
-    "type": "HOOK",
+    "week": 11,
+    "day": 72,
+    "type": "Hook",
     "title": "Business Nomination",
-    "subject": "Business Nomination",
+    "subject": "Someone nominated {{business_name}} for recognition",
     "landing_page": "business-nomination",
     "template": "nomination",
-    "description": "Business Nomination - Get user to take immediate action"
+    "description": "Business award/recognition nomination notification and claim"
   },
-  "landing_page": {
-    "campaign_id": "HOOK-015",
-    "landing_page_slug": "business-nomination",
-    "url": "/learn/business-nomination",
-    "template_id": "nomination",
-    "template_name": "Business Nomination",
-    "slide_count": 5,
-    "duration_seconds": 35,
-    "primary_cta": "signup_free",
-    "secondary_cta": "schedule_demo",
-    "ai_persona": "Sarah",
-    "ai_tone": "Excited, helpful",
-    "ai_goal": "Get user to take immediate action",
-    "data_capture_fields": "name, email, business_name, industry",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/business-nomination/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "signup",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week11-hook",
-    "utm_content": "HOOK-015"
-  },
-  "template": {
-    "template_id": "nomination",
-    "name": "Business Nomination",
-    "slides": 5,
-    "duration": 35,
-    "purpose": "hook",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "business-nomination",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/business-nomination/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "You've Been Nominated",
+      "content": {
+        "headline": "Someone Nominated Your Business",
+        "subhead": "Claim your nomination and get recognized"
+      },
+      "narration": "Great news: someone in the community nominated your business for recognition. They think you're doing something special and deserve to be highlighted. Now you just need to claim your nomination to be considered.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "Your Nomination",
+      "content": {
+        "headline": "Nomination Details",
+        "nomination": {
+          "business": "{{business_name}}",
+          "category": "{{nomination_category}}",
+          "nominated_by": "A community member",
+          "reason": "For outstanding service and community contribution"
+        },
+        "note": "Claim within 7 days to be considered"
+      },
+      "narration": "Here are your nomination details. Your business was nominated in the category shown. A community member submitted the nomination because they believe you provide outstanding service and contribute to our community. You have seven days to claim this nomination to be considered for recognition.",
+      "duration_seconds": 25,
+      "audio_file": "slide-02-details.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "Recognition Benefits",
+      "content": {
+        "headline": "What Recognized Businesses Receive",
+        "benefits": [
+          {
+            "benefit": "Winner announcement",
+            "where": "Newsletter to 10,000+ subscribers"
+          },
+          {
+            "benefit": "News article feature",
+            "where": "Full article about your business"
+          },
+          {
+            "benefit": "Award badge",
+            "where": "Display on website and marketing"
+          },
+          {
+            "benefit": "Social spotlight",
+            "where": "Featured across all social channels"
+          },
+          {
+            "benefit": "Certificate",
+            "where": "Physical certificate for your wall"
+          },
+          {
+            "benefit": "Directory highlight",
+            "where": "Featured placement in directory"
+          }
+        ]
+      },
+      "narration": "What do recognized businesses receive? Winner announcement in our newsletter to over ten thousand subscribers. A full news article feature about your business. An award badge to display on your website and marketing materials. Social media spotlight across all channels. A physical certificate for your wall. And featured placement in our directory. Recognition that works for your business.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-benefits.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "How to Claim",
+      "content": {
+        "headline": "Claiming Is Simple",
+        "steps": [
+          {
+            "step": 1,
+            "action": "Click 'Claim Nomination'"
+          },
+          {
+            "step": 2,
+            "action": "Verify your business info"
+          },
+          {
+            "step": 3,
+            "action": "Add a brief statement (optional)"
+          },
+          {
+            "step": 4,
+            "action": "Submit for consideration"
+          }
+        ],
+        "timing": "Takes under 3 minutes"
+      },
+      "narration": "Claiming your nomination is simple. Click 'Claim Nomination.' Verify your business information is correct. Optionally add a brief statement about why you deserve recognition. Submit for consideration. Takes under three minutes. That's it—you're in the running.",
+      "duration_seconds": 25,
+      "audio_file": "slide-04-claim.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "CTASlide",
+      "title": "Claim Now",
+      "content": {
+        "headline": "Ready to Claim Your Nomination?",
+        "cta_primary": {
+          "label": "Claim My Nomination",
+          "action": "claim_nomination"
+        },
+        "cta_secondary": {
+          "label": "See Past Winners",
+          "action": "view_winners"
+        },
+        "urgency": "Nomination expires in 7 days"
+      },
+      "narration": "Ready to claim your nomination? Do it now—takes under three minutes. Or see past winners to see the recognition your business could receive. Your nomination expires in seven days, so don't wait. Someone believes in your business. Let's make it official.",
+      "duration_seconds": 20,
+      "audio_file": "slide-05-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_hook": {
+      "subject": "Someone nominated {{business_name}} for recognition",
+      "preview_text": "Claim your nomination in 3 minutes",
+      "body": "Hey {{first_name}},\n\nGreat news: someone nominated {{business_name}} for community recognition.\n\nThey believe you're doing something special and deserve to be highlighted.\n\nIf selected, you'll receive:\n✓ Winner announcement to 10,000+ subscribers\n✓ News article feature\n✓ Award badge for marketing\n✓ Social media spotlight\n✓ Physical certificate\n\n[CLAIM YOUR NOMINATION →]\n\nClaiming takes under 3 minutes.\n\nNomination expires in 7 days.\n\n{{sender_name}}\nFibonacco"
+    },
+    "email_2_reminder": {
+      "subject": "Your nomination expires in 3 days",
+      "preview_text": "Don't let this opportunity pass",
+      "body": "Hey {{first_name}},\n\n{{business_name}}'s community nomination expires in 3 days.\n\nSomeone believed enough in your business to nominate you. Don't let it go unclaimed.\n\n[CLAIM IN 3 MINUTES →]\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "follows": "HOOK-014",
+    "related": [
+      "HOOK-004",
+      "HOOK-011"
+    ]
   }
 }

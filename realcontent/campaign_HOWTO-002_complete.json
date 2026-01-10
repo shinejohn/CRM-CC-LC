@@ -1,0 +1,240 @@
+{
+  "campaign": {
+    "id": "HOWTO-002",
+    "week": 1,
+    "day": 6,
+    "type": "How-To",
+    "title": "Create Your First Article",
+    "subject": "How to get featured in local news (easier than you think)",
+    "landing_page": "create-article",
+    "template": "tutorial",
+    "description": "Step-by-step guide to submitting news-worthy content about your business"
+  },
+  "landing_page": {
+    "campaign_id": "HOWTO-002",
+    "landing_page_slug": "create-article",
+    "url": "/learn/create-article",
+    "template_id": "tutorial",
+    "template_name": "How-To Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 360,
+    "primary_cta": "start_article",
+    "secondary_cta": "use_template",
+    "ai_persona": "Emma",
+    "ai_tone": "Encouraging, practical",
+    "ai_goal": "Get user to submit their first article/news item",
+    "data_capture_fields": "name, email, business_name, article_topic",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/create-article/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "article_started",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week1-how-to",
+    "utm_content": "HOWTO-002"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "TutorialIntroSlide",
+      "title": "Get Featured in Local News",
+      "content": {
+        "headline": "How to Get Featured in Local News",
+        "subhead": "It's easier than you think",
+        "expectations": {
+          "time": "15 minutes",
+          "difficulty": "Easy",
+          "outcome": "A publishable news item about your business"
+        },
+        "myth_bust": "You don't need to be 'newsworthy.' You just need a story worth sharing."
+      },
+      "narration": "Here's something most business owners don't realize: getting featured in local news isn't hard. You don't need a publicist. You don't need a major announcement. You just need a story worth sharing—and every business has one. In the next fifteen minutes, I'm going to show you exactly how to create news content that gets published.",
+      "duration_seconds": 25,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "What Counts as News",
+      "content": {
+        "headline": "What Actually Gets Published",
+        "news_types": [
+          {"type": "Business Milestones", "examples": "Anniversary, expansion, award, new location"},
+          {"type": "Community Involvement", "examples": "Charity work, sponsorship, local partnership"},
+          {"type": "Expert Insights", "examples": "Tips, how-tos, industry knowledge"},
+          {"type": "Human Interest", "examples": "Your story, why you started, customer stories"},
+          {"type": "Announcements", "examples": "New products, services, team members, changes"}
+        ],
+        "insight": "Local news needs local content. You ARE the content they're looking for."
+      },
+      "narration": "First, let's talk about what actually gets published. Business milestones—your anniversary, an expansion, an award. Community involvement—charity work, sponsorships, partnerships. Expert insights—tips and knowledge from your industry. Human interest—your story, why you started, customer stories. And announcements—new products, services, team members. Local news needs local content. You are exactly what they're looking for.",
+      "duration_seconds": 40,
+      "audio_file": "slide-02-what-counts.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Step 1: Choose Your Angle",
+      "content": {
+        "headline": "Step 1: Pick One Story",
+        "prompts": [
+          "What's new at your business right now?",
+          "What anniversary or milestone is coming up?",
+          "What do you know that would help your community?",
+          "What's your origin story—why did you start?",
+          "What's a customer success story you could share?"
+        ],
+        "tip": "Don't overthink it. The first idea that comes to mind is usually good enough.",
+        "action": "Write down your topic in one sentence."
+      },
+      "narration": "Step one: pick one story. Ask yourself: What's new at your business right now? What milestone is coming up? What do you know that would help people? What's your origin story? What's a customer success story? Don't overthink it. The first idea that comes to mind is usually the right one. Write it down in one sentence. That's your topic.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-step1.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Step 2: Use the Template",
+      "content": {
+        "headline": "Step 2: Fill in the Template",
+        "template_structure": {
+          "headline": "What's the one thing you want people to know?",
+          "lead": "Who, what, when, where, why in 2-3 sentences",
+          "body": "The details, the story, the quotes",
+          "cta": "What should readers do next?"
+        },
+        "length": "300-500 words is plenty",
+        "tip": "Write like you're telling a friend. Conversational beats formal."
+      },
+      "narration": "Step two: use our template. Start with your headline—what's the one thing you want people to know? Then your lead paragraph—who, what, when, where, why in two to three sentences. Then the body—the details, the story, include a quote if you can. And finally, what should readers do next? Aim for 300 to 500 words. That's plenty. And write like you're telling a friend—conversational beats formal.",
+      "duration_seconds": 40,
+      "audio_file": "slide-04-step2.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ExampleSlide",
+      "title": "Real Examples",
+      "content": {
+        "headline": "What Good Articles Look Like",
+        "examples": [
+          {
+            "type": "Anniversary",
+            "headline": "Martinez Bakery Celebrates 25 Years on Main Street",
+            "lead": "What started as a family dream in 1999 has become a community institution..."
+          },
+          {
+            "type": "Expert Tips",
+            "headline": "5 Things Every Homeowner Should Check Before Winter",
+            "lead": "Local contractor shares the maintenance checklist that prevents costly repairs..."
+          },
+          {
+            "type": "Community",
+            "headline": "Local Gym Raises $10,000 for Youth Sports",
+            "lead": "Members and staff came together for the annual fitness challenge..."
+          }
+        ]
+      },
+      "narration": "Here's what good articles look like. An anniversary piece: 'Martinez Bakery Celebrates 25 Years on Main Street.' An expert tips piece: 'Five Things Every Homeowner Should Check Before Winter.' A community piece: 'Local Gym Raises $10,000 for Youth Sports.' See how simple these are? They're not fancy. They're just clear stories about real businesses doing real things.",
+      "duration_seconds": 40,
+      "audio_file": "slide-05-examples.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "Step 3: Add a Photo",
+      "content": {
+        "headline": "Step 3: Add One Good Photo",
+        "photo_tips": [
+          "Show people—your team, your customers, yourself",
+          "Show action—someone doing something, not just posing",
+          "Natural light beats flash",
+          "Horizontal/landscape orientation works best",
+          "Phone photos are fine—don't overthink it"
+        ],
+        "no_photo": "Don't have a photo? We can use your logo or skip it for now.",
+        "caption": "Write a simple caption: who's in it, what's happening"
+      },
+      "narration": "Step three: add a photo. Articles with photos get way more engagement. Show people—your team, customers, yourself. Show action if you can—someone doing something beats everyone just posing. Natural light looks better than flash. Horizontal orientation works best for web. And phone photos are totally fine—don't overthink it. Write a simple caption saying who's in it and what's happening.",
+      "duration_seconds": 35,
+      "audio_file": "slide-06-step3.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "StepSlide",
+      "title": "Step 4: Submit for Review",
+      "content": {
+        "headline": "Step 4: Submit and We Handle the Rest",
+        "process": [
+          {"step": "Submit", "desc": "Click submit when you're ready"},
+          {"step": "Review", "desc": "Our editors check for typos and clarity"},
+          {"step": "Publish", "desc": "Goes live within 24-48 hours"},
+          {"step": "Promote", "desc": "Featured in newsletter and social"}
+        ],
+        "guarantee": "We'll work with you to make it publish-ready. No rejections, just collaboration.",
+        "cost": "Free to submit. Free to publish."
+      },
+      "narration": "Step four: submit and we handle the rest. When you're ready, click submit. Our editors review it for typos and clarity—we're not judging, we're polishing. Your article goes live within 24 to 48 hours. Then we promote it through our newsletter and social channels. And here's the key: we don't reject submissions. We work with you to make it publish-ready. It's free to submit, free to publish.",
+      "duration_seconds": 35,
+      "audio_file": "slide-07-step4.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Start Your Article",
+      "content": {
+        "headline": "Ready to Get Featured?",
+        "cta_primary": {
+          "label": "Start Your Article",
+          "action": "open_article_editor",
+          "description": "Use our guided template"
+        },
+        "cta_secondary": {
+          "label": "See More Examples",
+          "action": "view_examples",
+          "description": "Get inspiration first"
+        },
+        "templates_available": [
+          "Anniversary/Milestone Template",
+          "Expert Tips Template",
+          "Community Story Template",
+          "Announcement Template"
+        ],
+        "time": "About 15 minutes to write"
+      },
+      "narration": "Ready to get featured in local news? Click 'Start Your Article' and you'll get our guided template—just fill in the blanks. We have templates for anniversaries, expert tips, community stories, and announcements. Pick the one that fits your story. About fifteen minutes to write, and then you're in the news. Your community is waiting to hear from you.",
+      "duration_seconds": 25,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_tutorial": {
+      "subject": "How to get featured in local news (easier than you think)",
+      "preview_text": "15 minutes to a publishable story",
+      "body": "Hey {{first_name}},\n\nHere's something most business owners don't realize:\n\nGetting featured in local news isn't hard.\n\nYou don't need a publicist. You don't need a major announcement. You just need a story worth sharing—and {{business_name}} has one.\n\nI put together a 15-minute guide that walks you through it:\n\n✓ What actually gets published (spoiler: simpler than you think)\n✓ How to pick your angle\n✓ A fill-in-the-blanks template\n✓ Real examples from businesses like yours\n✓ How to submit (free, and we help you polish it)\n\n[START THE TUTORIAL →]\n\nWe publish articles from local businesses every day. The only thing missing is yours.\n\n{{sender_name}}\nFibonacco\n\nP.S. We don't reject submissions. We work with you to make it publish-ready. No pressure, just help."
+    }
+  },
+  "resources": {
+    "templates": {
+      "anniversary": {
+        "title": "Anniversary/Milestone Template",
+        "structure": "[Business Name] Celebrates [X] Years in [Location]\n\n[Lead: Brief history and significance]\n\n[Body: The journey, key moments, what's next]\n\n[Quote from owner]\n\n[Call to action: Visit, celebrate with us, etc.]"
+      },
+      "expert_tips": {
+        "title": "Expert Tips Template",
+        "structure": "[Number] [Topic] Tips from [Your City]'s [Your Business Type]\n\n[Lead: Why this matters to readers]\n\n[Tip 1 with brief explanation]\n[Tip 2 with brief explanation]\n[Tip 3 with brief explanation]\n[Tip 4 with brief explanation]\n[Tip 5 with brief explanation]\n\n[Call to action: Contact for help, learn more, etc.]"
+      },
+      "community": {
+        "title": "Community Story Template",
+        "structure": "[Business Name] [Action] for [Cause/Community]\n\n[Lead: What happened and impact]\n\n[Body: Details, who was involved, results]\n\n[Quote from participant or beneficiary]\n\n[Call to action: Join, donate, participate, etc.]"
+      },
+      "announcement": {
+        "title": "Announcement Template",
+        "structure": "[Business Name] Announces [What's New]\n\n[Lead: The news in 2-3 sentences]\n\n[Body: Details, why it matters, what's changing]\n\n[Quote from owner on significance]\n\n[Call to action: Visit, try it, learn more, etc.]"
+      }
+    }
+  },
+  "connections": {
+    "leads_to": ["HOWTO-006"],
+    "follows": "HOWTO-001",
+    "related": ["EDU-007", "HOWTO-013"]
+  }
+}

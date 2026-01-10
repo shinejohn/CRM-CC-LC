@@ -92,6 +92,36 @@ class CampaignController extends Controller
     }
     
     /**
+     * Download guide for a campaign
+     */
+    public function guide(string $id): \Illuminate\Http\Response
+    {
+        // Look for guide PDF in storage
+        $guidePath = "guides/campaign_{$id}_guide.pdf";
+        
+        // Check if guide exists in storage
+        if (Storage::disk('public')->exists($guidePath)) {
+            $filePath = Storage::disk('public')->path($guidePath);
+            return response()->download($filePath, "guide-{$id}.pdf", [
+                'Content-Type' => 'application/pdf',
+            ]);
+        }
+        
+        // Check in public directory as fallback
+        $publicPath = public_path("guides/campaign_{$id}_guide.pdf");
+        if (file_exists($publicPath)) {
+            return response()->download($publicPath, "guide-{$id}.pdf", [
+                'Content-Type' => 'application/pdf',
+            ]);
+        }
+        
+        // If guide doesn't exist, return 404
+        return response()->json([
+            'error' => 'Guide not found for this campaign'
+        ], 404);
+    }
+    
+    /**
      * Format campaign data for API response
      */
     protected function formatCampaignData(array $data): array
@@ -107,5 +137,73 @@ class CampaignController extends Controller
             'slide_count' => $data['slide_count'] ?? null,
             'duration_seconds' => $data['duration_seconds'] ?? null,
         ];
+    }
+    
+    /**
+     * Handle contact sales form submission
+     */
+    public function contactSales(Request $request): JsonResponse
+    {
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'company' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'message' => 'required|string|max:5000',
+            'campaign_id' => 'nullable|string',
+            'campaign_slug' => 'nullable|string',
+            'utm_source' => 'nullable|string',
+            'utm_medium' => 'nullable|string',
+            'utm_campaign' => 'nullable|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => 'Validation failed',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        try {
+            $data = $validator->validated();
+            
+            // Get tenant ID from request
+            $tenantId = $request->header('X-Tenant-ID') ?? 'default';
+            
+            // TODO: Send email notification to sales team
+            // This would typically use Laravel Mail or a service like SendGrid
+            // For now, we'll log it and return success
+            
+            \Log::info('Contact Sales Form Submission', [
+                'tenant_id' => $tenantId,
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'company' => $data['company'] ?? null,
+                'phone' => $data['phone'] ?? null,
+                'campaign_id' => $data['campaign_id'] ?? null,
+                'campaign_slug' => $data['campaign_slug'] ?? null,
+                'utm_source' => $data['utm_source'] ?? null,
+                'utm_medium' => $data['utm_medium'] ?? null,
+                'utm_campaign' => $data['utm_campaign'] ?? null,
+            ]);
+            
+            // TODO: Store in database (optional)
+            // Could create a ContactInquiry model and store submissions
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Thank you for contacting us! Our sales team will reach out to you shortly.',
+            ], 200);
+        } catch (\Exception $e) {
+            \Log::error('Contact Sales Form Error', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+            
+            return response()->json([
+                'error' => 'Failed to submit contact form',
+                'message' => 'An error occurred while processing your request. Please try again later.',
+            ], 500);
+        }
     }
 }

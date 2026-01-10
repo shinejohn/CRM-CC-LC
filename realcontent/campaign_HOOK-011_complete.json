@@ -1,0 +1,136 @@
+{
+  "campaign": {
+    "id": "HOOK-011",
+    "week": 8,
+    "day": 54,
+    "type": "Hook",
+    "title": "Expert Registration",
+    "subject": "You're an expert. Let's make sure people know it.",
+    "landing_page": "expert-registration",
+    "template": "expert-application",
+    "description": "Application to join expert directory for quotes and features"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Be the Go-To Expert",
+      "content": {
+        "headline": "When Journalists Need a Quote, They'll Call You",
+        "subhead": "Join our local expert directory"
+      },
+      "narration": "You're already an expert in what you do. The question is: do people know it? When local journalists need a quote, when community members have questions, when someone needs advice—are they calling you? Our expert directory makes sure they are.",
+      "duration_seconds": 18,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "How It Works",
+      "content": {
+        "headline": "Expert Directory Benefits",
+        "benefits": [
+          {"benefit": "Listed as local expert", "detail": "In your specialty area"},
+          {"benefit": "Journalist access", "detail": "Writers contact you for quotes and stories"},
+          {"benefit": "Q&A features", "detail": "Answer community questions in your area"},
+          {"benefit": "Expert badge", "detail": "Verified expert status on your profile"},
+          {"benefit": "Article opportunities", "detail": "First access to write guest content"},
+          {"benefit": "Speaking invitations", "detail": "Events looking for local experts"}
+        ]
+      },
+      "narration": "Here's how the expert directory works. You're listed as the local expert in your specialty area. Journalists contact you when they need quotes or stories on your topic. You answer community questions in your area of expertise. You get a verified expert badge on your profile. First access to write guest content and articles. And speaking invitations when events need local experts. You're already the expert—this makes it official.",
+      "duration_seconds": 35,
+      "audio_file": "slide-02-benefits.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "Expert Categories",
+      "content": {
+        "headline": "Areas We Need Experts In",
+        "categories": [
+          {"category": "Home & Property", "examples": "Real estate, renovation, landscaping, cleaning"},
+          {"category": "Health & Wellness", "examples": "Fitness, nutrition, mental health, medical"},
+          {"category": "Finance & Business", "examples": "Accounting, investing, insurance, legal"},
+          {"category": "Food & Hospitality", "examples": "Restaurants, catering, events, wine/spirits"},
+          {"category": "Technology", "examples": "IT, cybersecurity, software, digital marketing"},
+          {"category": "Personal Services", "examples": "Beauty, auto, childcare, pets"}
+        ]
+      },
+      "narration": "We need experts in many areas. Home and property: real estate, renovation, landscaping. Health and wellness: fitness, nutrition, mental health. Finance and business: accounting, investing, legal. Food and hospitality: restaurants, catering, events. Technology: IT, cybersecurity, digital marketing. Personal services: beauty, auto, childcare, pets. Whatever your specialty, there's likely a spot for you.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-categories.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "What We Look For",
+      "content": {
+        "headline": "Expert Qualifications",
+        "qualifications": [
+          {"qual": "Experience", "requirement": "3+ years in your field"},
+          {"qual": "Local presence", "requirement": "Active business in our community"},
+          {"qual": "Good standing", "requirement": "Positive reputation, no major complaints"},
+          {"qual": "Availability", "requirement": "Willing to respond to media inquiries"},
+          {"qual": "Knowledge sharing", "requirement": "Interested in educating the community"}
+        ],
+        "note": "We verify credentials before adding experts"
+      },
+      "narration": "What do we look for in experts? Experience: at least three years in your field. Local presence: an active business in our community. Good standing: positive reputation with no major complaints. Availability: willing to respond when journalists or community members reach out. Knowledge sharing mindset: genuinely interested in educating the community. We verify credentials before adding anyone to the directory.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-qualifications.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ProofSlide",
+      "title": "Expert Success",
+      "content": {
+        "headline": "What Experts Experience",
+        "examples": [
+          {"expert": "Financial planner", "result": "Quoted in 4 articles in 6 months", "impact": "Established as the go-to financial voice locally"},
+          {"expert": "Personal trainer", "result": "Monthly Q&A column", "impact": "Gym membership inquiries up 34%"},
+          {"expert": "Real estate agent", "result": "Invited to speak at 3 community events", "impact": "Name recognition throughout the community"}
+        ]
+      },
+      "narration": "What do experts experience? A financial planner was quoted in four articles in six months—now established as the go-to financial voice locally. A personal trainer got a monthly Q&A column—gym membership inquiries up thirty-four percent. A real estate agent was invited to speak at three community events—name recognition throughout the community. Expert status opens doors.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-success.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "CTASlide",
+      "title": "Apply Now",
+      "content": {
+        "headline": "Ready to Be Recognized as an Expert?",
+        "cta_primary": {
+          "label": "Apply for Expert Status",
+          "action": "submit_application"
+        },
+        "cta_secondary": {
+          "label": "See Current Experts",
+          "action": "view_experts"
+        },
+        "process": "Application takes 5 minutes. Review within 72 hours."
+      },
+      "narration": "Ready to be recognized as an expert? Apply now—takes about five minutes. We'll review your application within seventy-two hours. Or see our current experts to see the company you'd be joining. You're already the expert. Let's make it official.",
+      "duration_seconds": 20,
+      "audio_file": "slide-06-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_hook": {
+      "subject": "You're an expert. Let's make sure people know it.",
+      "preview_text": "Join our local expert directory",
+      "body": "Hey {{first_name}},\n\nYou're an expert in what you do.\n\nBut when journalists need a quote, when community members have questions—are they calling you?\n\nOur expert directory makes sure they are.\n\nExpert benefits:\n✓ Listed as local expert in your field\n✓ Journalists contact you for quotes\n✓ Answer community Q&As\n✓ Verified expert badge\n✓ Speaking invitations\n\n[APPLY FOR EXPERT STATUS →]\n\nOne financial planner was quoted in 4 articles in 6 months. Now he's THE local financial voice.\n\n{{sender_name}}\nFibonacco"
+    },
+    "email_3_hook": {
+      "subject": "Your expert profile is drafted—take a look",
+      "preview_text": "See how you'd be listed",
+      "body": "Hey {{first_name}},\n\nWe drafted an expert profile for you:\n\n[SEE YOUR EXPERT PROFILE →]\n\nThis is how you'd appear in our expert directory when journalists and community members are looking for expertise in your field.\n\nApprove it to go live, or suggest changes.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "follows": "HOOK-010",
+    "related": ["HOOK-010", "HOOK-012"]
+  }
+}

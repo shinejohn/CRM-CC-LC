@@ -31,16 +31,27 @@ export const FAQCard: React.FC<FAQCardProps> = ({
     : 0;
 
   return (
-    <div
+    <article
       className={`
-        bg-white rounded-lg border-2 transition-all
-        ${isSelected ? 'border-indigo-500 shadow-md' : 'border-gray-200 hover:border-gray-300'}
+        lc-surface lc-radius-lg border-2 lc-transition lc-animate-scale-in
+        ${isSelected ? 'lc-shadow-md' : 'lc-shadow-sm hover:lc-shadow-md'}
         ${needsValidation ? 'border-amber-300' : ''}
         ${className}
+        group
       `}
+      style={{
+        borderColor: isSelected 
+          ? 'var(--lc-primary)' 
+          : needsValidation 
+            ? 'var(--lc-accent)' 
+            : 'var(--lc-border)',
+        backgroundColor: 'var(--lc-surface)',
+      }}
+      aria-labelledby={`faq-question-${faq.id}`}
+      aria-describedby={`faq-answer-${faq.id}`}
     >
       {/* Header */}
-      <div className="p-4 border-b border-gray-100">
+      <div className="p-4 border-b lc-border">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-start gap-3 flex-1">
             {onSelect && (
@@ -48,18 +59,33 @@ export const FAQCard: React.FC<FAQCardProps> = ({
                 type="checkbox"
                 checked={isSelected}
                 onChange={() => onSelect(faq.id)}
-                className="mt-1 w-4 h-4 text-indigo-600 focus:ring-indigo-500 rounded"
+                className="mt-1 w-4 h-4 lc-transition"
+                style={{
+                  accentColor: 'var(--lc-primary)',
+                }}
               />
             )}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap mb-2">
                 {faq.category && (
-                  <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-50 text-indigo-700">
+                  <span 
+                    className="inline-flex items-center px-2 py-0.5 lc-radius-md text-xs font-medium lc-transition"
+                    style={{
+                      backgroundColor: 'var(--lc-primary-bg)',
+                      color: 'var(--lc-primary-dark)',
+                    }}
+                  >
                     {faq.category}
                   </span>
                 )}
                 {faq.industry_codes && faq.industry_codes.length > 0 && (
-                  <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-purple-50 text-purple-700">
+                  <span 
+                    className="inline-flex items-center px-2 py-0.5 lc-radius-md text-xs font-medium lc-transition"
+                    style={{
+                      backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                      color: '#7c3aed',
+                    }}
+                  >
                     {faq.industry_codes[0]}
                   </span>
                 )}
@@ -67,7 +93,11 @@ export const FAQCard: React.FC<FAQCardProps> = ({
                   <SourceBadge source={faq.source} size="sm" />
                 </div>
               </div>
-              <h3 className="text-base font-semibold text-gray-900 mb-2">
+              <h3 
+                id={`faq-question-${faq.id}`}
+                className="text-base font-semibold lc-text-primary mb-2 group-hover:text-indigo-600 lc-transition" 
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
                 {faq.question}
               </h3>
             </div>
@@ -77,7 +107,10 @@ export const FAQCard: React.FC<FAQCardProps> = ({
 
       {/* Content */}
       <div className="p-4">
-        <p className="text-sm text-gray-600 line-clamp-3 mb-4">
+        <p 
+          id={`faq-answer-${faq.id}`}
+          className="text-sm lc-text-secondary line-clamp-3 mb-4"
+        >
           {faq.answer}
         </p>
 
@@ -103,35 +136,48 @@ export const FAQCard: React.FC<FAQCardProps> = ({
       </div>
 
       {/* Actions */}
-      <div className="px-4 py-3 border-t border-gray-100 bg-gray-50 flex items-center justify-between">
+      <div 
+        className="px-4 py-3 border-t lc-border flex items-center justify-between lc-transition"
+        style={{ backgroundColor: 'var(--lc-surface-hover)' }}
+      >
         <div className="flex items-center gap-2">
           <button
             onClick={() => onEdit?.(faq.id)}
-            className="p-1.5 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded transition-colors"
+            className="p-1.5 lc-text-secondary hover:lc-text-primary lc-surface-hover lc-radius-md lc-transition focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2"
             title="Edit"
+            aria-label={`Edit ${faq.question}`}
+            style={{ backgroundColor: 'transparent' }}
           >
             <Edit2 size={16} />
           </button>
           <button
             onClick={() => onView?.(faq.id)}
-            className="p-1.5 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded transition-colors"
+            className="p-1.5 lc-text-secondary hover:lc-text-primary lc-surface-hover lc-radius-md lc-transition focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2"
             title="Preview"
+            aria-label={`Preview ${faq.question}`}
+            style={{ backgroundColor: 'transparent' }}
           >
             <Eye size={16} />
           </button>
           <button
             onClick={() => onDuplicate?.(faq.id)}
-            className="p-1.5 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 rounded transition-colors"
+            className="p-1.5 lc-text-secondary hover:lc-text-primary lc-surface-hover lc-radius-md lc-transition focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2"
             title="Duplicate"
+            aria-label={`Duplicate ${faq.question}`}
+            style={{ backgroundColor: 'transparent' }}
           >
             <Copy size={16} />
           </button>
         </div>
-        <button className="p-1.5 text-gray-500 hover:text-gray-700 rounded transition-colors">
+        <button 
+          className="p-1.5 lc-text-secondary hover:lc-text-primary lc-surface-hover lc-radius-md lc-transition focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:outline-offset-2"
+          aria-label="More options"
+          aria-haspopup="true"
+        >
           <MoreVertical size={16} />
         </button>
       </div>
-    </div>
+    </article>
   );
 };
 

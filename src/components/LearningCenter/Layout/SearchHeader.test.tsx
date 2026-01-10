@@ -19,6 +19,7 @@ describe('SearchHeader', () => {
   it('displays search input field', () => {
     render(<SearchHeader />);
 
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    // Input has role="searchbox", not "textbox"
+    expect(screen.getByRole('searchbox')).toBeInTheDocument();
   });
 });

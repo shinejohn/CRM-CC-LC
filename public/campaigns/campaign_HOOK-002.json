@@ -1,52 +1,235 @@
 {
   "campaign": {
     "id": "HOOK-002",
-    "week": 2,
-    "day": 2,
-    "type": "HOOK",
-    "title": "Event Posting Guide",
-    "subject": "Event Posting Guide",
+    "week": 1,
+    "day": 5,
+    "type": "Hook",
+    "title": "Post Your Event",
+    "subject": "Got an event coming up? Post it free to 10,000+ locals",
     "landing_page": "post-your-event",
     "template": "event-posting",
-    "description": "Event Posting Guide - Get user to take immediate action"
+    "description": "Show SMB a sample event for their business and invite them to post it"
   },
   "landing_page": {
     "campaign_id": "HOOK-002",
     "landing_page_slug": "post-your-event",
-    "url": "/learn/post-your-event",
+    "url": "/events/new/{{business_slug}}",
     "template_id": "event-posting",
-    "template_name": "Event Posting Guide",
+    "template_name": "Event Posting",
     "slide_count": 5,
-    "duration_seconds": 40,
-    "primary_cta": "signup_free",
-    "secondary_cta": "schedule_demo",
+    "duration_seconds": 90,
+    "primary_cta": "post_event",
+    "secondary_cta": "customize_event",
     "ai_persona": "Sarah",
-    "ai_tone": "Excited, helpful",
-    "ai_goal": "Get user to take immediate action",
-    "data_capture_fields": "name, email, business_name, industry",
+    "ai_tone": "Excited, encouraging",
+    "ai_goal": "Get user to post their first event",
+    "data_capture_fields": "name, email, business_name, event_type",
     "audio_base_url": "https://cdn.fibonacco.com/presentations/post-your-event/audio/",
     "crm_tracking": true,
-    "conversion_goal": "signup",
+    "conversion_goal": "event_posted",
     "utm_source": "email",
     "utm_medium": "outbound",
     "utm_campaign": "90day-week1-hook",
     "utm_content": "HOOK-002"
   },
-  "template": {
-    "template_id": "event-posting",
-    "name": "Event Posting Guide",
-    "slides": 5,
-    "duration": 40,
-    "purpose": "hook",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "post-your-event",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/post-your-event/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "PersonalizedHeroSlide",
+      "title": "Your Event Could Reach Thousands",
+      "content": {
+        "headline": "{{business_name}}, Got an Event Coming Up?",
+        "subhead": "Post it free to {{local_audience_size}}+ people in {{city}}",
+        "visual": "Event calendar with featured events",
+        "stats": {
+          "audience": "{{local_audience_size}}",
+          "avg_views": "{{avg_event_views}}",
+          "engagement": "{{avg_event_engagement}}"
+        }
+      },
+      "narration": "Hey {{first_name}}, quick question: do you have any events coming up at {{business_name}}? A sale, a workshop, a special, an open house—anything? Because our events calendar reaches over {{local_audience_size}} people in {{city}}. And posting is completely free.",
+      "duration_seconds": 20,
+      "audio_file": "slide-01-hero.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "EventPreviewSlide",
+      "title": "We Drafted One For You",
+      "content": {
+        "headline": "We Created a Sample Event",
+        "event_preview": {
+          "title": "{{suggested_event_title}}",
+          "date": "{{suggested_date}}",
+          "time": "{{suggested_time}}",
+          "description": "{{suggested_description}}",
+          "image": "placeholder_event_image",
+          "status": "Draft - Ready to Post"
+        },
+        "note": "This is just a suggestion based on your business type. Edit it however you want."
+      },
+      "narration": "We actually went ahead and drafted a sample event for you. Based on what {{business_category}} businesses typically do, we suggested: {{suggested_event_title}}. This is just a starting point—you can edit the title, date, description, everything. Or create something completely different.",
+      "duration_seconds": 25,
+      "audio_file": "slide-02-preview.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "BenefitsSlide",
+      "title": "Why Events Work",
+      "content": {
+        "headline": "Events Get Results",
+        "benefits": [
+          {
+            "stat": "{{avg_event_views}}",
+            "label": "average views per event"
+          },
+          {
+            "stat": "{{avg_event_saves}}",
+            "label": "people save events to attend"
+          },
+          {
+            "stat": "{{avg_event_shares}}",
+            "label": "shares to friends and family"
+          },
+          {
+            "stat": "Free",
+            "label": "to post, always"
+          }
+        ],
+        "testimonial": {
+          "quote": "Posted a workshop, got 40 RSVPs. Best marketing I've ever done.",
+          "author": "{{similar_business_owner}}",
+          "business_type": "{{similar_business_type}}"
+        }
+      },
+      "narration": "Here's why events work so well. On average, events on our calendar get {{avg_event_views}} views. {{avg_event_saves}} people typically save an event to attend later. And events get shared—{{avg_event_shares}} shares on average to friends and family. One business owner told us: 'Posted a workshop, got 40 RSVPs. Best marketing I've ever done.' And it's completely free to post.",
+      "duration_seconds": 25,
+      "audio_file": "slide-03-benefits.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "IdeaSlide",
+      "title": "Event Ideas For You",
+      "content": {
+        "headline": "Event Ideas for {{business_category}} Businesses",
+        "ideas": [
+          {
+            "idea": "{{event_idea_1}}",
+            "example": "{{event_example_1}}"
+          },
+          {
+            "idea": "{{event_idea_2}}",
+            "example": "{{event_example_2}}"
+          },
+          {
+            "idea": "{{event_idea_3}}",
+            "example": "{{event_example_3}}"
+          },
+          {
+            "idea": "{{event_idea_4}}",
+            "example": "{{event_example_4}}"
+          }
+        ],
+        "note": "Don't overthink it. Even 'Now Booking Appointments' counts as news."
+      },
+      "narration": "Not sure what to post? Here are ideas that work great for {{business_category}} businesses. {{event_idea_1}}—like {{event_example_1}}. {{event_idea_2}}. {{event_idea_3}}. Or {{event_idea_4}}. Don't overthink it. Even something simple like 'Now Booking Appointments for Spring' gives people a reason to engage.",
+      "duration_seconds": 25,
+      "audio_file": "slide-04-ideas.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "CTASlide",
+      "title": "Post Your Event",
+      "content": {
+        "headline": "Ready to Reach {{local_audience_size}}+ People?",
+        "cta_primary": {
+          "label": "Post This Event",
+          "action": "post_event",
+          "description": "Use our suggested event (edit anytime)"
+        },
+        "cta_secondary": {
+          "label": "Create My Own Event",
+          "action": "create_custom_event",
+          "description": "Start fresh with your own idea"
+        },
+        "trust": "Free forever • Edit anytime • Cancel anytime",
+        "urgency": "Events posted this week get featured in our newsletter"
+      },
+      "narration": "Ready to reach {{local_audience_size}} people in {{city}}? Click 'Post This Event' to use the one we drafted—you can edit it anytime. Or click 'Create My Own' to start fresh with your own idea. Either way, it's free, you can edit anytime, and events posted this week get featured in our newsletter. Let's get people to your next event.",
+      "duration_seconds": 20,
+      "audio_file": "slide-05-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_hook": {
+      "subject": "Got an event coming up? Post it free to 10,000+ locals",
+      "preview_text": "We drafted one for {{business_name}}",
+      "body": "Hey {{first_name}},\n\nQuick question: Does {{business_name}} have any events coming up?\n\nA sale. A workshop. A special. An open house. Anything.\n\nBecause our community events calendar reaches over {{local_audience_size}} people in {{city}}. And posting is completely free.\n\nWe actually drafted a sample event for you based on what {{business_category}} businesses typically do:\n\n📅 {{suggested_event_title}}\n\n[SEE YOUR SAMPLE EVENT →]\n\nYou can use it as-is, edit it, or create something completely different.\n\nEvents posted this week get featured in our newsletter ({{newsletter_subscribers}} subscribers).\n\n{{sender_name}}\nFibonacco\n\nP.S. One business owner told us: 'Posted a workshop, got 40 RSVPs. Best marketing I've ever done.' Just saying."
+    },
+    "email_reminder": {
+      "subject": "Your event is still waiting to be posted",
+      "preview_text": "Takes 3 minutes",
+      "body": "Hey {{first_name}},\n\nThat sample event we created for {{business_name}}? Still sitting there, ready to go.\n\n{{local_audience_size}} people could see it. But only if you post it.\n\nTakes about 3 minutes:\n\n[POST YOUR EVENT NOW →]\n\nFree. Editable. Reaches your whole community.\n\n{{sender_name}}"
+    }
+  },
+  "personalization": {
+    "required_fields": [
+      "first_name",
+      "business_name",
+      "business_slug",
+      "business_category",
+      "city"
+    ],
+    "generated_fields": {
+      "suggested_event_title": {
+        "restaurant": "Special Tasting Night at {{business_name}}",
+        "retail": "Exclusive Sale Event at {{business_name}}",
+        "service": "Free Consultation Day at {{business_name}}",
+        "fitness": "Free Class Week at {{business_name}}",
+        "salon": "VIP Pampering Event at {{business_name}}",
+        "default": "Special Event at {{business_name}}"
+      },
+      "event_ideas": {
+        "restaurant": [
+          "Wine tasting night",
+          "Chef's table experience",
+          "Happy hour special",
+          "Live music night"
+        ],
+        "retail": [
+          "Flash sale",
+          "New arrival showcase",
+          "Customer appreciation day",
+          "Holiday shopping event"
+        ],
+        "service": [
+          "Free consultation day",
+          "Workshop",
+          "Q&A session",
+          "Open house"
+        ],
+        "fitness": [
+          "Free class week",
+          "Challenge kickoff",
+          "Member appreciation",
+          "New program launch"
+        ],
+        "default": [
+          "Open house",
+          "Customer appreciation day",
+          "Special promotion",
+          "Workshop or demo"
+        ]
+      }
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-003"
+    ],
+    "follows": "HOOK-001",
+    "related": [
+      "HOOK-003",
+      "HOOK-004"
+    ]
   }
 }

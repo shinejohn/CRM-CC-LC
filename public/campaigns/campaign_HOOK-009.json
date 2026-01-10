@@ -1,52 +1,222 @@
 {
   "campaign": {
     "id": "HOOK-009",
-    "week": 9,
-    "day": 9,
-    "type": "HOOK",
+    "week": 7,
+    "day": 47,
+    "type": "Hook",
     "title": "Sponsor Application",
-    "subject": "Sponsor Application",
+    "subject": "Sponsor our community events—your brand everywhere locals gather",
     "landing_page": "become-sponsor",
     "template": "sponsor-application",
-    "description": "Sponsor Application - Get user to take immediate action"
+    "description": "Sponsorship opportunity for community events and programs"
   },
-  "landing_page": {
-    "campaign_id": "HOOK-009",
-    "landing_page_slug": "become-sponsor",
-    "url": "/learn/become-sponsor",
-    "template_id": "sponsor-application",
-    "template_name": "Sponsor Application",
-    "slide_count": 7,
-    "duration_seconds": 60,
-    "primary_cta": "signup_free",
-    "secondary_cta": "schedule_demo",
-    "ai_persona": "Sarah",
-    "ai_tone": "Excited, helpful",
-    "ai_goal": "Get user to take immediate action",
-    "data_capture_fields": "name, email, business_name, industry",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/become-sponsor/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "signup",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week7-hook",
-    "utm_content": "HOOK-009"
-  },
-  "template": {
-    "template_id": "sponsor-application",
-    "name": "Sponsor Application",
-    "slides": 7,
-    "duration": 60,
-    "purpose": "hook",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "become-sponsor",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/become-sponsor/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Become a Community Sponsor",
+      "content": {
+        "headline": "Your Brand, Everywhere Locals Gather",
+        "subhead": "Community sponsorship opportunities"
+      },
+      "narration": "There's a way to be everywhere locals gather—not with ads they ignore, but as a community partner they appreciate. Community sponsorship puts your brand at the center of local events, programs, and causes people care about.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "Sponsorship Benefits",
+      "content": {
+        "headline": "What Sponsors Receive",
+        "benefits": [
+          {
+            "benefit": "Logo on all event marketing",
+            "reach": "Emails, flyers, social posts"
+          },
+          {
+            "benefit": "Verbal recognition at events",
+            "reach": "MC shoutouts, signage"
+          },
+          {
+            "benefit": "Featured in newsletter",
+            "reach": "10,000+ subscribers"
+          },
+          {
+            "benefit": "News article mention",
+            "reach": "Event coverage includes sponsors"
+          },
+          {
+            "benefit": "Social media features",
+            "reach": "Dedicated sponsor posts"
+          },
+          {
+            "benefit": "Community goodwill",
+            "reach": "Associated with events people love"
+          }
+        ]
+      },
+      "narration": "What do sponsors receive? Logo on all event marketing—emails, flyers, social posts. Verbal recognition at events with MC shoutouts and signage. Featured in our newsletter reaching ten thousand plus subscribers. Mention in news article coverage. Dedicated social media features. And most importantly: community goodwill. You're associated with events people love.",
+      "duration_seconds": 35,
+      "audio_file": "slide-02-benefits.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "Sponsorship Levels",
+      "content": {
+        "headline": "Choose Your Level",
+        "levels": [
+          {
+            "level": "Community Partner",
+            "commitment": "Event-specific",
+            "investment": "$$",
+            "benefits": "Event recognition + newsletter mention"
+          },
+          {
+            "level": "Season Sponsor",
+            "commitment": "3 months",
+            "investment": "$$$",
+            "benefits": "All events + ongoing features"
+          },
+          {
+            "level": "Premier Sponsor",
+            "commitment": "Annual",
+            "investment": "$$$$",
+            "benefits": "Maximum visibility + exclusivity options"
+          }
+        ]
+      },
+      "narration": "Choose your sponsorship level. Community Partner: event-specific sponsorship, recognition at that event plus newsletter mention. Season Sponsor: three-month commitment, recognition at all events plus ongoing features. Premier Sponsor: annual commitment with maximum visibility and exclusivity options in your category. We'll work with your budget.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-levels.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "Upcoming Events",
+      "content": {
+        "headline": "Sponsorship Opportunities Coming Up",
+        "events": [
+          {
+            "event": "Monthly Community Market",
+            "attendance": "500-800 attendees",
+            "available": "2 sponsor slots"
+          },
+          {
+            "event": "Summer Concert Series",
+            "attendance": "1,000+ per event",
+            "available": "Title sponsor available"
+          },
+          {
+            "event": "Business Awards Gala",
+            "attendance": "300 business leaders",
+            "available": "Category sponsors needed"
+          },
+          {
+            "event": "Community 5K",
+            "attendance": "400 runners + spectators",
+            "available": "Multiple levels available"
+          }
+        ]
+      },
+      "narration": "Here are sponsorship opportunities coming up. Monthly Community Market: five hundred to eight hundred attendees, two sponsor slots available. Summer Concert Series: over a thousand per event, title sponsorship available. Business Awards Gala: three hundred business leaders, category sponsors needed. Community 5K: four hundred runners plus spectators, multiple levels available. Pick the events that fit your brand.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-events.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ProofSlide",
+      "title": "Sponsor Success",
+      "content": {
+        "headline": "What Sponsors Experience",
+        "testimonials": [
+          {
+            "sponsor": "Local bank",
+            "quote": "Best marketing spend we make. The goodwill is worth more than any ad.",
+            "result": "3-year continuous sponsor"
+          },
+          {
+            "sponsor": "Restaurant owner",
+            "quote": "People come in saying 'I saw you at the market.' That never happens with online ads.",
+            "result": "47% increase in foot traffic during sponsorship months"
+          }
+        ]
+      },
+      "narration": "What do sponsors experience? A local bank told us: 'Best marketing spend we make. The goodwill is worth more than any ad.' They've been a continuous sponsor for three years. A restaurant owner said: 'People come in saying I saw you at the market. That never happens with online ads.' They saw a forty-seven percent increase in foot traffic during sponsorship months. This is marketing that builds real community connection.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-proof.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "ConceptSlide",
+      "title": "Application Process",
+      "content": {
+        "headline": "How to Become a Sponsor",
+        "steps": [
+          {
+            "step": 1,
+            "action": "Submit application (2 minutes)"
+          },
+          {
+            "step": 2,
+            "action": "We'll review and contact you within 48 hours"
+          },
+          {
+            "step": 3,
+            "action": "Choose events and finalize level"
+          },
+          {
+            "step": 4,
+            "action": "Provide logo and messaging"
+          },
+          {
+            "step": 5,
+            "action": "Start appearing at events and in marketing"
+          }
+        ]
+      },
+      "narration": "How to become a sponsor. Step one: submit the application—takes two minutes. Step two: we'll review and contact you within forty-eight hours. Step three: choose your events and finalize your level. Step four: provide your logo and key messaging. Step five: start appearing at events and in all related marketing. Simple process, significant impact.",
+      "duration_seconds": 25,
+      "audio_file": "slide-06-process.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "CTASlide",
+      "title": "Apply Now",
+      "content": {
+        "headline": "Ready to Be Part of the Community?",
+        "cta_primary": {
+          "label": "Apply to Sponsor",
+          "action": "submit_application"
+        },
+        "cta_secondary": {
+          "label": "Download Sponsorship Guide",
+          "action": "download_guide"
+        }
+      },
+      "narration": "Ready to be part of the community in a meaningful way? Apply to become a sponsor now—takes two minutes. Or download the full sponsorship guide with all details and pricing. Your brand, everywhere locals gather, supporting the events they love.",
+      "duration_seconds": 20,
+      "audio_file": "slide-07-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_hook": {
+      "subject": "Sponsor our community events—your brand everywhere locals gather",
+      "preview_text": "Sponsorship opportunities available",
+      "body": "Hey {{first_name}},\n\nThere's a way to be everywhere locals gather.\n\nNot with ads they ignore—as a community partner they appreciate.\n\nSponsors receive:\n✓ Logo on all event marketing\n✓ Verbal recognition at events\n✓ Featured in 10,000+ subscriber newsletter\n✓ News article mentions\n✓ Community goodwill\n\n[SEE SPONSORSHIP OPPORTUNITIES →]\n\nOne sponsor told us: 'People come in saying I saw you at the market. That never happens with online ads.'\n\n{{sender_name}}\nFibonacco"
+    },
+    "email_3_hook": {
+      "subject": "We matched {{business_name}} with the perfect event",
+      "preview_text": "Sponsorship opportunity specifically for you",
+      "body": "Hey {{first_name}},\n\nBased on {{business_name}}'s profile, we found a perfect sponsorship match:\n\n[SEE YOUR RECOMMENDED EVENT →]\n\nThis event reaches your exact customer base. Sponsor slots are limited.\n\nWant to discuss? Reply to this email.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "follows": "HOOK-008",
+    "related": [
+      "HOOK-008",
+      "HOOK-010"
+    ]
   }
 }

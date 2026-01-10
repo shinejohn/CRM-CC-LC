@@ -19,6 +19,31 @@ import {
   TestimonialSlide,
   PricingSlide,
   CTASlide,
+  ConceptSlide,
+  StepSlide,
+  OverviewSlide,
+  TipsSlide,
+  ProofSlide,
+  TutorialIntroSlide,
+  BenefitsSlide,
+  PersonalizedHeroSlide,
+  ListingPreviewSlide,
+  SocialProofSlide,
+  CouponPreviewSlide,
+  ResultsSlide,
+  ActionSlide,
+  ApplicationSlide,
+  CategorySlide,
+  ComparisonHeroSlide,
+  DataSlide,
+  DistributionSlide,
+  EventPreviewSlide,
+  ExampleSlide,
+  FlowSlide,
+  IdeaSlide,
+  IntegrationSlide,
+  PreviewSlide,
+  StorySlide,
 } from './slides';
 import { AIChatPanel } from './AIChatPanel';
 import type { Presentation, Slide } from '@/types/learning';
@@ -40,6 +65,31 @@ const slideComponents: Record<string, React.ComponentType<any>> = {
   TestimonialSlide,
   PricingSlide,
   CTASlide,
+  ConceptSlide,
+  StepSlide,
+  OverviewSlide,
+  TipsSlide,
+  ProofSlide,
+  TutorialIntroSlide,
+  BenefitsSlide,
+  PersonalizedHeroSlide,
+  ListingPreviewSlide,
+  SocialProofSlide,
+  CouponPreviewSlide,
+  ResultsSlide,
+  ActionSlide,
+  ApplicationSlide,
+  CategorySlide,
+  ComparisonHeroSlide,
+  DataSlide,
+  DistributionSlide,
+  EventPreviewSlide,
+  ExampleSlide,
+  FlowSlide,
+  IdeaSlide,
+  IntegrationSlide,
+  PreviewSlide,
+  StorySlide,
 };
 
 export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
@@ -180,17 +230,21 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
         )}
       </div>
 
-      {/* AI Presenter Panel */}
-      {presentation.presenter && activeSlide?.narration && (
+      {/* AI Presenter Panel - Always show if presenter exists */}
+      {presentation.presenter && (
         <div className="absolute bottom-24 left-0 right-0 px-6 z-20">
           <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg">
             <div className="flex items-center gap-3">
-              {presentation.presenter.avatar_url && (
+              {presentation.presenter.avatar_url ? (
                 <img
                   src={presentation.presenter.avatar_url}
                   alt={presentation.presenter.name}
                   className="w-12 h-12 rounded-full"
                 />
+              ) : (
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-semibold text-lg">
+                  {presentation.presenter.name.charAt(0)}
+                </div>
               )}
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">
@@ -198,17 +252,23 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
                     {presentation.presenter.name}
                   </span>
                   <span className="text-sm text-gray-600">
-                    {presentation.presenter.role}
+                    {presentation.presenter.role || 'AI Assistant'}
                   </span>
                   {isPlaying && (
-                    <div className="flex gap-1">
+                    <div className="flex gap-1 ml-2">
                       <div className="w-1 h-4 bg-indigo-600 rounded animate-pulse" />
                       <div className="w-1 h-4 bg-indigo-600 rounded animate-pulse" style={{ animationDelay: '0.1s' }} />
                       <div className="w-1 h-4 bg-indigo-600 rounded animate-pulse" style={{ animationDelay: '0.2s' }} />
                     </div>
                   )}
                 </div>
-                <p className="text-sm text-gray-700">{activeSlide.narration}</p>
+                {activeSlide?.narration ? (
+                  <p className="text-sm text-gray-700">{activeSlide.narration}</p>
+                ) : (
+                  <p className="text-sm text-gray-500 italic">
+                    {presentation.presenter.communication_style || 'Presenting slide content...'}
+                  </p>
+                )}
               </div>
             </div>
           </div>

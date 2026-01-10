@@ -30,13 +30,14 @@ describe('ArticleList', () => {
   it('renders article list', async () => {
     vi.mocked(knowledgeApi.getArticles).mockResolvedValue({
       data: [],
-      meta: { total: 0, page: 1, per_page: 25 },
+      meta: { current_page: 1, last_page: 1, per_page: 25, total: 0 },
     });
 
     render(<ArticleList />);
 
     await waitFor(() => {
-      expect(screen.getByText(/articles/i)).toBeInTheDocument();
+      const articlesHeading = screen.getAllByText(/articles/i)[0];
+      expect(articlesHeading).toBeInTheDocument();
     });
   });
 
@@ -45,6 +46,8 @@ describe('ArticleList', () => {
 
     render(<ArticleList />);
 
-    expect(document.querySelector('.animate-spin')).toBeInTheDocument();
+    // Check for CardSkeleton components instead of animate-spin
+    const skeletons = document.querySelectorAll('[data-testid="card-skeleton"], .animate-pulse');
+    expect(skeletons.length).toBeGreaterThan(0);
   });
 });

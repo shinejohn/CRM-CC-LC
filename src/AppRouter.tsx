@@ -37,22 +37,6 @@ import { DashboardPage } from './pages/Business/DashboardPage';
 
 // User Pages
 import { SponsorPage } from './pages/SponsorPage';
-import { CommunityInfluencerPage } from './pages/Marketing/CommunityInfluencerPage';
-import { CommunityExpertPage } from './pages/Marketing/CommunityExpertPage';
-import { SponsorsPage } from './pages/Marketing/SponsorsPage';
-import { AdsPage } from './pages/Marketing/AdsPage';
-import { ArticlePage } from './pages/Action/ArticlePage';
-import { EventsPage } from './pages/Action/EventsPage';
-import { ClassifiedsPage } from './pages/Action/ClassifiedsPage';
-import { AnnouncementsPage } from './pages/Action/AnnouncementsPage';
-import { CouponsPage } from './pages/Action/CouponsPage';
-import { IncentivesPage } from './pages/Action/IncentivesPage';
-import { TicketsPage } from './pages/Action/TicketsPage';
-import { AIPage } from './pages/Action/AIPage';
-import { SurveyPage } from './pages/Business/SurveyPage';
-import { SubscriptionsPage } from './pages/Business/SubscriptionsPage';
-import { TodosPage } from './pages/Business/TodosPage';
-import { DashboardPage } from './pages/Business/DashboardPage';
 
 // Learning Center Pages
 import { LearningCenterIndexPage } from './pages/LearningCenter/Index';
@@ -64,7 +48,8 @@ import { SearchPlaygroundPage } from './pages/LearningCenter/Search/Playground';
 import { TrainingIndexPage } from './pages/LearningCenter/Training/Index';
 import { PresentationPlayerPage } from './pages/LearningCenter/Presentation/Player';
 import { CampaignLandingPage } from './pages/LearningCenter/Campaign/LandingPage';
-import { CampaignListPage } from './pages/LearningCenter/Campaign/List';
+import { CampaignListPage as LearningCampaignListPage } from './pages/LearningCenter/Campaign/List';
+import { ReviewDashboard } from './pages/LearningCenter/Campaign/ReviewDashboard';
 import { GettingStartedIndexPage } from './pages/LearningCenter/GettingStarted/Index';
 import { GettingStartedOverviewPage } from './pages/LearningCenter/GettingStarted/Overview';
 import { GettingStartedQuickStartPage } from './pages/LearningCenter/GettingStarted/QuickStart';
@@ -234,8 +219,10 @@ export function AppRouter() {
         <Route path="/learn/blog" element={<PlaceholderPage title="Blog & Articles" category="Resources" />} />
 
         {/* Campaign Landing Pages */}
-        <Route path="/learning/campaigns" element={<CampaignListPage />} />
-        <Route path="/campaigns" element={<CampaignListPage />} />
+        <Route path="/learning/campaigns" element={<LearningCampaignListPage />} />
+        <Route path="/learning/campaigns/review" element={<ReviewDashboard />} />
+        <Route path="/campaigns" element={<LearningCampaignListPage />} />
+        <Route path="/campaigns/review" element={<ReviewDashboard />} />
 
         {/* Service Catalog Routes */}
         <Route path="/learning/services" element={<ServiceCatalogPage />} />

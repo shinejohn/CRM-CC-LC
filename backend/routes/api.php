@@ -93,6 +93,16 @@ Route::prefix('v1')->group(function () {
         Route::get('/{slug}', [CampaignController::class, 'show']);
     });
     
+    // Learning Center Contact Sales API
+    Route::prefix('learning')->group(function () {
+        Route::post('/contact/sales', [CampaignController::class, 'contactSales']);
+    });
+    
+    // Learning Center Campaign API
+    Route::prefix('learning/campaigns')->group(function () {
+        Route::get('/{id}/guide', [CampaignController::class, 'guide']);
+    });
+    
     // Campaign Generation API
     Route::prefix('campaigns')->group(function () {
         Route::post('/generate', [\App\Http\Controllers\Api\CampaignGenerationController::class, 'generate']);

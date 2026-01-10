@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { LearningLayout } from '@/components/LearningCenter/Layout/LearningLayout';
-import { serviceApi, orderApi, type Service } from '@/services/learning/service-api';
+import { serviceApi, type Service } from '@/services/learning/service-api';
+import { orderApi } from '@/services/learning/order-api';
 import { ArrowLeft, Loader2, Check, ShoppingCart, Tag } from 'lucide-react';
 
 export const ServiceDetailPage: React.FC = () => {
