@@ -1,0 +1,105 @@
+<?php
+
+namespace App\Models\Operations;
+
+use Illuminate\Database\Eloquent\Model;
+
+class CostTracking extends Model
+{
+    protected $table = 'ops.cost_tracking';
+    
+    protected $keyType = 'string';
+    public $incrementing = false;
+
+    protected $fillable = [
+        'cost_date',
+        'period_type',
+        'cost_aws_total',
+        'cost_aws_ec2',
+        'cost_aws_rds',
+        'cost_aws_s3',
+        'cost_aws_ses',
+        'cost_aws_cloudfront',
+        'cost_aws_lambda',
+        'cost_aws_other',
+        'cost_email_total',
+        'cost_email_postal_infra',
+        'cost_email_ses_backup',
+        'cost_email_warmup',
+        'emails_sent',
+        'cost_per_email',
+        'cost_sms_total',
+        'sms_sent',
+        'cost_per_sms',
+        'cost_voice_total',
+        'voice_minutes',
+        'cost_per_voice_minute',
+        'cost_ai_total',
+        'cost_ai_anthropic',
+        'cost_ai_openai',
+        'ai_tokens_used',
+        'cost_per_1k_tokens',
+        'cost_twilio',
+        'cost_stripe_fees',
+        'cost_monitoring',
+        'cost_other_services',
+        'cost_domains',
+        'cost_ssl_certs',
+        'cost_ip_addresses',
+        'cost_total',
+        'cost_per_customer',
+        'cost_per_community',
+        'cost_change_from_prior',
+        'cost_change_percentage',
+        'budget_allocated',
+        'budget_variance',
+        'budget_variance_percentage',
+        'computed_at',
+    ];
+
+    protected $casts = [
+        'cost_aws_total' => 'decimal:2',
+        'cost_aws_ec2' => 'decimal:2',
+        'cost_aws_rds' => 'decimal:2',
+        'cost_aws_s3' => 'decimal:2',
+        'cost_aws_ses' => 'decimal:2',
+        'cost_aws_cloudfront' => 'decimal:2',
+        'cost_aws_lambda' => 'decimal:2',
+        'cost_aws_other' => 'decimal:2',
+        'cost_email_total' => 'decimal:2',
+        'cost_email_postal_infra' => 'decimal:2',
+        'cost_email_ses_backup' => 'decimal:2',
+        'cost_email_warmup' => 'decimal:2',
+        'cost_per_email' => 'decimal:6',
+        'cost_sms_total' => 'decimal:2',
+        'cost_per_sms' => 'decimal:4',
+        'cost_voice_total' => 'decimal:2',
+        'cost_per_voice_minute' => 'decimal:4',
+        'cost_ai_total' => 'decimal:2',
+        'cost_ai_anthropic' => 'decimal:2',
+        'cost_ai_openai' => 'decimal:2',
+        'cost_per_1k_tokens' => 'decimal:4',
+        'cost_twilio' => 'decimal:2',
+        'cost_stripe_fees' => 'decimal:2',
+        'cost_monitoring' => 'decimal:2',
+        'cost_other_services' => 'decimal:2',
+        'cost_domains' => 'decimal:2',
+        'cost_ssl_certs' => 'decimal:2',
+        'cost_ip_addresses' => 'decimal:2',
+        'cost_total' => 'decimal:2',
+        'cost_per_customer' => 'decimal:2',
+        'cost_per_community' => 'decimal:2',
+        'cost_change_from_prior' => 'decimal:2',
+        'cost_change_percentage' => 'decimal:2',
+        'budget_allocated' => 'decimal:2',
+        'budget_variance' => 'decimal:2',
+        'budget_variance_percentage' => 'decimal:2',
+        'emails_sent' => 'integer',
+        'sms_sent' => 'integer',
+        'voice_minutes' => 'integer',
+        'ai_tokens_used' => 'integer',
+        'cost_date' => 'date',
+        'computed_at' => 'datetime',
+    ];
+}
+

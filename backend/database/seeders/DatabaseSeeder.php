@@ -15,5 +15,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ServiceCatalogSeeder::class,
         ]);
+
+        // Seed operations data
+        $this->call([
+            \Database\Seeders\Operations\MetricDefinitionsSeeder::class,
+            \Database\Seeders\Operations\InfrastructureComponentsSeeder::class,
+            \Database\Seeders\Operations\AlertRulesSeeder::class,
+        ]);
     }
 }
