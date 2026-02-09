@@ -1,0 +1,56 @@
+{
+  "project_variables": {
+    "APP_NAME": "LearningCenter",
+    "APP_ENV": "production",
+    "APP_DEBUG": "false",
+    "DB_CONNECTION": "pgsql",
+    "DB_HOST": "${{Postgres.PGHOST}}",
+    "DB_PORT": "${{Postgres.PGPORT}}",
+    "DB_DATABASE": "${{Postgres.PGDATABASE}}",
+    "DB_USERNAME": "${{Postgres.PGUSER}}",
+    "DB_PASSWORD": "${{Postgres.PGPASSWORD}}",
+    "REDIS_HOST": "${{Redis.REDIS_HOST}}",
+    "REDIS_PORT": "${{Redis.REDIS_PORT}}",
+    "REDIS_PASSWORD": "${{Redis.REDIS_PASSWORD}}",
+    "QUEUE_CONNECTION": "redis",
+    "REDIS_QUEUE_CONNECTION": "default",
+    "REDIS_QUEUE": "default",
+    "SESSION_DRIVER": "redis",
+    "CACHE_DRIVER": "redis",
+    "LOG_CHANNEL": "stack",
+    "LOG_LEVEL": "info",
+    "HORIZON_PREFIX": "horizon"
+  },
+  "cc_api_service": {
+    "APP_URL": "https://cc-api.up.railway.app",
+    "APP_KEY": "GENERATE_THIS_WITH_PHP_ARTISAN_KEY_GENERATE",
+    "OPENROUTER_API_KEY": "your-openrouter-key-here",
+    "ELEVEN_LABS_API_KEY": "your-elevenlabs-key-here",
+    "ANTHROPIC_API_KEY": "your-anthropic-key-here",
+    "AI_GATEWAY_URL": "https://ai-gateway.fibonacco.com",
+    "AI_GATEWAY_TOKEN": "your-ai-gateway-token",
+    "AI_TOOLS_PLATFORM": "fibonacco",
+    "AI_TOOLS_PROVIDER": "openrouter",
+    "AI_TOOLS_LOGGING": "true",
+    "AI_TOOLS_LOG_CHANNEL": "stack"
+  },
+  "frontend_service": {
+    "VITE_API_ENDPOINT": "https://cc-api.up.railway.app/api",
+    "VITE_API_URL": "https://cc-api.up.railway.app/api",
+    "NODE_ENV": "production"
+  },
+  "queue_service": {
+    "note": "Inherits all variables from project_variables - no additional variables needed"
+  },
+  "scheduler_service": {
+    "note": "Inherits all variables from project_variables - no additional variables needed"
+  },
+  "instructions": {
+    "step_1": "Set project_variables in Railway Project Settings → Variables",
+    "step_2": "Set cc_api_service variables in CC API service → Variables",
+    "step_3": "Generate APP_KEY: Run 'php artisan key:generate --show' in CC API shell",
+    "step_4": "Set frontend_service variables in Frontend service → Variables",
+    "step_5": "Update APP_URL and VITE_API_ENDPOINT with actual Railway URLs after first deployment",
+    "step_6": "Replace placeholder API keys with your actual keys"
+  }
+}

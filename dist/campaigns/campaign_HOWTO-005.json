@@ -1,14 +1,14 @@
 {
   "campaign": {
     "id": "HOWTO-005",
-    "week": 5,
-    "day": 5,
-    "type": "HOWTO",
-    "title": "How-To Tutorial",
-    "subject": "How-To Tutorial",
+    "week": 2,
+    "day": 12,
+    "type": "How-To",
+    "title": "Performer Registration",
+    "subject": "Get booked: Set up your performer profile",
     "landing_page": "performer-registration",
     "template": "tutorial",
-    "description": "How-To Tutorial - Guide user through process"
+    "description": "For performers and entertainers: create a profile that gets you booked"
   },
   "landing_page": {
     "campaign_id": "HOWTO-005",
@@ -17,36 +17,287 @@
     "template_id": "tutorial",
     "template_name": "How-To Tutorial",
     "slide_count": 8,
-    "duration_seconds": 60,
-    "primary_cta": "start_trial",
-    "secondary_cta": "contact_sales",
+    "duration_seconds": 360,
+    "primary_cta": "create_performer_profile",
+    "secondary_cta": "view_performer_examples",
     "ai_persona": "Emma",
-    "ai_tone": "Helpful, step-by-step",
-    "ai_goal": "Guide user through process",
-    "data_capture_fields": "name, email, business_name, setup_preferences",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/performer-registration/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "engagement",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week3-how-to",
-    "utm_content": "HOWTO-005"
+    "ai_tone": "Creative, supportive",
+    "ai_goal": "Complete performer profile creation"
   },
-  "template": {
-    "template_id": "tutorial",
-    "name": "How-To Tutorial",
-    "slides": 8,
-    "duration": 60,
-    "purpose": "howto",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "performer-registration",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/performer-registration/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "TutorialIntroSlide",
+      "title": "Get Booked: Your Performer Profile",
+      "content": {
+        "headline": "Create a Profile That Gets You Booked",
+        "subhead": "For musicians, artists, entertainers, and creatives",
+        "expectations": {
+          "time": "15 minutes",
+          "difficulty": "Easy",
+          "outcome": "A professional profile that attracts bookings"
+        },
+        "promise": "Event planners are searching right now. Let's get you found."
+      },
+      "narration": "Whether you're a musician, DJ, artist, speaker, or any kind of performer—this guide is for you. In fifteen minutes, you'll have a professional profile that shows up when event planners are looking for talent. They're searching right now. Let's get you found.",
+      "duration_seconds": 20,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "What Bookers Look For",
+      "content": {
+        "headline": "What Event Planners Actually Want to See",
+        "must_haves": [
+          {
+            "item": "Clear Description",
+            "why": "What do you do? Who are you for?"
+          },
+          {
+            "item": "Media Samples",
+            "why": "Video > audio > photos > nothing"
+          },
+          {
+            "item": "Past Performances",
+            "why": "Social proof you've done this"
+          },
+          {
+            "item": "Availability",
+            "why": "Can I book you when I need you?"
+          },
+          {
+            "item": "Pricing Guidance",
+            "why": "Are you in my budget?"
+          },
+          {
+            "item": "Easy Contact",
+            "why": "How do I reach you quickly?"
+          }
+        ],
+        "truth": "Event planners make decisions in 60 seconds. Make those seconds count."
+      },
+      "narration": "Here's what event planners actually look for. A clear description—what do you do and who is it for? Media samples—video is best, then audio, then photos. Past performances—proof you've done this before. Availability—can I book you when I need you? Pricing guidance—are you in my budget? And easy contact—how do I reach you fast? Event planners make decisions in sixty seconds. Make those seconds count.",
+      "duration_seconds": 40,
+      "audio_file": "slide-02-what-bookers-want.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Step 1: Your Bio",
+      "content": {
+        "headline": "Step 1: Write a Bio That Books",
+        "bio_structure": [
+          {
+            "part": "Hook",
+            "content": "One sentence that captures your unique value"
+          },
+          {
+            "part": "Style",
+            "content": "What kind of performer are you? What's your vibe?"
+          },
+          {
+            "part": "Experience",
+            "content": "Key highlights, not a resume"
+          },
+          {
+            "part": "Perfect For",
+            "content": "What events are you ideal for?"
+          }
+        ],
+        "length": "100-200 words. Short enough to read, long enough to convince.",
+        "example": "Maria Gonzalez brings Latin jazz to life. With 10+ years performing at weddings, festivals, and corporate events, she creates the perfect atmosphere for any celebration. Perfect for cocktail hours, dinner music, or dancing."
+      },
+      "narration": "Step one: write a bio that books. Start with a hook—one sentence that captures your unique value. Then your style—what kind of performer are you, what's your vibe? Add key experience highlights, not your whole resume. And say what events you're perfect for. Keep it to 100 to 200 words. Here's an example: 'Maria Gonzalez brings Latin jazz to life. With ten-plus years performing at weddings, festivals, and corporate events, she creates the perfect atmosphere for any celebration.'",
+      "duration_seconds": 45,
+      "audio_file": "slide-03-bio.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Step 2: Media That Sells",
+      "content": {
+        "headline": "Step 2: Upload Media That Convinces",
+        "media_priority": [
+          {
+            "type": "Video",
+            "importance": "Essential",
+            "tip": "Even phone quality beats no video"
+          },
+          {
+            "type": "Audio",
+            "importance": "If applicable",
+            "tip": "Clean recordings, not live phone clips"
+          },
+          {
+            "type": "Photos",
+            "importance": "Required",
+            "tip": "Action shots > posed shots"
+          },
+          {
+            "type": "Press",
+            "importance": "Nice to have",
+            "tip": "Reviews, features, mentions"
+          }
+        ],
+        "video_tips": [
+          "30-60 seconds is ideal",
+          "Show you performing, not just talking",
+          "Good audio matters more than fancy visuals",
+          "Multiple clips for range > one long video"
+        ]
+      },
+      "narration": "Step two: upload media that convinces. Video is essential—even phone quality beats no video. Thirty to sixty seconds is ideal, showing you performing, not just talking. Good audio matters more than fancy visuals. Audio samples work great for musicians—clean recordings, not live phone clips. Photos should be action shots of you performing. And add press mentions if you have them. Multiple short clips showing range is better than one long video.",
+      "duration_seconds": 45,
+      "audio_file": "slide-04-media.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Step 3: Categories & Tags",
+      "content": {
+        "headline": "Step 3: Get Found in Searches",
+        "categorization": [
+          {
+            "field": "Primary Category",
+            "example": "Musician, DJ, Speaker, Magician, etc."
+          },
+          {
+            "field": "Genres/Styles",
+            "example": "Jazz, Rock, Acoustic, Comedy, etc."
+          },
+          {
+            "field": "Event Types",
+            "example": "Weddings, Corporate, Private, Festivals"
+          },
+          {
+            "field": "Performance Style",
+            "example": "Solo, Band, Interactive, Background"
+          }
+        ],
+        "tip": "The more specific your tags, the more qualified your leads.",
+        "example_tags": "Jazz Trio | Wedding Ceremony | Cocktail Hour | Background Music"
+      },
+      "narration": "Step three: get found in searches. Choose your primary category—musician, DJ, speaker, whatever fits. Add all your genres and styles. List the event types you're perfect for. Describe your performance style—solo, band, interactive, background. The more specific your tags, the more qualified your leads. Someone searching for 'jazz trio for wedding cocktail hour' will find exactly what they need. Be that result.",
+      "duration_seconds": 40,
+      "audio_file": "slide-05-tags.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "Step 4: Availability & Pricing",
+      "content": {
+        "headline": "Step 4: Show You're Bookable",
+        "availability_options": [
+          {
+            "option": "Calendar Integration",
+            "desc": "Sync with Google/iCal to show open dates"
+          },
+          {
+            "option": "General Availability",
+            "desc": "Weekends only, weekday evenings, etc."
+          },
+          {
+            "option": "Lead Time",
+            "desc": "How far in advance do you need?"
+          }
+        ],
+        "pricing_options": [
+          {
+            "approach": "Starting at $X",
+            "best_for": "Variable pricing based on event"
+          },
+          {
+            "approach": "Fixed packages",
+            "best_for": "Clear, predictable offerings"
+          },
+          {
+            "approach": "Request quote",
+            "best_for": "Custom/high-end work"
+          }
+        ],
+        "warning": "No pricing info = fewer quality leads. At least give a range."
+      },
+      "narration": "Step four: show you're bookable. Set up your availability—integrate your calendar to show open dates, or just indicate general availability like weekends only. Include your lead time—how far in advance do you need? For pricing, give at least a starting range. You don't have to commit to exact prices, but 'starting at X' helps filter unqualified leads. No pricing info means fewer quality inquiries.",
+      "duration_seconds": 40,
+      "audio_file": "slide-06-availability.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "StepSlide",
+      "title": "Step 5: Social Proof",
+      "content": {
+        "headline": "Step 5: Build Credibility",
+        "proof_elements": [
+          {
+            "element": "Past Events",
+            "action": "List notable performances with permission"
+          },
+          {
+            "element": "Testimonials",
+            "action": "Request after every gig"
+          },
+          {
+            "element": "Client Names",
+            "action": "Venues, companies, organizations"
+          },
+          {
+            "element": "Repeat Bookings",
+            "action": "'Booked 5x at XYZ Venue'"
+          },
+          {
+            "element": "Credentials",
+            "action": "Training, certifications, awards"
+          }
+        ],
+        "ask_script": "I'd love to include a testimonial from you—would you mind sharing a sentence or two about our performance at your event?"
+      },
+      "narration": "Step five: build credibility. List past events and notable performances—with permission. Request testimonials after every gig with a simple ask: 'Would you mind sharing a sentence about our performance?' Display client names—venues, companies you've worked with. Highlight repeat bookings—'Booked five times at this venue' is powerful. And add any credentials, training, or awards. Every piece of proof makes booking you feel safer.",
+      "duration_seconds": 40,
+      "audio_file": "slide-07-proof.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Create Your Profile",
+      "content": {
+        "headline": "Ready to Get Booked?",
+        "cta_primary": {
+          "label": "Create My Performer Profile",
+          "action": "open_performer_signup"
+        },
+        "cta_secondary": {
+          "label": "See Successful Performer Profiles",
+          "action": "view_examples"
+        },
+        "benefits": [
+          "Found by event planners searching for talent",
+          "Booking inquiries come directly to you",
+          "Manage your calendar and availability",
+          "Build your reputation with reviews"
+        ],
+        "cost": "Free to create, free to get found"
+      },
+      "narration": "Ready to get booked? Click 'Create My Performer Profile' and we'll walk you through each step. You'll be found by event planners searching for talent, get inquiries directly, manage your calendar and availability, and build your reputation with reviews. It's free to create, free to get found. Event planners are searching right now. Let's make sure they find you.",
+      "duration_seconds": 25,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_tutorial": {
+      "subject": "Get booked: Set up your performer profile",
+      "preview_text": "Event planners are searching for talent like you",
+      "body": "Hey {{first_name}},\n\nEvent planners are searching for performers right now.\n\nWeddings, corporate events, festivals, private parties—they need musicians, DJs, speakers, entertainers.\n\nThe question is: will they find you?\n\nI put together a 15-minute guide to create a performer profile that gets bookings:\n\n✓ Writing a bio that converts\n✓ Media that sells (video tips included)\n✓ Getting found in the right searches\n✓ Pricing strategies that work\n✓ Building credibility with social proof\n\n[CREATE YOUR PERFORMER PROFILE →]\n\nIt's free to create, free to get found. You just need to show up.\n\n{{sender_name}}\nFibonacco\n\nP.S. The guide includes examples of top-performing profiles so you can see what works."
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-006"
+    ],
+    "follows": "HOWTO-004",
+    "related": [
+      "HOOK-011",
+      "HOWTO-017"
+    ]
   }
 }

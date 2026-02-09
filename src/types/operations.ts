@@ -561,3 +561,38 @@ export interface OperationsDashboardSnapshot {
   };
 }
 
+// ============================================
+// API UTILITIES
+// ============================================
+
+export interface ApiResponse<T> {
+  data: T;
+  message?: string;
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  meta: {
+    current_page: number;
+    last_page: number;
+    per_page: number;
+    total: number;
+  };
+}
+
+export interface ApiError {
+  message: string;
+  errors?: Record<string, string[]>;
+  status: number;
+}
+
+export interface PaginationParams {
+  page?: number;
+  perPage?: number;
+}
+
+export interface DateRangeParams {
+  startDate?: Date;
+  endDate?: Date;
+}
+

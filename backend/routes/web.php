@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ApprovalController;
+use App\Http\Controllers\UpsellController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +31,12 @@ Route::get('/', function () {
         'status' => 'operational',
     ]);
 });
+
+Route::get('/approve', [ApprovalController::class, 'showConfirmation'])->name('approval.confirm');
+Route::post('/approve', [ApprovalController::class, 'submitApproval'])->name('approval.submit');
+Route::get('/approve/success/{uuid}', [ApprovalController::class, 'showSuccess'])->name('approval.success');
+Route::post('/approve/upsell', [UpsellController::class, 'acceptUpsell'])->name('approval.upsell.accept');
+Route::post('/approve/upsell/decline', [UpsellController::class, 'declineUpsell'])->name('approval.upsell.decline');
+
+// Subscriber verification route (web route for email links)
+Route::get('/subscriber/verify/{token}', [\App\Http\Controllers\Api\SubscriptionController::class, 'verify'])->name('subscriber.verify');

@@ -1,0 +1,131 @@
+{
+  "campaign": {
+    "id": "HOOK-012",
+    "week": 9,
+    "day": 58,
+    "type": "Hook",
+    "title": "Influencer Program",
+    "subject": "Local influencer opportunity—get paid to share what you love",
+    "landing_page": "influencer-program",
+    "template": "influencer-application",
+    "description": "Local business influencer/ambassador program application"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Become a Local Influencer",
+      "content": {
+        "headline": "Get Paid to Share Local Businesses You Love",
+        "subhead": "Join our local influencer program"
+      },
+      "narration": "Love sharing local discoveries? Have an audience that trusts your recommendations? Our local influencer program lets you get paid to share businesses you genuinely love with people who want to hear about them.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "Program Benefits",
+      "content": {
+        "headline": "What Local Influencers Receive",
+        "benefits": [
+          {"benefit": "Paid partnerships", "detail": "Compensation for posts featuring local businesses"},
+          {"benefit": "Exclusive access", "detail": "First to know about new businesses and events"},
+          {"benefit": "Free experiences", "detail": "Comped meals, services, products to review"},
+          {"benefit": "Platform growth", "detail": "Featured in our channels, cross-promotion"},
+          {"benefit": "Community connection", "detail": "Events with other influencers and businesses"},
+          {"benefit": "Flexible schedule", "detail": "Accept partnerships that fit your interests"}
+        ]
+      },
+      "narration": "What do local influencers receive? Paid partnerships—compensation for posts featuring local businesses. Exclusive access—first to know about new businesses and events. Free experiences—comped meals, services, and products to review. Platform growth—we feature you in our channels for cross-promotion. Community connection—events with other influencers and businesses. And a flexible schedule—accept only the partnerships that fit your interests and brand.",
+      "duration_seconds": 35,
+      "audio_file": "slide-02-benefits.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "Who We're Looking For",
+      "content": {
+        "headline": "Ideal Influencer Profile",
+        "criteria": [
+          {"criterion": "Local presence", "requirement": "Live and active in our community"},
+          {"criterion": "Engaged following", "requirement": "500+ followers with genuine engagement"},
+          {"criterion": "Quality content", "requirement": "Good photos, authentic voice"},
+          {"criterion": "Positive vibe", "requirement": "Uplifting content, supportive of local"},
+          {"criterion": "Reliable", "requirement": "Delivers on commitments, communicates well"}
+        ],
+        "note": "Micro-influencers welcome—engagement matters more than follower count"
+      },
+      "narration": "Who are we looking for? Local presence—you live and are active in our community. Engaged following—at least five hundred followers with genuine engagement. Quality content—good photos and an authentic voice. Positive vibe—uplifting content that's supportive of local businesses. Reliable—delivers on commitments, communicates well. Note: micro-influencers are absolutely welcome. Engagement matters more than follower count.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-criteria.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "How It Works",
+      "content": {
+        "headline": "The Partnership Process",
+        "process": [
+          {"step": 1, "action": "Apply and get accepted into the program"},
+          {"step": 2, "action": "Browse available partnership opportunities"},
+          {"step": 3, "action": "Accept opportunities that fit your brand"},
+          {"step": 4, "action": "Experience the business (meal, service, etc.)"},
+          {"step": 5, "action": "Create and post authentic content"},
+          {"step": 6, "action": "Get paid within 7 days of posting"}
+        ]
+      },
+      "narration": "Here's how it works. Apply and get accepted into the program. Browse available partnership opportunities—restaurants, shops, services, events. Accept the ones that fit your brand and interests. Experience the business—enjoy a meal, try a service, attend an event. Create and post authentic content about your experience. Get paid within seven days of posting. Simple, flexible, genuine.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-process.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ProofSlide",
+      "title": "Influencer Success",
+      "content": {
+        "headline": "What Our Influencers Experience",
+        "examples": [
+          {"influencer": "Food blogger, 2.1K followers", "result": "8 paid partnerships in 3 months", "earnings": "$1,200+ in compensation plus experiences"},
+          {"influencer": "Lifestyle content creator, 850 followers", "result": "Grew to 2.4K through cross-promotion", "note": "Program featured helped triple following"},
+          {"influencer": "Local mom blogger, 3.5K followers", "result": "Regular family-friendly business features", "quote": "My audience loves discovering new local spots through me"}
+        ]
+      },
+      "narration": "What do our influencers experience? A food blogger with twenty-one hundred followers completed eight paid partnerships in three months—twelve hundred dollars plus in compensation plus all the experiences. A lifestyle creator with eight hundred fifty followers grew to twenty-four hundred through our cross-promotion—the program tripled her following. A mom blogger with thirty-five hundred followers does regular family-friendly business features. She told us: 'My audience loves discovering new local spots through me.'",
+      "duration_seconds": 35,
+      "audio_file": "slide-05-success.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "CTASlide",
+      "title": "Apply Now",
+      "content": {
+        "headline": "Ready to Become a Local Influencer?",
+        "cta_primary": {
+          "label": "Apply to the Program",
+          "action": "submit_application"
+        },
+        "cta_secondary": {
+          "label": "See Current Influencers",
+          "action": "view_influencers"
+        },
+        "note": "Applications reviewed weekly. Acceptance based on fit, not follower count."
+      },
+      "narration": "Ready to become a local influencer? Apply to the program now. Applications are reviewed weekly, and acceptance is based on fit, not follower count. Or see our current influencers to see who you'd be joining. Get paid to share what you already love—local businesses that deserve attention.",
+      "duration_seconds": 20,
+      "audio_file": "slide-06-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_hook": {
+      "subject": "Local influencer opportunity—get paid to share what you love",
+      "preview_text": "Turn your local love into income",
+      "body": "Hey {{first_name}},\n\nLove sharing local discoveries with your audience?\n\nOur local influencer program lets you get paid to do exactly that.\n\nInfluencers receive:\n✓ Paid partnerships with local businesses\n✓ Free experiences to review\n✓ Exclusive access to new spots\n✓ Cross-promotion on our channels\n✓ Flexible schedule—accept what fits you\n\n[APPLY TO THE PROGRAM →]\n\nMicro-influencers welcome. Engagement matters more than follower count.\n\n{{sender_name}}\nFibonacco"
+    }
+  },
+  "connections": {
+    "follows": "HOOK-011",
+    "related": ["HOOK-011", "HOOK-010"]
+  }
+}

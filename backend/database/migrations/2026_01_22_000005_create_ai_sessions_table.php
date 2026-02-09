@@ -20,7 +20,7 @@ return new class extends Migration
         DB::statement('SET search_path TO ops, public');
 
         Schema::create('ai_sessions', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('gen_random_uuid()'));
+            $table->uuid('id')->primary()->default(DB::getDriverName() === 'pgsql' ? DB::raw('gen_random_uuid()') : null);
             
             // Session Info
             $table->string('session_type', 50); // scheduled_report, alert_response, user_query, automated_check

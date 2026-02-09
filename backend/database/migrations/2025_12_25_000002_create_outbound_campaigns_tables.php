@@ -28,9 +28,9 @@ return new class extends Migration
             $table->json('template_variables')->nullable(); // Template variables
             
             // Scheduling
-            $table->timestampTz('scheduled_at')->nullable();
-            $table->timestampTz('started_at')->nullable();
-            $table->timestampTz('completed_at')->nullable();
+            $table->timestamp('scheduled_at')->nullable();
+            $table->timestamp('started_at')->nullable();
+            $table->timestamp('completed_at')->nullable();
             
             // Recipients
             $table->json('recipient_segments')->nullable(); // Segmentation criteria
@@ -48,8 +48,8 @@ return new class extends Migration
             $table->json('metadata')->nullable();
             $table->text('notes')->nullable();
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             // Indexes
             $table->index('tenant_id');
@@ -72,12 +72,12 @@ return new class extends Migration
             
             // Status
             $table->enum('status', ['pending', 'queued', 'sent', 'delivered', 'opened', 'clicked', 'replied', 'answered', 'voicemail', 'failed', 'bounced', 'unsubscribed'])->default('pending');
-            $table->timestampTz('sent_at')->nullable();
-            $table->timestampTz('delivered_at')->nullable();
-            $table->timestampTz('opened_at')->nullable(); // Email
-            $table->timestampTz('clicked_at')->nullable(); // Email
-            $table->timestampTz('replied_at')->nullable(); // Email/SMS
-            $table->timestampTz('answered_at')->nullable(); // Phone
+            $table->timestamp('sent_at')->nullable();
+            $table->timestamp('delivered_at')->nullable();
+            $table->timestamp('opened_at')->nullable(); // Email
+            $table->timestamp('clicked_at')->nullable(); // Email
+            $table->timestamp('replied_at')->nullable(); // Email/SMS
+            $table->timestamp('answered_at')->nullable(); // Phone
             $table->integer('duration_seconds')->nullable(); // Phone
             
             // Tracking
@@ -85,8 +85,8 @@ return new class extends Migration
             $table->text('error_message')->nullable();
             $table->json('metadata')->nullable();
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             // Foreign keys
             $table->foreign('campaign_id')
@@ -122,8 +122,8 @@ return new class extends Migration
             $table->json('variables')->nullable(); // Available template variables
             $table->boolean('is_active')->default(true);
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             // Indexes
             $table->index('tenant_id');
@@ -142,8 +142,8 @@ return new class extends Migration
             $table->json('variables')->nullable(); // Available template variables
             $table->boolean('is_active')->default(true);
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             // Indexes
             $table->index('tenant_id');
@@ -162,8 +162,8 @@ return new class extends Migration
             $table->json('variables')->nullable(); // Available template variables
             $table->boolean('is_active')->default(true);
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             // Indexes
             $table->index('tenant_id');

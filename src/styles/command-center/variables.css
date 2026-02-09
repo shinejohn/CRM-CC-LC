@@ -1,0 +1,56 @@
+/* ============================================
+   COMMAND CENTER THEME VARIABLES
+   ============================================ */
+
+:root {
+  /* Base Colors */
+  --cc-bg-primary: #ffffff;
+  --cc-bg-secondary: #f9fafb;
+  --cc-bg-tertiary: #f3f4f6;
+  --cc-text-primary: #111827;
+  --cc-text-secondary: #4b5563;
+  --cc-text-muted: #9ca3af;
+  --cc-border: #e5e7eb;
+  
+  /* Accent Colors */
+  --cc-accent-blue: #3b82f6;
+  --cc-accent-purple: #8b5cf6;
+  --cc-accent-green: #10b981;
+  --cc-accent-orange: #f97316;
+  --cc-accent-red: #ef4444;
+  
+  /* Gradients */
+  --cc-gradient-primary: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  --cc-gradient-ai: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  
+  /* Shadows */
+  --cc-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --cc-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --cc-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  
+  /* Transitions */
+  --cc-transition-fast: 150ms ease;
+  --cc-transition-normal: 200ms ease;
+  --cc-transition-slow: 300ms ease;
+  
+  /* Spacing */
+  --cc-sidebar-width: 256px;
+  --cc-sidebar-collapsed: 64px;
+  --cc-header-height: 64px;
+  --cc-right-panel-width: 320px;
+}
+
+.dark {
+  --cc-bg-primary: #1e293b;
+  --cc-bg-secondary: #0f172a;
+  --cc-bg-tertiary: #334155;
+  --cc-text-primary: #f8fafc;
+  --cc-text-secondary: #cbd5e1;
+  --cc-text-muted: #64748b;
+  --cc-border: #334155;
+  
+  --cc-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --cc-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --cc-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+}
+

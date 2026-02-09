@@ -8,17 +8,21 @@ use Illuminate\Support\Facades\DB;
 
 class CampaignApiTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase; protected function setUp(): void { parent::setUp(); $this->createAndAuthenticateUser(); }
 
     public function test_can_list_campaigns(): void
     {
         // Assuming campaigns are stored in a campaigns table
         // Adjust based on your actual schema
         DB::table('campaigns')->insert([
-            'campaign_id' => 'TEST-001',
-            'template_name' => 'Test Campaign',
+            'id' => 'TEST-001',
+            'type' => 'email',
+            'week' => 1,
+            'day' => 1,
+            'title' => 'Test Campaign',
+            'subject' => 'Test Subject',
+            'slug' => 'test-campaign',
             'landing_page_slug' => 'test-campaign',
-            'tenant_id' => '00000000-0000-0000-0000-000000000000',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -28,7 +32,7 @@ class CampaignApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    '*' => ['campaign_id', 'template_name', 'landing_page_slug']
+                    '*' => ['id', 'title', 'landing_page_slug']
                 ]
             ]);
     }
@@ -36,10 +40,14 @@ class CampaignApiTest extends TestCase
     public function test_can_show_campaign_by_slug(): void
     {
         DB::table('campaigns')->insert([
-            'campaign_id' => 'TEST-002',
-            'template_name' => 'Test Campaign 2',
+            'id' => 'TEST-002',
+            'type' => 'email',
+            'week' => 1,
+            'day' => 2,
+            'title' => 'Test Campaign 2',
+            'subject' => 'Test Subject 2',
+            'slug' => 'test-campaign-2',
             'landing_page_slug' => 'test-campaign-2',
-            'tenant_id' => '00000000-0000-0000-0000-000000000000',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

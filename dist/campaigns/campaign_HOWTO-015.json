@@ -1,52 +1,157 @@
 {
   "campaign": {
     "id": "HOWTO-015",
-    "week": 15,
-    "day": 15,
-    "type": "HOWTO",
-    "title": "How-To Tutorial",
-    "subject": "How-To Tutorial",
+    "week": 7,
+    "day": 47,
+    "type": "How-To",
+    "title": "Analytics Guide",
+    "subject": "Understand your analytics in 10 minutes",
     "landing_page": "analytics-guide",
-    "template": "tutorial",
-    "description": "How-To Tutorial - Guide user through process"
+    "template": "tutorial"
   },
-  "landing_page": {
-    "campaign_id": "HOWTO-015",
-    "landing_page_slug": "analytics-guide",
-    "url": "/learn/analytics-guide",
-    "template_id": "tutorial",
-    "template_name": "How-To Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 60,
-    "primary_cta": "start_trial",
-    "secondary_cta": "contact_sales",
-    "ai_persona": "Emma",
-    "ai_tone": "Helpful, step-by-step",
-    "ai_goal": "Guide user through process",
-    "data_capture_fields": "name, email, business_name, setup_preferences",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/analytics-guide/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "engagement",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week7-how-to",
-    "utm_content": "HOWTO-015"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "How-To Tutorial",
-    "slides": 8,
-    "duration": 60,
-    "purpose": "howto",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "analytics-guide",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/analytics-guide/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Analytics Made Simple",
+      "content": {
+        "headline": "Numbers That Actually Matter",
+        "subhead": "10 minutes to understand your data"
+      },
+      "narration": "Analytics can feel overwhelming. Hundreds of numbers, charts everywhere. But only a few metrics actually matter for your business. Let's focus on those.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "OverviewSlide",
+      "title": "Key Metrics",
+      "content": {
+        "metrics": [
+          "Visibility (are people seeing you?)",
+          "Engagement (are they interested?)",
+          "Conversion (are they taking action?)",
+          "Retention (are they coming back?)"
+        ]
+      },
+      "narration": "Four categories that matter. Visibility: are people seeing you? Engagement: are they interested enough to interact? Conversion: are they taking action—calling, booking, buying? Retention: are they coming back? Master these four and you understand your business.",
+      "duration_seconds": 25,
+      "audio_file": "slide-02-metrics.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Visibility Metrics",
+      "content": {
+        "metrics": [
+          "Profile views",
+          "Search impressions",
+          "Website visits",
+          "Social reach"
+        ],
+        "benchmark": "Look for growth week over week"
+      },
+      "narration": "Visibility metrics show how many people see you. Profile views on directories. Search impressions on Google. Website visits. Social media reach. You want these growing week over week. If they're flat or declining, you need more content or promotion.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-visibility.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Engagement Metrics",
+      "content": {
+        "metrics": [
+          "Click-through rate",
+          "Time on site",
+          "Social interactions",
+          "Email opens"
+        ],
+        "benchmark": "CTR above 2% is good, above 5% is great"
+      },
+      "narration": "Engagement metrics show if people are interested. Click-through rate on listings and emails. Time on your website. Social interactions like likes and comments. Email open rates. Click-through rate above two percent is good, above five percent is great.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-engagement.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Conversion Metrics",
+      "content": {
+        "metrics": [
+          "Calls/messages",
+          "Bookings/appointments",
+          "Quote requests",
+          "Purchases"
+        ],
+        "benchmark": "Track cost per conversion to measure ROI"
+      },
+      "narration": "Conversion metrics are the bottom line. Calls and messages received. Bookings and appointments made. Quote requests submitted. Purchases completed. Track cost per conversion to measure your ROI—how much does it cost to get each customer action?",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-conversion.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "Reading Your Dashboard",
+      "content": {
+        "action": "Weekly Analytics Check",
+        "steps": [
+          "Compare to last week",
+          "Look for patterns",
+          "Note what changed",
+          "Identify what to test"
+        ]
+      },
+      "narration": "Your weekly analytics check. Compare this week to last week—are you up or down? Look for patterns—which days perform best? Note what changed—did you do something different? Identify what to test—based on patterns, what could improve results?",
+      "duration_seconds": 30,
+      "audio_file": "slide-06-reading.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "TipsSlide",
+      "title": "Pro Tips",
+      "content": {
+        "tips": [
+          "Check weekly, not daily (noise vs trends)",
+          "Focus on 3-5 key metrics, not everything",
+          "Set goals for each metric",
+          "Export monthly reports for records"
+        ]
+      },
+      "narration": "Analytics pro tips. Check weekly, not daily—daily is noise, weekly shows trends. Focus on three to five key metrics, not everything available. Set specific goals for each metric. Export monthly reports for your records and to spot long-term trends.",
+      "duration_seconds": 30,
+      "audio_file": "slide-07-tips.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Check Your Analytics",
+      "content": {
+        "cta_primary": {
+          "label": "View Your Analytics",
+          "action": "open_analytics"
+        },
+        "cta_secondary": {
+          "label": "Set Up Weekly Report",
+          "action": "setup_report"
+        }
+      },
+      "narration": "Ready to understand your numbers? View your analytics now and practice reading the dashboard. Or set up a weekly report to get key metrics emailed automatically. Data-driven decisions start here.",
+      "duration_seconds": 20,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_educational": {
+      "subject": "Understand your analytics in 10 minutes",
+      "preview_text": "Only a few metrics actually matter",
+      "body": "Hey {{first_name}},\n\nAnalytics can feel overwhelming. But only 4 categories matter:\n\n→ Visibility (are people seeing you?)\n→ Engagement (are they interested?)\n→ Conversion (are they taking action?)\n→ Retention (are they coming back?)\n\n[UNDERSTAND YOUR ANALYTICS →]\n\nPro tip: Check weekly, not daily. Daily is noise, weekly shows trends.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-029"
+    ],
+    "follows": "HOWTO-014"
   }
 }

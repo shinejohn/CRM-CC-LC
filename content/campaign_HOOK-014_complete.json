@@ -1,0 +1,111 @@
+{
+  "campaign": {
+    "id": "HOOK-014",
+    "week": 10,
+    "day": 68,
+    "type": "Hook",
+    "title": "Seasonal Promotion",
+    "subject": "Holiday event season is here—don't miss your chance to participate",
+    "landing_page": "holiday-events",
+    "template": "seasonal-promotion",
+    "description": "Seasonal promotion for holiday event participation and advertising"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Holiday Season",
+      "content": {
+        "headline": "The Busiest Shopping Season Is Almost Here",
+        "subhead": "Make sure customers find YOU this holiday"
+      },
+      "narration": "Holiday season is almost here—the busiest shopping time of the year. Customers are actively looking for local businesses to support. The question is: will they find you? We've got special holiday opportunities to make sure they do.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "Holiday Opportunities",
+      "content": {
+        "headline": "Holiday Visibility Options",
+        "options": [
+          {"option": "Holiday Gift Guide", "what": "Featured in our curated local gift guide", "reach": "Sent to all subscribers + promoted socially"},
+          {"option": "Holiday Event Listing", "what": "Free event posting for holiday events", "reach": "Events calendar + newsletter feature"},
+          {"option": "Small Business Saturday", "what": "Featured participant listing", "reach": "Special feature package"},
+          {"option": "Holiday Deals Section", "what": "Your holiday offer prominently displayed", "reach": "Dedicated deals email + website section"},
+          {"option": "Last-Minute Guide", "what": "Featured in last-minute shopping guide", "reach": "High-intent shoppers"}
+        ]
+      },
+      "narration": "Here are your holiday visibility options. Holiday Gift Guide: featured in our curated local gift guide sent to all subscribers. Holiday Event Listing: free posting for your holiday events with newsletter features. Small Business Saturday: featured participant listing with special coverage. Holiday Deals Section: your holiday offer prominently displayed in dedicated communications. Last-Minute Guide: featured in our last-minute shopping guide reaching high-intent shoppers.",
+      "duration_seconds": 40,
+      "audio_file": "slide-02-options.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "Holiday Timeline",
+      "content": {
+        "headline": "Key Holiday Dates",
+        "timeline": [
+          {"date": "November 1", "event": "Holiday Gift Guide submissions open"},
+          {"date": "November 15", "event": "Gift Guide published"},
+          {"date": "November 28", "event": "Small Business Saturday (special feature)"},
+          {"date": "December 1-15", "event": "Holiday Deals promotion period"},
+          {"date": "December 16-23", "event": "Last-Minute Guide published"}
+        ],
+        "note": "Submit early for best placement"
+      },
+      "narration": "Key dates to know. November first: Holiday Gift Guide submissions open. November fifteenth: Gift Guide is published. November twenty-eighth: Small Business Saturday with special features. December first through fifteenth: Holiday Deals promotion period. December sixteenth through twenty-third: Last-Minute Guide for procrastinators. Submit early for best placement—first submissions get priority positioning.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-timeline.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ProofSlide",
+      "title": "Holiday Results",
+      "content": {
+        "headline": "What Participants Experienced Last Year",
+        "results": [
+          {"business": "Gift shop", "participation": "Gift Guide + Deals", "result": "Best December in 7 years—up 43%"},
+          {"business": "Restaurant", "participation": "Holiday Events", "result": "Sold out 4 holiday dinner events"},
+          {"business": "Spa", "participation": "Gift Guide", "result": "Gift card sales up 67% over previous year"}
+        ]
+      },
+      "narration": "What did participants experience last year? A gift shop in our Gift Guide and Deals section had their best December in seven years—up forty-three percent. A restaurant listing holiday events sold out four holiday dinner events. A spa in our Gift Guide saw gift card sales up sixty-seven percent over the previous year. This season brings customers looking to spend—make sure they find you.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-results.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "CTASlide",
+      "title": "Get Started",
+      "content": {
+        "headline": "Ready for the Holidays?",
+        "cta_primary": {
+          "label": "Submit for Holiday Features",
+          "action": "submit_holiday"
+        },
+        "cta_secondary": {
+          "label": "See Last Year's Guide",
+          "action": "view_past_guide"
+        },
+        "urgency": "Gift Guide deadline: November 10th"
+      },
+      "narration": "Ready for the holidays? Submit for holiday features now—Gift Guide deadline is November tenth. Or see last year's guide to see what participants looked like. The holiday shopping season waits for no one. Get visible before customers start looking.",
+      "duration_seconds": 20,
+      "audio_file": "slide-05-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_hook": {
+      "subject": "Holiday event season is here—don't miss your chance to participate",
+      "preview_text": "Gift guides, events, deals—get visible",
+      "body": "Hey {{first_name}},\n\nHoliday season is almost here.\n\nCustomers are looking for local businesses to support. Will they find {{business_name}}?\n\nHoliday visibility options:\n✓ Holiday Gift Guide feature\n✓ Free holiday event listing\n✓ Small Business Saturday spotlight\n✓ Holiday Deals section\n✓ Last-Minute Shopping Guide\n\n[SUBMIT FOR HOLIDAY FEATURES →]\n\nOne gift shop had their best December in 7 years after participating.\n\nGift Guide deadline: November 10th.\n\n{{sender_name}}\nFibonacco"
+    }
+  },
+  "connections": {
+    "follows": "HOOK-013",
+    "related": ["HOOK-003", "HOOK-002"]
+  }
+}

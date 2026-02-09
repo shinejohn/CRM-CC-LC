@@ -149,84 +149,17 @@ export interface CampaignData {
   };
 }
 
-// For now, load from static JSON files
-// Later this can be migrated to API/database
-
-// Load master JSON for slug-to-campaign-id mapping
-let campaignMasterData: { landing_pages: CampaignLandingPage[] } | null = null;
-
-async function loadMasterData(): Promise<{ landing_pages: CampaignLandingPage[] }> {
-  if (campaignMasterData) return campaignMasterData;
-  
-  try {
-    const response = await fetch('/campaigns/landing_pages_master.json');
-    if (response.ok) {
-      campaignMasterData = await response.json();
-      return campaignMasterData!;
-    }
-  } catch (error) {
-    console.error('Failed to load master campaign data:', error);
-  }
-  
-  return { landing_pages: [] };
-}
+// Static JSON loading has been removed in favor of API-backed campaigns.
+// The old mock data fetches are intentionally commented out to avoid regressions.
+// const response = await fetch('/campaigns/landing_pages_master.json');
+// const response = await fetch(`/campaigns/campaign_${campaignId}.json`);
 
 export const campaignApi = {
   // Get campaign by slug
   getCampaignBySlug: async (slug: string): Promise<CampaignData | null> => {
     try {
-      // Load master data to find campaign_id from slug
-      const masterData = await loadMasterData();
-      const landingPage = masterData.landing_pages.find(lp => lp.landing_page_slug === slug);
-      
-      if (!landingPage) {
-        console.error(`Campaign with slug "${slug}" not found`);
-        return null;
-      }
-
-      const campaignId = landingPage.campaign_id;
-      
-      // Try to load from static JSON file (campaign_HOOK-001.json format)
-      const response = await fetch(`/campaigns/campaign_${campaignId}.json`);
-      if (response.ok) {
-        return await response.json();
-      }
-      
-      // If individual JSON doesn't exist, create CampaignData from master metadata
-      console.log(`Individual campaign file not found for ${campaignId}, creating from metadata`);
-      return {
-        campaign: {
-          id: campaignId,
-          week: 1,
-          day: 1,
-          type: landingPage.campaign_id.split('-')[0],
-          title: landingPage.template_name,
-          subject: landingPage.template_name,
-          landing_page: slug,
-          template: landingPage.template_id,
-          description: `${landingPage.template_name} - ${landingPage.ai_goal || 'Educational content'}`,
-        },
-        landing_page: landingPage,
-        template: {
-          template_id: landingPage.template_id,
-          name: landingPage.template_name,
-          slides: landingPage.slide_count,
-          duration: landingPage.duration_seconds,
-          purpose: landingPage.ai_goal || 'Educational content',
-          audio_required: true,
-        },
-        slides: Array.from({ length: landingPage.slide_count }, (_, index) => ({
-          template_id: landingPage.template_id,
-          slide_num: index + 1,
-          component: index === 0 ? 'HeroSlide' : index === landingPage.slide_count - 1 ? 'CTASlide' : 'SolutionSlide',
-          content_type: 'mixed',
-          requires_personalization: false,
-          audio_file: `slide-${String(index + 1).padStart(2, '0')}.mp3`,
-        })),
-      };
-      
-      // Final fallback: try API endpoint
-      // return await apiClient.get<CampaignData>(`/learning/campaigns/${slug}`);
+      const response = await apiClient.get<{ data: CampaignData }>(`/v1/campaigns/${slug}`);
+      return response.data;
     } catch (error) {
       console.error(`Failed to load campaign ${slug}:`, error);
       return null;
@@ -392,15 +325,8 @@ export const campaignApi = {
   // Get all campaigns (for listing)
   getAllCampaigns: async (): Promise<CampaignLandingPage[]> => {
     try {
-      // Try static file first
-      const response = await fetch('/campaigns/landing_pages_master.json');
-      if (response.ok) {
-        const data = await response.json();
-        return data.landing_pages || [];
-      }
-      
-      // Fallback to API
-      return await apiClient.get<CampaignLandingPage[]>('/learning/campaigns');
+      const response = await apiClient.get<{ data: CampaignLandingPage[] }>('/v1/campaigns');
+      return response.data;
     } catch (error) {
       console.error('Failed to load campaigns:', error);
       return [];

@@ -2,51 +2,232 @@
   "campaign": {
     "id": "EDU-002",
     "week": 2,
-    "day": 2,
-    "type": "EDU",
-    "title": "Educational Content",
-    "subject": "Educational Content",
-    "landing_page": "ai-marketing-101",
+    "day": 8,
+    "type": "Educational",
+    "title": "AI Discovery",
+    "subject": "Google is dying. Here's how people find businesses now.",
+    "landing_page": "ai-discovery",
     "template": "educational",
-    "description": "Educational Content - Build trust through education"
+    "description": "Explain how AI search is replacing traditional SEO and what SMBs should do"
   },
   "landing_page": {
     "campaign_id": "EDU-002",
-    "landing_page_slug": "ai-marketing-101",
-    "url": "/learn/ai-marketing-101",
+    "landing_page_slug": "ai-discovery",
+    "url": "/learn/ai-discovery",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
-    "duration_seconds": 75,
-    "primary_cta": "download_guide",
-    "secondary_cta": "start_trial",
+    "duration_seconds": 180,
+    "primary_cta": "get_ai_visible",
+    "secondary_cta": "download_article",
     "ai_persona": "Sarah",
-    "ai_tone": "Knowledgeable, patient",
-    "ai_goal": "Build trust through education",
-    "data_capture_fields": "name, email, business_name, industry, current_challenges",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-marketing-101/audio/",
+    "ai_tone": "Knowledgeable, urgent but not alarmist",
+    "ai_goal": "Create understanding and urgency about AI discovery",
+    "data_capture_fields": "name, email, business_name, industry, current_marketing",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-discovery/audio/",
     "crm_tracking": true,
     "conversion_goal": "education",
     "utm_source": "email",
     "utm_medium": "outbound",
-    "utm_campaign": "90day-week1-educational",
+    "utm_campaign": "90day-week2-educational",
     "utm_content": "EDU-002"
   },
-  "template": {
-    "template_id": "educational",
-    "name": "Educational Content",
-    "slides": 7,
-    "duration": 75,
-    "purpose": "edu",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "ai-marketing-101",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/ai-marketing-101/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "The Way People Search Has Changed",
+      "content": {
+        "headline": "When's the Last Time You Scrolled Through Google?",
+        "subhead": "Something fundamental has shifted",
+        "visual": "Split screen: old Google results page (faded) vs. AI assistant response (bright)"
+      },
+      "narration": "Quick question: When's the last time you actually scrolled through Google search results to find a local business? Really think about it. If you're like most people, you've started asking AI instead. 'Hey Siri, find me a good plumber.' 'ChatGPT, what's the best restaurant near downtown?' The shift is happening faster than anyone predicted.",
+      "duration_seconds": 25,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "DataSlide",
+      "title": "The Numbers Don't Lie",
+      "content": {
+        "headline": "The Shift Is Already Here",
+        "stats": [
+          {
+            "value": "40%",
+            "label": "of Gen Z uses TikTok or AI for search, not Google"
+          },
+          {
+            "value": "8B",
+            "label": "AI assistant queries processed last month"
+          },
+          {
+            "value": "2x",
+            "label": "AI search growing every year"
+          }
+        ],
+        "trend_line": "Google search declining, AI search exponential",
+        "visual": "Graph showing crossover point"
+      },
+      "narration": "Here's what the data shows. Forty percent of Gen Z doesn't use Google for search anymore—they use TikTok or AI assistants. AI assistants processed eight billion queries last month. And that number is doubling every year. This isn't a prediction about some distant future. This is what's happening right now.",
+      "duration_seconds": 30,
+      "audio_file": "slide-02-data.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "How AI Finds Businesses",
+      "content": {
+        "headline": "AI Doesn't Search. AI Knows.",
+        "key_insight": "AI has already learned from trusted sources. When someone asks, AI already has an answer.",
+        "sources_ai_trusts": [
+          {
+            "icon": "newspaper",
+            "source": "News publications"
+          },
+          {
+            "icon": "directory",
+            "source": "Business directories"
+          },
+          {
+            "icon": "star",
+            "source": "Reviews & reputation"
+          },
+          {
+            "icon": "calendar",
+            "source": "Events & activity"
+          }
+        ],
+        "visual": "AI brain with input sources flowing in"
+      },
+      "narration": "Here's what most business owners don't understand: AI doesn't search the web in real-time like Google does. AI has already learned things. It's been trained on trusted sources—news publications, business directories, reviews, activity signals. When someone asks AI for a recommendation, AI already has an answer. The question is: are you part of what AI knows?",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-concept.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ProblemSlide",
+      "title": "The Visibility Problem",
+      "content": {
+        "headline": "If Your Only Presence Is Your Website...",
+        "problem": "AI doesn't know you exist",
+        "comparison": {
+          "website_only": "One voice saying 'I'm great' (everyone's website says that)",
+          "multi_presence": "Multiple trusted sources confirming you're real, good, active"
+        },
+        "visual": "Lonely website floating in void vs. connected network"
+      },
+      "narration": "If your entire online presence is a standalone website and maybe a Google Business profile, here's the hard truth: AI doesn't know you exist. Your website is one voice saying 'I'm great.' But everyone's website says that. AI needs multiple trusted sources confirming you're real, you're good, you're active. One signal isn't enough. AI needs a pattern.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-problem.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "SolutionSlide",
+      "title": "Be Where AI Looks",
+      "content": {
+        "headline": "The Opportunity",
+        "solution": "Be present in the sources AI trusts",
+        "touchpoints": [
+          {
+            "platform": "Local News",
+            "why": "Authoritative content source"
+          },
+          {
+            "platform": "Business Directory",
+            "why": "Structured data AI understands"
+          },
+          {
+            "platform": "Events Calendar",
+            "why": "Activity and freshness signals"
+          },
+          {
+            "platform": "Community Platform",
+            "why": "Engagement and reputation"
+          }
+        ],
+        "result": "One presence → Multiple touchpoints → AI-discoverable",
+        "visual": "Business connected to multiple sources, all feeding AI"
+      },
+      "narration": "The opportunity is to be present in the sources AI trusts. Local news—authoritative content. Business directories—structured data AI can understand. Events calendars—proof you're active and current. Community platforms—engagement and reputation signals. When you're in multiple authoritative sources, AI sees you as real, trusted, recommendable. One presence creates multiple touchpoints. And you become AI-discoverable.",
+      "duration_seconds": 35,
+      "audio_file": "slide-05-solution.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StorySlide",
+      "title": "It's Already Working",
+      "content": {
+        "headline": "Martinez Plumbing: 30 Years to Invisible to Found",
+        "story_beats": [
+          "31-year family business, great reputation",
+          "Daughter asked ChatGPT for plumber recommendations—they weren't listed",
+          "Claimed directory listing, got mentioned in local news, posted events",
+          "60 days later: AI recommending them"
+        ],
+        "quote": "A customer told me ChatGPT recommended us. First time that ever happened.",
+        "visual": "Before/after comparison"
+      },
+      "narration": "Let me tell you about Martinez Plumbing. Thirty-one years in business. Great reputation. Five stars everywhere. But when the owner's daughter asked ChatGPT to recommend a plumber—they weren't listed. So they got to work. Claimed their directory listing. Got mentioned in local news. Posted some events. Sixty days later, a customer called and said, 'ChatGPT recommended you.' First AI referral in thirty-one years. It took about an hour total to set up.",
+      "duration_seconds": 35,
+      "audio_file": "slide-06-story.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "CTASlide",
+      "title": "Get AI-Discoverable",
+      "content": {
+        "headline": "Your Competitors Are Figuring This Out",
+        "subhead": "Will you be ahead of them or behind them?",
+        "cta_primary": {
+          "label": "Get AI-Discoverable Now",
+          "action": "start_visibility",
+          "description": "15 minutes to be found by AI"
+        },
+        "cta_secondary": {
+          "label": "Download the Full Article",
+          "action": "download_article",
+          "description": "The complete story with implementation steps"
+        },
+        "urgency": "Every day you wait, AI is learning about your competitors instead of you"
+      },
+      "narration": "Your competitors are figuring this out. Some already have. The question is whether you'll be ahead of them or behind them. Get AI-discoverable now—it takes about fifteen minutes. Or download the full article for the complete story with step-by-step implementation. Either way, every day you wait is a day AI is learning about your competitors instead of you. Let's fix that.",
+      "duration_seconds": 25,
+      "audio_file": "slide-07-cta.mp3"
+    }
+  ],
+  "article": {
+    "title": "The Day Martinez Plumbing Disappeared",
+    "subtitle": "How a 30-year business became invisible overnight—and what it means for yours",
+    "word_count": 2400,
+    "content": "# The Day Martinez Plumbing Disappeared\n\n**How a 30-year business became invisible overnight—and what it means for yours**\n\n---\n\nRoberto Martinez had been a plumber for 31 years. His father started the business. His son was learning the trade. Three generations of Martinez Plumbing, serving the same community since 1993.\n\nThey had a good reputation. Referrals kept them busy. When the internet came along, Roberto's daughter built them a website. When Google Business became a thing, she set that up too. Five stars, dozens of reviews. They were doing fine.\n\nThen, last spring, Roberto noticed something strange.\n\n\"The phone stopped ringing from new customers,\" he told me. \"I mean, regulars still called. People who knew us. But new people? Nothing. For weeks.\"\n\nHis daughter checked their Google ranking. Still there. Still five stars. Still showing up when you searched \"plumber near me.\"\n\nSo what happened?\n\n---\n\n## The Shift Nobody Warned Them About\n\nHere's what Roberto didn't know: the way people find local businesses changed. And it changed fast.\n\nHis daughter made a discovery when she asked her teenage son to find a plumber for his apartment.\n\n\"He didn't Google it,\" she told me. \"He asked ChatGPT. He literally said, 'Hey, find me a reliable plumber in [their city].' And ChatGPT gave him three names. We weren't one of them.\"\n\nShe tried it herself. Asked her phone's AI assistant. Asked ChatGPT. Asked Perplexity. Asked Claude.\n\nMartinez Plumbing—31 years, five stars, great reputation—didn't exist in any of the answers.\n\n\"It was like we just... weren't there,\" Roberto said. \"Thirty years, and the AI didn't know we existed.\"\n\n---\n\n## How AI \"Knows\" Things\n\nHere's what most business owners don't understand about AI assistants—the thing that explains exactly what happened to Martinez Plumbing.\n\n**AI doesn't search the internet in real-time like Google does.** AI has already learned things. It's been trained on data. It has a \"knowledge base\" that it draws from when you ask questions.\n\nWhen someone asks, \"Who's a good plumber in Springfield?\"—the AI doesn't go searching. The AI already has an answer based on what it's learned.\n\nSo what has it learned? Where does that knowledge come from?\n\n**AI learns from authoritative sources:**\n- News publications and local media\n- Established business directories\n- Review platforms with verified data\n- Active businesses with recent information\n\n**AI trusts consistency:**\n- The same business showing up across multiple sources\n- Consistent name, address, services\n- Multiple signals all saying \"this business is real and good\"\n\n**AI values freshness:**\n- Recent activity signals a living business\n- Stale information suggests maybe they've closed\n- Events, news mentions, current reviews all matter\n\nMartinez Plumbing had a website and a Google Business profile. That's it. Two data points. No news mentions. No directory listings beyond Google. No events. No community presence.\n\nFrom AI's perspective, they were practically invisible.\n\n---\n\n## The Businesses AI Recommends\n\nMeanwhile, a competing plumbing company—one that had been around only eight years—was showing up in every AI recommendation.\n\nWhy? I looked into it.\n\nThey were listed in the local business directory. They had been mentioned in a local news article about home improvement tips. They posted community events (a free \"winterize your pipes\" workshop). They were active on the local community platform.\n\nThey weren't bigger than Martinez. They weren't better. They weren't cheaper.\n\nThey were just *visible* in the places AI looks.\n\n\"Same service, probably same quality,\" Roberto admitted. \"But they're getting the calls. Because the AI knows they exist.\"\n\n---\n\n## This Isn't About Google Anymore\n\nFor twenty years, the game was Google. Rank on Google, get found on Google, pay Google for ads. Businesses spent fortunes on SEO, on Google Ads, on gaming the algorithm.\n\nThat game is ending.\n\nGoogle's own data shows that younger users are increasingly using AI assistants and social platforms for discovery. The fastest-growing search behavior isn't typing into a search box—it's asking an AI.\n\nAnd AI doesn't care about your Google ranking.\n\nAI cares about:\n- Are you present in trusted sources?\n- Are you consistent across platforms?\n- Are you active and current?\n- Do multiple signals confirm you're legitimate?\n\nThis isn't a prediction about the future. This is what's happening right now. The businesses that understand this are getting found. The ones that don't—like Martinez Plumbing was—are disappearing.\n\n---\n\n## The Local AND Global Opportunity\n\nHere's something that surprised Roberto when I explained it:\n\nAI discovery isn't just local.\n\n\"Someone in Texas was asking about specialty pipe fitting techniques,\" I told him. \"If you were visible in the right sources, with content about your expertise, AI could have recommended you as an expert. Someone across the country, looking for exactly what you know.\"\n\nHis eyes lit up. Martinez Plumbing had developed some specialty techniques over the years. Things they did that other plumbers didn't know. Regional expertise that could be valuable nationally.\n\n\"You're saying someone in another state could find us?\"\n\n\"If AI knows about your expertise, yes. AI doesn't care about geography when someone's asking about knowledge. Your local business can have global reach—if you're visible.\"\n\nThis is the flip side of the challenge. Yes, being invisible to AI is a problem. But being visible to AI is a massive opportunity. Your expertise, your specialty, your unique value—it can reach anyone, anywhere, asking AI about what you do.\n\nLocal business. Global discovery. Same visibility strategy.\n\n---\n\n## What Martinez Plumbing Did Next\n\nRoberto's daughter got to work.\n\nShe claimed their listing on the local business directory—a real directory, the kind AI trusts, not just Google.\n\nShe submitted a news tip to the local digital news publication about their 30-year anniversary. They ran a short piece.\n\nShe posted their free workshop to the community events calendar.\n\nShe set up a profile on the community platform.\n\nWithin 60 days, Martinez Plumbing was showing up in AI recommendations.\n\n\"A customer told me last week that ChatGPT recommended us,\" Roberto said when I followed up. \"First time that ever happened. Thirty-one years in business, and I'm getting my first AI referral.\"\n\nThe phone is ringing again.\n\n---\n\n## What This Means For Your Business\n\nYou're probably not a plumber. But the lesson is the same.\n\n**If your entire online presence is a website and a Google profile, you're becoming invisible.** Not overnight, but gradually. As more people ask AI instead of searching Google, businesses that aren't in AI's knowledge base fade away.\n\n**The solution isn't complicated.** You don't need to become an AI expert. You don't need to master a new algorithm. You need to be present in the sources AI trusts—directories, local news, event calendars, community platforms.\n\n**The opportunity goes both ways.** Yes, you need to be found locally. But your expertise can also travel globally. The same visibility that helps neighbors find you can help people across the world find your specialty.\n\n---\n\n## Get AI-Discoverable in 15 Minutes\n\nHere's exactly what to do:\n\n**Step 1: Claim your directory listing (5 minutes)**\nGet in a real business directory—one with structured data AI can understand. Complete every field. Be consistent with how your name appears elsewhere.\n\n**Step 2: Show you're active (3 minutes)**\nPost an event, announcement, or coupon. Something. Anything recent. AI values freshness. A business with recent activity looks alive and trustworthy.\n\n**Step 3: Get a reputation signal (5 minutes)**\nText your happiest customer right now. Ask for a quick review. Send them the link. One review today beats waiting for reviews to trickle in.\n\n**Step 4: Connect your presence (2 minutes)**\nSet up your Alphasite—your authoritative home base. It connects to news, events, community. One click and you're linked to everything AI checks.\n\n**That's it. 15 minutes.**\n\nYou now have directory presence, recent activity, reputation proof, and a connected home base. AI can find you. Recommend you. Send you customers.\n\n---\n\n## The Businesses That Get This Will Win\n\nNot everyone understands this shift yet. That's your advantage.\n\nWhile your competitors are still chasing Google rankings and posting into the void on social media, you can be building the presence that actually matters—the one AI sees.\n\nMartinez Plumbing waited until they noticed the problem. You don't have to.\n\n---\n\n**Ready to be found again?**\n\nThe infrastructure exists. The process takes 15 minutes. The results start within weeks.\n\n**[GET AI-DISCOVERABLE NOW →]**\n\n*Your community is already asking AI. Make sure AI knows about you.*"
+  },
+  "emails": {
+    "email_1_educational": {
+      "subject": "Google is dying. Here's how people find businesses now.",
+      "preview_text": "The shift happened faster than anyone predicted",
+      "body": "Hey {{first_name}},\n\nQuick question: When's the last time you actually scrolled through Google search results?\n\nBe honest. It's been a while, right?\n\nThat's because something changed. And it's affecting how customers find businesses like {{business_name}}.\n\nI put together a quick 3-minute presentation that explains what's happening:\n\n→ Why AI search is replacing Google\n→ How AI decides which businesses to recommend\n→ What you can do about it (15 minutes total)\n\n[WATCH THE 3-MINUTE PRESENTATION →]\n\nNo sales pitch—just something you should probably know.\n\n{{sender_name}}\nFibonacco\n\nP.S. There's a full article at the end with the complete story of a 30-year business that became invisible—and how they fixed it in 60 days."
+    },
+    "email_2a_engaged": {
+      "subject": "You watched it—here's how to actually do it",
+      "preview_text": "15 minutes to AI-discoverable",
+      "body": "Hey {{first_name}},\n\nThanks for checking out that presentation on how AI is changing discovery.\n\nQuick recap:\n• AI doesn't search—AI already knows things\n• AI learns from directories, news, events, community\n• If you're not in those sources, AI doesn't know you exist\n• Getting visible takes about 15 minutes\n\nReady to do it?\n\nThe How-To Guide walks you through step by step:\n\n[GET AI-DISCOVERABLE IN 15 MINUTES →]\n\nIt's practical. It's quick. And it works.\n\n{{sender_name}}\n\nP.S. Keep an eye out for my next email. We built something specifically for {{business_name}}."
+    },
+    "email_2b_reengage": {
+      "subject": "The 30-second version (AI discovery)",
+      "preview_text": "What you missed, in brief",
+      "body": "Hey {{first_name}},\n\nI sent you something last week about how people find businesses now. Life's busy—I get it.\n\nHere's the 30-second version:\n\n→ 40% of people under 30 don't use Google for search anymore\n→ They ask AI: ChatGPT, Siri, Alexa\n→ AI doesn't search in real-time—it already knows things\n→ If you're not in what AI knows, you're invisible\n→ Getting visible takes 15 minutes, not months\n\nWant the full picture? It's only 3 minutes:\n\n[WATCH THE PRESENTATION →]\n\nOr skip straight to action:\n\n[GET AI-DISCOVERABLE NOW →]\n\nEither way, this matters for {{business_name}}.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-003",
+      "HOWTO-004"
+    ],
+    "follows": "EDU-001",
+    "related": [
+      "EDU-003",
+      "EDU-008"
+    ]
   }
 }

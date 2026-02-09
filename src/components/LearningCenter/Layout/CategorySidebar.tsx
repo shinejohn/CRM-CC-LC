@@ -30,7 +30,7 @@ interface SidebarItem {
 const mainSections: SidebarSection[] = [
   {
     id: 'campaigns',
-    label: 'Email Campaigns',
+    label: 'Landing Pages',
     icon: <FileText size={18} />,
     href: '/learning/campaigns',
     badge: 60,

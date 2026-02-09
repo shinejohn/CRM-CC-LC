@@ -1,0 +1,134 @@
+{
+  "campaign": {
+    "id": "HOOK-008",
+    "week": 7,
+    "day": 44,
+    "type": "Hook",
+    "title": "Newsletter Advertising",
+    "subject": "Get in front of 10,000+ local subscribers this week",
+    "landing_page": "newsletter-advertising",
+    "template": "advertising-offer",
+    "description": "Offer to advertise in local community newsletter"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "10,000 Local Readers",
+      "content": {
+        "headline": "10,000+ Local Subscribers Open This Newsletter Every Week",
+        "subhead": "Your business could be inside"
+      },
+      "narration": "Ten thousand local subscribers open our community newsletter every week. They're looking for local businesses, local events, local recommendations. Your business could be inside, in front of the exact audience you want to reach.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "DataSlide",
+      "title": "Newsletter Stats",
+      "content": {
+        "headline": "Why Newsletter Advertising Works",
+        "stats": {
+          "subscribers": "10,847 active subscribers",
+          "open_rate": "47% average open rate (industry avg: 21%)",
+          "click_rate": "12% click-through rate (industry avg: 2.6%)",
+          "demographics": "82% homeowners, 73% household decision-makers",
+          "geography": "100% within 15-mile radius"
+        }
+      },
+      "narration": "Here's why newsletter advertising works. Ten thousand eight hundred forty-seven active subscribers. Forty-seven percent average open rate—more than double the industry average. Twelve percent click-through rate—nearly five times industry average. Eighty-two percent homeowners, seventy-three percent household decision-makers. One hundred percent within a fifteen-mile radius. This is your exact audience.",
+      "duration_seconds": 35,
+      "audio_file": "slide-02-stats.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "Ad Options",
+      "content": {
+        "headline": "Choose Your Visibility",
+        "options": [
+          {"option": "Featured Sponsor", "placement": "Top of newsletter", "visibility": "100% of opens see it first"},
+          {"option": "Section Sponsor", "placement": "Top of specific section", "visibility": "Contextual relevance"},
+          {"option": "Display Ad", "placement": "In-content placement", "visibility": "Natural integration"},
+          {"option": "Event Highlight", "placement": "Events section", "visibility": "Perfect for promotions"}
+        ]
+      },
+      "narration": "Choose your visibility level. Featured Sponsor: top of the entire newsletter, one hundred percent of opens see it first. Section Sponsor: top of a specific section like events or business news—contextual relevance. Display Ad: in-content placement with natural integration. Event Highlight: perfect if you're promoting an event or time-limited offer.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-options.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "Your Ad Preview",
+      "content": {
+        "headline": "Here's What Your Ad Could Look Like",
+        "preview": {
+          "business_name": "{{business_name}}",
+          "headline": "Sample headline for your business",
+          "description": "Sample description highlighting your key offering",
+          "cta": "Learn More →",
+          "link": "Tracks to your website or listing"
+        },
+        "note": "We'll create the final version based on your input"
+      },
+      "narration": "Here's what your ad could look like. Your business name prominently displayed. A headline that grabs attention. A description highlighting your key offering. A clear call to action. And a tracked link so you know exactly how many people clicked. We'll create the final version based on what you want to promote.",
+      "duration_seconds": 25,
+      "audio_file": "slide-04-preview.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ProofSlide",
+      "title": "Advertiser Results",
+      "content": {
+        "headline": "What Other Advertisers See",
+        "results": [
+          {"business": "Local restaurant", "result": "147 clicks, 23 reservations from one ad"},
+          {"business": "Home services", "result": "89 clicks, 12 quote requests"},
+          {"business": "Retail shop", "result": "234 clicks, coupon redeemed 41 times"}
+        ],
+        "average_cpc": "Average cost per click: $0.47 (Google Ads local avg: $2-5)"
+      },
+      "narration": "What do other advertisers see? A local restaurant got one hundred forty-seven clicks and twenty-three reservations from one ad. A home services company got eighty-nine clicks and twelve quote requests. A retail shop got two hundred thirty-four clicks, coupon redeemed forty-one times. Average cost per click: forty-seven cents. Compare that to two to five dollars for Google Ads. This is efficient reach.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-proof.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "CTASlide",
+      "title": "Book Your Spot",
+      "content": {
+        "headline": "Ready to Reach 10,000 Local Subscribers?",
+        "cta_primary": {
+          "label": "Book Newsletter Ad",
+          "action": "book_ad"
+        },
+        "cta_secondary": {
+          "label": "See Full Media Kit",
+          "action": "view_media_kit"
+        },
+        "urgency": "Next newsletter sends Thursday—book by Tuesday to be included"
+      },
+      "narration": "Ready to reach ten thousand local subscribers? Book your newsletter ad now. Next newsletter sends Thursday—book by Tuesday to be included. Or see the full media kit for all options and pricing. Ten thousand people, your exact audience, waiting to hear about you.",
+      "duration_seconds": 20,
+      "audio_file": "slide-06-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_hook": {
+      "subject": "Get in front of 10,000+ local subscribers this week",
+      "preview_text": "Newsletter ad spots open now",
+      "body": "Hey {{first_name}},\n\n10,847 local subscribers open our community newsletter every week.\n\n47% open rate (industry avg: 21%)\n82% homeowners\n100% within 15 miles\n\nYour business could be in front of them this Thursday.\n\n[SEE YOUR AD OPTIONS →]\n\nAverage cost per click: $0.47\n(Compare to $2-5 for Google Ads)\n\nOne restaurant got 23 reservations from a single ad.\n\nBook by Tuesday to be in this week's edition.\n\n{{sender_name}}\nFibonacco"
+    },
+    "email_3_hook": {
+      "subject": "Your newsletter ad mockup is ready",
+      "preview_text": "See how {{business_name}} would look",
+      "body": "Hey {{first_name}},\n\nWe created a mockup of what {{business_name}}'s newsletter ad could look like:\n\n[SEE YOUR AD MOCKUP →]\n\nThis is ready to run in this week's edition if you approve by Tuesday.\n\n10,000+ local subscribers. 47% open rate. Your exact audience.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "follows": "HOOK-007",
+    "related": ["HOOK-009", "HOOK-010"]
+  }
+}

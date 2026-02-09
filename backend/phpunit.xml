@@ -19,6 +19,9 @@
     </source>
     <php>
         <env name="APP_ENV" value="testing"/>
+        <env name="APP_KEY" value="base64:AHApFITd1iU64CufN0Quc44vlRIw8ExVni4Qo21jcL4="/>
+        <env name="OPENAI_API_KEY" value="sk-dummy-key-for-testing"/>
+        <env name="OPENROUTER_API_KEY" value="sk-dummy-key-for-testing"/>
         <env name="APP_MAINTENANCE_DRIVER" value="file"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="BROADCAST_CONNECTION" value="null"/>

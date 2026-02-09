@@ -67,15 +67,24 @@ import { InterestAnalyticsPage } from './pages/CRM/Analytics/Interest';
 import { PurchaseAnalyticsPage } from './pages/CRM/Analytics/Purchases';
 import { LearningAnalyticsPage } from './pages/CRM/Analytics/Learning';
 import { CampaignListPage } from './pages/CRM/Campaigns/List';
-import { OutboundDashboardPage } from './pages/Outbound/Dashboard';
-import { CreateEmailCampaignPage } from './pages/Outbound/Email/Create';
-import { CreatePhoneCampaignPage } from './pages/Outbound/Phone/Create';
-import { CreateSmsCampaignPage } from './pages/Outbound/SMS/Create';
+import { KanbanBoard } from './pages/CRM/Pipeline/KanbanBoard';
+import { OutboundDashboardPage as StandaloneOutboundDashboard } from './pages/Outbound/Dashboard';
+import { CreateEmailCampaignPage as StandaloneCreateEmailCampaign } from './pages/Outbound/Email/Create';
+import { CreatePhoneCampaignPage as StandaloneCreatePhoneCampaign } from './pages/Outbound/Phone/Create';
+import { CreateSmsCampaignPage as StandaloneCreateSmsCampaign } from './pages/Outbound/SMS/Create';
+import { OutboundDashboardPage } from './pages/LearningCenter/Outbound/Dashboard';
+import { CreateEmailCampaignPage } from './pages/LearningCenter/Outbound/Email/Create';
+import { CreatePhoneCampaignPage } from './pages/LearningCenter/Outbound/Phone/Create';
+import { CreateSmsCampaignPage } from './pages/LearningCenter/Outbound/SMS/Create';
+import { ConversationsPage } from './pages/LearningCenter/Inbound/Conversations';
+import { RepliesPage } from './pages/LearningCenter/Inbound/Replies';
+import { CallsPage } from './pages/LearningCenter/Inbound/Calls';
 import { CommandCenterDashboardPage } from './pages/CommandCenter/Dashboard';
 import { AIPersonalitiesDashboardPage } from './pages/AIPersonalities/Dashboard';
 import { AIPersonalityDetailPage } from './pages/AIPersonalities/Detail';
 import { AIPersonalityAssignPage } from './pages/AIPersonalities/Assign';
 import { AIPersonalityContactsPage } from './pages/AIPersonalities/Contacts';
+import { ServicePurchaseWizardPage } from './command-center/modules/services/wizard';
 
 export function AppRouter() {
   return (
@@ -126,16 +135,17 @@ export function AppRouter() {
         <Route path="/crm/dashboard" element={<CrmDashboardPage />} />
         <Route path="/crm/customers" element={<CustomerListPage />} />
         <Route path="/crm/customers/:id" element={<CustomerDetailPage />} />
+        <Route path="/crm/pipeline" element={<KanbanBoard />} />
         <Route path="/crm/analytics/interest" element={<InterestAnalyticsPage />} />
         <Route path="/crm/analytics/purchases" element={<PurchaseAnalyticsPage />} />
         <Route path="/crm/analytics/learning" element={<LearningAnalyticsPage />} />
         <Route path="/crm/campaigns" element={<CampaignListPage />} />
 
-        {/* Outbound Campaign Routes */}
-        <Route path="/outbound" element={<OutboundDashboardPage />} />
-        <Route path="/outbound/email/create" element={<CreateEmailCampaignPage />} />
-        <Route path="/outbound/phone/create" element={<CreatePhoneCampaignPage />} />
-        <Route path="/outbound/sms/create" element={<CreateSmsCampaignPage />} />
+        {/* Outbound Campaign Routes (Standalone - for backward compatibility) */}
+        <Route path="/outbound" element={<StandaloneOutboundDashboard />} />
+        <Route path="/outbound/email/create" element={<StandaloneCreateEmailCampaign />} />
+        <Route path="/outbound/phone/create" element={<StandaloneCreatePhoneCampaign />} />
+        <Route path="/outbound/sms/create" element={<StandaloneCreateSmsCampaign />} />
 
         {/* Command Center Routes */}
         <Route path="/command-center" element={<CommandCenterDashboardPage />} />
@@ -146,7 +156,7 @@ export function AppRouter() {
         <Route path="/ai-personalities/assign" element={<AIPersonalityAssignPage />} />
         <Route path="/ai-personalities/contacts" element={<AIPersonalityContactsPage />} />
 
-        {/* Learning Center Routes */}
+        {/* Learning Center Routes - Landing Page CMS */}
         <Route path="/learning" element={<LearningCenterIndexPage />} />
         <Route path="/learning/faqs" element={<FAQIndexPage />} />
         <Route path="/learning/business-profile" element={<BusinessProfileIndexPage />} />
@@ -229,7 +239,10 @@ export function AppRouter() {
         <Route path="/learning/services/checkout" element={<ServiceCheckoutPage />} />
         <Route path="/learning/services/:id" element={<ServiceDetailPage />} />
         <Route path="/learning/services/orders/:id/success" element={<OrderConfirmationPage />} />
-        
+
+        {/* Service Purchase Wizard */}
+        <Route path="/command-center/services/buy" element={<ServicePurchaseWizardPage />} />
+
         {/* Campaign Landing Pages - Catch-all must be LAST */}
         <Route path="/learn/:slug" element={<CampaignLandingPage />} />
       </Routes>

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CampaignGenerationApiTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase; protected function setUp(): void { parent::setUp(); $this->createAndAuthenticateUser(); }
 
     public function test_can_generate_campaign(): void
     {

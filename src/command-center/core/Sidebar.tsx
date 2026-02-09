@@ -1,0 +1,118 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router';
+import { 
+  LayoutDashboard, Users, FileText, Megaphone, 
+  ShoppingBag, MessageSquare, Calendar, Settings,
+  ChevronLeft, ChevronRight, Sparkles, Activity
+} from 'lucide-react';
+import { NavItem } from '@/types/command-center';
+
+interface SidebarProps {
+  collapsed: boolean;
+  onToggle: () => void;
+  activeItem?: string;
+  onNavigate?: (path: string) => void;
+}
+
+const navItems: NavItem[] = [
+  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, path: '/command-center' },
+  { id: 'activities', label: 'Activities', icon: Activity, path: '/command-center/activities', badge: 5 },
+  { id: 'customers', label: 'Customers', icon: Users, path: '/command-center/customers' },
+  { id: 'content', label: 'Content', icon: FileText, path: '/command-center/content' },
+  { id: 'campaigns', label: 'Campaigns', icon: Megaphone, path: '/command-center/campaigns' },
+  { id: 'services', label: 'Services', icon: ShoppingBag, path: '/command-center/services' },
+  { id: 'ai-hub', label: 'AI Hub', icon: Sparkles, path: '/command-center/ai-hub' },
+  { id: 'calendar', label: 'Calendar', icon: Calendar, path: '/command-center/calendar' },
+  { id: 'messages', label: 'Messages', icon: MessageSquare, path: '/command-center/messages', badge: 3 },
+];
+
+export function Sidebar({ collapsed, onToggle, activeItem = 'dashboard', onNavigate }: SidebarProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  const handleNavigate = (path: string) => {
+    if (onNavigate) {
+      onNavigate(path);
+    } else {
+      navigate(path);
+    }
+  };
+
+  return (
+    <motion.aside
+      className="fixed left-0 top-16 bottom-0 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 z-30 flex flex-col"
+      animate={{ width: collapsed ? 64 : 256 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+    >
+      {/* Navigation Items */}
+      <nav className="flex-1 py-4 overflow-y-auto">
+        <ul className="space-y-1 px-2">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeItem === item.id;
+            
+            return (
+              <li key={item.id}>
+                <button
+                  onClick={() => handleNavigate(item.path)}
+                  className={`
+                    w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors
+                    ${isActive 
+                      ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' 
+                      : 'text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-700'
+                    }
+                  `}
+                  aria-label={item.label}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  <Icon className="w-5 h-5 flex-shrink-0" />
+                  {!collapsed && (
+                    <>
+                      <span className="flex-1 text-left text-sm font-medium">
+                        {item.label}
+                      </span>
+                      {item.badge && (
+                        <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                          {item.badge}
+                        </span>
+                      )}
+                    </>
+                  )}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      {/* Settings & Collapse Toggle */}
+      <div className="p-2 border-t border-gray-200 dark:border-slate-700">
+        <button
+          onClick={() => handleNavigate('/command-center/settings')}
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+          aria-label="Settings"
+        >
+          <Settings className="w-5 h-5 flex-shrink-0" />
+          {!collapsed && <span className="text-sm font-medium">Settings</span>}
+        </button>
+        
+        <button
+          onClick={onToggle}
+          className="w-full flex items-center justify-center gap-2 px-3 py-2 mt-2 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        >
+          {collapsed ? (
+            <ChevronRight className="w-5 h-5" />
+          ) : (
+            <>
+              <ChevronLeft className="w-5 h-5" />
+              <span className="text-xs">Collapse</span>
+            </>
+          )}
+        </button>
+      </div>
+    </motion.aside>
+  );
+}
+

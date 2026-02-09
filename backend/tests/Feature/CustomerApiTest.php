@@ -16,10 +16,11 @@ class CustomerApiTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+        $this->createAndAuthenticateUser();
+
         // Generate a test tenant ID
         $this->tenantId = (string) Str::uuid();
-        
+
         // Set tenant ID in config for tests
         config(['app.default_tenant_id' => $this->tenantId]);
     }

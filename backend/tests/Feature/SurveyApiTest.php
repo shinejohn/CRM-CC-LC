@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SurveyApiTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase; protected function setUp(): void { parent::setUp(); $this->createAndAuthenticateUser(); }
 
     public function test_can_list_survey_sections(): void
     {

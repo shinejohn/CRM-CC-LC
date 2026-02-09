@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -21,7 +22,8 @@ return new class extends Migration
             $table->string('color', 7)->nullable();
             $table->integer('display_order')->default(0);
             $table->integer('faq_count')->default(0);
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
         
         // Add foreign key and indexes after table creation

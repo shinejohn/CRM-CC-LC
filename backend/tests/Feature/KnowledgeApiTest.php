@@ -14,6 +14,7 @@ class KnowledgeApiTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->createAndAuthenticateUser();
         // Set up any required test data
     }
 

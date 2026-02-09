@@ -68,13 +68,20 @@ class SendEmailCampaign implements ShouldQueue
                     'status' => 'sent',
                     'external_id' => $result['message_id'] ?? null,
                     'sent_at' => now(),
+                    'metadata' => array_merge($recipient->metadata ?? [], [
+                        'provider' => $result['provider'] ?? null,
+                        'ip_pool' => $result['ip_pool'] ?? null,
+                    ]),
                 ]);
 
                 $campaign->increment('sent_count');
             } else {
                 $recipient->update([
                     'status' => 'failed',
-                    'error_message' => 'Failed to send email',
+                    'error_message' => $result['error'] ?? 'Failed to send email',
+                    'metadata' => array_merge($recipient->metadata ?? [], [
+                        'provider' => $result['provider'] ?? null,
+                    ]),
                 ]);
 
                 $campaign->increment('failed_count');

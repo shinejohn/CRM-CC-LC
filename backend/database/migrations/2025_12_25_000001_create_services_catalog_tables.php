@@ -66,7 +66,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('order_number')->unique();
             $table->uuid('tenant_id')->nullable();
-            $table->foreignUuid('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignUuid('customer_id')->nullable()->constrained('customers')->nullOnDelete();
             $table->string('customer_email');
             $table->string('customer_name')->nullable();
@@ -114,7 +114,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('tenant_id')->nullable();
             $table->foreignUuid('customer_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignUuid('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignUuid('service_id')->constrained()->cascadeOnDelete();
             $table->foreignUuid('order_id')->nullable()->constrained()->nullOnDelete();
             $table->string('tier'); // 'trial', 'basic', 'standard', 'premium', 'enterprise'

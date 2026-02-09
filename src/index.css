@@ -9,6 +9,12 @@
    ============================================ */
 @import './styles/learning-center.css';
 
+/* ============================================
+   COMMAND CENTER THEME SYSTEM
+   CC-CORE-02: Theme System
+   ============================================ */
+@import './styles/command-center/variables.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

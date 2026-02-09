@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SearchApiTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase; protected function setUp(): void { parent::setUp(); $this->createAndAuthenticateUser(); }
 
     public function test_can_search_knowledge_base(): void
     {

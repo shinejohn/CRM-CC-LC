@@ -32,19 +32,19 @@ return new class extends Migration
             
             // Status
             $table->boolean('asked')->default(false);
-            $table->timestampTz('asked_at')->nullable();
+            $table->timestamp('asked_at')->nullable();
             $table->uuid('asked_in_conversation_id')->nullable();
             
             $table->boolean('answered')->default(false);
             $table->text('answer')->nullable();
-            $table->timestampTz('answered_at')->nullable();
+            $table->timestamp('answered_at')->nullable();
             
             // If answer needs verification
             $table->boolean('needs_verification')->default(false);
             $table->boolean('verified')->default(false);
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             // Indexes
             $table->index('tenant_id');

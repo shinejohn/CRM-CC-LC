@@ -1,52 +1,160 @@
 {
   "campaign": {
     "id": "HOWTO-010",
-    "week": 10,
-    "day": 10,
-    "type": "HOWTO",
-    "title": "How-To Tutorial",
-    "subject": "How-To Tutorial",
+    "week": 5,
+    "day": 32,
+    "type": "How-To",
+    "title": "Social Connection Guide",
+    "subject": "Connect your social accounts in 5 minutes",
     "landing_page": "social-connection-guide",
     "template": "tutorial",
-    "description": "How-To Tutorial - Guide user through process"
+    "description": "How to connect Facebook, Instagram and other social accounts"
   },
-  "landing_page": {
-    "campaign_id": "HOWTO-010",
-    "landing_page_slug": "social-connection-guide",
-    "url": "/learn/social-connection-guide",
-    "template_id": "tutorial",
-    "template_name": "How-To Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 60,
-    "primary_cta": "start_trial",
-    "secondary_cta": "contact_sales",
-    "ai_persona": "Emma",
-    "ai_tone": "Helpful, step-by-step",
-    "ai_goal": "Guide user through process",
-    "data_capture_fields": "name, email, business_name, setup_preferences",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/social-connection-guide/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "engagement",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week5-how-to",
-    "utm_content": "HOWTO-010"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "How-To Tutorial",
-    "slides": 8,
-    "duration": 60,
-    "purpose": "howto",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "social-connection-guide",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/social-connection-guide/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Connect Social Accounts",
+      "content": {
+        "headline": "Link Your Social Media",
+        "subhead": "5 minutes to connect all accounts"
+      },
+      "narration": "Let's connect your social accounts. Once connected, you can post to all platforms from one place, track engagement across channels, and never miss a message. Takes about five minutes.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "OverviewSlide",
+      "title": "What You'll Connect",
+      "content": {
+        "platforms": [
+          "Facebook Business Page",
+          "Instagram Business",
+          "Google Business Profile",
+          "LinkedIn (optional)"
+        ]
+      },
+      "narration": "Here's what you can connect: Facebook Business Page, Instagram Business account, Google Business Profile, and optionally LinkedIn. Each connection gives you more reach and more convenience.",
+      "duration_seconds": 20,
+      "audio_file": "slide-02-overview.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Step 1: Facebook",
+      "content": {
+        "action": "Connect Facebook",
+        "steps": [
+          "Click 'Connect Facebook'",
+          "Log in to Facebook if needed",
+          "Select your business page",
+          "Grant permissions",
+          "Confirm connection"
+        ]
+      },
+      "narration": "Start with Facebook. Click Connect Facebook. Log in if needed. Select your business page from the list. Grant the requested permissions—we need these to post on your behalf. Confirm, and you're connected.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-facebook.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Step 2: Instagram",
+      "content": {
+        "action": "Connect Instagram",
+        "note": "Instagram connects through Facebook",
+        "steps": [
+          "Ensure Instagram is linked to Facebook page",
+          "Click 'Connect Instagram'",
+          "Select your Instagram business account",
+          "Confirm connection"
+        ]
+      },
+      "narration": "Instagram connects through Facebook. First make sure your Instagram is linked to your Facebook page in Instagram settings. Then click Connect Instagram, select your business account, and confirm. If you see errors, check that Instagram is set as a business account, not personal.",
+      "duration_seconds": 35,
+      "audio_file": "slide-04-instagram.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Step 3: Google",
+      "content": {
+        "action": "Connect Google Business",
+        "steps": [
+          "Click 'Connect Google'",
+          "Sign in with Google account that manages your business",
+          "Select your business location",
+          "Grant permissions"
+        ]
+      },
+      "narration": "For Google Business Profile, click Connect Google. Sign in with the Google account that manages your business profile. Select your business location if you have multiple. Grant permissions. Now your Google profile is connected.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-google.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "Verify Connections",
+      "content": {
+        "action": "Check All Connected",
+        "checklist": [
+          "Green checkmark = connected",
+          "Yellow = needs attention",
+          "Red = disconnected"
+        ]
+      },
+      "narration": "After connecting, verify everything shows green checkmarks. Green means connected and working. Yellow means something needs attention—usually a permission that expired. Red means disconnected and needs to be reconnected.",
+      "duration_seconds": 25,
+      "audio_file": "slide-06-verify.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "TipsSlide",
+      "title": "Pro Tips",
+      "content": {
+        "tips": [
+          "Reconnect quarterly (tokens expire)",
+          "Keep admin access on all accounts",
+          "Enable notifications for connection issues",
+          "Test with a draft post"
+        ]
+      },
+      "narration": "Pro tips for social connections. Plan to reconnect quarterly as some tokens expire. Keep admin access on all your accounts. Enable notifications so you know immediately if something disconnects. Test with a draft post to make sure everything's working.",
+      "duration_seconds": 25,
+      "audio_file": "slide-07-tips.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Connect Now",
+      "content": {
+        "cta_primary": {
+          "label": "Connect Social Accounts",
+          "action": "start_connection"
+        },
+        "cta_secondary": {
+          "label": "Troubleshooting Guide",
+          "action": "view_troubleshoot"
+        }
+      },
+      "narration": "Ready to connect? Start now and have all your accounts linked in five minutes. If you run into issues, check the troubleshooting guide—we cover the most common problems. One connection, all your platforms.",
+      "duration_seconds": 20,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_educational": {
+      "subject": "Connect your social accounts in 5 minutes",
+      "preview_text": "Post everywhere from one place",
+      "body": "Hey {{first_name}},\n\nOnce your social accounts are connected:\n✓ Post to all platforms from one place\n✓ Track engagement across channels\n✓ Never miss a message\n\n[CONNECT YOUR ACCOUNTS →]\n\nSupported: Facebook, Instagram, Google Business, LinkedIn\n\nTakes about 5 minutes.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-011",
+      "HOWTO-013"
+    ],
+    "follows": "HOWTO-009"
   }
 }

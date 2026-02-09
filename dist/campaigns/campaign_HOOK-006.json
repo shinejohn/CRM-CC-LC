@@ -1,52 +1,226 @@
 {
   "campaign": {
     "id": "HOOK-006",
-    "week": 6,
-    "day": 6,
-    "type": "HOOK",
-    "title": "Integration Setup",
-    "subject": "Integration Setup",
+    "week": 4,
+    "day": 25,
+    "type": "Hook",
+    "title": "CRM Integration",
+    "subject": "Connect your CRM and never lose a lead again",
     "landing_page": "crm-integration",
     "template": "integration",
-    "description": "Integration Setup - Get user to take immediate action"
+    "description": "One-click CRM connection to sync leads automatically"
   },
   "landing_page": {
     "campaign_id": "HOOK-006",
     "landing_page_slug": "crm-integration",
-    "url": "/learn/crm-integration",
+    "url": "/connect/crm",
     "template_id": "integration",
     "template_name": "Integration Setup",
     "slide_count": 6,
-    "duration_seconds": 45,
-    "primary_cta": "signup_free",
-    "secondary_cta": "schedule_demo",
-    "ai_persona": "Sarah",
-    "ai_tone": "Excited, helpful",
-    "ai_goal": "Get user to take immediate action",
-    "data_capture_fields": "name, email, business_name, industry",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/crm-integration/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "signup",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week5-hook",
-    "utm_content": "HOOK-006"
+    "duration_seconds": 120,
+    "primary_cta": "connect_crm",
+    "secondary_cta": "see_integrations"
   },
-  "template": {
-    "template_id": "integration",
-    "name": "Integration Setup",
-    "slides": 6,
-    "duration": 45,
-    "purpose": "hook",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "crm-integration",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/crm-integration/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Never Lose a Lead Again",
+      "content": {
+        "headline": "Connect Your CRM in One Click",
+        "subhead": "Every inquiry automatically synced. Zero manual entry.",
+        "visual": "CRM logos connected with sync arrows"
+      },
+      "narration": "How many leads have you lost because they came in through one system and never made it to another? Connect your CRM in one click, and every inquiry automatically syncs. Zero manual entry. Zero lost leads.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "IntegrationSlide",
+      "title": "We Connect With",
+      "content": {
+        "headline": "Integrations Ready to Go",
+        "integrations": [
+          {
+            "name": "Salesforce",
+            "icon": "salesforce",
+            "status": "Available"
+          },
+          {
+            "name": "HubSpot",
+            "icon": "hubspot",
+            "status": "Available"
+          },
+          {
+            "name": "Zoho",
+            "icon": "zoho",
+            "status": "Available"
+          },
+          {
+            "name": "Pipedrive",
+            "icon": "pipedrive",
+            "status": "Available"
+          },
+          {
+            "name": "Monday.com",
+            "icon": "monday",
+            "status": "Available"
+          },
+          {
+            "name": "Airtable",
+            "icon": "airtable",
+            "status": "Available"
+          },
+          {
+            "name": "Google Sheets",
+            "icon": "google",
+            "status": "Available"
+          },
+          {
+            "name": "Custom API",
+            "icon": "api",
+            "status": "Available"
+          }
+        ],
+        "note": "Don't see yours? We probably support it."
+      },
+      "narration": "We connect with the CRMs you actually use. Salesforce, HubSpot, Zoho, Pipedrive, Monday, Airtable, Google Sheets—and custom API if you have your own system. Don't see yours? We probably support it. Check the full list when you connect.",
+      "duration_seconds": 25,
+      "audio_file": "slide-02-integrations.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "FlowSlide",
+      "title": "What Gets Synced",
+      "content": {
+        "headline": "Automatic Sync, Both Ways",
+        "sync_items": [
+          {
+            "item": "New inquiries",
+            "direction": "Fibonacco → Your CRM"
+          },
+          {
+            "item": "Contact updates",
+            "direction": "Both ways"
+          },
+          {
+            "item": "Lead status",
+            "direction": "Both ways"
+          },
+          {
+            "item": "Conversation history",
+            "direction": "Fibonacco → Your CRM"
+          },
+          {
+            "item": "Activity timeline",
+            "direction": "Fibonacco → Your CRM"
+          }
+        ],
+        "benefit": "Your CRM becomes the single source of truth"
+      },
+      "narration": "Here's what gets synced automatically. New inquiries flow from Fibonacco to your CRM instantly. Contact updates sync both ways—change it here, it changes there. Lead status stays synchronized. Conversation history and activity timeline flow into your CRM automatically. Your CRM becomes the single source of truth.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-sync.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "BenefitsSlide",
+      "title": "Why Connect",
+      "content": {
+        "headline": "Stop Copying and Pasting",
+        "benefits": [
+          {
+            "pain": "Manual data entry",
+            "solution": "Automatic sync"
+          },
+          {
+            "pain": "Lost leads",
+            "solution": "Every inquiry captured"
+          },
+          {
+            "pain": "Duplicate records",
+            "solution": "Smart deduplication"
+          },
+          {
+            "pain": "Outdated info",
+            "solution": "Real-time updates"
+          },
+          {
+            "pain": "Scattered conversations",
+            "solution": "Everything in one place"
+          }
+        ]
+      },
+      "narration": "Stop copying and pasting. Manual data entry becomes automatic sync. Lost leads become every inquiry captured. Duplicate records become smart deduplication. Outdated info becomes real-time updates. Scattered conversations become everything in one place. One connection solves all of it.",
+      "duration_seconds": 25,
+      "audio_file": "slide-04-benefits.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ProcessSlide",
+      "title": "Setup Takes 2 Minutes",
+      "content": {
+        "headline": "Connect in 3 Steps",
+        "steps": [
+          {
+            "num": 1,
+            "step": "Select your CRM",
+            "time": "30 seconds"
+          },
+          {
+            "num": 2,
+            "step": "Authorize connection",
+            "time": "1 minute"
+          },
+          {
+            "num": 3,
+            "step": "Map fields (or use defaults)",
+            "time": "30 seconds"
+          }
+        ],
+        "result": "Syncing starts immediately"
+      },
+      "narration": "Setup takes two minutes. Step one: select your CRM from the list—thirty seconds. Step two: authorize the connection by logging into your CRM—one minute. Step three: map your fields or just use our smart defaults—thirty seconds. Then syncing starts immediately.",
+      "duration_seconds": 20,
+      "audio_file": "slide-05-process.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "CTASlide",
+      "title": "Connect Your CRM",
+      "content": {
+        "headline": "Ready to Stop Losing Leads?",
+        "cta_primary": {
+          "label": "Connect Your CRM",
+          "action": "start_connection"
+        },
+        "cta_secondary": {
+          "label": "See All Integrations",
+          "action": "view_integrations"
+        },
+        "reassurance": "Free • 2-minute setup • Disconnect anytime"
+      },
+      "narration": "Ready to stop losing leads? Click 'Connect Your CRM' and you'll be syncing in two minutes. Free, simple setup, and you can disconnect anytime. Every lead captured. Every conversation tracked. Never lose another one.",
+      "duration_seconds": 15,
+      "audio_file": "slide-06-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_hook": {
+      "subject": "Connect your CRM and never lose a lead again",
+      "preview_text": "2-minute setup, automatic sync",
+      "body": "Hey {{first_name}},\n\nHow many leads have you lost to manual data entry?\n\nInquiry comes in here. You copy it to your CRM. Maybe. If you remember. If you have time.\n\nWhat if every inquiry automatically synced to your CRM? Zero manual entry. Zero lost leads.\n\n[CONNECT YOUR CRM →]\n\nWe integrate with:\n• Salesforce\n• HubSpot\n• Zoho\n• Pipedrive\n• And 20+ more\n\n2-minute setup. Free. Syncing starts immediately.\n\n{{sender_name}}\nFibonacco"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-009"
+    ],
+    "follows": "EDU-004",
+    "related": [
+      "HOWTO-026",
+      "EDU-006"
+    ]
   }
 }

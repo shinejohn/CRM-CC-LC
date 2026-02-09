@@ -1,0 +1,150 @@
+{
+  "campaign": {
+    "id": "EDU-010",
+    "week": 7,
+    "day": 46,
+    "type": "Educational",
+    "title": "AI Content Guide",
+    "subject": "AI can write your marketing. Here's how to make it actually good.",
+    "landing_page": "ai-content-guide",
+    "template": "educational",
+    "description": "How to use AI for content creation without sounding generic"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "AI Content Reality",
+      "content": {
+        "headline": "AI Can Write Your Marketing",
+        "subhead": "But there's a right way and a wrong way"
+      },
+      "narration": "AI can write your marketing content. Blog posts, social media, emails, descriptions—all of it. But here's what nobody tells you: there's a right way and a wrong way to use AI for content. The wrong way sounds generic and robotic. The right way sounds like you, but takes a fraction of the time.",
+      "duration_seconds": 20,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "The Generic Problem",
+      "content": {
+        "headline": "Why Most AI Content Sounds the Same",
+        "problems": [
+          {"issue": "No context", "result": "Generic, could-be-anyone content"},
+          {"issue": "No voice guidance", "result": "Corporate-speak instead of your personality"},
+          {"issue": "No specifics", "result": "Vague claims instead of real details"},
+          {"issue": "No editing", "result": "First draft published as final"}
+        ],
+        "example_bad": "We are committed to providing excellent service to our valued customers...",
+        "example_good": "We've been fixing cars in Springfield since 1987. My dad started this shop, and we still treat every customer like family."
+      },
+      "narration": "Why does most AI content sound the same? No context—the AI doesn't know your business, so it writes generic content. No voice guidance—it defaults to corporate-speak instead of your personality. No specifics—vague claims instead of real details. No editing—first drafts published as final. 'We are committed to providing excellent service' could be anyone. 'We've been fixing cars in Springfield since 1987, my dad started this shop'—that's you.",
+      "duration_seconds": 40,
+      "audio_file": "slide-02-problem.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "The Right Way",
+      "content": {
+        "headline": "How to Get AI Content That Sounds Like You",
+        "method": [
+          {"step": "Train it on your business", "how": "Feed it your best content, FAQs, story"},
+          {"step": "Give it your voice", "how": "Examples of how you talk, words you use"},
+          {"step": "Provide specifics", "how": "Real names, real numbers, real stories"},
+          {"step": "Review and refine", "how": "2-5 minutes to add your touch"}
+        ]
+      },
+      "narration": "Here's the right way. Train it on your business—feed it your best existing content, your FAQs, your story. Give it your voice—examples of how you actually talk, words you use, words you don't. Provide specifics—real customer names with permission, real numbers, real stories. Review and refine—spend two to five minutes adding your personal touch. AI writes the draft, you make it yours.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-method.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "The 80/20 Rule",
+      "content": {
+        "headline": "AI Does 80%, You Do 20%",
+        "breakdown": {
+          "ai_does": ["Research and outline", "First draft", "Multiple variations", "Formatting", "SEO optimization"],
+          "you_do": ["Add personal stories", "Include specific details", "Adjust tone", "Final approval"]
+        },
+        "time_comparison": {
+          "without_ai": "2-4 hours per blog post",
+          "with_ai": "20-30 minutes per blog post"
+        }
+      },
+      "narration": "Think of it as eighty-twenty. AI does eighty percent: research, outline, first draft, variations, formatting, SEO optimization. You do twenty percent: add personal stories, include specific details only you know, adjust the tone, give final approval. Without AI, a blog post takes two to four hours. With AI, twenty to thirty minutes. Same quality. Fraction of the time.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-ratio.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ConceptSlide",
+      "title": "Content Types AI Handles",
+      "content": {
+        "headline": "What AI Can Write for Your Business",
+        "content_types": [
+          {"type": "Social media posts", "frequency": "Daily", "time": "5 min review"},
+          {"type": "Blog articles", "frequency": "Weekly", "time": "15-20 min review"},
+          {"type": "Email newsletters", "frequency": "Weekly/monthly", "time": "10 min review"},
+          {"type": "Service descriptions", "frequency": "Once, then update", "time": "10 min review"},
+          {"type": "FAQ answers", "frequency": "Build library", "time": "5 min each"},
+          {"type": "Review responses", "frequency": "As needed", "time": "2 min each"}
+        ]
+      },
+      "narration": "What can AI write for your business? Social media posts—daily content, five minutes to review. Blog articles—weekly content, fifteen to twenty minutes to review. Email newsletters—weekly or monthly, ten minutes. Service descriptions—write once, update occasionally. FAQ answers—build a library, five minutes each. Review responses—as needed, two minutes each. Your entire content operation, streamlined.",
+      "duration_seconds": 35,
+      "audio_file": "slide-05-types.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "ProofSlide",
+      "title": "Real Results",
+      "content": {
+        "case_study": {
+          "business": "Home cleaning service",
+          "before": "1 blog post per month, 2 social posts per week",
+          "after": "4 blog posts per month, daily social posts",
+          "time_change": "From 8 hours/month to 3 hours/month",
+          "results": "Website traffic up 156%, inquiries up 43%",
+          "quote": "The AI learned our voice. People comment that they love our personality online—they don't know it's AI-assisted."
+        }
+      },
+      "narration": "Real example. Home cleaning service. Before AI: one blog post a month, two social posts a week, eight hours of work. After AI: four blog posts a month, daily social posts, three hours of work. Results: website traffic up one hundred fifty-six percent, inquiries up forty-three percent. The owner told us: 'The AI learned our voice. People comment that they love our personality online—they don't know it's AI-assisted.'",
+      "duration_seconds": 35,
+      "audio_file": "slide-06-proof.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "CTASlide",
+      "title": "Start Creating with AI",
+      "content": {
+        "headline": "Ready to Create More Content in Less Time?",
+        "cta_primary": {
+          "label": "Set Up AI Content",
+          "action": "setup_content_ai"
+        },
+        "cta_secondary": {
+          "label": "See Sample Content",
+          "action": "view_samples"
+        }
+      },
+      "narration": "Ready to create more content in less time? Set up AI content now—we'll train it on your business, your voice, your specifics. Or see sample content first to see what's possible. Either way, you're about to get your time back while publishing more than ever.",
+      "duration_seconds": 20,
+      "audio_file": "slide-07-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_educational": {
+      "subject": "AI can write your marketing. Here's how to make it actually good.",
+      "preview_text": "The difference between generic and great",
+      "body": "Hey {{first_name}},\n\nAI can write your marketing content.\n\nBut most AI content sounds generic and robotic. Why?\n\n❌ No business context\n❌ No voice guidance  \n❌ No specific details\n❌ No human review\n\nThe right way:\n\n✓ Train AI on YOUR business\n✓ Give it YOUR voice\n✓ Provide real specifics\n✓ Review in 5-10 minutes\n\nResult: Content that sounds like you, in a fraction of the time.\n\n[WATCH THE 3-MINUTE GUIDE →]\n\nOne cleaning service went from 1 blog post/month to 4—in LESS time.\n\n{{sender_name}}\nFibonacco"
+    }
+  },
+  "connections": {
+    "leads_to": ["HOWTO-013"],
+    "follows": "EDU-009",
+    "related": ["EDU-006", "EDU-007"]
+  }
+}

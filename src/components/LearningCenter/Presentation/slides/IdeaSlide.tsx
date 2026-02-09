@@ -51,3 +51,7 @@ export const IdeaSlide: React.FC<IdeaSlideProps> = ({
   );
 };
 
+
+
+
+

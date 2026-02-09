@@ -1,0 +1,153 @@
+{
+  "campaign": {
+    "id": "EDU-012",
+    "week": 9,
+    "day": 58,
+    "type": "Educational",
+    "title": "Data Privacy for Small Business",
+    "subject": "Your customers care about privacy. Here's what you need to know.",
+    "landing_page": "data-privacy-guide",
+    "template": "educational",
+    "description": "Understanding data privacy obligations and best practices for SMBs"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Privacy Matters",
+      "content": {
+        "headline": "Your Customers Care About Privacy",
+        "stats": {
+          "concern": "79% of consumers are concerned about how businesses use their data",
+          "trust": "81% say they'd stop doing business with a company after a data breach",
+          "preference": "73% prefer businesses with clear privacy practices"
+        }
+      },
+      "narration": "Privacy isn't just for big tech companies. Your customers care—a lot. Seventy-nine percent are concerned about how businesses use their data. Eighty-one percent would stop doing business with you after a data breach. Seventy-three percent prefer businesses with clear privacy practices. Privacy is a competitive advantage now.",
+      "duration_seconds": 25,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "What Data You Collect",
+      "content": {
+        "headline": "You Probably Collect More Than You Think",
+        "data_types": [
+          {"type": "Contact info", "examples": "Name, email, phone, address"},
+          {"type": "Transaction data", "examples": "What they bought, when, how much"},
+          {"type": "Communication history", "examples": "Emails, calls, messages"},
+          {"type": "Preferences", "examples": "What they like, how they interact"},
+          {"type": "Technical data", "examples": "IP addresses, device info from website"}
+        ]
+      },
+      "narration": "You probably collect more data than you realize. Contact info: names, emails, phones, addresses. Transaction data: what they bought, when, how much. Communication history: every email, call, and message. Preferences: what they like, how they interact with you. Technical data: IP addresses and device info from your website. All of this is data you're responsible for protecting.",
+      "duration_seconds": 30,
+      "audio_file": "slide-02-data.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "Your Obligations",
+      "content": {
+        "headline": "What the Law Requires",
+        "requirements": [
+          {"requirement": "Tell people what you collect", "how": "Privacy policy on your website"},
+          {"requirement": "Protect data from breaches", "how": "Secure storage, access controls"},
+          {"requirement": "Allow deletion requests", "how": "Process within required timeframe"},
+          {"requirement": "Get consent for marketing", "how": "Opt-in for emails and texts"},
+          {"requirement": "Report breaches", "how": "Notify affected customers if breach occurs"}
+        ],
+        "note": "Requirements vary by state/country—some are stricter than others"
+      },
+      "narration": "What does the law require? You must tell people what you collect—that means a privacy policy on your website. Protect data from breaches—secure storage, access controls. Allow deletion requests—process them within required timeframes. Get consent for marketing—real opt-in for emails and texts. Report breaches if they happen—notify affected customers. Requirements vary by location, but these basics apply almost everywhere.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-obligations.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "Best Practices",
+      "content": {
+        "headline": "Privacy Best Practices for Small Business",
+        "practices": [
+          {"practice": "Collect only what you need", "why": "Less data = less risk"},
+          {"practice": "Use secure tools", "why": "Encrypted, reputable platforms"},
+          {"practice": "Limit access", "why": "Only people who need it should have it"},
+          {"practice": "Keep it updated", "why": "Delete old data you don't need"},
+          {"practice": "Be transparent", "why": "Tell customers what you do with their info"}
+        ]
+      },
+      "narration": "Best practices for small business. Collect only what you need—less data means less risk. Use secure tools—encrypted, reputable platforms. Limit access—only people who need data should have it. Keep it updated—delete old data you don't need anymore. Be transparent—tell customers what you do with their information. These practices protect you and build trust.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-practices.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ConceptSlide",
+      "title": "Privacy as Trust",
+      "content": {
+        "headline": "Privacy Is Actually a Marketing Advantage",
+        "advantages": [
+          {"advantage": "Differentiation", "how": "\"We respect your privacy\" is a selling point"},
+          {"advantage": "Customer trust", "how": "People share more when they trust you"},
+          {"advantage": "Better data quality", "how": "Consent-based data is more accurate"},
+          {"advantage": "Reduced risk", "how": "Fewer breaches, fewer legal issues"},
+          {"advantage": "Future-proof", "how": "Regulations are only getting stricter"}
+        ]
+      },
+      "narration": "Here's the flip side: privacy is actually a marketing advantage. Differentiation—'We respect your privacy' is a real selling point now. Customer trust—people share more when they trust you. Better data quality—consent-based data is more accurate and useful. Reduced risk—fewer breaches, fewer legal headaches. Future-proof—regulations are only getting stricter, so get ahead now.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-advantage.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "ActionSlide",
+      "title": "Your Privacy Checklist",
+      "content": {
+        "headline": "Quick Privacy Wins for Your Business",
+        "checklist": [
+          {"item": "Add a privacy policy to your website", "time": "30 minutes"},
+          {"item": "Review what data you collect", "time": "15 minutes"},
+          {"item": "Check your email opt-in process", "time": "10 minutes"},
+          {"item": "Secure your customer database", "time": "Varies"},
+          {"item": "Create a data deletion process", "time": "30 minutes"}
+        ]
+      },
+      "narration": "Quick privacy wins you can do today. Add a privacy policy to your website—thirty minutes. Review what data you actually collect—fifteen minutes. Check your email opt-in process is compliant—ten minutes. Secure your customer database with proper access controls—time varies. Create a simple process for deletion requests—thirty minutes. Small investments, big protection.",
+      "duration_seconds": 30,
+      "audio_file": "slide-06-checklist.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "CTASlide",
+      "title": "Get Privacy-Ready",
+      "content": {
+        "headline": "Ready to Build Customer Trust Through Privacy?",
+        "cta_primary": {
+          "label": "Get the Privacy Checklist",
+          "action": "download_checklist"
+        },
+        "cta_secondary": {
+          "label": "Review Our Privacy Practices",
+          "action": "view_privacy"
+        }
+      },
+      "narration": "Ready to build customer trust through privacy? Download the complete privacy checklist—everything you need to get compliant and build trust. Or review our privacy practices to see how we handle your data. Privacy isn't a burden—it's an opportunity to stand out.",
+      "duration_seconds": 20,
+      "audio_file": "slide-07-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_educational": {
+      "subject": "Your customers care about privacy. Here's what you need to know.",
+      "preview_text": "Privacy is now a competitive advantage",
+      "body": "Hey {{first_name}},\n\nPrivacy isn't just for big tech.\n\n• 79% of consumers worry about how businesses use their data\n• 81% would stop doing business after a breach\n• 73% prefer businesses with clear privacy practices\n\nYou probably collect more data than you realize:\n→ Contact info\n→ Transaction history\n→ Communication records\n→ Website visitor data\n\nAll of this is data you're responsible for.\n\n[WATCH THE 3-MINUTE GUIDE →]\n\nGood news: Privacy done right is actually a marketing advantage.\n\n{{sender_name}}\nFibonacco"
+    }
+  },
+  "connections": {
+    "leads_to": ["HOWTO-025"],
+    "follows": "EDU-011",
+    "related": ["EDU-006", "EDU-011"]
+  }
+}

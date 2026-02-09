@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PublishingApiTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase; protected function setUp(): void { parent::setUp(); $this->createAndAuthenticateUser(); }
 
     public function test_can_get_publishing_dashboard(): void
     {

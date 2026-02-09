@@ -1,5 +1,5 @@
 {
-  "name": "magic-patterns-vite-template",
+  "name": "learning-center",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -13,13 +13,30 @@
     "test:coverage": "vitest --coverage",
     "test:run": "vitest run",
     "test:navigation": "playwright test navigation-audit.test.ts",
-    "test:navigation:headed": "playwright test navigation-audit.test.ts --headed"
+    "test:navigation:headed": "playwright test navigation-audit.test.ts --headed",
+    "verify": "node scripts/verify/index.js",
+    "verify:structure": "node scripts/verify/structure.js",
+    "verify:types": "node scripts/verify/types.js",
+    "verify:components": "node scripts/verify/components.js",
+    "verify:services": "node scripts/verify/services.js",
+    "verify:routing": "node scripts/verify/routing.js",
+    "verify:tests": "node scripts/verify/tests.js",
+    "verify:build": "node scripts/verify/build.js",
+    "verify:e2e": "node scripts/verify/e2e.js",
+    "verify:full": "node scripts/verify-implementation.js",
+    "verify:dev": "node scripts/verify-dev.js",
+    "verify:extended": "node scripts/verify-extended.js",
+    "data-dictionary": "node scripts/generate-data-dictionary.js",
+    "prepare": "husky install || true"
   },
   "dependencies": {
+    "framer-motion": "^12.27.5",
     "lucide-react": "0.522.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router": "^7.0.0"
+    "react-markdown": "^10.1.0",
+    "react-router": "^7.0.0",
+    "zustand": "^5.0.10"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",
@@ -33,6 +50,7 @@
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/coverage-v8": "^4.0.16",
     "@vitest/ui": "^4.0.16",
     "autoprefixer": "latest",
     "eslint": "^8.50.0",

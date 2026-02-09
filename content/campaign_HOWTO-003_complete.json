@@ -1,0 +1,220 @@
+{
+  "campaign": {
+    "id": "HOWTO-003",
+    "week": 2,
+    "day": 9,
+    "type": "How-To",
+    "title": "Event Creation Guide",
+    "subject": "Post events that actually get attendance",
+    "landing_page": "event-creation-guide",
+    "template": "tutorial",
+    "description": "How to create compelling events that people actually attend"
+  },
+  "landing_page": {
+    "campaign_id": "HOWTO-003",
+    "landing_page_slug": "event-creation-guide",
+    "url": "/learn/event-creation-guide",
+    "template_id": "tutorial",
+    "template_name": "How-To Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 300,
+    "primary_cta": "create_event",
+    "secondary_cta": "view_examples",
+    "ai_persona": "Emma",
+    "ai_tone": "Practical, encouraging",
+    "ai_goal": "Get user to create an effective event",
+    "data_capture_fields": "name, email, business_name, event_type",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/event-creation-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "event_created",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week2-how-to",
+    "utm_content": "HOWTO-003"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "TutorialIntroSlide",
+      "title": "Events That Get Attendance",
+      "content": {
+        "headline": "How to Create Events People Actually Attend",
+        "subhead": "The difference between an event that flops and one that fills up",
+        "expectations": {
+          "time": "10 minutes",
+          "difficulty": "Easy",
+          "outcome": "A compelling event that drives attendance"
+        }
+      },
+      "narration": "There's a huge difference between posting an event and posting an event people actually attend. In the next ten minutes, I'm going to show you exactly what makes the difference. By the end, you'll know how to create events that fill up, not flop.",
+      "duration_seconds": 20,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "The Anatomy of a Great Event",
+      "content": {
+        "headline": "What Makes Events Work",
+        "elements": [
+          {"element": "Compelling Title", "impact": "3x more clicks"},
+          {"element": "Clear Value", "impact": "Why should I care?"},
+          {"element": "Specific Details", "impact": "Reduces friction"},
+          {"element": "Great Image", "impact": "2x more engagement"},
+          {"element": "Easy Action", "impact": "One-click RSVP"}
+        ],
+        "insight": "Most events fail because they're vague. Specificity wins."
+      },
+      "narration": "Great events have five things. A compelling title—this alone can triple your clicks. Clear value—people need to know why they should care. Specific details—date, time, location, what to expect. A great image—doubles your engagement. And an easy action—one click to RSVP or save. Most events fail because they're too vague. Specificity wins.",
+      "duration_seconds": 35,
+      "audio_file": "slide-02-anatomy.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Step 1: Write a Great Title",
+      "content": {
+        "headline": "Step 1: Write a Title That Gets Clicks",
+        "formula": "[Benefit/Hook] + [What It Is] + [Your Business]",
+        "bad_examples": [
+          "Sale Event",
+          "Workshop",
+          "Our Grand Opening"
+        ],
+        "good_examples": [
+          "50% Off Everything: Summer Blowout at Martinez Boutique",
+          "Free DIY Home Repair Workshop (Learn to Fix Anything)",
+          "Grand Opening Celebration: Free Samples & Live Music"
+        ],
+        "tip": "Ask yourself: Would I click on this?"
+      },
+      "narration": "Step one: write a title that gets clicks. Use this formula: benefit or hook, plus what it is, plus your business name. Bad titles are vague: 'Sale Event,' 'Workshop,' 'Grand Opening.' Good titles are specific: 'Fifty Percent Off Everything: Summer Blowout at Martinez Boutique.' 'Free DIY Home Repair Workshop—Learn to Fix Anything.' Ask yourself: would I click on this? If not, rewrite it.",
+      "duration_seconds": 40,
+      "audio_file": "slide-03-title.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Step 2: Make the Value Clear",
+      "content": {
+        "headline": "Step 2: Answer 'Why Should I Care?'",
+        "questions_to_answer": [
+          "What will I get/learn/experience?",
+          "Is it worth my time?",
+          "What's in it for me specifically?"
+        ],
+        "value_examples": [
+          {"event": "Workshop", "value": "Leave with 3 skills you can use immediately"},
+          {"event": "Sale", "value": "Save $50-200 on items you're already buying"},
+          {"event": "Open House", "value": "Free food, live music, 20% off your first visit"}
+        ],
+        "tip": "Lead with the benefit, not the logistics."
+      },
+      "narration": "Step two: make the value clear. Answer the question: why should I care? What will I get, learn, or experience? Is it worth my time? What's in it for me? For a workshop: 'Leave with three skills you can use immediately.' For a sale: 'Save fifty to two hundred dollars on items you're already buying.' Lead with the benefit, not the logistics. People need to want it before they need the details.",
+      "duration_seconds": 35,
+      "audio_file": "slide-04-value.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Step 3: Include All the Details",
+      "content": {
+        "headline": "Step 3: Remove Every Barrier",
+        "required_details": [
+          {"detail": "Date & Time", "format": "Day, Date at Time (include timezone)"},
+          {"detail": "Location", "format": "Full address + parking/access notes"},
+          {"detail": "Cost", "format": "Free, $X, or 'included with purchase'"},
+          {"detail": "What to Bring/Expect", "format": "Reduce anxiety about showing up"},
+          {"detail": "RSVP/Capacity", "format": "Limited spots create urgency"}
+        ],
+        "checklist": "If someone has to ask a question before attending, you forgot something."
+      },
+      "narration": "Step three: include all the details. Every question someone might have, answer it. Date and time—include the day of week and timezone. Location—full address plus parking notes. Cost—say if it's free. What to bring or expect—reduce the anxiety about showing up. And if there's limited capacity, say so—it creates urgency. Here's your test: if someone would have to ask a question before attending, you forgot something.",
+      "duration_seconds": 40,
+      "audio_file": "slide-05-details.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "Step 4: Choose a Great Image",
+      "content": {
+        "headline": "Step 4: Use an Image That Pops",
+        "image_tips": [
+          "Show the experience—people enjoying, learning, participating",
+          "Bright, well-lit photos outperform dark ones",
+          "Faces get more engagement than objects",
+          "Horizontal orientation works best",
+          "Don't use stock photos if you have real ones"
+        ],
+        "specs": "Minimum 1200x630 pixels for best display",
+        "no_image": "No photo? Use an eye-catching graphic or your best storefront shot."
+      },
+      "narration": "Step four: use an image that pops. Show the experience—people enjoying themselves, learning something, participating. Bright, well-lit photos outperform dark ones. Faces get more engagement than objects. Horizontal orientation displays best across platforms. And if you have real photos from past events, use those instead of stock photos. Minimum 1200 by 630 pixels for best display.",
+      "duration_seconds": 35,
+      "audio_file": "slide-06-image.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "StepSlide",
+      "title": "Step 5: Add Urgency & Action",
+      "content": {
+        "headline": "Step 5: Make Taking Action Easy",
+        "urgency_techniques": [
+          "Limited spots: 'Only 20 spots available'",
+          "Early bird: 'First 10 registrations get a bonus'",
+          "Deadline: 'RSVP by Friday for free parking'",
+          "Scarcity: 'Last year sold out in 3 days'"
+        ],
+        "action_options": [
+          "One-click RSVP (no account required)",
+          "Add to calendar button",
+          "Share with friends option"
+        ],
+        "tip": "Every extra step loses 50% of attendees. Make it frictionless."
+      },
+      "narration": "Step five: add urgency and make action easy. Urgency techniques: 'Only 20 spots available.' 'First ten registrations get a bonus.' 'RSVP by Friday.' 'Last year sold out.' Then make the action frictionless. One-click RSVP, no account required. Add to calendar button. Share button. Remember: every extra step you add loses fifty percent of attendees. Friction kills attendance.",
+      "duration_seconds": 35,
+      "audio_file": "slide-07-action.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Create Your Event",
+      "content": {
+        "headline": "Ready to Fill Your Next Event?",
+        "cta_primary": {
+          "label": "Create Your Event",
+          "action": "open_event_creator",
+          "description": "Use our guided template"
+        },
+        "cta_secondary": {
+          "label": "See Top-Performing Events",
+          "action": "view_examples",
+          "description": "Get inspired by what's working"
+        },
+        "checklist": [
+          "Compelling title with clear benefit",
+          "Value proposition in first paragraph",
+          "All logistics included",
+          "Eye-catching image",
+          "One-click RSVP"
+        ]
+      },
+      "narration": "Ready to fill your next event? Click 'Create Your Event' and use our guided template. It walks you through each step we just covered—title, value, details, image, action. Or click to see top-performing events and get inspired by what's working right now. Your next event could be the one everyone's talking about. Let's make it happen.",
+      "duration_seconds": 25,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_tutorial": {
+      "subject": "Post events that actually get attendance",
+      "preview_text": "The difference between a flop and a full house",
+      "body": "Hey {{first_name}},\n\nThere's a huge difference between posting an event and posting an event people actually attend.\n\nMost events flop because they're vague. Great events are specific.\n\nI put together a 10-minute guide that shows you exactly what works:\n\n✓ How to write titles that get 3x more clicks\n✓ Making your value proposition irresistible\n✓ The details you MUST include (or people won't show)\n✓ Image tips that double engagement\n✓ Creating urgency without being sleazy\n\n[START THE TUTORIAL →]\n\nBy the end, you'll know exactly how to create events that fill up.\n\n{{sender_name}}\nFibonacco\n\nP.S. The tutorial includes examples of top-performing events so you can see what's actually working."
+    }
+  },
+  "connections": {
+    "leads_to": ["HOOK-002"],
+    "follows": "EDU-002",
+    "related": ["HOWTO-004", "HOWTO-005"]
+  }
+}

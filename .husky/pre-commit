@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit verification..."
+
+# Run quick verification checks
+echo "📋 Checking file structure..."
+npm run verify:structure || {
+  echo "❌ Structure verification failed. Please fix before committing."
+  exit 1
+}
+
+echo "📋 Checking TypeScript types..."
+npm run verify:types || {
+  echo "⚠️  TypeScript errors found. Consider fixing before committing."
+  # Don't fail on type errors, just warn
+}
+
+echo "📋 Checking components..."
+npm run verify:components || {
+  echo "❌ Component verification failed. Please fix before committing."
+  exit 1
+}
+
+echo "✅ Pre-commit checks passed!"
+

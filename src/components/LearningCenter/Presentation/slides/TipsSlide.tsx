@@ -65,3 +65,7 @@ export const TipsSlide: React.FC<TipsSlideProps> = ({
   );
 };
 
+
+
+
+

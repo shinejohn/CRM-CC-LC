@@ -26,8 +26,8 @@ return new class extends Migration
             $table->json('structure')->nullable(); // Content structure/outline
             $table->boolean('is_active')->default(true);
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             $table->index('tenant_id');
             $table->index('type');
@@ -56,8 +56,8 @@ return new class extends Migration
             
             // Workflow
             $table->uuid('assigned_to')->nullable(); // Reviewer/approver
-            $table->timestampTz('scheduled_publish_at')->nullable();
-            $table->timestampTz('published_at')->nullable();
+            $table->timestamp('scheduled_publish_at')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->uuid('published_by')->nullable();
             
             // Publishing
@@ -66,8 +66,8 @@ return new class extends Migration
             
             $table->text('notes')->nullable();
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             $table->index('tenant_id');
             $table->index('type');
@@ -93,7 +93,7 @@ return new class extends Migration
             $table->uuid('created_by')->nullable();
             $table->text('change_notes')->nullable();
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
             
             $table->foreign('content_id')
                   ->references('id')
@@ -118,7 +118,7 @@ return new class extends Migration
             $table->text('notes')->nullable();
             $table->json('metadata')->nullable();
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
             
             $table->foreign('content_id')
                   ->references('id')

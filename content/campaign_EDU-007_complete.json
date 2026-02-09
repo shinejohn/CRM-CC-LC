@@ -1,0 +1,185 @@
+{
+  "campaign": {
+    "id": "EDU-007",
+    "week": 6,
+    "day": 36,
+    "type": "Educational",
+    "title": "AI Content Creation",
+    "subject": "AI writes. You approve. Content happens.",
+    "landing_page": "ai-content",
+    "template": "educational",
+    "description": "How AI content creation works - consistency beats perfection"
+  },
+  "landing_page": {
+    "campaign_id": "EDU-007",
+    "landing_page_slug": "ai-content",
+    "url": "/learn/ai-content",
+    "template_id": "educational",
+    "template_name": "Educational Content",
+    "slide_count": 7,
+    "duration_seconds": 180,
+    "primary_cta": "activate_ai_content",
+    "secondary_cta": "download_article",
+    "ai_persona": "Sarah",
+    "ai_tone": "Practical, encouraging, demystifying"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "The Content Problem",
+      "content": {
+        "headline": "You Know You Should Post More",
+        "subhead": "But who has the time?",
+        "visual": "Empty content calendar with question marks"
+      },
+      "narration": "You know you should post more. Social media, blog posts, email newsletters, announcements—everyone says you need content. But who has the time? You're running a business. The content falls off. Then the visibility drops. It's a vicious cycle. What if there was another way?",
+      "duration_seconds": 20,
+      "audio_file": "slide-01-problem.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "AI Writes. You Approve.",
+      "content": {
+        "headline": "The New Content Model",
+        "flow": [
+          {"step": 1, "action": "AI drafts content based on your business", "you": "Nothing"},
+          {"step": 2, "action": "You review in 2 minutes", "you": "Quick review"},
+          {"step": 3, "action": "Click approve (or edit)", "you": "One click"},
+          {"step": 4, "action": "Content publishes automatically", "you": "Nothing"}
+        ],
+        "result": "Consistent content without the time drain"
+      },
+      "narration": "Here's the new model. AI drafts content based on your business—you do nothing. You review it in two minutes—quick scan. Click approve or make quick edits—one click. Content publishes automatically—you do nothing. The result: consistent content without the time drain. You stay visible without becoming a full-time content creator.",
+      "duration_seconds": 30,
+      "audio_file": "slide-02-model.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "What AI Can Create",
+      "content": {
+        "headline": "AI Creates All Types of Content",
+        "content_types": [
+          {"type": "Social posts", "frequency": "Daily", "time": "2 min review"},
+          {"type": "Blog articles", "frequency": "Weekly", "time": "5 min review"},
+          {"type": "Email newsletters", "frequency": "Weekly/Monthly", "time": "5 min review"},
+          {"type": "Announcements", "frequency": "As needed", "time": "2 min review"},
+          {"type": "Event descriptions", "frequency": "As needed", "time": "3 min review"},
+          {"type": "Service descriptions", "frequency": "Once", "time": "10 min review"}
+        ]
+      },
+      "narration": "AI can create all types of content. Social posts—daily, two-minute review. Blog articles—weekly, five minutes to review. Email newsletters—weekly or monthly, five minutes. Announcements, event descriptions, service descriptions—as needed, quick review. The AI adapts to your voice, your business, your audience. You just approve or adjust.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-types.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "Consistency Beats Perfection",
+      "content": {
+        "headline": "The Secret: Consistency > Perfection",
+        "comparison": {
+          "perfectionist": {
+            "posts": "2 perfect posts/month",
+            "reach": "200 people",
+            "algorithm": "Punishes inconsistency"
+          },
+          "consistent": {
+            "posts": "20 good posts/month",
+            "reach": "2,000 people",
+            "algorithm": "Rewards consistency"
+          }
+        },
+        "insight": "10x reach. Same total effort."
+      },
+      "narration": "Here's the secret nobody tells you: consistency beats perfection. Two perfect posts per month reaches maybe two hundred people. The algorithm punishes inconsistency. Twenty good posts per month reaches two thousand people. The algorithm rewards consistency. Ten times the reach. Probably the same total effort. You don't need perfect content. You need present content.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-consistency.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ConceptSlide",
+      "title": "How AI Learns Your Voice",
+      "content": {
+        "headline": "AI Sounds Like You (Not a Robot)",
+        "training": [
+          {"source": "Your website", "learns": "Your terminology, services, approach"},
+          {"source": "Past content", "learns": "Your tone and style"},
+          {"source": "Your feedback", "learns": "What you like and don't like"},
+          {"source": "Industry context", "learns": "What resonates in your field"}
+        ],
+        "result": "Content that sounds authentically like your business"
+      },
+      "narration": "But does AI content sound robotic? Not anymore. AI learns your voice from your website—your terminology, services, approach. From past content—your tone and style. From your feedback—what you like and don't like. From industry context—what resonates in your field. After a few rounds of feedback, AI produces content that sounds authentically like your business. Not generic. Not robotic. Yours.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-voice.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "ProofSlide",
+      "title": "The Business That Posts Every Day",
+      "content": {
+        "case_study": {
+          "business": "Boutique fitness studio",
+          "before": "1-2 posts/month, constantly stressed about content",
+          "after": "Daily posts, 10 minutes/week total on content",
+          "result": "Social following grew 340%, inquiries up 67%",
+          "quote": "I finally feel like we have a real social media presence without hiring anyone."
+        }
+      },
+      "narration": "Real example. A boutique fitness studio. Before: one to two posts a month, constantly stressed about content. After enabling AI content: daily posts, ten minutes per week total on content. Result: social following grew three hundred forty percent, inquiries up sixty-seven percent. The owner said: 'I finally feel like we have a real social media presence without hiring anyone.'",
+      "duration_seconds": 30,
+      "audio_file": "slide-06-proof.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "CTASlide",
+      "title": "Activate AI Content",
+      "content": {
+        "headline": "Ready to Post Consistently Without the Work?",
+        "cta_primary": {
+          "label": "Activate AI Content",
+          "action": "enable_ai_content"
+        },
+        "cta_secondary": {
+          "label": "Download: The Business That Posts Every Day",
+          "action": "download_article"
+        },
+        "assurance": "Try it free. Cancel anytime. Your voice, amplified."
+      },
+      "narration": "Ready to post consistently without the work? Activate AI Content now—try it free, cancel anytime. Or download the full story about the business that posts every day. Your voice, amplified. Your visibility, maintained. Your time, protected. Click activate and let's make content happen.",
+      "duration_seconds": 20,
+      "audio_file": "slide-07-cta.mp3"
+    }
+  ],
+  "article": {
+    "title": "The Business That Posts Every Day (Without Trying)",
+    "subtitle": "How AI content creation transformed a burned-out business owner's marketing",
+    "word_count": 2000,
+    "file_path": "/content/articles/EDU-007-ai-content.md"
+  },
+  "emails": {
+    "email_1_educational": {
+      "subject": "AI writes. You approve. Content happens.",
+      "preview_text": "Finally, consistent content without the work",
+      "body": "Hey {{first_name}},\n\nYou know you should post more.\n\nBut who has time to:\n• Write social posts daily\n• Create blog articles weekly\n• Send email newsletters regularly\n• Keep up with all the platforms\n\nWhat if AI did the writing, and you just approved?\n\n[WATCH THE 3-MINUTE PRESENTATION →]\n\nOne fitness studio went from 2 posts/month to daily posts—spending only 10 minutes/week on content.\n\nTheir following grew 340%.\n\nConsistency beats perfection. AI makes consistency possible.\n\n{{sender_name}}\nFibonacco"
+    },
+    "email_2a_engaged": {
+      "subject": "Ready to activate AI content?",
+      "preview_text": "Your first AI-drafted post is waiting",
+      "body": "Hey {{first_name}},\n\nYou watched the AI content presentation. Key takeaways:\n\n• AI drafts, you approve (2-5 min reviews)\n• Consistency beats perfection (10x reach difference)\n• AI learns your voice over time\n• Works for social, blogs, emails, announcements\n\nReady to activate for {{business_name}}?\n\n[ACTIVATE AI CONTENT →]\n\nYour first AI-drafted post is waiting.\n\n{{sender_name}}"
+    },
+    "email_2b_reengage": {
+      "subject": "Still writing all your own content?",
+      "preview_text": "There's an easier way",
+      "body": "Hey {{first_name}},\n\nQuick reality check:\n\nHow many hours did you spend on content this month?\n\nHow many posts actually went out?\n\nAI content creation:\n→ AI writes based on your business\n→ You review in 2-5 minutes\n→ Publish with one click\n→ Stay consistent without the time drain\n\n3 minutes to see how:\n\n[WATCH THE PRESENTATION →]\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": ["HOWTO-013"],
+    "follows": "EDU-006",
+    "related": ["HOOK-008", "HOWTO-028"]
+  }
+}

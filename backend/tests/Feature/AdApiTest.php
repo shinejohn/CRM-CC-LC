@@ -8,6 +8,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class AdApiTest extends TestCase
 {
     use RefreshDatabase;
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->createAndAuthenticateUser();
+    }
 
     public function test_can_list_ads(): void
     {

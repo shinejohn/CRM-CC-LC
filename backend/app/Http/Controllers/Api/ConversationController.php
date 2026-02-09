@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreConversationRequest;
 use App\Models\Conversation;
 use App\Models\ConversationMessage;
 use App\Models\Customer;
@@ -75,25 +76,15 @@ class ConversationController extends Controller
     /**
      * Create a new conversation
      */
-    public function store(Request $request): JsonResponse
+    public function store(StoreConversationRequest $request): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $tenantId = $request->getTenantId();
         
         if (!$tenantId) {
             return response()->json(['error' => 'Tenant ID required'], 400);
         }
         
-        $validated = $request->validate([
-            'customer_id' => 'nullable|exists:customers,id',
-            'session_id' => 'nullable|string|max:100',
-            'entry_point' => 'nullable|string|max:100',
-            'template_id' => 'nullable|string|max:50',
-            'slide_at_start' => 'nullable|integer',
-            'presenter_id' => 'nullable|string|max:50',
-            'user_agent' => 'nullable|string',
-            'ip_address' => 'nullable|ip',
-        ]);
-        
+        $validated = $request->validated();
         $validated['tenant_id'] = $tenantId;
         
         // Verify customer belongs to tenant if provided

@@ -1,0 +1,145 @@
+{
+  "campaign": {
+    "id": "EDU-009",
+    "week": 7,
+    "day": 43,
+    "type": "Educational",
+    "title": "Local SEO in 2025",
+    "subject": "Local SEO isn't dead—it evolved. Here's what works now.",
+    "landing_page": "local-seo-guide",
+    "template": "educational",
+    "description": "What still works in local SEO and what's changed"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "SEO Evolved",
+      "content": {
+        "headline": "Local SEO Isn't Dead—It Evolved",
+        "subhead": "What works now is different from what worked before"
+      },
+      "narration": "You've heard the rumors: SEO is dead. Google doesn't matter anymore. Here's the truth: local SEO isn't dead—it evolved. What works now is different from what worked five years ago. Let me show you what actually matters today.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "What Changed",
+      "content": {
+        "headline": "The Old Rules vs. The New Rules",
+        "old_rules": ["Keyword stuffing", "Link building schemes", "Gaming the algorithm", "Website-centric strategy"],
+        "new_rules": ["Natural language content", "Genuine reputation signals", "Multi-platform presence", "Entity-based optimization"]
+      },
+      "narration": "What changed? Old rules: keyword stuffing, link building schemes, gaming the algorithm, everything focused on your website. New rules: natural language content, genuine reputation signals from real customers, presence across multiple platforms, and entity-based optimization where Google understands your business as a real thing, not just a website.",
+      "duration_seconds": 30,
+      "audio_file": "slide-02-changes.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "What Still Works",
+      "content": {
+        "headline": "Local SEO Fundamentals That Still Matter",
+        "fundamentals": [
+          {"tactic": "Google Business Profile", "status": "More important than ever", "action": "Complete, accurate, active"},
+          {"tactic": "NAP consistency", "status": "Still crucial", "action": "Same name/address/phone everywhere"},
+          {"tactic": "Reviews", "status": "Weighted heavily", "action": "Volume + velocity + quality"},
+          {"tactic": "Local content", "status": "Signals relevance", "action": "Content about your area"},
+          {"tactic": "Mobile experience", "status": "Non-negotiable", "action": "Fast, easy to use on phones"}
+        ]
+      },
+      "narration": "What still works? Google Business Profile—more important than ever. Complete it, keep it accurate, stay active. NAP consistency—your name, address, and phone should be identical everywhere. Reviews—Google weighs them heavily. Volume, velocity, and quality all matter. Local content—content about your area signals relevance. Mobile experience—non-negotiable. If your site is slow or hard to use on phones, you lose.",
+      "duration_seconds": 40,
+      "audio_file": "slide-03-works.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "The Entity Factor",
+      "content": {
+        "headline": "Google Wants to Know You're Real",
+        "entity_signals": [
+          {"signal": "Consistent business info across platforms", "why": "Proves you exist"},
+          {"signal": "Mentions in authoritative sources", "why": "News, directories, citations"},
+          {"signal": "Social proof", "why": "Reviews, engagement, followers"},
+          {"signal": "Activity signals", "why": "Recent posts, events, updates"}
+        ],
+        "key_point": "Google builds a 'knowledge graph' about your business"
+      },
+      "narration": "Here's what most people miss: Google now thinks in entities, not just keywords. Google wants to know you're a real, legitimate business. It looks for consistent info across platforms—proving you exist. Mentions in authoritative sources—news, directories, citations. Social proof—reviews, engagement, followers. Activity signals—recent posts, events, updates. Google builds a knowledge graph about your business. The more signals, the more confident Google is in recommending you.",
+      "duration_seconds": 35,
+      "audio_file": "slide-04-entity.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ConceptSlide",
+      "title": "The AI Connection",
+      "content": {
+        "headline": "Local SEO + AI Discovery = Maximum Visibility",
+        "connection": "The same signals that help Google also help AI assistants",
+        "overlap": [
+          {"signal": "Multi-platform presence", "helps": "Both Google and AI"},
+          {"signal": "Reviews and reputation", "helps": "Both Google and AI"},
+          {"signal": "Authoritative mentions", "helps": "Both Google and AI"},
+          {"signal": "Fresh activity", "helps": "Both Google and AI"}
+        ],
+        "insight": "One strategy, two discovery channels"
+      },
+      "narration": "Here's the connection most people miss: local SEO and AI discovery aren't separate strategies. They're the same strategy. Multi-platform presence helps both Google and AI. Reviews and reputation matter to both. Authoritative mentions matter to both. Fresh activity matters to both. One strategy, two discovery channels. Get your presence right, and you're visible everywhere.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-ai.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "ActionSlide",
+      "title": "Your Local SEO Checklist",
+      "content": {
+        "headline": "Priority Actions for Local SEO Today",
+        "checklist": [
+          {"priority": 1, "action": "Claim and complete Google Business Profile"},
+          {"priority": 2, "action": "Get listed in authoritative directories"},
+          {"priority": 3, "action": "Build review velocity (ask every customer)"},
+          {"priority": 4, "action": "Ensure NAP consistency everywhere"},
+          {"priority": 5, "action": "Post regularly (events, updates, content)"},
+          {"priority": 6, "action": "Pursue local news mentions"}
+        ]
+      },
+      "narration": "Here's your priority checklist for local SEO today. One: Claim and complete your Google Business Profile if you haven't. Two: Get listed in authoritative directories—real ones, not spam. Three: Build review velocity—ask every customer. Four: Ensure your name, address, phone is consistent everywhere. Five: Post regularly—events, updates, content. Six: Pursue local news mentions when you can. Do these six things and you're ahead of ninety percent of local businesses.",
+      "duration_seconds": 35,
+      "audio_file": "slide-06-checklist.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "CTASlide",
+      "title": "Optimize Your Local SEO",
+      "content": {
+        "headline": "Ready to Get Found Locally?",
+        "cta_primary": {
+          "label": "Get Your SEO Checklist",
+          "action": "download_checklist"
+        },
+        "cta_secondary": {
+          "label": "Run a Free SEO Audit",
+          "action": "start_audit"
+        }
+      },
+      "narration": "Ready to get found locally? Download the complete SEO checklist—printable, actionable, everything you need. Or run a free SEO audit to see where you stand right now. Local SEO evolved, but it didn't die. The businesses that adapt are the ones getting found.",
+      "duration_seconds": 20,
+      "audio_file": "slide-07-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_educational": {
+      "subject": "Local SEO isn't dead—it evolved. Here's what works now.",
+      "preview_text": "The new rules of getting found",
+      "body": "Hey {{first_name}},\n\nYou've probably heard: 'SEO is dead.'\n\nHere's the truth: Local SEO evolved. What works now is different.\n\nOld rules (don't work):\n❌ Keyword stuffing\n❌ Link schemes\n❌ Gaming the algorithm\n\nNew rules (do work):\n✓ Multi-platform presence\n✓ Real reputation signals\n✓ Entity-based optimization\n✓ Activity across channels\n\n[WATCH THE 3-MINUTE GUIDE →]\n\nBonus: The same strategy that helps Google also helps AI assistants recommend you.\n\n{{sender_name}}\nFibonacco"
+    }
+  },
+  "connections": {
+    "leads_to": ["HOWTO-021"],
+    "follows": "EDU-008",
+    "related": ["EDU-002", "EDU-005"]
+  }
+}

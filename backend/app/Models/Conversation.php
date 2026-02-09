@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class Conversation extends Model
 {
-    use HasFactory;
+    use HasFactory, \Illuminate\Database\Eloquent\Concerns\HasUuids;
 
     protected $keyType = 'string';
     public $incrementing = false;
@@ -58,13 +58,11 @@ class Conversation extends Model
         'duration_seconds' => 'integer',
     ];
 
-    protected static function boot()
+    protected static function booted()
     {
-        parent::boot();
-
         static::creating(function ($conversation) {
-            if (empty($conversation->id)) {
-                $conversation->id = (string) Str::uuid();
+            if (empty($conversation->tenant_id)) {
+                $conversation->tenant_id = (string) Str::uuid();
             }
             if (empty($conversation->session_id)) {
                 $conversation->session_id = 'session_' . Str::random(32);
@@ -99,7 +97,7 @@ class Conversation extends Model
         }
         $this->save();
     }
-    
+
     /**
      * Get formatted duration
      */
@@ -108,10 +106,10 @@ class Conversation extends Model
         if (!$this->duration_seconds) {
             return 'N/A';
         }
-        
+
         $minutes = floor($this->duration_seconds / 60);
         $seconds = $this->duration_seconds % 60;
-        
+
         if ($minutes > 0) {
             return "{$minutes}m {$seconds}s";
         }

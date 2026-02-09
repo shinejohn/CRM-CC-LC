@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->string('code', 100)->unique();
             $table->string('parent_industry', 100)->nullable();
             $table->integer('display_order')->default(0);
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
         });
         
         Schema::create('industry_subcategories', function (Blueprint $table) {
@@ -27,7 +28,7 @@ return new class extends Migration
             $table->string('code', 100);
             $table->integer('faq_count')->default(0);
             $table->integer('profile_questions_count')->default(0);
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
             
             $table->foreign('industry_id')->references('id')->on('industry_categories')->onDelete('cascade');
             $table->unique(['industry_id', 'code']);

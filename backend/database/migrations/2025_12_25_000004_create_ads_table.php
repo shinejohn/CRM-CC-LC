@@ -28,8 +28,8 @@ return new class extends Migration
             $table->json('specs')->nullable(); // Platform-specific specs (dimensions, file sizes, etc.)
             $table->boolean('is_active')->default(true);
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             $table->index('tenant_id');
             $table->index('platform');
@@ -68,10 +68,10 @@ return new class extends Migration
             $table->json('schedule')->nullable(); // Scheduling info
             
             // Scheduling
-            $table->timestampTz('scheduled_start_at')->nullable();
-            $table->timestampTz('scheduled_end_at')->nullable();
-            $table->timestampTz('started_at')->nullable();
-            $table->timestampTz('ended_at')->nullable();
+            $table->timestamp('scheduled_start_at')->nullable();
+            $table->timestamp('scheduled_end_at')->nullable();
+            $table->timestamp('started_at')->nullable();
+            $table->timestamp('ended_at')->nullable();
             
             // External IDs
             $table->string('external_ad_id')->nullable(); // Platform-specific ad ID
@@ -86,8 +86,8 @@ return new class extends Migration
             
             $table->text('notes')->nullable();
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             $table->index('tenant_id');
             $table->index('platform');

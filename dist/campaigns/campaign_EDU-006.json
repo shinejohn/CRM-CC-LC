@@ -1,52 +1,268 @@
 {
   "campaign": {
     "id": "EDU-006",
-    "week": 6,
-    "day": 6,
-    "type": "EDU",
-    "title": "Educational Content",
-    "subject": "Educational Content",
-    "landing_page": "community-marketing",
+    "week": 5,
+    "day": 29,
+    "type": "Educational",
+    "title": "Your AI Employee",
+    "subject": "The employee you couldn't afford just became free",
+    "landing_page": "ai-employee",
     "template": "educational",
-    "description": "Educational Content - Build trust through education"
+    "description": "Introduce AI as business automation - handle volume, focus on relationships"
   },
   "landing_page": {
     "campaign_id": "EDU-006",
-    "landing_page_slug": "community-marketing",
-    "url": "/learn/community-marketing",
+    "landing_page_slug": "ai-employee",
+    "url": "/learn/ai-employee",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
-    "duration_seconds": 75,
-    "primary_cta": "download_guide",
-    "secondary_cta": "start_trial",
+    "duration_seconds": 180,
+    "primary_cta": "activate_ai",
+    "secondary_cta": "download_article",
     "ai_persona": "Sarah",
-    "ai_tone": "Knowledgeable, patient",
-    "ai_goal": "Build trust through education",
-    "data_capture_fields": "name, email, business_name, industry, current_challenges",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/community-marketing/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "education",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week4-educational",
-    "utm_content": "EDU-006"
+    "ai_tone": "Exciting, practical, empowering",
+    "ai_goal": "Show AI as accessible competitive advantage",
+    "data_capture_fields": "name, email, business_name, industry, current_pain_points",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-employee/audio/"
   },
-  "template": {
-    "template_id": "educational",
-    "name": "Educational Content",
-    "slides": 7,
-    "duration": 75,
-    "purpose": "edu",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "community-marketing",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/community-marketing/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "The Employee You Couldn't Afford",
+      "content": {
+        "headline": "What If You Had an Employee Who...",
+        "list": [
+          "Worked 24/7 without breaks",
+          "Answered every inquiry within seconds",
+          "Never forgot a follow-up",
+          "Handled repetitive tasks flawlessly",
+          "Cost almost nothing"
+        ],
+        "punchline": "That employee exists now. It's AI.",
+        "visual": "Friendly AI assistant helping business owner"
+      },
+      "narration": "What if you had an employee who worked twenty-four seven without breaks? Who answered every inquiry within seconds? Who never forgot a follow-up? Who handled all the repetitive tasks flawlessly? And who cost you almost nothing? That employee exists now. It's called AI. And it's no longer just for big corporations. Let me show you.",
+      "duration_seconds": 25,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "The Small Business AI Gap",
+      "content": {
+        "headline": "Big Companies Have Been Using AI for Years",
+        "examples": [
+          {
+            "company": "Amazon",
+            "use": "Personalized recommendations"
+          },
+          {
+            "company": "Netflix",
+            "use": "Content suggestions"
+          },
+          {
+            "company": "Banks",
+            "use": "Fraud detection"
+          },
+          {
+            "company": "Airlines",
+            "use": "Dynamic pricing"
+          }
+        ],
+        "problem": "Small businesses couldn't afford AI. Until now.",
+        "shift": "The same technology is now accessible to everyone."
+      },
+      "narration": "Big companies have been using AI for years. Amazon's personalized recommendations? AI. Netflix suggesting what to watch? AI. Banks catching fraud? AI. Airlines pricing flights? AI. Small businesses couldn't afford this technology. It required massive budgets, technical teams, custom development. Until now. The same technology that powers billion-dollar companies is now accessible to you.",
+      "duration_seconds": 30,
+      "audio_file": "slide-02-gap.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "What AI Can Do For You",
+      "content": {
+        "headline": "Your AI Employee Can Handle:",
+        "capabilities": [
+          {
+            "task": "Customer Inquiries",
+            "detail": "Answer questions 24/7, route complex ones to you"
+          },
+          {
+            "task": "Content Creation",
+            "detail": "Write posts, emails, descriptions in your voice"
+          },
+          {
+            "task": "Scheduling",
+            "detail": "Book appointments, send reminders automatically"
+          },
+          {
+            "task": "Follow-ups",
+            "detail": "Never let a lead go cold"
+          },
+          {
+            "task": "Data Entry",
+            "detail": "Update records, sync platforms automatically"
+          },
+          {
+            "task": "Social Media",
+            "detail": "Schedule posts, respond to comments"
+          }
+        ],
+        "key_point": "AI handles the volume. You handle the relationships."
+      },
+      "narration": "What can your AI employee actually do? Customer inquiries—answer questions twenty-four seven, route the complex ones to you. Content creation—write posts, emails, descriptions that sound like you. Scheduling—book appointments and send reminders automatically. Follow-ups—never let a lead go cold again. Data entry—update records and sync platforms without you touching it. Social media—schedule posts and respond to comments. AI handles the volume. You handle the relationships.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-capabilities.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "AI + Human = Superpower",
+      "content": {
+        "headline": "You're Not Being Replaced. You're Being Amplified.",
+        "equation": {
+          "ai_does": [
+            "Speed",
+            "Consistency",
+            "Volume",
+            "24/7 availability",
+            "Memory"
+          ],
+          "you_do": [
+            "Judgment",
+            "Creativity",
+            "Relationships",
+            "Complex decisions",
+            "Care"
+          ],
+          "together": "10x what either could do alone"
+        },
+        "visual": "Human and AI as collaborative partners"
+      },
+      "narration": "Let me be clear: you're not being replaced. You're being amplified. AI brings speed, consistency, volume, availability, perfect memory. You bring judgment, creativity, real relationships, complex decision-making, genuine care. Together, you're ten times what either could be alone. The business owner who resists AI will be outcompeted. The one who partners with AI becomes unstoppable.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-superpower.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ConceptSlide",
+      "title": "The Math",
+      "content": {
+        "headline": "What AI Saves You",
+        "calculations": [
+          {
+            "task": "Answering routine inquiries",
+            "hours": "5 hrs/week",
+            "value": "$200/week"
+          },
+          {
+            "task": "Writing content",
+            "hours": "3 hrs/week",
+            "value": "$120/week"
+          },
+          {
+            "task": "Scheduling/follow-ups",
+            "hours": "2 hrs/week",
+            "value": "$80/week"
+          },
+          {
+            "task": "Data entry/admin",
+            "hours": "2 hrs/week",
+            "value": "$80/week"
+          }
+        ],
+        "total": {
+          "hours_saved": "12 hrs/week",
+          "value_saved": "$480/week = $25,000/year",
+          "cost": "Fraction of one employee"
+        }
+      },
+      "narration": "Let's do the math. Answering routine inquiries—five hours a week saved, two hundred dollars in value. Writing content—three hours, a hundred twenty dollars. Scheduling and follow-ups—two hours, eighty dollars. Data entry and admin—two hours, eighty dollars. Total: twelve hours a week saved. Four hundred eighty dollars in value. That's twenty-five thousand dollars a year. For a fraction of the cost of one employee.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-math.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "ProofSlide",
+      "title": "The Owner Who Finally Took a Vacation",
+      "content": {
+        "case_study": {
+          "business": "Landscaping company, owner worked 70 hours/week",
+          "problem": "Couldn't step away—everything depended on him",
+          "ai_implementation": [
+            "AI handles initial customer inquiries",
+            "AI schedules estimates automatically",
+            "AI sends follow-ups and reminders",
+            "AI creates weekly social content"
+          ],
+          "result": {
+            "hours": "70/week → 45/week",
+            "revenue": "Up 15% (more capacity)",
+            "vacation": "First real vacation in 8 years"
+          }
+        }
+      },
+      "narration": "Real story. Landscaping company owner. Worked seventy hours a week. Couldn't step away because everything depended on him. He implemented AI: handling initial inquiries, scheduling estimates, sending follow-ups, creating social content. Result: seventy hours down to forty-five. Revenue up fifteen percent because he had capacity for more jobs. And this year? He took his first real vacation in eight years. His AI employee kept things running while he was gone.",
+      "duration_seconds": 35,
+      "audio_file": "slide-06-proof.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "CTASlide",
+      "title": "Activate Your AI",
+      "content": {
+        "headline": "Your AI Employee Is Ready",
+        "subhead": "The question isn't whether to use AI. It's how soon.",
+        "cta_primary": {
+          "label": "Activate Your AI Employee",
+          "action": "ai_setup"
+        },
+        "cta_secondary": {
+          "label": "Download: The Owner Who Finally Took a Vacation",
+          "action": "download_article"
+        },
+        "assurance": "Start free. See results in days. Scale when ready."
+      },
+      "narration": "Your AI employee is ready. The question isn't whether to use AI—that's already decided. The question is how soon you'll start. Activate your AI employee now. Start free, see results in days, scale when you're ready. Or download the full article about the owner who finally took a vacation. Your competitors are figuring this out. Don't be the last one still doing everything manually.",
+      "duration_seconds": 25,
+      "audio_file": "slide-07-cta.mp3"
+    }
+  ],
+  "article": {
+    "title": "The Owner Who Finally Took a Vacation",
+    "subtitle": "How AI gave a small business owner his life back—and grew his revenue",
+    "word_count": 2300,
+    "file_path": "/content/articles/EDU-006-ai-employee.md"
+  },
+  "emails": {
+    "email_1_educational": {
+      "subject": "The employee you couldn't afford just became free",
+      "preview_text": "Your AI employee is ready",
+      "body": "Hey {{first_name}},\n\nWhat if you had an employee who:\n\n• Worked 24/7 without breaks\n• Answered every inquiry within seconds\n• Never forgot a follow-up\n• Handled repetitive tasks flawlessly\n• Cost almost nothing\n\nThat employee exists now. It's AI.\n\nAnd it's no longer just for big corporations.\n\nI put together a 3-minute presentation on what AI can actually do for a business like {{business_name}}.\n\n[WATCH THE PRESENTATION →]\n\nOne business owner went from 70-hour weeks to 45—and took his first vacation in 8 years.\n\n{{sender_name}}\nFibonacco"
+    },
+    "email_2a_engaged": {
+      "subject": "Ready to activate your AI employee?",
+      "preview_text": "Start free, see results in days",
+      "body": "Hey {{first_name}},\n\nYou watched the AI employee presentation. Key takeaways:\n\n• AI can handle inquiries, content, scheduling, follow-ups, admin\n• You're not replaced—you're amplified\n• The math: 12 hours/week saved = $25K/year value\n• Your competitors are already figuring this out\n\nReady to activate AI for {{business_name}}?\n\n[ACTIVATE YOUR AI EMPLOYEE →]\n\nStart free. See results in days. Scale when ready.\n\n{{sender_name}}"
+    },
+    "email_2b_reengage": {
+      "subject": "Still doing everything manually?",
+      "preview_text": "Your AI employee is waiting",
+      "body": "Hey {{first_name}},\n\nHow many hours did you spend this week on:\n\n→ Answering routine questions\n→ Writing posts and emails\n→ Scheduling and follow-ups\n→ Data entry and admin\n\nAI can handle all of that. While you sleep.\n\n3 minutes to see what's possible:\n\n[WATCH THE PRESENTATION →]\n\nOne owner saved 25 hours/week. What would you do with that time?\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-008",
+      "HOWTO-010",
+      "HOWTO-011"
+    ],
+    "follows": "EDU-005",
+    "related": [
+      "EDU-013",
+      "HOOK-007"
+    ]
   }
 }

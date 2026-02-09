@@ -1,52 +1,160 @@
 {
   "campaign": {
     "id": "HOWTO-016",
-    "week": 16,
-    "day": 16,
-    "type": "HOWTO",
-    "title": "How-To Tutorial",
-    "subject": "How-To Tutorial",
+    "week": 8,
+    "day": 51,
+    "type": "How-To",
+    "title": "Lead Capture Guide",
+    "subject": "Capture leads from your website (finally)",
     "landing_page": "lead-capture-guide",
-    "template": "tutorial",
-    "description": "How-To Tutorial - Guide user through process"
+    "template": "tutorial"
   },
-  "landing_page": {
-    "campaign_id": "HOWTO-016",
-    "landing_page_slug": "lead-capture-guide",
-    "url": "/learn/lead-capture-guide",
-    "template_id": "tutorial",
-    "template_name": "How-To Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 60,
-    "primary_cta": "start_trial",
-    "secondary_cta": "contact_sales",
-    "ai_persona": "Emma",
-    "ai_tone": "Helpful, step-by-step",
-    "ai_goal": "Guide user through process",
-    "data_capture_fields": "name, email, business_name, setup_preferences",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/lead-capture-guide/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "engagement",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week8-how-to",
-    "utm_content": "HOWTO-016"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "How-To Tutorial",
-    "slides": 8,
-    "duration": 60,
-    "purpose": "howto",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "lead-capture-guide",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/lead-capture-guide/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Lead Capture",
+      "content": {
+        "headline": "Turn Website Visitors into Leads",
+        "subhead": "Stop losing potential customers"
+      },
+      "narration": "Most website visitors leave without contacting you. They were interested enough to visit, but something stopped them from reaching out. Lead capture fixes that—give them easy ways to connect before they leave.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "OverviewSlide",
+      "title": "Lead Capture Methods",
+      "content": {
+        "methods": [
+          "Contact forms",
+          "Chat widgets",
+          "Lead magnets",
+          "Exit popups",
+          "Callback requests"
+        ]
+      },
+      "narration": "Multiple ways to capture leads. Contact forms for direct inquiries. Chat widgets for immediate questions. Lead magnets offering value in exchange for email. Exit popups as a last chance. Callback requests for phone-preferred customers. Use several for maximum capture.",
+      "duration_seconds": 25,
+      "audio_file": "slide-02-methods.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Step 1: Contact Form",
+      "content": {
+        "action": "Optimize Your Form",
+        "principles": [
+          "Fewer fields = more submissions",
+          "Ask only what you need",
+          "Make submit button compelling",
+          "Confirm submission clearly"
+        ],
+        "ideal": "Name, email, phone, message = 4 fields max"
+      },
+      "narration": "Start with your contact form. Fewer fields equals more submissions—every field reduces completion rates. Ask only what you actually need. Make the submit button compelling—not 'Submit' but 'Get Your Quote' or 'Start the Conversation.' Confirm submission clearly so they know it worked.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-form.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Step 2: Chat Widget",
+      "content": {
+        "action": "Add Live Chat",
+        "benefits": [
+          "Immediate answers to questions",
+          "Lower barrier than forms",
+          "Captures leads who won't fill forms",
+          "AI can handle after-hours"
+        ],
+        "placement": "Bottom right corner, all pages"
+      },
+      "narration": "Add a chat widget. It provides immediate answers to questions—lower barrier than filling out forms. Captures leads who wouldn't complete a form. AI can handle inquiries after hours so you never miss an opportunity. Place it bottom right corner on all pages.",
+      "duration_seconds": 35,
+      "audio_file": "slide-04-chat.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Step 3: Lead Magnet",
+      "content": {
+        "action": "Offer Something Valuable",
+        "examples": [
+          "Free guide or checklist",
+          "Discount code",
+          "Free consultation",
+          "Helpful resource"
+        ],
+        "formula": "Value offered > perceived effort to get it"
+      },
+      "narration": "Create a lead magnet—something valuable in exchange for their email. Free guides or checklists. Discount codes. Free consultations. Helpful resources they'd actually use. The value offered must exceed the perceived effort to get it. Make it irresistible.",
+      "duration_seconds": 35,
+      "audio_file": "slide-05-magnet.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "Step 4: Exit Intent",
+      "content": {
+        "action": "Catch Leaving Visitors",
+        "popup": {
+          "trigger": "Mouse moves toward close button",
+          "offer": "Last chance valuable offer",
+          "example": "Before you go—get 10% off your first visit"
+        }
+      },
+      "narration": "Exit intent popups catch visitors as they're leaving. When their mouse moves toward the close button, show a compelling offer. Last chance to capture them. 'Before you go—get ten percent off your first visit.' Makes them pause and reconsider.",
+      "duration_seconds": 30,
+      "audio_file": "slide-06-exit.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "TipsSlide",
+      "title": "Pro Tips",
+      "content": {
+        "tips": [
+          "Respond to leads within 5 minutes for best conversion",
+          "Set up auto-responses so they know you received it",
+          "Track which sources bring best leads",
+          "A/B test your forms and popups"
+        ]
+      },
+      "narration": "Lead capture pro tips. Respond within five minutes for best conversion—speed matters enormously. Set up auto-responses so they know you received their inquiry. Track which sources bring your best leads. A/B test your forms and popups to optimize over time.",
+      "duration_seconds": 30,
+      "audio_file": "slide-07-tips.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Start Capturing",
+      "content": {
+        "cta_primary": {
+          "label": "Set Up Lead Capture",
+          "action": "setup_capture"
+        },
+        "cta_secondary": {
+          "label": "Get Lead Magnet Ideas",
+          "action": "view_ideas"
+        }
+      },
+      "narration": "Ready to capture more leads? Set up your lead capture tools now. Or get lead magnet ideas if you need inspiration for what to offer. Every visitor is a potential customer—start capturing them.",
+      "duration_seconds": 20,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_educational": {
+      "subject": "Capture leads from your website (finally)",
+      "preview_text": "Stop losing potential customers",
+      "body": "Hey {{first_name}},\n\nMost website visitors leave without contacting you.\n\nHere's how to capture them:\n✓ Optimized contact form (4 fields max)\n✓ Chat widget for immediate questions\n✓ Lead magnet offering real value\n✓ Exit popup as last chance\n\n[SET UP LEAD CAPTURE →]\n\nPro tip: Respond within 5 minutes for best conversion.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-017"
+    ],
+    "follows": "HOWTO-015"
   }
 }

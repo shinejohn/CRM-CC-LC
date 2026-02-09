@@ -11,6 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Skip PostgreSQL-specific functions for SQLite (used in tests)
+        if (DB::getDriverName() === 'sqlite') {
+            return;
+        }
+        
         // Create update timestamp trigger function
         DB::unprepared('
             CREATE OR REPLACE FUNCTION update_updated_at()
@@ -106,6 +111,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Skip PostgreSQL-specific functions for SQLite (used in tests)
+        if (DB::getDriverName() === 'sqlite') {
+            return;
+        }
+        
         DB::unprepared('DROP FUNCTION IF EXISTS search_knowledge_base(UUID, TEXT, vector, INT, FLOAT)');
         DB::unprepared('DROP FUNCTION IF EXISTS update_updated_at()');
     }

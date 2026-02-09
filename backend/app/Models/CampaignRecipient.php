@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CampaignRecipient extends Model
 {
@@ -53,6 +54,11 @@ class CampaignRecipient extends Model
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function emailDeliveryEvents(): HasMany
+    {
+        return $this->hasMany(EmailDeliveryEvent::class, 'campaign_recipient_id');
     }
 
     public function isPending(): bool

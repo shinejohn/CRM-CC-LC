@@ -29,16 +29,16 @@ return new class extends Migration
             $table->string('human_rep_id', 100)->nullable();
             
             // Full conversation log
-            $table->jsonb('messages')->default('[]');
+            $table->json('messages')->default('[]');
             
             // AI analysis
             $table->json('topics_discussed')->nullable(); // Array
-            $table->jsonb('questions_asked')->nullable();
-            $table->jsonb('objections_raised')->nullable();
-            $table->jsonb('sentiment_trajectory')->nullable();
+            $table->json('questions_asked')->nullable();
+            $table->json('objections_raised')->nullable();
+            $table->json('sentiment_trajectory')->nullable();
             
             // Data collected
-            $table->jsonb('new_data_collected')->nullable();
+            $table->json('new_data_collected')->nullable();
             $table->json('faqs_generated')->nullable(); // Array of UUIDs
             
             // Outcome
@@ -47,20 +47,20 @@ return new class extends Migration
             
             // Follow-up
             $table->boolean('followup_needed')->default(false);
-            $table->timestampTz('followup_scheduled_at')->nullable();
+            $table->timestamp('followup_scheduled_at')->nullable();
             $table->text('followup_notes')->nullable();
             
             // Duration
-            $table->timestampTz('started_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('ended_at')->nullable();
+            $table->timestamp('started_at')->useCurrent();
+            $table->timestamp('ended_at')->nullable();
             $table->integer('duration_seconds')->nullable();
             
             // Metadata
             $table->text('user_agent')->nullable();
             $table->string('ip_address')->nullable();
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             // Foreign key
             $table->foreign('customer_id')

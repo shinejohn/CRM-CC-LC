@@ -25,9 +25,9 @@ return new class extends Migration
             $table->integer('response_time_ms')->nullable();
             
             // Actions taken
-            $table->jsonb('actions_triggered')->nullable();
+            $table->json('actions_triggered')->nullable();
             
-            $table->timestampTz('timestamp')->default(DB::raw('NOW()'));
+            $table->timestamp('timestamp')->useCurrent();
             
             // Indexes
             $table->index('conversation_id');

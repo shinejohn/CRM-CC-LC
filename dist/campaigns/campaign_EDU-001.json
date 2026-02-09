@@ -4,27 +4,27 @@
     "week": 1,
     "day": 2,
     "type": "Educational",
-    "title": "SEO is Dead for SMBs",
-    "subject": "Google SEO is broken for small businesses - here's the truth",
-    "landing_page": "seo-reality-check",
+    "title": "The New Day",
+    "subject": "Something is happening in local marketing",
+    "landing_page": "the-new-day",
     "template": "educational",
-    "description": "Explain how AI search is replacing traditional SEO and what SMBs should do"
+    "description": "Introduce the renaissance of community marketing - hope, opportunity, invitation"
   },
   "landing_page": {
     "campaign_id": "EDU-001",
-    "landing_page_slug": "seo-reality-check",
-    "url": "/learn/seo-reality-check",
+    "landing_page_slug": "the-new-day",
+    "url": "/learn/the-new-day",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
-    "duration_seconds": 75,
-    "primary_cta": "download_guide",
-    "secondary_cta": "start_trial",
+    "duration_seconds": 180,
+    "primary_cta": "claim_listing",
+    "secondary_cta": "download_article",
     "ai_persona": "Sarah",
-    "ai_tone": "Knowledgeable, patient",
-    "ai_goal": "Build trust through education",
-    "data_capture_fields": "name, email, business_name, industry, current_challenges",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/seo-reality-check/audio/",
+    "ai_tone": "Warm, hopeful, inviting",
+    "ai_goal": "Inspire hope and action",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/the-new-day/audio/",
     "crm_tracking": true,
     "conversion_goal": "education",
     "utm_source": "email",
@@ -36,117 +36,201 @@
     "template_id": "educational",
     "name": "Educational Content",
     "slides": 7,
-    "duration": 75,
+    "duration": 180,
     "purpose": "education",
     "audio_required": true
   },
   "slides": [
     {
-      "template_id": "educational",
       "slide_num": 1,
       "component": "HeroSlide",
-      "content_type": "topic_intro",
-      "requires_personalization": true,
+      "title": "Something Is Happening",
+      "content": {
+        "headline": "Something Is Happening",
+        "subhead": "A quiet revolution in how local businesses get found",
+        "visual": "Sunrise over main street, warm colors, small businesses with lights on"
+      },
+      "narration": "Listen. If you pay attention, you can feel it. Something is shifting. A quiet revolution is happening in communities across the country. And if you're a local business owner, this is the most important thing you'll hear all year.",
+      "duration_seconds": 20,
       "audio_file": "slide-01-intro.mp3"
     },
     {
-      "template_id": "educational",
       "slide_num": 2,
       "component": "ConceptSlide",
-      "content_type": "key_concept",
-      "requires_personalization": false,
-      "audio_file": "slide-02-concept.mp3"
+      "title": "Local Is Winning",
+      "content": {
+        "headline": "Local Is Winning Again",
+        "stats": [
+          {
+            "value": "82%",
+            "label": "of consumers want to support local"
+          },
+          {
+            "value": "70%",
+            "label": "trust local businesses more than chains"
+          },
+          {
+            "value": "88%",
+            "label": "of local searches lead to action within 24 hours"
+          }
+        ],
+        "visual": "Upward trending graphs, community imagery"
+      },
+      "narration": "Here's what the data shows: Eighty-two percent of consumers say they want to support local businesses. Seventy percent trust local businesses more than national chains. And eighty-eight percent of local searches lead to a purchase within twenty-four hours. People aren't just saying they prefer local. They're acting on it. Every single day.",
+      "duration_seconds": 30,
+      "audio_file": "slide-02-local-winning.mp3"
     },
     {
-      "template_id": "educational",
       "slide_num": 3,
-      "component": "DataSlide",
-      "content_type": "statistics",
-      "requires_personalization": false,
-      "audio_file": "slide-03-data.mp3"
+      "component": "ConceptSlide",
+      "title": "The Community Comeback",
+      "content": {
+        "headline": "People Want Community Again",
+        "points": [
+          "Tired of algorithms and faceless corporations",
+          "Want to know their neighbors",
+          "Want to support real people",
+          "Want to belong to something"
+        ],
+        "visual": "People at local farmer's market, community gathering"
+      },
+      "narration": "People are tired. Tired of algorithms. Tired of faceless corporations. Tired of scrolling through feeds that make them feel more alone, not less. They want to know their neighbors again. They want to support businesses run by real people. They want to be part of something. They want community. And for the first time in a generation, the technology exists to give it to them.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-community.mp3"
     },
     {
-      "template_id": "educational",
       "slide_num": 4,
-      "component": "ComparisonSlide",
-      "content_type": "before_after",
-      "requires_personalization": true,
-      "audio_file": "slide-04-comparison.mp3"
+      "component": "ConceptSlide",
+      "title": "Technology That Connects",
+      "content": {
+        "headline": "Technology Finally Doing What It Should",
+        "comparison": {
+          "before": "Tech that extracted attention and sold ads",
+          "after": "Tech that connects people to what they care about"
+        },
+        "key_point": "Not replacing human connection—enabling it",
+        "visual": "Network diagram showing connections between businesses and community"
+      },
+      "narration": "For twenty years, technology mostly made things worse for local businesses. Social media promised connection but delivered isolation. Search engines promised discovery but delivered pay-to-play. But that's changing. A new kind of infrastructure is emerging. Technology that actually connects people to the businesses and communities they care about. Not replacing human connection—enabling it.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-technology.mp3"
     },
     {
-      "template_id": "educational",
       "slide_num": 5,
-      "component": "ActionSlide",
-      "content_type": "what_to_do",
-      "requires_personalization": true,
-      "audio_file": "slide-05-action.mp3"
+      "component": "ConceptSlide",
+      "title": "What We're Building",
+      "content": {
+        "headline": "Community Infrastructure, Rebuilt",
+        "elements": [
+          {
+            "icon": "newspaper",
+            "label": "Local News",
+            "desc": "People actually read"
+          },
+          {
+            "icon": "directory",
+            "label": "Business Directory",
+            "desc": "People actually use"
+          },
+          {
+            "icon": "calendar",
+            "label": "Events Calendar",
+            "desc": "People actually check"
+          },
+          {
+            "icon": "home",
+            "label": "Your Home Base",
+            "desc": "AI actually understands"
+          }
+        ],
+        "visual": "Four connected platforms flowing into unified presence"
+      },
+      "narration": "What your parents had—the newspaper everyone read, the Yellow Pages everyone used, the community bulletin board everyone checked—we've rebuilt that. For the digital age. With AI. Connected. Local news people actually read. A directory people actually use. An events calendar people actually check. And a home base for your business that AI actually understands. One presence. Multiple touchpoints. Found everywhere.",
+      "duration_seconds": 35,
+      "audio_file": "slide-05-building.mp3"
     },
     {
-      "template_id": "educational",
       "slide_num": 6,
-      "component": "ResourceSlide",
-      "content_type": "resources",
-      "requires_personalization": false,
-      "audio_file": "slide-06-resources.mp3"
+      "component": "ConceptSlide",
+      "title": "For Everyone",
+      "content": {
+        "headline": "For the People. For the Businesses. For the Future.",
+        "three_pillars": [
+          {
+            "title": "For the People",
+            "desc": "Communities where local businesses thrive are better places to live"
+          },
+          {
+            "title": "For the Businesses",
+            "desc": "Focus on your craft—infrastructure handles being found"
+          },
+          {
+            "title": "For the Future",
+            "desc": "Building something that lasts for generations"
+          }
+        ],
+        "visual": "Community scene with thriving main street"
+      },
+      "narration": "This isn't just about marketing. It's about the kind of communities we want to live in. When local businesses thrive, the money stays local. Jobs are created. Character is preserved. Connection happens. For the people who want thriving communities. For the businesses who want to be found and valued. For the future we're building together.",
+      "duration_seconds": 30,
+      "audio_file": "slide-06-everyone.mp3"
     },
     {
-      "template_id": "educational",
       "slide_num": 7,
       "component": "CTASlide",
-      "content_type": "next_steps",
-      "requires_personalization": true,
+      "title": "Join the Renaissance",
+      "content": {
+        "headline": "The Renaissance Is Here",
+        "subhead": "You're Invited",
+        "cta_primary": {
+          "label": "Claim Your Free Listing",
+          "action": "claim_listing",
+          "description": "Get found in 5 minutes"
+        },
+        "cta_secondary": {
+          "label": "Download the Full Article",
+          "action": "download_article",
+          "description": "Real stories, deeper insights"
+        },
+        "closing": "Your community is waiting. Let's build it together."
+      },
+      "narration": "The renaissance of community marketing is here. AI-powered. Locally-rooted. Globally-connected. And you're invited. Claim your free listing right now—it takes five minutes. Or download the full article for real stories and deeper insights. Either way, your community is waiting. Let's build it together.",
+      "duration_seconds": 25,
       "audio_file": "slide-07-cta.mp3"
     }
   ],
-  "presentation": {
-    "id": "seo-reality-check",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/seo-reality-check/audio/",
-      "format": "mp3"
+  "article": {
+    "title": "The New Day: A Renaissance of Community Marketing",
+    "subtitle": "How local businesses are being found again—and why you're invited",
+    "word_count": 2200,
+    "content": "# The New Day: A Renaissance of Community Marketing\n\n**How local businesses are being found again—and why you're invited**\n\n---\n\nMaria closed her laptop and rubbed her eyes. Another $400 gone to Facebook ads. Another month of posts that reached nobody. Another marketing \"expert\" telling her she needed to be on TikTok now.\n\nShe'd been running her bakery for 23 years. Survived recessions. Survived a pandemic. Survived a Walmart opening two miles away. But this—this slow fade into invisibility—felt different. Worse.\n\n\"It's like we don't exist anymore,\" she told her daughter. \"People drive right past us. They order from chains on their phones. They don't even know we're here.\"\n\nHer daughter, home from college for the summer, looked up from her own phone. \"Mom, when's the last time you asked someone what was happening in town?\"\n\n\"What do you mean?\"\n\n\"Like, if you wanted to know about local events, or find a good plumber, or see what businesses were having sales—where would you go?\"\n\nMaria thought about it. The newspaper had closed years ago. The local radio station just played syndicated content now. The community bulletin board at the grocery store was covered in outdated flyers.\n\n\"I don't know,\" she admitted. \"Google, I guess?\"\n\nHer daughter shook her head. \"Mom, nobody under 30 uses Google like that anymore. We ask AI. We ask ChatGPT, or Siri, or whatever. And here's the thing—\" she pulled up her phone, \"—watch this.\"\n\nShe spoke clearly: \"Hey Siri, where's a good bakery near me?\"\n\nThree results came back. Maria's Bakery wasn't one of them.\n\n\"Twenty-three years,\" Maria said quietly. \"And the AI doesn't know I exist.\"\n\n---\n\n## Something Is Happening\n\nIf you're a local business owner, you've probably felt what Maria felt. The slow fade. The sense that the old ways of being found have stopped working, but the new ways seem designed for someone else—someone with a marketing team, a content budget, infinite time to post on social media.\n\nBut here's what Maria didn't know yet: something is changing.\n\nNot the frantic, expensive kind of change that marketing gurus sell. Something quieter. Something that actually makes sense for businesses like hers.\n\nA renaissance.\n\n---\n\n## Local Is Winning\n\nThe data tells a story that might surprise you.\n\n**82% of consumers say they want to support local businesses.** Not in a vague, feel-good way. In a \"given the choice, I'll choose local\" way.\n\n**70% trust local businesses more than national chains.** In an era of declining trust in institutions, local businesses are one of the few things people still believe in.\n\n**88% of local searches lead to action within 24 hours.** When someone's looking for something local, they're ready to act. They're not browsing. They're deciding.\n\nThe hunger for local isn't just sentiment. It's behavior. It's wallets opening. It's decisions being made every day by people who are actively choosing local over corporate, personal over faceless, community over convenience.\n\nFor years, we were told the future was global. Frictionless. Borderless. And yes, you can buy anything from anywhere with a click.\n\nBut something was lost. Something human.\n\nNow people are finding their way back.\n\n---\n\n## The Community Comeback\n\nHere's what never changed, even when everything else did:\n\n**People want to belong.**\n\nThey want to walk into a place where someone knows their name. They want to support the family that's been running the shop for thirty years. They want their dollars to matter to someone—not just a shareholder in Delaware.\n\nThey want to know what's happening in their town. Who opened a new restaurant. What events are worth checking out. Which businesses are good, really good, not just good at gaming an algorithm.\n\n**They want home.**\n\nThe tools that connected communities—the newspaper, the radio station, the bulletin board, Main Street—those were dismantled. But the human need? That's hardwired. That doesn't go away.\n\nPeople didn't stop wanting community. They just lost the connective tissue.\n\nNow it's being rebuilt.\n\n---\n\n## Technology That Finally Works\n\nFor two decades, technology mostly made things worse.\n\nSocial media promised connection, delivered isolation. Search engines promised discovery, delivered pay-to-play. Websites promised visibility, delivered ghost towns that nobody visits.\n\nTechnology was supposed to bring us together. Instead, it fragmented us into a billion lonely feeds.\n\n**But that's changing.**\n\nA new generation of infrastructure is emerging—built not to extract attention and sell ads, but to actually connect people to things and people they care about.\n\nAI that understands what you're looking for and finds it—without making you wade through ads.\n\nPlatforms that serve communities instead of serving shareholders.\n\nInfrastructure that makes local businesses visible to the people who want to find them.\n\nTechnology finally doing what it should have done all along: making it easier for people to connect with their community.\n\nNot replacing human connection. **Enabling** it.\n\n---\n\n## What We're Building\n\nThink about what your parents had.\n\nThe newspaper everyone read. When a business was mentioned in the paper, people knew about it.\n\nThe Yellow Pages everyone used. When someone needed a service, they looked it up. It worked.\n\nThe local radio everyone listened to. When there was an event or a sale, people heard about it.\n\nThe town square everyone visited. When you walked down Main Street, you discovered businesses just by being there.\n\nThat infrastructure connected communities to their businesses. It worked because it was shared—everyone used the same channels, checked the same sources, participated in the same conversation.\n\nThen it was destroyed. Consolidated. Defunded. Replaced by a million fragmented digital channels that nobody can keep up with.\n\n**We're rebuilding it.**\n\nNot as nostalgia. Not as a return to some imagined past. As something new—something that takes the best of what worked before and combines it with technology that actually serves connection.\n\n**Local news that people actually read.** Real journalism about real communities, delivered in ways people actually consume.\n\n**A directory that people actually use.** Structured, comprehensive, designed for both humans and AI to understand.\n\n**An events calendar that people actually check.** The go-to source for what's happening in town.\n\n**A home base for your business.** Professional, authoritative, connected to everything—and structured so AI can understand and recommend you.\n\nOne listing. Multiple touchpoints. Found everywhere.\n\n---\n\n## For the People\n\nWhy does this matter? Why rebuild community infrastructure? Why care whether local businesses thrive?\n\nBecause **communities with thriving local businesses are better places to live.**\n\nThe money stays local. It circulates. The restaurant owner shops at the hardware store. The hardware store owner hires the accountant's kid. The accountant eats at the restaurant.\n\nLocal businesses sponsor Little League teams. They donate to charity auctions. They show up when the community needs them.\n\nThey create **jobs**—not the kind that disappear when corporate decides to restructure, but jobs rooted in place, relationship, commitment.\n\nThey create **character**—the unique flavor that makes your town your town, not just another interchangeable suburb.\n\nThey create **connection**—because when you walk into a local business, you're not a transaction. You're a neighbor.\n\nWhen local businesses win, communities win.\n\n---\n\n## For the Businesses\n\nAnd what does this mean for you?\n\nIt means you don't have to struggle alone anymore.\n\nIt means there's infrastructure—real infrastructure—designed to help people find you, trust you, choose you.\n\nIt means the hours you've wasted on marketing that doesn't work, platforms that don't care, strategies that were never designed for you to win—those days can be over.\n\n**You get to focus on what you actually do.**\n\nYour craft. Your service. Your customers. Your team. The thing you started this business to do.\n\nLet the infrastructure handle being found. Let the AI handle the repetitive tasks. Let the publishing network handle your visibility.\n\nYou do what you do best. We make sure people know about it.\n\n---\n\n## Maria's New Day\n\nThree months after that conversation with her daughter, Maria's phone started ringing again.\n\n\"Someone told me ChatGPT recommended you,\" a new customer said. \"Said you were the best bakery in town.\"\n\nMaria had to sit down.\n\nWhat changed? Not her baking—that had always been excellent. Not her hours, her prices, her location.\n\nShe got visible in the places AI looks. The local business directory. The community news platform. The events calendar. Her daughter helped her claim her listing, post a few events, connect the dots.\n\n\"It took maybe an hour total,\" her daughter said. \"And now AI knows you exist.\"\n\nThe marketing gurus would have charged her thousands. The social media strategy would have consumed hours every week. The Google Ads would have drained her budget.\n\nInstead, she plugged into infrastructure. Once.\n\nAnd now she's being found again.\n\n---\n\n## Your Invitation\n\nThe renaissance is real. It's happening now.\n\nNot everyone sees it yet. That's your advantage.\n\nThe businesses that understand this shift—that position themselves in the new infrastructure while their competitors are still chasing algorithms—they're getting found. Getting chosen. Getting recommended.\n\nNot because they cracked some code. Because they showed up in the places that matter.\n\n**This isn't about becoming a marketing expert.** You have a business to run.\n\n**This isn't about spending money on ads.** The infrastructure is free to start.\n\n**This isn't about mastering another platform.** You plug in once and you're connected.\n\nYour parents had the newspaper and the Yellow Pages. They didn't have to become marketing experts. They showed up in the shared channels, and they got found.\n\nYou can have that again. But better. Because now you also have AI working for you, reaching people who are actively looking for what you offer—locally and globally.\n\n---\n\n## What Do I Do About This?\n\nYou've read the story. You understand the shift.\n\nNow the practical question: **How do I actually make this happen for my business?**\n\nStart here:\n\n**Claim your listing.** Takes five minutes. Gets you in the directory, visible to locals and AI alike.\n\n**Complete your profile.** Every field matters. This is how AI understands who you are.\n\n**Post something.** An event, an announcement, a coupon. Show you're alive and active.\n\n**Connect your presence.** Let the network amplify you across news, events, community.\n\nThat's it. Four steps. Maybe an hour total.\n\nYour competitors are figuring this out. Some already have. The question is whether you'll be ahead of them or behind them.\n\n---\n\n**Ready to be found again?**\n\nThe renaissance is here. Your community is waiting.\n\n**[CLAIM YOUR FREE LISTING →]**\n\n*Takes 5 minutes. No credit card required.*\n\n---\n\n*Welcome to the new day.*"
+  },
+  "emails": {
+    "email_1_educational": {
+      "subject": "Something is happening in local marketing",
+      "preview_text": "A quiet revolution you should know about",
+      "body": "Hey {{first_name}},\n\nQuick question: When's the last time a new customer told you how they found you?\n\nIf the answer is \"I don't remember\" or \"It's been a while\"—you're not alone.\n\nSomething's been shifting in how people find local businesses. And most business owners don't even realize it's happening.\n\nI put together a 3-minute presentation that explains what's going on. No sales pitch—just something I think you should know.\n\n[WATCH THE 3-MINUTE PRESENTATION →]\n\nIt might change how you think about being found.\n\n{{sender_name}}\nFibonacco\n\nP.S. If you prefer reading, there's a full article you can download at the end. Real stories, deeper insights."
     },
-    "slides": [
-      {
-        "id": 1,
-        "component": "HeroSlide",
-        "audioFile": "slide-01-intro.mp3",
-        "requiresPersonalization": true
-      },
-      {
-        "id": 2,
-        "component": "ConceptSlide",
-        "audioFile": "slide-02-concept.mp3",
-        "requiresPersonalization": false
-      },
-      {
-        "id": 3,
-        "component": "DataSlide",
-        "audioFile": "slide-03-data.mp3",
-        "requiresPersonalization": false
-      },
-      {
-        "id": 4,
-        "component": "ComparisonSlide",
-        "audioFile": "slide-04-comparison.mp3",
-        "requiresPersonalization": true
-      },
-      {
-        "id": 5,
-        "component": "ActionSlide",
-        "audioFile": "slide-05-action.mp3",
-        "requiresPersonalization": true
-      },
-      {
-        "id": 6,
-        "component": "ResourceSlide",
-        "audioFile": "slide-06-resources.mp3",
-        "requiresPersonalization": false
-      },
-      {
-        "id": 7,
-        "component": "CTASlide",
-        "audioFile": "slide-07-cta.mp3",
-        "requiresPersonalization": true
-      }
+    "email_2a_engaged": {
+      "subject": "Glad you watched—here's your next step",
+      "preview_text": "The practical guide you asked for",
+      "body": "Hey {{first_name}},\n\nThanks for checking out that presentation on what's happening in local marketing.\n\nQuick recap:\n• The old channels (newspapers, Yellow Pages) are gone\n• The new channels (SEO, social) were never designed for you to win\n• A new kind of infrastructure is emerging—community-based, AI-powered\n• The businesses plugging in are getting found again\n\nSo what do you actually DO about this?\n\nThat's what the How-To Guide covers. Fifteen minutes, step by step.\n\n[GET THE HOW-TO GUIDE →]\n\nIt's practical. It's quick. And it works.\n\n{{sender_name}}\n\nP.S. Keep an eye out for my next email. I'm going to show you something we built specifically for {{business_name}}."
+    },
+    "email_2b_reengage": {
+      "subject": "The 2-minute version (worth it)",
+      "preview_text": "In case you missed it",
+      "body": "Hey {{first_name}},\n\nI sent you something last week about what's changing in local marketing. Life's busy—I get it.\n\nHere's the 30-second version:\n\n→ The way people find local businesses is shifting\n→ Old tactics (SEO, social media) are becoming less effective\n→ New infrastructure is emerging that actually works\n→ Getting visible isn't complicated (about an hour total)\n\nWant the full picture? The presentation is only 3 minutes:\n\n[WATCH THE PRESENTATION →]\n\nOr if you're ready to take action:\n\n[SKIP TO THE HOW-TO GUIDE →]\n\nEither way, this matters for {{business_name}}.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOOK-001",
+      "HOWTO-001"
+    ],
+    "follows": null,
+    "related": [
+      "EDU-002",
+      "EDU-003"
     ]
   }
 }

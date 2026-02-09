@@ -1,14 +1,14 @@
 {
   "campaign": {
     "id": "HOWTO-006",
-    "week": 6,
-    "day": 6,
-    "type": "HOWTO",
-    "title": "How-To Tutorial",
-    "subject": "How-To Tutorial",
+    "week": 3,
+    "day": 16,
+    "type": "How-To",
+    "title": "Post Announcement",
+    "subject": "Make news: How to post announcements that get seen",
     "landing_page": "post-announcement",
     "template": "tutorial",
-    "description": "How-To Tutorial - Guide user through process"
+    "description": "Step-by-step guide to creating announcements that get distributed"
   },
   "landing_page": {
     "campaign_id": "HOWTO-006",
@@ -17,36 +17,234 @@
     "template_id": "tutorial",
     "template_name": "How-To Tutorial",
     "slide_count": 8,
-    "duration_seconds": 60,
-    "primary_cta": "start_trial",
-    "secondary_cta": "contact_sales",
-    "ai_persona": "Emma",
-    "ai_tone": "Helpful, step-by-step",
-    "ai_goal": "Guide user through process",
-    "data_capture_fields": "name, email, business_name, setup_preferences",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/post-announcement/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "engagement",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week3-how-to",
-    "utm_content": "HOWTO-006"
+    "duration_seconds": 300,
+    "primary_cta": "create_announcement",
+    "secondary_cta": "see_examples"
   },
-  "template": {
-    "template_id": "tutorial",
-    "name": "How-To Tutorial",
-    "slides": 8,
-    "duration": 60,
-    "purpose": "howto",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "post-announcement",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/post-announcement/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "TutorialIntroSlide",
+      "title": "Make News",
+      "content": {
+        "headline": "Post Announcements That Get Seen",
+        "subhead": "10 minutes to being newsworthy",
+        "expectations": {
+          "time": "10 minutes",
+          "difficulty": "Beginner",
+          "outcome": "Your announcement distributed across the network"
+        }
+      },
+      "narration": "Want to make news? In the next ten minutes, you'll learn how to post announcements that actually get seen and distributed across our network. No PR experience required. Let's make you newsworthy.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "What Counts as Announcement-Worthy",
+      "content": {
+        "headline": "You Have News. You Just Don't Know It.",
+        "newsworthy": [
+          {
+            "type": "Business milestones",
+            "examples": "Anniversary, expansion, new location"
+          },
+          {
+            "type": "New offerings",
+            "examples": "Products, services, menu items"
+          },
+          {
+            "type": "Achievements",
+            "examples": "Awards, certifications, recognition"
+          },
+          {
+            "type": "Community involvement",
+            "examples": "Sponsorships, charity, events"
+          },
+          {
+            "type": "Team updates",
+            "examples": "New hires, promotions, expertise"
+          },
+          {
+            "type": "Special offers",
+            "examples": "Limited time, seasonal, exclusive"
+          }
+        ],
+        "key_point": "If you'd tell a customer about it, it's announcement-worthy"
+      },
+      "narration": "First, let's get clear on what's announcement-worthy. You have news—you just don't realize it. Business milestones like anniversaries or expansions. New offerings—products, services, menu items. Achievements—awards, certifications. Community involvement—sponsorships, charity work. Team updates—new hires, promotions. Special offers. Here's the test: if you'd tell a customer about it in person, it's announcement-worthy.",
+      "duration_seconds": 40,
+      "audio_file": "slide-02-newsworthy.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Step 1: Start Your Announcement",
+      "content": {
+        "headline": "Step 1: Create New Announcement",
+        "location": "Dashboard → Content → Create → Announcement",
+        "fields": {
+          "headline": "The hook (what's the news?)",
+          "category": "Select the type of announcement",
+          "date": "When is this happening/relevant?"
+        },
+        "tip": "Your headline should answer: 'What's new?'",
+        "screenshot": "announcement-create-screen.png"
+      },
+      "narration": "Step one: Create a new announcement. Go to Dashboard, click Content, then Create, then Announcement. You'll see three key fields. Headline—this is your hook, what's the actual news. Category—select the type of announcement. Date—when is this happening or when is it relevant. Pro tip: your headline should answer one question: 'What's new?'",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-step1.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Step 2: Write the Body",
+      "content": {
+        "headline": "Step 2: Write Clear, Concise Body",
+        "structure": [
+          {
+            "paragraph": 1,
+            "content": "The news (who, what, when, where)"
+          },
+          {
+            "paragraph": 2,
+            "content": "Why it matters (to the reader)"
+          },
+          {
+            "paragraph": 3,
+            "content": "What to do next (call to action)"
+          }
+        ],
+        "length": "150-300 words ideal",
+        "example": {
+          "bad": "We are excited to announce that after many months of hard work...",
+          "good": "Starting June 1st, [Business] is now offering [service]..."
+        }
+      },
+      "narration": "Step two: Write the body. Keep it clear and concise. Paragraph one: the news itself—who, what, when, where. Paragraph two: why it matters to the reader—not why it matters to you. Paragraph three: what to do next—your call to action. Aim for 150 to 300 words. Skip the 'we're excited to announce' opening. Just tell us what's new.",
+      "duration_seconds": 40,
+      "audio_file": "slide-04-step2.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Step 3: Add an Image",
+      "content": {
+        "headline": "Step 3: Add a Compelling Image",
+        "requirements": {
+          "size": "At least 1200x630 pixels",
+          "format": "JPG or PNG",
+          "content": "Relevant to the announcement"
+        },
+        "good_images": [
+          "Product photos",
+          "Team photos",
+          "Event images",
+          "Your storefront/location"
+        ],
+        "avoid": "Stock photos when possible—authentic is better"
+      },
+      "narration": "Step three: Add an image. Announcements with images get three times more engagement. Use at least 1200 by 630 pixels, JPG or PNG. Good options: product photos, team photos, event images, your storefront. Avoid stock photos when possible—authentic images perform better. This image will appear when your announcement is shared.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-step3.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "Step 4: Set Distribution",
+      "content": {
+        "headline": "Step 4: Choose Where It Goes",
+        "distribution_options": [
+          {
+            "channel": "Your profile",
+            "default": true,
+            "reach": "Your followers"
+          },
+          {
+            "channel": "Community feed",
+            "default": true,
+            "reach": "Local community"
+          },
+          {
+            "channel": "News consideration",
+            "default": false,
+            "reach": "Possible news pickup"
+          },
+          {
+            "channel": "Social syndication",
+            "default": false,
+            "reach": "Your connected accounts"
+          }
+        ],
+        "tip": "Enable news consideration for major announcements"
+      },
+      "narration": "Step four: Set your distribution. By default, your announcement goes to your profile and the community feed. For major announcements, enable 'News consideration'—our editorial team reviews these for potential news coverage. If you've connected social accounts, you can also enable social syndication to post automatically. More distribution means more reach.",
+      "duration_seconds": 30,
+      "audio_file": "slide-06-step4.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "StepSlide",
+      "title": "Step 5: Preview and Publish",
+      "content": {
+        "headline": "Step 5: Preview, Then Publish",
+        "checklist": [
+          "Headline is clear and specific",
+          "Body answers who/what/when/where/why",
+          "Image looks good at all sizes",
+          "Links work correctly",
+          "No typos"
+        ],
+        "publish_options": {
+          "now": "Publish immediately",
+          "scheduled": "Set specific date/time"
+        }
+      },
+      "narration": "Step five: Preview and publish. Before you hit publish, run through this checklist. Is your headline clear and specific? Does the body answer who, what, when, where, and why? Does your image look good at all sizes? Do any links work correctly? No typos? Then choose: publish now or schedule for a specific date and time. Click publish, and you're live.",
+      "duration_seconds": 30,
+      "audio_file": "slide-07-step5.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Create Your Announcement",
+      "content": {
+        "headline": "You're Ready to Make News",
+        "summary": "Headline + Body + Image + Distribution = Published",
+        "cta_primary": {
+          "label": "Create Your Announcement",
+          "action": "create_announcement"
+        },
+        "cta_secondary": {
+          "label": "See Example Announcements",
+          "action": "view_examples"
+        },
+        "tip": "First announcement? Keep it simple. You can always post more."
+      },
+      "narration": "You're ready to make news. Headline plus body plus image plus distribution equals published announcement. Click 'Create Your Announcement' to start right now. Or check out example announcements if you want inspiration first. First announcement? Keep it simple. You can always post more. Your news is waiting to be shared.",
+      "duration_seconds": 25,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_tutorial": {
+      "subject": "Make news: How to post announcements that get seen",
+      "preview_text": "10 minutes to being newsworthy",
+      "body": "Hey {{first_name}},\n\nYou have news. You just don't realize it.\n\n• Business milestone? News.\n• New offering? News.\n• Team update? News.\n• Community involvement? News.\n\nThe question is whether anyone sees it.\n\nI put together a 10-minute guide on creating announcements that actually get distributed—across the community, potentially to local news, and to all your connected accounts.\n\n[CREATE YOUR ANNOUNCEMENT →]\n\nIf you'd tell a customer about it in person, it's worth announcing.\n\n{{sender_name}}\nFibonacco"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-007"
+    ],
+    "follows": [
+      "EDU-003",
+      "HOOK-004"
+    ],
+    "related": [
+      "HOWTO-002",
+      "HOWTO-013"
+    ]
   }
 }

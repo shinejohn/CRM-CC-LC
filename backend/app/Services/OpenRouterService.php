@@ -2,58 +2,65 @@
 
 namespace App\Services;
 
+use Fibonacco\AiGatewayClient\AiGatewayClient;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class OpenRouterService
 {
-    protected string $apiKey;
-    protected string $baseUrl = 'https://openrouter.ai/api/v1';
+    protected AiGatewayClient $gateway;
 
-    public function __construct()
+    public function __construct(AiGatewayClient $gateway)
     {
-        $this->apiKey = config('services.openrouter.api_key');
+        $this->gateway = $gateway;
     }
 
     /**
      * Send chat completion request
+     * Relays to AI Gateway.
      */
     public function chatCompletion(array $messages, array $options = []): ?array
     {
         try {
-            $payload = [
-                'model' => $options['model'] ?? 'anthropic/claude-3.5-sonnet',
-                'messages' => $messages,
-                'temperature' => $options['temperature'] ?? 0.7,
-                'max_tokens' => $options['max_tokens'] ?? 2000,
+            $lastMessage = end($messages);
+            $prompt = $lastMessage['content'] ?? '';
+            $system = $options['system'] ?? null;
+
+            $result = $this->gateway->agent(
+                prompt: $prompt,
+                tools: [],
+                context: ['system_prompt' => $system, 'messages' => $messages]
+            );
+
+            if (isset($result['error']) && $result['error']) {
+                Log::error('Gateway error', ['error' => $result['error']]);
+                return null;
+            }
+
+            return [
+                'id' => 'chatcmpl-' . \Illuminate\Support\Str::random(12),
+                'object' => 'chat.completion',
+                'created' => time(),
+                'model' => 'gateway-model',
+                'choices' => [
+                    [
+                        'index' => 0,
+                        'message' => [
+                            'role' => 'assistant',
+                            'content' => $result['response'] ?? '',
+                        ],
+                        'finish_reason' => 'stop',
+                    ]
+                ],
+                'usage' => [
+                    'prompt_tokens' => 0,
+                    'completion_tokens' => 0,
+                    'total_tokens' => 0,
+                ]
             ];
 
-            if (isset($options['system'])) {
-                array_unshift($payload['messages'], [
-                    'role' => 'system',
-                    'content' => $options['system'],
-                ]);
-            }
-
-            $response = Http::withHeaders([
-                'Authorization' => "Bearer {$this->apiKey}",
-                'Content-Type' => 'application/json',
-                'HTTP-Referer' => config('app.url', 'https://fibonacco.com'),
-                'X-Title' => 'Fibonacco Learning Center',
-            ])->post("{$this->baseUrl}/chat/completions", $payload);
-
-            if ($response->successful()) {
-                return $response->json();
-            }
-
-            Log::error('OpenRouter API failed', [
-                'status' => $response->status(),
-                'body' => $response->body(),
-            ]);
-
-            return null;
         } catch (\Exception $e) {
-            Log::error('OpenRouter API error', ['error' => $e->getMessage()]);
+            Log::error('OpenRouter Adapter error', ['error' => $e->getMessage()]);
             return null;
         }
     }
@@ -64,15 +71,10 @@ class OpenRouterService
     public function getModels(): array
     {
         try {
-            $response = Http::withHeaders([
-                'Authorization' => "Bearer {$this->apiKey}",
-            ])->get("{$this->baseUrl}/models");
-
-            if ($response->successful()) {
-                return $response->json('data', []);
-            }
-
-            return [];
+            // Gateway doesn't expose raw models list yet in client, return basics
+            return [
+                ['id' => 'gateway-default', 'name' => 'Gateway Default Model']
+            ];
         } catch (\Exception $e) {
             Log::error('OpenRouter get models error', ['error' => $e->getMessage()]);
             return [];

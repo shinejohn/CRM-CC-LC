@@ -8,7 +8,7 @@
     "subject": "Your Command Center is ready - here's how to use it",
     "landing_page": "command-center-basics",
     "template": "tutorial",
-    "description": "Basic walkthrough of Command Center features"
+    "description": "Basic walkthrough of Command Center features - first steps after claiming listing"
   },
   "landing_page": {
     "campaign_id": "HOWTO-001",
@@ -17,12 +17,12 @@
     "template_id": "tutorial",
     "template_name": "How-To Tutorial",
     "slide_count": 8,
-    "duration_seconds": 60,
-    "primary_cta": "start_trial",
-    "secondary_cta": "contact_sales",
+    "duration_seconds": 300,
+    "primary_cta": "go_to_dashboard",
+    "secondary_cta": "watch_video",
     "ai_persona": "Emma",
-    "ai_tone": "Helpful, step-by-step",
-    "ai_goal": "Guide user through process",
+    "ai_tone": "Helpful, patient, encouraging",
+    "ai_goal": "Guide user through first actions confidently",
     "data_capture_fields": "name, email, business_name, setup_preferences",
     "audio_base_url": "https://cdn.fibonacco.com/presentations/command-center-basics/audio/",
     "crm_tracking": true,
@@ -36,131 +36,333 @@
     "template_id": "tutorial",
     "name": "How-To Tutorial",
     "slides": 8,
-    "duration": 60,
+    "duration": 300,
     "purpose": "tutorial",
     "audio_required": true
   },
   "slides": [
     {
-      "template_id": "tutorial",
       "slide_num": 1,
-      "component": "HeroSlide",
-      "content_type": "tutorial_intro",
-      "requires_personalization": true,
+      "component": "TutorialIntroSlide",
+      "title": "Welcome to Your Command Center",
+      "content": {
+        "headline": "Your Command Center in 10 Minutes",
+        "subhead": "Everything you need to know to get started",
+        "expectations": {
+          "time": "10 minutes",
+          "difficulty": "Beginner",
+          "outcome": "Navigate confidently, take first actions"
+        },
+        "visual": "Dashboard overview screenshot"
+      },
+      "narration": "Welcome to your Command Center. In the next ten minutes, you're going to learn everything you need to navigate confidently and take your first actions. This is beginner-friendly—no tech skills required. Let's get you set up.",
+      "duration_seconds": 20,
       "audio_file": "slide-01-intro.mp3"
     },
     {
-      "template_id": "tutorial",
       "slide_num": 2,
       "component": "OverviewSlide",
-      "content_type": "what_youll_learn",
-      "requires_personalization": false,
+      "title": "The Five Areas",
+      "content": {
+        "headline": "Your Dashboard Has 5 Key Areas",
+        "areas": [
+          {
+            "num": 1,
+            "name": "Your Profile",
+            "desc": "How you appear to the world"
+          },
+          {
+            "num": 2,
+            "name": "Your Content",
+            "desc": "Posts, events, coupons, news"
+          },
+          {
+            "num": 3,
+            "name": "Your Insights",
+            "desc": "Who's viewing and engaging"
+          },
+          {
+            "num": 4,
+            "name": "Your Messages",
+            "desc": "Inquiries and conversations"
+          },
+          {
+            "num": 5,
+            "name": "Your Settings",
+            "desc": "Preferences and integrations"
+          }
+        ],
+        "visual": "Dashboard with 5 areas highlighted"
+      },
+      "narration": "Your Command Center has five key areas. One: Your Profile—this is how you appear to the world. Two: Your Content—where you create and manage posts, events, coupons, and news. Three: Your Insights—where you see who's viewing and engaging. Four: Your Messages—where inquiries and conversations come in. Five: Your Settings—where you set preferences and connect other tools. Let's look at each one.",
+      "duration_seconds": 40,
       "audio_file": "slide-02-overview.mp3"
     },
     {
-      "template_id": "tutorial",
       "slide_num": 3,
       "component": "StepSlide",
-      "content_type": "step_1",
-      "requires_personalization": false,
-      "audio_file": "slide-03-step1.mp3"
+      "title": "Your Profile",
+      "content": {
+        "headline": "Step 1: Complete Your Profile",
+        "location": "Click 'Profile' in the left sidebar",
+        "key_fields": [
+          {
+            "field": "Business Description",
+            "tip": "2-3 sentences about what you do"
+          },
+          {
+            "field": "Profile Photo",
+            "tip": "Logo or storefront works great"
+          },
+          {
+            "field": "Contact Info",
+            "tip": "How customers should reach you"
+          },
+          {
+            "field": "Hours",
+            "tip": "When you're open"
+          },
+          {
+            "field": "Services/Products",
+            "tip": "What you offer"
+          }
+        ],
+        "completion_indicator": "Aim for 100% - complete profiles get 3x more views",
+        "visual": "Profile editing screen"
+      },
+      "narration": "Start with your profile. Click 'Profile' in the left sidebar. You'll see fields for your business description, profile photo, contact info, hours, and services. Here's a pro tip: complete profiles get three times more views than incomplete ones. Take five minutes now to fill in everything. Two to three sentences for your description is plenty. A logo or storefront photo works great.",
+      "duration_seconds": 45,
+      "audio_file": "slide-03-profile.mp3"
     },
     {
-      "template_id": "tutorial",
       "slide_num": 4,
       "component": "StepSlide",
-      "content_type": "step_2",
-      "requires_personalization": false,
-      "audio_file": "slide-04-step2.mp3"
+      "title": "Your Content",
+      "content": {
+        "headline": "Step 2: Create Your First Content",
+        "location": "Click 'Content' → 'Create New'",
+        "content_types": [
+          {
+            "type": "Announcement",
+            "use_for": "News about your business",
+            "time": "2 min"
+          },
+          {
+            "type": "Event",
+            "use_for": "Something happening at a specific time",
+            "time": "3 min"
+          },
+          {
+            "type": "Coupon",
+            "use_for": "Special offers and discounts",
+            "time": "2 min"
+          },
+          {
+            "type": "Article",
+            "use_for": "Longer stories and expertise",
+            "time": "10 min"
+          }
+        ],
+        "recommendation": "Start with an Announcement - it's the easiest",
+        "visual": "Content creation menu"
+      },
+      "narration": "Next, let's create your first content. Click 'Content' in the sidebar, then 'Create New.' You'll see four options: Announcements for news about your business, Events for things happening at specific times, Coupons for special offers, and Articles for longer stories. My recommendation? Start with an announcement. It's the easiest—takes about two minutes. Just say what's new, what you're excited about, or what customers should know.",
+      "duration_seconds": 45,
+      "audio_file": "slide-04-content.mp3"
     },
     {
-      "template_id": "tutorial",
       "slide_num": 5,
       "component": "StepSlide",
-      "content_type": "step_3",
-      "requires_personalization": false,
-      "audio_file": "slide-05-step3.mp3"
+      "title": "Your Insights",
+      "content": {
+        "headline": "Step 3: Understand Your Insights",
+        "location": "Click 'Insights' in the left sidebar",
+        "key_metrics": [
+          {
+            "metric": "Profile Views",
+            "meaning": "How many people saw your listing"
+          },
+          {
+            "metric": "Content Engagement",
+            "meaning": "Clicks, shares, saves on your posts"
+          },
+          {
+            "metric": "Search Appearances",
+            "meaning": "How often you showed up in searches"
+          },
+          {
+            "metric": "Inquiry Rate",
+            "meaning": "How many viewers contacted you"
+          }
+        ],
+        "check_frequency": "Check weekly to start, then monthly once patterns emerge",
+        "visual": "Insights dashboard"
+      },
+      "narration": "Your Insights area shows you what's working. Click 'Insights' in the sidebar. You'll see profile views—how many people saw your listing. Content engagement—clicks, shares, saves on your posts. Search appearances—how often you showed up when people searched. And inquiry rate—how many viewers actually contacted you. Check this weekly at first. Once you see patterns, monthly is fine.",
+      "duration_seconds": 40,
+      "audio_file": "slide-05-insights.mp3"
     },
     {
-      "template_id": "tutorial",
       "slide_num": 6,
-      "component": "DemoSlide",
-      "content_type": "live_demo",
-      "requires_personalization": true,
-      "audio_file": "slide-06-demo.mp3"
+      "component": "StepSlide",
+      "title": "Your Messages",
+      "content": {
+        "headline": "Step 4: Set Up Messages",
+        "location": "Click 'Messages' in the left sidebar",
+        "features": [
+          {
+            "feature": "Unified Inbox",
+            "desc": "All inquiries in one place"
+          },
+          {
+            "feature": "Quick Replies",
+            "desc": "Save responses you use often"
+          },
+          {
+            "feature": "Auto-Response",
+            "desc": "Instant reply when you're busy"
+          },
+          {
+            "feature": "Notifications",
+            "desc": "Email or SMS when messages arrive"
+          }
+        ],
+        "action": "Set up your auto-response now - takes 2 minutes",
+        "visual": "Messages inbox with auto-response settings"
+      },
+      "narration": "Messages is where customer inquiries come in. Click 'Messages' in the sidebar. You get a unified inbox—everything in one place. You can save quick replies for questions you answer often. And here's what I recommend setting up right now: your auto-response. When someone messages you and you can't reply immediately, they automatically get a response saying you'll be in touch soon. Takes two minutes to set up. Go to Messages, click Settings, and write your auto-response.",
+      "duration_seconds": 45,
+      "audio_file": "slide-06-messages.mp3"
     },
     {
-      "template_id": "tutorial",
       "slide_num": 7,
-      "component": "TipsSlide",
-      "content_type": "pro_tips",
-      "requires_personalization": true,
-      "audio_file": "slide-07-tips.mp3"
+      "component": "StepSlide",
+      "title": "Your Settings",
+      "content": {
+        "headline": "Step 5: Key Settings to Check",
+        "location": "Click 'Settings' in the left sidebar",
+        "priority_settings": [
+          {
+            "setting": "Notification Preferences",
+            "why": "So you don't miss inquiries"
+          },
+          {
+            "setting": "Connected Accounts",
+            "why": "Link social media for auto-posting"
+          },
+          {
+            "setting": "Team Members",
+            "why": "Add staff who need access"
+          },
+          {
+            "setting": "Billing",
+            "why": "View your plan and usage"
+          }
+        ],
+        "note": "Most defaults are fine - just check notifications",
+        "visual": "Settings menu"
+      },
+      "narration": "Finally, Settings. Click 'Settings' in the sidebar. The most important thing to check: notification preferences. Make sure you're getting notified when inquiries come in—by email, SMS, or both. You can also connect social accounts here for auto-posting, add team members if you have staff who need access, and view your plan and billing. Most defaults are fine. Just make sure notifications are set up so you don't miss anything.",
+      "duration_seconds": 40,
+      "audio_file": "slide-07-settings.mp3"
     },
     {
-      "template_id": "tutorial",
       "slide_num": 8,
       "component": "CTASlide",
-      "content_type": "try_it_now",
-      "requires_personalization": true,
+      "title": "You're Ready",
+      "content": {
+        "headline": "You're Ready to Go",
+        "checklist": [
+          {
+            "item": "Profile completed",
+            "status": "checkbox"
+          },
+          {
+            "item": "First content created",
+            "status": "checkbox"
+          },
+          {
+            "item": "Insights bookmarked",
+            "status": "checkbox"
+          },
+          {
+            "item": "Auto-response set up",
+            "status": "checkbox"
+          },
+          {
+            "item": "Notifications configured",
+            "status": "checkbox"
+          }
+        ],
+        "cta_primary": {
+          "label": "Go to Your Command Center",
+          "action": "open_dashboard"
+        },
+        "cta_secondary": {
+          "label": "Watch the Video Walkthrough",
+          "action": "play_video"
+        },
+        "next_steps": "Next up: How to create content that gets found →"
+      },
+      "narration": "That's it. You know your way around. Your checklist: complete your profile, create your first content, bookmark your insights, set up auto-response, and configure notifications. Click 'Go to Your Command Center' to put this into action right now. Or if you want to see it all in action first, watch the video walkthrough. Next up, we'll show you how to create content that actually gets found. You've got this.",
+      "duration_seconds": 30,
       "audio_file": "slide-08-cta.mp3"
     }
   ],
-  "presentation": {
-    "id": "command-center-basics",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/command-center-basics/audio/",
-      "format": "mp3"
+  "emails": {
+    "email_tutorial": {
+      "subject": "Your Command Center is ready - here's how to use it",
+      "preview_text": "10 minutes to master your dashboard",
+      "body": "Hey {{first_name}},\n\nYou claimed your listing (nice work!).\n\nNow let's make sure you actually know how to use it.\n\nI put together a quick 10-minute guide that walks you through your Command Center:\n\n✓ The 5 areas you need to know\n✓ How to complete your profile for maximum visibility\n✓ Creating your first content\n✓ Understanding your insights\n✓ Setting up messages so you don't miss inquiries\n\n[START THE TUTORIAL →]\n\nIt's step-by-step, screenshot by screenshot. No tech skills required.\n\nOnce you're done, you'll feel confident navigating everything.\n\n{{sender_name}}\nFibonacco\n\nP.S. The tutorial includes a checklist at the end. Complete it and you'll be ahead of 90% of businesses on the platform."
+    }
+  },
+  "resources": {
+    "video_walkthrough": {
+      "url": "https://cdn.fibonacco.com/videos/command-center-basics.mp4",
+      "duration": "8:30",
+      "chapters": [
+        {
+          "time": "0:00",
+          "title": "Dashboard Overview"
+        },
+        {
+          "time": "1:15",
+          "title": "Your Profile"
+        },
+        {
+          "time": "2:45",
+          "title": "Creating Content"
+        },
+        {
+          "time": "4:30",
+          "title": "Insights Explained"
+        },
+        {
+          "time": "6:00",
+          "title": "Messages Setup"
+        },
+        {
+          "time": "7:15",
+          "title": "Key Settings"
+        }
+      ]
     },
-    "slides": [
-      {
-        "id": 1,
-        "component": "HeroSlide",
-        "audioFile": "slide-01-intro.mp3",
-        "requiresPersonalization": true
-      },
-      {
-        "id": 2,
-        "component": "OverviewSlide",
-        "audioFile": "slide-02-overview.mp3",
-        "requiresPersonalization": false
-      },
-      {
-        "id": 3,
-        "component": "StepSlide",
-        "audioFile": "slide-03-step1.mp3",
-        "requiresPersonalization": false
-      },
-      {
-        "id": 4,
-        "component": "StepSlide",
-        "audioFile": "slide-04-step2.mp3",
-        "requiresPersonalization": false
-      },
-      {
-        "id": 5,
-        "component": "StepSlide",
-        "audioFile": "slide-05-step3.mp3",
-        "requiresPersonalization": false
-      },
-      {
-        "id": 6,
-        "component": "DemoSlide",
-        "audioFile": "slide-06-demo.mp3",
-        "requiresPersonalization": true
-      },
-      {
-        "id": 7,
-        "component": "TipsSlide",
-        "audioFile": "slide-07-tips.mp3",
-        "requiresPersonalization": true
-      },
-      {
-        "id": 8,
-        "component": "CTASlide",
-        "audioFile": "slide-08-cta.mp3",
-        "requiresPersonalization": true
-      }
+    "downloadable_checklist": {
+      "url": "https://cdn.fibonacco.com/downloads/command-center-checklist.pdf",
+      "title": "Command Center Setup Checklist"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-002",
+      "HOWTO-003"
+    ],
+    "follows": [
+      "HOOK-001",
+      "EDU-001"
+    ],
+    "related": [
+      "HOWTO-009"
     ]
   }
 }

@@ -20,7 +20,7 @@ return new class extends Migration
         DB::statement('SET search_path TO ops, public');
 
         Schema::create('metric_aggregates', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('gen_random_uuid()'));
+            $table->uuid('id')->primary()->default(DB::getDriverName() === 'pgsql' ? DB::raw('gen_random_uuid()') : null);
             
             $table->uuid('metric_id');
             $table->string('dimension_key', 100)->nullable();

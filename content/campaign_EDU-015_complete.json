@@ -1,0 +1,197 @@
+{
+  "campaign": {
+    "id": "EDU-015",
+    "week": 11,
+    "day": 72,
+    "type": "Educational",
+    "title": "AI Employees Explained",
+    "subject": "Meet your new AI employees (they don't need coffee breaks)",
+    "landing_page": "ai-employees-explained",
+    "template": "ai-intro",
+    "description": "Comprehensive introduction to AI employees - what they are, what they do, how to work with them"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Meet Your AI Employees",
+      "content": {
+        "headline": "Your New Team Members Don't Need Coffee Breaks",
+        "subhead": "AI Employees: What they are, what they do, and how they work"
+      },
+      "narration": "Meet your new team members—they don't need coffee breaks, they never call in sick, and they're available twenty-four seven. These are AI employees, and they're about to change how you run your business. Let me introduce you to who they are and what they can do.",
+      "duration_seconds": 20,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "What Are AI Employees?",
+      "content": {
+        "headline": "AI That Works Like a Team Member",
+        "definition": "AI employees are specialized AI systems trained to handle specific roles in your business",
+        "not_chatbots": "These aren't simple chatbots—they're sophisticated systems that learn your business, your voice, and your preferences",
+        "examples": [
+          {"role": "AI Receptionist", "handles": "Calls, scheduling, inquiries"},
+          {"role": "AI Marketing Assistant", "handles": "Content, social, campaigns"},
+          {"role": "AI Customer Service Rep", "handles": "Support, follow-ups, reviews"},
+          {"role": "AI Sales Assistant", "handles": "Lead qualification, follow-ups, proposals"}
+        ]
+      },
+      "narration": "What are AI employees? They're specialized AI systems trained to handle specific roles in your business. These aren't simple chatbots—they're sophisticated systems that learn your business, your voice, and your preferences. You might have an AI Receptionist handling calls and scheduling. An AI Marketing Assistant creating content and managing campaigns. An AI Customer Service Rep handling support and reviews. An AI Sales Assistant qualifying leads and following up. Each one specialized, each one trained for their role.",
+      "duration_seconds": 40,
+      "audio_file": "slide-02-what.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "How They Work",
+      "content": {
+        "headline": "AI Employees Learn and Improve",
+        "process": [
+          {"stage": "Training", "what": "You provide your business info, preferences, examples"},
+          {"stage": "Launch", "what": "AI starts handling tasks with supervision"},
+          {"stage": "Learning", "what": "AI improves from every interaction"},
+          {"stage": "Autonomy", "what": "AI handles routine independently, escalates exceptions"},
+          {"stage": "Evolution", "what": "AI adapts as your business grows"}
+        ],
+        "key_point": "They get better over time—unlike human employees who need constant retraining"
+      },
+      "narration": "How do AI employees work? Training: you provide your business info, preferences, and examples of how you'd handle things. Launch: AI starts handling tasks with your supervision. Learning: AI improves from every interaction—what worked, what didn't. Autonomy: AI handles routine independently, escalates exceptions to you. Evolution: AI adapts as your business grows and changes. The key point? They get better over time. Unlike human employees who need constant retraining, AI employees accumulate knowledge.",
+      "duration_seconds": 40,
+      "audio_file": "slide-03-how.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "Working Together",
+      "content": {
+        "headline": "AI + Human = Best Results",
+        "collaboration": [
+          {"ai_does": "Handle volume", "human_does": "Handle complexity"},
+          {"ai_does": "Instant responses", "human_does": "Nuanced decisions"},
+          {"ai_does": "Consistent execution", "human_does": "Creative strategy"},
+          {"ai_does": "Data analysis", "human_does": "Interpretation and action"},
+          {"ai_does": "24/7 availability", "human_does": "High-touch relationships"}
+        ],
+        "result": "Each does what they do best"
+      },
+      "narration": "AI employees work best alongside humans, not replacing them. AI handles volume, humans handle complexity. AI provides instant responses, humans make nuanced decisions. AI executes consistently, humans create strategy. AI analyzes data, humans interpret and act. AI provides twenty-four seven availability, humans build high-touch relationships. Each does what they do best. Together, they're unstoppable.",
+      "duration_seconds": 35,
+      "audio_file": "slide-04-together.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ConceptSlide",
+      "title": "The Numbers",
+      "content": {
+        "headline": "What AI Employees Deliver",
+        "metrics": [
+          {"metric": "Time saved", "typical": "10-20 hours/week"},
+          {"metric": "Response time", "typical": "From hours to seconds"},
+          {"metric": "Availability", "typical": "24/7/365"},
+          {"metric": "Consistency", "typical": "100% on-brand, every time"},
+          {"metric": "Cost vs. hiring", "typical": "10-20% of human employee"}
+        ],
+        "roi_example": "One AI employee at $200/month replacing 15 hours/week of work = $3/hour vs. $15-20/hour for human"
+      },
+      "narration": "What do AI employees actually deliver? Time saved: ten to twenty hours per week typically. Response time: from hours to seconds. Availability: twenty-four seven, three sixty-five. Consistency: one hundred percent on-brand, every time. Cost: ten to twenty percent of a human employee. The math: one AI employee at two hundred dollars a month replacing fifteen hours a week of work costs three dollars an hour. Compare that to fifteen to twenty dollars for a human. Not a replacement for humans—an enhancement that makes everything else more efficient.",
+      "duration_seconds": 35,
+      "audio_file": "slide-05-numbers.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "ConceptSlide",
+      "title": "Getting Started",
+      "content": {
+        "headline": "Start with Your Biggest Time Drain",
+        "recommendation": [
+          {"priority": 1, "if": "Drowning in calls/messages", "start": "AI Receptionist"},
+          {"priority": 2, "if": "Can't keep up with content", "start": "AI Marketing Assistant"},
+          {"priority": 3, "if": "Slow customer response", "start": "AI Customer Service Rep"},
+          {"priority": 4, "if": "Leads falling through cracks", "start": "AI Sales Assistant"}
+        ],
+        "advice": "Start with ONE role. Master it. Then expand."
+      },
+      "narration": "Where should you start? Start with your biggest time drain. Drowning in calls and messages? Start with an AI Receptionist. Can't keep up with content? AI Marketing Assistant. Slow customer response? AI Customer Service Rep. Leads falling through cracks? AI Sales Assistant. My advice: start with ONE role. Master it. Prove the ROI. Then expand. Don't try to do everything at once.",
+      "duration_seconds": 35,
+      "audio_file": "slide-06-start.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "ConceptSlide",
+      "title": "Common Concerns",
+      "content": {
+        "headline": "Questions You Might Have",
+        "qa": [
+          {"q": "Will customers know it's AI?", "a": "Many won't. But transparency is fine too—people accept AI help."},
+          {"q": "What about mistakes?", "a": "AI is trained on your info and improves. Mistakes decrease over time."},
+          {"q": "Is my data safe?", "a": "Yes—encrypted, private, not used to train other AIs."},
+          {"q": "What if I need to change something?", "a": "You're always in control. Change settings, update training anytime."}
+        ]
+      },
+      "narration": "Questions you might have. Will customers know it's AI? Many won't notice. But transparency is fine too—people increasingly accept AI assistance. What about mistakes? AI is trained on your info and improves with every interaction. Mistakes decrease over time. Is my data safe? Yes—encrypted, private, not used to train other people's AI. What if I need to change something? You're always in control. Change settings, update training anytime.",
+      "duration_seconds": 35,
+      "audio_file": "slide-07-concerns.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "ProofSlide",
+      "title": "Success Stories",
+      "content": {
+        "case_studies": [
+          {
+            "business": "Dental practice",
+            "ai_employee": "AI Receptionist",
+            "result": "47% fewer missed calls, 23% more appointments"
+          },
+          {
+            "business": "Real estate agent",
+            "ai_employee": "AI Marketing Assistant",
+            "result": "Daily content, 5x social engagement, 8 hours/week saved"
+          },
+          {
+            "business": "Home services company",
+            "ai_employee": "AI Customer Service + Sales",
+            "result": "24/7 coverage, 34% faster close rate"
+          }
+        ]
+      },
+      "narration": "Real success stories. A dental practice with an AI Receptionist: forty-seven percent fewer missed calls, twenty-three percent more appointments. A real estate agent with AI Marketing Assistant: daily content posting, five times social engagement, eight hours a week saved. A home services company with AI Customer Service and Sales: twenty-four seven coverage, thirty-four percent faster close rate. This isn't theory—it's happening now.",
+      "duration_seconds": 30,
+      "audio_file": "slide-08-proof.mp3"
+    },
+    {
+      "slide_num": 9,
+      "component": "CTASlide",
+      "title": "Hire Your First AI Employee",
+      "content": {
+        "headline": "Ready to Build Your AI Team?",
+        "cta_primary": {
+          "label": "Hire Your First AI Employee",
+          "action": "start_hiring"
+        },
+        "cta_secondary": {
+          "label": "See AI Employees in Action",
+          "action": "view_demos"
+        },
+        "assurance": "Start with one role. See results in days, not months."
+      },
+      "narration": "Ready to build your AI team? Hire your first AI employee now—start with the role that will save you the most time. Or see AI employees in action with live demos. Start with one role. See results in days, not months. Your new team members are ready to work.",
+      "duration_seconds": 20,
+      "audio_file": "slide-09-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_educational": {
+      "subject": "Meet your new AI employees (they don't need coffee breaks)",
+      "preview_text": "24/7, never sick, constantly improving",
+      "body": "Hey {{first_name}},\n\nYour new team members:\n✓ Don't need coffee breaks\n✓ Never call in sick\n✓ Available 24/7\n✓ Get better over time\n✓ Cost 10-20% of human employees\n\nAI employees aren't chatbots. They're specialized systems trained for specific roles:\n\n→ AI Receptionist (calls, scheduling)\n→ AI Marketing Assistant (content, social)\n→ AI Customer Service Rep (support, reviews)\n→ AI Sales Assistant (leads, follow-ups)\n\n[WATCH THE 5-MINUTE INTRODUCTION →]\n\nOne AI employee = 10-20 hours/week saved.\n\n{{sender_name}}\nFibonacco"
+    }
+  },
+  "connections": {
+    "leads_to": ["HOWTO-025"],
+    "follows": "EDU-014",
+    "related": ["EDU-006", "EDU-007", "EDU-008"]
+  }
+}

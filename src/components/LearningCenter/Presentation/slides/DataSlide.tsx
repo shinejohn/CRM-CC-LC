@@ -22,3 +22,7 @@ export const DataSlide: React.FC<DataSlideProps> = (props) => {
   return <StatsSlide {...props} />;
 };
 
+
+
+
+

@@ -1,52 +1,159 @@
 {
   "campaign": {
     "id": "HOWTO-017",
-    "week": 17,
-    "day": 17,
-    "type": "HOWTO",
-    "title": "How-To Tutorial",
-    "subject": "How-To Tutorial",
+    "week": 8,
+    "day": 53,
+    "type": "How-To",
+    "title": "Appointment Booking Setup",
+    "subject": "Let customers book appointments 24/7",
     "landing_page": "appointment-booking-setup",
-    "template": "tutorial",
-    "description": "How-To Tutorial - Guide user through process"
+    "template": "tutorial"
   },
-  "landing_page": {
-    "campaign_id": "HOWTO-017",
-    "landing_page_slug": "appointment-booking-setup",
-    "url": "/learn/appointment-booking-setup",
-    "template_id": "tutorial",
-    "template_name": "How-To Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 60,
-    "primary_cta": "start_trial",
-    "secondary_cta": "contact_sales",
-    "ai_persona": "Emma",
-    "ai_tone": "Helpful, step-by-step",
-    "ai_goal": "Guide user through process",
-    "data_capture_fields": "name, email, business_name, setup_preferences",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/appointment-booking-setup/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "engagement",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week8-how-to",
-    "utm_content": "HOWTO-017"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "How-To Tutorial",
-    "slides": 8,
-    "duration": 60,
-    "purpose": "howto",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "appointment-booking-setup",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/appointment-booking-setup/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Online Booking",
+      "content": {
+        "headline": "Customers Book While You Sleep",
+        "subhead": "Set up 24/7 appointment booking"
+      },
+      "narration": "What if customers could book appointments anytime—while you're with other clients, after hours, on weekends? Online booking makes that possible. Let's set it up.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "OverviewSlide",
+      "title": "What You'll Set Up",
+      "content": {
+        "topics": [
+          "Your availability calendar",
+          "Service types and durations",
+          "Booking rules",
+          "Confirmation and reminders"
+        ]
+      },
+      "narration": "We'll configure your availability calendar, define your service types and how long each takes, set booking rules like buffer time and advance notice, and set up automatic confirmations and reminders.",
+      "duration_seconds": 20,
+      "audio_file": "slide-02-overview.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Step 1: Set Availability",
+      "content": {
+        "action": "Define Your Hours",
+        "settings": [
+          "Working hours per day",
+          "Days available",
+          "Lunch/break blocks",
+          "Vacation/blackout dates"
+        ]
+      },
+      "narration": "First, set your availability. Define working hours for each day—they don't have to be the same. Mark days you're available. Block out lunch and break times. Add vacation or blackout dates. The system only shows times you're actually free.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-availability.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Step 2: Define Services",
+      "content": {
+        "action": "Add Your Services",
+        "for_each_service": [
+          "Service name",
+          "Duration",
+          "Price (optional)",
+          "Description",
+          "Who can perform it (if multiple staff)"
+        ]
+      },
+      "narration": "Add your services. For each one: the service name, how long it takes, price if you want to show it, a brief description, and who can perform it if you have multiple staff. Customers will select from this menu when booking.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-services.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Step 3: Booking Rules",
+      "content": {
+        "action": "Set Your Rules",
+        "rules": [
+          "Minimum advance notice (e.g., 24 hours)",
+          "Maximum advance booking (e.g., 60 days)",
+          "Buffer time between appointments",
+          "Cancellation policy",
+          "Require payment or deposit (optional)"
+        ]
+      },
+      "narration": "Set booking rules. Minimum advance notice—how much warning you need. Maximum advance booking—how far ahead people can book. Buffer time between appointments for prep or travel. Your cancellation policy. And whether to require payment or deposit upfront.",
+      "duration_seconds": 35,
+      "audio_file": "slide-05-rules.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "Step 4: Notifications",
+      "content": {
+        "action": "Configure Alerts",
+        "notifications": [
+          "Booking confirmation (immediate)",
+          "Reminder 24 hours before",
+          "Reminder 1 hour before (optional)",
+          "Follow-up after appointment"
+        ]
+      },
+      "narration": "Configure notifications. Booking confirmation goes out immediately. Reminder twenty-four hours before reduces no-shows significantly. Optional one-hour reminder for forgetful clients. Follow-up after the appointment for feedback or rebooking. All automatic.",
+      "duration_seconds": 30,
+      "audio_file": "slide-06-notifications.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "TipsSlide",
+      "title": "Pro Tips",
+      "content": {
+        "tips": [
+          "Add booking link to email signature",
+          "Share on social media profiles",
+          "24-hour reminder reduces no-shows by 40%",
+          "Sync with Google/Outlook calendar"
+        ]
+      },
+      "narration": "Booking pro tips. Add your booking link to your email signature—every email becomes a booking opportunity. Share on social media profiles. That twenty-four hour reminder reduces no-shows by about forty percent. And sync with your Google or Outlook calendar so everything stays in one place.",
+      "duration_seconds": 25,
+      "audio_file": "slide-07-tips.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Start Taking Bookings",
+      "content": {
+        "cta_primary": {
+          "label": "Set Up Booking",
+          "action": "setup_booking"
+        },
+        "cta_secondary": {
+          "label": "See How It Looks",
+          "action": "preview_booking"
+        }
+      },
+      "narration": "Ready to take bookings twenty-four seven? Set up your booking system now. Or preview how it looks to customers first. Stop playing phone tag—let customers book when it's convenient for them.",
+      "duration_seconds": 20,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_educational": {
+      "subject": "Let customers book appointments 24/7",
+      "preview_text": "Stop playing phone tag",
+      "body": "Hey {{first_name}},\n\nWhat if customers could book while you're busy with other clients?\n\nOnline booking:\n✓ Available 24/7\n✓ Automatic confirmations\n✓ Reminders reduce no-shows 40%\n✓ Syncs with your calendar\n\n[SET UP ONLINE BOOKING →]\n\nPro tip: Add booking link to your email signature.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-022"
+    ],
+    "follows": "HOWTO-016"
   }
 }

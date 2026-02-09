@@ -1,52 +1,160 @@
 {
   "campaign": {
     "id": "HOWTO-011",
-    "week": 11,
-    "day": 11,
-    "type": "HOWTO",
-    "title": "How-To Tutorial",
-    "subject": "How-To Tutorial",
+    "week": 5,
+    "day": 34,
+    "type": "How-To",
+    "title": "Email Marketing Setup",
+    "subject": "Set up email marketing in 10 minutes",
     "landing_page": "email-marketing-setup",
     "template": "tutorial",
-    "description": "How-To Tutorial - Guide user through process"
+    "description": "How to set up and send email campaigns"
   },
-  "landing_page": {
-    "campaign_id": "HOWTO-011",
-    "landing_page_slug": "email-marketing-setup",
-    "url": "/learn/email-marketing-setup",
-    "template_id": "tutorial",
-    "template_name": "How-To Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 60,
-    "primary_cta": "start_trial",
-    "secondary_cta": "contact_sales",
-    "ai_persona": "Emma",
-    "ai_tone": "Helpful, step-by-step",
-    "ai_goal": "Guide user through process",
-    "data_capture_fields": "name, email, business_name, setup_preferences",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/email-marketing-setup/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "engagement",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week5-how-to",
-    "utm_content": "HOWTO-011"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "How-To Tutorial",
-    "slides": 8,
-    "duration": 60,
-    "purpose": "howto",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "email-marketing-setup",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/email-marketing-setup/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Email Marketing Setup",
+      "content": {
+        "headline": "Send Professional Emails",
+        "subhead": "10 minutes to your first campaign"
+      },
+      "narration": "Email marketing is one of the highest ROI channels available. Let's get you set up in ten minutes so you can start reaching your customers directly.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "OverviewSlide",
+      "title": "What You'll Learn",
+      "content": {
+        "topics": [
+          "Setting up your sender profile",
+          "Importing contacts",
+          "Creating your first email",
+          "Scheduling and sending"
+        ]
+      },
+      "narration": "In this tutorial: setting up your sender profile so emails come from you, importing your contacts legally, creating your first email, and scheduling and sending. Everything you need to start.",
+      "duration_seconds": 20,
+      "audio_file": "slide-02-overview.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Step 1: Sender Profile",
+      "content": {
+        "action": "Set Up Sender",
+        "fields": [
+          "From name (your business name)",
+          "From email (verified email)",
+          "Reply-to email",
+          "Physical address (required by law)"
+        ]
+      },
+      "narration": "First, set up your sender profile. From name: your business name so people recognize you. From email: needs to be verified—we'll send a confirmation. Reply-to email: where responses go. Physical address: required by law for commercial emails.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-sender.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Step 2: Import Contacts",
+      "content": {
+        "action": "Add Your List",
+        "methods": [
+          "Upload CSV file",
+          "Connect from CRM",
+          "Manual entry",
+          "Signup form"
+        ],
+        "important": "Only import people who opted in"
+      },
+      "narration": "Import your contacts. Upload a CSV file with emails, connect from your CRM, enter manually, or set up a signup form. Critical: only import people who opted in to hear from you. Sending to purchased lists damages your reputation and may violate laws.",
+      "duration_seconds": 35,
+      "audio_file": "slide-04-contacts.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Step 3: Create Email",
+      "content": {
+        "action": "Build Your First Email",
+        "elements": [
+          "Choose template",
+          "Add your content",
+          "Include images",
+          "Set call-to-action"
+        ]
+      },
+      "narration": "Create your first email. Choose a template—we have designs for announcements, promotions, newsletters. Add your content—keep it focused on one main message. Include images to catch attention. Set a clear call-to-action—what do you want readers to do?",
+      "duration_seconds": 35,
+      "audio_file": "slide-05-create.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "Step 4: Test and Send",
+      "content": {
+        "action": "Review and Launch",
+        "checklist": [
+          "Send test email to yourself",
+          "Check on mobile",
+          "Verify links work",
+          "Review subject line",
+          "Schedule or send now"
+        ]
+      },
+      "narration": "Before sending, always test. Send a test email to yourself. Check how it looks on mobile—most people read on phones. Verify all links work. Review your subject line—this determines if people open. Then schedule for optimal time or send immediately.",
+      "duration_seconds": 35,
+      "audio_file": "slide-06-send.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "TipsSlide",
+      "title": "Pro Tips",
+      "content": {
+        "tips": [
+          "Best send times: Tuesday-Thursday, 10am or 2pm",
+          "Keep subject lines under 50 characters",
+          "Include one clear CTA per email",
+          "Clean your list quarterly"
+        ]
+      },
+      "narration": "Email pro tips. Best send times are typically Tuesday through Thursday, around ten AM or two PM. Keep subject lines under fifty characters so they don't get cut off. Include one clear call-to-action per email. Clean your list quarterly—remove people who never open.",
+      "duration_seconds": 30,
+      "audio_file": "slide-07-tips.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Start Emailing",
+      "content": {
+        "cta_primary": {
+          "label": "Create First Email",
+          "action": "start_email"
+        },
+        "cta_secondary": {
+          "label": "See Templates",
+          "action": "view_templates"
+        }
+      },
+      "narration": "Ready to start? Create your first email now—our templates make it easy. Or browse templates first to find one that fits your message. Your customers are waiting to hear from you.",
+      "duration_seconds": 20,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_educational": {
+      "subject": "Set up email marketing in 10 minutes",
+      "preview_text": "Reach customers directly",
+      "body": "Hey {{first_name}},\n\nEmail marketing has the highest ROI of any channel.\n\n10-minute setup:\n1. Create sender profile\n2. Import contacts (legally)\n3. Design your email\n4. Test and send\n\n[START YOUR FIRST EMAIL →]\n\nPro tip: Tuesday-Thursday, 10am or 2pm are best send times.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-019"
+    ],
+    "follows": "HOWTO-010"
   }
 }

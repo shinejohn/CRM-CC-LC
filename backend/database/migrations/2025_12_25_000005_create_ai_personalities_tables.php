@@ -56,8 +56,8 @@ return new class extends Migration
             $table->json('metadata')->nullable();
             $table->text('notes')->nullable();
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             $table->index('tenant_id');
             $table->index('slug');
@@ -74,8 +74,8 @@ return new class extends Migration
             
             // Assignment Configuration
             $table->enum('status', ['active', 'inactive', 'archived'])->default('active');
-            $table->timestampTz('assigned_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('last_interaction_at')->nullable();
+            $table->timestamp('assigned_at')->useCurrent();
+            $table->timestamp('last_interaction_at')->nullable();
             
             // Assignment Rules
             $table->json('assignment_rules')->nullable(); // Why this personality was assigned
@@ -89,8 +89,8 @@ return new class extends Migration
             
             $table->text('notes')->nullable();
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             $table->foreign('personality_id')
                   ->references('id')
@@ -121,8 +121,8 @@ return new class extends Migration
             $table->json('personality_metadata')->nullable(); // Additional metadata
             $table->integer('messages_handled')->default(0);
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             $table->foreign('personality_id')
                   ->references('id')

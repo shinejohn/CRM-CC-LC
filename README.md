@@ -334,4 +334,29 @@ For issues or questions:
 
 ---
 
+## 🌐 PLATFORM ECOSYSTEM
+
+This Learning Center is part of the larger Fibonacco platform ecosystem:
+
+### Related Projects
+
+1. **Community Platform**
+   - **Repository:** https://github.com/shinejohn/Community-Platform
+   - **Deployment:** Railway
+   - **Purpose:** Community features, forums, discussions
+
+2. **Multisite Platform**
+   - **Repository:** https://github.com/Fibonacco-Inc/multisite
+   - **Deployment:** AWS
+   - **Purpose:** Multi-tenant site management, white-label solutions
+
+3. **Learning Center** (This Project)
+   - **Repository:** This repository
+   - **Deployment:** AWS (via Pulumi)
+   - **Purpose:** Learning platform, campaigns, content management
+
+See **[PROJECT_ECOSYSTEM.md](PROJECT_ECOSYSTEM.md)** for detailed ecosystem documentation.
+
+---
+
 **Built with ❤️ for Fibonacco**

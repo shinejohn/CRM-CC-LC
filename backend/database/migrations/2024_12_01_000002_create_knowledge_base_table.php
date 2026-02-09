@@ -35,7 +35,7 @@ return new class extends Migration
             $table->string('source', 20)->nullable();
             $table->text('source_url')->nullable();
             $table->string('validation_status', 20)->default('unverified');
-            $table->timestampTz('validated_at')->nullable();
+            $table->timestamp('validated_at')->nullable();
             $table->uuid('validated_by')->nullable();
             
             // Usage metrics
@@ -45,11 +45,11 @@ return new class extends Migration
             
             // Metadata
             $table->json('tags')->nullable();
-            $table->jsonb('metadata')->nullable();
+            $table->json('metadata')->nullable();
             
             $table->uuid('created_by')->nullable();
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             // Indexes
             $table->index('tenant_id');

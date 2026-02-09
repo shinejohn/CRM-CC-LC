@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\EmailSuppression;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -9,14 +10,18 @@ use Illuminate\Support\Facades\Mail;
 class EmailService
 {
     protected string $provider;
+    protected string $fallbackProvider;
     protected ?string $sendgridApiKey;
     protected array $sesConfig;
+    protected array $postalConfig;
 
     public function __construct()
     {
-        $this->provider = config('mail.default', 'sendgrid');
+        $this->provider = config('services.email_gateway.provider', config('mail.default', 'sendgrid'));
+        $this->fallbackProvider = config('services.email_gateway.fallback_provider', 'ses');
         $this->sendgridApiKey = config('services.sendgrid.api_key');
         $this->sesConfig = config('services.ses');
+        $this->postalConfig = config('services.postal', []);
     }
 
     /**
@@ -100,6 +105,86 @@ class EmailService
     }
 
     /**
+     * Send email via Postal
+     */
+    public function sendViaPostal(string $to, string $subject, string $htmlContent, ?string $textContent = null, array $options = []): ?array
+    {
+        $apiUrl = $this->postalConfig['api_url'] ?? null;
+        $serverKey = $this->postalConfig['server_key'] ?? null;
+
+        if (!$apiUrl || !$serverKey) {
+            Log::error('Postal API not configured');
+            return null;
+        }
+
+        try {
+            $payload = [
+                'to' => [$to],
+                'from' => $options['from_email'] ?? config('mail.from.address'),
+                'sender' => $options['from_email'] ?? config('mail.from.address'),
+                'subject' => $subject,
+                'html_body' => $htmlContent,
+                'plain_body' => $textContent ?? strip_tags($htmlContent),
+            ];
+
+            if (!empty($options['tag'])) {
+                $payload['tag'] = $options['tag'];
+            }
+
+            $ipPool = $options['ip_pool'] ?? ($this->postalConfig['default_ip_pool'] ?? null);
+            if (!empty($ipPool)) {
+                $payload['ip_pool'] = $ipPool;
+            }
+
+            $headers = [];
+            if (!empty($options['campaign_id'])) {
+                $headers['X-Fibonacco-Campaign-ID'] = (string) $options['campaign_id'];
+            }
+            if (!empty($options['recipient_id'])) {
+                $headers['X-Fibonacco-Recipient-ID'] = (string) $options['recipient_id'];
+            }
+            if (!empty($headers)) {
+                $payload['headers'] = $headers;
+            }
+
+            $response = Http::withHeaders([
+                'X-Server-API-Key' => $serverKey,
+                'Content-Type' => 'application/json',
+            ])->post(rtrim($apiUrl, '/') . '/api/v1/send/message', $payload);
+
+            if ($response->successful()) {
+                $data = $response->json();
+                $messageId = $data['data']['message_id'] ?? $data['message_id'] ?? null;
+
+                return [
+                    'success' => true,
+                    'message_id' => $messageId,
+                    'provider' => 'postal',
+                    'ip_pool' => $ipPool ?? null,
+                ];
+            }
+
+            Log::error('Postal API failed', [
+                'status' => $response->status(),
+                'body' => $response->body(),
+            ]);
+
+            return [
+                'success' => false,
+                'provider' => 'postal',
+                'error' => $response->json('message') ?? 'Postal API error',
+            ];
+        } catch (\Exception $e) {
+            Log::error('Postal error', ['error' => $e->getMessage()]);
+            return [
+                'success' => false,
+                'provider' => 'postal',
+                'error' => $e->getMessage(),
+            ];
+        }
+    }
+
+    /**
      * Send email via AWS SES
      */
     public function sendViaSES(string $to, string $subject, string $htmlContent, ?string $textContent = null, array $options = []): ?array
@@ -131,11 +216,32 @@ class EmailService
      */
     public function send(string $to, string $subject, string $htmlContent, ?string $textContent = null, array $options = []): ?array
     {
-        if ($this->provider === 'sendgrid' && $this->sendgridApiKey) {
-            return $this->sendViaSendGrid($to, $subject, $htmlContent, $textContent, $options);
+        if (EmailSuppression::where('email', $to)->exists()) {
+            return [
+                'success' => false,
+                'provider' => 'suppression',
+                'error' => 'Recipient is suppressed',
+            ];
         }
 
-        return $this->sendViaSES($to, $subject, $htmlContent, $textContent, $options);
+        if ($this->provider === 'postal') {
+            $result = $this->sendViaPostal($to, $subject, $htmlContent, $textContent, $options);
+            if ($result && ($result['success'] ?? false)) {
+                return $result;
+            }
+        }
+
+        if ($this->provider === 'sendgrid' && $this->sendgridApiKey) {
+            $result = $this->sendViaSendGrid($to, $subject, $htmlContent, $textContent, $options);
+            if ($result && ($result['success'] ?? false)) {
+                return $result;
+            }
+        }
+
+        return match ($this->fallbackProvider) {
+            'sendgrid' => $this->sendViaSendGrid($to, $subject, $htmlContent, $textContent, $options),
+            default => $this->sendViaSES($to, $subject, $htmlContent, $textContent, $options),
+        };
     }
 
     /**

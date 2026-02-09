@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOutboundCampaignRequest;
 use App\Models\Customer;
 use App\Models\OutboundCampaign;
 use App\Models\CampaignRecipient;
@@ -68,43 +69,27 @@ class OutboundCampaignController extends Controller
     /**
      * Create new campaign
      */
-    public function store(Request $request): JsonResponse
+    public function store(StoreOutboundCampaignRequest $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'type' => 'required|in:email,phone,sms',
-            'message' => 'required|string',
-            'subject' => 'required_if:type,email|string|max:255',
-            'template_id' => 'nullable|uuid',
-            'template_variables' => 'nullable|array',
-            'scheduled_at' => 'nullable|date',
-            'recipient_segments' => 'nullable|array',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'error' => 'Validation failed',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $tenantId = $request->getTenantId();
         
         if (!$tenantId) {
             return response()->json(['error' => 'Tenant ID required'], 400);
         }
 
+        $validated = $request->validated();
+
         $campaign = OutboundCampaign::create([
             'tenant_id' => $tenantId,
-            'name' => $request->input('name'),
-            'type' => $request->input('type'),
-            'status' => $request->input('scheduled_at') ? 'scheduled' : 'draft',
-            'subject' => $request->input('subject'),
-            'message' => $request->input('message'),
-            'template_id' => $request->input('template_id'),
-            'template_variables' => $request->input('template_variables', []),
-            'scheduled_at' => $request->input('scheduled_at'),
-            'recipient_segments' => $request->input('recipient_segments', []),
+            'name' => $validated['name'],
+            'type' => $validated['type'],
+            'status' => $validated['scheduled_at'] ?? false ? 'scheduled' : 'draft',
+            'subject' => $validated['subject'] ?? null,
+            'message' => $validated['message'],
+            'template_id' => $validated['template_id'] ?? null,
+            'template_variables' => $validated['template_variables'] ?? [],
+            'scheduled_at' => $validated['scheduled_at'] ?? null,
+            'recipient_segments' => $validated['recipient_segments'] ?? [],
         ]);
 
         return response()->json([

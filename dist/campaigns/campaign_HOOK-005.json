@@ -1,52 +1,167 @@
 {
   "campaign": {
     "id": "HOOK-005",
-    "week": 5,
-    "day": 5,
-    "type": "HOOK",
-    "title": "Classified Ad Posting",
-    "subject": "Classified Ad Posting",
+    "week": 3,
+    "day": 19,
+    "type": "Hook",
+    "title": "Post Classified",
+    "subject": "Hiring? Selling? Your classified is ready",
     "landing_page": "post-classified",
     "template": "classified-posting",
-    "description": "Classified Ad Posting - Get user to take immediate action"
+    "description": "Pre-drafted classified ad ready to publish"
   },
   "landing_page": {
     "campaign_id": "HOOK-005",
     "landing_page_slug": "post-classified",
-    "url": "/learn/post-classified",
+    "url": "/post/classified",
     "template_id": "classified-posting",
     "template_name": "Classified Ad Posting",
     "slide_count": 5,
-    "duration_seconds": 35,
-    "primary_cta": "signup_free",
-    "secondary_cta": "schedule_demo",
-    "ai_persona": "Sarah",
-    "ai_tone": "Excited, helpful",
-    "ai_goal": "Get user to take immediate action",
-    "data_capture_fields": "name, email, business_name, industry",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/post-classified/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "signup",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week4-hook",
-    "utm_content": "HOOK-005"
+    "duration_seconds": 90,
+    "primary_cta": "post_classified",
+    "secondary_cta": "customize_first"
   },
-  "template": {
-    "template_id": "classified-posting",
-    "name": "Classified Ad Posting",
-    "slides": 5,
-    "duration": 35,
-    "purpose": "hook",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "post-classified",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/post-classified/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Your Classified Is Ready",
+      "content": {
+        "headline": "We Created a Classified for {{business_name}}",
+        "subhead": "Hiring, selling, or announcing—reach local buyers instantly",
+        "visual": "Classified ad preview mockup"
+      },
+      "narration": "We went ahead and created a classified ad for {{business_name}}. Whether you're hiring, selling equipment, or have something to announce—this is ready to reach local buyers instantly.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "PreviewSlide",
+      "title": "Your Ad Preview",
+      "content": {
+        "headline": "Here's How Your Ad Looks",
+        "classified_preview": {
+          "business_name": "{{business_name}}",
+          "category": "{{classified_category}}",
+          "headline": "{{auto_generated_headline}}",
+          "body": "{{auto_generated_body}}",
+          "contact": "{{contact_method}}",
+          "status": "Ready to Post"
+        },
+        "note": "Edit any of this before posting"
+      },
+      "narration": "Here's how your ad looks. We've drafted the headline and body based on your business. All your contact info is ready to go. You can edit any of this before posting, or post it exactly as is.",
+      "duration_seconds": 25,
+      "audio_file": "slide-02-preview.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "BenefitsSlide",
+      "title": "Why Classifieds Work",
+      "content": {
+        "headline": "Local Classifieds Reach Buyers Ready to Act",
+        "benefits": [
+          {
+            "icon": "target",
+            "benefit": "Local audience",
+            "detail": "People in your area"
+          },
+          {
+            "icon": "clock",
+            "benefit": "High intent",
+            "detail": "They're actively looking"
+          },
+          {
+            "icon": "dollar",
+            "benefit": "Free to post",
+            "detail": "No listing fees"
+          },
+          {
+            "icon": "eye",
+            "benefit": "Syndicated",
+            "detail": "Appears across network"
+          }
+        ],
+        "stat": "Classifieds get 40% response rate vs. 2% for social posts"
+      },
+      "narration": "Why do local classifieds work so well? Local audience—people actually in your area. High intent—they're actively looking for what you're offering, not just scrolling. Free to post—no listing fees. And syndicated—your classified appears across our entire network. Classifieds get a forty percent response rate compared to two percent for typical social posts.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-benefits.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "CategorySlide",
+      "title": "Classified Categories",
+      "content": {
+        "headline": "What Are You Posting?",
+        "categories": [
+          {
+            "icon": "briefcase",
+            "category": "Now Hiring",
+            "desc": "Find local talent"
+          },
+          {
+            "icon": "tag",
+            "category": "For Sale",
+            "desc": "Equipment, inventory, supplies"
+          },
+          {
+            "icon": "home",
+            "category": "Commercial Space",
+            "desc": "Office, retail, warehouse"
+          },
+          {
+            "icon": "wrench",
+            "category": "Services Offered",
+            "desc": "B2B services"
+          },
+          {
+            "icon": "megaphone",
+            "category": "Announcements",
+            "desc": "Business updates"
+          }
+        ],
+        "note": "Select category when posting"
+      },
+      "narration": "What are you posting? Now Hiring—find local talent. For Sale—equipment, inventory, supplies. Commercial Space—if you have office, retail, or warehouse available. Services Offered—B2B services you provide. Or Announcements—general business updates. Select your category when you post.",
+      "duration_seconds": 25,
+      "audio_file": "slide-04-categories.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "CTASlide",
+      "title": "Post Your Classified",
+      "content": {
+        "headline": "Ready to Reach Local Buyers?",
+        "cta_primary": {
+          "label": "Post This Classified",
+          "action": "post_now"
+        },
+        "cta_secondary": {
+          "label": "Edit First",
+          "action": "edit_classified"
+        },
+        "reassurance": "Free • Goes live immediately • Edit or remove anytime"
+      },
+      "narration": "Ready to reach local buyers? Click 'Post This Classified' and it goes live immediately. Want to make changes first? Click 'Edit First' to customize. It's free, it goes live immediately, and you can edit or remove it anytime. Your local audience is waiting.",
+      "duration_seconds": 15,
+      "audio_file": "slide-05-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_hook": {
+      "subject": "Hiring? Selling? Your classified is ready",
+      "preview_text": "Post free to local buyers",
+      "body": "Hey {{first_name}},\n\nNeed to reach local buyers quickly?\n\nWe created a classified ad template for {{business_name}}—ready to post.\n\nUse it for:\n• Now Hiring posts\n• Equipment/inventory for sale\n• Services you offer\n• Business announcements\n\n[SEE YOUR CLASSIFIED →]\n\nFree to post. Goes live immediately. Reaches local buyers with high intent.\n\nClassifieds get 40% response rate vs. 2% for social posts.\n\n{{sender_name}}\nFibonacco"
+    }
+  },
+  "connections": {
+    "leads_to": [],
+    "follows": "HOOK-004",
+    "related": [
+      "HOOK-002",
+      "HOOK-003"
+    ]
   }
 }

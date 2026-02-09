@@ -58,6 +58,18 @@ return [
         'api_key' => env('SENDGRID_API_KEY'),
     ],
 
+    'postal' => [
+        'api_url' => env('POSTAL_API_URL'),
+        'server_key' => env('POSTAL_SERVER_KEY'),
+        'webhook_secret' => env('POSTAL_WEBHOOK_SECRET'),
+        'default_ip_pool' => env('POSTAL_DEFAULT_IP_POOL'),
+    ],
+
+    'email_gateway' => [
+        'provider' => env('EMAIL_PROVIDER', 'postal'),
+        'fallback_provider' => env('EMAIL_FALLBACK_PROVIDER', 'ses'),
+    ],
+
     'twilio' => [
         'account_sid' => env('TWILIO_ACCOUNT_SID'),
         'auth_token' => env('TWILIO_AUTH_TOKEN'),

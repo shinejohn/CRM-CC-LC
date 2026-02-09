@@ -20,17 +20,17 @@ return new class extends Migration
             $table->string('target_audience', 255)->nullable();
             
             // Structure
-            $table->jsonb('slides');
+            $table->json('slides');
             
             // Pre-recorded audio location
             $table->string('audio_base_url', 500)->nullable();
-            $table->jsonb('audio_files')->nullable();
+            $table->json('audio_files')->nullable();
             
             // Dynamic injection points
-            $table->jsonb('injection_points')->nullable();
+            $table->json('injection_points')->nullable();
             
             // Visual
-            $table->jsonb('default_theme')->nullable();
+            $table->json('default_theme')->nullable();
             $table->string('default_presenter_id', 50)->nullable();
             
             // Metadata
@@ -38,8 +38,8 @@ return new class extends Migration
             $table->integer('slide_count')->nullable();
             
             $table->boolean('is_active')->default(true);
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
         
         Schema::create('presenters', function (Blueprint $table) {
@@ -51,14 +51,14 @@ return new class extends Migration
             // Voice settings
             $table->string('voice_provider', 50)->nullable();
             $table->string('voice_id', 100)->nullable();
-            $table->jsonb('voice_settings')->nullable();
+            $table->json('voice_settings')->nullable();
             
             // AI personality
             $table->text('personality')->nullable();
             $table->text('communication_style')->nullable();
             
             $table->boolean('is_active')->default(true);
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
         });
         
         Schema::create('generated_presentations', function (Blueprint $table) {
@@ -68,23 +68,23 @@ return new class extends Migration
             $table->string('template_id', 50)->nullable();
             
             // The assembled presentation
-            $table->jsonb('presentation_json');
+            $table->json('presentation_json');
             
             // Audio status
             $table->string('audio_base_url', 500)->nullable();
             $table->boolean('audio_generated')->default(false);
-            $table->timestampTz('audio_generated_at')->nullable();
+            $table->timestamp('audio_generated_at')->nullable();
             
             // Cache management
             $table->string('input_hash', 64)->nullable();
-            $table->timestampTz('expires_at')->nullable();
+            $table->timestamp('expires_at')->nullable();
             
             // Analytics
             $table->integer('view_count')->default(0);
             $table->decimal('avg_completion_rate', 5, 2)->nullable();
-            $table->timestampTz('last_viewed_at')->nullable();
+            $table->timestamp('last_viewed_at')->nullable();
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
             
             $table->foreign('template_id')->references('id')->on('presentation_templates')->onDelete('set null');
             $table->index('tenant_id');

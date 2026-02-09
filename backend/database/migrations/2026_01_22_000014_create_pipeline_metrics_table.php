@@ -20,7 +20,7 @@ return new class extends Migration
         DB::statement('SET search_path TO ops, public');
 
         Schema::create('pipeline_metrics', function (Blueprint $table) {
-            $table->uuid('id')->primary()->default(DB::raw('gen_random_uuid()'));
+            $table->uuid('id')->primary()->default(DB::getDriverName() === 'pgsql' ? DB::raw('gen_random_uuid()') : null);
             
             // Time
             $table->date('snapshot_date');

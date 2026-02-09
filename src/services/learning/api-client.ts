@@ -34,10 +34,11 @@ class ApiClient {
 
   private async request<T>(
     endpoint: string,
-    options: RequestInit = {}
+    options: RequestInit & { retries?: number } = {}
   ): Promise<T> {
+    const { retries = 0, ...fetchOptions } = options;
     const url = `${this.baseUrl}${endpoint}`;
-    
+
     const defaultHeaders: HeadersInit = {
       'Content-Type': 'application/json',
     };
@@ -55,17 +56,28 @@ class ApiClient {
     }
 
     const config: RequestInit = {
-      ...options,
+      ...fetchOptions,
       headers: {
         ...defaultHeaders,
-        ...options.headers,
+        ...fetchOptions.headers,
       },
     };
 
     try {
       const response = await fetch(url, config);
-      
+
+      if (response.status === 401) {
+        // Handle unauthorized access
+        window.dispatchEvent(new Event('auth:unauthorized'));
+      }
+
       if (!response.ok) {
+        // Retry on Server Errors if retries > 0
+        if (response.status >= 500 && retries > 0) {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          return this.request<T>(endpoint, { ...options, retries: retries - 1 });
+        }
+
         const error: ApiError = await response.json().catch(() => ({
           message: response.statusText,
           status: response.status,
@@ -75,6 +87,12 @@ class ApiClient {
 
       return await response.json();
     } catch (error) {
+      // Retry on network errors
+      if (retries > 0) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        return this.request<T>(endpoint, { ...options, retries: retries - 1 });
+      }
+
       if (error instanceof Error) {
         throw new Error(`API request failed: ${error.message}`);
       }
@@ -82,8 +100,21 @@ class ApiClient {
     }
   }
 
-  async get<T>(endpoint: string): Promise<T> {
-    return this.request<T>(endpoint, { method: 'GET' });
+  async get<T>(endpoint: string, options?: { params?: Record<string, any> }): Promise<T> {
+    let url = endpoint;
+    if (options?.params) {
+      const searchParams = new URLSearchParams();
+      Object.entries(options.params).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          searchParams.append(key, String(value));
+        }
+      });
+      const queryString = searchParams.toString();
+      if (queryString) {
+        url += (endpoint.includes('?') ? '&' : '?') + queryString;
+      }
+    }
+    return this.request<T>(url, { method: 'GET' });
   }
 
   async post<T>(endpoint: string, data?: unknown): Promise<T> {

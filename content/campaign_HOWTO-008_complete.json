@@ -1,0 +1,187 @@
+{
+  "campaign": {
+    "id": "HOWTO-008",
+    "week": 4,
+    "day": 23,
+    "type": "How-To",
+    "title": "AI Sales Setup",
+    "subject": "Let AI handle your initial customer conversations",
+    "landing_page": "ai-sales-setup",
+    "template": "tutorial",
+    "description": "Setting up AI sales assistant, training, and handoffs"
+  },
+  "landing_page": {
+    "campaign_id": "HOWTO-008",
+    "landing_page_slug": "ai-sales-setup",
+    "url": "/learn/ai-sales-setup",
+    "template_id": "tutorial",
+    "template_name": "How-To Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 360,
+    "primary_cta": "setup_ai_sales",
+    "secondary_cta": "watch_demo"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "TutorialIntroSlide",
+      "title": "AI Sales Setup",
+      "content": {
+        "headline": "Let AI Handle Initial Customer Conversations",
+        "subhead": "20 minutes to 24/7 sales coverage",
+        "expectations": {
+          "time": "20 minutes",
+          "difficulty": "Intermediate",
+          "outcome": "AI answering inquiries within seconds, 24/7"
+        }
+      },
+      "narration": "In the next twenty minutes, you'll set up an AI assistant that handles initial customer conversations twenty-four seven. It answers instantly, qualifies leads, and hands off to you when a human is needed. Let's build your always-on sales team.",
+      "duration_seconds": 20,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "What AI Sales Can Do",
+      "content": {
+        "headline": "Your AI Sales Assistant Handles:",
+        "capabilities": [
+          {"task": "Answer common questions", "example": "Hours, pricing, availability"},
+          {"task": "Qualify leads", "example": "Budget, timeline, needs"},
+          {"task": "Schedule appointments", "example": "Connect to your calendar"},
+          {"task": "Provide information", "example": "Services, products, process"},
+          {"task": "Hand off to humans", "example": "Complex questions, ready-to-buy"}
+        ],
+        "what_you_handle": "Complex decisions, negotiations, relationship building"
+      },
+      "narration": "Here's what your AI sales assistant can handle. Answer common questions—hours, pricing, availability. Qualify leads—understand their budget, timeline, and needs. Schedule appointments—directly connecting to your calendar. Provide information—about your services, products, and process. And hand off to humans—when questions get complex or someone's ready to buy. You handle the relationships. AI handles the volume.",
+      "duration_seconds": 40,
+      "audio_file": "slide-02-capabilities.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Step 1: Enable AI Sales",
+      "content": {
+        "headline": "Step 1: Turn On AI Sales Assistant",
+        "location": "Dashboard → AI → Sales Assistant → Enable",
+        "initial_setup": [
+          "Toggle 'AI Sales Assistant' to ON",
+          "Select response speed (Instant recommended)",
+          "Choose your AI personality (Professional, Friendly, or Custom)"
+        ],
+        "note": "AI starts with basic capabilities; we'll customize next"
+      },
+      "narration": "Step one: Enable your AI Sales Assistant. Go to Dashboard, AI, Sales Assistant, and click Enable. Toggle the assistant to on. Select response speed—instant is recommended, but you can add a delay if preferred. Choose your AI personality—professional, friendly, or custom. The AI starts with basic capabilities. We'll customize it for your business next.",
+      "duration_seconds": 35,
+      "audio_file": "slide-03-step1.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Step 2: Train on Your Business",
+      "content": {
+        "headline": "Step 2: Teach AI About Your Business",
+        "training_sources": [
+          {"source": "Your website", "how": "AI scans and learns", "time": "Automatic"},
+          {"source": "FAQ document", "how": "Upload your common Q&As", "time": "5 min"},
+          {"source": "Service descriptions", "how": "Add manually or import", "time": "5 min"},
+          {"source": "Pricing information", "how": "Add pricing rules/ranges", "time": "3 min"}
+        ],
+        "tip": "The more you teach it, the better it performs"
+      },
+      "narration": "Step two: Train the AI on your business. It needs to know what you know. First, let it scan your website—this happens automatically. Then upload your FAQ document if you have one. Add your service descriptions—import or add manually. Include pricing information—at least ranges if not exact prices. The more you teach it, the better it performs. Don't worry about perfection—you can refine later.",
+      "duration_seconds": 40,
+      "audio_file": "slide-04-step2.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Step 3: Set Qualification Questions",
+      "content": {
+        "headline": "Step 3: Define Lead Qualification",
+        "qualification_questions": [
+          {"question": "What service are you interested in?", "purpose": "Routing"},
+          {"question": "What's your timeline?", "purpose": "Urgency"},
+          {"question": "What's your approximate budget?", "purpose": "Qualification"},
+          {"question": "What's the best way to reach you?", "purpose": "Contact capture"}
+        ],
+        "customization": "Add questions specific to your business",
+        "scoring": "Optionally set up lead scoring based on answers"
+      },
+      "narration": "Step three: Set your qualification questions. These help AI understand who's a good fit. Basic questions: What service are they interested in? What's their timeline? What's their approximate budget? Best way to reach them? Add questions specific to your business. You can also set up lead scoring—automatically ranking leads based on their answers so you prioritize the best ones.",
+      "duration_seconds": 35,
+      "audio_file": "slide-05-step3.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "Step 4: Configure Handoffs",
+      "content": {
+        "headline": "Step 4: When Does AI Hand Off to You?",
+        "handoff_triggers": [
+          {"trigger": "Ready to buy signals", "action": "Immediate notification + handoff"},
+          {"trigger": "Complex questions AI can't answer", "action": "Escalate to human"},
+          {"trigger": "Customer requests human", "action": "Instant transfer"},
+          {"trigger": "High-value lead detected", "action": "Priority notification"}
+        ],
+        "notification_options": "Email, SMS, App notification, or all three"
+      },
+      "narration": "Step four: Configure when AI hands off to you. Ready-to-buy signals—AI recognizes these and notifies you immediately. Complex questions AI can't answer—it escalates instead of guessing. Customer requests human—instant transfer, no questions asked. High-value lead detected—priority notification. Choose how you want to be notified: email, SMS, app notification, or all three. You stay in control of what matters.",
+      "duration_seconds": 35,
+      "audio_file": "slide-06-step4.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "StepSlide",
+      "title": "Step 5: Test and Refine",
+      "content": {
+        "headline": "Step 5: Test Your AI Assistant",
+        "testing": [
+          {"test": "Ask common questions", "check": "Answers correctly?"},
+          {"test": "Ask edge cases", "check": "Handles gracefully or escalates?"},
+          {"test": "Request human", "check": "Hands off properly?"},
+          {"test": "Complete qualification flow", "check": "Captures info correctly?"}
+        ],
+        "refinement": "Review conversations weekly; add training as needed",
+        "tip": "AI improves over time as it learns from real conversations"
+      },
+      "narration": "Step five: Test and refine. Before going live, test your AI. Ask common questions—does it answer correctly? Ask edge cases—does it handle gracefully or escalate? Request a human—does it hand off properly? Complete a full qualification flow—does it capture information correctly? After launch, review conversations weekly. Add training as needed. AI improves over time as it learns from real conversations.",
+      "duration_seconds": 35,
+      "audio_file": "slide-07-step5.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Activate AI Sales",
+      "content": {
+        "headline": "Ready for 24/7 Sales Coverage?",
+        "summary": "Enable → Train → Qualify → Handoff → Go Live",
+        "cta_primary": {
+          "label": "Set Up AI Sales",
+          "action": "start_ai_setup"
+        },
+        "cta_secondary": {
+          "label": "Watch Demo First",
+          "action": "watch_demo"
+        },
+        "result": "Never miss another inquiry. Even at 3am."
+      },
+      "narration": "Ready for twenty-four seven sales coverage? Enable, train, set qualification, configure handoffs, go live. Click 'Set Up AI Sales' to start now, or watch a demo first if you want to see it in action. The result: you'll never miss another inquiry, even at three in the morning. Your AI sales assistant is ready.",
+      "duration_seconds": 25,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_tutorial": {
+      "subject": "Let AI handle your initial customer conversations",
+      "preview_text": "20 minutes to 24/7 sales coverage",
+      "body": "Hey {{first_name}},\n\nHow many inquiries have you missed because you couldn't respond fast enough?\n\nWhat if every inquiry got an instant, intelligent response—24/7?\n\nYour AI Sales Assistant can:\n• Answer common questions instantly\n• Qualify leads (budget, timeline, needs)\n• Schedule appointments automatically\n• Hand off to you when a human is needed\n\n[SET UP AI SALES →]\n\n20-minute setup. Then it works while you sleep.\n\n{{sender_name}}\nFibonacco"
+    }
+  },
+  "connections": {
+    "leads_to": ["HOWTO-010", "HOWTO-011"],
+    "follows": ["EDU-006", "EDU-004"],
+    "related": ["HOWTO-017", "HOOK-007"]
+  }
+}

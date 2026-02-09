@@ -1,0 +1,185 @@
+{
+  "campaign": {
+    "id": "EDU-008",
+    "week": 6,
+    "day": 38,
+    "type": "Educational",
+    "title": "Voice AI for Business",
+    "subject": "Your phone can answer itself now",
+    "landing_page": "voice-ai",
+    "template": "educational",
+    "description": "AI phone answering - never miss a call, always professional"
+  },
+  "landing_page": {
+    "campaign_id": "EDU-008",
+    "landing_page_slug": "voice-ai",
+    "url": "/learn/voice-ai",
+    "template_id": "educational",
+    "template_name": "Educational Content",
+    "slide_count": 7,
+    "duration_seconds": 180,
+    "primary_cta": "setup_voice_ai",
+    "secondary_cta": "hear_demo"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "The Missed Call Problem",
+      "content": {
+        "headline": "How Many Calls Did You Miss Today?",
+        "stats": {
+          "missed_calls": "62% of calls to small businesses go unanswered",
+          "lost_revenue": "85% of callers won't call back",
+          "competitor": "They call your competitor instead"
+        }
+      },
+      "narration": "How many calls did you miss today? Here's a sobering stat: sixty-two percent of calls to small businesses go unanswered. And eighty-five percent of those callers won't call back. They call your competitor instead. Every missed call is potentially lost revenue. What if your phone could answer itself?",
+      "duration_seconds": 25,
+      "audio_file": "slide-01-problem.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "Voice AI: Your Always-On Receptionist",
+      "content": {
+        "headline": "AI Answers Your Phone. Professionally.",
+        "capabilities": [
+          {"capability": "Answers every call", "detail": "24/7, no hold times"},
+          {"capability": "Sounds natural", "detail": "Not robotic, conversational"},
+          {"capability": "Handles common questions", "detail": "Hours, location, services, pricing"},
+          {"capability": "Takes messages", "detail": "Accurate transcription sent to you"},
+          {"capability": "Books appointments", "detail": "Connected to your calendar"},
+          {"capability": "Transfers when needed", "detail": "Routes urgent calls to you"}
+        ]
+      },
+      "narration": "Voice AI is your always-on receptionist. It answers every call, twenty-four seven, no hold times. It sounds natural—conversational, not robotic. It handles common questions: hours, location, services, pricing. It takes messages with accurate transcription sent to you. It books appointments directly on your calendar. And it transfers when needed—urgent calls get routed to you immediately.",
+      "duration_seconds": 35,
+      "audio_file": "slide-02-capabilities.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "How It Sounds",
+      "content": {
+        "headline": "Natural, Professional, On-Brand",
+        "sample_conversation": {
+          "caller": "Hi, I'm looking for information about your services",
+          "ai": "Hi! Thanks for calling [Business]. I'd be happy to help. Are you interested in [Service A] or [Service B]?",
+          "caller": "Service A. What are your prices?",
+          "ai": "Great choice. [Service A] starts at [price]. Would you like to schedule a consultation, or do you have other questions I can help with?"
+        },
+        "note": "Customize greeting, personality, and responses to match your brand"
+      },
+      "narration": "Here's how it actually sounds. Caller says: 'Hi, I'm looking for information about your services.' AI responds: 'Hi! Thanks for calling [your business]. I'd be happy to help. Are you interested in [Service A] or [Service B]?' Natural. Professional. On-brand. You customize the greeting, the personality, and the responses. It sounds like your business, not a generic robot.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-sound.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "When AI Hands Off to You",
+      "content": {
+        "headline": "AI Knows When to Transfer",
+        "handoff_triggers": [
+          {"trigger": "Caller requests human", "action": "Immediate transfer"},
+          {"trigger": "Complex question AI can't answer", "action": "Takes message + alerts you"},
+          {"trigger": "High-value opportunity", "action": "Priority notification"},
+          {"trigger": "Emergency/urgent", "action": "Direct transfer"},
+          {"trigger": "VIP caller recognized", "action": "Custom handling"}
+        ],
+        "control": "You set the rules. AI follows them."
+      },
+      "narration": "AI knows when to transfer to you. Caller requests a human? Immediate transfer. Complex question AI can't answer? Takes a message and alerts you. High-value opportunity detected? Priority notification. Emergency or urgent? Direct transfer. VIP caller recognized? Custom handling. You set the rules. AI follows them. You stay in control while AI handles the volume.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-handoff.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ComparisonSlide",
+      "title": "The Math",
+      "content": {
+        "headline": "Voice AI vs. Missed Calls vs. Hiring",
+        "comparison": {
+          "missed_calls": {
+            "cost": "$0/month",
+            "result": "Lost revenue: $500-5,000/month",
+            "coverage": "0%"
+          },
+          "hire_receptionist": {
+            "cost": "$2,500-4,000/month",
+            "result": "Good during business hours",
+            "coverage": "~40 hours/week"
+          },
+          "voice_ai": {
+            "cost": "$99-299/month",
+            "result": "Every call answered professionally",
+            "coverage": "24/7/365"
+          }
+        }
+      },
+      "narration": "Let's look at the math. Option one: miss calls. Costs zero, but you're losing five hundred to five thousand a month in missed opportunities. Option two: hire a receptionist. Twenty-five hundred to four thousand a month for about forty hours of coverage. Option three: Voice AI. Ninety-nine to two ninety-nine a month for twenty-four seven, three-sixty-five coverage. Every call answered. Fraction of the cost.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-math.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "ProofSlide",
+      "title": "The Contractor Who Never Misses a Call",
+      "content": {
+        "case_study": {
+          "business": "HVAC contractor, one-person operation",
+          "before": "Missed 40% of calls while on jobs",
+          "after": "Every call answered, appointments booked automatically",
+          "result": "Revenue up 35%, works fewer hours",
+          "quote": "I was leaving money on the table every day. Now my phone works as hard as I do."
+        }
+      },
+      "narration": "Real story. An HVAC contractor, one-person operation. Before Voice AI, he missed forty percent of calls while on jobs. Potential customers went to competitors. After: every call answered, appointments booked automatically while he's working. Revenue up thirty-five percent, and he actually works fewer hours. His quote: 'I was leaving money on the table every day. Now my phone works as hard as I do.'",
+      "duration_seconds": 30,
+      "audio_file": "slide-06-proof.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "CTASlide",
+      "title": "Set Up Voice AI",
+      "content": {
+        "headline": "Ready to Answer Every Call?",
+        "cta_primary": {
+          "label": "Set Up Voice AI",
+          "action": "setup_voice"
+        },
+        "cta_secondary": {
+          "label": "Hear a Demo",
+          "action": "play_demo"
+        },
+        "assurance": "15-minute setup. Try free for 14 days."
+      },
+      "narration": "Ready to answer every call? Set up Voice AI now—fifteen-minute setup, free for fourteen days. Or hear a demo first—listen to what callers actually experience. Every call answered. Every opportunity captured. Never miss revenue again.",
+      "duration_seconds": 20,
+      "audio_file": "slide-07-cta.mp3"
+    }
+  ],
+  "article": {
+    "title": "The Contractor Who Never Misses a Call",
+    "subtitle": "How Voice AI turned missed opportunities into a 35% revenue increase",
+    "word_count": 2100
+  },
+  "emails": {
+    "email_1_educational": {
+      "subject": "Your phone can answer itself now",
+      "preview_text": "Stop missing calls (and revenue)",
+      "body": "Hey {{first_name}},\n\nQuick question: How many calls did you miss this week?\n\nHere's what's happening to those missed calls:\n• 62% of calls to small businesses go unanswered\n• 85% of those callers won't call back\n• They call your competitor instead\n\nWhat if your phone answered itself?\n\n[WATCH THE 3-MINUTE PRESENTATION →]\n\nVoice AI answers every call, 24/7. Books appointments. Takes messages. Sounds natural.\n\nOne contractor stopped missing 40% of his calls. Revenue up 35%.\n\n{{sender_name}}\nFibonacco"
+    },
+    "email_2a_engaged": {
+      "subject": "Ready to set up Voice AI?",
+      "preview_text": "15 minutes to never missing a call",
+      "body": "Hey {{first_name}},\n\nYou watched the Voice AI presentation. Quick recap:\n\n• Answers every call 24/7\n• Sounds natural, not robotic\n• Books appointments automatically\n• Takes messages with transcription\n• Transfers to you when needed\n• Costs less than missing calls\n\nReady to set up for {{business_name}}?\n\n[SET UP VOICE AI →]\n\n15-minute setup. 14-day free trial.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": ["HOWTO-017"],
+    "follows": "EDU-007",
+    "related": ["EDU-006", "HOOK-007"]
+  }
+}

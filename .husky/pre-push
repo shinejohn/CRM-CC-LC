@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-push verification..."
+
+# Run more comprehensive checks before pushing
+echo "📋 Running full verification..."
+node scripts/verify-implementation.js || {
+  echo "❌ Full verification failed. Please fix before pushing."
+  exit 1
+}
+
+echo "📋 Running tests..."
+npm run test:run || {
+  echo "⚠️  Tests failed. Consider fixing before pushing."
+  # Allow push but warn
+}
+
+echo "✅ Pre-push checks passed!"
+

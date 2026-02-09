@@ -31,7 +31,7 @@ return new class extends Migration
             
             // Verification
             $table->boolean('verified_by_owner')->default(false);
-            $table->timestampTz('verified_at')->nullable();
+            $table->timestamp('verified_at')->nullable();
             
             // For AI handling
             $table->boolean('should_ask_clarification')->default(false);
@@ -40,8 +40,8 @@ return new class extends Migration
             // Status
             $table->boolean('is_active')->default(true);
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             // Indexes
             $table->index('tenant_id');

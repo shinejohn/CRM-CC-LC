@@ -28,6 +28,8 @@ export async function getCustomer(id: string): Promise<Customer> {
 // TYPES
 // ============================================
 
+export type PipelineStage = 'hook' | 'engagement' | 'sales' | 'retention' | 'churned';
+
 export interface Customer {
   id: string;
   tenant_id: string;
@@ -83,6 +85,20 @@ export interface Customer {
   brand_voice?: Record<string, unknown>;
   content_preferences?: Record<string, unknown>;
   contact_preferences?: Record<string, unknown>;
+  // Pipeline stage fields
+  pipeline_stage?: PipelineStage;
+  stage_entered_at?: string;
+  trial_started_at?: string;
+  trial_ends_at?: string;
+  days_in_stage?: number;
+  stage_history?: Array<{
+    from?: string;
+    to: string;
+    at: string;
+    days_in_previous: number;
+    trigger?: string;
+  }>;
+  engagement_score?: number;
   created_at: string;
   updated_at: string;
 }
@@ -240,6 +256,30 @@ export const customerApi = {
   getAiContext: async (id: string): Promise<Record<string, unknown>> => {
     const response = await apiClient.get<{ data: Record<string, unknown> }>(
       `/api/v1/customers/${id}/ai-context`
+    );
+    return response.data;
+  },
+
+  /**
+   * Get customers by pipeline stage
+   */
+  getCustomersByStage: async (stage: PipelineStage): Promise<PaginatedResponse<Customer>> => {
+    return apiClient.get<PaginatedResponse<Customer>>(
+      `/api/v1/customers?pipeline_stage=${stage}`
+    );
+  },
+
+  /**
+   * Update customer pipeline stage
+   */
+  updatePipelineStage: async (
+    id: string,
+    stage: PipelineStage,
+    trigger: string = 'manual'
+  ): Promise<Customer> => {
+    const response = await apiClient.put<{ data: Customer; message?: string }>(
+      `/api/v1/customers/${id}/pipeline-stage`,
+      { pipeline_stage: stage, trigger }
     );
     return response.data;
   },

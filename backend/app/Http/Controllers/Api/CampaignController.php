@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Campaign;
+use App\Models\Content;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
@@ -14,33 +16,44 @@ class CampaignController extends Controller
      */
     public function index(): JsonResponse
     {
-        // Load from public/campaigns directory or database
-        $campaignsPath = public_path('campaigns');
-        
-        if (!is_dir($campaignsPath)) {
-            return response()->json([
-                'data' => [],
-                'message' => 'No campaigns found'
-            ]);
-        }
-        
-        $campaigns = [];
-        $files = glob($campaignsPath . '/campaign_*.json');
-        
-        foreach ($files as $file) {
-            $content = json_decode(file_get_contents($file), true);
-            if ($content) {
-                $campaigns[] = [
-                    'slug' => $content['slug'] ?? basename($file, '.json'),
-                    'title' => $content['title'] ?? null,
-                    'type' => $content['type'] ?? null,
-                ];
-            }
-        }
-        
+        $campaigns = Campaign::query()
+            ->with('landingPage')
+            ->where('is_active', true)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         return response()->json([
-            'data' => $campaigns,
-            'count' => count($campaigns),
+            'data' => $campaigns->map(function ($campaign) {
+                $landingPage = $campaign->landingPage;
+                $dataCaptureFields = $landingPage?->data_capture_fields ?? [];
+                $dataCaptureString = is_array($dataCaptureFields)
+                    ? implode(', ', $dataCaptureFields)
+                    : (string) $dataCaptureFields;
+
+                return [
+                    'campaign_id' => $campaign->id,
+                    'landing_page_slug' => $campaign->landing_page_slug ?: $campaign->slug,
+                    'url' => $landingPage?->url,
+                    'template_id' => $landingPage?->template_id,
+                    'template_name' => $landingPage?->template_name ?? $campaign->title,
+                    'slide_count' => $landingPage?->slide_count ?? 0,
+                    'duration_seconds' => $landingPage?->duration_seconds ?? 0,
+                    'primary_cta' => $landingPage?->primary_cta,
+                    'secondary_cta' => $landingPage?->secondary_cta,
+                    'ai_persona' => $landingPage?->ai_persona,
+                    'ai_tone' => $landingPage?->ai_tone,
+                    'ai_goal' => $landingPage?->ai_goal,
+                    'data_capture_fields' => $dataCaptureString,
+                    'audio_base_url' => $landingPage?->audio_base_url,
+                    'crm_tracking' => $landingPage?->crm_tracking ?? false,
+                    'conversion_goal' => $landingPage?->conversion_goal,
+                    'utm_source' => $landingPage?->utm_source,
+                    'utm_medium' => $landingPage?->utm_medium,
+                    'utm_campaign' => $landingPage?->utm_campaign,
+                    'utm_content' => $landingPage?->utm_content,
+                ];
+            })->values(),
+            'count' => $campaigns->count(),
         ]);
     }
     
@@ -49,45 +62,21 @@ class CampaignController extends Controller
      */
     public function show(string $slug): JsonResponse
     {
-        // Try to find campaign file
-        $campaignFile = public_path("campaigns/campaign_{$slug}.json");
-        
-        if (!file_exists($campaignFile)) {
-            // Try alternative naming
-            $campaignFile = public_path("campaigns/{$slug}.json");
-        }
-        
-        if (!file_exists($campaignFile)) {
-            // Try loading from master JSON
-            $masterFile = public_path('campaigns/landing_pages_master.json');
-            if (file_exists($masterFile)) {
-                $masterData = json_decode(file_get_contents($masterFile), true);
-                if ($masterData && isset($masterData['landing_pages'])) {
-                    foreach ($masterData['landing_pages'] as $page) {
-                        if (($page['landing_page_slug'] ?? null) === $slug) {
-                            return response()->json([
-                                'data' => $this->formatCampaignData($page),
-                            ]);
-                        }
-                    }
-                }
-            }
-            
-            return response()->json([
-                'error' => 'Campaign not found'
-            ], 404);
-        }
-        
-        $campaign = json_decode(file_get_contents($campaignFile), true);
-        
+        $campaign = Campaign::with(['landingPage', 'emails', 'content'])
+            ->where('slug', $slug)
+            ->orWhere('landing_page_slug', $slug)
+            ->orWhere('id', $slug)
+            ->first();
+
         if (!$campaign) {
-            return response()->json([
-                'error' => 'Invalid campaign file'
-            ], 500);
+            return response()->json(['error' => 'Campaign not found'], 404);
         }
-        
+
+        $content = $campaign->content->first()
+            ?? Content::where('slug', $slug)->first();
+
         return response()->json([
-            'data' => $this->formatCampaignData($campaign),
+            'data' => $this->formatCampaignData($campaign, $content),
         ]);
     }
     
@@ -124,18 +113,73 @@ class CampaignController extends Controller
     /**
      * Format campaign data for API response
      */
-    protected function formatCampaignData(array $data): array
+    protected function formatCampaignData(Campaign $campaign, ?Content $content): array
     {
+        $landingPage = $campaign->landingPage;
+        $emails = $campaign->emails
+            ->where('is_active', true)
+            ->mapWithKeys(function ($email) {
+                return [
+                    $email->template_key => [
+                        'subject' => $email->subject,
+                        'preview_text' => $email->preview_text,
+                        'body' => $email->body_html,
+                        'body_text' => $email->body_text,
+                    ],
+                ];
+            })
+            ->toArray();
+
+        $dataCaptureFields = $landingPage?->data_capture_fields ?? [];
+        $dataCaptureString = is_array($dataCaptureFields)
+            ? implode(', ', $dataCaptureFields)
+            : (string) $dataCaptureFields;
+
         return [
-            'slug' => $data['landing_page_slug'] ?? $data['slug'] ?? null,
-            'campaign_id' => $data['campaign_id'] ?? null,
-            'title' => $data['title'] ?? $data['template_name'] ?? null,
-            'type' => $data['type'] ?? $data['campaign_type'] ?? null,
-            'landing_page' => $data['landing_page'] ?? $data,
-            'presentation' => $data['presentation'] ?? null,
-            'ai_persona' => $data['ai_persona'] ?? null,
-            'slide_count' => $data['slide_count'] ?? null,
-            'duration_seconds' => $data['duration_seconds'] ?? null,
+            'campaign' => [
+                'id' => $campaign->id,
+                'week' => $campaign->week,
+                'day' => $campaign->day,
+                'type' => $campaign->type,
+                'title' => $campaign->title,
+                'subject' => $campaign->subject,
+                'landing_page' => $campaign->landing_page_slug ?: $campaign->slug,
+                'template' => $landingPage?->template_id,
+                'description' => $landingPage?->template_name,
+            ],
+            'landing_page' => [
+                'campaign_id' => $campaign->id,
+                'landing_page_slug' => $campaign->landing_page_slug ?: $campaign->slug,
+                'url' => $landingPage?->url,
+                'template_id' => $landingPage?->template_id,
+                'template_name' => $landingPage?->template_name,
+                'slide_count' => $landingPage?->slide_count ?? ($content ? count($content->slides ?? []) : 0),
+                'duration_seconds' => $landingPage?->duration_seconds,
+                'primary_cta' => $landingPage?->primary_cta,
+                'secondary_cta' => $landingPage?->secondary_cta,
+                'ai_persona' => $landingPage?->ai_persona,
+                'ai_tone' => $landingPage?->ai_tone,
+                'ai_goal' => $landingPage?->ai_goal,
+                'data_capture_fields' => $dataCaptureString,
+                'audio_base_url' => $landingPage?->audio_base_url,
+                'crm_tracking' => $landingPage?->crm_tracking ?? false,
+                'conversion_goal' => $landingPage?->conversion_goal,
+                'utm_source' => $landingPage?->utm_source,
+                'utm_medium' => $landingPage?->utm_medium,
+                'utm_campaign' => $landingPage?->utm_campaign,
+                'utm_content' => $landingPage?->utm_content,
+            ],
+            'template' => $landingPage?->metadata['template'] ?? null,
+            'slides' => $content?->slides ?? [],
+            'article' => $content?->article_body
+                ? [
+                    'title' => $content->title,
+                    'content' => $content->article_body,
+                ]
+                : null,
+            'emails' => $emails,
+            'personalization' => $landingPage?->metadata['personalization'] ?? null,
+            'presentation' => null,
         ];
     }
     

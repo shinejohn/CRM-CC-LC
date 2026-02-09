@@ -1,0 +1,2793 @@
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\ConversationApiTest::it_can_create_a_conversation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\ConversationApiTest::it_can_list_conversations(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\ConversationApiTest::it_can_show_a_conversation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\ConversationApiTest::it_can_update_a_conversation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\ConversationApiTest::it_can_end_a_conversation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\ConversationApiTest::it_can_add_message_to_conversation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\ConversationApiTest::it_can_list_conversation_messages(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\ConversationApiTest::it_enforces_tenant_isolation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CustomerApiTest::it_can_list_customers(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CustomerApiTest::it_can_create_a_customer(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CustomerApiTest::it_validates_required_fields_when_creating_customer(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CustomerApiTest::it_can_show_a_customer(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CustomerApiTest::it_can_show_customer_by_slug(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CustomerApiTest::it_can_update_a_customer(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CustomerApiTest::it_can_update_business_context(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CustomerApiTest::it_can_get_ai_context(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CustomerApiTest::it_can_delete_a_customer(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   WARN  Metadata found in doc-comment for method Tests\Feature\CustomerApiTest::it_enforces_tenant_isolation(). Metadata in doc-comments is deprecated and will no longer be supported in PHPUnit 12. Update your test code to use attributes instead.
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true
+
+   FAIL  Tests\Unit\Services\OpenAIServiceTest
+  ⨯ can generate embedding
+  ⨯ handles api error
+
+   FAIL  Tests\Feature\AIControllerTest
+  ⨯ can get ai chat response                                             0.01s  
+  ⨯ can get ai context
+  ⨯ can list ai models
+  ⨯ chat requires message
+
+   FAIL  Tests\Feature\AdApiTest
+  ⨯ can list ads                                                         0.01s  
+  ⨯ can generate ad from campaign
+  ⨯ can generate ad from content
+  ⨯ can list ad templates
+  ⨯ can create ad template                                               0.01s  
+  ⨯ can show ad
+  ⨯ can update ad
+
+   FAIL  Tests\Feature\ArticleApiTest
+  ⨯ can list articles                                                    0.01s  
+  ⨯ can create article
+  ⨯ can show article
+  ⨯ can update article
+  ⨯ can delete article
+  ⨯ can update article status to published
+
+   FAIL  Tests\Feature\CampaignApiTest
+  ⨯ can list campaigns
+  ⨯ can show campaign by slug
+  ✓ returns 404 for nonexistent campaign
+
+   FAIL  Tests\Feature\CampaignGenerationApiTest
+  ⨯ can generate campaign
+  ⨯ can list campaign templates
+  ⨯ can get campaign suggestions
+
+   FAIL  Tests\Feature\ContactApiTest
+  ⨯ can contact customer                                                 0.01s  
+  ⨯ can schedule contact
+  ⨯ can get customer contact preferences
+  ⨯ can update customer contact preferences
+
+   FAIL  Tests\Feature\ContactSalesTest
+  ⨯ contact sales submission success
+  ⨯ contact sales validation required fields
+  ⨯ contact sales validation invalid email
+  ⨯ contact sales validation message too long                            0.01s  
+  ⨯ contact sales with optional fields                                   0.01s  
+  ⨯ contact sales with campaign context
+  ⨯ contact sales with tenant id
+
+   FAIL  Tests\Feature\ContentGenerationApiTest
+  ⨯ can list generated content
+  ⨯ can generate content
+  ⨯ can generate content from campaign
+  ⨯ can list content templates
+  ⨯ can create content template
+  ⨯ can show generated content                                           0.01s  
+  ⨯ can update content status                                            0.01s  
+
+   FAIL  Tests\Feature\ConversationApiTest
+  ⨯ it can create a conversation                                         0.02s  
+  ⨯ it can list conversations                                            0.01s  
+  ⨯ it can show a conversation                                           0.02s  
+  ⨯ it can update a conversation                                         0.01s  
+  ⨯ it can end a conversation                                            0.01s  
+  ⨯ it can add message to conversation                                   0.01s  
+  ⨯ it can list conversation messages                                    0.01s  
+  ✓ it enforces tenant isolation
+
+   FAIL  Tests\Feature\CrmAdvancedAnalyticsApiTest
+  ⨯ can get customer engagement score                                    0.01s  
+  ⨯ can get campaign roi                                                 0.01s  
+  ⨯ can get predictive score                                             0.01s  
+
+   FAIL  Tests\Feature\CrmAnalyticsApiTest
+  ⨯ can get interest analytics                                           0.01s  
+  ⨯ can get purchase analytics                                           0.01s  
+  ⨯ can get learning analytics                                           0.01s  
+  ⨯ can get campaign performance
+
+   FAIL  Tests\Feature\CrmDashboardApiTest
+  ⨯ can get dashboard analytics                                          0.01s  
+
+   FAIL  Tests\Feature\CustomerApiTest
+  ⨯ it can list customers
+  ⨯ it can create a customer
+  ⨯ it validates required fields when creating customer
+  ⨯ it can show a customer
+  ⨯ it can show customer by slug
+  ⨯ it can update a customer
+  ⨯ it can update business context
+  ⨯ it can get ai context
+  ⨯ it can delete a customer
+  ✓ it enforces tenant isolation
+
+   FAIL  Tests\Feature\EmailCampaignApiTest
+  ⨯ can list email campaigns                                             0.01s  
+  ⨯ can create email campaign
+  ⨯ can list email templates
+  ⨯ can create email template                                            0.01s  
+
+   PASS  Tests\Feature\ExampleTest
+  ✓ the application returns a successful response                        0.01s  
+
+   FAIL  Tests\Feature\KnowledgeApiTest
+  ⨯ can list knowledge items                                             0.01s  
+  ⨯ can create knowledge item                                            0.01s  
+  ⨯ can show knowledge item
+  ⨯ can update knowledge item
+  ⨯ can delete knowledge item
+  ⨯ can vote on knowledge item
+  ⨯ can list faq categories
+  ⨯ can create faq category
+
+   FAIL  Tests\Feature\OrderApiTest
+  ⨯ can list orders                                                      0.01s  
+  ⨯ can show order                                                       0.01s  
+  ⨯ can create checkout session
+  ⨯ checkout requires valid customer
+  ⨯ checkout requires items
+
+   FAIL  Tests\Feature\OutboundCampaignApiTest
+  ⨯ can list outbound campaigns                                          0.01s  
+  ⨯ can create outbound campaign
+  ⨯ can show outbound campaign
+  ⨯ can update outbound campaign
+  ⨯ can get campaign recipients                                          0.01s  
+  ⨯ can start campaign
+  ⨯ can get campaign analytics
+
+   FAIL  Tests\Feature\PersonalityApiTest
+  ⨯ can list personalities
+  ⨯ can create personality
+  ⨯ can show personality
+  ⨯ can assign personality to customer
+  ⨯ can get customer personality
+  ⨯ can generate personality response
+
+   FAIL  Tests\Feature\PhoneCampaignApiTest
+  ⨯ can list phone campaigns
+  ⨯ can create phone campaign
+  ⨯ can list phone scripts
+  ⨯ can create phone script
+  ⨯ can update call status
+
+   FAIL  Tests\Feature\PresentationApiTest
+  ⨯ can list presentation templates                                      0.01s  
+  ⨯ can show presentation template
+  ⨯ can create presentation from template
+  ⨯ can show generated presentation
+  ⨯ can generate audio for presentation
+
+   FAIL  Tests\Feature\PublishingApiTest
+  ⨯ can get publishing dashboard
+  ⨯ can get publishing calendar                                          0.01s  
+  ⨯ can get publishing analytics
+  ⨯ can publish content
+
+   FAIL  Tests\Feature\SMSCampaignApiTest
+  ⨯ can list sms campaigns                                               0.01s  
+  ⨯ can create sms campaign
+  ⨯ can list sms templates
+  ⨯ can create sms template
+  ⨯ can update sms status
+
+   FAIL  Tests\Feature\SearchApiTest
+  ⨯ can search knowledge base                                            0.01s  
+  ⨯ can perform hybrid search
+  ⨯ search requires query
+  ⨯ can perform fulltext search
+  ⨯ can get embedding status                                             0.01s  
+
+   FAIL  Tests\Feature\ServiceApiTest
+  ⨯ can list services                                                    0.01s  
+  ⨯ can show service
+  ⨯ can filter services by category
+  ⨯ can filter services by type
+  ⨯ can filter active services
+
+   FAIL  Tests\Feature\ServiceCategoryApiTest
+  ⨯ can list service categories                                          0.01s  
+  ⨯ can show service category
+  ⨯ can list services in category
+  ⨯ can create service category
+  ⨯ can update service category                                          0.01s  
+  ⨯ can delete service category
+
+   FAIL  Tests\Feature\StripeWebhookTest
+  ⨯ can handle payment intent succeeded webhook                          0.01s  
+  ⨯ can handle invoice payment succeeded webhook
+  ⨯ can handle customer subscription created webhook
+  ⨯ can handle customer subscription deleted webhook
+  ⨯ ignores unknown webhook types
+
+   FAIL  Tests\Feature\SurveyApiTest
+  ⨯ can list survey sections                                             0.01s  
+  ⨯ can create survey section
+  ⨯ can update survey section
+  ⨯ can delete survey section
+  ⨯ can list questions for section                                       0.01s  
+  ⨯ can create survey question
+  ⨯ can update survey question
+  ⨯ can delete survey question                                           0.01s  
+
+   FAIL  Tests\Feature\TTSApiTest
+  ⨯ can generate audio from text                                         0.01s  
+  ⨯ can get generation status
+  ⨯ requires text for generation
+  ⨯ can list available voices                                            0.01s  
+
+   FAIL  Tests\Feature\TrainingApiTest
+  ⨯ can list training courses                                            0.01s  
+  ⨯ can show training course
+  ⨯ can enroll in training course
+  ⨯ can get user enrollments
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Unit\Services\OpenAIServiceTest > can generate e…  TypeError   
+  Cannot assign null to property App\Services\OpenAIService::$apiKey of type string
+
+  at app/Services/OpenAIService.php:15
+     11▕     protected string $baseUrl = 'https://api.openai.com/v1';
+     12▕ 
+     13▕     public function __construct()
+     14▕     {
+  ➜  15▕         $this->apiKey = config('services.openai.api_key');
+     16▕     }
+     17▕ 
+     18▕     /**
+     19▕      * Generate embedding vector
+
+  1   app/Services/OpenAIService.php:15
+  2   tests/Unit/Services/OpenAIServiceTest.php:17
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Unit\Services\OpenAIServiceTest > handles api er…  TypeError   
+  Cannot assign null to property App\Services\OpenAIService::$apiKey of type string
+
+  at app/Services/OpenAIService.php:15
+     11▕     protected string $baseUrl = 'https://api.openai.com/v1';
+     12▕ 
+     13▕     public function __construct()
+     14▕     {
+  ➜  15▕         $this->apiKey = config('services.openai.api_key');
+     16▕     }
+     17▕ 
+     18▕     /**
+     19▕      * Generate embedding vector
+
+  1   app/Services/OpenAIService.php:15
+  2   tests/Unit/Services/OpenAIServiceTest.php:17
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\AIControllerTest > can get ai chat response            
+  Failed asserting that an array contains 404.
+
+  at tests/Feature/AIControllerTest.php:35
+     31▕ 
+     32▕         $response = $this->postJson('/api/v1/ai/chat', $data);
+     33▕ 
+     34▕         // May return 200 or 500 depending on OpenAI service availability
+  ➜  35▕         $this->assertContains($response->status(), [200, 500]);
+     36▕     }
+     37▕ 
+     38▕     public function test_can_get_ai_context(): void
+     39▕     {
+
+  1   tests/Feature/AIControllerTest.php:35
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\AIControllerTest > can get ai context                  
+  Failed asserting that an array contains 404.
+
+  at tests/Feature/AIControllerTest.php:48
+     44▕ 
+     45▕         $response = $this->postJson('/api/v1/ai/context', $data);
+     46▕ 
+     47▕         // May return 200 or 500 depending on service availability
+  ➜  48▕         $this->assertContains($response->status(), [200, 500]);
+     49▕     }
+     50▕ 
+     51▕     public function test_can_list_ai_models(): void
+     52▕     {
+
+  1   tests/Feature/AIControllerTest.php:48
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\AIControllerTest > can list ai models                  
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/AIControllerTest.php:56
+     52▕     {
+     53▕         $response = $this->getJson('/api/v1/ai/models');
+     54▕ 
+     55▕         // Should return list of available models
+  ➜  56▕         $response->assertStatus(200)
+     57▕             ->assertJsonStructure(['data']);
+     58▕     }
+     59▕ 
+     60▕     public function test_chat_requires_message(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\AIControllerTest > chat requires message               
+  Expected response status code [422] but received 404.
+Failed asserting that 404 is identical to 422.
+
+  at tests/Feature/AIControllerTest.php:64
+     60▕     public function test_chat_requires_message(): void
+     61▕     {
+     62▕         $response = $this->postJson('/api/v1/ai/chat', []);
+     63▕ 
+  ➜  64▕         $response->assertStatus(422)
+     65▕             ->assertJsonValidationErrors(['message']);
+     66▕     }
+     67▕ }
+     68▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\AdApiTest > can list ads                               
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/AdApiTest.php:16
+     12▕     public function test_can_list_ads(): void
+     13▕     {
+     14▕         $response = $this->getJson('/api/v1/ads');
+     15▕ 
+  ➜  16▕         $response->assertStatus(200)
+     17▕             ->assertJsonStructure([
+     18▕                 'data' => [
+     19▕                     '*' => ['id', 'title', 'type', 'status']
+     20▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\AdApiTest > can generate ad from campaign              
+  Failed asserting that an array contains 404.
+
+  at tests/Feature/AdApiTest.php:35
+     31▕         ];
+     32▕ 
+     33▕         $response = $this->postJson('/api/v1/ads/generate-from-campaign', $data);
+     34▕ 
+  ➜  35▕         $this->assertContains($response->status(), [201, 202, 200]);
+     36▕     }
+     37▕ 
+     38▕     public function test_can_generate_ad_from_content(): void
+     39▕     {
+
+  1   tests/Feature/AdApiTest.php:35
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\AdApiTest > can generate ad from content               
+  Failed asserting that an array contains 404.
+
+  at tests/Feature/AdApiTest.php:48
+     44▕         ];
+     45▕ 
+     46▕         $response = $this->postJson('/api/v1/ads/generate-from-content', $data);
+     47▕ 
+  ➜  48▕         $this->assertContains($response->status(), [201, 202, 200]);
+     49▕     }
+     50▕ 
+     51▕     public function test_can_list_ad_templates(): void
+     52▕     {
+
+  1   tests/Feature/AdApiTest.php:48
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\AdApiTest > can list ad templates                      
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/AdApiTest.php:55
+     51▕     public function test_can_list_ad_templates(): void
+     52▕     {
+     53▕         $response = $this->getJson('/api/v1/ads/templates');
+     54▕ 
+  ➜  55▕         $response->assertStatus(200)
+     56▕             ->assertJsonStructure([
+     57▕                 'data' => [
+     58▕                     '*' => ['id', 'name', 'type', 'platform']
+     59▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\AdApiTest > can create ad template                     
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/AdApiTest.php:75
+     71▕         ];
+     72▕ 
+     73▕         $response = $this->postJson('/api/v1/ads/templates', $data);
+     74▕ 
+  ➜  75▕         $response->assertStatus(201)
+     76▕             ->assertJsonStructure(['data' => ['id', 'name']]);
+     77▕     }
+     78▕ 
+     79▕     public function test_can_show_ad(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\AdApiTest > can show ad                                
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/AdApiTest.php:85
+     81▕         $adId = 'test-ad-id';
+     82▕ 
+     83▕         $response = $this->getJson("/api/v1/ads/{$adId}");
+     84▕ 
+  ➜  85▕         $response->assertStatus(200)
+     86▕             ->assertJsonStructure(['data']);
+     87▕     }
+     88▕ 
+     89▕     public function test_can_update_ad(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\AdApiTest > can update ad                              
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/AdApiTest.php:100
+     96▕         ];
+     97▕ 
+     98▕         $response = $this->putJson("/api/v1/ads/{$adId}", $data);
+     99▕ 
+  ➜ 100▕         $response->assertStatus(200)
+    101▕             ->assertJsonStructure(['data', 'message']);
+    102▕     }
+    103▕ }
+    104▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ArticleApiTest > can list articles    QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: articles (Connection: sqlite, SQL: insert into "articles" ("tenant_id", "title", "slug", "excerpt", "content", "featured_image", "category", "status", "published_at", "is_ai_generated", "view_count", "created_by", "id", "updated_at", "created_at") values (00000000-0000-0000-0000-000000000000, Quia laudantium adipisci facilis., quia-laudantium-adipisci-facilis-3908, ?, Nihil dolorem debitis dignissimos nostrum excepturi quam impedit aut. Ex qui eos in quam aspernatur possimus. Voluptas nihil possimus dignissimos molestiae voluptatem. Aut fugiat magni beatae explicabo accusamus maxime qui.
+
+Ea velit exercitationem perferendis sint sunt veritatis distinctio. Eaque autem voluptatem molestiae quibusdam voluptatem hic neque. Exercitationem et quam ut.
+
+Illo itaque aliquam nulla natus. Et accusantium quaerat nihil velit hic sed eligendi. Qui dicta autem non doloribus sunt doloremque.
+
+Ea eos aut ratione exercitationem cumque. Ut vel unde aspernatur accusantium deserunt. Nam et voluptatem nemo nemo dolore ut delectus totam. Animi numquam nesciunt eum unde.
+
+Consequatur facere eum ipsa qui voluptatibus. Inventore ducimus architecto odit. Tenetur modi quo ad et harum est sed. Itaque voluptatem vero minus neque., https://via.placeholder.com/640x480.png/002299?text=aperiam, incidunt, archived, ?, 0, 2854, 623fffc8-c07e-34a9-95c4-65fe9e08657c, 019ba9ed-a044-7154-8a2a-d76650260da0, 2026-01-10 22:01:21, 2026-01-10 22:01:21))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:826
+    822▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    823▕                 );
+    824▕             }
+    825▕ 
+  ➜ 826▕             throw new QueryException(
+    827▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    828▕             );
+    829▕         }
+    830▕     }
+
+      [2m+15 vendor frames [22m
+  16  tests/Feature/ArticleApiTest.php:15
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ArticleApiTest > can create article                    
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/ArticleApiTest.php:41
+     37▕         ];
+     38▕ 
+     39▕         $response = $this->postJson('/api/v1/articles', $data);
+     40▕ 
+  ➜  41▕         $response->assertStatus(201)
+     42▕             ->assertJsonStructure(['data' => ['id', 'title', 'slug']]);
+     43▕ 
+     44▕         $this->assertDatabaseHas('articles', [
+     45▕             'title' => 'Test Article',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ArticleApiTest > can show article     QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: articles (Connection: sqlite, SQL: insert into "articles" ("tenant_id", "title", "slug", "excerpt", "content", "featured_image", "category", "status", "published_at", "is_ai_generated", "view_count", "created_by", "id", "updated_at", "created_at") values (00000000-0000-0000-0000-000000000000, Beatae distinctio rem molestiae., beatae-distinctio-rem-molestiae-8566, Nobis et voluptatibus voluptas sed., At tempore quo est repudiandae hic autem. Quibusdam molestias laudantium molestiae molestias. Nostrum esse eius itaque minima eaque eum blanditiis.
+
+Culpa doloremque pariatur aliquam non voluptates consequatur ea laborum. Est necessitatibus quibusdam voluptatem et nihil ex. Atque tempora voluptas eveniet est explicabo nostrum perspiciatis reprehenderit. Voluptatem impedit odio veniam ipsa nobis qui ipsa.
+
+Est omnis consequatur ipsam assumenda suscipit. Excepturi consequatur enim magnam suscipit praesentium ipsum est. Voluptates culpa ducimus possimus sint quibusdam sit. Similique saepe voluptatibus natus perferendis doloremque et.
+
+Minus autem et consequatur eos. Quasi earum eveniet quia voluptate consequatur rerum illo. Voluptates est temporibus voluptates ullam et accusamus.
+
+Nesciunt soluta ipsam quidem totam unde. Nisi esse qui autem dolorem qui consequatur ab., ?, ipsum, published, ?, 0, 9968, ?, 019ba9ed-a04c-7280-9640-3ec4200f5e82, 2026-01-10 22:01:21, 2026-01-10 22:01:21))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:826
+    822▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    823▕                 );
+    824▕             }
+    825▕ 
+  ➜ 826▕             throw new QueryException(
+    827▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    828▕             );
+    829▕         }
+    830▕     }
+
+      [2m+15 vendor frames [22m
+  16  tests/Feature/ArticleApiTest.php:52
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ArticleApiTest > can update article   QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: articles (Connection: sqlite, SQL: insert into "articles" ("tenant_id", "title", "slug", "excerpt", "content", "featured_image", "category", "status", "published_at", "is_ai_generated", "view_count", "created_by", "id", "updated_at", "created_at") values (00000000-0000-0000-0000-000000000000, Fuga aut fugiat quo nemo., fuga-aut-fugiat-quo-nemo-2700, Tenetur ut quo non ut., Et ipsam saepe unde laborum enim. Et perspiciatis omnis ut architecto minus quam. Veniam est fuga eaque magni cumque.
+
+Totam modi dolore doloremque deserunt sit rem. Sit enim nostrum sequi nulla et. Vel in in eos est.
+
+Maxime iure ut occaecati earum. Distinctio perferendis facilis enim voluptas. Dignissimos asperiores ducimus hic. Ullam cupiditate totam quam qui eos est sint laboriosam.
+
+Adipisci corrupti at sint corporis debitis saepe. Illum praesentium velit minima tenetur. Expedita omnis minima esse accusamus. Unde et et nihil et.
+
+Quae sed quaerat quia praesentium tempore voluptate sed est. Et blanditiis quidem ipsum cum et sit magnam. Vero sint atque officia dolorum et incidunt commodi magnam., ?, sunt, published, 1970-10-13 15:39:11, 0, 9558, c5ffa26f-74e7-38a2-83cf-861564c19f95, 019ba9ed-a050-7160-9dca-adb0061246be, 2026-01-10 22:01:21, 2026-01-10 22:01:21))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:826
+    822▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    823▕                 );
+    824▕             }
+    825▕ 
+  ➜ 826▕             throw new QueryException(
+    827▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    828▕             );
+    829▕         }
+    830▕     }
+
+      [2m+15 vendor frames [22m
+  16  tests/Feature/ArticleApiTest.php:67
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ArticleApiTest > can delete article   QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: articles (Connection: sqlite, SQL: insert into "articles" ("tenant_id", "title", "slug", "excerpt", "content", "featured_image", "category", "status", "published_at", "is_ai_generated", "view_count", "created_by", "id", "updated_at", "created_at") values (00000000-0000-0000-0000-000000000000, Quis quia magnam et., quis-quia-magnam-et-103, ?, Est similique id omnis ipsum repudiandae possimus. Quia consectetur laborum aspernatur qui adipisci et sed. Autem nostrum et repellendus rerum adipisci. Dolorem et officiis sunt inventore est. Sed hic qui veritatis autem.
+
+Id provident reiciendis cumque et. Officia architecto dolorem dolores autem totam ab sed. Et inventore ea a animi et et est. Voluptatem et sunt est reiciendis ea.
+
+Aspernatur numquam sit minus vel. Dolore qui atque error beatae nam. Et animi veniam exercitationem accusamus repellendus neque occaecati. Ab perspiciatis amet earum sed officia quia quasi eum.
+
+Voluptates qui et ad accusantium aut expedita exercitationem. In aperiam omnis perferendis rerum. Excepturi neque ut ut repellat possimus numquam ullam.
+
+Qui nobis excepturi maxime veniam. Rerum veniam quis ea dicta quos suscipit. Maxime eligendi architecto quo eos eveniet vel rerum., https://via.placeholder.com/640x480.png/00ffee?text=dolor, tenetur, draft, 1985-01-31 20:06:15, 1, 6439, 7e467191-37cb-3565-b5e7-a03837ed1a61, 019ba9ed-a054-70de-a7af-e09d57c5127d, 2026-01-10 22:01:21, 2026-01-10 22:01:21))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:826
+    822▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    823▕                 );
+    824▕             }
+    825▕ 
+  ➜ 826▕             throw new QueryException(
+    827▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    828▕             );
+    829▕         }
+    830▕     }
+
+      [2m+15 vendor frames [22m
+  16  tests/Feature/ArticleApiTest.php:91
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ArticleApiTest > can update article…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: articles (Connection: sqlite, SQL: insert into "articles" ("tenant_id", "title", "slug", "excerpt", "content", "featured_image", "category", "status", "published_at", "is_ai_generated", "view_count", "created_by", "id", "updated_at", "created_at") values (00000000-0000-0000-0000-000000000000, Sint sed est aliquam., sint-sed-est-aliquam-2090, ?, Id possimus repellendus explicabo. Odit cupiditate nulla rerum praesentium enim ipsum. Aliquid quidem eos autem eaque et officiis optio reiciendis. Eligendi animi ut nemo praesentium repudiandae ea repudiandae.
+
+Repellat quos error qui quasi. Asperiores cupiditate necessitatibus velit praesentium ut in eligendi. Assumenda incidunt consequuntur ipsam non. Omnis repellat et et rerum ut error rem.
+
+Possimus hic consequatur ea est. Est enim dolorem reprehenderit et voluptate. Minus id laborum aut eligendi quisquam quia corporis explicabo.
+
+Nostrum nisi est aut animi fugiat aperiam magni. Sapiente a delectus praesentium sed repellat fuga. Voluptatibus atque sunt deleniti rerum voluptate rem. Iste explicabo sed incidunt omnis laboriosam ut.
+
+Sunt ducimus molestiae iusto ullam in ipsa. Aut occaecati labore doloribus voluptates et. Perspiciatis repellendus consequatur vero et in., https://via.placeholder.com/640x480.png/002288?text=deserunt, ?, draft, 1979-10-23 19:44:23, 0, 7651, ?, 019ba9ed-a057-736c-855e-61863c4c303a, 2026-01-10 22:01:21, 2026-01-10 22:01:21))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:826
+    822▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    823▕                 );
+    824▕             }
+    825▕ 
+  ➜ 826▕             throw new QueryException(
+    827▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    828▕             );
+    829▕         }
+    830▕     }
+
+      [2m+16 vendor frames [22m
+  17  tests/Feature/ArticleApiTest.php:104
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CampaignApiTest > can list campaign…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: campaigns (Connection: sqlite, SQL: insert into "campaigns" ("campaign_id", "template_name", "landing_page_slug", "tenant_id", "created_at", "updated_at") values (TEST-001, Test Campaign, test-campaign, 00000000-0000-0000-0000-000000000000, 2026-01-10 22:01:21, 2026-01-10 22:01:21))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:826
+    822▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    823▕                 );
+    824▕             }
+    825▕ 
+  ➜ 826▕             throw new QueryException(
+    827▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    828▕             );
+    829▕         }
+    830▕     }
+
+      [2m+8 vendor frames [22m
+  9   tests/Feature/CampaignApiTest.php:17
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CampaignApiTest > can show campaign…  QueryException   
+  SQLSTATE[HY000]: General error: 1 no such table: campaigns (Connection: sqlite, SQL: insert into "campaigns" ("campaign_id", "template_name", "landing_page_slug", "tenant_id", "created_at", "updated_at") values (TEST-002, Test Campaign 2, test-campaign-2, 00000000-0000-0000-0000-000000000000, 2026-01-10 22:01:21, 2026-01-10 22:01:21))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:826
+    822▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    823▕                 );
+    824▕             }
+    825▕ 
+  ➜ 826▕             throw new QueryException(
+    827▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    828▕             );
+    829▕         }
+    830▕     }
+
+      [2m+8 vendor frames [22m
+  9   tests/Feature/CampaignApiTest.php:38
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CampaignGenerationApiTest > can generate campaign      
+  Failed asserting that an array contains 404.
+
+  at tests/Feature/CampaignGenerationApiTest.php:24
+     20▕ 
+     21▕         $response = $this->postJson('/api/v1/campaigns/generate', $data);
+     22▕ 
+     23▕         // May return 201 or 202 (accepted) depending on implementation
+  ➜  24▕         $this->assertContains($response->status(), [201, 202, 200]);
+     25▕     }
+     26▕ 
+     27▕     public function test_can_list_campaign_templates(): void
+     28▕     {
+
+  1   tests/Feature/CampaignGenerationApiTest.php:24
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CampaignGenerationApiTest > can list campaign templ…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CampaignGenerationApiTest.php:31
+     27▕     public function test_can_list_campaign_templates(): void
+     28▕     {
+     29▕         $response = $this->getJson('/api/v1/campaigns/templates');
+     30▕ 
+  ➜  31▕         $response->assertStatus(200)
+     32▕             ->assertJsonStructure([
+     33▕                 'data' => [
+     34▕                     '*' => ['id', 'name', 'type', 'objectives']
+     35▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CampaignGenerationApiTest > can get campaign sugges…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CampaignGenerationApiTest.php:48
+     44▕         ];
+     45▕ 
+     46▕         $response = $this->postJson('/api/v1/campaigns/suggestions', $data);
+     47▕ 
+  ➜  48▕         $response->assertStatus(200)
+     49▕             ->assertJsonStructure([
+     50▕                 'data' => [
+     51▕                     '*' => ['type', 'recommendation', 'rationale']
+     52▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContactApiTest > can contact customer                  
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ContactApiTest.php:27
+     23▕         ];
+     24▕ 
+     25▕         $response = $this->postJson('/api/v1/personality-contacts/contact', $data);
+     26▕ 
+  ➜  27▕         $response->assertStatus(200)
+     28▕             ->assertJsonStructure(['data', 'message']);
+     29▕     }
+     30▕ 
+     31▕     public function test_can_schedule_contact(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContactApiTest > can schedule contact                  
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/ContactApiTest.php:45
+     41▕         ];
+     42▕ 
+     43▕         $response = $this->postJson('/api/v1/personality-contacts/schedule', $data);
+     44▕ 
+  ➜  45▕         $response->assertStatus(201)
+     46▕             ->assertJsonStructure(['data', 'message']);
+     47▕     }
+     48▕ 
+     49▕     public function test_can_get_customer_contact_preferences(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContactApiTest > can get customer contact preferenc…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ContactApiTest.php:55
+     51▕         $customer = Customer::factory()->create();
+     52▕ 
+     53▕         $response = $this->getJson("/api/v1/personality-contacts/customers/{$customer->id}/preferences");
+     54▕ 
+  ➜  55▕         $response->assertStatus(200)
+     56▕             ->assertJsonStructure(['data']);
+     57▕     }
+     58▕ 
+     59▕     public function test_can_update_customer_contact_preferences(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContactApiTest > can update customer contact prefer…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ContactApiTest.php:71
+     67▕         ];
+     68▕ 
+     69▕         $response = $this->putJson("/api/v1/personality-contacts/customers/{$customer->id}/preferences", $data);
+     70▕ 
+  ➜  71▕         $response->assertStatus(200)
+     72▕             ->assertJsonStructure(['data', 'message']);
+     73▕     }
+     74▕ }
+     75▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContactSalesTest > contact sales submission success    
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ContactSalesTest.php:33
+     29▕         ];
+     30▕ 
+     31▕         $response = $this->postJson('/api/v1/learning/contact/sales', $data);
+     32▕ 
+  ➜  33▕         $response->assertStatus(200)
+     34▕             ->assertJson([
+     35▕                 'success' => true,
+     36▕             ])
+     37▕             ->assertJsonStructure([
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContactSalesTest > contact sales validation require…   
+  Expected response status code [422] but received 404.
+Failed asserting that 404 is identical to 422.
+
+  at tests/Feature/ContactSalesTest.php:50
+     46▕     public function test_contact_sales_validation_required_fields(): void
+     47▕     {
+     48▕         $response = $this->postJson('/api/v1/learning/contact/sales', []);
+     49▕ 
+  ➜  50▕         $response->assertStatus(422)
+     51▕             ->assertJsonValidationErrors(['name', 'email', 'message']);
+     52▕     }
+     53▕ 
+     54▕     /**
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContactSalesTest > contact sales validation invalid…   
+  Expected response status code [422] but received 404.
+Failed asserting that 404 is identical to 422.
+
+  at tests/Feature/ContactSalesTest.php:67
+     63▕         ];
+     64▕ 
+     65▕         $response = $this->postJson('/api/v1/learning/contact/sales', $data);
+     66▕ 
+  ➜  67▕         $response->assertStatus(422)
+     68▕             ->assertJsonValidationErrors(['email']);
+     69▕     }
+     70▕ 
+     71▕     /**
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContactSalesTest > contact sales validation message…   
+  Expected response status code [422] but received 404.
+Failed asserting that 404 is identical to 422.
+
+  at tests/Feature/ContactSalesTest.php:84
+     80▕         ];
+     81▕ 
+     82▕         $response = $this->postJson('/api/v1/learning/contact/sales', $data);
+     83▕ 
+  ➜  84▕         $response->assertStatus(422)
+     85▕             ->assertJsonValidationErrors(['message']);
+     86▕     }
+     87▕ 
+     88▕     /**
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContactSalesTest > contact sales with optional fiel…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ContactSalesTest.php:101
+     97▕         ];
+     98▕ 
+     99▕         $response = $this->postJson('/api/v1/learning/contact/sales', $data);
+    100▕ 
+  ➜ 101▕         $response->assertStatus(200)
+    102▕             ->assertJson([
+    103▕                 'success' => true,
+    104▕             ]);
+    105▕     }
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContactSalesTest > contact sales with campaign cont…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ContactSalesTest.php:125
+    121▕         ];
+    122▕ 
+    123▕         $response = $this->postJson('/api/v1/learning/contact/sales', $data);
+    124▕ 
+  ➜ 125▕         $response->assertStatus(200)
+    126▕             ->assertJson([
+    127▕                 'success' => true,
+    128▕             ]);
+    129▕     }
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContactSalesTest > contact sales with tenant id        
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ContactSalesTest.php:146
+    142▕         $response = $this->withHeaders([
+    143▕             'X-Tenant-ID' => 'tenant-123',
+    144▕         ])->postJson('/api/v1/learning/contact/sales', $data);
+    145▕ 
+  ➜ 146▕         $response->assertStatus(200)
+    147▕             ->assertJson([
+    148▕                 'success' => true,
+    149▕             ]);
+    150▕     }
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContentGenerationApiTest > can list generated conte…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ContentGenerationApiTest.php:16
+     12▕     public function test_can_list_generated_content(): void
+     13▕     {
+     14▕         $response = $this->getJson('/api/v1/content');
+     15▕ 
+  ➜  16▕         $response->assertStatus(200)
+     17▕             ->assertJsonStructure([
+     18▕                 'data' => [
+     19▕                     '*' => ['id', 'title', 'type', 'status']
+     20▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContentGenerationApiTest > can generate content        
+  Failed asserting that an array contains 404.
+
+  at tests/Feature/ContentGenerationApiTest.php:36
+     32▕ 
+     33▕         $response = $this->postJson('/api/v1/content/generate', $data);
+     34▕ 
+     35▕         // May return 201 or 202 (accepted) depending on implementation
+  ➜  36▕         $this->assertContains($response->status(), [201, 202, 200]);
+     37▕     }
+     38▕ 
+     39▕     public function test_can_generate_content_from_campaign(): void
+     40▕     {
+
+  1   tests/Feature/ContentGenerationApiTest.php:36
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContentGenerationApiTest > can generate content fro…   
+  Failed asserting that an array contains 404.
+
+  at tests/Feature/ContentGenerationApiTest.php:49
+     45▕         ];
+     46▕ 
+     47▕         $response = $this->postJson('/api/v1/content/generate-from-campaign', $data);
+     48▕ 
+  ➜  49▕         $this->assertContains($response->status(), [201, 202, 200]);
+     50▕     }
+     51▕ 
+     52▕     public function test_can_list_content_templates(): void
+     53▕     {
+
+  1   tests/Feature/ContentGenerationApiTest.php:49
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContentGenerationApiTest > can list content templat…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ContentGenerationApiTest.php:56
+     52▕     public function test_can_list_content_templates(): void
+     53▕     {
+     54▕         $response = $this->getJson('/api/v1/content/templates');
+     55▕ 
+  ➜  56▕         $response->assertStatus(200)
+     57▕             ->assertJsonStructure([
+     58▕                 'data' => [
+     59▕                     '*' => ['id', 'name', 'type']
+     60▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContentGenerationApiTest > can create content templ…   
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/ContentGenerationApiTest.php:75
+     71▕         ];
+     72▕ 
+     73▕         $response = $this->postJson('/api/v1/content/templates', $data);
+     74▕ 
+  ➜  75▕         $response->assertStatus(201)
+     76▕             ->assertJsonStructure(['data' => ['id', 'name']]);
+     77▕     }
+     78▕ 
+     79▕     public function test_can_show_generated_content(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContentGenerationApiTest > can show generated conte…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ContentGenerationApiTest.php:85
+     81▕         $contentId = 'test-content-id';
+     82▕ 
+     83▕         $response = $this->getJson("/api/v1/content/{$contentId}");
+     84▕ 
+  ➜  85▕         $response->assertStatus(200)
+     86▕             ->assertJsonStructure(['data']);
+     87▕     }
+     88▕ 
+     89▕     public function test_can_update_content_status(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ContentGenerationApiTest > can update content statu…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ContentGenerationApiTest.php:99
+     95▕         ];
+     96▕ 
+     97▕         $response = $this->postJson("/api/v1/content/{$contentId}/status", $data);
+     98▕ 
+  ➜  99▕         $response->assertStatus(200)
+    100▕             ->assertJsonStructure(['data', 'message']);
+    101▕     }
+    102▕ }
+    103▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ConversationApiTest > it can create a conversation     
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/ConversationApiTest.php:54
+     50▕         ];
+     51▕ 
+     52▕         $response = $this->postJson('/api/v1/conversations', $conversationData, $this->getHeaders());
+     53▕ 
+  ➜  54▕         $response->assertStatus(201)
+     55▕             ->assertJsonStructure([
+     56▕                 'data' => ['id', 'session_id', 'customer_id', 'entry_point'],
+     57▕                 'message'
+     58▕             ]);
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ConversationApiTest > it can list conversations        
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ConversationApiTest.php:87
+     83▕         ]);
+     84▕ 
+     85▕         $response = $this->getJson('/api/v1/conversations', $this->getHeaders());
+     86▕ 
+  ➜  87▕         $response->assertStatus(200)
+     88▕             ->assertJsonStructure([
+     89▕                 'data' => [
+     90▕                     '*' => ['id', 'session_id', 'customer_id', 'started_at']
+     91▕                 ],
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ConversationApiTest > it can show a conversation       
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ConversationApiTest.php:112
+    108▕         ]);
+    109▕ 
+    110▕         $response = $this->getJson("/api/v1/conversations/{$conversation->id}", $this->getHeaders());
+    111▕ 
+  ➜ 112▕         $response->assertStatus(200)
+    113▕             ->assertJson([
+    114▕                 'data' => [
+    115▕                     'id' => $conversation->id,
+    116▕                     'customer_id' => $this->customer->id,
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ConversationApiTest > it can update a conversation     
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ConversationApiTest.php:140
+    136▕         ];
+    137▕ 
+    138▕         $response = $this->putJson("/api/v1/conversations/{$conversation->id}", $updateData, $this->getHeaders());
+    139▕ 
+  ➜ 140▕         $response->assertStatus(200)
+    141▕             ->assertJson([
+    142▕                 'data' => [
+    143▕                     'outcome' => 'signup',
+    144▕                     'outcome_details' => 'Customer signed up for premium',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ConversationApiTest > it can end a conversation        
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ConversationApiTest.php:163
+    159▕         ]);
+    160▕ 
+    161▕         $response = $this->postJson("/api/v1/conversations/{$conversation->id}/end", [], $this->getHeaders());
+    162▕ 
+  ➜ 163▕         $response->assertStatus(200)
+    164▕             ->assertJsonStructure([
+    165▕                 'data' => ['id', 'ended_at', 'duration_seconds'],
+    166▕                 'message'
+    167▕             ]);
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ConversationApiTest > it can add message to convers…   
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/ConversationApiTest.php:196
+    192▕             $messageData,
+    193▕             $this->getHeaders()
+    194▕         );
+    195▕ 
+  ➜ 196▕         $response->assertStatus(201)
+    197▕             ->assertJsonStructure([
+    198▕                 'data' => ['id', 'role', 'content', 'timestamp'],
+    199▕                 'message'
+    200▕             ]);
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ConversationApiTest > it can list c…  QueryException   
+  SQLSTATE[HY000]: General error: 1 table conversation_messages has no column named updated_at (Connection: sqlite, SQL: insert into "conversation_messages" ("conversation_id", "role", "content", "id", "timestamp", "updated_at", "created_at") values (75f41a45-de63-449e-b7ed-60b545e59b1c, user, Message 1, 4495c4da-293b-43ba-bc9e-25ae5d5ce8f9, 2026-01-10 22:01:21, 2026-01-10 22:01:21, 2026-01-10 22:01:21))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:826
+    822▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    823▕                 );
+    824▕             }
+    825▕ 
+  ➜ 826▕             throw new QueryException(
+    827▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    828▕             );
+    829▕         }
+    830▕     }
+
+      [2m+17 vendor frames [22m
+  18  tests/Feature/ConversationApiTest.php:223
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CrmAdvancedAnalyticsApiTest > can get customer enga…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CrmAdvancedAnalyticsApiTest.php:19
+     15▕         $customer = Customer::factory()->create();
+     16▕ 
+     17▕         $response = $this->getJson("/api/v1/crm/customers/{$customer->id}/engagement-score");
+     18▕ 
+  ➜  19▕         $response->assertStatus(200)
+     20▕             ->assertJsonStructure([
+     21▕                 'data' => [
+     22▕                     'customer_id',
+     23▕                     'engagement_score',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CrmAdvancedAnalyticsApiTest > can get campaign roi     
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CrmAdvancedAnalyticsApiTest.php:36
+     32▕         $campaignId = 'test-campaign-id';
+     33▕ 
+     34▕         $response = $this->getJson("/api/v1/crm/campaigns/{$campaignId}/roi");
+     35▕ 
+  ➜  36▕         $response->assertStatus(200)
+     37▕             ->assertJsonStructure([
+     38▕                 'data' => [
+     39▕                     'campaign_id',
+     40▕                     'roi',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CrmAdvancedAnalyticsApiTest > can get predictive sc…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CrmAdvancedAnalyticsApiTest.php:54
+     50▕         $customer = Customer::factory()->create();
+     51▕ 
+     52▕         $response = $this->getJson("/api/v1/crm/customers/{$customer->id}/predictive-score");
+     53▕ 
+  ➜  54▕         $response->assertStatus(200)
+     55▕             ->assertJsonStructure([
+     56▕                 'data' => [
+     57▕                     'customer_id',
+     58▕                     'predictive_score',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CrmAnalyticsApiTest > can get interest analytics       
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CrmAnalyticsApiTest.php:16
+     12▕     public function test_can_get_interest_analytics(): void
+     13▕     {
+     14▕         $response = $this->getJson('/api/v1/crm/analytics/interest?start_date=2024-01-01&end_date=2024-12-31');
+     15▕ 
+  ➜  16▕         $response->assertStatus(200)
+     17▕             ->assertJsonStructure([
+     18▕                 'data' => [
+     19▕                     'total_interests',
+     20▕                     'top_interests',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CrmAnalyticsApiTest > can get purchase analytics       
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CrmAnalyticsApiTest.php:30
+     26▕     public function test_can_get_purchase_analytics(): void
+     27▕     {
+     28▕         $response = $this->getJson('/api/v1/crm/analytics/purchases?start_date=2024-01-01&end_date=2024-12-31');
+     29▕ 
+  ➜  30▕         $response->assertStatus(200)
+     31▕             ->assertJsonStructure([
+     32▕                 'data' => [
+     33▕                     'total_purchases',
+     34▕                     'revenue',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CrmAnalyticsApiTest > can get learning analytics       
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CrmAnalyticsApiTest.php:45
+     41▕     public function test_can_get_learning_analytics(): void
+     42▕     {
+     43▕         $response = $this->getJson('/api/v1/crm/analytics/learning?start_date=2024-01-01&end_date=2024-12-31');
+     44▕ 
+  ➜  45▕         $response->assertStatus(200)
+     46▕             ->assertJsonStructure([
+     47▕                 'data' => [
+     48▕                     'total_learning_activities',
+     49▕                     'completion_rate',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CrmAnalyticsApiTest > can get campaign performance     
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CrmAnalyticsApiTest.php:59
+     55▕     public function test_can_get_campaign_performance(): void
+     56▕     {
+     57▕         $response = $this->getJson('/api/v1/crm/analytics/campaign-performance?start_date=2024-01-01&end_date=2024-12-31');
+     58▕ 
+  ➜  59▕         $response->assertStatus(200)
+     60▕             ->assertJsonStructure([
+     61▕                 'data' => [
+     62▕                     'total_campaigns',
+     63▕                     'performance_metrics',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CrmDashboardApiTest > can get dashboard analytics      
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CrmDashboardApiTest.php:16
+     12▕     public function test_can_get_dashboard_analytics(): void
+     13▕     {
+     14▕         $response = $this->getJson('/api/v1/crm/dashboard/analytics');
+     15▕ 
+  ➜  16▕         $response->assertStatus(200)
+     17▕             ->assertJsonStructure([
+     18▕                 'data' => [
+     19▕                     'total_customers',
+     20▕                     'active_campaigns',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CustomerApiTest > it can list customers                
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CustomerApiTest.php:66
+     62▕         ]);
+     63▕ 
+     64▕         $response = $this->getJson('/api/v1/customers', $this->getHeaders());
+     65▕ 
+  ➜  66▕         $response->assertStatus(200)
+     67▕             ->assertJsonStructure([
+     68▕                 'data' => [
+     69▕                     '*' => ['id', 'business_name', 'slug', 'tenant_id']
+     70▕                 ],
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CustomerApiTest > it can create a customer             
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/CustomerApiTest.php:95
+     91▕         ];
+     92▕ 
+     93▕         $response = $this->postJson('/api/v1/customers', $customerData, $this->getHeaders());
+     94▕ 
+  ➜  95▕         $response->assertStatus(201)
+     96▕             ->assertJsonStructure([
+     97▕                 'data' => ['id', 'business_name', 'slug', 'email'],
+     98▕                 'message'
+     99▕             ]);
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CustomerApiTest > it validates required fields when…   
+  Expected response status code [422] but received 404.
+Failed asserting that 404 is identical to 422.
+
+  at tests/Feature/CustomerApiTest.php:113
+    109▕     public function it_validates_required_fields_when_creating_customer(): void
+    110▕     {
+    111▕         $response = $this->postJson('/api/v1/customers', [], $this->getHeaders());
+    112▕ 
+  ➜ 113▕         $response->assertStatus(422)
+    114▕             ->assertJsonValidationErrors(['business_name']);
+    115▕     }
+    116▕ 
+    117▕     /** @test */
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CustomerApiTest > it can show a customer               
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CustomerApiTest.php:130
+    126▕         ]);
+    127▕ 
+    128▕         $response = $this->getJson("/api/v1/customers/{$customer->id}", $this->getHeaders());
+    129▕ 
+  ➜ 130▕         $response->assertStatus(200)
+    131▕             ->assertJson([
+    132▕                 'data' => [
+    133▕                     'id' => $customer->id,
+    134▕                     'business_name' => 'Test Customer',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CustomerApiTest > it can show customer by slug         
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CustomerApiTest.php:152
+    148▕         ]);
+    149▕ 
+    150▕         $response = $this->getJson('/api/v1/customers/slug/test-business-123', $this->getHeaders());
+    151▕ 
+  ➜ 152▕         $response->assertStatus(200)
+    153▕             ->assertJson([
+    154▕                 'data' => [
+    155▕                     'id' => $customer->id,
+    156▕                     'slug' => 'test-business-123',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CustomerApiTest > it can update a customer             
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CustomerApiTest.php:179
+    175▕         ];
+    176▕ 
+    177▕         $response = $this->putJson("/api/v1/customers/{$customer->id}", $updateData, $this->getHeaders());
+    178▕ 
+  ➜ 179▕         $response->assertStatus(200)
+    180▕             ->assertJson([
+    181▕                 'data' => [
+    182▕                     'business_name' => 'Updated Name',
+    183▕                     'email' => 'updated@example.com',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CustomerApiTest > it can update business context       
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CustomerApiTest.php:218
+    214▕             $contextData,
+    215▕             $this->getHeaders()
+    216▕         );
+    217▕ 
+  ➜ 218▕         $response->assertStatus(200)
+    219▕             ->assertJson([
+    220▕                 'data' => [
+    221▕                     'business_description' => 'A great pizza place',
+    222▕                     'industry_category' => 'restaurant',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CustomerApiTest > it can get ai context                
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CustomerApiTest.php:245
+    241▕         ]);
+    242▕ 
+    243▕         $response = $this->getJson("/api/v1/customers/{$customer->id}/ai-context", $this->getHeaders());
+    244▕ 
+  ➜ 245▕         $response->assertStatus(200)
+    246▕             ->assertJsonStructure([
+    247▕                 'data' => [
+    248▕                     'customer_id',
+    249▕                     'business_name',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\CustomerApiTest > it can delete a customer             
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/CustomerApiTest.php:281
+    277▕         ]);
+    278▕ 
+    279▕         $response = $this->deleteJson("/api/v1/customers/{$customer->id}", [], $this->getHeaders());
+    280▕ 
+  ➜ 281▕         $response->assertStatus(200)
+    282▕             ->assertJson(['message' => 'Customer deleted successfully']);
+    283▕ 
+    284▕         $this->assertDatabaseMissing('customers', ['id' => $customer->id]);
+    285▕     }
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\EmailCampaignApiTest > can list email campaigns        
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/EmailCampaignApiTest.php:16
+     12▕     public function test_can_list_email_campaigns(): void
+     13▕     {
+     14▕         $response = $this->getJson('/api/v1/outbound/email/campaigns');
+     15▕ 
+  ➜  16▕         $response->assertStatus(200)
+     17▕             ->assertJsonStructure([
+     18▕                 'data' => [
+     19▕                     '*' => ['id', 'subject', 'status', 'sent_count']
+     20▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\EmailCampaignApiTest > can create email campaign       
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/EmailCampaignApiTest.php:35
+     31▕         ];
+     32▕ 
+     33▕         $response = $this->postJson('/api/v1/outbound/email/campaigns', $data);
+     34▕ 
+  ➜  35▕         $response->assertStatus(201)
+     36▕             ->assertJsonStructure(['data' => ['id', 'subject']]);
+     37▕     }
+     38▕ 
+     39▕     public function test_can_list_email_templates(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\EmailCampaignApiTest > can list email templates        
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/EmailCampaignApiTest.php:43
+     39▕     public function test_can_list_email_templates(): void
+     40▕     {
+     41▕         $response = $this->getJson('/api/v1/outbound/email/templates');
+     42▕ 
+  ➜  43▕         $response->assertStatus(200)
+     44▕             ->assertJsonStructure([
+     45▕                 'data' => [
+     46▕                     '*' => ['id', 'name', 'subject']
+     47▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\EmailCampaignApiTest > can create email template       
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/EmailCampaignApiTest.php:62
+     58▕         ];
+     59▕ 
+     60▕         $response = $this->postJson('/api/v1/outbound/email/templates', $data);
+     61▕ 
+  ➜  62▕         $response->assertStatus(201)
+     63▕             ->assertJsonStructure(['data' => ['id', 'name']]);
+     64▕     }
+     65▕ }
+     66▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\KnowledgeApiTest > can list knowledge items            
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/KnowledgeApiTest.php:26
+     22▕         Knowledge::factory()->count(3)->create();
+     23▕ 
+     24▕         $response = $this->getJson('/api/v1/knowledge');
+     25▕ 
+  ➜  26▕         $response->assertStatus(200)
+     27▕             ->assertJsonStructure([
+     28▕                 'data' => [
+     29▕                     '*' => ['id', 'title', 'content', 'category_id', 'created_at']
+     30▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\KnowledgeApiTest > can create knowledge item           
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/KnowledgeApiTest.php:47
+     43▕         ];
+     44▕ 
+     45▕         $response = $this->postJson('/api/v1/knowledge', $data);
+     46▕ 
+  ➜  47▕         $response->assertStatus(201)
+     48▕             ->assertJsonStructure(['data' => ['id', 'title', 'content']]);
+     49▕ 
+     50▕         $this->assertDatabaseHas('knowledge_base', [
+     51▕             'title' => 'Test Knowledge',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\KnowledgeApiTest > can show knowledge item             
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/KnowledgeApiTest.php:62
+     58▕         $knowledge = Knowledge::factory()->create();
+     59▕ 
+     60▕         $response = $this->getJson("/api/v1/knowledge/{$knowledge->id}");
+     61▕ 
+  ➜  62▕         $response->assertStatus(200)
+     63▕             ->assertJson([
+     64▕                 'data' => [
+     65▕                     'id' => $knowledge->id,
+     66▕                     'title' => $knowledge->title,
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\KnowledgeApiTest > can update knowledge item           
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/KnowledgeApiTest.php:82
+     78▕         ];
+     79▕ 
+     80▕         $response = $this->putJson("/api/v1/knowledge/{$knowledge->id}", $data);
+     81▕ 
+  ➜  82▕         $response->assertStatus(200)
+     83▕             ->assertJson([
+     84▕                 'data' => [
+     85▕                     'title' => 'Updated Title',
+     86▕                     'content' => 'Updated content',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\KnowledgeApiTest > can delete knowledge item           
+  Expected response status code [204] but received 404.
+Failed asserting that 404 is identical to 204.
+
+  at tests/Feature/KnowledgeApiTest.php:102
+     98▕         $knowledge = Knowledge::factory()->create();
+     99▕ 
+    100▕         $response = $this->deleteJson("/api/v1/knowledge/{$knowledge->id}");
+    101▕ 
+  ➜ 102▕         $response->assertStatus(204);
+    103▕ 
+    104▕         $this->assertDatabaseMissing('knowledge_base', [
+    105▕             'id' => $knowledge->id,
+    106▕         ]);
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\KnowledgeApiTest > can vote on knowledge item          
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/KnowledgeApiTest.php:117
+    113▕         $response = $this->postJson("/api/v1/knowledge/{$knowledge->id}/vote", [
+    114▕             'helpful' => true,
+    115▕         ]);
+    116▕ 
+  ➜ 117▕         $response->assertStatus(200);
+    118▕         // Add assertions based on your vote implementation
+    119▕     }
+    120▕ 
+    121▕     public function test_can_list_faq_categories(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\KnowledgeApiTest > can list faq categories             
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/KnowledgeApiTest.php:127
+    123▕         FaqCategory::factory()->count(3)->create();
+    124▕ 
+    125▕         $response = $this->getJson('/api/v1/faq-categories');
+    126▕ 
+  ➜ 127▕         $response->assertStatus(200)
+    128▕             ->assertJsonStructure([
+    129▕                 'data' => [
+    130▕                     '*' => ['id', 'name', 'description', 'parent_id']
+    131▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\KnowledgeApiTest > can create faq category             
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/KnowledgeApiTest.php:145
+    141▕         ];
+    142▕ 
+    143▕         $response = $this->postJson('/api/v1/faq-categories', $data);
+    144▕ 
+  ➜ 145▕         $response->assertStatus(201)
+    146▕             ->assertJsonStructure(['data' => ['id', 'name', 'description']]);
+    147▕ 
+    148▕         $this->assertDatabaseHas('faq_categories', [
+    149▕             'name' => 'Test Category',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OrderApiTest > can list orders                         
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/OrderApiTest.php:21
+     17▕         Order::factory()->count(3)->create();
+     18▕ 
+     19▕         $response = $this->getJson('/api/v1/orders');
+     20▕ 
+  ➜  21▕         $response->assertStatus(200)
+     22▕             ->assertJsonStructure([
+     23▕                 'data' => [
+     24▕                     '*' => ['id', 'customer_id', 'total_amount', 'status', 'created_at']
+     25▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OrderApiTest > can show order                          
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/OrderApiTest.php:35
+     31▕         $order = Order::factory()->create();
+     32▕ 
+     33▕         $response = $this->getJson("/api/v1/orders/{$order->id}");
+     34▕ 
+  ➜  35▕         $response->assertStatus(200)
+     36▕             ->assertJson([
+     37▕                 'data' => [
+     38▕                     'id' => $order->id,
+     39▕                     'customer_id' => $order->customer_id,
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OrderApiTest > can create…  InvalidArgumentException   
+  Unknown format "string"
+
+  at vendor/fakerphp/faker/src/Faker/Generator.php:743
+    739▕                 return $this->formatters[$format];
+    740▕             }
+    741▕         }
+    742▕ 
+  ➜ 743▕         throw new \InvalidArgumentException(sprintf('Unknown format "%s"', $format));
+    744▕     }
+    745▕ 
+    746▕     /**
+    747▕      * Replaces tokens ('{{ tokenName }}') with the result from the token method call
+
+      [2m+4 vendor frames [22m
+  5   database/factories/ServiceFactory.php:48
+      [2m+7 vendor frames [22m
+  13  tests/Feature/OrderApiTest.php:47
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OrderApiTest > checkout requires valid customer        
+  Expected response status code [422] but received 404.
+Failed asserting that 404 is identical to 422.
+
+  at tests/Feature/OrderApiTest.php:81
+     77▕         ];
+     78▕ 
+     79▕         $response = $this->postJson('/api/v1/orders/checkout', $data);
+     80▕ 
+  ➜  81▕         $response->assertStatus(422); // Validation error
+     82▕     }
+     83▕ 
+     84▕     public function test_checkout_requires_items(): void
+     85▕     {
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OrderApiTest > checkout requires items                 
+  Expected response status code [422] but received 404.
+Failed asserting that 404 is identical to 422.
+
+  at tests/Feature/OrderApiTest.php:95
+     91▕         ];
+     92▕ 
+     93▕         $response = $this->postJson('/api/v1/orders/checkout', $data);
+     94▕ 
+  ➜  95▕         $response->assertStatus(422); // Validation error
+     96▕     }
+     97▕ }
+     98▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutboundCampaignApiTest > can list outbound campaig…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/OutboundCampaignApiTest.php:16
+     12▕     public function test_can_list_outbound_campaigns(): void
+     13▕     {
+     14▕         $response = $this->getJson('/api/v1/outbound/campaigns');
+     15▕ 
+  ➜  16▕         $response->assertStatus(200)
+     17▕             ->assertJsonStructure([
+     18▕                 'data' => [
+     19▕                     '*' => ['id', 'name', 'status', 'type']
+     20▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutboundCampaignApiTest > can create outbound campa…   
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/OutboundCampaignApiTest.php:35
+     31▕         ];
+     32▕ 
+     33▕         $response = $this->postJson('/api/v1/outbound/campaigns', $data);
+     34▕ 
+  ➜  35▕         $response->assertStatus(201)
+     36▕             ->assertJsonStructure(['data' => ['id', 'name']]);
+     37▕     }
+     38▕ 
+     39▕     public function test_can_show_outbound_campaign(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutboundCampaignApiTest > can show outbound campaig…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/OutboundCampaignApiTest.php:45
+     41▕         $campaignId = 'test-campaign-id';
+     42▕ 
+     43▕         $response = $this->getJson("/api/v1/outbound/campaigns/{$campaignId}");
+     44▕ 
+  ➜  45▕         $response->assertStatus(200)
+     46▕             ->assertJsonStructure(['data']);
+     47▕     }
+     48▕ 
+     49▕     public function test_can_update_outbound_campaign(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutboundCampaignApiTest > can update outbound campa…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/OutboundCampaignApiTest.php:60
+     56▕         ];
+     57▕ 
+     58▕         $response = $this->putJson("/api/v1/outbound/campaigns/{$campaignId}", $data);
+     59▕ 
+  ➜  60▕         $response->assertStatus(200)
+     61▕             ->assertJsonStructure(['data', 'message']);
+     62▕     }
+     63▕ 
+     64▕     public function test_can_get_campaign_recipients(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutboundCampaignApiTest > can get campaign recipien…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/OutboundCampaignApiTest.php:70
+     66▕         $campaignId = 'test-campaign-id';
+     67▕ 
+     68▕         $response = $this->getJson("/api/v1/outbound/campaigns/{$campaignId}/recipients");
+     69▕ 
+  ➜  70▕         $response->assertStatus(200)
+     71▕             ->assertJsonStructure([
+     72▕                 'data' => [
+     73▕                     '*' => ['id', 'email', 'status']
+     74▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutboundCampaignApiTest > can start campaign           
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/OutboundCampaignApiTest.php:84
+     80▕         $campaignId = 'test-campaign-id';
+     81▕ 
+     82▕         $response = $this->postJson("/api/v1/outbound/campaigns/{$campaignId}/start", []);
+     83▕ 
+  ➜  84▕         $response->assertStatus(200)
+     85▕             ->assertJsonStructure(['data', 'message']);
+     86▕     }
+     87▕ 
+     88▕     public function test_can_get_campaign_analytics(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\OutboundCampaignApiTest > can get campaign analytic…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/OutboundCampaignApiTest.php:94
+     90▕         $campaignId = 'test-campaign-id';
+     91▕ 
+     92▕         $response = $this->getJson("/api/v1/outbound/campaigns/{$campaignId}/analytics");
+     93▕ 
+  ➜  94▕         $response->assertStatus(200)
+     95▕             ->assertJsonStructure([
+     96▕                 'data' => [
+     97▕                     'sent',
+     98▕                     'delivered',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PersonalityApiTest > can list personalities            
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/PersonalityApiTest.php:17
+     13▕     public function test_can_list_personalities(): void
+     14▕     {
+     15▕         $response = $this->getJson('/api/v1/personalities');
+     16▕ 
+  ➜  17▕         $response->assertStatus(200)
+     18▕             ->assertJsonStructure([
+     19▕                 'data' => [
+     20▕                     '*' => ['id', 'name', 'description']
+     21▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PersonalityApiTest > can create personality            
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/PersonalityApiTest.php:35
+     31▕         ];
+     32▕ 
+     33▕         $response = $this->postJson('/api/v1/personalities', $data);
+     34▕ 
+  ➜  35▕         $response->assertStatus(201)
+     36▕             ->assertJsonStructure(['data' => ['id', 'name']]);
+     37▕     }
+     38▕ 
+     39▕     public function test_can_show_personality(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PersonalityApiTest > can show personality              
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/PersonalityApiTest.php:47
+     43▕ 
+     44▕         $response = $this->getJson("/api/v1/personalities/{$personalityId}");
+     45▕ 
+     46▕         // Adjust based on actual implementation
+  ➜  47▕         $response->assertStatus(200);
+     48▕     }
+     49▕ 
+     50▕     public function test_can_assign_personality_to_customer(): void
+     51▕     {
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PersonalityApiTest > can assign personality to cust…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/PersonalityApiTest.php:62
+     58▕         ];
+     59▕ 
+     60▕         $response = $this->postJson('/api/v1/personalities/assign', $data);
+     61▕ 
+  ➜  62▕         $response->assertStatus(200)
+     63▕             ->assertJsonStructure(['data', 'message']);
+     64▕     }
+     65▕ 
+     66▕     public function test_can_get_customer_personality(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PersonalityApiTest > can get customer personality      
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/PersonalityApiTest.php:72
+     68▕         $customer = Customer::factory()->create();
+     69▕ 
+     70▕         $response = $this->getJson("/api/v1/personalities/customers/{$customer->id}/personality");
+     71▕ 
+  ➜  72▕         $response->assertStatus(200)
+     73▕             ->assertJsonStructure(['data']);
+     74▕     }
+     75▕ 
+     76▕     public function test_can_generate_personality_response(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PersonalityApiTest > can generate personality respo…   
+  Failed asserting that an array contains 404.
+
+  at tests/Feature/PersonalityApiTest.php:87
+     83▕ 
+     84▕         $response = $this->postJson('/api/v1/personalities/test-personality-id/generate-response', $data);
+     85▕ 
+     86▕         // May return 200 or 500 depending on AI service availability
+  ➜  87▕         $this->assertContains($response->status(), [200, 500]);
+     88▕     }
+     89▕ }
+     90▕
+
+  1   tests/Feature/PersonalityApiTest.php:87
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PhoneCampaignApiTest > can list phone campaigns        
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/PhoneCampaignApiTest.php:16
+     12▕     public function test_can_list_phone_campaigns(): void
+     13▕     {
+     14▕         $response = $this->getJson('/api/v1/outbound/phone/campaigns');
+     15▕ 
+  ➜  16▕         $response->assertStatus(200)
+     17▕             ->assertJsonStructure([
+     18▕                 'data' => [
+     19▕                     '*' => ['id', 'name', 'status', 'call_count']
+     20▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PhoneCampaignApiTest > can create phone campaign       
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/PhoneCampaignApiTest.php:35
+     31▕         ];
+     32▕ 
+     33▕         $response = $this->postJson('/api/v1/outbound/phone/campaigns', $data);
+     34▕ 
+  ➜  35▕         $response->assertStatus(201)
+     36▕             ->assertJsonStructure(['data' => ['id', 'name']]);
+     37▕     }
+     38▕ 
+     39▕     public function test_can_list_phone_scripts(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PhoneCampaignApiTest > can list phone scripts          
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/PhoneCampaignApiTest.php:43
+     39▕     public function test_can_list_phone_scripts(): void
+     40▕     {
+     41▕         $response = $this->getJson('/api/v1/outbound/phone/scripts');
+     42▕ 
+  ➜  43▕         $response->assertStatus(200)
+     44▕             ->assertJsonStructure([
+     45▕                 'data' => [
+     46▕                     '*' => ['id', 'name', 'content']
+     47▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PhoneCampaignApiTest > can create phone script         
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/PhoneCampaignApiTest.php:61
+     57▕         ];
+     58▕ 
+     59▕         $response = $this->postJson('/api/v1/outbound/phone/scripts', $data);
+     60▕ 
+  ➜  61▕         $response->assertStatus(201)
+     62▕             ->assertJsonStructure(['data' => ['id', 'name']]);
+     63▕     }
+     64▕ 
+     65▕     public function test_can_update_call_status(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PhoneCampaignApiTest > can update call status          
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/PhoneCampaignApiTest.php:77
+     73▕         ];
+     74▕ 
+     75▕         $response = $this->postJson("/api/v1/outbound/phone/campaigns/{$campaignId}/call-status", $data);
+     76▕ 
+  ➜  77▕         $response->assertStatus(200)
+     78▕             ->assertJsonStructure(['data', 'message']);
+     79▕     }
+     80▕ }
+     81▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PresentationApiTest > can list presentation templat…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/PresentationApiTest.php:20
+     16▕         PresentationTemplate::factory()->count(3)->create();
+     17▕ 
+     18▕         $response = $this->getJson('/api/v1/presentations/templates');
+     19▕ 
+  ➜  20▕         $response->assertStatus(200)
+     21▕             ->assertJsonStructure([
+     22▕                 'data' => [
+     23▕                     '*' => ['id', 'name', 'description', 'purpose', 'slide_count']
+     24▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PresentationApiTest > can show presentation templat…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/PresentationApiTest.php:34
+     30▕         $template = PresentationTemplate::factory()->create();
+     31▕ 
+     32▕         $response = $this->getJson("/api/v1/presentations/templates/{$template->id}");
+     33▕ 
+  ➜  34▕         $response->assertStatus(200)
+     35▕             ->assertJson([
+     36▕                 'data' => [
+     37▕                     'id' => $template->id,
+     38▕                     'name' => $template->name,
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PresentationApiTest > can create presentation from…    
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/PresentationApiTest.php:58
+     54▕         ];
+     55▕ 
+     56▕         $response = $this->postJson('/api/v1/presentations/generate', $data);
+     57▕ 
+  ➜  58▕         $response->assertStatus(201)
+     59▕             ->assertJsonStructure(['data' => ['id', 'template_id']]);
+     60▕ 
+     61▕         $this->assertDatabaseHas('generated_presentations', [
+     62▕             'template_id' => $template->id,
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PresentationApiTest > can show gene…  QueryException   
+  SQLSTATE[HY000]: General error: 1 table generated_presentations has no column named updated_at (Connection: sqlite, SQL: insert into "generated_presentations" ("template_id", "tenant_id", "customer_id", "presentation_json", "audio_base_url", "audio_generated", "audio_generated_at", "input_hash", "expires_at", "view_count", "avg_completion_rate", "last_viewed_at", "id", "updated_at", "created_at") values (675a187e-935c-49ac-a03b-86d7df9f4d25, 00000000-0000-0000-0000-000000000000, ?, {"title":"Soluta tempora voluptatibus molestias omnis eaque.","slides":[{"type":"hero","title":"Illo in accusamus eum.","content":"Esse illum quia consequatur dolorem iusto enim. Aut veniam quae non ducimus voluptas nesciunt. Ea nostrum ipsum fugiat eveniet."}]}, ?, 0, ?, ?, ?, 0, ?, ?, 019ba9ed-a253-70af-be50-bae4f0f11428, 2026-01-10 22:01:21, 2026-01-10 22:01:21))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:826
+    822▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    823▕                 );
+    824▕             }
+    825▕ 
+  ➜ 826▕             throw new QueryException(
+    827▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    828▕             );
+    829▕         }
+    830▕     }
+
+      [2m+15 vendor frames [22m
+  16  tests/Feature/PresentationApiTest.php:68
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PresentationApiTest > can generate…   QueryException   
+  SQLSTATE[HY000]: General error: 1 table generated_presentations has no column named updated_at (Connection: sqlite, SQL: insert into "generated_presentations" ("template_id", "tenant_id", "customer_id", "presentation_json", "audio_base_url", "audio_generated", "audio_generated_at", "input_hash", "expires_at", "view_count", "avg_completion_rate", "last_viewed_at", "id", "updated_at", "created_at") values (ef86bf4f-f60e-4e8e-9648-0fdc73b50ba2, 00000000-0000-0000-0000-000000000000, ?, {"title":"Est id eum accusantium aliquid neque.","slides":[{"type":"hero","title":"Qui quo debitis labore.","content":"Vitae sint similique qui. Id esse et debitis assumenda est placeat. Veritatis et mollitia quo atque dolorem aut perspiciatis. Quidem doloribus eum cumque est."}]}, ?, 0, ?, ?, ?, 0, ?, ?, 019ba9ed-a256-730d-ae54-0db7b0ff94c5, 2026-01-10 22:01:21, 2026-01-10 22:01:21))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connection.php:826
+    822▕                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    823▕                 );
+    824▕             }
+    825▕ 
+  ➜ 826▕             throw new QueryException(
+    827▕                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    828▕             );
+    829▕         }
+    830▕     }
+
+      [2m+15 vendor frames [22m
+  16  tests/Feature/PresentationApiTest.php:82
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PublishingApiTest > can get publishing dashboard       
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/PublishingApiTest.php:16
+     12▕     public function test_can_get_publishing_dashboard(): void
+     13▕     {
+     14▕         $response = $this->getJson('/api/v1/publishing/dashboard');
+     15▕ 
+  ➜  16▕         $response->assertStatus(200)
+     17▕             ->assertJsonStructure([
+     18▕                 'data' => [
+     19▕                     'stats',
+     20▕                     'recent_content',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PublishingApiTest > can get publishing calendar        
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/PublishingApiTest.php:30
+     26▕     public function test_can_get_publishing_calendar(): void
+     27▕     {
+     28▕         $response = $this->getJson('/api/v1/publishing/calendar?month=2024-12');
+     29▕ 
+  ➜  30▕         $response->assertStatus(200)
+     31▕             ->assertJsonStructure([
+     32▕                 'data' => [
+     33▕                     '*' => ['date', 'content', 'status']
+     34▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PublishingApiTest > can get publishing analytics       
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/PublishingApiTest.php:42
+     38▕     public function test_can_get_publishing_analytics(): void
+     39▕     {
+     40▕         $response = $this->getJson('/api/v1/publishing/analytics?start_date=2024-01-01&end_date=2024-12-31');
+     41▕ 
+  ➜  42▕         $response->assertStatus(200)
+     43▕             ->assertJsonStructure([
+     44▕                 'data' => [
+     45▕                     'total_published',
+     46▕                     'engagement_metrics',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\PublishingApiTest > can publish content                
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/PublishingApiTest.php:63
+     59▕         ];
+     60▕ 
+     61▕         $response = $this->postJson("/api/v1/publishing/content/{$contentId}/publish", $data);
+     62▕ 
+  ➜  63▕         $response->assertStatus(200)
+     64▕             ->assertJsonStructure(['data', 'message']);
+     65▕     }
+     66▕ }
+     67▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SMSCampaignApiTest > can list sms campaigns            
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/SMSCampaignApiTest.php:16
+     12▕     public function test_can_list_sms_campaigns(): void
+     13▕     {
+     14▕         $response = $this->getJson('/api/v1/outbound/sms/campaigns');
+     15▕ 
+  ➜  16▕         $response->assertStatus(200)
+     17▕             ->assertJsonStructure([
+     18▕                 'data' => [
+     19▕                     '*' => ['id', 'name', 'status', 'sent_count']
+     20▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SMSCampaignApiTest > can create sms campaign           
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/SMSCampaignApiTest.php:35
+     31▕         ];
+     32▕ 
+     33▕         $response = $this->postJson('/api/v1/outbound/sms/campaigns', $data);
+     34▕ 
+  ➜  35▕         $response->assertStatus(201)
+     36▕             ->assertJsonStructure(['data' => ['id', 'name']]);
+     37▕     }
+     38▕ 
+     39▕     public function test_can_list_sms_templates(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SMSCampaignApiTest > can list sms templates            
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/SMSCampaignApiTest.php:43
+     39▕     public function test_can_list_sms_templates(): void
+     40▕     {
+     41▕         $response = $this->getJson('/api/v1/outbound/sms/templates');
+     42▕ 
+  ➜  43▕         $response->assertStatus(200)
+     44▕             ->assertJsonStructure([
+     45▕                 'data' => [
+     46▕                     '*' => ['id', 'name', 'message']
+     47▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SMSCampaignApiTest > can create sms template           
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/SMSCampaignApiTest.php:61
+     57▕         ];
+     58▕ 
+     59▕         $response = $this->postJson('/api/v1/outbound/sms/templates', $data);
+     60▕ 
+  ➜  61▕         $response->assertStatus(201)
+     62▕             ->assertJsonStructure(['data' => ['id', 'name']]);
+     63▕     }
+     64▕ 
+     65▕     public function test_can_update_sms_status(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SMSCampaignApiTest > can update sms status             
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/SMSCampaignApiTest.php:76
+     72▕         ];
+     73▕ 
+     74▕         $response = $this->postJson("/api/v1/outbound/sms/campaigns/{$campaignId}/sms-status", $data);
+     75▕ 
+  ➜  76▕         $response->assertStatus(200)
+     77▕             ->assertJsonStructure(['data', 'message']);
+     78▕     }
+     79▕ }
+     80▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SearchApiTest > can search knowledge base              
+  Failed asserting that an array contains 404.
+
+  at tests/Feature/SearchApiTest.php:27
+     23▕         ]);
+     24▕ 
+     25▕         // May return 200 with data or 500 if OpenAI service not available
+     26▕         // Just verify it doesn't crash
+  ➜  27▕         $this->assertContains($response->status(), [200, 500]);
+     28▕     }
+     29▕ 
+     30▕     public function test_can_perform_hybrid_search(): void
+     31▕     {
+
+  1   tests/Feature/SearchApiTest.php:27
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SearchApiTest > can perform hybrid search              
+  Failed asserting that an array contains 404.
+
+  at tests/Feature/SearchApiTest.php:44
+     40▕             'limit' => 10,
+     41▕         ]);
+     42▕ 
+     43▕         // May return 200 with data or 500 if services not available
+  ➜  44▕         $this->assertContains($response->status(), [200, 500]);
+     45▕     }
+     46▕ 
+     47▕     public function test_search_requires_query(): void
+     48▕     {
+
+  1   tests/Feature/SearchApiTest.php:44
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SearchApiTest > search requires query                  
+  Expected response status code [422] but received 404.
+Failed asserting that 404 is identical to 422.
+
+  at tests/Feature/SearchApiTest.php:51
+     47▕     public function test_search_requires_query(): void
+     48▕     {
+     49▕         $response = $this->postJson('/api/v1/search', []);
+     50▕ 
+  ➜  51▕         $response->assertStatus(422)
+     52▕             ->assertJsonValidationErrors(['query', 'tenant_id']);
+     53▕     }
+     54▕ 
+     55▕     public function test_can_perform_fulltext_search(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SearchApiTest > can perform fulltext search            
+  Failed asserting that an array contains 404.
+
+  at tests/Feature/SearchApiTest.php:69
+     65▕             'limit' => 10,
+     66▕         ]);
+     67▕ 
+     68▕         // May return 200 with data or 500 if database functions not available
+  ➜  69▕         $this->assertContains($response->status(), [200, 500]);
+     70▕     }
+     71▕ 
+     72▕     public function test_can_get_embedding_status(): void
+     73▕     {
+
+  1   tests/Feature/SearchApiTest.php:69
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SearchApiTest > can get embedding status               
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/SearchApiTest.php:81
+     77▕         Knowledge::factory()->count(3)->create(['embedding_status' => 'pending']);
+     78▕ 
+     79▕         $response = $this->getJson('/api/v1/search/status?tenant_id=00000000-0000-0000-0000-000000000000');
+     80▕ 
+  ➜  81▕         $response->assertStatus(200)
+     82▕             ->assertJsonStructure([
+     83▕                 'data' => [
+     84▕                     'total',
+     85▕                     'embedded',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ServiceApiTest > can list…  InvalidArgumentException   
+  Unknown format "string"
+
+  at vendor/fakerphp/faker/src/Faker/Generator.php:743
+    739▕                 return $this->formatters[$format];
+    740▕             }
+    741▕         }
+    742▕ 
+  ➜ 743▕         throw new \InvalidArgumentException(sprintf('Unknown format "%s"', $format));
+    744▕     }
+    745▕ 
+    746▕     /**
+    747▕      * Replaces tokens ('{{ tokenName }}') with the result from the token method call
+
+      [2m+4 vendor frames [22m
+  5   database/factories/ServiceFactory.php:48
+      [2m+8 vendor frames [22m
+  14  tests/Feature/ServiceApiTest.php:16
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ServiceApiTest > can show…  InvalidArgumentException   
+  Unknown format "string"
+
+  at vendor/fakerphp/faker/src/Faker/Generator.php:743
+    739▕                 return $this->formatters[$format];
+    740▕             }
+    741▕         }
+    742▕ 
+  ➜ 743▕         throw new \InvalidArgumentException(sprintf('Unknown format "%s"', $format));
+    744▕     }
+    745▕ 
+    746▕     /**
+    747▕      * Replaces tokens ('{{ tokenName }}') with the result from the token method call
+
+      [2m+4 vendor frames [22m
+  5   database/factories/ServiceFactory.php:48
+      [2m+7 vendor frames [22m
+  13  tests/Feature/ServiceApiTest.php:30
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ServiceApiTest > can filt…  InvalidArgumentException   
+  Unknown format "string"
+
+  at vendor/fakerphp/faker/src/Faker/Generator.php:743
+    739▕                 return $this->formatters[$format];
+    740▕             }
+    741▕         }
+    742▕ 
+  ➜ 743▕         throw new \InvalidArgumentException(sprintf('Unknown format "%s"', $format));
+    744▕     }
+    745▕ 
+    746▕     /**
+    747▕      * Replaces tokens ('{{ tokenName }}') with the result from the token method call
+
+      [2m+4 vendor frames [22m
+  5   database/factories/ServiceFactory.php:49
+      [2m+9 vendor frames [22m
+  15  tests/Feature/ServiceApiTest.php:46
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ServiceApiTest > can filt…  InvalidArgumentException   
+  Unknown format "string"
+
+  at vendor/fakerphp/faker/src/Faker/Generator.php:743
+    739▕                 return $this->formatters[$format];
+    740▕             }
+    741▕         }
+    742▕ 
+  ➜ 743▕         throw new \InvalidArgumentException(sprintf('Unknown format "%s"', $format));
+    744▕     }
+    745▕ 
+    746▕     /**
+    747▕      * Replaces tokens ('{{ tokenName }}') with the result from the token method call
+
+      [2m+4 vendor frames [22m
+  5   database/factories/ServiceFactory.php:49
+      [2m+9 vendor frames [22m
+  15  tests/Feature/ServiceApiTest.php:58
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ServiceApiTest > can filt…  InvalidArgumentException   
+  Unknown format "string"
+
+  at vendor/fakerphp/faker/src/Faker/Generator.php:743
+    739▕                 return $this->formatters[$format];
+    740▕             }
+    741▕         }
+    742▕ 
+  ➜ 743▕         throw new \InvalidArgumentException(sprintf('Unknown format "%s"', $format));
+    744▕     }
+    745▕ 
+    746▕     /**
+    747▕      * Replaces tokens ('{{ tokenName }}') with the result from the token method call
+
+      [2m+4 vendor frames [22m
+  5   database/factories/ServiceFactory.php:48
+      [2m+9 vendor frames [22m
+  15  tests/Feature/ServiceApiTest.php:72
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ServiceCategoryApiTest > can list service categorie…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ServiceCategoryApiTest.php:20
+     16▕         ServiceCategory::factory()->count(5)->create();
+     17▕ 
+     18▕         $response = $this->getJson('/api/v1/services/categories');
+     19▕ 
+  ➜  20▕         $response->assertStatus(200)
+     21▕             ->assertJsonStructure([
+     22▕                 'data' => [
+     23▕                     '*' => ['id', 'name', 'slug', 'description']
+     24▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ServiceCategoryApiTest > can show service category     
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ServiceCategoryApiTest.php:34
+     30▕         $category = ServiceCategory::factory()->create();
+     31▕ 
+     32▕         $response = $this->getJson("/api/v1/services/categories/{$category->id}");
+     33▕ 
+  ➜  34▕         $response->assertStatus(200)
+     35▕             ->assertJson([
+     36▕                 'data' => [
+     37▕                     'id' => $category->id,
+     38▕                     'name' => $category->name,
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ServiceCategoryApiTest >…   InvalidArgumentException   
+  Unknown format "string"
+
+  at vendor/fakerphp/faker/src/Faker/Generator.php:743
+    739▕                 return $this->formatters[$format];
+    740▕             }
+    741▕         }
+    742▕ 
+  ➜ 743▕         throw new \InvalidArgumentException(sprintf('Unknown format "%s"', $format));
+    744▕     }
+    745▕ 
+    746▕     /**
+    747▕      * Replaces tokens ('{{ tokenName }}') with the result from the token method call
+
+      [2m+4 vendor frames [22m
+  5   database/factories/ServiceFactory.php:48
+      [2m+9 vendor frames [22m
+  15  tests/Feature/ServiceCategoryApiTest.php:46
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ServiceCategoryApiTest > can create service categor…   
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/ServiceCategoryApiTest.php:73
+     69▕         ];
+     70▕ 
+     71▕         $response = $this->postJson('/api/v1/services/categories', $data);
+     72▕ 
+  ➜  73▕         $response->assertStatus(201)
+     74▕             ->assertJsonStructure(['data' => ['id', 'name', 'slug']]);
+     75▕ 
+     76▕         $this->assertDatabaseHas('service_categories', [
+     77▕             'name' => 'Test Category',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ServiceCategoryApiTest > can update service categor…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/ServiceCategoryApiTest.php:93
+     89▕         ];
+     90▕ 
+     91▕         $response = $this->putJson("/api/v1/services/categories/{$category->id}", $data);
+     92▕ 
+  ➜  93▕         $response->assertStatus(200)
+     94▕             ->assertJson([
+     95▕                 'data' => [
+     96▕                     'name' => 'Updated Category',
+     97▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\ServiceCategoryApiTest > can delete service categor…   
+  Expected response status code [204] but received 404.
+Failed asserting that 404 is identical to 204.
+
+  at tests/Feature/ServiceCategoryApiTest.php:112
+    108▕         $category = ServiceCategory::factory()->create();
+    109▕ 
+    110▕         $response = $this->deleteJson("/api/v1/services/categories/{$category->id}");
+    111▕ 
+  ➜ 112▕         $response->assertStatus(204);
+    113▕ 
+    114▕         $this->assertDatabaseMissing('service_categories', [
+    115▕             'id' => $category->id,
+    116▕         ]);
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\StripeWebhookTest > can handle payment intent succe…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/StripeWebhookTest.php:35
+     31▕             'Stripe-Signature' => 'test_signature',
+     32▕         ]);
+     33▕ 
+     34▕         // Webhook should return 200 even if processing fails (to prevent retries)
+  ➜  35▕         $response->assertStatus(200);
+     36▕     }
+     37▕ 
+     38▕     public function test_can_handle_invoice_payment_succeeded_webhook(): void
+     39▕     {
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\StripeWebhookTest > can handle invoice payment succ…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/StripeWebhookTest.php:56
+     52▕         $response = $this->postJson('/api/stripe/webhook', $payload, [
+     53▕             'Stripe-Signature' => 'test_signature',
+     54▕         ]);
+     55▕ 
+  ➜  56▕         $response->assertStatus(200);
+     57▕     }
+     58▕ 
+     59▕     public function test_can_handle_customer_subscription_created_webhook(): void
+     60▕     {
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\StripeWebhookTest > can handle customer subscriptio…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/StripeWebhookTest.php:85
+     81▕         $response = $this->postJson('/api/stripe/webhook', $payload, [
+     82▕             'Stripe-Signature' => 'test_signature',
+     83▕         ]);
+     84▕ 
+  ➜  85▕         $response->assertStatus(200);
+     86▕     }
+     87▕ 
+     88▕     public function test_can_handle_customer_subscription_deleted_webhook(): void
+     89▕     {
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\StripeWebhookTest > can handle customer subscriptio…   
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/StripeWebhookTest.php:104
+    100▕         $response = $this->postJson('/api/stripe/webhook', $payload, [
+    101▕             'Stripe-Signature' => 'test_signature',
+    102▕         ]);
+    103▕ 
+  ➜ 104▕         $response->assertStatus(200);
+    105▕     }
+    106▕ 
+    107▕     public function test_ignores_unknown_webhook_types(): void
+    108▕     {
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\StripeWebhookTest > ignores unknown webhook types      
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/StripeWebhookTest.php:121
+    117▕             'Stripe-Signature' => 'test_signature',
+    118▕         ]);
+    119▕ 
+    120▕         // Should still return 200 to acknowledge receipt
+  ➜ 121▕         $response->assertStatus(200);
+    122▕     }
+    123▕ }
+    124▕
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SurveyApiTest > can list survey sections               
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/SurveyApiTest.php:20
+     16▕         SurveySection::factory()->count(3)->create();
+     17▕ 
+     18▕         $response = $this->getJson('/api/v1/survey/sections');
+     19▕ 
+  ➜  20▕         $response->assertStatus(200)
+     21▕             ->assertJsonStructure([
+     22▕                 'data' => [
+     23▕                     '*' => ['id', 'title', 'description', 'order']
+     24▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SurveyApiTest > can create survey section              
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/SurveyApiTest.php:39
+     35▕         ];
+     36▕ 
+     37▕         $response = $this->postJson('/api/v1/survey/sections', $data);
+     38▕ 
+  ➜  39▕         $response->assertStatus(201)
+     40▕             ->assertJsonStructure(['data' => ['id', 'title', 'description']]);
+     41▕ 
+     42▕         $this->assertDatabaseHas('survey_sections', [
+     43▕             'title' => 'Test Section',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SurveyApiTest > can update survey section              
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/SurveyApiTest.php:58
+     54▕         ];
+     55▕ 
+     56▕         $response = $this->putJson("/api/v1/survey/sections/{$section->id}", $data);
+     57▕ 
+  ➜  58▕         $response->assertStatus(200);
+     59▕ 
+     60▕         $this->assertDatabaseHas('survey_sections', [
+     61▕             'id' => $section->id,
+     62▕             'title' => 'Updated Section',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SurveyApiTest > can delete survey section              
+  Expected response status code [204] but received 404.
+Failed asserting that 404 is identical to 204.
+
+  at tests/Feature/SurveyApiTest.php:72
+     68▕         $section = SurveySection::factory()->create();
+     69▕ 
+     70▕         $response = $this->deleteJson("/api/v1/survey/sections/{$section->id}");
+     71▕ 
+  ➜  72▕         $response->assertStatus(204);
+     73▕ 
+     74▕         $this->assertDatabaseMissing('survey_sections', [
+     75▕             'id' => $section->id,
+     76▕         ]);
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SurveyApiTest > can list questions for section         
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/SurveyApiTest.php:86
+     82▕         SurveyQuestion::factory()->count(3)->create(['section_id' => $section->id]);
+     83▕ 
+     84▕         $response = $this->getJson("/api/v1/survey/sections/{$section->id}/questions");
+     85▕ 
+  ➜  86▕         $response->assertStatus(200)
+     87▕             ->assertJsonStructure([
+     88▕                 'data' => [
+     89▕                     '*' => ['id', 'question_text', 'question_type', 'section_id']
+     90▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SurveyApiTest > can create survey question             
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/SurveyApiTest.php:108
+    104▕         ];
+    105▕ 
+    106▕         $response = $this->postJson('/api/v1/survey/questions', $data);
+    107▕ 
+  ➜ 108▕         $response->assertStatus(201)
+    109▕             ->assertJsonStructure(['data' => ['id', 'question_text', 'question_type']]);
+    110▕ 
+    111▕         $this->assertDatabaseHas('survey_questions', [
+    112▕             'question_text' => 'Test Question?',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SurveyApiTest > can update survey question             
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/SurveyApiTest.php:127
+    123▕         ];
+    124▕ 
+    125▕         $response = $this->putJson("/api/v1/survey/questions/{$question->id}", $data);
+    126▕ 
+  ➜ 127▕         $response->assertStatus(200);
+    128▕ 
+    129▕         $this->assertDatabaseHas('survey_questions', [
+    130▕             'id' => $question->id,
+    131▕             'question_text' => 'Updated Question?',
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\SurveyApiTest > can delete survey question             
+  Expected response status code [204] but received 404.
+Failed asserting that 404 is identical to 204.
+
+  at tests/Feature/SurveyApiTest.php:141
+    137▕         $question = SurveyQuestion::factory()->create();
+    138▕ 
+    139▕         $response = $this->deleteJson("/api/v1/survey/questions/{$question->id}");
+    140▕ 
+  ➜ 141▕         $response->assertStatus(204);
+    142▕ 
+    143▕         $this->assertDatabaseMissing('survey_questions', [
+    144▕             'id' => $question->id,
+    145▕         ]);
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TTSApiTest > can generate audio from text              
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/TTSApiTest.php:22
+     18▕         ];
+     19▕ 
+     20▕         $response = $this->postJson('/api/v1/tts/generate', $data);
+     21▕ 
+  ➜  22▕         $response->assertStatus(200)
+     23▕             ->assertJsonStructure([
+     24▕                 'data' => ['audio_url', 'duration', 'text_length']
+     25▕             ]);
+     26▕     }
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TTSApiTest > can get generation status                 
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/TTSApiTest.php:34
+     30▕         $jobId = 'test-job-id';
+     31▕ 
+     32▕         $response = $this->getJson("/api/v1/tts/status/{$jobId}");
+     33▕ 
+  ➜  34▕         $response->assertStatus(200)
+     35▕             ->assertJsonStructure([
+     36▕                 'data' => ['status', 'progress', 'audio_url']
+     37▕             ]);
+     38▕     }
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TTSApiTest > requires text for generation              
+  Expected response status code [422] but received 404.
+Failed asserting that 404 is identical to 422.
+
+  at tests/Feature/TTSApiTest.php:46
+     42▕         $response = $this->postJson('/api/v1/tts/generate', [
+     43▕             'voice_id' => 'default',
+     44▕         ]);
+     45▕ 
+  ➜  46▕         $response->assertStatus(422)
+     47▕             ->assertJsonValidationErrors(['text']);
+     48▕     }
+     49▕ 
+     50▕     public function test_can_list_available_voices(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TTSApiTest > can list available voices                 
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/TTSApiTest.php:54
+     50▕     public function test_can_list_available_voices(): void
+     51▕     {
+     52▕         $response = $this->getJson('/api/v1/tts/voices');
+     53▕ 
+  ➜  54▕         $response->assertStatus(200)
+     55▕             ->assertJsonStructure([
+     56▕                 'data' => [
+     57▕                     '*' => ['id', 'name', 'language', 'gender']
+     58▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TrainingApiTest > can list training courses            
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/TrainingApiTest.php:16
+     12▕     public function test_can_list_training_courses(): void
+     13▕     {
+     14▕         $response = $this->getJson('/api/v1/training/courses');
+     15▕ 
+  ➜  16▕         $response->assertStatus(200)
+     17▕             ->assertJsonStructure([
+     18▕                 'data' => [
+     19▕                     '*' => ['id', 'title', 'description', 'duration']
+     20▕                 ]
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TrainingApiTest > can show training course             
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/TrainingApiTest.php:32
+     28▕ 
+     29▕         $response = $this->getJson("/api/v1/training/courses/{$courseId}");
+     30▕ 
+     31▕         // Adjust assertion based on actual implementation
+  ➜  32▕         $response->assertStatus(200);
+     33▕     }
+     34▕ 
+     35▕     public function test_can_enroll_in_training_course(): void
+     36▕     {
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TrainingApiTest > can enroll in training course        
+  Expected response status code [201] but received 404.
+Failed asserting that 404 is identical to 201.
+
+  at tests/Feature/TrainingApiTest.php:46
+     42▕         ];
+     43▕ 
+     44▕         $response = $this->postJson('/api/v1/training/enrollments', $data);
+     45▕ 
+  ➜  46▕         $response->assertStatus(201)
+     47▕             ->assertJsonStructure(['data' => ['id', 'course_id', 'user_id', 'status']]);
+     48▕     }
+     49▕ 
+     50▕     public function test_can_get_user_enrollments(): void
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\TrainingApiTest > can get user enrollments             
+  Expected response status code [200] but received 404.
+Failed asserting that 404 is identical to 200.
+
+  at tests/Feature/TrainingApiTest.php:56
+     52▕         $userId = '00000000-0000-0000-0000-000000000000';
+     53▕ 
+     54▕         $response = $this->getJson("/api/v1/training/users/{$userId}/enrollments");
+     55▕ 
+  ➜  56▕         $response->assertStatus(200)
+     57▕             ->assertJsonStructure([
+     58▕                 'data' => [
+     59▕                     '*' => ['id', 'course_id', 'status', 'progress']
+     60▕                 ]
+
+
+  Tests:    152 failed, 5 passed (138 assertions)
+  Duration: 0.98s
+

@@ -52,3 +52,7 @@ export const ApplicationSlide: React.FC<ApplicationSlideProps> = ({
   );
 };
 
+
+
+
+

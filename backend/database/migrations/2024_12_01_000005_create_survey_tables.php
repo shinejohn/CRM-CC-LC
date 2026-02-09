@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -19,9 +20,9 @@ return new class extends Migration
             $table->integer('display_order')->default(0);
             $table->boolean('is_required')->default(true);
             $table->boolean('is_conditional')->default(false);
-            $table->jsonb('condition_config')->nullable();
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->json('condition_config')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             $table->index('tenant_id');
         });
@@ -36,17 +37,17 @@ return new class extends Migration
             $table->integer('display_order')->default(0);
             
             // Validation
-            $table->jsonb('validation_rules')->nullable();
+            $table->json('validation_rules')->nullable();
             
             // Options for select/multi-select
-            $table->jsonb('options')->nullable();
+            $table->json('options')->nullable();
             
             // Scale config
-            $table->jsonb('scale_config')->nullable();
+            $table->json('scale_config')->nullable();
             
             // Conditional display
             $table->boolean('is_conditional')->default(false);
-            $table->jsonb('show_when')->nullable();
+            $table->json('show_when')->nullable();
             
             // AI/Data enrichment
             $table->string('auto_populate_source', 20)->nullable();
@@ -56,8 +57,8 @@ return new class extends Migration
             $table->boolean('industry_specific')->default(false);
             $table->json('applies_to_industries')->nullable();
             
-            $table->timestampTz('created_at')->default(DB::raw('NOW()'));
-            $table->timestampTz('updated_at')->default(DB::raw('NOW()'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             
             $table->foreign('section_id')->references('id')->on('survey_sections')->onDelete('cascade');
             $table->index('section_id');

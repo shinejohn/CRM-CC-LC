@@ -2,51 +2,260 @@
   "campaign": {
     "id": "EDU-004",
     "week": 4,
-    "day": 4,
-    "type": "EDU",
-    "title": "Educational Content",
-    "subject": "Educational Content",
-    "landing_page": "ai-operations-guide",
+    "day": 22,
+    "type": "Educational",
+    "title": "Community Marketing",
+    "subject": "Why 'community marketing' beats 'digital marketing'",
+    "landing_page": "community-marketing",
     "template": "educational",
-    "description": "Educational Content - Build trust through education"
+    "description": "Explain why being part of community beats shouting at community"
   },
   "landing_page": {
     "campaign_id": "EDU-004",
-    "landing_page_slug": "ai-operations-guide",
-    "url": "/learn/ai-operations-guide",
+    "landing_page_slug": "community-marketing",
+    "url": "/learn/community-marketing",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
-    "duration_seconds": 75,
-    "primary_cta": "download_guide",
-    "secondary_cta": "start_trial",
+    "duration_seconds": 180,
+    "primary_cta": "join_community",
+    "secondary_cta": "download_article",
     "ai_persona": "Sarah",
-    "ai_tone": "Knowledgeable, patient",
-    "ai_goal": "Build trust through education",
-    "data_capture_fields": "name, email, business_name, industry, current_challenges",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-operations-guide/audio/",
+    "ai_tone": "Warm, insightful, community-focused",
+    "ai_goal": "Shift mindset from advertising to belonging",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/community-marketing/audio/",
     "crm_tracking": true,
     "conversion_goal": "education",
     "utm_source": "email",
     "utm_medium": "outbound",
-    "utm_campaign": "90day-week2-educational",
+    "utm_campaign": "90day-week4-educational",
     "utm_content": "EDU-004"
   },
-  "template": {
-    "template_id": "educational",
-    "name": "Educational Content",
-    "slides": 7,
-    "duration": 75,
-    "purpose": "edu",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "ai-operations-guide",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/ai-operations-guide/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "The Coffee Shop Question",
+      "content": {
+        "headline": "Which Coffee Shop Would You Choose?",
+        "scenario": {
+          "option_a": "The one with the best Facebook ads",
+          "option_b": "The one your neighbor told you about"
+        },
+        "visual": "Two coffee shops - one with ad banner, one with people chatting outside"
+      },
+      "narration": "Quick scenario. You're looking for a new coffee shop. You see an ad on Facebook for one—great photos, compelling copy. Your neighbor mentions another one—says they love it there. Which one do you try first? You already know the answer. Everyone does.",
+      "duration_seconds": 20,
+      "audio_file": "slide-01-question.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "Digital Marketing's Problem",
+      "content": {
+        "headline": "Digital Marketing = Shouting at Strangers",
+        "problems": [
+          {
+            "stat": "0.1%",
+            "meaning": "Average ad click-through rate"
+          },
+          {
+            "stat": "86%",
+            "meaning": "People skip or block ads"
+          },
+          {
+            "stat": "↓42%",
+            "meaning": "Trust in advertising since 2020"
+          },
+          {
+            "stat": "$0",
+            "meaning": "What most ad spend returns"
+          }
+        ],
+        "key_insight": "People don't trust ads. They trust people."
+      },
+      "narration": "Here's the problem with digital marketing: it's shouting at strangers. Average ad click-through rate? Point one percent. That means ninety-nine point nine percent of people ignore you. Eighty-six percent of people skip or actively block ads. Trust in advertising has dropped forty-two percent since 2020. You're spending money to yell at people who've learned to tune you out.",
+      "duration_seconds": 30,
+      "audio_file": "slide-02-problem.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "Community Marketing",
+      "content": {
+        "headline": "Community Marketing = Being Part of Something",
+        "contrast": {
+          "digital": "Interrupt people with your message",
+          "community": "Be present where people already are"
+        },
+        "elements": [
+          {
+            "icon": "handshake",
+            "label": "Trust built through presence"
+          },
+          {
+            "icon": "repeat",
+            "label": "Relationships that compound"
+          },
+          {
+            "icon": "users",
+            "label": "Word-of-mouth that scales"
+          },
+          {
+            "icon": "heart",
+            "label": "Loyalty that lasts"
+          }
+        ]
+      },
+      "narration": "Community marketing is different. Instead of interrupting people with your message, you become part of where they already are. You're in the local directory they check. You're sponsoring the event they attend. You're mentioned in the news they read. Trust builds through presence, not persuasion. Relationships compound over time. Word-of-mouth scales. Loyalty lasts.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-community.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "The Trust Hierarchy",
+      "content": {
+        "headline": "Who People Trust (In Order)",
+        "hierarchy": [
+          {
+            "rank": 1,
+            "source": "People they know personally",
+            "trust": "92%"
+          },
+          {
+            "rank": 2,
+            "source": "Online reviews from strangers",
+            "trust": "70%"
+          },
+          {
+            "rank": 3,
+            "source": "Editorial content / News",
+            "trust": "58%"
+          },
+          {
+            "rank": 4,
+            "source": "Brand websites",
+            "trust": "33%"
+          },
+          {
+            "rank": 5,
+            "source": "Advertising",
+            "trust": "14%"
+          }
+        ],
+        "insight": "Community marketing operates in the top 3. Digital marketing operates in the bottom 2."
+      },
+      "narration": "Look at who people trust. Ninety-two percent trust people they know personally. Seventy percent trust online reviews. Fifty-eight percent trust editorial content and news. Only thirty-three percent trust brand websites. And fourteen percent—fourteen—trust advertising. Community marketing operates in the top three. Digital marketing operates in the bottom two. That's the difference.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-trust.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ComparisonSlide",
+      "title": "Real Results Comparison",
+      "content": {
+        "headline": "Same Budget. Different Approach. Different Results.",
+        "comparison": {
+          "digital_approach": {
+            "budget": "$500/month",
+            "method": "Facebook/Google ads",
+            "reach": "5,000 impressions",
+            "engagement": "5 clicks (0.1%)",
+            "conversions": "Maybe 1",
+            "lasting_value": "Zero (stops when you stop paying)"
+          },
+          "community_approach": {
+            "budget": "$500/month",
+            "method": "Directory + Events + News",
+            "reach": "3,000 targeted locals",
+            "engagement": "300 meaningful views",
+            "conversions": "8-12 average",
+            "lasting_value": "Compounds (presence builds over time)"
+          }
+        }
+      },
+      "narration": "Same budget, different approach, different results. Five hundred dollars on Facebook and Google ads gets you five thousand impressions, five clicks, maybe one conversion. And the moment you stop paying, you're invisible. Five hundred dollars on community presence—directory, events, news—gets you three thousand targeted local views, three hundred meaningful engagements, eight to twelve conversions on average. And it compounds. Your presence builds over time.",
+      "duration_seconds": 35,
+      "audio_file": "slide-05-comparison.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "ProofSlide",
+      "title": "The Restaurant That Stopped Advertising",
+      "content": {
+        "headline": "They Stopped Advertising. Sales Went Up.",
+        "case_study": {
+          "business": "Family restaurant, 15 years in business",
+          "old_approach": "$800/month on ads, declining returns",
+          "decision": "Stopped all ads. Invested in community presence.",
+          "actions": [
+            "Sponsored local events",
+            "Posted to community calendar weekly",
+            "Got featured in local news twice",
+            "Engaged with community platform"
+          ],
+          "result": "Sales up 23% in first year. Ad spend: $0."
+        }
+      },
+      "narration": "Real story. A family restaurant, fifteen years in business. They were spending eight hundred a month on ads with declining returns. They made a decision: stop all advertising. Invest that money in community presence instead. They sponsored local events. Posted to the community calendar weekly. Got featured in local news twice. Engaged on the community platform. Result? Sales up twenty-three percent in the first year. Ad spend: zero.",
+      "duration_seconds": 35,
+      "audio_file": "slide-06-proof.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "CTASlide",
+      "title": "Join Your Community",
+      "content": {
+        "headline": "Stop Advertising. Start Belonging.",
+        "shift": "From 'How do I reach more people?' to 'How do I become part of what people already care about?'",
+        "cta_primary": {
+          "label": "Join the Community Platform",
+          "action": "join_community"
+        },
+        "cta_secondary": {
+          "label": "Download: The Coffee Shop That Stopped Advertising",
+          "action": "download_article"
+        }
+      },
+      "narration": "Ready to stop shouting and start belonging? The shift is simple: from 'how do I reach more people' to 'how do I become part of what people already care about.' Join the community platform and become part of the conversation. Or download the full article—'The Coffee Shop That Stopped Advertising and Doubled Sales.' Your community is already there. The question is whether you're part of it.",
+      "duration_seconds": 25,
+      "audio_file": "slide-07-cta.mp3"
+    }
+  ],
+  "article": {
+    "title": "The Coffee Shop That Stopped Advertising and Doubled Sales",
+    "subtitle": "Why community marketing beats digital marketing every time",
+    "word_count": 2200,
+    "file_path": "/content/articles/EDU-004-community-marketing.md"
+  },
+  "emails": {
+    "email_1_educational": {
+      "subject": "Why 'community marketing' beats 'digital marketing'",
+      "preview_text": "The coffee shop that stopped advertising",
+      "body": "Hey {{first_name}},\n\nQuick question: Which would you trust more—\n\nA) A Facebook ad for a restaurant\nB) Your neighbor recommending a restaurant\n\nYou already know the answer.\n\nSo why are we all still spending money on ads that 86% of people ignore?\n\nI put together a 3-minute presentation on why community marketing beats digital marketing—with real numbers and a real story about a business that stopped advertising entirely.\n\n[WATCH THE PRESENTATION →]\n\nSpoiler: Their sales went UP.\n\n{{sender_name}}\nFibonacco\n\nP.S. The full article is called \"The Coffee Shop That Stopped Advertising and Doubled Sales.\" Download at the end."
+    },
+    "email_2a_engaged": {
+      "subject": "Ready to stop advertising and start belonging?",
+      "preview_text": "Join your community",
+      "body": "Hey {{first_name}},\n\nYou watched the presentation on community marketing. Quick recap:\n\n• 86% of people ignore or block ads\n• Only 14% trust advertising (vs 92% for personal recommendations)\n• Community presence compounds; ads stop working when you stop paying\n• Real businesses are cutting ads and seeing sales go UP\n\nReady to shift from shouting to belonging?\n\nThe community platform is where {{city}} locals connect:\n\n[JOIN THE COMMUNITY →]\n\nYour neighbors are already there.\n\n{{sender_name}}"
+    },
+    "email_2b_reengage": {
+      "subject": "86% of people ignore your ads",
+      "preview_text": "There's a better way",
+      "body": "Hey {{first_name}},\n\nStill running ads that 86% of people ignore?\n\nThere's a different approach. It's called community marketing.\n\nInstead of interrupting strangers with ads, you become part of the community they already belong to.\n\n• They see you in the local directory\n• They see you at community events\n• They hear about you from neighbors\n\nSame budget. 10x the trust. Results that compound.\n\n3 minutes to understand why:\n\n[WATCH THE PRESENTATION →]\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-008",
+      "HOWTO-009"
+    ],
+    "follows": "EDU-003",
+    "related": [
+      "EDU-005",
+      "HOOK-006"
+    ]
   }
 }

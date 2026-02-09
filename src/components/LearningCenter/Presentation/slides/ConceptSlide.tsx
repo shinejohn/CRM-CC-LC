@@ -230,3 +230,7 @@ export const ConceptSlide: React.FC<ConceptSlideProps> = ({
   );
 };
 
+
+
+
+

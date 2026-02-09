@@ -1,0 +1,10 @@
+# Railway Environment Variables for Redis Service
+# Copy these to Railway Dashboard → Redis → Variables
+
+REDIS_PASSWORD="dASEMARUgvkpzXcUuQVRzRTbKANnehqp"
+REDIS_PUBLIC_URL="redis://default:${{REDIS_PASSWORD}}@${{RAILWAY_TCP_PROXY_DOMAIN}}:${{RAILWAY_TCP_PROXY_PORT}}"
+REDIS_URL="redis://${{REDISUSER}}:${{REDIS_PASSWORD}}@${{REDISHOST}}:${{REDISPORT}}"
+REDISHOST="${{RAILWAY_PRIVATE_DOMAIN}}"
+REDISPASSWORD="${{REDIS_PASSWORD}}"
+REDISPORT="6379"
+REDISUSER="default"

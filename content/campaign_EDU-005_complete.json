@@ -1,0 +1,188 @@
+{
+  "campaign": {
+    "id": "EDU-005",
+    "week": 4,
+    "day": 24,
+    "type": "Educational",
+    "title": "Reputation in the AI Age",
+    "subject": "Your reputation is now your algorithm",
+    "landing_page": "reputation-ai-age",
+    "template": "educational",
+    "description": "How AI weighs reputation signals and why trust compounds"
+  },
+  "landing_page": {
+    "campaign_id": "EDU-005",
+    "landing_page_slug": "reputation-ai-age",
+    "url": "/learn/reputation-ai-age",
+    "template_id": "educational",
+    "template_name": "Educational Content",
+    "slide_count": 7,
+    "duration_seconds": 180,
+    "primary_cta": "build_reputation",
+    "secondary_cta": "download_article",
+    "ai_persona": "Sarah",
+    "ai_tone": "Knowledgeable, strategic, empowering",
+    "ai_goal": "Show reputation as competitive advantage",
+    "data_capture_fields": "name, email, business_name, industry",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/reputation-ai-age/audio/"
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "The Review That Changed Everything",
+      "content": {
+        "headline": "One Review Changed Everything",
+        "subhead": "How a single customer's words became an algorithm",
+        "visual": "Five-star review transforming into code/AI signals"
+      },
+      "narration": "Last year, a bakery in Ohio got a review. Nothing special—just a customer saying the croissants were amazing. Within weeks, AI assistants started recommending them. Not because of ads. Not because of SEO. Because AI learned to trust them. That one review was the tipping point. Let me explain why.",
+      "duration_seconds": 20,
+      "audio_file": "slide-01-intro.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "How AI Evaluates Trust",
+      "content": {
+        "headline": "AI Doesn't Search. AI Evaluates.",
+        "signals": [
+          {"signal": "Review Volume", "weight": "How many people are talking about you"},
+          {"signal": "Review Quality", "weight": "What they're actually saying"},
+          {"signal": "Review Recency", "weight": "Are people still talking about you"},
+          {"signal": "Source Authority", "weight": "Where are these reviews coming from"},
+          {"signal": "Consistency", "weight": "Do all signals tell the same story"}
+        ],
+        "key_point": "AI builds a 'trust score' from multiple signals"
+      },
+      "narration": "AI doesn't just search for keywords. AI evaluates trust. It looks at review volume—how many people are talking about you. Review quality—what they're actually saying. Review recency—are people still talking about you, or did everyone stop two years ago? Source authority—are these reviews on trusted platforms? And consistency—do all the signals tell the same story? AI builds a trust score from all of this.",
+      "duration_seconds": 35,
+      "audio_file": "slide-02-evaluation.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "The Reputation Flywheel",
+      "content": {
+        "headline": "Reputation Compounds",
+        "flywheel": [
+          {"step": 1, "action": "Good service", "result": "Happy customer"},
+          {"step": 2, "action": "Happy customer", "result": "Positive review"},
+          {"step": 3, "action": "Positive review", "result": "AI recommends you"},
+          {"step": 4, "action": "AI recommendation", "result": "New customer"},
+          {"step": 5, "action": "Repeat", "result": "Flywheel accelerates"}
+        ],
+        "insight": "The businesses with the best reputations get MORE opportunities to build reputation"
+      },
+      "narration": "Here's what makes reputation so powerful: it compounds. Good service creates happy customers. Happy customers leave positive reviews. Positive reviews make AI recommend you. AI recommendations bring new customers. Those new customers, if served well, leave more reviews. The flywheel accelerates. The businesses with the best reputations get more opportunities to build even better reputations. The rich get richer.",
+      "duration_seconds": 30,
+      "audio_file": "slide-03-flywheel.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "The Review Velocity Problem",
+      "content": {
+        "headline": "It's Not Just Stars. It's Speed.",
+        "comparison": {
+          "business_a": {"rating": "4.8 stars", "reviews_per_month": 1, "trend": "Stagnant"},
+          "business_b": {"rating": "4.5 stars", "reviews_per_month": 8, "trend": "Growing"}
+        },
+        "question": "Which one does AI trust more?",
+        "answer": "Business B. Velocity signals a living, thriving business.",
+        "visual": "Graph showing review velocity over time"
+      },
+      "narration": "Here's something most people don't realize: it's not just about stars. It's about velocity. Business A has four point eight stars but only gets one review a month—stagnant. Business B has four point five stars but gets eight reviews a month—growing. Which one does AI trust more? Business B. Every time. Velocity signals a living, thriving business. Stagnation signals maybe they've declined. Maybe they've closed. Maybe those old reviews aren't relevant anymore.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-velocity.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ConceptSlide",
+      "title": "The Multi-Platform Effect",
+      "content": {
+        "headline": "One Platform Isn't Enough",
+        "scenario": {
+          "google_only": "5 stars on Google, nothing elsewhere = AI skeptical",
+          "multi_platform": "4.5 stars across Google, Yelp, Directory, Facebook = AI confident"
+        },
+        "why": "Multiple platforms = multiple independent signals = higher trust",
+        "visual": "Single vs. multiple platform presence comparison"
+      },
+      "narration": "One platform isn't enough anymore. Five stars on Google but nothing elsewhere? AI is skeptical. Could be fake. Could be gamed. Could be one platform with a weird algorithm. But four point five stars across Google, Yelp, the directory, and Facebook? Now AI is confident. Multiple platforms mean multiple independent signals. Different people, different contexts, all saying the same thing. That's trust you can't fake.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-multiplatform.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "ProofSlide",
+      "title": "From Invisible to Recommended",
+      "content": {
+        "case_study": {
+          "business": "Auto repair shop, 20 years in business",
+          "problem": "Excellent service, almost no reviews",
+          "action": [
+            "Implemented review request system",
+            "Responded to every review (positive and negative)",
+            "Got listed on multiple platforms",
+            "Asked happy customers for specific feedback"
+          ],
+          "before": "2 reviews/month, not appearing in AI results",
+          "after": "15 reviews/month, AI recommends regularly",
+          "timeline": "90 days"
+        }
+      },
+      "narration": "Auto repair shop, twenty years in business. Excellent service—everyone who went there loved them. Problem: almost no reviews. Two a month, maybe. Never appeared in AI results. They implemented a simple review request system. Started responding to every review. Got listed on multiple platforms. Asked happy customers to mention specific things they appreciated. Ninety days later: fifteen reviews a month. AI recommends them regularly. Same great service. Now everyone knows about it.",
+      "duration_seconds": 35,
+      "audio_file": "slide-06-proof.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "CTASlide",
+      "title": "Build Your Reputation",
+      "content": {
+        "headline": "Reputation Is Your New Algorithm",
+        "reality": "You can't game AI. But you can build genuine trust that AI recognizes.",
+        "cta_primary": {
+          "label": "Start Building Your Reputation",
+          "action": "reputation_guide"
+        },
+        "cta_secondary": {
+          "label": "Download: The Review That Changed Everything",
+          "action": "download_article"
+        }
+      },
+      "narration": "Reputation is your new algorithm. You can't game AI—it's too smart. But you can build genuine trust that AI recognizes. Start building your reputation now. The guide shows you exactly how: getting more reviews, responding effectively, building multi-platform presence. Or download the full article—'The Review That Changed Everything.' Your reputation compounds. Start building today.",
+      "duration_seconds": 20,
+      "audio_file": "slide-07-cta.mp3"
+    }
+  ],
+  "article": {
+    "title": "The Review That Changed Everything",
+    "subtitle": "How one customer's words became an algorithm—and what it means for your business",
+    "word_count": 2100,
+    "file_path": "/content/articles/EDU-005-reputation.md"
+  },
+  "emails": {
+    "email_1_educational": {
+      "subject": "Your reputation is now your algorithm",
+      "preview_text": "How AI decides who to trust",
+      "body": "Hey {{first_name}},\n\nDid you know AI assistants are building a 'trust score' for your business right now?\n\nEvery review. Every mention. Every signal.\n\nAI doesn't search randomly. AI evaluates who to trust—and recommends them.\n\nI put together a 3-minute presentation on how this works, and what it means for {{business_name}}.\n\n[WATCH THE PRESENTATION →]\n\nThe businesses figuring this out are getting recommended. The ones who aren't... aren't.\n\n{{sender_name}}\nFibonacco\n\nP.S. One bakery got a single review that changed everything. Full story in the article."
+    },
+    "email_2a_engaged": {
+      "subject": "Ready to build your reputation flywheel?",
+      "preview_text": "Reputation compounds",
+      "body": "Hey {{first_name}},\n\nYou watched the reputation presentation. Key takeaways:\n\n• AI evaluates trust from multiple signals\n• Reputation compounds (the flywheel effect)\n• Velocity matters as much as stars\n• Multi-platform presence beats single-platform perfection\n\nReady to build {{business_name}}'s reputation systematically?\n\n[GET THE REPUTATION GUIDE →]\n\nStep by step. What to do this week, this month, ongoing.\n\n{{sender_name}}"
+    },
+    "email_2b_reengage": {
+      "subject": "Is AI recommending your competitors instead of you?",
+      "preview_text": "It might be your reputation signals",
+      "body": "Hey {{first_name}},\n\nQuick thought experiment:\n\nIf someone asks ChatGPT for a {{business_category}} in {{city}}, do you come up?\n\nIf not, it might be your reputation signals.\n\nAI looks at:\n→ Review volume (are people talking about you?)\n→ Review velocity (are they still talking?)\n→ Multi-platform presence (are signals consistent?)\n\n3 minutes to understand how AI evaluates trust:\n\n[WATCH THE PRESENTATION →]\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": ["HOWTO-012", "HOWTO-014"],
+    "follows": "EDU-004",
+    "related": ["EDU-002", "HOOK-007"]
+  }
+}

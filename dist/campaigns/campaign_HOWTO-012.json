@@ -1,52 +1,160 @@
 {
   "campaign": {
     "id": "HOWTO-012",
-    "week": 12,
-    "day": 12,
-    "type": "HOWTO",
-    "title": "How-To Tutorial",
-    "subject": "How-To Tutorial",
+    "week": 6,
+    "day": 37,
+    "type": "How-To",
+    "title": "Review Response Guide",
+    "subject": "How to respond to reviews (good and bad)",
     "landing_page": "review-response-guide",
     "template": "tutorial",
-    "description": "How-To Tutorial - Guide user through process"
+    "description": "Best practices for responding to all types of reviews"
   },
-  "landing_page": {
-    "campaign_id": "HOWTO-012",
-    "landing_page_slug": "review-response-guide",
-    "url": "/learn/review-response-guide",
-    "template_id": "tutorial",
-    "template_name": "How-To Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 60,
-    "primary_cta": "start_trial",
-    "secondary_cta": "contact_sales",
-    "ai_persona": "Emma",
-    "ai_tone": "Helpful, step-by-step",
-    "ai_goal": "Guide user through process",
-    "data_capture_fields": "name, email, business_name, setup_preferences",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/review-response-guide/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "engagement",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week6-how-to",
-    "utm_content": "HOWTO-012"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "How-To Tutorial",
-    "slides": 8,
-    "duration": 60,
-    "purpose": "howto",
-    "audio_required": true
-  },
-  "slides": [],
-  "presentation": {
-    "id": "review-response-guide",
-    "audio": {
-      "baseUrl": "https://cdn.fibonacco.com/presentations/review-response-guide/audio/",
-      "format": "mp3"
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Review Responses",
+      "content": {
+        "headline": "Turn Reviews into Opportunities",
+        "subhead": "How to respond to any review"
+      },
+      "narration": "Reviews are conversations with your customers—and everyone watching. How you respond matters as much as the review itself. Let's master review responses.",
+      "duration_seconds": 15,
+      "audio_file": "slide-01-intro.mp3"
     },
-    "slides": []
+    {
+      "slide_num": 2,
+      "component": "OverviewSlide",
+      "title": "What You'll Learn",
+      "content": {
+        "topics": [
+          "Responding to positive reviews",
+          "Handling negative reviews",
+          "Timing and templates",
+          "Turning negatives into wins"
+        ]
+      },
+      "narration": "We'll cover responding to positive reviews to encourage more, handling negative reviews professionally, timing and templates to save time, and how to turn negative situations into wins.",
+      "duration_seconds": 20,
+      "audio_file": "slide-02-overview.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "StepSlide",
+      "title": "Positive Reviews",
+      "content": {
+        "action": "Thank and Personalize",
+        "formula": [
+          "Thank them by name",
+          "Reference something specific they mentioned",
+          "Invite them back",
+          "Keep it brief"
+        ],
+        "example": "Thanks Sarah! So glad you loved the seasonal menu. The butternut squash soup is our chef's favorite too. See you next time!"
+      },
+      "narration": "For positive reviews: thank them by name, reference something specific they mentioned, invite them back, and keep it brief. Example: 'Thanks Sarah! So glad you loved the seasonal menu. The butternut squash soup is our chef's favorite too. See you next time!' Personal, warm, brief.",
+      "duration_seconds": 40,
+      "audio_file": "slide-03-positive.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StepSlide",
+      "title": "Negative Reviews",
+      "content": {
+        "action": "HEARD Framework",
+        "steps": [
+          "Hear - Acknowledge their concern",
+          "Empathize - Show you understand",
+          "Apologize - Even if not your fault",
+          "Resolve - Offer solution",
+          "Document - Take offline if needed"
+        ]
+      },
+      "narration": "For negative reviews, use the HEARD framework. Hear: acknowledge their specific concern. Empathize: show you understand their frustration. Apologize: even if it's not entirely your fault, apologize for their experience. Resolve: offer a specific solution. Document: invite them to contact you directly to resolve.",
+      "duration_seconds": 40,
+      "audio_file": "slide-04-negative.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StepSlide",
+      "title": "Response Timing",
+      "content": {
+        "action": "When to Respond",
+        "guidelines": [
+          "Within 24 hours ideal",
+          "Within 48 hours acceptable",
+          "Never ignore negative reviews",
+          "Batch responses 2x daily"
+        ]
+      },
+      "narration": "Timing matters. Within twenty-four hours is ideal—shows you're attentive. Within forty-eight hours is acceptable. Never ignore negative reviews—silence looks worse than the review. Batch your responses twice daily so it doesn't consume your day.",
+      "duration_seconds": 30,
+      "audio_file": "slide-05-timing.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "StepSlide",
+      "title": "What Not to Do",
+      "content": {
+        "action": "Avoid These Mistakes",
+        "mistakes": [
+          "Never argue or get defensive",
+          "Don't make excuses",
+          "Avoid generic copy-paste responses",
+          "Don't ask them to remove or change review"
+        ]
+      },
+      "narration": "What not to do. Never argue or get defensive—you'll lose even if you're right. Don't make excuses—take responsibility. Avoid generic copy-paste responses—people can tell. Don't ask customers to remove or change reviews—it's against most platforms' policies and looks bad.",
+      "duration_seconds": 30,
+      "audio_file": "slide-06-avoid.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "TipsSlide",
+      "title": "Pro Tips",
+      "content": {
+        "tips": [
+          "Negative reviews with good responses often help you",
+          "Ask happy customers to review right after good experience",
+          "Monitor all platforms, not just Google",
+          "Use reviews as feedback to improve"
+        ]
+      },
+      "narration": "Pro tips. Negative reviews with thoughtful responses often help you—people see how you handle problems. Ask happy customers to review right after a good experience—timing matters. Monitor all platforms, not just Google. Use reviews as genuine feedback to improve your business.",
+      "duration_seconds": 30,
+      "audio_file": "slide-07-tips.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "CTASlide",
+      "title": "Start Responding",
+      "content": {
+        "cta_primary": {
+          "label": "View Pending Reviews",
+          "action": "view_reviews"
+        },
+        "cta_secondary": {
+          "label": "Get Response Templates",
+          "action": "download_templates"
+        }
+      },
+      "narration": "Ready to respond? View your pending reviews and start applying what you learned. Or download our response templates for quick starting points you can customize. Every review is an opportunity.",
+      "duration_seconds": 20,
+      "audio_file": "slide-08-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_1_educational": {
+      "subject": "How to respond to reviews (good and bad)",
+      "preview_text": "Turn any review into an opportunity",
+      "body": "Hey {{first_name}},\n\nHow you respond to reviews matters as much as the reviews themselves.\n\nFor positive reviews:\n→ Thank by name\n→ Reference something specific\n→ Invite them back\n\nFor negative reviews (HEARD):\n→ Hear their concern\n→ Empathize\n→ Apologize for their experience\n→ Resolve with specific solution\n→ Document - take offline\n\n[LEARN THE FULL APPROACH →]\n\nRespond within 24 hours for best results.\n\n{{sender_name}}"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOWTO-014"
+    ],
+    "follows": "HOWTO-011"
   }
 }

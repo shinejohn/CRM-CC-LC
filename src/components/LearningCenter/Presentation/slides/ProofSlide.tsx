@@ -119,3 +119,7 @@ export const ProofSlide: React.FC<ProofSlideProps> = ({
   );
 };
 
+
+
+
+

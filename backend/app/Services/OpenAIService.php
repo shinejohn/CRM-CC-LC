@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Log;
 
 class OpenAIService
 {
-    protected string $apiKey;
+    protected string $openaiApiKey;
     protected string $baseUrl = 'https://api.openai.com/v1';
 
     public function __construct()
     {
-        $this->apiKey = config('services.openai.api_key');
+        $this->openaiApiKey = (string) config('services.openai.api_key', '');
     }
 
     /**
@@ -22,27 +22,22 @@ class OpenAIService
     {
         try {
             $response = Http::withHeaders([
-                'Authorization' => "Bearer {$this->apiKey}",
+                'Authorization' => "Bearer {$this->openaiApiKey}",
                 'Content-Type' => 'application/json',
             ])->post("{$this->baseUrl}/embeddings", [
-                'model' => 'text-embedding-ada-002',
-                'input' => $text,
-            ]);
+                        'model' => 'text-embedding-ada-002',
+                        'input' => $text,
+                    ]);
 
             if ($response->successful()) {
                 $data = $response->json();
                 return $data['data'][0]['embedding'] ?? null;
             }
 
-            Log::error('OpenAI embedding failed', [
-                'status' => $response->status(),
-                'body' => $response->body(),
-            ]);
-
-            return null;
+            throw new \Exception('OpenAI embedding failed with status ' . $response->status());
         } catch (\Exception $e) {
             Log::error('OpenAI embedding error', ['error' => $e->getMessage()]);
-            return null;
+            throw $e;
         }
     }
 }

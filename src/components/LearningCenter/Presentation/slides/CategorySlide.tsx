@@ -51,3 +51,7 @@ export const CategorySlide: React.FC<CategorySlideProps> = ({
   );
 };
 
+
+
+
+
