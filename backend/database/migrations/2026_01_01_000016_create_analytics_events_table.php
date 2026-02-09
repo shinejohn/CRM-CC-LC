@@ -11,8 +11,8 @@ return new class extends Migration
     {
         Schema::create('analytics_events', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('smb_id')->nullable()->constrained();
-            $table->foreignId('community_id')->nullable()->constrained();
+            $table->unsignedBigInteger('smb_id')->nullable();
+            $table->unsignedBigInteger('community_id')->nullable();
 
             $table->string('event_type', 100);
             $table->string('event_category', 50)->nullable();

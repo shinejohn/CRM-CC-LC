@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('content_views', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('smb_id')->nullable()->constrained();
+            $table->unsignedBigInteger('smb_id')->nullable();
             $table->string('content_slug');
 
             $table->timestamp('started_at');

@@ -17,7 +17,7 @@ return new class extends Migration
         // Create partitioned table
         DB::statement('
             CREATE TABLE ops.metric_snapshots (
-                id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                id UUID NOT NULL DEFAULT gen_random_uuid(),
                 metric_id UUID NOT NULL REFERENCES ops.metric_definitions(id),
                 dimension_key VARCHAR(100),
                 dimension_value VARCHAR(255),
@@ -27,7 +27,8 @@ return new class extends Migration
                 period_end TIMESTAMP WITH TIME ZONE,
                 granularity VARCHAR(20) DEFAULT \'point\',
                 metadata JSONB,
-                created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+                created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+                UNIQUE (id, recorded_at)
             ) PARTITION BY RANGE (recorded_at)
         ');
 

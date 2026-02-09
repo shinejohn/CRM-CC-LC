@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('callbacks', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('smb_id')->nullable()->constrained();
+            $table->unsignedBigInteger('smb_id')->nullable();
             $table->foreignId('rvm_drop_id')->nullable()->constrained();
 
             $table->string('caller_phone', 50);

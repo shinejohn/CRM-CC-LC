@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('chat_messages', function (Blueprint $table) {
             $table->id();
             $table->uuid('session_id');
-            $table->foreignId('smb_id')->nullable()->constrained();
+            $table->unsignedBigInteger('smb_id')->nullable();
 
             $table->string('role', 20);
             $table->text('content');
