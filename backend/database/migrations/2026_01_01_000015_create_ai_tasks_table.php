@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('ai_tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('smb_id')->constrained('customers');
+            $table->foreignUuid('smb_id')->constrained('customers');
 
             $table->string('task_type', 100);
             $table->string('status', 50)->default('pending');

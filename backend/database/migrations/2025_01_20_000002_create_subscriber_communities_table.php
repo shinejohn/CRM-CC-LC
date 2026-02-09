@@ -14,7 +14,14 @@ return new class extends Migration
         Schema::dropIfExists('subscriber_communities');
         Schema::create('subscriber_communities', function (Blueprint $table) {
             $table->foreignId('subscriber_id')->constrained('subscribers')->onDelete('cascade');
-            $table->foreignId('community_id')->constrained('communities')->onDelete('cascade');
+            
+            // Explicitly handle community_id constraint if communities table is visible
+            $communitiesExist = Schema::hasTable('communities');
+            if ($communitiesExist) {
+                $table->foreignId('community_id')->constrained('communities')->onDelete('cascade');
+            } else {
+                $table->foreignId('community_id');
+            }
             
             // Subscription details
             $table->timestamp('subscribed_at')->useCurrent();

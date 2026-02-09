@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('alert_sends');
         Schema::create('alert_sends', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('alert_id')->constrained('alerts')->onDelete('cascade');
+            $table->foreignUuid('alert_id')->constrained('alerts')->onDelete('cascade');
             $table->foreignId('subscriber_id')->constrained('subscribers')->onDelete('cascade');
             
             // Channels used

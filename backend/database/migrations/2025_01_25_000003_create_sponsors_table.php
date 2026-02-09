@@ -8,13 +8,14 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
+        Schema::dropIfExists('sponsors');
         Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique()->default(DB::getDriverName() === 'pgsql' ? DB::raw('gen_random_uuid()') : null);
 
             // Identity
             $table->string('name', 255);
-            $table->foreignId('smb_id')->nullable()->constrained('customers')->onDelete('set null')->comment('If sponsor is also an SMB');
+            $table->foreignUuid('smb_id')->nullable()->constrained('customers')->onDelete('set null')->comment('If sponsor is also an SMB');
 
             // Display
             $table->string('logo_url', 500)->nullable();

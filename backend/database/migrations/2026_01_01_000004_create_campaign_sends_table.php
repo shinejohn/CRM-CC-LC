@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('campaign_sends', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('smb_id')->constrained('customers');
+            $table->foreignUuid('smb_id')->constrained('customers');
             $table->string('campaign_id', 50);
 
             $table->string('email');

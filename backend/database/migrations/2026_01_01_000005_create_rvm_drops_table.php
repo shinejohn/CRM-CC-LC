@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('rvm_drops', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('smb_id')->constrained('customers');
+            $table->foreignUuid('smb_id')->constrained('customers');
             $table->foreignId('campaign_send_id')->nullable()->constrained();
 
             $table->string('phone', 50);

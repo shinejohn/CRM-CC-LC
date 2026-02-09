@@ -9,48 +9,35 @@ return new class extends Migration
 {
     public function up(): void
     {
+        Schema::dropIfExists('sponsorships');
         Schema::create('sponsorships', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique()->default(DB::getDriverName() === 'pgsql' ? DB::raw('gen_random_uuid()') : null);
-            $table->foreignId('sponsor_id')->constrained('sponsors')->onDelete('cascade');
-            
-            // Scope
-            $table->string('sponsorship_type', 50)->comment('newsletter_header, newsletter_section, alert_sponsor');
-            $table->foreignId('community_id')->nullable()->constrained('communities')->onDelete('cascade')->comment('NULL = all communities');
-            
-            // Campaign dates
-            $table->date('start_date');
-            $table->date('end_date');
-            
-            // Inventory
-            $table->integer('impressions_purchased');
-            $table->integer('impressions_delivered')->default(0);
-            
-            // Creative
-            if (DB::getDriverName() === 'pgsql') {
-                $table->jsonb('creative_json')->nullable()->comment('Ad content: headline, image, cta, etc.');
+            if (Schema::hasTable('communities')) {
+                $table->foreignId('community_id')->nullable()->constrained('communities')->onDelete('cascade')->comment('NULL = all communities');
             } else {
-                $table->json('creative_json')->nullable();
+                $table->foreignId('community_id')->nullable();
             }
             
-            // Pricing
-            $table->string('rate_type', 20)->comment('cpm, flat, cpc');
-            $table->integer('rate_cents')->comment('CPM rate or flat fee');
-            $table->integer('total_value_cents')->comment('Total contract value');
+            // Client/Advertiser
+            $table->string('advertiser_name', 255);
+            $table->string('advertiser_url', 255)->nullable();
+            $table->string('logo_path', 255)->nullable();
             
-            // Status
-            $table->string('status', 20)->default('pending')->comment('pending, active, paused, completed, cancelled');
+            // Campaign details
+            $table->string('campaign_name', 255);
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
             
-            // Performance (denormalized)
-            $table->integer('click_count')->default(0);
+            // Creative
+            $table->text('display_copy')->nullable();
+            $table->string('cta_text', 50)->nullable();
+            
+            // Budget/Status
+            $table->integer('total_budget_cents')->default(0);
+            $table->string('status', 20)->default('active')->comment('active, paused, completed, cancelled');
             
             $table->timestamps();
-        });
-        
-        Schema::table('sponsorships', function (Blueprint $table) {
-            $table->index(['start_date', 'end_date', 'status'], 'idx_sponsorships_active')
-                ->where('status', '=', 'active');
-            $table->index('sponsor_id', 'idx_sponsorships_sponsor');
         });
     }
 
@@ -59,6 +46,3 @@ return new class extends Migration
         Schema::dropIfExists('sponsorships');
     }
 };
-
-
-

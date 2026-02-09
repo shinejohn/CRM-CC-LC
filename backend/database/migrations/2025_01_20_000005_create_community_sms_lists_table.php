@@ -13,7 +13,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('community_sms_lists', function (Blueprint $table) {
-            $table->foreignUuid('community_id')->primary()->constrained('communities');
+            if (Schema::hasTable('communities')) {
+                $table->foreignId('community_id')->primary()->constrained('communities');
+            } else {
+                $table->foreignId('community_id')->primary();
+            }
             
             if (DB::getDriverName() === 'pgsql') {
                 $table->text('alert_phones')->nullable(); // Stored as comma-separated or JSON

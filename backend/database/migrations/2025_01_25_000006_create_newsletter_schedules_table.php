@@ -2,31 +2,33 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
     public function up(): void
     {
+        Schema::dropIfExists('newsletter_schedules');
         Schema::create('newsletter_schedules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('community_id')->unique()->constrained('communities')->onDelete('cascade');
+            if (Schema::hasTable('communities')) {
+                $table->foreignId('community_id')->unique()->constrained('communities')->onDelete('cascade');
+            } else {
+                $table->foreignId('community_id')->unique();
+            }
             
-            // Daily newsletter
-            $table->boolean('daily_enabled')->default(true);
-            $table->time('daily_send_time')->default('06:00:00')->comment('Local time');
-            $table->foreignId('daily_template_id')->nullable()->constrained('newsletter_templates')->onDelete('set null');
+            // Scheduling config
+            $table->string('daily_send_time', 5)->default('07:00')->comment('24h format, e.g. 07:00');
+            $table->integer('weekly_send_day')->default(1)->comment('1-7 (Mon-Sun)');
+            $table->string('weekly_send_time', 5)->default('08:00');
             
-            // Weekly newsletter
-            $table->boolean('weekly_enabled')->default(true);
-            $table->integer('weekly_send_day')->default(0)->comment('0=Sunday, 6=Saturday');
-            $table->time('weekly_send_time')->default('08:00:00');
-            $table->foreignId('weekly_template_id')->nullable()->constrained('newsletter_templates')->onDelete('set null');
+            // Automation
+            $table->boolean('is_active')->default(true);
+            $table->timestamp('last_run_at')->nullable();
+            $table->timestamp('next_run_at')->nullable();
             
-            // Timezone
-            $table->string('timezone', 50)->default('America/New_York');
-            
-            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamps();
         });
     }
 
@@ -35,6 +37,3 @@ return new class extends Migration
         Schema::dropIfExists('newsletter_schedules');
     }
 };
-
-
-

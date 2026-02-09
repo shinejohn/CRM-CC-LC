@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('communities')) {
+            return;
+        }
         Schema::create('communities', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('state', 2);

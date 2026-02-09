@@ -9,10 +9,15 @@ return new class extends Migration
 {
     public function up(): void
     {
+        Schema::dropIfExists('newsletters');
         Schema::create('newsletters', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique()->default(DB::getDriverName() === 'pgsql' ? DB::raw('gen_random_uuid()') : null);
-            $table->foreignId('community_id')->constrained('communities')->onDelete('cascade');
+            if (Schema::hasTable('communities')) {
+                $table->foreignId('community_id')->constrained('communities')->onDelete('cascade');
+            } else {
+                $table->foreignId('community_id');
+            }
             
             // Type and scheduling
             $table->string('newsletter_type', 20)->comment('daily, weekly, special');
@@ -65,8 +70,7 @@ return new class extends Migration
         
         // Indexes
         Schema::table('newsletters', function (Blueprint $table) {
-            $table->index(['scheduled_for', 'status'], 'idx_newsletters_schedule')
-                ->where('status', '=', 'scheduled');
+            $table->index(['scheduled_for', 'status'], 'idx_newsletters_schedule');
             $table->index(['community_id', 'issue_date'], 'idx_newsletters_community');
         });
     }
@@ -76,6 +80,3 @@ return new class extends Migration
         Schema::dropIfExists('newsletters');
     }
 };
-
-
-
