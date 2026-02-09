@@ -1,0 +1,22 @@
+# 4Healthcare Platform Engineering Rules
+
+## Deployment & Infrastructure
+- **THE ONLY WAY TO DEPLOY is `./scripts/railway-deploy.sh`**. This tool handles validation, committing, and pushing in one step.
+- **Git Enforcement**: A `pre-push` hook is installed. Even manual `git push` commands will trigger `./scripts/guardian.sh` and fail on errors.
+- All infrastructure changes (.toml, .json, Dockerfiles) must be validated using the `nixpacks plan` if available.
+- Treat `backend/nixpacks.toml` and `backend/railway.json` as immutable unless performing a major version upgrade.
+- If a build fails on Railway, immediately download/read the logs and use the Scientific Method to fix the ROOT CAUSE. Do not attempt "blind fixes".
+
+## Development Workflow
+- **Scientific Method for Debugging**: 
+  1. Hypothesis: [What I think is wrong]
+  2. Single change: [The one thing I'll modify]
+  3. Expected result: [What should happen if I'm right]
+  4. Test: [How we'll verify]
+- **No Mock Data**: Comment out all mock data in pages and components. 
+- **Database Truth**: Define data from UI Back. If a field is missing, correct it in the Database, not by adding workarounds in the code.
+- **Fail Fast**: Do not suppress or catch errors to hide symptoms. Fix the origin.
+
+## Commit Standards
+- All commits should be prefixed with `feat:`, `fix:`, or `infra:`.
+- Include `(guardian-validated)` in the commit message after a successful run of the Guardian script.
