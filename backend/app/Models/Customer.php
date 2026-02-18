@@ -223,6 +223,46 @@ class Customer extends Model
     }
 
     /**
+     * Get CRM contacts for this customer
+     */
+    public function crmContacts(): HasMany
+    {
+        return $this->hasMany(CrmContact::class);
+    }
+
+    /**
+     * Get deals for this customer
+     */
+    public function deals(): HasMany
+    {
+        return $this->hasMany(Deal::class);
+    }
+
+    /**
+     * Get quotes for this customer
+     */
+    public function quotes(): HasMany
+    {
+        return $this->hasMany(Quote::class);
+    }
+
+    /**
+     * Get invoices for this customer
+     */
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    /**
+     * Get CRM activities for this customer
+     */
+    public function crmActivities(): HasMany
+    {
+        return $this->hasMany(CrmActivity::class);
+    }
+
+    /**
      * Scope: Active campaign customers
      */
     public function scopeActive($query)

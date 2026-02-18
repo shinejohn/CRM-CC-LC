@@ -25,6 +25,11 @@ use App\Http\Controllers\Api\SubscriberController;
 use App\Http\Controllers\Api\AdminSubscriberController;
 use App\Http\Controllers\Api\V1\ContentController;
 use App\Http\Controllers\Api\V1\ContentTrackingController;
+use App\Http\Controllers\Api\V1\DealController;
+use App\Http\Controllers\Api\V1\QuoteController;
+use App\Http\Controllers\Api\V1\InvoiceController;
+use App\Http\Controllers\Api\V1\ContactController as CrmContactController;
+use App\Http\Controllers\Api\V1\ActivityController as CrmActivityController;
 use App\Http\Controllers\Api\NewsletterController;
 use App\Http\Controllers\Api\SponsorController;
 use App\Http\Controllers\Api\NewsletterTemplateController;
@@ -207,6 +212,58 @@ Route::prefix('v1')->group(function () {
             Route::post('/{id}/campaign/start', [CustomerController::class, 'startCampaign']);
             Route::post('/{id}/campaign/pause', [CustomerController::class, 'pauseCampaign']);
             Route::post('/{id}/campaign/resume', [CustomerController::class, 'resumeCampaign']);
+        });
+
+        // CRM API - Deals Pipeline
+        Route::prefix('deals')->group(function () {
+            Route::get('/', [DealController::class, 'index']);
+            Route::get('/pipeline', [DealController::class, 'pipeline']);
+            Route::post('/', [DealController::class, 'store']);
+            Route::get('/{id}', [DealController::class, 'show']);
+            Route::put('/{id}', [DealController::class, 'update']);
+            Route::post('/{id}/transition', [DealController::class, 'transition']);
+            Route::delete('/{id}', [DealController::class, 'destroy']);
+        });
+
+        // CRM API - Quotes
+        Route::prefix('quotes')->group(function () {
+            Route::get('/', [QuoteController::class, 'index']);
+            Route::post('/', [QuoteController::class, 'store']);
+            Route::get('/{id}', [QuoteController::class, 'show']);
+            Route::put('/{id}', [QuoteController::class, 'update']);
+            Route::post('/{id}/send', [QuoteController::class, 'send']);
+            Route::post('/{id}/convert-to-invoice', [QuoteController::class, 'convertToInvoice']);
+            Route::delete('/{id}', [QuoteController::class, 'destroy']);
+        });
+
+        // CRM API - Invoices (full CRUD; billing/invoices is for order payment)
+        Route::prefix('crm-invoices')->group(function () {
+            Route::get('/', [InvoiceController::class, 'index']);
+            Route::post('/', [InvoiceController::class, 'store']);
+            Route::get('/{id}', [InvoiceController::class, 'show']);
+            Route::put('/{id}', [InvoiceController::class, 'update']);
+            Route::post('/{id}/record-payment', [InvoiceController::class, 'recordPayment']);
+            Route::post('/{id}/send', [InvoiceController::class, 'send']);
+            Route::delete('/{id}', [InvoiceController::class, 'destroy']);
+        });
+
+        // CRM API - Contacts (people at companies)
+        Route::prefix('crm-contacts')->group(function () {
+            Route::get('/', [CrmContactController::class, 'index']);
+            Route::post('/', [CrmContactController::class, 'store']);
+            Route::get('/{id}', [CrmContactController::class, 'show']);
+            Route::put('/{id}', [CrmContactController::class, 'update']);
+            Route::delete('/{id}', [CrmContactController::class, 'destroy']);
+        });
+
+        // CRM API - Activities (call logs, meetings)
+        Route::prefix('crm-activities')->group(function () {
+            Route::get('/', [CrmActivityController::class, 'index']);
+            Route::post('/', [CrmActivityController::class, 'store']);
+            Route::get('/{id}', [CrmActivityController::class, 'show']);
+            Route::put('/{id}', [CrmActivityController::class, 'update']);
+            Route::post('/{id}/complete', [CrmActivityController::class, 'complete']);
+            Route::delete('/{id}', [CrmActivityController::class, 'destroy']);
         });
 
         // Communities API
