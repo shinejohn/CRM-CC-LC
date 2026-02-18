@@ -38,7 +38,7 @@ class SubscriptionController extends Controller
 
         try {
             $subscriber = $this->subscriberService->register($validator->validated());
-            
+
             return response()->json([
                 'message' => 'Subscription successful. Please check your email to verify your address.',
                 'subscriber' => $subscriber,
@@ -57,7 +57,7 @@ class SubscriptionController extends Controller
     {
         try {
             $subscriber = $this->subscriberService->verifyEmail($token);
-            
+
             return response()->json([
                 'message' => 'Email verified successfully.',
                 'subscriber' => $subscriber,
@@ -76,7 +76,7 @@ class SubscriptionController extends Controller
     {
         try {
             $result = $this->subscriberService->unsubscribe($token);
-            
+
             return response()->json($result);
         } catch (\Exception $e) {
             return response()->json([
@@ -85,6 +85,3 @@ class SubscriptionController extends Controller
         }
     }
 }
-
-
-

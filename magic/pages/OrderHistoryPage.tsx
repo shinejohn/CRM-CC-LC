@@ -6,7 +6,8 @@ export function OrderHistoryPage({
 }: {
   onBack: () => void;
 }) {
-  const orders = [{
+  /* Mock data commented out - use OrderHistoryPage with real orderApi */
+  const orders: { id: string; date: string; item: string; amount: string; status: string }[] = [/* {
     id: 'ORD-1247',
     date: 'Dec 15, 2024',
     item: 'Sarah (Marketing)',
@@ -36,7 +37,7 @@ export function OrderHistoryPage({
     item: 'Initial Plan: Tier 1',
     amount: '$99/mo',
     status: 'upgraded'
-  }];
+  } */];
   return <motion.div initial={{
     opacity: 0,
     y: 20
@@ -108,7 +109,13 @@ export function OrderHistoryPage({
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {orders.map((order, index) => <motion.tr key={index} initial={{
+              {orders.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="px-6 py-12 text-center text-slate-500">
+                    No orders. Use the real OrderHistoryPage with orderApi for live data.
+                  </td>
+                </tr>
+              ) : orders.map((order, index) => <motion.tr key={index} initial={{
               opacity: 0,
               x: -10
             }} animate={{
@@ -141,7 +148,7 @@ export function OrderHistoryPage({
           </table>
         </div>
         <div className="p-4 border-t border-slate-100 text-center text-sm text-slate-500">
-          Showing 1-5 of 5 orders
+          Showing {orders.length} order(s)
         </div>
       </div>
     </motion.div>;

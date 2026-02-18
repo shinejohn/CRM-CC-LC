@@ -58,6 +58,8 @@ import { ServiceCatalogPage } from './pages/LearningCenter/Services/Catalog';
 import { ServiceDetailPage } from './pages/LearningCenter/Services/Detail';
 import { ServiceCheckoutPage } from './pages/LearningCenter/Services/Checkout';
 import { OrderConfirmationPage } from './pages/LearningCenter/Services/OrderConfirmation';
+import { BillingDashboardPage } from './pages/LearningCenter/Services/BillingDashboard';
+import { OrderHistoryPage } from './pages/LearningCenter/Services/OrderHistory';
 
 // CRM Pages
 import { CrmDashboardPage } from './pages/CRM/Dashboard';
@@ -236,6 +238,8 @@ export function AppRouter() {
 
         {/* Service Catalog Routes */}
         <Route path="/learning/services" element={<ServiceCatalogPage />} />
+        <Route path="/learning/services/billing" element={<BillingDashboardPage />} />
+        <Route path="/learning/services/orders" element={<OrderHistoryPage />} />
         <Route path="/learning/services/checkout" element={<ServiceCheckoutPage />} />
         <Route path="/learning/services/:id" element={<ServiceDetailPage />} />
         <Route path="/learning/services/orders/:id/success" element={<OrderConfirmationPage />} />

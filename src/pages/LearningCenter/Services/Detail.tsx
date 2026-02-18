@@ -12,6 +12,7 @@ export const ServiceDetailPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [customerEmail, setCustomerEmail] = useState('');
 
   useEffect(() => {
     if (id) {
@@ -33,22 +34,24 @@ export const ServiceDetailPage: React.FC = () => {
 
   const handleCheckout = async () => {
     if (!service) return;
+    const email = customerEmail.trim();
+    if (!email) {
+      alert('Please enter your email address to continue.');
+      return;
+    }
 
     setCheckoutLoading(true);
     try {
       const response = await orderApi.checkout({
-        services: [
-          {
-            service_id: service.id,
-            quantity: quantity,
-          },
-        ],
-        customer_email: '', // Will need to get from auth or form
-        customer_name: '', // Will need to get from auth or form
+        services: [{ service_id: service.id, quantity }],
+        customer_email: email,
       });
 
-      // Redirect to Stripe checkout
-      window.location.href = response.url;
+      if (response.url) {
+        window.location.href = response.url;
+      } else {
+        throw new Error('No checkout URL received');
+      }
     } catch (error) {
       console.error('Checkout failed:', error);
       alert('Failed to start checkout. Please try again.');
@@ -194,6 +197,18 @@ export const ServiceDetailPage: React.FC = () => {
                     </span>
                   </div>
                 )}
+              </div>
+
+              {/* Email (required for checkout) */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                <input
+                  type="email"
+                  value={customerEmail}
+                  onChange={(e) => setCustomerEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                />
               </div>
 
               {/* Quantity Selector (for non-subscription services) */}

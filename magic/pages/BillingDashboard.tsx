@@ -220,47 +220,12 @@ export function BillingDashboard() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/10">
-                  {[{
-                date: 'Dec 15, 2024',
-                desc: 'Monthly subscription',
-                amount: '$298.00',
-                status: 'Paid'
-              }, {
-                date: 'Nov 15, 2024',
-                desc: 'Monthly subscription',
-                amount: '$298.00',
-                status: 'Paid'
-              }, {
-                date: 'Nov 1, 2024',
-                desc: 'Emma (Finance) - Prorated',
-                amount: '$49.50',
-                status: 'Paid'
-              }, {
-                date: 'Oct 15, 2024',
-                desc: 'Monthly subscription',
-                amount: '$199.00',
-                status: 'Paid'
-              }].map((invoice, i) => <tr key={i} className={`${style.itemHover} transition-colors`}>
-                      <td className={`px-6 py-4 text-sm ${style.textClass} font-medium`}>
-                        {invoice.date}
-                      </td>
-                      <td className={`px-6 py-4 text-sm ${style.textClass} opacity-90`}>
-                        {invoice.desc}
-                      </td>
-                      <td className={`px-6 py-4 text-sm font-bold ${style.textClass}`}>
-                        {invoice.amount}
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700">
-                          <CheckCircle2 className="w-3 h-3" /> {invoice.status}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <button className={`${style.textClass} opacity-60 hover:opacity-100 transition-colors`}>
-                          <Download className="w-4 h-4" />
-                        </button>
-                      </td>
-                    </tr>)}
+                  {/* Mock data commented out - use BillingDashboardPage with real API */}
+                  <tr>
+                    <td colSpan={5} className="px-6 py-12 text-center opacity-80">
+                      No payment history. Use BillingDashboardPage for real data.
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -283,58 +248,10 @@ export function BillingDashboard() {
               Usage This Period
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[{
-            label: 'Email Sends',
-            value: '3,200',
-            total: '5,000',
-            percent: 64,
-            color: 'bg-blue-600'
-          }, {
-            label: 'CRM Contacts',
-            value: '247',
-            total: '2,500',
-            percent: 10,
-            color: 'bg-emerald-500'
-          }, {
-            label: 'Storage',
-            value: '8.2 GB',
-            total: '25 GB',
-            percent: 33,
-            color: 'bg-purple-600'
-          }, {
-            label: 'AI Employees',
-            value: '4',
-            total: '4',
-            percent: 100,
-            color: 'bg-amber-500',
-            warning: true
-          }].map((usage, i) => <div key={i}>
-                  <div className="flex justify-between text-sm mb-2">
-                    <span className={`font-bold ${style.textClass}`}>
-                      {usage.label}
-                    </span>
-                    <span className={`${style.textClass} opacity-80`}>
-                      {usage.value} / {usage.total}
-                    </span>
-                  </div>
-                  <div className={`h-2 ${style.contentBg} rounded-full overflow-hidden mb-2 border border-white/20`}>
-                    <motion.div initial={{
-                width: 0
-              }} animate={{
-                width: `${usage.percent}%`
-              }} transition={{
-                duration: 1,
-                delay: 0.2
-              }} className={`h-full rounded-full ${usage.color}`} />
-                  </div>
-                  {usage.warning && <div className="flex items-center gap-2 text-xs text-red-600 dark:text-red-400 font-bold mt-1">
-                      <AlertTriangle className="w-3 h-3" />
-                      You're at capacity.{' '}
-                      <button className="underline hover:text-red-700 dark:hover:text-red-300">
-                        Upgrade for more
-                      </button>
-                    </div>}
-                </div>)}
+              {/* Mock usage data commented out - wire to real usage API */}
+              <div className="col-span-2 text-center py-8 opacity-80">
+                No usage data. Wire to real usage API.
+              </div>
             </div>
           </motion.div>;
     })()}

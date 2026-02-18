@@ -54,11 +54,19 @@ export const ServiceCatalogPage: React.FC = () => {
     <LearningLayout title="Service Catalog" breadcrumbs={breadcrumbs}>
       <div className="space-y-6">
         {/* Header */}
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Service Catalog</h1>
-          <p className="text-lg text-gray-600">
-            Browse and purchase services for your business
-          </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Service Catalog</h1>
+            <p className="text-lg text-gray-600">
+              Browse and purchase services for your business
+            </p>
+          </div>
+          <Link
+            to="/learning/services/billing"
+            className="px-4 py-2 text-sm font-medium text-indigo-600 hover:text-indigo-700 border border-indigo-200 rounded-lg hover:bg-indigo-50"
+          >
+            Billing & Orders
+          </Link>
         </div>
 
         {/* Filters */}

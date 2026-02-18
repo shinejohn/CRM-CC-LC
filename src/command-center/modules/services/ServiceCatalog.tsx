@@ -4,8 +4,9 @@ import { Check, Sparkles } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Service, ServiceTier } from '../../hooks/useServices';
+import { Service } from '../../hooks/useServices';
 import { useServices } from '../../hooks/useServices';
+import { useAuth } from '../../core/AuthContext';
 
 interface ServiceCatalogProps {
   services: Service[];
@@ -13,7 +14,8 @@ interface ServiceCatalogProps {
 
 export function ServiceCatalog({ services: initialServices }: ServiceCatalogProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const { subscribe, isLoading: isSubscribing, refreshServices } = useServices();
+  const { user } = useAuth();
+  const { subscribe, isLoading: isSubscribing } = useServices();
 
   const categories = ['all', ...new Set(initialServices.map(s => s.category))];
   const filteredServices = selectedCategory === 'all'
@@ -21,12 +23,15 @@ export function ServiceCatalog({ services: initialServices }: ServiceCatalogProp
     : initialServices.filter(s => s.category === selectedCategory);
 
   const handleSubscribe = async (serviceId: string, tierId: string) => {
+    const customerEmail = user?.email ?? '';
+    if (!customerEmail) {
+      console.error('Please log in to subscribe');
+      return;
+    }
     try {
-      await subscribe(serviceId, tierId);
-      await refreshServices();
+      await subscribe(serviceId, tierId, customerEmail);
     } catch (error) {
       console.error('Failed to subscribe:', error);
-      // TODO: Show error toast
     }
   };
 

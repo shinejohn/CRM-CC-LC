@@ -104,6 +104,15 @@ class ApiService {
       };
     }
 
+    // Add tenant header when available (required by services, orders, billing APIs)
+    const tenantId = localStorage.getItem('tenant_id');
+    if (tenantId) {
+      requestInit.headers = {
+        ...requestInit.headers,
+        'X-Tenant-ID': tenantId,
+      };
+    }
+
     // Add body for non-GET requests
     if (data && method !== 'GET') {
       requestInit.body = JSON.stringify(data);

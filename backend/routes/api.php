@@ -16,6 +16,8 @@ use App\Http\Controllers\Api\AIController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\ServiceCategoryController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\ServiceSubscriptionController;
+use App\Http\Controllers\Api\BillingController;
 use App\Http\Controllers\Api\ProvisioningTaskController;
 use App\Http\Controllers\Api\WebhookController;
 use App\Http\Controllers\Api\SubscriptionController;
@@ -317,6 +319,20 @@ Route::prefix('v1')->group(function () {
         Route::post('/checkout', [\App\Http\Controllers\Api\OrderController::class, 'checkout']);
         Route::get('/{id}', [\App\Http\Controllers\Api\OrderController::class, 'show']);
     });
+
+    // Service Subscriptions (active subscriptions for SMB/tenant)
+    Route::prefix('subscriptions')->group(function () {
+        Route::get('/', [ServiceSubscriptionController::class, 'index']);
+        Route::delete('/{id}', [ServiceSubscriptionController::class, 'destroy']);
+    });
+
+    // Billing API
+    Route::prefix('billing')->group(function () {
+        Route::get('/summary', [BillingController::class, 'summary']);
+    });
+
+    Route::get('/invoices', [BillingController::class, 'invoices']);
+    Route::post('/invoices/{id}/pay', [BillingController::class, 'payInvoice']);
 
     Route::middleware(['auth:sanctum'])->group(function () {
         // Approvals API
