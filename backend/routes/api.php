@@ -28,6 +28,7 @@ use App\Http\Controllers\Api\V1\ContentTrackingController;
 use App\Http\Controllers\Api\V1\DealController;
 use App\Http\Controllers\Api\V1\QuoteController;
 use App\Http\Controllers\Api\V1\InvoiceController;
+use App\Http\Controllers\Api\V1\NotificationController;
 use App\Http\Controllers\Api\V1\ContactController as CrmContactController;
 use App\Http\Controllers\Api\V1\ActivityController as CrmActivityController;
 use App\Http\Controllers\Api\NewsletterController;
@@ -254,6 +255,16 @@ Route::prefix('v1')->group(function () {
             Route::get('/{id}', [CrmContactController::class, 'show']);
             Route::put('/{id}', [CrmContactController::class, 'update']);
             Route::delete('/{id}', [CrmContactController::class, 'destroy']);
+        });
+
+        // CRM API - Notifications
+        Route::prefix('notifications')->group(function () {
+            Route::get('/', [NotificationController::class, 'index']);
+            Route::post('/mark-all-read', [NotificationController::class, 'markAllRead']);
+            Route::post('/{id}/mark-read', [NotificationController::class, 'markRead']);
+            Route::post('/{id}/toggle-important', [NotificationController::class, 'toggleImportant']);
+            Route::post('/{id}/archive', [NotificationController::class, 'archive']);
+            Route::delete('/{id}', [NotificationController::class, 'destroy']);
         });
 
         // CRM API - Activities (call logs, meetings)

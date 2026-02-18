@@ -1,112 +1,235 @@
-import React, { useState } from 'react';
-import { SparklesIcon, DownloadIcon, SaveIcon } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Plus, Trash2, Loader2 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from './ui/card';
-export const ProposalForm = () => {
-  const [isGenerating, setIsGenerating] = useState(false);
+import { quotesApi } from '../../src/services/crm/quotes-api';
+import { customerApi, type Customer } from '../../src/services/crm/crm-api';
+
+interface LineItem {
+  description: string;
+  quantity: number;
+  unit_price: number;
+}
+
+export const ProposalForm = ({
+  onSaved,
+  dealId,
+}: {
+  onSaved?: (quoteId: string) => void;
+  dealId?: string;
+}) => {
+  const [customers, setCustomers] = useState<Customer[]>([]);
+  const [loadingCustomers, setLoadingCustomers] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
-    clientName: 'Acme Corporation',
-    projectTitle: 'Digital Transformation Initiative',
-    executiveSummary: '',
-    scope: '',
-    timeline: '',
-    budget: '',
-    deliverables: ''
+    customer_id: '',
+    projectTitle: '',
+    notes: '',
+    valid_until: '',
+    items: [
+      { description: '', quantity: 1, unit_price: 0 },
+    ] as LineItem[],
   });
-  const handleGenerate = () => {
-    setIsGenerating(true);
-    // Simulate AI generation
-    setTimeout(() => {
-      setFormData({
-        ...formData,
-        executiveSummary: 'Acme Corporation seeks to modernize its digital infrastructure to improve operational efficiency and customer experience. This proposal outlines a comprehensive digital transformation initiative that will deliver measurable ROI within 12 months through cloud migration, process automation, and enhanced analytics capabilities.',
-        scope: '• Cloud infrastructure migration\n• Legacy system modernization\n• Customer portal development\n• Data analytics platform implementation\n• Staff training and change management',
-        timeline: 'Phase 1 (Months 1-3): Discovery and planning\nPhase 2 (Months 4-6): Infrastructure setup\nPhase 3 (Months 7-9): Application development\nPhase 4 (Months 10-12): Testing and deployment',
-        budget: 'Total Investment: $450,000\n• Infrastructure: $180,000\n• Development: $150,000\n• Training: $50,000\n• Contingency: $70,000',
-        deliverables: '• Cloud-based infrastructure\n• Modernized applications\n• Customer self-service portal\n• Analytics dashboard\n• Training materials and documentation'
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoadingCustomers(true);
+    customerApi
+      .list({}, 1, 50)
+      .then((res) => {
+        const data = res.data ?? [];
+        if (!cancelled && data.length) setCustomers(data);
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setLoadingCustomers(false);
       });
-      setIsGenerating(false);
-    }, 2000);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const handleChange = (field: string, value: string | number) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
-  const handleChange = (field: string, value: string) => {
-    setFormData({
-      ...formData,
-      [field]: value
+
+  const handleItemChange = (index: number, field: keyof LineItem, value: string | number) => {
+    setFormData((prev) => {
+      const items = [...prev.items];
+      items[index] = { ...items[index], [field]: value };
+      return { ...prev, items };
     });
   };
-  return <div className="p-6 max-w-5xl mx-auto">
+
+  const addItem = () => {
+    setFormData((prev) => ({
+      ...prev,
+      items: [...prev.items, { description: '', quantity: 1, unit_price: 0 }],
+    }));
+  };
+
+  const removeItem = (index: number) => {
+    if (formData.items.length <= 1) return;
+    setFormData((prev) => ({
+      ...prev,
+      items: prev.items.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleSave = async () => {
+    if (!formData.customer_id) {
+      setError('Please select a customer');
+      return;
+    }
+    const validItems = formData.items.filter((i) => i.description.trim());
+    if (validItems.length === 0) {
+      setError('Please add at least one line item');
+      return;
+    }
+    setError(null);
+    setSaving(true);
+    try {
+      const quote = await quotesApi.create({
+        customer_id: formData.customer_id,
+        deal_id: dealId,
+        notes: formData.notes || undefined,
+        valid_until: formData.valid_until || undefined,
+        items: validItems.map((i) => ({
+          description: i.description,
+          quantity: i.quantity,
+          unit_price: i.unit_price,
+        })),
+      });
+      onSaved?.(quote.id);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to save proposal');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="p-6 max-w-5xl mx-auto">
       <Card>
         <CardHeader>
-          <div className="flex justify-between items-center">
-            <div>
-              <CardTitle>Client Proposal</CardTitle>
-              <CardDescription>AI-powered proposal generation</CardDescription>
-            </div>
-            <Button onClick={handleGenerate} disabled={isGenerating}>
-              <SparklesIcon className="w-4 h-4 mr-2" />
-              {isGenerating ? 'Generating...' : 'Generate with AI'}
-            </Button>
-          </div>
+          <CardTitle>Create Proposal</CardTitle>
+          <CardDescription>Add line items and save as draft</CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-6">
-          {/* Client Name */}
+          {error && (
+            <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+              {error}
+            </div>
+          )}
+
           <div className="space-y-2">
-            <Label htmlFor="clientName">Client Name</Label>
-            <Input id="clientName" value={formData.clientName} onChange={e => handleChange('clientName', e.target.value)} />
+            <Label htmlFor="customer">Customer *</Label>
+            <select
+              id="customer"
+              value={formData.customer_id}
+              onChange={(e) => handleChange('customer_id', e.target.value)}
+              className="w-full p-2 border border-slate-200 rounded-lg bg-white"
+              disabled={loadingCustomers}
+            >
+              <option value="">Select customer...</option>
+              {customers.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.business_name}
+                </option>
+              ))}
+            </select>
           </div>
 
-          {/* Project Title */}
           <div className="space-y-2">
             <Label htmlFor="projectTitle">Project Title</Label>
-            <Input id="projectTitle" value={formData.projectTitle} onChange={e => handleChange('projectTitle', e.target.value)} />
+            <Input
+              id="projectTitle"
+              value={formData.projectTitle}
+              onChange={(e) => handleChange('projectTitle', e.target.value)}
+              placeholder="e.g. Q1 Services Package"
+            />
           </div>
 
-          {/* Executive Summary */}
+          <div>
+            <Label className="mb-2 block">Line Items *</Label>
+            <div className="space-y-2">
+              {formData.items.map((item, i) => (
+                <div key={i} className="flex gap-2 items-start">
+                  <Input
+                    className="flex-1"
+                    placeholder="Description"
+                    value={item.description}
+                    onChange={(e) => handleItemChange(i, 'description', e.target.value)}
+                  />
+                  <Input
+                    type="number"
+                    className="w-20"
+                    placeholder="Qty"
+                    min={0.01}
+                    step={0.01}
+                    value={item.quantity || ''}
+                    onChange={(e) => handleItemChange(i, 'quantity', parseFloat(e.target.value) || 0)}
+                  />
+                  <Input
+                    type="number"
+                    className="w-28"
+                    placeholder="Unit price"
+                    min={0}
+                    step={0.01}
+                    value={item.unit_price || ''}
+                    onChange={(e) => handleItemChange(i, 'unit_price', parseFloat(e.target.value) || 0)}
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => removeItem(i)}
+                    disabled={formData.items.length <= 1}
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </div>
+              ))}
+              <Button type="button" variant="outline" size="sm" onClick={addItem}>
+                <Plus className="w-4 h-4 mr-2" /> Add Line Item
+              </Button>
+            </div>
+          </div>
+
           <div className="space-y-2">
-            <Label htmlFor="executiveSummary">Executive Summary</Label>
-            <Textarea id="executiveSummary" value={formData.executiveSummary} onChange={e => handleChange('executiveSummary', e.target.value)} rows={4} placeholder="Brief overview of the proposal..." />
+            <Label htmlFor="valid_until">Valid Until</Label>
+            <Input
+              id="valid_until"
+              type="date"
+              value={formData.valid_until}
+              onChange={(e) => handleChange('valid_until', e.target.value)}
+            />
           </div>
 
-          {/* Scope */}
           <div className="space-y-2">
-            <Label htmlFor="scope">Project Scope</Label>
-            <Textarea id="scope" value={formData.scope} onChange={e => handleChange('scope', e.target.value)} rows={5} placeholder="Key deliverables and scope items..." />
+            <Label htmlFor="notes">Notes</Label>
+            <Textarea
+              id="notes"
+              value={formData.notes}
+              onChange={(e) => handleChange('notes', e.target.value)}
+              rows={3}
+              placeholder="Optional notes..."
+            />
           </div>
 
-          {/* Timeline */}
-          <div className="space-y-2">
-            <Label htmlFor="timeline">Timeline</Label>
-            <Textarea id="timeline" value={formData.timeline} onChange={e => handleChange('timeline', e.target.value)} rows={4} placeholder="Project phases and milestones..." />
-          </div>
-
-          {/* Budget */}
-          <div className="space-y-2">
-            <Label htmlFor="budget">Budget Breakdown</Label>
-            <Textarea id="budget" value={formData.budget} onChange={e => handleChange('budget', e.target.value)} rows={4} placeholder="Cost breakdown and investment details..." />
-          </div>
-
-          {/* Deliverables */}
-          <div className="space-y-2">
-            <Label htmlFor="deliverables">Key Deliverables</Label>
-            <Textarea id="deliverables" value={formData.deliverables} onChange={e => handleChange('deliverables', e.target.value)} rows={4} placeholder="List of deliverables..." />
-          </div>
-
-          {/* Action Buttons */}
           <div className="flex gap-3 pt-6 border-t border-slate-200">
-            <Button variant="default">
-              <SaveIcon className="w-4 h-4 mr-2" />
+            <Button onClick={handleSave} disabled={saving}>
+              {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
               Save Draft
-            </Button>
-            <Button variant="secondary">
-              <DownloadIcon className="w-4 h-4 mr-2" />
-              Export PDF
             </Button>
           </div>
         </CardContent>
       </Card>
-    </div>;
+    </div>
+  );
 };

@@ -8,7 +8,7 @@ interface SendPaymentReminderModalProps {
   customer: string;
   amount: string;
   daysOverdue: number;
-  onSendReminder: (data: any) => void;
+  onSendReminder: (data?: { type?: string }) => void;
 }
 export function SendPaymentReminderModal({
   isOpen,
