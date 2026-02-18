@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ApprovalController;
 use App\Http\Controllers\Api\KnowledgeController;
 use App\Http\Controllers\Api\SurveyController;
 use App\Http\Controllers\Api\ArticleController;
+use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\PresentationController;
 use App\Http\Controllers\Api\CampaignController;
@@ -97,6 +98,15 @@ Route::prefix('v1')->group(function () {
         Route::get('/{id}', [ArticleController::class, 'show']);
         Route::put('/{id}', [ArticleController::class, 'update']);
         Route::delete('/{id}', [ArticleController::class, 'destroy']);
+    });
+
+    // Events API
+    Route::prefix('events')->group(function () {
+        Route::get('/', [EventController::class, 'index']);
+        Route::post('/', [EventController::class, 'store']);
+        Route::get('/{id}', [EventController::class, 'show']);
+        Route::put('/{id}', [EventController::class, 'update']);
+        Route::delete('/{id}', [EventController::class, 'destroy']);
     });
 
     // Learning Center - Content API

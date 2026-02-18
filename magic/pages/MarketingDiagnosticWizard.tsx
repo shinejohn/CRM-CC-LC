@@ -1,6 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Target, ArrowRight, Check, X, Sparkles, Edit2, GripVertical, Lightbulb, Search, BarChart3, Download, MessageCircle } from 'lucide-react';
+
+const API_BASE = import.meta.env?.VITE_API_URL || 'http://localhost:8000/api/v1';
+async function fetchSmbProfile(): Promise<{ name?: string; category?: string; location?: string } | null> {
+  try {
+    const token = localStorage.getItem('auth_token');
+    const res = await fetch(`${API_BASE}/smb/profile`, {
+      headers: {
+        Accept: 'application/json',
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      credentials: 'include',
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    const data = json?.data ?? json;
+    return {
+      name: data?.business_name ?? data?.name ?? data?.company_name,
+      category: data?.industry ?? data?.category ?? data?.business_type,
+      location: data?.location ?? data?.city ?? data?.address,
+    };
+  } catch {
+    return null;
+  }
+}
 interface MarketingDiagnosticWizardProps {
   onComplete?: (data: DiagnosticData) => void;
   onCancel?: () => void;
@@ -52,13 +76,26 @@ export function MarketingDiagnosticWizard({
   const [processingStep, setProcessingStep] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [showFullResults, setShowFullResults] = useState(false);
+  const [businessInfo, setBusinessInfo] = useState<BusinessInfo>({
+    name: 'Your Business',
+    category: 'Business',
+    location: '',
+    icon: '🔧',
+  });
   const totalSteps = 7;
-  const businessInfo: BusinessInfo = {
-    name: 'ABC Home Services',
-    category: 'Plumbing',
-    location: 'Tampa, FL',
-    icon: '🔧'
-  };
+
+  useEffect(() => {
+    fetchSmbProfile().then((profile) => {
+      if (profile?.name || profile?.category || profile?.location) {
+        setBusinessInfo((prev) => ({
+          ...prev,
+          name: profile.name ?? prev.name,
+          category: profile.category ?? prev.category,
+          location: profile.location ?? prev.location,
+        }));
+      }
+    });
+  }, []);
   const subtypeOptions = [{
     id: 'emergency',
     label: 'Emergency & Repairs',

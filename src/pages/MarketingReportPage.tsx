@@ -1,11 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Facilitator } from '../components/Facilitator';
 import { Participants } from '../components/Participants';
 import { MarketingPlanForm } from '../components/MarketingPlanForm';
 import { ExpandableChat } from '../components/ExpandableChat';
 import { VoiceControls } from '../components/VoiceControls';
 import { MainNavigationHeader } from '../components/MainNavigationHeader';
-import { VideoIcon, MessageCircleIcon, MicIcon } from 'lucide-react';
+import { VideoIcon, MessageCircleIcon, MicIcon, BarChart3, RefreshCw } from 'lucide-react';
+import { analyticsService } from '../services/analyticsService';
+
+interface CampaignPerformanceItem {
+  campaign_type: string;
+  total_sessions: number;
+  conversions: number;
+  conversion_rate: number;
+  avg_duration: number | null;
+  engagement_rate: number;
+}
+
+interface CampaignPerformanceData {
+  campaign_performance: CampaignPerformanceItem[];
+  date_range: { start: string; end: string; days: number };
+}
+
 export const MarketingReportPage = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOff, setIsVideoOff] = useState(false);
@@ -13,38 +29,33 @@ export const MarketingReportPage = () => {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [isFacilitatorPresent, setIsFacilitatorPresent] = useState(true);
-  const [messages, setMessages] = useState([{
-    sender: 'AI Facilitator',
-    text: 'Welcome to the marketing report. How can I help you analyze this marketing plan?',
-    isAI: true
-  }, {
-    sender: 'You',
-    text: 'Can you explain the competitive analysis section in more detail?',
-    isAI: false
-  }, {
-    sender: 'AI Facilitator',
-    text: "The competitive analysis shows that your company has 8% market share compared to CompanyX (42%), CompanyY (27%), and CompanyZ (15%). Your advantage is in customer satisfaction (82% vs. competitor's 67%), while CompanyX leads in product quality but has higher pricing.",
-    isAI: true
-  }]);
-  const addMessage = message => {
-    setMessages([...messages, message]);
+  const [messages, setMessages] = useState<Array<{ sender: string; text: string; isAI: boolean }>>([]);
+  const [campaignPerformance, setCampaignPerformance] = useState<CampaignPerformanceData | null>(null);
+  const [campaignLoading, setCampaignLoading] = useState(true);
+  const [participants, setParticipants] = useState<Array<{ id: number; name: string; image: string }>>([]);
+
+  useEffect(() => {
+    loadCampaignPerformance();
+  }, []);
+
+  const loadCampaignPerformance = async () => {
+    setCampaignLoading(true);
+    try {
+      const data = await analyticsService.getCampaignPerformance() as unknown as CampaignPerformanceData;
+      setCampaignPerformance(data);
+    } catch (err) {
+      console.error('Failed to load campaign performance:', err);
+    } finally {
+      setCampaignLoading(false);
+    }
   };
-  const handleTranscriptUpdate = text => {
+
+  const addMessage = (message: { sender: string; text: string; isAI: boolean }) => {
+    setMessages((prev) => [...prev, message]);
+  };
+  const handleTranscriptUpdate = (text: string) => {
     setTranscript(text);
   };
-  const participants = [{
-    id: 1,
-    name: 'John Doe',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-  }, {
-    id: 2,
-    name: 'Jane Smith',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-  }, {
-    id: 3,
-    name: 'Alex Johnson',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-  }];
   return <div className="flex flex-col h-screen">
       {/* Main Navigation Header */}
       <MainNavigationHeader />
@@ -54,6 +65,39 @@ export const MarketingReportPage = () => {
         {/* Main Content Area - Marketing Report */}
         <div className="flex-1 border-r border-gray-300 flex flex-col">
           <div className="flex-1 overflow-y-auto">
+            {/* Campaign Performance - Real API: GET /v1/crm/analytics/campaign-performance */}
+            <div className="border-b border-gray-200 bg-white p-4">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                  <BarChart3 className="w-5 h-5 text-indigo-600" />
+                  Campaign Performance
+                </h2>
+                <button
+                  onClick={loadCampaignPerformance}
+                  disabled={campaignLoading}
+                  className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg disabled:opacity-50"
+                  title="Refresh"
+                >
+                  <RefreshCw className={`w-4 h-4 ${campaignLoading ? 'animate-spin' : ''}`} />
+                </button>
+              </div>
+              {campaignLoading ? (
+                <div className="text-sm text-gray-500">Loading campaign metrics...</div>
+              ) : campaignPerformance?.campaign_performance?.length ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {campaignPerformance.campaign_performance.map((item, idx) => (
+                    <div key={idx} className="bg-gray-50 rounded-lg p-3 border border-gray-100">
+                      <div className="font-medium text-gray-900 text-sm">{item.campaign_type || 'Campaign'}</div>
+                      <div className="mt-1 text-xs text-gray-600">
+                        Sessions: {item.total_sessions} · Conversions: {item.conversions} · Rate: {item.conversion_rate}%
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-gray-500">No campaign performance data for the selected period.</p>
+              )}
+            </div>
             <MarketingPlanForm />
           </div>
           {/* Expandable Chat */}

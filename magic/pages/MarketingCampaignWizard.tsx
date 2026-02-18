@@ -1,6 +1,35 @@
 import React, { useEffect, useState, Component } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Check, Lightbulb, AlertCircle, Sparkles, ChevronRight, Rocket } from 'lucide-react';
+
+const API_BASE = import.meta.env?.VITE_API_URL || 'http://localhost:8000/api/v1';
+async function createOutboundCampaign(payload: {
+  name: string;
+  type: 'email' | 'sms' | 'phone';
+  message: string;
+  subject?: string;
+  recipient_segments?: Record<string, unknown>;
+  scheduled_at?: string;
+}) {
+  const token = localStorage.getItem('auth_token');
+  const tenantId = localStorage.getItem('tenant_id');
+  const res = await fetch(`${API_BASE}/outbound/campaigns`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      ...(token && { Authorization: `Bearer ${token}` }),
+      ...(tenantId && { 'X-Tenant-ID': tenantId }),
+    },
+    body: JSON.stringify(payload),
+    credentials: 'include',
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error((err as { message?: string }).message || res.statusText);
+  }
+  return res.json();
+}
 // TypeScript Interfaces
 interface WizardState {
   currentStep: number;
@@ -850,6 +879,9 @@ function calculateMonthlyTotal(state: WizardState): number {
   return total;
 }
 export function MarketingCampaignWizard() {
+  const [launching, setLaunching] = useState(false);
+  const [launchError, setLaunchError] = useState<string | null>(null);
+  const [launchSuccess, setLaunchSuccess] = useState(false);
   const [state, setState] = useState<WizardState>({
     currentStep: 1,
     currentScreenIndex: 0,
@@ -887,7 +919,33 @@ export function MarketingCampaignWizard() {
       }));
     }
   }, [state.enhancements]);
-  const handleNext = () => {
+  const handleNext = async () => {
+    if (currentScreen.navigation.nextAction === 'finish') {
+      setLaunching(true);
+      setLaunchError(null);
+      try {
+        const campaignName = state.eventName || state.campaignFocus || `Campaign for ${state.businessName}`;
+        const message = [
+          state.businessName && `Hello from ${state.businessName}!`,
+          state.community && `We're based in ${state.community}.`,
+          state.eventName && state.eventDate && `Join us for ${state.eventName} on ${state.eventDate}.`,
+          state.eventDescription && state.eventDescription,
+        ].filter(Boolean).join('\n\n') || `Welcome! We're excited to connect with you from ${state.businessName || 'our business'}.`;
+        await createOutboundCampaign({
+          name: campaignName,
+          type: 'email',
+          subject: state.eventName || `Update from ${state.businessName || 'Us'}`,
+          message,
+          recipient_segments: { has_email: true },
+        });
+        setLaunchSuccess(true);
+      } catch (err) {
+        setLaunchError(err instanceof Error ? err.message : 'Failed to launch campaign');
+      } finally {
+        setLaunching(false);
+      }
+      return;
+    }
     // Routing logic based on customer value ranking
     if (state.currentScreenIndex === 1 && state.customerValueRanking.length === 3) {
       const topValue = state.customerValueRanking[0];
@@ -1059,10 +1117,27 @@ export function MarketingCampaignWizard() {
                     {currentScreen.navigation.backLabel || 'Back'}
                   </button>
 
-                  <button onClick={handleNext} className="flex items-center gap-2 px-8 py-3 bg-[#1E3A5F] text-white rounded-lg font-bold hover:bg-[#2D5A8A] transition-colors shadow-lg">
-                    {currentScreen.navigation.nextLabel || 'Continue'}
-                    {currentScreen.navigation.nextAction === 'finish' ? <Rocket className="w-5 h-5" /> : <ArrowRight className="w-5 h-5" />}
-                  </button>
+                  {launchSuccess ? (
+                    <div className="flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-lg font-bold">
+                      <Check className="w-5 h-5" /> Campaign Launched!
+                    </div>
+                  ) : (
+                    <>
+                      {launchError && (
+                        <div className="absolute top-0 left-0 right-0 -translate-y-full mb-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-800 text-sm">
+                          {launchError}
+                        </div>
+                      )}
+                      <button
+                        onClick={() => handleNext()}
+                        disabled={launching}
+                        className="flex items-center gap-2 px-8 py-3 bg-[#1E3A5F] text-white rounded-lg font-bold hover:bg-[#2D5A8A] transition-colors shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                      >
+                        {launching ? 'Launching...' : (currentScreen.navigation.nextLabel || 'Continue')}
+                        {currentScreen.navigation.nextAction === 'finish' ? <Rocket className="w-5 h-5" /> : <ArrowRight className="w-5 h-5" />}
+                      </button>
+                    </>
+                  )}
                 </div>
               </motion.div>
             </AnimatePresence>

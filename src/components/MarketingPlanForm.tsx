@@ -10,11 +10,13 @@ export const MarketingPlanForm = () => {
     timeline: 'pending',
     metrics: 'pending'
   });
+  // Mock AI content commented out - wire to campaign generation API when available
+  // fullText: 'Based on market data analysis, three primary competitors...'
   const [aiTyping, setAiTyping] = useState({
     section: 'competitiveAnalysis',
     isTyping: false,
     text: '',
-    fullText: 'Based on market data analysis, three primary competitors have been identified: CompanyX (42% market share), CompanyY (27% market share), and CompanyZ (15% market share). Your company currently holds 8% of the market. CompanyX leads in product quality but has higher pricing, while CompanyY offers competitive pricing but lower customer satisfaction ratings (67% vs. your 82%).'
+    fullText: '',
   });
   const [confidenceLevels, setConfidenceLevels] = useState({
     executiveSummary: 92,
@@ -54,7 +56,7 @@ export const MarketingPlanForm = () => {
               section: 'marketingStrategy',
               isTyping: true,
               text: '',
-              fullText: 'Recommend a multi-channel approach focusing on digital marketing (60%) and targeted industry events (40%). Key digital channels should include LinkedIn for B2B engagement (estimated 3.2% conversion rate), Google Ads with industry-specific keywords (projected 2.8% CTR), and email marketing campaigns to existing clients (expected 22% open rate, 4.1% conversion).'
+              fullText: '', // Wire to API for real recommendations
             });
           }, 2000);
         } else if (aiTyping.section === 'marketingStrategy') {
@@ -68,7 +70,7 @@ export const MarketingPlanForm = () => {
               section: 'budget',
               isTyping: true,
               text: '',
-              fullText: 'Based on industry benchmarks and projected ROI analysis, recommend allocating $125,000 quarterly with the following distribution: Digital Marketing (60%): $75,000, Industry Events (25%): $31,250, Content Creation (10%): $12,500, Contingency (5%): $6,250.'
+              fullText: '', // Wire to API for real budget recommendations
             });
           }, 2000);
         }
@@ -76,16 +78,8 @@ export const MarketingPlanForm = () => {
       return () => clearTimeout(timer);
     }
   }, [aiTyping]);
-  // Start the AI typing when component mounts
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAiTyping(prev => ({
-        ...prev,
-        isTyping: true
-      }));
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, []);
+  // AI typing disabled - wire to campaign generation API for real content
+  // useEffect(() => { setAiTyping(prev => ({ ...prev, isTyping: true })); }, []);
   const getStatusIcon = status => {
     switch (status) {
       case 'completed':
@@ -131,18 +125,19 @@ export const MarketingPlanForm = () => {
       </div>
       <div className="flex-1 overflow-y-auto p-6">
         <div className="max-w-4xl mx-auto space-y-8">
-          {/* Client Info */}
+          {/* Client Info - load from SMB profile / business context API */}
           <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
             <div className="flex justify-between items-start">
               <div>
                 <h2 className="text-lg font-medium text-gray-800">
-                  Acme Corporation
+                  {/* Acme Corporation - mock commented out */}
+                  Business Profile
                 </h2>
                 <p className="text-sm text-gray-600">
-                  Industry: Software as a Service (SaaS)
+                  Industry: — {/* Load from API */}
                 </p>
                 <p className="text-sm text-gray-600">
-                  Target Market: Mid-size businesses (100-500 employees)
+                  Target Market: — {/* Load from API */}
                 </p>
               </div>
               <div className="bg-blue-50 p-3 rounded-lg">
@@ -150,9 +145,8 @@ export const MarketingPlanForm = () => {
                   Analysis based on:
                 </p>
                 <ul className="text-xs text-blue-600 mt-1">
-                  <li>• 3 years of historical data</li>
-                  <li>• 1,245 customer records</li>
-                  <li>• 14 market research reports</li>
+                  {/* Mock data commented out: 3 years historical, 1245 records, 14 reports */}
+                  <li>• Connect to CRM analytics for real data</li>
                 </ul>
               </div>
             </div>
@@ -169,23 +163,8 @@ export const MarketingPlanForm = () => {
               </div>
             </div>
             <div className="p-4 bg-white">
-              <p className="text-gray-700">
-                Analysis of Acme Corporation's current market position indicates
-                significant growth opportunity in the mid-size business segment,
-                particularly within the technology and financial services
-                verticals. Current customer acquisition cost (CAC) of $1,250 is
-                15% above industry average, while customer lifetime value (CLV)
-                of $8,750 creates a healthy CLV:CAC ratio of 7:1.
-              </p>
-              <p className="text-gray-700 mt-3">
-                Recommend focusing marketing efforts on digital channels with
-                targeted messaging around cost reduction and operational
-                efficiency, which aligns with primary customer pain points
-                identified in recent surveys. Competitive analysis suggests
-                emphasizing your platform's integration capabilities and
-                superior customer support (NPS score of 72 vs. industry average
-                of 45).
-              </p>
+              {/* Mock executive summary commented out - wire to campaign generation API */}
+              <p className="text-gray-500 italic">Executive summary will be generated from business data and campaign analytics.</p>
             </div>
           </div>
           {/* Target Market Analysis */}
@@ -200,61 +179,19 @@ export const MarketingPlanForm = () => {
               </div>
             </div>
             <div className="p-4 bg-white">
+              {/* Mock target market data commented out - wire to CRM analytics API */}
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1">
                   <h3 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
                     <UsersIcon size={16} className="mr-1" /> Primary Audience
                   </h3>
-                  <ul className="text-gray-700 space-y-2">
-                    <li>
-                      <span className="font-medium">Demographics:</span>{' '}
-                      Mid-size businesses (100-500 employees)
-                    </li>
-                    <li>
-                      <span className="font-medium">Key Industries:</span>{' '}
-                      Technology (42%), Financial Services (28%), Healthcare
-                      (15%)
-                    </li>
-                    <li>
-                      <span className="font-medium">Decision Makers:</span> IT
-                      Directors (37%), CTOs (32%), Operations Managers (24%)
-                    </li>
-                  </ul>
+                  <p className="text-gray-500 italic text-sm">Load from CRM / customer analytics</p>
                 </div>
                 <div className="flex-1">
                   <h3 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
                     <TargetIcon size={16} className="mr-1" /> Key Pain Points
                   </h3>
-                  <ul className="text-gray-700 space-y-2">
-                    <li>
-                      <span className="font-medium">Primary:</span> Cost
-                      management (87% of survey respondents)
-                    </li>
-                    <li>
-                      <span className="font-medium">Secondary:</span> System
-                      integration difficulties (72%)
-                    </li>
-                    <li>
-                      <span className="font-medium">Tertiary:</span> Reporting
-                      and analytics capabilities (65%)
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="mt-4 p-3 bg-yellow-50 rounded-md border border-yellow-200">
-                <div className="flex items-start">
-                  <AlertTriangleIcon size={18} className="text-yellow-500 mr-2 mt-0.5" />
-                  <div>
-                    <p className="text-sm font-medium text-yellow-800">
-                      Market Opportunity Alert
-                    </p>
-                    <p className="text-sm text-yellow-700">
-                      Data indicates an underserved segment within healthcare
-                      industry (15% of current customers but 27% of total market
-                      opportunity). Consider developing targeted messaging for
-                      healthcare-specific use cases.
-                    </p>
-                  </div>
+                  <p className="text-gray-500 italic text-sm">Load from survey / conversation data</p>
                 </div>
               </div>
             </div>
