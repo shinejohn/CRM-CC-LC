@@ -19,11 +19,15 @@ import {
   getPublishingDashboard,
   type PublishingDashboard,
 } from '@/services/command-center/publishing-api';
+import { operationsApi } from '@/services/operations/operations-api';
+import type { OperationsDashboardSnapshot } from '@/types/operations';
 
 export const CommandCenterDashboardPage: React.FC = () => {
   const [dashboard, setDashboard] = useState<PublishingDashboard | null>(null);
+  const [operationsSnapshot, setOperationsSnapshot] = useState<OperationsDashboardSnapshot | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [operationsError, setOperationsError] = useState<string | null>(null);
 
   useEffect(() => {
     loadDashboard();
@@ -32,12 +36,26 @@ export const CommandCenterDashboardPage: React.FC = () => {
   const loadDashboard = async () => {
     setLoading(true);
     setError(null);
+    setOperationsError(null);
     try {
-      const data = await getPublishingDashboard();
-      setDashboard(data);
+      const [publishingData, operationsData] = await Promise.all([
+        getPublishingDashboard(),
+        operationsApi.getDashboardSnapshot(),
+      ]);
+      setDashboard(publishingData);
+      setOperationsSnapshot(operationsData);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load dashboard');
       console.error('Error loading dashboard:', err);
+      try {
+        const operationsData = await operationsApi.getDashboardSnapshot();
+        setOperationsSnapshot(operationsData);
+      } catch (opsErr) {
+        setOperationsError(
+          opsErr instanceof Error ? opsErr.message : 'Failed to load operations snapshot'
+        );
+        console.error('Error loading operations snapshot:', opsErr);
+      }
     } finally {
       setLoading(false);
     }
@@ -134,6 +152,93 @@ export const CommandCenterDashboardPage: React.FC = () => {
               ${dashboard.ad_stats.total_spend.toFixed(2)}
             </p>
             <p className="text-sm text-gray-500 mt-1">Total spend</p>
+          </div>
+        </div>
+
+        {/* Operations Snapshot */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-8">
+          <div className="p-6 border-b border-gray-200 flex items-center justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900">Operations Snapshot</h2>
+              {operationsSnapshot && (
+                <p className="text-sm text-gray-500">
+                  As of {operationsSnapshot.asOf.toLocaleString()}
+                </p>
+              )}
+            </div>
+            <BarChart3 className="h-5 w-5 text-indigo-600" />
+          </div>
+          <div className="p-6">
+            {operationsError && (
+              <div className="mb-4 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <div className="flex items-center">
+                  <AlertCircle className="h-5 w-5 text-yellow-600 mr-2" />
+                  <p className="text-yellow-800">{operationsError}</p>
+                </div>
+              </div>
+            )}
+            {operationsSnapshot ? (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                  <p className="text-sm text-gray-500">Overall Status</p>
+                  <p className="text-xl font-semibold text-gray-900 capitalize">
+                    {operationsSnapshot.infrastructure.overallStatus}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {operationsSnapshot.infrastructure.componentsHealthy} healthy ·{' '}
+                    {operationsSnapshot.infrastructure.componentsDegraded} degraded
+                  </p>
+                </div>
+                <div className="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                  <p className="text-sm text-gray-500">Active Alerts</p>
+                  <p className="text-xl font-semibold text-gray-900">
+                    {operationsSnapshot.alerts.activeTotal}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {operationsSnapshot.alerts.activeCritical} critical ·{' '}
+                    {operationsSnapshot.alerts.activeWarning} warning
+                  </p>
+                </div>
+                <div className="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                  <p className="text-sm text-gray-500">Queue Depth</p>
+                  <p className="text-xl font-semibold text-gray-900">
+                    {operationsSnapshot.system.queueDepthTotal.toLocaleString()}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Oldest item {operationsSnapshot.system.oldestQueueItemAge}s
+                  </p>
+                </div>
+                <div className="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                  <p className="text-sm text-gray-500">MRR</p>
+                  <p className="text-xl font-semibold text-gray-900">
+                    ${operationsSnapshot.financial.mrr.toLocaleString()}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {operationsSnapshot.financial.mrrChangePercent30d}% 30d change
+                  </p>
+                </div>
+                <div className="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                  <p className="text-sm text-gray-500">Costs (MTD)</p>
+                  <p className="text-xl font-semibold text-gray-900">
+                    ${operationsSnapshot.costs.mtdTotal.toLocaleString()}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Budget ${operationsSnapshot.costs.mtdBudget.toLocaleString()}
+                  </p>
+                </div>
+                <div className="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                  <p className="text-sm text-gray-500">Deliverability</p>
+                  <p className="text-xl font-semibold text-gray-900">
+                    {operationsSnapshot.email.overallDeliverability.toFixed(1)}%
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {operationsSnapshot.email.ipsBlacklisted} IPs blacklisted
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <p className="text-sm text-gray-500">No operations snapshot available yet.</p>
+            )}
           </div>
         </div>
 

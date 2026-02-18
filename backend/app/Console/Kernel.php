@@ -72,6 +72,27 @@ class Kernel extends ConsoleKernel
         
         // Campaign Orchestrator - Advance days daily at midnight
         $schedule->job(new \App\Jobs\AdvanceCampaignDays)->dailyAt('00:00');
+        
+        // Communication Infrastructure (Module 0B)
+        // Priority dispatcher - runs every 10 seconds
+        $schedule->call(function () {
+            app(\App\Services\Communication\PriorityDispatcher::class)->dispatch();
+        })->everyTenSeconds();
+        
+        // Clean up old messages (keep 30 days)
+        $schedule->job(new \App\Jobs\Communication\CleanupMessageQueue)->dailyAt('04:00');
+        
+        // Update channel health metrics
+        $schedule->job(new \App\Jobs\Communication\UpdateChannelHealth)->everyFiveMinutes();
+        
+        // Compile suppression list from bounces/complaints
+        $schedule->job(new \App\Jobs\Communication\ProcessSuppressions)->everyFifteenMinutes();
+        
+        // Release stuck messages (locked > 10 minutes)
+        $schedule->job(new \App\Jobs\Communication\ReleaseStuckMessages)->everyFiveMinutes();
+        
+        // Update rate limit counters from Redis to DB
+        $schedule->job(new \App\Jobs\Communication\PersistRateLimitCounters)->everyFiveMinutes();
     }
 
     /**

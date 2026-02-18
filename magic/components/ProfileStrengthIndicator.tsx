@@ -1,14 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Building2, ArrowRight } from 'lucide-react';
+
 interface ProfileStrengthIndicatorProps {
+  /** 0-100 profile completeness. When undefined, shows loading state. */
   strength?: number;
   onCompleteClick?: () => void;
 }
+
 export function ProfileStrengthIndicator({
-  strength = 65,
+  strength = 0,
   onCompleteClick
 }: ProfileStrengthIndicatorProps) {
+  const displayStrength = strength ?? 0;
   return <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
       <div className="flex items-center gap-4">
         <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600">
@@ -30,13 +34,13 @@ export function ProfileStrengthIndicator({
           <span className="text-sm font-medium text-slate-700">
             Profile Strength
           </span>
-          <span className="text-lg font-bold text-blue-600">{strength}%</span>
+          <span className="text-lg font-bold text-blue-600">{displayStrength}%</span>
         </div>
         <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
           <motion.div initial={{
           width: 0
         }} animate={{
-          width: `${strength}%`
+          width: `${displayStrength}%`
         }} transition={{
           duration: 1,
           ease: 'easeOut'

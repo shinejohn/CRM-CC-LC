@@ -1,58 +1,79 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, TrendingUp, DollarSign, Users, Mail, Wrench, Star, AlertCircle, CheckCircle2, ArrowRight } from 'lucide-react';
+import { ArrowLeft, TrendingUp, DollarSign, Users, Mail, Wrench, Star, AlertCircle } from 'lucide-react';
+import { useDashboardAnalytics } from '@/hooks/useAnalytics';
+
+function formatCurrency(n: number): string {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(n);
+}
+
 export function BusinessHealthScoreDetail({
   onBack
 }: {
   onBack: () => void;
 }) {
+  const { data: analytics, isLoading } = useDashboardAnalytics();
+  const orders = (analytics as { orders?: { total_revenue?: number; paid?: number; recent_revenue?: number } })?.orders;
+  const customers = (analytics as { customers?: { total?: number; new?: number } })?.customers;
+  const conversion = (analytics as { conversion?: { rate?: number } })?.conversion;
+  const totalRevenue = orders?.total_revenue ?? 0;
+  const paidOrders = orders?.paid ?? 0;
+  const customerCount = customers?.total ?? 0;
+  const newCustomers = customers?.new ?? 0;
+  const conversionRate = conversion?.rate ?? 0;
+  const revenueScore = Math.min(100, Math.round((totalRevenue / 10000) * 25));
+  const customerScore = Math.min(100, customerCount * 2);
+  const conversionScore = Math.min(100, Math.round(conversionRate));
+  const overallScore = Math.round((revenueScore + customerScore + conversionScore) / 3);
+  const aov = paidOrders > 0 ? totalRevenue / paidOrders : 0;
+
   const factors = [{
     title: 'Revenue Health',
-    score: 92,
+    score: revenueScore,
     icon: DollarSign,
     color: 'text-emerald-600',
     bgColor: 'bg-emerald-100',
     barColor: 'bg-emerald-500',
-    metrics: ['Monthly revenue: $12,450 (▲12% vs last month)', 'Revenue goal progress: 78% on track', 'Average order value: $285 (▲ $15)'],
-    tip: "You're on track! Consider upselling to existing customers."
+    metrics: [`Monthly revenue: ${formatCurrency(totalRevenue)}`, `Revenue goal progress: ${Math.round((totalRevenue / 16000) * 100)}% on track`, `Average order value: ${formatCurrency(aov)}`],
+    tip: totalRevenue > 0 ? "You're on track! Consider upselling to existing customers." : undefined
   }, {
     title: 'Customer Health',
-    score: 85,
+    score: customerScore,
     icon: Users,
     color: 'text-blue-600',
     bgColor: 'bg-blue-100',
     barColor: 'bg-blue-500',
-    metrics: ['Active customers: 247 (▲ 8 this month)', 'At-risk customers: 3 (need attention)', 'Customer satisfaction: 4.8/5'],
-    warning: "3 customers haven't ordered in 60+ days",
+    metrics: [`Active customers: ${customerCount} (▲ ${newCustomers} this period)`, 'Track at-risk customers', 'Customer satisfaction: —'],
+    warning: customerCount === 0 ? 'Add customers to improve your score' : undefined,
     action: 'View At-Risk Customers'
   }, {
     title: 'Marketing Health',
-    score: 94,
+    score: conversionScore,
     icon: Mail,
     color: 'text-purple-600',
     bgColor: 'bg-purple-100',
     barColor: 'bg-purple-500',
-    metrics: ['Email open rate: 28.5% (industry avg: 22%)', 'Click rate: 4.2% (industry avg: 2.8%)', 'List growth: +45 subscribers this month'],
-    success: 'Excellent! Your emails significantly outperform industry.'
+    metrics: [`Conversion rate: ${conversionRate.toFixed(1)}%`, 'Campaign performance', 'List growth: —'],
+    success: conversionRate >= 50 ? 'Excellent! Your conversion is strong.' : undefined
   }, {
     title: 'Operations Health',
-    score: 78,
+    score: Math.min(100, paidOrders * 2),
     icon: Wrench,
     color: 'text-amber-600',
     bgColor: 'bg-amber-100',
     barColor: 'bg-amber-500',
-    metrics: ['Jobs completed on time: 92%', 'Average response time: 4 hours', 'Overdue invoices: 2 ($1,200)'],
-    warning: '2 invoices are 30+ days overdue',
+    metrics: [`Paid orders: ${paidOrders}`, 'Order completion rate', 'Overdue invoices: —'],
+    warning: paidOrders === 0 ? 'Complete orders to improve operations score' : undefined,
     action: 'View Overdue Invoices'
   }, {
     title: 'Reputation Health',
-    score: 88,
+    score: Math.min(100, customerCount + conversionRate),
     icon: Star,
     color: 'text-yellow-600',
     bgColor: 'bg-yellow-100',
     barColor: 'bg-yellow-500',
-    metrics: ['Average rating: 4.8/5 (127 reviews)', 'Reviews this month: 8 (all positive)', 'Response rate: 100%'],
-    tip: 'Request reviews from 5 recent happy customers.',
+    metrics: ['Average rating: —', 'Reviews this month: —', 'Response rate: —'],
+    tip: 'Request reviews from recent happy customers.',
     action: 'Send Review Requests'
   }];
   return <motion.div initial={{
@@ -86,9 +107,9 @@ export function BusinessHealthScoreDetail({
             transform: 'rotate(-45deg)'
           }} />
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-center">
-              <div className="text-5xl font-bold text-slate-900">87</div>
-              <div className="text-sm font-medium text-emerald-600">
-                Excellent
+              <div className="text-5xl font-bold text-slate-900">{isLoading ? '—' : overallScore}</div>
+              <div className={`text-sm font-medium ${overallScore >= 80 ? 'text-emerald-600' : overallScore >= 60 ? 'text-blue-600' : overallScore >= 40 ? 'text-amber-600' : 'text-red-600'}`}>
+                {isLoading ? '—' : overallScore >= 80 ? 'Excellent' : overallScore >= 60 ? 'Good' : overallScore >= 40 ? 'Needs Work' : 'Critical'}
               </div>
             </div>
           </div>

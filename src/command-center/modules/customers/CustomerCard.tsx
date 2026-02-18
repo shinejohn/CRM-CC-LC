@@ -1,20 +1,27 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
-import { 
-  Phone, Mail, Building, TrendingUp, 
-  TrendingDown, MoreVertical
+import {
+  Phone, Mail, Building, TrendingUp,
+  TrendingDown, MoreVertical, Trash2
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Customer, CustomerStage } from '@/types/command-center';
 
 interface CustomerCardProps {
   customer: Customer;
   isSelected: boolean;
   onSelect: (selected: boolean) => void;
+  onDelete?: (id: string) => void;
 }
 
 const stageColors: Record<CustomerStage, string> = {
@@ -25,7 +32,7 @@ const stageColors: Record<CustomerStage, string> = {
   churned: 'bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-400',
 };
 
-export function CustomerCard({ customer, isSelected, onSelect }: CustomerCardProps) {
+export function CustomerCard({ customer, isSelected, onSelect, onDelete }: CustomerCardProps) {
   const navigate = useNavigate();
 
   const engagementColor = customer.engagementScore >= 70
@@ -69,14 +76,35 @@ export function CustomerCard({ customer, isSelected, onSelect }: CustomerCardPro
                 )}
               </div>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-8 w-8"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <MoreVertical className="w-4 h-4" />
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <MoreVertical className="w-4 h-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" onClick={(e) => e.stopPropagation()}>
+                <DropdownMenuItem onClick={() => navigate(`/command-center/customers/${customer.id}`)}>
+                  View Details
+                </DropdownMenuItem>
+                {onDelete && (
+                  <DropdownMenuItem
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDelete(customer.id);
+                    }}
+                    className="text-red-600 focus:text-red-600"
+                  >
+                    <Trash2 className="w-4 h-4 mr-2" />
+                    Delete
+                  </DropdownMenuItem>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Contact Info */}

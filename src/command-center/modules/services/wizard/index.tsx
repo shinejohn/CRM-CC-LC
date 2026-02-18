@@ -111,7 +111,15 @@ export const ServicePurchaseWizardPage: React.FC = () => {
             case 6:
                 return <QuoteReviewStep onNext={nextStep} onBack={prevStep} cartItems={state.selectedServices} />;
             case 7:
-                return <CheckoutStep onNext={nextStep} onBack={prevStep} />;
+                return (
+                    <CheckoutStep
+                        onNext={nextStep}
+                        onBack={prevStep}
+                        cartItems={[...state.selectedServices, ...state.selectedAddOns]}
+                        customerEmail=""
+                        customerName=""
+                    />
+                );
             case 8:
                 return <ConfirmationStep onComplete={() => navigate('/command-center')} onNext={() => undefined} onBack={() => undefined} />;
             default:

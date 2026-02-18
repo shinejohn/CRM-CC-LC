@@ -1,11 +1,36 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { BarChart2, ArrowUpRight } from 'lucide-react';
-export function RevenueTrendChart() {
-  // Mock data points for the chart
-  const data = [40, 65, 55, 80, 70, 95, 85];
-  const prevData = [30, 45, 40, 60, 55, 70, 65];
+
+interface RevenueTrendChartProps {
+  revenueOverTime?: Array<{ date: string; revenue: number }>;
+  totalRevenue?: number;
+  recentRevenue?: number;
+  isLoading?: boolean;
+}
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+export function RevenueTrendChart({ revenueOverTime = [], totalRevenue = 0, recentRevenue = 0, isLoading = false }: RevenueTrendChartProps) {
+  const points = revenueOverTime.length > 0
+    ? revenueOverTime.map((p) => p.revenue)
+    : [];
+  const maxVal = Math.max(...points, 1);
+  const data = points.length > 0
+    ? points.map((v) => Math.round((v / maxVal) * 100))
+    : [0, 0, 0, 0, 0, 0, 0];
+  const prevData = data.map((v) => Math.max(0, v - 10));
   const goal = 90;
+  const labels = revenueOverTime.length > 0
+    ? revenueOverTime.map((p) => {
+        const d = new Date(p.date);
+        return MONTHS[d.getMonth()];
+      })
+    : ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'];
+  const pctChange = totalRevenue > 0 && recentRevenue > 0 && totalRevenue !== recentRevenue
+    ? Math.round(((recentRevenue / (totalRevenue - recentRevenue || 1)) - 1) * 100)
+    : 0;
+
   return <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 h-full flex flex-col">
       <div className="flex justify-between items-start mb-6">
         <div>
@@ -13,14 +38,18 @@ export function RevenueTrendChart() {
             <BarChart2 className="w-5 h-5 text-blue-600" /> Revenue Trend
           </h3>
           <p className="text-sm text-slate-500 mt-1">
-            Last 6 months performance
+            {revenueOverTime.length > 0 ? `${revenueOverTime.length} days` : 'Last 6 months performance'}
           </p>
         </div>
         <div className="text-right">
-          <div className="text-2xl font-bold text-slate-900">$12,450</div>
-          <div className="text-xs font-medium text-emerald-600 flex items-center justify-end gap-1">
-            <ArrowUpRight className="w-3 h-3" /> +12% vs last month
+          <div className="text-2xl font-bold text-slate-900">
+            {isLoading ? '—' : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(totalRevenue)}
           </div>
+          {!isLoading && pctChange !== 0 && (
+            <div className={`text-xs font-medium flex items-center justify-end gap-1 ${pctChange >= 0 ? 'text-emerald-600' : 'text-red-600'}`}>
+              <ArrowUpRight className={`w-3 h-3 ${pctChange < 0 ? 'rotate-180' : ''}`} /> {pctChange >= 0 ? '+' : ''}{pctChange}% vs prior
+            </div>
+          )}
         </div>
       </div>
 
@@ -45,7 +74,9 @@ export function RevenueTrendChart() {
           {data.map((value, index) => <div key={index} className="flex-1 flex flex-col justify-end items-center gap-1 group relative h-full">
               {/* Tooltip */}
               <div className="absolute bottom-full mb-2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900 text-white text-xs rounded px-2 py-1 whitespace-nowrap z-20 pointer-events-none">
-                ${(value * 150).toLocaleString()}
+                {points[index] != null
+                  ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(points[index])
+                  : '—'}
               </div>
 
               {/* Bar Container */}
@@ -73,7 +104,7 @@ export function RevenueTrendChart() {
 
               {/* X-Axis Label */}
               <span className="text-xs text-slate-500 absolute -bottom-6">
-                {['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'][index]}
+                {labels[index] ?? ''}
               </span>
             </div>)}
         </div>

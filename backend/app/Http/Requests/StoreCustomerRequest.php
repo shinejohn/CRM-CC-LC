@@ -22,7 +22,8 @@ class StoreCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'business_name' => 'required|string|max:255',
+            'name' => 'required_without:business_name|string|max:255',
+            'business_name' => 'required_without:name|string|max:255',
             'slug' => 'nullable|string|max:100|unique:customers,slug',
             'external_id' => 'nullable|string|max:100',
             'owner_name' => 'nullable|string|max:255',

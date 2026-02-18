@@ -34,6 +34,8 @@ use App\Http\Controllers\Api\AlertTrackingController;
 use App\Http\Controllers\Api\EmergencyBroadcastController;
 use App\Http\Controllers\Api\MunicipalAdminController;
 use App\Http\Controllers\Api\InteractionController;
+use App\Http\Controllers\Api\V1\MessageController;
+use App\Http\Controllers\Api\V1\CommunicationWebhookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -185,6 +187,7 @@ Route::prefix('v1')->group(function () {
             // Engagement routes
             Route::get('/{id}/engagement', [CustomerController::class, 'engagementHistory']);
             Route::get('/{id}/engagement/score-history', [CustomerController::class, 'scoreHistory']);
+            Route::get('/{id}/timeline', [CustomerController::class, 'timeline']);
 
             // Campaign management
             Route::post('/{id}/campaign/start', [CustomerController::class, 'startCampaign']);
@@ -553,6 +556,16 @@ Route::prefix('v1')->group(function () {
         Route::delete('/{id}', [MunicipalAdminController::class, 'destroy']);
         Route::post('/{id}/verify', [MunicipalAdminController::class, 'verify']);
     });
+    
+    // Communication Infrastructure (Module 0B) - Message Management
+    Route::prefix('messages')->middleware('auth:sanctum')->group(function () {
+        Route::post('/', [MessageController::class, 'send']);
+        Route::post('/bulk', [MessageController::class, 'sendBulk']);
+        Route::get('/{uuid}', [MessageController::class, 'status']);
+        Route::delete('/{uuid}', [MessageController::class, 'cancel']);
+        Route::get('/stats/queue', [MessageController::class, 'queueStats']);
+        Route::get('/stats/channels', [MessageController::class, 'channelStats']);
+    });
 });
 
 // Public tracking endpoints (no auth)
@@ -581,6 +594,12 @@ Route::prefix('webhooks')->group(function () {
 
     // Postal inbound email webhook
     Route::post('postal/inbound', [WebhookController::class, 'inboundEmail']);
+    
+    // Communication Infrastructure webhooks (Module 0B)
+    Route::post('communication/postal', [\App\Http\Controllers\Api\V1\CommunicationWebhookController::class, 'postal']);
+    Route::post('communication/ses', [\App\Http\Controllers\Api\V1\CommunicationWebhookController::class, 'ses']);
+    Route::post('communication/twilio', [\App\Http\Controllers\Api\V1\CommunicationWebhookController::class, 'twilio']);
+    Route::post('communication/firebase', [\App\Http\Controllers\Api\V1\CommunicationWebhookController::class, 'firebase']);
 });
 
 // Stripe Webhook (outside v1 prefix, no auth required)

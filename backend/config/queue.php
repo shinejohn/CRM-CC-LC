@@ -98,6 +98,48 @@ return [
             'after_commit' => false,
         ],
 
+        // Priority queues for message processing
+        'messages-p0' => [
+            'driver' => env('QUEUE_CONNECTION', 'database'),
+            'connection' => env('DB_QUEUE_CONNECTION'),
+            'table' => env('DB_QUEUE_TABLE', 'jobs'),
+            'queue' => 'messages-p0',
+            'retry_after' => 30,
+            'after_commit' => false,
+        ],
+        'messages-p1' => [
+            'driver' => env('QUEUE_CONNECTION', 'database'),
+            'connection' => env('DB_QUEUE_CONNECTION'),
+            'table' => env('DB_QUEUE_TABLE', 'jobs'),
+            'queue' => 'messages-p1',
+            'retry_after' => 60,
+            'after_commit' => false,
+        ],
+        'messages-p2' => [
+            'driver' => env('QUEUE_CONNECTION', 'database'),
+            'connection' => env('DB_QUEUE_CONNECTION'),
+            'table' => env('DB_QUEUE_TABLE', 'jobs'),
+            'queue' => 'messages-p2',
+            'retry_after' => 90,
+            'after_commit' => false,
+        ],
+        'messages-p3' => [
+            'driver' => env('QUEUE_CONNECTION', 'database'),
+            'connection' => env('DB_QUEUE_CONNECTION'),
+            'table' => env('DB_QUEUE_TABLE', 'jobs'),
+            'queue' => 'messages-p3',
+            'retry_after' => 90,
+            'after_commit' => false,
+        ],
+        'messages-p4' => [
+            'driver' => env('QUEUE_CONNECTION', 'database'),
+            'connection' => env('DB_QUEUE_CONNECTION'),
+            'table' => env('DB_QUEUE_TABLE', 'jobs'),
+            'queue' => 'messages-p4',
+            'retry_after' => 90,
+            'after_commit' => false,
+        ],
+
     ],
 
     /*

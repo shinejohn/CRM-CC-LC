@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, MessageSquare, CheckSquare, Calendar, Share2, Voicemail, Search, Plus, Users, BookOpen, Briefcase, FileText, UserCircle, CalendarDays, ChevronDown, Mic, Paperclip, Send, Bell, ChevronRight, Maximize2, MoreVertical, Clock, TrendingUp, Play, Eye, User, Settings, Wand2, LogOut, Building2, Clipboard, DollarSign, Receipt, Megaphone, ExternalLink, Sparkles, PenTool } from 'lucide-react';
+import { Mail, MessageSquare, CheckSquare, Calendar, Share2, Voicemail, Search, Plus, Users, BookOpen, Briefcase, FileText, CalendarDays, ChevronDown, Mic, Send, Bell, ChevronRight, Maximize2, MoreVertical, Clock, TrendingUp, Play, User, Settings, LogOut, Building2, Clipboard, DollarSign, Receipt, Megaphone, Sparkles, PenTool } from 'lucide-react';
+import { useDashboardAnalytics } from '@/hooks/useAnalytics';
+import { useBusinessMode } from '../contexts/BusinessModeContext';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -15,6 +17,14 @@ export function UnifiedCommandCenter({
   onToggleAIMode?: () => void;
 }) {
   const [searchQuery, setSearchQuery] = useState('');
+  const { data: analytics } = useDashboardAnalytics();
+  const { terminology } = useBusinessMode();
+  const orders = (analytics as { orders?: { total_revenue?: number; paid?: number } })?.orders;
+  const customers = (analytics as { customers?: { total?: number } })?.customers;
+  const subscriptions = (analytics as { subscriptions?: { active?: number } })?.subscriptions;
+  const activeServices = subscriptions?.active ?? 0;
+  const customerCount = customers?.total ?? 0;
+  const paidOrders = orders?.paid ?? 0;
   const [expandedRightCards, setExpandedRightCards] = useState<Record<string, boolean>>({
     tasks: false,
     email: false,
@@ -155,19 +165,19 @@ export function UnifiedCommandCenter({
                       <div className="flex items-center justify-around pt-3 border-t border-gray-200 dark:border-slate-700">
                         <div className="text-center">
                           <p className="text-lg font-bold text-gray-900 dark:text-white">
-                            12
+                            {paidOrders}
                           </p>
                           <p className="text-xs text-gray-500 dark:text-slate-400">
-                            Tasks
+                            {terminology.deals}
                           </p>
                         </div>
                         <div className="w-px h-8 bg-gray-200 dark:bg-slate-700"></div>
                         <div className="text-center">
                           <p className="text-lg font-bold text-gray-900 dark:text-white">
-                            48
+                            {customerCount}
                           </p>
                           <p className="text-xs text-gray-500 dark:text-slate-400">
-                            Emails
+                            {terminology.customers}
                           </p>
                         </div>
                       </div>
@@ -177,7 +187,6 @@ export function UnifiedCommandCenter({
                     <div className="py-2">
                       <button onClick={() => {
                     setIsProfileMenuOpen(false);
-                    // Navigate to profile
                   }} className="w-full px-4 py-3 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors text-left">
                         <User className="w-4 h-4 text-gray-500 dark:text-slate-400" />
                         <span className="text-sm font-medium text-gray-700 dark:text-slate-200">
@@ -351,7 +360,7 @@ export function UnifiedCommandCenter({
                               Active Services
                             </p>
                             <p className={`text-3xl font-bold mt-1 ${style.textClass}`}>
-                              12
+                              {activeServices}
                             </p>
                           </div>
                           <div className={`p-3 rounded-full ${style.iconBg}`}>
@@ -411,7 +420,7 @@ export function UnifiedCommandCenter({
                             <Users className={`w-5 h-5 ${style.iconColor}`} />
                           </div>
                           <h3 className={`font-bold text-lg ${style.textClass}`}>
-                            Clients
+                            {terminology.customers}
                           </h3>
                         </div>
                         <div className="flex items-center gap-1">

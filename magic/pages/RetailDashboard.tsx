@@ -1,19 +1,27 @@
-import React, { useState, Children } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Users, Calendar, TrendingUp, AlertCircle, ArrowRight, Gift, Award, Cake, Heart } from 'lucide-react';
 import { LogVisitModal } from '../components/LogVisitModal';
 import { useTheme } from '../contexts/ThemeContext';
 import { ColorPicker } from '../components/ColorPicker';
+import { useDashboardAnalytics } from '@/hooks/useAnalytics';
+import { useBusinessMode } from '../contexts/BusinessModeContext';
+
 export function RetailDashboard({
   onNavigate
 }: {
   onNavigate: (page: string) => void;
 }) {
   const [isLogVisitOpen, setIsLogVisitOpen] = useState(false);
-  const {
-    getColorScheme,
-    isDarkMode
-  } = useTheme();
+  const { getColorScheme, isDarkMode } = useTheme();
+  const { terminology } = useBusinessMode();
+  const { data: analytics, isLoading } = useDashboardAnalytics();
+  const customers = (analytics as { customers?: { total?: number; new?: number } })?.customers;
+  const orders = (analytics as { orders?: { total?: number; recent?: number } })?.orders;
+  const guestCount = customers?.total ?? 0;
+  const newGuests = customers?.new ?? 0;
+  const visitsCount = orders?.total ?? 0;
+  const recentVisits = orders?.recent ?? 0;
   const containerVariants = {
     hidden: {
       opacity: 0
@@ -67,29 +75,29 @@ export function RetailDashboard({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[{
         id: 'metric-guests',
-        label: 'Known Guests',
-        value: '1,247',
-        subtext: '▲ +45 this month',
+        label: `Known ${terminology.customers}`,
+        value: isLoading ? '—' : guestCount.toLocaleString(),
+        subtext: `▲ +${newGuests} this period`,
         icon: Users,
         defaultColor: 'sky'
       }, {
         id: 'metric-visits',
-        label: 'Visits This Month',
-        value: '892',
-        subtext: '▲ +12% vs average',
+        label: `${terminology.activities} This Month`,
+        value: isLoading ? '—' : visitsCount.toLocaleString(),
+        subtext: `▲ +${recentVisits} recent`,
         icon: Calendar,
         defaultColor: 'mint'
       }, {
         id: 'metric-regulars',
         label: 'Regulars (3+ visits)',
-        value: '186',
-        subtext: '15% of total base',
+        value: isLoading ? '—' : String(Math.round(guestCount * 0.15)),
+        subtext: guestCount > 0 ? `${Math.round((guestCount * 0.15) / guestCount * 100)}% of base` : '—',
         icon: Heart,
         defaultColor: 'lavender'
       }, {
         id: 'metric-risk',
         label: 'At Risk Lapsed',
-        value: '23',
+        value: isLoading ? '—' : String(Math.max(0, Math.round(guestCount * 0.02))),
         subtext: '60+ days no visit',
         icon: AlertCircle,
         defaultColor: 'coral'

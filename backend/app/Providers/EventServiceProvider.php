@@ -83,6 +83,16 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\InboundEmailReceived::class => [
             \App\Listeners\HandleInboundEmailReceived::class,
         ],
+        
+        // Communication Infrastructure Events (Module 0B)
+        \App\Events\Communication\MessageQueued::class => [],
+        \App\Events\Communication\MessageSent::class => [],
+        \App\Events\Communication\MessageDelivered::class => [],
+        \App\Events\Communication\MessageOpened::class => [],
+        \App\Events\Communication\MessageClicked::class => [],
+        \App\Events\Communication\MessageBounced::class => [],
+        \App\Events\Communication\MessageComplained::class => [],
+        \App\Events\Communication\MessageFailed::class => [],
     ];
 
     /**

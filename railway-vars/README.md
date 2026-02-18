@@ -12,6 +12,7 @@ Each service has two files:
 
 - ✅ `Postgres-CC.vars.sh` / `Postgres-CC.vars.txt` - PostgreSQL Database
 - ✅ `Redis.vars.sh` / `Redis.vars.txt` - Redis Cache
+- ⏳ `Publishing-APIs.vars.sh` / `Publishing-APIs.vars.txt` - Publishing APIs Service (waiting for variables)
 - ⏳ `CRM-CC-LC-API.vars.sh` / `CRM-CC-LC-API.vars.txt` - Backend API (pending)
 - ⏳ `horizon.vars.sh` / `horizon.vars.txt` - Queue Worker (pending)
 - ⏳ `CRM-CC-LC-Front-End.vars.sh` / `CRM-CC-LC-Front-End.vars.txt` - Frontend (pending)

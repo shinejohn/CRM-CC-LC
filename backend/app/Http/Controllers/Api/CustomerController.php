@@ -50,7 +50,22 @@ class CustomerController extends Controller
         if ($request->has('community_id')) {
             $query->where('community_id', $request->input('community_id'));
         }
-        
+
+        // tier maps to pipeline_stage (Publishing Platform API: lead, prospect, customer, advocate, churned)
+        if ($request->has('tier')) {
+            $tier = $request->input('tier');
+            $pipelineMap = [
+                'lead' => 'hook',
+                'prospect' => 'engagement',
+                'customer' => 'sales',
+                'advocate' => 'retention',
+                'churned' => 'churned',
+            ];
+            if (isset($pipelineMap[$tier])) {
+                $query->where('pipeline_stage', $pipelineMap[$tier]);
+            }
+        }
+
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where(function($q) use ($search) {
@@ -117,10 +132,16 @@ class CustomerController extends Controller
         
         $validated = $request->validated();
         $validated['tenant_id'] = $tenantId;
-        
+
+        // Support 'name' as alias for business_name (Publishing Platform API contract)
+        if (!empty($validated['name']) && empty($validated['business_name'])) {
+            $validated['business_name'] = $validated['name'];
+        }
+        unset($validated['name']);
+
         // Generate slug if not provided
         if (empty($validated['slug'])) {
-            $baseSlug = Str::slug($validated['business_name']);
+            $baseSlug = Str::slug($validated['business_name'] ?? '');
             $slug = $baseSlug;
             $counter = 1;
             while (Customer::where('slug', $slug)->exists()) {
@@ -146,9 +167,13 @@ class CustomerController extends Controller
         $tenantId = $request->getTenantId();
         
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
-        
+
         $validated = $request->validated();
-        
+        if (!empty($validated['name'])) {
+            $validated['business_name'] = $validated['name'];
+        }
+        unset($validated['name']);
+
         $customer->update($validated);
         
         return response()->json([
@@ -298,6 +323,69 @@ class CustomerController extends Controller
                 'tier_name' => $customer->getTierName(),
             ],
         ]);
+    }
+
+    /**
+     * Get customer timeline (interactions + conversations as unified activity feed)
+     */
+    public function timeline(Request $request, string $id): JsonResponse
+    {
+        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
+
+        $interactions = $customer->interactions()
+            ->orderBy('completed_at', 'desc')
+            ->orderBy('scheduled_at', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->limit(50)
+            ->get();
+
+        $conversations = $customer->conversations()
+            ->orderBy('started_at', 'desc')
+            ->limit(20)
+            ->get();
+
+        $items = [];
+
+        foreach ($interactions as $i) {
+            $ts = $i->completed_at ?? $i->scheduled_at ?? $i->due_at ?? $i->created_at;
+            $items[] = [
+                'id' => $i->id,
+                'type' => $this->mapInteractionTypeToTimeline($i->type),
+                'title' => $i->title ?? ucfirst(str_replace('_', ' ', $i->type ?? 'activity')),
+                'description' => $i->description ?? $i->notes ?? '',
+                'timestamp' => $ts?->toIso8601String() ?? $i->created_at?->toIso8601String(),
+            ];
+        }
+
+        foreach ($conversations as $c) {
+            $ts = $c->started_at ?? $c->created_at;
+            $msgCount = is_array($c->messages) ? count($c->messages) : 0;
+            $items[] = [
+                'id' => $c->id,
+                'type' => 'meeting',
+                'title' => 'Conversation',
+                'description' => "{$msgCount} messages",
+                'timestamp' => $ts?->toIso8601String() ?? $c->created_at?->toIso8601String(),
+            ];
+        }
+
+        usort($items, fn ($a, $b) => strcmp($b['timestamp'] ?? '', $a['timestamp'] ?? ''));
+
+        return response()->json(['data' => array_slice($items, 0, 50)]);
+    }
+
+    private function mapInteractionTypeToTimeline(?string $type): string
+    {
+        $map = [
+            'phone_call' => 'phone',
+            'email' => 'email',
+            'sms' => 'sms',
+            'note' => 'note',
+            'meeting' => 'meeting',
+            'task' => 'note',
+        ];
+        return $map[$type ?? ''] ?? 'note';
     }
 
     /**

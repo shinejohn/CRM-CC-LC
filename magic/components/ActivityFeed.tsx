@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Clock } from 'lucide-react';
+
 interface ActivityItem {
   id: string;
   text: string;
@@ -8,42 +9,29 @@ interface ActivityItem {
   type: 'success' | 'warning' | 'error' | 'info';
   action?: string;
 }
-const activities: ActivityItem[] = [{
-  id: '1',
-  text: 'Sarah sent 250 marketing emails',
-  time: '2 hours ago',
-  type: 'success'
-}, {
-  id: '2',
-  text: 'Derek completed 5 service jobs',
-  time: '3 hours ago',
-  type: 'success',
-  action: 'View'
-}, {
-  id: '3',
-  text: 'New customer: ABC Plumbing',
-  time: 'Yesterday',
-  type: 'info',
-  action: 'View'
-}, {
-  id: '4',
-  text: 'Invoice #1234 overdue (5 days)',
-  time: 'Dec 26',
-  type: 'warning',
-  action: 'Send Reminder'
-}, {
-  id: '5',
-  text: 'Payment received: $850',
-  time: 'Dec 25',
-  type: 'success'
-}, {
-  id: '6',
-  text: 'Campaign failed: Email bounce rate high',
-  time: 'Dec 24',
-  type: 'error',
-  action: 'Fix Now'
-}];
-export function ActivityFeed() {
+
+interface ActivityFeedProps {
+  activities?: ActivityItem[];
+  isLoading?: boolean;
+  onViewAll?: () => void;
+}
+
+function formatTimeAgo(date: string): string {
+  const d = new Date(date);
+  const now = new Date();
+  const diffMs = now.getTime() - d.getTime();
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMs / 3600000);
+  const diffDays = Math.floor(diffMs / 86400000);
+  if (diffMins < 60) return `${diffMins}m ago`;
+  if (diffHours < 24) return `${diffHours}h ago`;
+  if (diffDays < 7) return `${diffDays}d ago`;
+  return d.toLocaleDateString();
+}
+
+export function ActivityFeed({ activities: propActivities, isLoading = false, onViewAll }: ActivityFeedProps) {
+  const defaultActivities: ActivityItem[] = [];
+  const activities = propActivities ?? defaultActivities;
   const getDotColor = (type: ActivityItem['type']) => {
     switch (type) {
       case 'success':
@@ -61,12 +49,27 @@ export function ActivityFeed() {
         <h3 className="font-bold text-slate-900 flex items-center gap-2">
           <span className="text-amber-500">⚡</span> Recent Activity
         </h3>
-        <button className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1">
+        <button onClick={onViewAll} className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1">
           View All <ArrowRight className="w-4 h-4" />
         </button>
       </div>
 
       <div className="p-6">
+        {isLoading ? (
+          <div className="space-y-6">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="animate-pulse flex gap-3">
+                <div className="w-3 h-3 rounded-full bg-slate-200" />
+                <div className="flex-1">
+                  <div className="h-4 bg-slate-200 rounded w-3/4 mb-2" />
+                  <div className="h-3 bg-slate-100 rounded w-1/4" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : activities.length === 0 ? (
+          <p className="text-sm text-slate-500 text-center py-8">No recent activity</p>
+        ) : (
         <div className="space-y-6 relative">
           {/* Vertical line connecting items */}
           <div className="absolute left-[5px] top-2 bottom-2 w-[2px] bg-slate-100" />
@@ -99,6 +102,7 @@ export function ActivityFeed() {
               </div>
             </motion.div>)}
         </div>
+        )}
       </div>
     </div>;
 }

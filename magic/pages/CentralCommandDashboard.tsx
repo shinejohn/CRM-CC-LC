@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, MessageSquare, CheckSquare, Calendar, Share2, Voicemail, Search, Plus, Maximize2, MoreVertical, Clock, Target, FileText, ChevronDown, ChevronUp, Mic, Send, Bell, Phone, Plane, Folder, CheckCircle2, User, Settings, LogOut, Building2, CalendarDays, Eye, Megaphone, ExternalLink } from 'lucide-react';
+import { Mail, MessageSquare, CheckSquare, Calendar, Share2, Voicemail, Search, Plus, Maximize2, MoreVertical, Clock, Target, FileText, ChevronDown, ChevronUp, Mic, Send, Bell, Phone, Plane, User, Settings, LogOut, Building2 } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -8,25 +8,13 @@ import { Badge } from '../components/ui/badge';
 import { useTheme } from '../contexts/ThemeContext';
 import { ColorPicker } from '../components/ColorPicker';
 import { DarkModeToggle } from '../components/DarkModeToggle';
-const MOCK_GOALS = [{
-  id: '1',
-  title: 'Q4 Revenue Target',
-  progress: 75,
-  target: '$500K',
-  color: 'bg-emerald-500'
-}, {
-  id: '2',
-  title: 'Client Onboarding',
-  progress: 60,
-  target: '12/20 Clients',
-  color: 'bg-blue-500'
-}, {
-  id: '3',
-  title: 'Service Launch',
-  progress: 85,
-  target: 'Dec 1',
-  color: 'bg-purple-500'
-}];
+import { useDashboardAnalytics } from '@/hooks/useAnalytics';
+import { useBusinessMode } from '../contexts/BusinessModeContext';
+
+function formatCurrency(n: number): string {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(n);
+}
+
 export function CentralCommandDashboard({
   onNavigate,
   onToggleAIMode
@@ -35,6 +23,18 @@ export function CentralCommandDashboard({
   onToggleAIMode?: () => void;
 }) {
   const [searchQuery, setSearchQuery] = useState('');
+  const { data: analytics } = useDashboardAnalytics();
+  const { terminology } = useBusinessMode();
+  const orders = (analytics as { orders?: { total_revenue?: number; paid?: number } })?.orders;
+  const customers = (analytics as { customers?: { total?: number } })?.customers;
+  const totalRevenue = orders?.total_revenue ?? 0;
+  const paidOrders = orders?.paid ?? 0;
+  const customerCount = customers?.total ?? 0;
+  const goals = [
+    { id: '1', title: 'Revenue Target', progress: Math.min(100, Math.round((totalRevenue / 500000) * 100)), target: formatCurrency(totalRevenue), color: 'bg-emerald-500' },
+    { id: '2', title: `${terminology.customers} Onboarding`, progress: Math.min(100, Math.round((customerCount / 20) * 100)), target: `${customerCount}/20 ${terminology.customers}`, color: 'bg-blue-500' },
+    { id: '3', title: 'Orders Completed', progress: Math.min(100, paidOrders * 2), target: String(paidOrders), color: 'bg-purple-500' },
+  ];
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     services: false,
     clients: false,
@@ -284,19 +284,19 @@ export function CentralCommandDashboard({
                       <div className="flex items-center justify-around pt-3 border-t border-gray-200 dark:border-slate-700">
                         <div className="text-center">
                           <p className="text-lg font-bold text-gray-900 dark:text-white">
-                            12
+                            {paidOrders}
                           </p>
                           <p className="text-xs text-gray-500 dark:text-slate-400">
-                            Tasks
+                            {terminology.deals}
                           </p>
                         </div>
                         <div className="w-px h-8 bg-gray-200 dark:bg-slate-700"></div>
                         <div className="text-center">
                           <p className="text-lg font-bold text-gray-900 dark:text-white">
-                            48
+                            {customerCount}
                           </p>
                           <p className="text-xs text-gray-500 dark:text-slate-400">
-                            Emails
+                            {terminology.customers}
                           </p>
                         </div>
                       </div>
@@ -660,7 +660,7 @@ export function CentralCommandDashboard({
                               Goals
                             </h3>
                             {!expandedSections.goals && <p className={`text-xs font-semibold ${style.textClass} opacity-70`}>
-                                {MOCK_GOALS.length} active goals
+                                {goals.length} active goals
                               </p>}
                           </div>
                         </div>
@@ -685,7 +685,7 @@ export function CentralCommandDashboard({
                     damping: 30
                   }} className="overflow-hidden">
                           <div className="p-4 space-y-4">
-                            {MOCK_GOALS.map(goal => <div key={goal.id} className="group">
+                            {goals.map(goal => <div key={goal.id} className="group">
                                 <div className="flex items-center justify-between mb-2">
                                   <span className={`text-sm font-bold ${style.textClass}`}>
                                     {goal.title}

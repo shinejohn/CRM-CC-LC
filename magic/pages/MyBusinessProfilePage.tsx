@@ -1,8 +1,9 @@
-import React, { useState, Children, Component } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, MapPin, FileText, HelpCircle, MessageSquare, ClipboardList, ChevronRight, CheckCircle, AlertCircle, Clock, Phone, Mail, Settings, Store, Users, Zap, PlayCircle, GraduationCap, Globe, Send, Loader2, Code, Trash2, Target, TrendingUp, BarChart3 } from 'lucide-react';
+import { Sparkles, ArrowRight, MapPin, FileText, HelpCircle, MessageSquare, ClipboardList, ChevronRight, CheckCircle, AlertCircle, Clock, Phone, Mail, Settings, Store, Zap, PlayCircle, GraduationCap, Globe, Code, Target, BarChart3 } from 'lucide-react';
 import { ProfileStrengthIndicator } from '../components/ProfileStrengthIndicator';
 import { FAQEditModal } from '../components/FAQEditModal';
+import { useSMBProfile } from '@/hooks/useSMBProfile';
 interface MyBusinessProfilePageProps {
   onNavigate?: (page: string) => void;
 }
@@ -12,6 +13,22 @@ interface AlphaSiteComponent {
   description: string;
   status: 'generating' | 'ready';
 }
+function computeProfileStrength(profile: { name?: string; industry?: string; settings?: Record<string, unknown> } | null): number {
+  if (!profile) return 0;
+  let score = 0;
+  if (profile.name) score += 15;
+  if (profile.industry) score += 10;
+  const s = profile.settings ?? {};
+  if (s.phone || (s as { phone?: string }).phone) score += 15;
+  if (s.email || (s as { email?: string }).email) score += 15;
+  if (s.address || (s as { address?: string }).address) score += 10;
+  if (s.hours || (s as { hours?: string }).hours) score += 10;
+  if (s.photos && Array.isArray((s as { photos?: unknown[] }).photos) && (s as { photos: unknown[] }).photos.length > 0) score += 10;
+  if (s.social && typeof (s as { social?: unknown }).social === 'object') score += 10;
+  if (s.menu_services || (s as { menu_services?: unknown }).menu_services) score += 5;
+  return Math.min(100, score);
+}
+
 export function MyBusinessProfilePage({
   onNavigate
 }: MyBusinessProfilePageProps) {
@@ -19,22 +36,24 @@ export function MyBusinessProfilePage({
   const [alphaSiteMessage, setAlphaSiteMessage] = useState('');
   const [alphaSiteComponents, setAlphaSiteComponents] = useState<AlphaSiteComponent[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
-  // Mock data - in real app, this would come from state/API
+  const { data: profile, isLoading } = useSMBProfile();
+  const profileStrength = computeProfileStrength(profile ?? null);
+  const s = (profile?.settings ?? {}) as Record<string, unknown>;
   const profileData = {
     configuration: {
-      businessTypes: ['Retail / Store', 'Home Services'],
-      customerEngagement: ['Walk-ins Welcome', 'By Appointment', 'Phone Orders'],
-      operationsEnabled: 18,
-      completeness: 75
+      businessTypes: (s.business_types as string[]) ?? ['Retail / Store', 'Home Services'],
+      customerEngagement: (s.customer_engagement as string[]) ?? ['Walk-ins Welcome', 'By Appointment', 'Phone Orders'],
+      operationsEnabled: (s.operations_enabled as number) ?? 0,
+      completeness: profileStrength
     },
     businessInfo: {
-      name: 'ABC Home Services',
-      category: 'Home Services › Plumbing',
-      phone: '(555) 123-4567',
-      email: 'info@abchome.com',
-      address: '123 Main St, Anytown, FL 33444',
-      hours: 'Mon-Fri: 8-6, Sat: 9-2',
-      completeness: 85
+      name: profile?.name ?? '—',
+      category: profile?.industry ?? '—',
+      phone: (s.phone as string) ?? '—',
+      email: (s.email as string) ?? '—',
+      address: (s.address as string) ?? '—',
+      hours: (s.hours as string) ?? '—',
+      completeness: profileStrength
     },
     processes: {
       total: 2,
@@ -62,7 +81,7 @@ export function MyBusinessProfilePage({
       lastCompleted: null
     }
   };
-  const overallCompleteness = Math.round((profileData.configuration.completeness + profileData.businessInfo.completeness + profileData.processes.completeness + profileData.faqs.completeness + profileData.communication.completeness + profileData.surveys.completeness) / 6);
+  const overallCompleteness = profileStrength;
   const handleGenerateComponent = async () => {
     if (!alphaSiteMessage.trim() || alphaSiteComponents.length >= 3) return;
     setIsGenerating(true);
@@ -132,7 +151,7 @@ export function MyBusinessProfilePage({
 
       {/* Profile Strength */}
       <motion.div variants={itemVariants}>
-        <ProfileStrengthIndicator strength={overallCompleteness} onCompleteClick={() => onNavigate?.('business-configurator')} />
+        <ProfileStrengthIndicator strength={isLoading ? undefined : overallCompleteness} onCompleteClick={() => onNavigate?.('business-configurator')} />
       </motion.div>
 
       {/* Business Information Card - MOVED TO TOP */}

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
-import { motion } from 'framer-motion';
 import {
   ArrowLeft, Phone, Mail, Building, Clock, Edit,
-  TrendingUp, Activity, FileText, Megaphone
+  Activity, FileText, Megaphone
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -12,7 +11,18 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { EngagementScoreCard } from './EngagementScoreCard';
 import { CustomerTimeline } from './CustomerTimeline';
 import { EditCustomerModal } from './EditCustomerModal';
-import { useCustomer } from '../../hooks/useCustomers';
+import { useCustomer, useUpdateCustomer } from '@/hooks/useCustomers';
+import { useQuery } from '@tanstack/react-query';
+import api from '@/services/api';
+import { mapApiCustomerToUi, type ApiCustomer } from './customerMap';
+
+interface TimelineItem {
+  id: string;
+  type: string;
+  title: string;
+  description: string;
+  timestamp: string;
+}
 
 export function CustomerDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -20,16 +30,35 @@ export function CustomerDetailPage() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
 
-  const { customer, timeline, isLoading, error, refreshCustomer } = useCustomer(id!);
+  const { data: apiCustomer, isLoading, error, refetch } = useCustomer(id ?? '');
+  const timelineQuery = useQuery({
+    queryKey: ['customers', id, 'timeline'],
+    queryFn: () =>
+      api.get<{ data: TimelineItem[] }>(`/customers/${id}/timeline`).then((r) => r.data.data ?? []),
+    enabled: !!id,
+  });
+  const updateCustomerMutation = useUpdateCustomer();
 
-  if (isLoading) {
+  const customer = apiCustomer ? mapApiCustomerToUi(apiCustomer as unknown as ApiCustomer) : null;
+  const timeline = (timelineQuery.data ?? []) as TimelineItem[];
+  const isLoadingAny = isLoading || timelineQuery.isLoading;
+  const errorMsg = error || timelineQuery.error;
+
+  const refreshCustomer = () => {
+    refetch();
+    timelineQuery.refetch();
+  };
+
+  if (isLoadingAny) {
     return <CustomerDetailSkeleton />;
   }
 
-  if (error || !customer) {
+  if (errorMsg || !customer) {
     return (
       <div className="text-center py-12">
-        <p className="text-red-500">{error || 'Customer not found'}</p>
+        <p className="text-red-500">
+          {errorMsg instanceof Error ? errorMsg.message : String(errorMsg || 'Customer not found')}
+        </p>
         <Button variant="outline" onClick={() => navigate('/command-center/customers')}>
           Back to Customers
         </Button>
@@ -193,25 +222,26 @@ export function CustomerDetailPage() {
         </div>
       </div>
 
-      {/* Edit Modal - Note: updateCustomer function should be passed from parent or hook */}
       {showEditModal && (
         <EditCustomerModal
           customer={customer}
           open={showEditModal}
           onClose={() => setShowEditModal(false)}
-          onSaved={() => {
+          onSaved={(updated) => {
             setShowEditModal(false);
             refreshCustomer();
           }}
-          updateCustomer={async (id, data) => {
-            // Import and use the API service directly
-            const { apiService } = await import('../../services/api.service');
-            const response = await apiService.put(`/v1/customers/${id}`, data);
-            if (response.success && response.data) {
-              refreshCustomer();
-              return response.data;
-            }
-            throw new Error(response.error?.message || 'Failed to update customer');
+          updateCustomer={async (customerId, data) => {
+            const result = await updateCustomerMutation.mutateAsync({
+              id: customerId,
+              data: {
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                business_context: data.company ? { company: data.company } : undefined,
+              },
+            });
+            return mapApiCustomerToUi(result as unknown as ApiCustomer);
           }}
         />
       )}

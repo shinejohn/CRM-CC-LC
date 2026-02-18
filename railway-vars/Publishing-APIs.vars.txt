@@ -1,0 +1,5 @@
+# Railway Environment Variables for Publishing APIs Service
+# Copy these to Railway Dashboard → Publishing APIs → Variables
+# NOTE: Variables will be added once provided by user
+
+# Waiting for environment variables...

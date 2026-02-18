@@ -1,23 +1,42 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Target, Edit2 } from 'lucide-react';
-export function GoalProgressCards() {
+
+interface GoalProgressCardsProps {
+  totalRevenue?: number;
+  revenueTarget?: number;
+  customerCount?: number;
+  customerTarget?: number;
+  paidOrders?: number;
+  orderTarget?: number;
+  isLoading?: boolean;
+}
+
+export function GoalProgressCards({
+  totalRevenue = 0,
+  revenueTarget = 16000,
+  customerCount = 0,
+  customerTarget = 10,
+  paidOrders = 0,
+  orderTarget = 50,
+  isLoading = false,
+}: GoalProgressCardsProps) {
   const goals = [{
     label: 'Monthly Revenue',
-    current: 12450,
-    target: 16000,
+    current: totalRevenue,
+    target: revenueTarget,
     unit: '$',
     color: 'bg-emerald-500'
   }, {
     label: 'New Customers',
-    current: 8,
-    target: 10,
+    current: customerCount,
+    target: customerTarget,
     unit: '',
     color: 'bg-blue-500'
   }, {
     label: 'Jobs Completed',
-    current: 46,
-    target: 50,
+    current: paidOrders,
+    target: orderTarget,
     unit: '',
     color: 'bg-purple-500'
   }];
@@ -32,8 +51,17 @@ export function GoalProgressCards() {
       </div>
 
       <div className="flex-1 flex flex-col justify-center space-y-8">
-        {goals.map((goal, index) => {
-        const percentage = Math.round(goal.current / goal.target * 100);
+        {isLoading ? (
+          <div className="space-y-6">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="animate-pulse">
+                <div className="h-4 bg-slate-200 rounded w-1/2 mb-2" />
+                <div className="h-3 bg-slate-100 rounded-full" />
+              </div>
+            ))}
+          </div>
+        ) : goals.map((goal, index) => {
+        const percentage = goal.target > 0 ? Math.min(100, Math.round(goal.current / goal.target * 100)) : 0;
         return <div key={index}>
               <div className="flex justify-between items-end mb-2">
                 <span className="text-sm font-medium text-slate-700">

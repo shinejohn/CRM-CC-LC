@@ -1,17 +1,29 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Plus, TrendingUp, DollarSign, CheckCircle2, AlertCircle, Clock, ArrowRight, Calendar } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { ColorPicker } from '../components/ColorPicker';
+import { useDashboardAnalytics } from '@/hooks/useAnalytics';
+import { useBusinessMode } from '../contexts/BusinessModeContext';
+
+function formatCurrency(n: number): string {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(n);
+}
+
 export function B2BDashboard({
   onNavigate
 }: {
   onNavigate: (page: string) => void;
 }) {
-  const {
-    getColorScheme,
-    isDarkMode
-  } = useTheme();
+  const { getColorScheme, isDarkMode } = useTheme();
+  const { terminology } = useBusinessMode();
+  const { data: analytics, isLoading } = useDashboardAnalytics();
+  const orders = (analytics as { orders?: { total_revenue?: number; paid?: number; total?: number } })?.orders;
+  const customers = (analytics as { customers?: { total?: number } })?.customers;
+  const pipelineValue = orders?.total_revenue ?? 0;
+  const dealsWon = orders?.paid ?? 0;
+  const totalDeals = orders?.total ?? 0;
+  const winRate = totalDeals > 0 ? Math.round((dealsWon / totalDeals) * 100) : 0;
   const containerVariants = {
     hidden: {
       opacity: 0
@@ -60,30 +72,30 @@ export function B2BDashboard({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[{
         id: 'metric-pipeline',
-        label: 'Pipeline Value',
-        value: '$156,000',
-        subtext: '28 deals',
+        label: `${terminology.deals} Value`,
+        value: isLoading ? '—' : formatCurrency(pipelineValue),
+        subtext: `${totalDeals} ${terminology.deals.toLowerCase()}`,
         icon: TrendingUp,
         defaultColor: 'sky'
       }, {
         id: 'metric-won',
-        label: 'Deals Won',
-        value: '8',
-        subtext: '$42,000 revenue',
+        label: `${terminology.deals} Won`,
+        value: isLoading ? '—' : String(dealsWon),
+        subtext: formatCurrency(pipelineValue) + ' revenue',
         icon: CheckCircle2,
         defaultColor: 'mint'
       }, {
         id: 'metric-winrate',
         label: 'Win Rate',
-        value: '34%',
-        subtext: '▲ +3% vs last month',
+        value: isLoading ? '—' : `${winRate}%`,
+        subtext: totalDeals > 0 ? `${dealsWon}/${totalDeals} closed` : '—',
         icon: TrendingUp,
         defaultColor: 'sunshine'
       }, {
         id: 'metric-outstanding',
         label: 'Outstanding',
-        value: '$18,400',
-        subtext: '5 unpaid invoices',
+        value: isLoading ? '—' : String(Math.max(0, totalDeals - dealsWon)),
+        subtext: `unpaid ${terminology.deals.toLowerCase()}`,
         icon: DollarSign,
         defaultColor: 'coral'
       }].map((metric, i) => {

@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Search, Plus, Filter, Download, Upload, 
+import {
+  Search, Plus, Filter, Download, Upload,
   Users, TrendingUp, AlertCircle
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -10,11 +10,21 @@ import { Card, CardContent } from '@/components/ui/card';
 import { CustomerCard } from './CustomerCard';
 import { CustomerFilters } from './CustomerFilters';
 import { CreateCustomerModal } from './CreateCustomerModal';
-import { useCustomers } from '../../hooks/useCustomers';
-import { Customer, CustomerStage } from '@/types/command-center';
+import { useCustomerList, useCreateCustomer, useDeleteCustomer } from '@/hooks/useCustomers';
+import { CustomerStage } from '@/types/command-center';
+import { mapApiCustomerToUi, type ApiCustomer } from './customerMap';
+
+const STAGE_TO_TIER: Record<string, string> = {
+  lead: 'lead',
+  prospect: 'prospect',
+  customer: 'customer',
+  advocate: 'advocate',
+  churned: 'churned',
+};
 
 export function CustomersListPage() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [debouncedSearchValue, setDebouncedSearchValue] = useState('');
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [selectedCustomers, setSelectedCustomers] = useState<string[]>([]);
   const [filters, setFilters] = useState({
@@ -23,26 +33,67 @@ export function CustomersListPage() {
     engagementMin: 0,
     engagementMax: 100,
   });
+  const [page, setPage] = useState(1);
+  const perPage = 20;
 
-  const {
-    customers,
-    isLoading,
-    error,
-    totalCount,
+  useEffect(() => {
+    const t = setTimeout(() => setDebouncedSearchValue(searchQuery), 300);
+    return () => clearTimeout(t);
+  }, [searchQuery]);
+
+  const apiFilters = useMemo(() => ({
     page,
-    setPage,
-    refreshCustomers,
-    createCustomer,
-  } = useCustomers(filters);
+    per_page: perPage,
+    search: debouncedSearchValue || undefined,
+    tier: filters.stage ? STAGE_TO_TIER[filters.stage] : undefined,
+    engagement_min: filters.engagementMin > 0 ? filters.engagementMin : undefined,
+    engagement_max: filters.engagementMax < 100 ? filters.engagementMax : undefined,
+  }), [page, perPage, debouncedSearchValue, filters]);
 
-  // Filter by search
+  const { data, isLoading, error, refetch } = useCustomerList(apiFilters);
+  const createCustomerMutation = useCreateCustomer();
+  const deleteCustomerMutation = useDeleteCustomer();
+
+  const customers = useMemo(() => {
+    const items = (data?.data ?? []) as ApiCustomer[];
+    return items.map(mapApiCustomerToUi);
+  }, [data?.data]);
+
+  const meta = data?.meta;
+  const totalCount = meta?.total ?? 0;
+  const totalPages = meta?.last_page ?? 1;
+
+  const refreshCustomers = useCallback(() => refetch(), [refetch]);
+
+  const createCustomer = useCallback(
+    async (formData: { name: string; email: string; phone?: string; company?: string; stage?: CustomerStage; tags?: string[] }) => {
+      const result = await createCustomerMutation.mutateAsync({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        community_id: undefined,
+        business_context: formData.company ? { company: formData.company } : undefined,
+      });
+      return mapApiCustomerToUi(result as unknown as ApiCustomer);
+    },
+    [createCustomerMutation]
+  );
+
+  const handleDeleteCustomer = useCallback(
+    (id: string) => {
+      deleteCustomerMutation.mutate(id);
+    },
+    [deleteCustomerMutation]
+  );
+
+  // Client-side filter by search (for instant feedback before debounce)
   const filteredCustomers = useMemo(() => {
     if (!searchQuery) return customers;
     const query = searchQuery.toLowerCase();
     return customers.filter(c =>
       c.name.toLowerCase().includes(query) ||
       c.email.toLowerCase().includes(query) ||
-      c.company?.toLowerCase().includes(query)
+      (c.company?.toLowerCase().includes(query) ?? false)
     );
   }, [customers, searchQuery]);
 
@@ -128,7 +179,10 @@ export function CustomersListPage() {
       {isLoading ? (
         <CustomerGridSkeleton />
       ) : error ? (
-        <ErrorState message={error} onRetry={refreshCustomers} />
+        <ErrorState
+          message={error instanceof Error ? error.message : String(error)}
+          onRetry={refreshCustomers}
+        />
       ) : filteredCustomers.length === 0 ? (
         <EmptyState onCreateNew={() => setShowCreateModal(true)} />
       ) : (
@@ -151,6 +205,7 @@ export function CustomersListPage() {
                         : prev.filter(id => id !== customer.id)
                     );
                   }}
+                  onDelete={handleDeleteCustomer}
                 />
               </motion.div>
             ))}
@@ -159,7 +214,7 @@ export function CustomersListPage() {
           {/* Pagination */}
           <Pagination
             page={page}
-            totalPages={Math.ceil(totalCount / 20)}
+            totalPages={totalPages}
             onPageChange={setPage}
           />
         </>
