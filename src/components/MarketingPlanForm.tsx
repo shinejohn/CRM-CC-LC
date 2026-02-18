@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { CheckCircleIcon, ClockIcon, BarChart4Icon, UsersIcon, TargetIcon, PenToolIcon, RefreshCwIcon, EditIcon, SaveIcon, DownloadIcon } from 'lucide-react';
 import api from '@/services/api';
 import { smbService } from '@/services/smbService';
-import { analyticsService } from '@/services/analyticsService';
 
 interface MarketingPlanSections {
   executiveSummary: string;
@@ -121,12 +120,13 @@ export const MarketingPlanForm = () => {
         timeline: 0,
         metrics: 0
       });
-      setAiTyping(prev => ({
-        ...prev,
-        fullText: outline[2] || outline[0] || desc,
-        isTyping: false,
-        text: outline[2] || outline[0] || desc,
-      }));
+      const competitiveText = outline[2] || outline[0] || desc;
+      setAiTyping({
+        section: 'competitiveAnalysis',
+        fullText: competitiveText,
+        isTyping: competitiveText.length > 0,
+        text: '',
+      });
     } catch (err) {
       setGenerateError(err instanceof Error ? err.message : 'Failed to generate marketing plan');
       setCompletionStatus({
@@ -293,19 +293,22 @@ export const MarketingPlanForm = () => {
               </div>
             </div>
             <div className="p-4 bg-white">
-              {/* Mock target market data commented out - wire to CRM analytics API */}
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1">
                   <h3 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
                     <UsersIcon size={16} className="mr-1" /> Primary Audience
                   </h3>
-                  <p className="text-gray-500 italic text-sm">Load from CRM / customer analytics</p>
+                  {planSections.targetMarket ? (
+                    <p className="text-gray-700 text-sm">{planSections.targetMarket}</p>
+                  ) : (
+                    <p className="text-gray-500 italic text-sm">Generated with marketing plan</p>
+                  )}
                 </div>
                 <div className="flex-1">
                   <h3 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
                     <TargetIcon size={16} className="mr-1" /> Key Pain Points
                   </h3>
-                  <p className="text-gray-500 italic text-sm">Load from survey / conversation data</p>
+                  <p className="text-gray-500 italic text-sm">Included in target market analysis</p>
                 </div>
               </div>
             </div>
