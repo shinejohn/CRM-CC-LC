@@ -1,31 +1,112 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Paperclip, Maximize2, Sparkles } from 'lucide-react';
+
+const API_BASE = import.meta.env?.VITE_API_URL || 'http://localhost:8000/api/v1';
+
 interface Message {
   id: string;
   sender: 'ai' | 'user';
   text: string;
   timestamp: string;
 }
-const initialMessages: Message[] = [{
-  id: '1',
-  sender: 'ai',
-  text: "I noticed your email open rates dropped 5% this week. This is likely due to sending on Tuesday instead of Thursday. Would you like me to adjust Sarah's schedule?",
-  timestamp: '10:23 AM'
-}, {
-  id: '2',
-  sender: 'user',
-  text: 'Yes, please switch to Thursday sends.',
-  timestamp: '10:25 AM'
-}, {
-  id: '3',
-  sender: 'ai',
-  text: "Done! I've updated Sarah's email schedule to Thursday mornings at 9 AM. I'll monitor the results and report back next week.",
-  timestamp: '10:25 AM'
-}];
-export function ConsultingChat() {
-  const [messages] = useState<Message[]>(initialMessages);
+
+export function ConsultingChat({ personalityId }: { personalityId?: string | null }) {
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [activePersonalityId, setActivePersonalityId] = useState<string | null>(personalityId ?? null);
+
+  const fetchPersonality = useCallback(async () => {
+    if (activePersonalityId) return activePersonalityId;
+    try {
+      const token = typeof localStorage !== 'undefined' ? localStorage.getItem('auth_token') : null;
+      const r = await fetch(`${API_BASE}/personalities`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        credentials: 'include',
+      });
+      const data = await r.json();
+      const list = data?.data ?? data ?? [];
+      const p = Array.isArray(list) ? list.find((x: { is_active?: boolean }) => x.is_active !== false) ?? list[0] : null;
+      if (p?.id) {
+        setActivePersonalityId(p.id);
+        return p.id;
+      }
+    } catch {
+      /* ignore */
+    }
+    return null;
+  }, [activePersonalityId]);
+
+  const handleSend = async () => {
+    const text = inputValue.trim();
+    if (!text || isLoading) return;
+
+    const userMsg: Message = {
+      id: Date.now().toString(),
+      sender: 'user',
+      text,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    };
+    setMessages((prev) => [...prev, userMsg]);
+    setInputValue('');
+    setIsLoading(true);
+
+    const pid = personalityId ?? (await fetchPersonality());
+    if (!pid) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          sender: 'ai',
+          text: 'AI is not configured. Please set up personalities in settings.',
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        },
+      ]);
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const token = typeof localStorage !== 'undefined' ? localStorage.getItem('auth_token') : null;
+      const convCtx = messages.slice(-10).map((m) => ({
+        role: m.sender === 'ai' ? 'assistant' : 'user',
+        content: m.text,
+      }));
+      const res = await fetch(`${API_BASE}/personalities/${pid}/generate-response`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        credentials: 'include',
+        body: JSON.stringify({ message: text, conversation_context: convCtx }),
+      });
+      const data = await res.json();
+      const responseText = data?.data?.response ?? data?.response ?? 'Sorry, I could not get a response.';
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          sender: 'ai',
+          text: responseText,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        },
+      ]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          sender: 'ai',
+          text: 'Sorry, I could not get a response. Please try again.',
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
       {/* Header */}
       <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-gradient-to-r from-slate-50 to-white">
@@ -77,14 +158,14 @@ export function ConsultingChat() {
       <div className="p-4 border-t border-slate-100 bg-white">
         <div className="flex gap-2">
           <div className="flex-1 relative">
-            <input type="text" value={inputValue} onChange={e => setInputValue(e.target.value)} placeholder="Type your message..." className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all pr-12" />
+            <input type="text" value={inputValue} onChange={e => setInputValue(e.target.value)} onKeyPress={e => e.key === 'Enter' && handleSend()} placeholder="Type your message..." disabled={isLoading} className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all pr-12" />
             <button className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
               <Paperclip className="w-4 h-4" />
             </button>
           </div>
-          <button className="px-4 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors shadow-sm flex items-center gap-2 font-medium">
+          <button onClick={handleSend} disabled={isLoading || !inputValue.trim()} className="px-4 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors shadow-sm flex items-center gap-2 font-medium disabled:opacity-50 disabled:cursor-not-allowed">
             <Send className="w-4 h-4" />
-            Send
+            {isLoading ? '...' : 'Send'}
           </button>
         </div>
       </div>

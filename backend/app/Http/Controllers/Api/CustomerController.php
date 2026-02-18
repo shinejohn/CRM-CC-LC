@@ -442,4 +442,66 @@ class CustomerController extends Controller
             'message' => 'Campaign resumed successfully',
         ]);
     }
+
+    /**
+     * Get AI recommendations for customer (SMB)
+     * GET /v1/customers/{id}/recommendations
+     */
+    public function recommendations(Request $request, string $id): JsonResponse
+    {
+        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
+
+        $analytics = app(\App\Services\CrmAdvancedAnalyticsService::class);
+        $engagementScore = $analytics->calculateEngagementScore($id, $tenantId);
+        $predictive = $analytics->calculatePredictiveLeadScore($id, $tenantId);
+
+        $recommendations = [];
+
+        if ($engagementScore < 30) {
+            $recommendations[] = [
+                'priority' => 'high',
+                'category' => 'engagement',
+                'title' => 'Re-engage At-Risk Customer',
+                'impact' => 'Improve retention',
+                'description' => "{$customer->business_name} has low engagement. Consider a personalized outreach to re-engage.",
+                'actions' => ['Launch Re-engagement Campaign', 'Schedule Call'],
+            ];
+        }
+
+        if (($predictive['predicted_score'] ?? $predictive['current_score'] ?? 0) > 70) {
+            $recommendations[] = [
+                'priority' => 'opportunity',
+                'category' => 'sales',
+                'title' => 'High-Intent Lead',
+                'impact' => '+$2,400 potential',
+                'description' => "{$customer->business_name} shows strong buying signals. Prioritize follow-up.",
+                'actions' => ['Schedule Strategy Call', 'Send Proposal'],
+            ];
+        }
+
+        if ($customer->lead_score && $customer->lead_score >= 60 && !$customer->campaign_status) {
+            $recommendations[] = [
+                'priority' => 'medium',
+                'category' => 'marketing',
+                'title' => 'Start Marketing Campaign',
+                'impact' => 'Increase visibility',
+                'description' => "{$customer->business_name} is ready for campaign activation.",
+                'actions' => ['Start Campaign', 'View Options'],
+            ];
+        }
+
+        if (empty($recommendations)) {
+            $recommendations[] = [
+                'priority' => 'opportunity',
+                'category' => 'general',
+                'title' => 'Increase Email Frequency',
+                'impact' => '+$800/mo',
+                'description' => 'Your engagement metrics suggest room to increase touchpoints.',
+                'actions' => ['Schedule Strategy Call', 'Adjust Frequency'],
+            ];
+        }
+
+        return response()->json(['data' => $recommendations]);
+    }
 }

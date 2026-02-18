@@ -172,6 +172,7 @@ Route::prefix('v1')->group(function () {
         // CRM API - Dashboard
         Route::prefix('crm')->group(function () {
             Route::get('/dashboard/analytics', [\App\Http\Controllers\Api\CrmDashboardController::class, 'analytics']);
+            Route::get('/recommendations', [\App\Http\Controllers\Api\CrmDashboardController::class, 'recommendations']);
             Route::get('/analytics/interest', [\App\Http\Controllers\Api\CrmAnalyticsController::class, 'interest']);
             Route::get('/analytics/purchases', [\App\Http\Controllers\Api\CrmAnalyticsController::class, 'purchases']);
             Route::get('/analytics/learning', [\App\Http\Controllers\Api\CrmAnalyticsController::class, 'learning']);
@@ -193,6 +194,7 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', [CustomerController::class, 'destroy']);
             Route::put('/{id}/business-context', [CustomerController::class, 'updateBusinessContext']);
             Route::get('/{id}/ai-context', [CustomerController::class, 'getAiContext']);
+            Route::get('/{id}/recommendations', [CustomerController::class, 'recommendations']);
 
             // Engagement routes
             Route::get('/{id}/engagement', [CustomerController::class, 'engagementHistory']);

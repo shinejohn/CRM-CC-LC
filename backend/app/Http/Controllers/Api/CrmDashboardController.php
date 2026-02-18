@@ -217,4 +217,67 @@ class CrmDashboardController extends Controller
             ],
         ]);
     }
+
+    /**
+     * Get AI recommendations for tenant dashboard
+     * GET /v1/crm/recommendations
+     */
+    public function recommendations(Request $request): JsonResponse
+    {
+        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+
+        if (!$tenantId) {
+            return response()->json(['error' => 'Tenant ID required'], 400);
+        }
+
+        $recommendations = [];
+
+        $atRiskCount = Customer::where('tenant_id', $tenantId)
+            ->where(function ($q) {
+                $q->where('engagement_score', '<', 30)
+                    ->orWhere(function ($q2) {
+                        $q2->whereNull('last_email_open')
+                            ->where('created_at', '<', Carbon::now()->subDays(60));
+                    });
+            })
+            ->count();
+
+        if ($atRiskCount > 0) {
+            $recommendations[] = [
+                'priority' => 'high',
+                'category' => 'engagement',
+                'title' => 'Re-engage At-Risk Customers',
+                'impact' => '$' . ($atRiskCount * 800) . ' potential',
+                'description' => "{$atRiskCount} customers haven't engaged in 60+ days. Historical value at risk.",
+                'actions' => ['Launch Re-engagement Campaign', 'View Customers'],
+            ];
+        }
+
+        $highIntentCount = Customer::where('tenant_id', $tenantId)
+            ->where('lead_score', '>=', 70)
+            ->where('campaign_status', '!=', 'running')
+            ->count();
+
+        if ($highIntentCount > 0) {
+            $recommendations[] = [
+                'priority' => 'opportunity',
+                'category' => 'sales',
+                'title' => 'High-Intent Leads Ready',
+                'impact' => '+' . $highIntentCount . ' conversions',
+                'description' => "{$highIntentCount} leads show strong buying signals. Prioritize follow-up.",
+                'actions' => ['Schedule Strategy Call', 'View Leads'],
+            ];
+        }
+
+        $recommendations[] = [
+            'priority' => 'opportunity',
+            'category' => 'marketing',
+            'title' => 'Increase Email Frequency',
+            'impact' => '+$800/mo',
+            'description' => 'Email open rates above industry average. Increasing from 2x to 3x monthly could generate additional leads.',
+            'actions' => ['Schedule Strategy Call', 'Adjust Email Frequency'],
+        ];
+
+        return response()->json(['data' => $recommendations]);
+    }
 }

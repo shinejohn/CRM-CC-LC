@@ -1,13 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Filter, DollarSign, Users, Clock, TrendingUp, Search } from 'lucide-react';
+import { ArrowLeft, DollarSign, Users, Clock, TrendingUp, Search } from 'lucide-react';
+
+const API_BASE = import.meta.env?.VITE_API_URL || 'http://localhost:8000/api/v1';
+
+interface Recommendation {
+  priority: string;
+  category: string;
+  title: string;
+  impact: string;
+  description: string;
+  actions: string[];
+}
+
+type RecWithStyle = Recommendation & { icon?: typeof DollarSign; color?: string; bgColor?: string; borderColor?: string };
+
+const iconMap: Record<string, typeof DollarSign> = {
+  engagement: Users,
+  sales: DollarSign,
+  marketing: TrendingUp,
+  general: Search,
+};
+
 export function AIRecommendationsFullView({
   onBack
 }: {
   onBack: () => void;
 }) {
-  const recommendations = [{
+  const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('auth_token') : null;
+    fetch(`${API_BASE}/crm/recommendations`, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+      credentials: 'include',
+    })
+      .then((r) => (r.ok ? r.json() : { data: [] }))
+      .then((res) => setRecommendations(Array.isArray(res?.data) ? res.data : []))
+      .catch(() => setRecommendations([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const fallbackRecommendations: RecWithStyle[] = [{
     priority: 'high',
+    category: 'revenue',
     title: 'Collect Overdue Revenue',
     impact: '$1,200',
     description: '2 invoices are 30+ days overdue. This affects cash flow and business health score.',
@@ -18,6 +55,7 @@ export function AIRecommendationsFullView({
     borderColor: 'border-red-200'
   }, {
     priority: 'medium',
+    category: 'engagement',
     title: 'Re-engage At-Risk Customers',
     impact: '$2,400 potential',
     description: "3 customers haven't booked in 60+ days. Historical value: $2,400/yr.",
@@ -28,6 +66,7 @@ export function AIRecommendationsFullView({
     borderColor: 'border-amber-200'
   }, {
     priority: 'medium',
+    category: 'operations',
     title: 'Set Up Recurring Billing',
     impact: 'Save 5hrs',
     description: '15 customers are eligible for automatic monthly billing. This would save ~5 hours/month in manual invoicing.',
@@ -38,6 +77,7 @@ export function AIRecommendationsFullView({
     borderColor: 'border-amber-200'
   }, {
     priority: 'opportunity',
+    category: 'marketing',
     title: 'Increase Email Frequency',
     impact: '+$800/mo',
     description: 'Your email open rates (28%) are 28% above industry average (22%). Increasing from 2x to 3x monthly could generate additional leads.',
@@ -48,6 +88,7 @@ export function AIRecommendationsFullView({
     borderColor: 'border-emerald-200'
   }, {
     priority: 'opportunity',
+    category: 'general',
     title: 'Add Jennifer (Content Creator)',
     impact: '+40% SEO',
     description: 'Your website has low organic traffic. Regular blog content could improve SEO by 40% and generate 10+ leads/month.',
@@ -57,6 +98,25 @@ export function AIRecommendationsFullView({
     bgColor: 'bg-emerald-100',
     borderColor: 'border-emerald-200'
   }];
+
+  const displayRecs: RecWithStyle[] = recommendations.length > 0
+    ? recommendations.map((r) => ({
+        ...r,
+        icon: iconMap[r.category] ?? DollarSign,
+        color: r.priority === 'high' ? 'text-red-600' : r.priority === 'medium' ? 'text-amber-600' : 'text-emerald-600',
+        bgColor: r.priority === 'high' ? 'bg-red-100' : r.priority === 'medium' ? 'bg-amber-100' : 'bg-emerald-100',
+        borderColor: r.priority === 'high' ? 'border-red-200' : r.priority === 'medium' ? 'border-amber-200' : 'border-emerald-200',
+      }))
+    : fallbackRecommendations;
+
+  if (loading) {
+    return (
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-4xl mx-auto pb-12">
+        <div className="flex justify-center py-16 text-slate-600">Loading recommendations...</div>
+      </motion.div>
+    );
+  }
+
   return <motion.div initial={{
     opacity: 0,
     y: 20
@@ -100,7 +160,7 @@ export function AIRecommendationsFullView({
             (Action Required)
           </h3>
           <div className="space-y-4">
-            {recommendations.filter(r => r.priority === 'high').map((rec, index) => <RecommendationCard key={index} recommendation={rec} />)}
+            {displayRecs.filter(r => r.priority === 'high').map((rec, index) => <RecommendationCard key={index} recommendation={rec} />)}
           </div>
         </div>
 
@@ -111,7 +171,7 @@ export function AIRecommendationsFullView({
             Priority (Attention Needed)
           </h3>
           <div className="space-y-4">
-            {recommendations.filter(r => r.priority === 'medium').map((rec, index) => <RecommendationCard key={index} recommendation={rec} />)}
+            {displayRecs.filter(r => r.priority === 'medium').map((rec, index) => <RecommendationCard key={index} recommendation={rec} />)}
           </div>
         </div>
 
@@ -122,7 +182,7 @@ export function AIRecommendationsFullView({
             Opportunities (Growth Potential)
           </h3>
           <div className="space-y-4">
-            {recommendations.filter(r => r.priority === 'opportunity').map((rec, index) => <RecommendationCard key={index} recommendation={rec} />)}
+            {displayRecs.filter(r => r.priority === 'opportunity').map((rec, index) => <RecommendationCard key={index} recommendation={rec} />)}
           </div>
         </div>
       </div>
@@ -131,8 +191,11 @@ export function AIRecommendationsFullView({
 function RecommendationCard({
   recommendation
 }: {
-  recommendation: any;
+  recommendation: RecWithStyle;
 }) {
+  const Icon = recommendation.icon ?? DollarSign;
+  const bgColor = recommendation.bgColor ?? 'bg-slate-100';
+  const color = recommendation.color ?? 'text-slate-600';
   return <motion.div initial={{
     opacity: 0,
     y: 10
@@ -143,8 +206,8 @@ function RecommendationCard({
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-start gap-4">
-            <div className={`w-12 h-12 rounded-xl ${recommendation.bgColor} flex items-center justify-center ${recommendation.color} shrink-0`}>
-              <recommendation.icon className="w-6 h-6" />
+            <div className={`w-12 h-12 rounded-xl ${bgColor} flex items-center justify-center ${color} shrink-0`}>
+              <Icon className="w-6 h-6" />
             </div>
             <div>
               <h4 className="font-bold text-slate-900 text-lg">
@@ -156,7 +219,7 @@ function RecommendationCard({
             </div>
           </div>
           <div className="text-right shrink-0">
-            <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${recommendation.bgColor} ${recommendation.color}`}>
+            <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${bgColor} ${color}`}>
               Impact: {recommendation.impact}
             </span>
           </div>

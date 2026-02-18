@@ -26,6 +26,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "magic"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

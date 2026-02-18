@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SparklesIcon, CheckCircleIcon, ClockIcon, PlusCircleIcon, HeartIcon } from 'lucide-react';
 import { VoiceControls } from '../components/VoiceControls';
 interface AIModeHubProps {
@@ -31,29 +31,88 @@ export const AIModeHub = ({
     isAI: true
   }]);
   const addMessage = (message: Message) => {
-    setMessages([...messages, message]);
+    setMessages((prev) => [...prev, message]);
   };
   const handleTranscriptUpdate = (text: string) => {
     setTranscript(text);
   };
-  const handleSendMessage = () => {
-    if (messageInput.trim()) {
-      addMessage({
-        sender: 'You',
-        text: messageInput,
-        isAI: false
+  const [personalityId, setPersonalityId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const API_BASE = import.meta.env?.VITE_API_URL || 'http://localhost:8000/api/v1';
+    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('auth_token') : null;
+    fetch(`${API_BASE}/personalities`, { headers: token ? { Authorization: `Bearer ${token}` } : {}, credentials: 'include' })
+      .then((r) => r.json())
+      .then((data) => {
+        const list = data?.data ?? data ?? [];
+        const p = Array.isArray(list) ? list.find((x: { is_active?: boolean }) => x.is_active !== false) ?? list[0] : null;
+        if (p?.id) setPersonalityId(p.id);
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleSendMessage = async () => {
+    const text = messageInput.trim();
+    if (!text || isLoading) return;
+
+    addMessage({ sender: 'You', text, isAI: false });
+    setMessageInput('');
+    setIsLoading(true);
+
+    const pid = personalityId;
+    if (!pid) {
+      addMessage({ sender: 'Jessica', text: 'AI is not configured. Please set up personalities in settings.', isAI: true });
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const API_BASE = import.meta.env?.VITE_API_URL || 'http://localhost:8000/api/v1';
+      const token = typeof localStorage !== 'undefined' ? localStorage.getItem('auth_token') : null;
+      const convCtx = [...messages, { sender: 'You', text, isAI: false }].slice(-10).map((m: { sender?: string; text: string; isAI?: boolean }) => ({ role: m.isAI ? 'assistant' : 'user', content: m.text }));
+      const res = await fetch(`${API_BASE}/personalities/${pid}/generate-response`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+        credentials: 'include',
+        body: JSON.stringify({ message: text, conversation_context: convCtx }),
       });
-      setTimeout(() => {
-        addMessage({
-          sender: 'Jessica',
-          text: `I understand you're interested in "${messageInput}". Let me help you with that!`,
-          isAI: true
-        });
-      }, 1000);
-      setMessageInput('');
+      const data = await res.json();
+      const responseText = data?.data?.response ?? data?.response ?? 'Sorry, I could not get a response.';
+      addMessage({ sender: 'Jessica', text: responseText, isAI: true });
+    } catch {
+      addMessage({ sender: 'Jessica', text: 'Sorry, I could not get a response. Please try again.', isAI: true });
+    } finally {
+      setIsLoading(false);
     }
   };
-  const aiEmployees: AIEmployee[] = [{
+  const [aiEmployeesFromApi, setAiEmployeesFromApi] = useState<AIEmployee[]>([]);
+
+  useEffect(() => {
+    const API_BASE = import.meta.env?.VITE_API_URL || 'http://localhost:8000/api/v1';
+    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('auth_token') : null;
+    fetch(`${API_BASE}/personalities`, { headers: token ? { Authorization: `Bearer ${token}` } : {}, credentials: 'include' })
+      .then((r) => r.json())
+      .then((data) => {
+        const list = data?.data ?? data ?? [];
+        if (Array.isArray(list) && list.length > 0) {
+          setAiEmployeesFromApi(
+            list.map((p: { id: string; name?: string; identity?: string; description?: string; persona_description?: string }) => ({
+              id: p.id,
+              name: p.identity ?? p.name ?? 'AI Assistant',
+              title: p.persona_description?.split('.')[0] ?? 'AI Employee',
+              description: p.description ?? p.persona_description ?? '',
+              avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(p.identity ?? p.name ?? 'AI')}&background=6366f1&color=fff`,
+              status: 'free' as const,
+              accentColor: 'indigo',
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const aiEmployees: AIEmployee[] = aiEmployeesFromApi.length > 0 ? aiEmployeesFromApi : [{
     id: 'leonard',
     name: 'Leonard',
     title: 'Learning Coordinator',

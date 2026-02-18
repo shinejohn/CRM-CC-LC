@@ -21,4 +21,7 @@ export const analyticsService = {
 
   getCampaignPerformance: () =>
     api.get<ApiResponse<Record<string, unknown>>>('/crm/analytics/campaign-performance').then((r) => r.data.data ?? r.data),
+
+  getRecommendations: () =>
+    api.get<ApiResponse<Array<{ priority: string; category: string; title: string; impact: string; description: string; actions: string[] }>>>('/crm/recommendations').then((r) => r.data.data ?? r.data ?? []),
 };
