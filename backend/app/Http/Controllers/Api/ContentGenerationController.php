@@ -270,6 +270,19 @@ class ContentGenerationController extends Controller
     }
 
     /**
+     * Get content versions (version history)
+     */
+    public function versions(Request $request, string $id): JsonResponse
+    {
+        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+
+        $content = GeneratedContent::where('tenant_id', $tenantId)->findOrFail($id);
+        $versions = $content->versions()->orderBy('version_number', 'desc')->get();
+
+        return response()->json(['data' => $versions]);
+    }
+
+    /**
      * Get content templates
      */
     public function templates(Request $request): JsonResponse

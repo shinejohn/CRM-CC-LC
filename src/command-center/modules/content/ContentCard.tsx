@@ -17,11 +17,21 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Content } from '../../hooks/useContent';
+export interface ContentCardItem {
+  id: string;
+  title: string;
+  type: string;
+  status: 'draft' | 'review' | 'approved' | 'published' | 'archived';
+  excerpt?: string;
+  thumbnail?: string;
+  category?: string;
+  updatedAt: string;
+}
 
 interface ContentCardProps {
-  content: Content;
+  content: ContentCardItem;
   onDelete?: () => void;
+  onStatusChange?: (status: 'draft' | 'review' | 'approved' | 'published' | 'archived') => void;
 }
 
 const typeIcons = {
@@ -40,7 +50,7 @@ const statusColors = {
   archived: 'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-500',
 };
 
-export function ContentCard({ content, onDelete }: ContentCardProps) {
+export function ContentCard({ content, onDelete, onStatusChange }: ContentCardProps) {
   const navigate = useNavigate();
   const TypeIcon = typeIcons[content.type] || FileText;
 
@@ -88,28 +98,41 @@ export function ContentCard({ content, onDelete }: ContentCardProps) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate(`/command-center/content/${content.id}`)}>
                   <Eye className="w-4 h-4 mr-2" />
                   Preview
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate(`/command-center/content/${content.id}/edit`)}>
                   <Edit className="w-4 h-4 mr-2" />
                   Edit
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Share2 className="w-4 h-4 mr-2" />
-                  Share
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  className="text-red-600"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onDelete?.();
-                  }}
-                >
-                  <Trash2 className="w-4 h-4 mr-2" />
-                  Delete
-                </DropdownMenuItem>
+                {content.status === 'draft' && onStatusChange && (
+                  <DropdownMenuItem onClick={(e) => { e.stopPropagation(); onStatusChange('review'); }}>
+                    Send to Review
+                  </DropdownMenuItem>
+                )}
+                {content.status === 'review' && onStatusChange && (
+                  <DropdownMenuItem onClick={(e) => { e.stopPropagation(); onStatusChange('approved'); }}>
+                    Approve
+                  </DropdownMenuItem>
+                )}
+                {(content.status === 'approved' || content.status === 'review') && onStatusChange && (
+                  <DropdownMenuItem onClick={(e) => { e.stopPropagation(); onStatusChange('published'); }}>
+                    Publish
+                  </DropdownMenuItem>
+                )}
+                {content.status !== 'archived' && (onStatusChange || onDelete) && (
+                  <DropdownMenuItem
+                    className="text-red-600"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onStatusChange ? onStatusChange('archived') : onDelete?.();
+                    }}
+                  >
+                    <Trash2 className="w-4 h-4 mr-2" />
+                    Archive
+                  </DropdownMenuItem>
+                )}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

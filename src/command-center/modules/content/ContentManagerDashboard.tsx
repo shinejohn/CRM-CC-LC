@@ -1,7 +1,7 @@
 // Command Center Content Manager Dashboard
-// CC-FT-04: Content Module
+// CC-FT-04: Content Module - Wired to GET /v1/generated-content
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import {
   Search, Plus, Filter, Grid, List, FileText,
@@ -15,10 +15,15 @@ import { ContentCard } from './ContentCard';
 import { ContentFilters } from './ContentFilters';
 import { CreateContentModal } from './CreateContentModal';
 import { AIContentGenerator } from './AIContentGenerator';
-import { useContent, Content } from '../../hooks/useContent';
+import {
+  listContent,
+  generateContent,
+  updateContentStatus,
+  type GeneratedContent,
+} from '@/services/command-center/content-api';
 
 type ViewMode = 'grid' | 'list';
-type ContentStatus = 'all' | 'draft' | 'review' | 'approved' | 'published';
+type ContentStatus = 'all' | 'draft' | 'review' | 'approved' | 'published' | 'archived';
 
 export function ContentManagerDashboard() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -26,49 +31,80 @@ export function ContentManagerDashboard() {
   const [statusFilter, setStatusFilter] = useState<ContentStatus>('all');
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showAIGenerator, setShowAIGenerator] = useState(false);
+  const [content, setContent] = useState<GeneratedContent[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState({
     type: null as string | null,
     category: null as string | null,
   });
 
-  const { content, isLoading, error, refreshContent, createContent, deleteContent } = useContent({
-    status: statusFilter === 'all' ? null : statusFilter,
-    ...filters,
-  });
+  const fetchContent = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const items = await listContent({
+        status: statusFilter === 'all' ? undefined : statusFilter,
+        type: filters.type ?? undefined,
+      });
+      setContent(items);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load content');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [statusFilter, filters.type]);
+
+  useEffect(() => {
+    fetchContent();
+  }, [fetchContent]);
 
   const filteredContent = content.filter(item => {
     if (!searchQuery) return true;
     const query = searchQuery.toLowerCase();
     return (
       item.title.toLowerCase().includes(query) ||
-      item.description?.toLowerCase().includes(query) ||
+      item.content?.toLowerCase().includes(query) ||
       item.excerpt?.toLowerCase().includes(query)
     );
   });
 
-  // Content stats
+  // Content stats from API data
   const stats = {
     total: content.length,
     draft: content.filter(c => c.status === 'draft').length,
     review: content.filter(c => c.status === 'review').length,
     published: content.filter(c => c.status === 'published').length,
+    approved: content.filter(c => c.status === 'approved').length,
+    archived: content.filter(c => c.status === 'archived').length,
   };
 
-  const handleCreate = async (newContent: Partial<Content>) => {
-    try {
-      await createContent(newContent);
-      refreshContent();
-    } catch (error) {
-      console.error('Failed to create content:', error);
-    }
+  const handleCreate = async (newContent: {
+    title: string;
+    type: string;
+    description?: string;
+    status?: string;
+  }) => {
+    const apiType = (['article', 'blog', 'social', 'email', 'landing_page'].includes(newContent.type)
+      ? newContent.type
+      : newContent.type === 'video' || newContent.type === 'image' ? 'article' : 'article') as GeneratedContent['type'];
+    await generateContent({
+      type: apiType,
+      parameters: {
+        title: newContent.title,
+        topic: newContent.description,
+      },
+    });
+    fetchContent();
   };
 
-  const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this content?')) {
+  const handleArchive = async (id: string) => {
+    if (confirm('Are you sure you want to archive this content?')) {
       try {
-        await deleteContent(id);
-      } catch (error) {
-        console.error('Failed to delete content:', error);
+        await updateContentStatus(id, 'archived');
+        fetchContent();
+      } catch (err) {
+        console.error('Failed to archive content:', err);
       }
     }
   };
@@ -151,8 +187,14 @@ export function ContentManagerDashboard() {
           <TabsTrigger value="review">
             Review <Badge variant="secondary" className="ml-2">{stats.review}</Badge>
           </TabsTrigger>
+          <TabsTrigger value="approved">
+            Approved <Badge variant="secondary" className="ml-2">{stats.approved}</Badge>
+          </TabsTrigger>
           <TabsTrigger value="published">
             Published <Badge variant="secondary" className="ml-2">{stats.published}</Badge>
+          </TabsTrigger>
+          <TabsTrigger value="archived">
+            Archived <Badge variant="secondary" className="ml-2">{stats.archived}</Badge>
           </TabsTrigger>
         </TabsList>
 
@@ -175,14 +217,22 @@ export function ContentManagerDashboard() {
                   transition={{ delay: index * 0.05 }}
                 >
                   <ContentCard 
-                    content={item} 
-                    onDelete={() => handleDelete(item.id)}
+                    content={mapToContentCard(item)} 
+                    onDelete={() => handleArchive(item.id)}
+                    onStatusChange={async (status) => {
+                      try {
+                        await updateContentStatus(item.id, status);
+                        fetchContent();
+                      } catch (err) {
+                        console.error('Failed to update status:', err);
+                      }
+                    }}
                   />
                 </motion.div>
               ))}
             </div>
           ) : (
-            <ContentListView content={filteredContent} />
+            <ContentListView content={filteredContent.map(mapToContentCard)} />
           )}
         </TabsContent>
       </Tabs>
@@ -191,27 +241,66 @@ export function ContentManagerDashboard() {
       <CreateContentModal
         open={showCreateModal}
         onClose={() => setShowCreateModal(false)}
-        onCreated={(content) => {
-          handleCreate(content);
-          setShowCreateModal(false);
+        onCreated={async (content) => {
+          try {
+            await handleCreate(content);
+            setShowCreateModal(false);
+          } catch {
+            // Error already logged
+          }
         }}
       />
 
       <AIContentGenerator
         open={showAIGenerator}
         onClose={() => setShowAIGenerator(false)}
-        onGenerated={(content) => {
-          handleCreate({
-            title: content.title,
-            type: content.type as Content['type'],
-            description: content.content,
-            status: 'draft',
-          });
+        onGenerated={async (content) => {
+          if ('id' in content) {
+            fetchContent();
+          } else {
+            try {
+              await handleCreate({
+                title: content.title,
+                type: content.type,
+                description: content.content,
+                status: 'draft',
+              });
+            } catch {
+              // Error already logged
+            }
+          }
           setShowAIGenerator(false);
         }}
       />
     </div>
   );
+}
+
+function mapToContentCard(item: GeneratedContent): {
+  id: string;
+  title: string;
+  type: 'article' | 'email' | 'social' | 'video' | 'image';
+  status: 'draft' | 'review' | 'approved' | 'published' | 'archived';
+  description?: string;
+  excerpt?: string;
+  updatedAt: string;
+} {
+  const typeMap = {
+    article: 'article' as const,
+    blog: 'article' as const,
+    social: 'social' as const,
+    email: 'email' as const,
+    landing_page: 'article' as const,
+  };
+  return {
+    id: item.id,
+    title: item.title,
+    type: (typeMap[item.type] ?? 'article') as 'article' | 'email' | 'social' | 'video' | 'image',
+    status: item.status,
+    description: item.content?.slice(0, 200),
+    excerpt: item.excerpt ?? undefined,
+    updatedAt: item.updated_at,
+  };
 }
 
 // Sub-components
@@ -241,7 +330,7 @@ function ContentGridSkeleton({ viewMode }: { viewMode: ViewMode }) {
   );
 }
 
-function ContentListView({ content }: { content: Content[] }) {
+function ContentListView({ content }: { content: Array<{ id: string; title: string; type: string; status: string }> }) {
   return (
     <div className="space-y-2">
       {content.map((item) => (

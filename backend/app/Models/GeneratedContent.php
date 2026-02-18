@@ -12,6 +12,8 @@ class GeneratedContent extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $table = 'generated_content';
+
     protected $fillable = [
         'tenant_id',
         'title',

@@ -23,13 +23,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useAI } from '../../hooks/useAI';
-import { GenerationRequest } from '../../services/ai.types';
+import { generateContent } from '@/services/command-center/content-api';
 
 interface AIContentGeneratorProps {
   open: boolean;
   onClose: () => void;
-  onGenerated: (content: { type: string; title: string; content: string }) => void;
+  onGenerated: (content: { type: string; title: string; content: string } | { id: string; title: string; type: string; content: string }) => void;
 }
 
 const contentTypes = [
@@ -50,23 +49,34 @@ export function AIContentGenerator({ open, onClose, onGenerated }: AIContentGene
   const [prompt, setPrompt] = useState('');
   const [tone, setTone] = useState('professional');
   const [generatedContent, setGeneratedContent] = useState('');
+  const [generatedResult, setGeneratedResult] = useState<{ id: string; title: string; type: string; content: string } | null>(null);
   const [copied, setCopied] = useState(false);
 
-  const { generate, isLoading } = useAI();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleGenerate = async () => {
     if (!prompt.trim()) return;
 
+    setIsLoading(true);
     try {
-      const request: GenerationRequest = {
-        type: selectedType as any,
-        prompt: `Write a ${selectedType} with a ${tone} tone about: ${prompt}`,
-      };
-      
-      const response = await generate(request);
-      setGeneratedContent(response);
-    } catch (error) {
-      console.error('Generation failed:', error);
+      const result = await generateContent({
+        type: selectedType === 'article' ? 'article' : selectedType === 'email' ? 'email' : 'social',
+        parameters: {
+          title: prompt.slice(0, 100),
+          topic: `Write with a ${tone} tone: ${prompt}`,
+        },
+      });
+      setGeneratedContent(result.content || result.excerpt || 'Content generated.');
+      setGeneratedResult({
+        id: result.id,
+        title: result.title,
+        type: result.type,
+        content: result.content || '',
+      });
+    } catch (err) {
+      console.error('Generation failed:', err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -77,12 +87,17 @@ export function AIContentGenerator({ open, onClose, onGenerated }: AIContentGene
   };
 
   const handleUse = () => {
-    onGenerated({
-      type: selectedType,
-      title: prompt.slice(0, 50),
-      content: generatedContent,
-    });
+    if (generatedResult) {
+      onGenerated(generatedResult);
+    } else {
+      onGenerated({
+        type: selectedType,
+        title: prompt.slice(0, 50),
+        content: generatedContent,
+      });
+    }
     setGeneratedContent('');
+    setGeneratedResult(null);
     setPrompt('');
   };
 

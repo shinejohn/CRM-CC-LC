@@ -15,12 +15,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Content } from '../../hooks/useContent';
-
 interface CreateContentModalProps {
   open: boolean;
   onClose: () => void;
-  onCreated: (content: Content) => void;
+  onCreated: (content: { title: string; type: string; description?: string; category?: string; status?: string }) => void;
 }
 
 const contentTypes = [
@@ -33,7 +31,7 @@ const contentTypes = [
 
 export function CreateContentModal({ open, onClose, onCreated }: CreateContentModalProps) {
   const [title, setTitle] = useState('');
-  const [type, setType] = useState<Content['type']>('article');
+  const [type, setType] = useState<string>('article');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [isCreating, setIsCreating] = useState(false);
@@ -46,16 +44,13 @@ export function CreateContentModal({ open, onClose, onCreated }: CreateContentMo
     setIsCreating(true);
     try {
       // This will be handled by the parent component using useContent hook
-      const newContent: Partial<Content> = {
+      onCreated({
         title,
         type,
         description,
         category: category || undefined,
         status: 'draft',
-      };
-      
-      // The parent should call createContent with this data
-      onCreated(newContent as Content);
+      });
       
       // Reset form
       setTitle('');
@@ -91,7 +86,7 @@ export function CreateContentModal({ open, onClose, onCreated }: CreateContentMo
 
           <div>
             <Label htmlFor="type">Content Type</Label>
-            <Select value={type} onValueChange={(v) => setType(v as Content['type'])}>
+            <Select value={type} onValueChange={setType}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>

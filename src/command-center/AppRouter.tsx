@@ -69,7 +69,7 @@ export function AppRouter() {
           </Suspense>
         } />
 
-        <Route path="content" element={
+        <Route path="content/*" element={
           <Suspense fallback={<LoadingScreen />}>
             <Content />
           </Suspense>

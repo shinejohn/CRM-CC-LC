@@ -11,6 +11,11 @@ class ContentWorkflowHistory extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $table = 'content_workflow_history';
+
+    public $timestamps = true;
+    const UPDATED_AT = null;
+
     protected $fillable = [
         'content_id',
         'tenant_id',

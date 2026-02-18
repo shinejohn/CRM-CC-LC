@@ -343,13 +343,14 @@ Route::prefix('v1')->group(function () {
             Route::put('/customers/{customerId}/preferences', [\App\Http\Controllers\Api\ContactController::class, 'updatePreferences']);
         });
 
-        // Command Center - Content Generation API
-        Route::prefix('content')->group(function () {
+        // Command Center - Content Generation API (generated-content to avoid conflict with Learning Center /content)
+        Route::prefix('generated-content')->group(function () {
             Route::get('/', [\App\Http\Controllers\Api\ContentGenerationController::class, 'index']);
             Route::post('/generate', [\App\Http\Controllers\Api\ContentGenerationController::class, 'generate']);
             Route::post('/generate-from-campaign', [\App\Http\Controllers\Api\ContentGenerationController::class, 'generateFromCampaign']);
             Route::get('/templates', [\App\Http\Controllers\Api\ContentGenerationController::class, 'templates']);
             Route::post('/templates', [\App\Http\Controllers\Api\ContentGenerationController::class, 'createTemplate']);
+            Route::get('/{id}/versions', [\App\Http\Controllers\Api\ContentGenerationController::class, 'versions']);
             Route::get('/{id}', [\App\Http\Controllers\Api\ContentGenerationController::class, 'show']);
             Route::put('/{id}', [\App\Http\Controllers\Api\ContentGenerationController::class, 'update']);
             Route::post('/{id}/status', [\App\Http\Controllers\Api\ContentGenerationController::class, 'updateStatus']);
