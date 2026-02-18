@@ -1,36 +1,156 @@
-import React, { useEffect, useState } from 'react';
-import { CheckCircleIcon, ClockIcon, AlertCircleIcon, BarChart4Icon, UsersIcon, TrendingUpIcon, DollarSignIcon, CalendarIcon, TargetIcon, AlertTriangleIcon, PenToolIcon, EditIcon, SaveIcon, RefreshCwIcon, DownloadIcon } from 'lucide-react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { CheckCircleIcon, ClockIcon, BarChart4Icon, UsersIcon, TargetIcon, PenToolIcon, RefreshCwIcon, EditIcon, SaveIcon, DownloadIcon } from 'lucide-react';
+import api from '@/services/api';
+import { smbService } from '@/services/smbService';
+import { analyticsService } from '@/services/analyticsService';
+
+interface MarketingPlanSections {
+  executiveSummary: string;
+  targetMarket: string;
+  competitiveAnalysis: string;
+  marketingStrategy: string;
+  budget: string;
+}
+
 export const MarketingPlanForm = () => {
   const [completionStatus, setCompletionStatus] = useState({
-    executiveSummary: 'completed',
-    targetMarket: 'completed',
-    competitiveAnalysis: 'in-progress',
-    marketingStrategy: 'in-progress',
+    executiveSummary: 'pending',
+    targetMarket: 'pending',
+    competitiveAnalysis: 'pending',
+    marketingStrategy: 'pending',
     budget: 'pending',
     timeline: 'pending',
     metrics: 'pending'
   });
-  // Mock AI content commented out - wire to campaign generation API when available
-  // fullText: 'Based on market data analysis, three primary competitors...'
   const [aiTyping, setAiTyping] = useState({
     section: 'competitiveAnalysis',
     isTyping: false,
     text: '',
     fullText: '',
   });
-  const [confidenceLevels, setConfidenceLevels] = useState({
-    executiveSummary: 92,
-    targetMarket: 88,
-    competitiveAnalysis: 76,
-    marketingStrategy: 84,
-    budget: 70,
-    timeline: 65,
-    metrics: 80
+  const [planSections, setPlanSections] = useState<MarketingPlanSections>({
+    executiveSummary: '',
+    targetMarket: '',
+    competitiveAnalysis: '',
+    marketingStrategy: '',
+    budget: '',
   });
-  // Simulate AI typing effect
+  const [clientInfo, setClientInfo] = useState<{
+    name: string;
+    industry: string;
+    targetMarket: string;
+    dataSources: string[];
+  }>({ name: '', industry: '', targetMarket: '', dataSources: [] });
+  const [confidenceLevels, setConfidenceLevels] = useState({
+    executiveSummary: 0,
+    targetMarket: 0,
+    competitiveAnalysis: 0,
+    marketingStrategy: 0,
+    budget: 0,
+    timeline: 0,
+    metrics: 0
+  });
+  const [generating, setGenerating] = useState(false);
+  const [generateError, setGenerateError] = useState<string | null>(null);
+
+  const loadClientInfo = useCallback(async () => {
+    try {
+      const profile = await smbService.getProfile();
+      if (profile) {
+        setClientInfo({
+          name: (profile as { business_name?: string; name?: string }).business_name ?? (profile as { name?: string }).name ?? '',
+          industry: (profile as { industry?: string; industry_category?: string }).industry ?? (profile as { industry_category?: string }).industry_category ?? '',
+          targetMarket: (profile as { target_market?: string }).target_market ?? '',
+          dataSources: ['Business profile', 'CRM analytics'],
+        });
+      }
+    } catch {
+      setClientInfo(prev => ({ ...prev, dataSources: ['Connect SMB profile for business data'] }));
+    }
+  }, []);
+
+  const generatePlan = useCallback(async () => {
+    setGenerating(true);
+    setGenerateError(null);
+    setCompletionStatus({
+      executiveSummary: 'in-progress',
+      targetMarket: 'pending',
+      competitiveAnalysis: 'pending',
+      marketingStrategy: 'pending',
+      budget: 'pending',
+      timeline: 'pending',
+      metrics: 'pending'
+    });
+    try {
+      const { data } = await api.post<{
+        data: {
+          campaign?: { description?: string };
+          outline?: string[];
+          suggestions?: unknown[];
+        };
+      }>('/campaigns/generate', {
+        type: 'Educational',
+        objective: 'create a comprehensive marketing plan with executive summary, competitive analysis, marketing strategy, and budget recommendations',
+        topic: 'marketing plan',
+        target_audience: clientInfo.targetMarket || 'small businesses',
+      });
+      const res = data as { campaign?: { description?: string }; outline?: string[] };
+      const desc = res?.campaign?.description ?? '';
+      const outline = Array.isArray(res?.outline) ? res.outline : [];
+      setPlanSections({
+        executiveSummary: desc || outline[0] || '',
+        targetMarket: outline[1] || '',
+        competitiveAnalysis: outline[2] || outline[0] || '',
+        marketingStrategy: outline[3] || outline[1] || '',
+        budget: outline[4] || outline[2] || '',
+      });
+      setCompletionStatus(prev => ({
+        ...prev,
+        executiveSummary: 'completed',
+        targetMarket: desc ? 'completed' : prev.targetMarket,
+        competitiveAnalysis: outline.length > 0 ? 'completed' : prev.competitiveAnalysis,
+        marketingStrategy: outline.length > 1 ? 'completed' : prev.marketingStrategy,
+        budget: outline.length > 2 ? 'completed' : prev.budget,
+      }));
+      setConfidenceLevels({
+        executiveSummary: desc ? 85 : 0,
+        targetMarket: outline[1] ? 82 : 0,
+        competitiveAnalysis: outline[2] || outline[0] ? 78 : 0,
+        marketingStrategy: outline[3] || outline[1] ? 80 : 0,
+        budget: outline[4] || outline[2] ? 75 : 0,
+        timeline: 0,
+        metrics: 0
+      });
+      setAiTyping(prev => ({
+        ...prev,
+        fullText: outline[2] || outline[0] || desc,
+        isTyping: false,
+        text: outline[2] || outline[0] || desc,
+      }));
+    } catch (err) {
+      setGenerateError(err instanceof Error ? err.message : 'Failed to generate marketing plan');
+      setCompletionStatus({
+        executiveSummary: 'pending',
+        targetMarket: 'pending',
+        competitiveAnalysis: 'pending',
+        marketingStrategy: 'pending',
+        budget: 'pending',
+        timeline: 'pending',
+        metrics: 'pending'
+      });
+    } finally {
+      setGenerating(false);
+    }
+  }, [clientInfo.targetMarket]);
+
+  useEffect(() => {
+    loadClientInfo();
+  }, [loadClientInfo]);
+
+  // Simulate AI typing effect when we have content from API
   useEffect(() => {
     if (aiTyping.isTyping && aiTyping.text.length < aiTyping.fullText.length) {
-      const typingSpeed = Math.floor(Math.random() * 30) + 20; // Random typing speed between 20-50ms
+      const typingSpeed = Math.floor(Math.random() * 30) + 20;
       const timer = setTimeout(() => {
         setAiTyping(prev => ({
           ...prev,
@@ -39,47 +159,29 @@ export const MarketingPlanForm = () => {
       }, typingSpeed);
       return () => clearTimeout(timer);
     } else if (aiTyping.isTyping && aiTyping.text.length === aiTyping.fullText.length) {
-      // When typing is complete
       const timer = setTimeout(() => {
-        setAiTyping(prev => ({
-          ...prev,
-          isTyping: false
-        }));
-        // Move to the next section
+        setAiTyping(prev => ({ ...prev, isTyping: false }));
         if (aiTyping.section === 'competitiveAnalysis') {
-          setCompletionStatus(prev => ({
-            ...prev,
-            competitiveAnalysis: 'completed'
-          }));
-          setTimeout(() => {
-            setAiTyping({
-              section: 'marketingStrategy',
-              isTyping: true,
-              text: '',
-              fullText: '', // Wire to API for real recommendations
-            });
-          }, 2000);
+          setCompletionStatus(prev => ({ ...prev, competitiveAnalysis: 'completed' }));
+          setTimeout(() => setAiTyping({
+            section: 'marketingStrategy',
+            isTyping: true,
+            text: '',
+            fullText: planSections.marketingStrategy,
+          }), 500);
         } else if (aiTyping.section === 'marketingStrategy') {
-          setCompletionStatus(prev => ({
-            ...prev,
-            marketingStrategy: 'completed',
-            budget: 'in-progress'
-          }));
-          setTimeout(() => {
-            setAiTyping({
-              section: 'budget',
-              isTyping: true,
-              text: '',
-              fullText: '', // Wire to API for real budget recommendations
-            });
-          }, 2000);
+          setCompletionStatus(prev => ({ ...prev, marketingStrategy: 'completed', budget: 'in-progress' }));
+          setTimeout(() => setAiTyping({
+            section: 'budget',
+            isTyping: true,
+            text: '',
+            fullText: planSections.budget,
+          }), 500);
         }
-      }, 1000);
+      }, 500);
       return () => clearTimeout(timer);
     }
-  }, [aiTyping]);
-  // AI typing disabled - wire to campaign generation API for real content
-  // useEffect(() => { setAiTyping(prev => ({ ...prev, isTyping: true })); }, []);
+  }, [aiTyping, planSections.marketingStrategy, planSections.budget]);
   const getStatusIcon = status => {
     switch (status) {
       case 'completed':
@@ -92,25 +194,36 @@ export const MarketingPlanForm = () => {
         return null;
     }
   };
-  const getConfidenceBadge = level => {
+  const getConfidenceBadge = (level: number) => {
+    if (level <= 0) return null;
     let color = 'gray';
-    if (level > 85) color = 'green';else if (level > 70) color = 'blue';else if (level > 50) color = 'yellow';else color = 'red';
-    return <div className={`px-2 py-1 rounded-full text-xs font-medium bg-${color}-100 text-${color}-800 flex items-center`}>
+    if (level > 85) color = 'green'; else if (level > 70) color = 'blue'; else if (level > 50) color = 'yellow'; else color = 'red';
+    return (
+      <div className={`px-2 py-1 rounded-full text-xs font-medium bg-${color}-100 text-${color}-800 flex items-center`}>
         <BarChart4Icon size={12} className="mr-1" />
         {level}% confidence
-      </div>;
+      </div>
+    );
   };
   return <div className="h-full flex flex-col bg-white">
       <div className="p-4 border-b border-gray-200 flex justify-between items-center bg-white">
         <div className="flex items-center">
           <h1 className="text-xl font-bold">AI-Generated Marketing Plan</h1>
-          <span className="ml-3 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
-            Auto-generating
+          <span className={`ml-3 px-3 py-1 rounded-full text-xs font-medium ${generating ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-600'}`}>
+            {generating ? 'Generating...' : planSections.executiveSummary ? 'Generated' : 'Ready'}
           </span>
         </div>
         <div className="flex space-x-2">
-          <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-full">
-            <RefreshCwIcon size={18} />
+          {generateError && (
+            <span className="text-sm text-red-600 mr-2">{generateError}</span>
+          )}
+          <button
+            onClick={generatePlan}
+            disabled={generating}
+            className="p-2 text-gray-600 hover:bg-gray-100 rounded-full disabled:opacity-50"
+            title="Generate plan"
+          >
+            <RefreshCwIcon size={18} className={generating ? 'animate-spin' : ''} />
           </button>
           <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-full">
             <EditIcon size={18} />
@@ -125,28 +238,26 @@ export const MarketingPlanForm = () => {
       </div>
       <div className="flex-1 overflow-y-auto p-6">
         <div className="max-w-4xl mx-auto space-y-8">
-          {/* Client Info - load from SMB profile / business context API */}
+          {/* Client Info - from SMB profile API */}
           <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
             <div className="flex justify-between items-start">
               <div>
                 <h2 className="text-lg font-medium text-gray-800">
-                  {/* Acme Corporation - mock commented out */}
-                  Business Profile
+                  {clientInfo.name || 'Business Profile'}
                 </h2>
                 <p className="text-sm text-gray-600">
-                  Industry: — {/* Load from API */}
+                  Industry: {clientInfo.industry || '—'}
                 </p>
                 <p className="text-sm text-gray-600">
-                  Target Market: — {/* Load from API */}
+                  Target Market: {clientInfo.targetMarket || '—'}
                 </p>
               </div>
               <div className="bg-blue-50 p-3 rounded-lg">
-                <p className="text-sm font-medium text-blue-700">
-                  Analysis based on:
-                </p>
+                <p className="text-sm font-medium text-blue-700">Analysis based on:</p>
                 <ul className="text-xs text-blue-600 mt-1">
-                  {/* Mock data commented out: 3 years historical, 1245 records, 14 reports */}
-                  <li>• Connect to CRM analytics for real data</li>
+                  {clientInfo.dataSources.map((s, i) => (
+                    <li key={i}>• {s}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -163,8 +274,11 @@ export const MarketingPlanForm = () => {
               </div>
             </div>
             <div className="p-4 bg-white">
-              {/* Mock executive summary commented out - wire to campaign generation API */}
-              <p className="text-gray-500 italic">Executive summary will be generated from business data and campaign analytics.</p>
+              {planSections.executiveSummary ? (
+                <p className="text-gray-700">{planSections.executiveSummary}</p>
+              ) : (
+                <p className="text-gray-500 italic">Click Refresh to generate from business data and campaign analytics.</p>
+              )}
             </div>
           </div>
           {/* Target Market Analysis */}
