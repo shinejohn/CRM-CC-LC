@@ -18,18 +18,8 @@ export function SurveyBuilderPage({
 }: SurveyBuilderPageProps) {
   const [surveyTitle, setSurveyTitle] = useState('New Business Survey');
   const [surveyDescription, setSurveyDescription] = useState('Help us understand your business better');
-  const [questions, setQuestions] = useState<Question[]>([{
-    id: '1',
-    type: 'text',
-    question: 'What are your primary business goals?',
-    required: true
-  }, {
-    id: '2',
-    type: 'multiple-choice',
-    question: 'How many employees do you have?',
-    options: ['1-10', '11-50', '51-200', '200+'],
-    required: true
-  }]);
+  // Mock data commented out - wire to GET/POST /v1/survey/* API
+  const [questions, setQuestions] = useState<Question[]>([]);
   const questionTypes = [{
     type: 'text',
     label: 'Text',

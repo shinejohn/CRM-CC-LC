@@ -8,6 +8,9 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Schema::hasTable('rvm_drops')) {
+            return;
+        }
         Schema::create('rvm_drops', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();

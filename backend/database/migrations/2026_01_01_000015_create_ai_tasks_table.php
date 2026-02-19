@@ -9,6 +9,9 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Schema::hasTable('ai_tasks')) {
+            return;
+        }
         Schema::create('ai_tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('smb_id')->constrained('customers');

@@ -9,6 +9,9 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Schema::hasTable('email_events')) {
+            return;
+        }
         Schema::create('email_events', function (Blueprint $table) {
             $table->id();
             $table->foreignId('campaign_send_id')->constrained();

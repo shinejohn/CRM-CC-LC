@@ -66,9 +66,8 @@ return new class extends Migration
             $table->integer('escalation_level')->default(0);
             $table->timestampTz('escalated_at')->nullable();
             
-            // Related
+            // Related (FK added in incidents migration - incidents created after alerts)
             $table->uuid('incident_id')->nullable();
-            $table->foreign('incident_id')->references('id')->on('ops.incidents');
             
             $table->timestampTz('created_at')->useCurrent();
             $table->timestampTz('updated_at')->useCurrent()->useCurrentOnUpdate();

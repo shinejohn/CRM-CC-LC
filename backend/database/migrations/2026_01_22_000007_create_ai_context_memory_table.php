@@ -53,7 +53,6 @@ return new class extends Migration
             // Versioning
             $table->integer('version')->default(1);
             $table->uuid('previous_version_id')->nullable();
-            $table->foreign('previous_version_id')->references('id')->on('ops.ai_context_memory');
             
             $table->timestampTz('created_at')->useCurrent();
             $table->timestampTz('updated_at')->useCurrent()->useCurrentOnUpdate();
@@ -64,6 +63,11 @@ return new class extends Migration
 
         // Reset search path
         DB::statement('SET search_path TO public');
+
+        // Add self-referential FK after table exists
+        Schema::table('ops.ai_context_memory', function (Blueprint $table) {
+            $table->foreign('previous_version_id')->references('id')->on('ops.ai_context_memory');
+        });
 
         // Indexes
         DB::statement('CREATE INDEX idx_ai_memory_type_cat ON ops.ai_context_memory(memory_type, category) WHERE is_active = TRUE');

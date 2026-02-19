@@ -9,6 +9,9 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Schema::hasTable('analytics_events')) {
+            return;
+        }
         Schema::create('analytics_events', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('smb_id')->nullable();

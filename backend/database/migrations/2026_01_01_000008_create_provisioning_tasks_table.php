@@ -9,6 +9,9 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Schema::hasTable('provisioning_tasks')) {
+            return;
+        }
         Schema::create('provisioning_tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('approval_id')->constrained();

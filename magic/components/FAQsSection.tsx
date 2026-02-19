@@ -8,13 +8,8 @@ export function FAQsSection({
   onNavigate
 }: FAQsSectionProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const faqs = [{
-    q: 'What is your cancellation policy?',
-    a: 'Appointments can be cancelled or rescheduled up to 24 hours in advance with no charge. Same-day cancellations incur a $50 service fee.'
-  }, {
-    q: 'Do you offer emergency services?',
-    a: 'Yes! We offer 24/7 emergency plumbing at premium rates. Call our emergency line: (555) 123-9999'
-  }];
+  // Mock data commented out - wire to GET /v1/faq-categories or knowledge API
+  const faqs: { q: string; a: string }[] = [];
   return <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
       <div onClick={() => setIsExpanded(!isExpanded)} className="p-6 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-colors">
         <div className="flex items-center gap-3">

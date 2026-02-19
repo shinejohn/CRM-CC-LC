@@ -4,11 +4,13 @@ import { useNavigate, useLocation } from 'react-router';
 import { 
   LayoutDashboard, Users, FileText, Megaphone, 
   ShoppingBag, MessageSquare, Calendar, Settings,
-  ChevronLeft, ChevronRight, Sparkles, Activity
+  ChevronLeft, ChevronRight, Sparkles, Activity,
+  Shield
 } from 'lucide-react';
 import { NavItem } from '@/types/command-center';
 import { useFeatureFlags } from '@/hooks/useFeatureFlag';
 import { useNotificationBadge } from '@/hooks/useNotificationBadge';
+import { useCurrentUser } from '../hooks/useCurrentUser';
 
 interface SidebarProps {
   collapsed: boolean;
@@ -29,12 +31,14 @@ const navItems: NavItem[] = [
   { id: 'messages', label: 'Messages', icon: MessageSquare, path: '/command-center/messages', badge: 'dynamic' },
   { id: 'loyalty', label: 'Loyalty', icon: Sparkles, path: '/command-center/loyalty', featureFlag: 'loyalty_program' },
   { id: 'job-board', label: 'Job Board', icon: FileText, path: '/command-center/job-board', featureFlag: 'job_board' },
+  { id: 'ops', label: 'Operations', icon: Shield, path: '/ops', adminOnly: true },
 ];
 
 export function Sidebar({ collapsed, onToggle, activeItem = 'dashboard', onNavigate }: SidebarProps) {
   const navigate = useNavigate();
   const { unreadCount } = useNotificationBadge();
   const featureFlags = useFeatureFlags();
+  const { isAdmin } = useCurrentUser();
 
   const handleNavigate = (path: string) => {
     if (onNavigate) {
@@ -55,9 +59,12 @@ export function Sidebar({ collapsed, onToggle, activeItem = 'dashboard', onNavig
         <ul className="space-y-1 px-2">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = activeItem === item.id;
+            const isActive = activeItem === item.id || (item.path === '/ops' && typeof window !== 'undefined' && window.location.pathname.startsWith('/ops'));
             const featureEnabled = item.featureFlag ? featureFlags[item.featureFlag] : true;
             const showComingSoon = item.featureFlag && !featureEnabled;
+            const adminOnly = item.adminOnly === true;
+            const hideForNonAdmin = adminOnly && !isAdmin;
+            if (hideForNonAdmin) return null;
             const badgeValue =
               item.badge === 'dynamic' && item.id === 'messages'
                 ? unreadCount

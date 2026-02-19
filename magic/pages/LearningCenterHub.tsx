@@ -14,79 +14,13 @@ interface LearningTopic {
   tags: string[];
   relatedTopics: string[];
 }
-const LEARNING_TOPICS: LearningTopic[] = [{
-  id: 'ai-customer-service',
-  title: 'AI-Powered Customer Service: Transform Your Support',
-  description: 'Learn how AI can handle customer inquiries 24/7, reduce response times, and improve satisfaction scores.',
-  category: 'Customer Service',
-  duration: '12 min',
-  difficulty: 'beginner',
-  thumbnail: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400',
-  views: 1247,
-  completionRate: 89,
-  tags: ['Customer Service', 'Automation', 'Chatbots'],
-  relatedTopics: ['ai-email-automation', 'ai-sentiment-analysis', 'ai-crm-integration']
-}, {
-  id: 'ai-marketing-automation',
-  title: 'Marketing Automation with AI: From Leads to Customers',
-  description: 'Discover how AI can personalize marketing campaigns, optimize ad spend, and nurture leads automatically.',
-  category: 'Marketing',
-  duration: '15 min',
-  difficulty: 'intermediate',
-  thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400',
-  views: 2103,
-  completionRate: 92,
-  tags: ['Marketing', 'Lead Generation', 'Personalization'],
-  relatedTopics: ['ai-content-generation', 'ai-social-media', 'ai-email-campaigns']
-}, {
-  id: 'ai-data-insights',
-  title: 'Turn Data into Decisions: AI Analytics for SMBs',
-  description: 'See how AI analyzes your business data to uncover trends, predict outcomes, and recommend actions.',
-  category: 'Analytics',
-  duration: '10 min',
-  difficulty: 'beginner',
-  thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400',
-  views: 892,
-  completionRate: 85,
-  tags: ['Analytics', 'Data Science', 'Reporting'],
-  relatedTopics: ['ai-predictive-analytics', 'ai-dashboards', 'ai-forecasting']
-}, {
-  id: 'ai-sales-assistant',
-  title: 'Your AI Sales Assistant: Close More Deals Faster',
-  description: 'Learn how AI can qualify leads, schedule meetings, and provide real-time sales intelligence.',
-  category: 'Sales',
-  duration: '14 min',
-  difficulty: 'intermediate',
-  thumbnail: 'https://images.unsplash.com/photo-1553484771-371a605b060b?w=400',
-  views: 1567,
-  completionRate: 88,
-  tags: ['Sales', 'Lead Qualification', 'CRM'],
-  relatedTopics: ['ai-proposal-generation', 'ai-pricing-optimization', 'ai-customer-service']
-}, {
-  id: 'ai-content-generation',
-  title: 'AI Content Creation: Blog Posts, Social Media & More',
-  description: 'Master AI-powered content creation for your marketing channels while maintaining your brand voice.',
-  category: 'Marketing',
-  duration: '18 min',
-  difficulty: 'beginner',
-  thumbnail: 'https://images.unsplash.com/photo-1542744094-3a31f272c490?w=400',
-  views: 3421,
-  completionRate: 94,
-  tags: ['Content Marketing', 'Copywriting', 'Social Media'],
-  relatedTopics: ['ai-marketing-automation', 'ai-social-media', 'ai-seo-optimization']
-}, {
-  id: 'ai-inventory-management',
-  title: 'Smart Inventory: AI-Driven Stock Optimization',
-  description: 'Reduce waste and stockouts with AI that predicts demand and optimizes inventory levels.',
-  category: 'Operations',
-  duration: '11 min',
-  difficulty: 'intermediate',
-  thumbnail: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400',
-  views: 743,
-  completionRate: 81,
-  tags: ['Inventory', 'Supply Chain', 'Forecasting'],
-  relatedTopics: ['ai-demand-forecasting', 'ai-supplier-management', 'ai-data-insights']
-}];
+// Mock data commented out - wire to GET /v1/content (courses/lessons) API
+// const LEARNING_TOPICS: LearningTopic[] = [{
+//   id: 'ai-customer-service',
+//   title: 'AI-Powered Customer Service: Transform Your Support',
+//   ...
+// }];
+const LEARNING_TOPICS: LearningTopic[] = [];
 const CATEGORIES = ['All Topics', 'Customer Service', 'Marketing', 'Sales', 'Analytics', 'Operations'];
 interface LearningCenterHubProps {
   onNavigateToLesson: (topicId: string) => void;
@@ -97,7 +31,7 @@ export function LearningCenterHub({
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All Topics');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const filteredTopics = LEARNING_TOPICS.filter(topic => {
+  const filteredTopics = (LEARNING_TOPICS ?? []).filter(topic => {
     const matchesSearch = topic.title.toLowerCase().includes(searchQuery.toLowerCase()) || topic.description.toLowerCase().includes(searchQuery.toLowerCase()) || topic.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
     const matchesCategory = selectedCategory === 'All Topics' || topic.category === selectedCategory;
     return matchesSearch && matchesCategory;

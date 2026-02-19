@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
+import { useAuthStore } from '@/stores/authStore';
 import {
   FileText,
   Megaphone,
@@ -23,6 +24,8 @@ import { operationsApi } from '@/services/operations/operations-api';
 import type { OperationsDashboardSnapshot } from '@/types/operations';
 
 export const CommandCenterDashboardPage: React.FC = () => {
+  const { user } = useAuthStore();
+  const isAdmin = user?.role === 'admin' || user?.role === 'owner' || user?.permissions?.includes('ops:access');
   const [dashboard, setDashboard] = useState<PublishingDashboard | null>(null);
   const [operationsSnapshot, setOperationsSnapshot] = useState<OperationsDashboardSnapshot | null>(null);
   const [loading, setLoading] = useState(true);
@@ -87,6 +90,14 @@ export const CommandCenterDashboardPage: React.FC = () => {
             <p className="text-gray-600 mt-1">Content generation, ad creation, and publishing</p>
           </div>
           <div className="flex items-center space-x-4">
+            {isAdmin && (
+              <Link
+                to="/ops"
+                className="px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 flex items-center"
+              >
+                Operations
+              </Link>
+            )}
             <button
               onClick={loadDashboard}
               className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 flex items-center"

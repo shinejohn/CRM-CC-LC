@@ -9,6 +9,9 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Schema::hasTable('content')) {
+            return;
+        }
         Schema::create('content', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();

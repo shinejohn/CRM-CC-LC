@@ -14,10 +14,10 @@ return new class extends Migration
             return;
         }
 
-        // Create partitioned table
+        // Create partitioned table (PK must include partition key for PostgreSQL)
         DB::statement('
             CREATE TABLE ops.queue_metrics (
-                id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                id UUID NOT NULL DEFAULT gen_random_uuid(),
                 queue_name VARCHAR(100) NOT NULL,
                 queue_type VARCHAR(50) NOT NULL,
                 priority VARCHAR(10),
@@ -34,7 +34,8 @@ return new class extends Migration
                 active_consumers INTEGER,
                 consumer_utilization DECIMAL(5,2),
                 status VARCHAR(20) DEFAULT \'healthy\',
-                recorded_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+                recorded_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+                PRIMARY KEY (id, recorded_at)
             ) PARTITION BY RANGE (recorded_at)
         ');
 

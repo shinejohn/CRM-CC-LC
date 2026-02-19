@@ -57,6 +57,9 @@ echo ""
 read -p "OpenRouter API Key: " OPENROUTER_KEY
 read -p "ElevenLabs API Key: " ELEVENLABS_KEY
 read -p "CC API URL (e.g., https://cc-api.up.railway.app): " API_URL
+read -p "Pusher App Key (optional, for real-time WebSocket - press Enter to skip): " PUSHER_APP_KEY
+read -p "Pusher Cluster [us2]: " PUSHER_APP_CLUSTER
+PUSHER_APP_CLUSTER=${PUSHER_APP_CLUSTER:-us2}
 
 echo ""
 echo "⚙️  Setting variables for all services..."
@@ -142,6 +145,8 @@ echo "🎨 Frontend Service:"
 set_var "$FRONTEND_SERVICE" "VITE_API_ENDPOINT" "$API_URL/api"
 set_var "$FRONTEND_SERVICE" "VITE_API_URL" "$API_URL/api"
 set_var "$FRONTEND_SERVICE" "NODE_ENV" "production"
+[ -n "$PUSHER_APP_KEY" ] && set_var "$FRONTEND_SERVICE" "VITE_PUSHER_APP_KEY" "$PUSHER_APP_KEY"
+[ -n "$PUSHER_APP_KEY" ] && set_var "$FRONTEND_SERVICE" "VITE_PUSHER_APP_CLUSTER" "$PUSHER_APP_CLUSTER"
 
 echo ""
 echo "========================================"

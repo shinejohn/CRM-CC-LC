@@ -18,12 +18,23 @@ import {
   BookMarked,
   PlayCircle,
   Shield,
-  Rocket
+  Rocket,
+  Clock,
+  Loader2
 } from 'lucide-react';
 import { Link } from 'react-router';
+import { contentApi, type Content } from '@/services/learning/content-api';
 
 export const LearningCenterIndexPage: React.FC = () => {
   const breadcrumbs = [{ label: 'Learning Center' }];
+  const [content, setContent] = useState<Content[]>([]);
+  const [contentLoading, setContentLoading] = useState(true);
+
+  useEffect(() => {
+    contentApi.getContent({ type: undefined, per_page: 12 }).then((res) => {
+      setContent(res.data ?? []);
+    }).catch(() => setContent([])).finally(() => setContentLoading(false));
+  }, []);
 
   const quickLinks = [
     {
@@ -206,6 +217,49 @@ export const LearningCenterIndexPage: React.FC = () => {
               </Link>
             </div>
           </div>
+        </div>
+
+        {/* Courses & Lessons - Real API */}
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <GraduationCap size={24} className="text-indigo-600" />
+            Courses & Lessons
+          </h2>
+          {contentLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
+            </div>
+          ) : content.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {content.map((item) => (
+                <Link
+                  key={item.slug}
+                  to={`/learning/content/${item.slug}`}
+                  className="group p-6 bg-white border border-gray-200 rounded-xl hover:shadow-lg hover:border-indigo-300 transition-all duration-200"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="p-2 bg-indigo-50 rounded-lg group-hover:bg-indigo-100 transition-colors">
+                      <PlayCircle size={20} className="text-indigo-600" />
+                    </div>
+                    <span className="text-xs font-medium px-2 py-1 rounded-full bg-gray-100 text-gray-700 capitalize">
+                      {item.type}
+                    </span>
+                  </div>
+                  <div className="font-semibold text-gray-900 mb-1 group-hover:text-indigo-600 transition-colors">
+                    {item.title}
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-gray-500">
+                    <Clock size={12} />
+                    {Math.round((item.duration_seconds ?? 0) / 60)} min
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="p-8 bg-gray-50 border border-gray-200 rounded-xl text-center text-gray-600">
+              No courses or lessons available yet.
+            </div>
+          )}
         </div>
 
         {/* Stats Grid - Enhanced */}

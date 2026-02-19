@@ -14,10 +14,10 @@ return new class extends Migration
             return;
         }
 
-        // Create partitioned table
+        // Create partitioned table (PK must include partition key for PostgreSQL)
         DB::statement('
             CREATE TABLE ops.health_checks (
-                id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                id UUID NOT NULL DEFAULT gen_random_uuid(),
                 component_id UUID NOT NULL REFERENCES ops.infrastructure_components(id),
                 status VARCHAR(20) NOT NULL,
                 response_time_ms INTEGER,
@@ -27,7 +27,8 @@ return new class extends Migration
                 response_body_sample TEXT,
                 error_message TEXT,
                 checked_from VARCHAR(100),
-                checked_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+                checked_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+                PRIMARY KEY (id, checked_at)
             ) PARTITION BY RANGE (checked_at)
         ');
 

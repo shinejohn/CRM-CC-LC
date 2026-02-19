@@ -90,6 +90,17 @@ import { AIPersonalityContactsPage } from './pages/AIPersonalities/Contacts';
 import { ServicePurchaseWizardPage } from './command-center/modules/services/wizard';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
+// Ops Dashboard (POD) - Admin only
+import { OpsLayout } from './pages/ops/OpsLayout';
+import { OpsDashboard } from './pages/ops/OpsDashboard';
+import { OpsMetricsExplorer } from './pages/ops/OpsMetricsExplorer';
+import { OpsAlertsPage } from './pages/ops/OpsAlertsPage';
+import { OpsIncidentsPage } from './pages/ops/OpsIncidentsPage';
+import { OpsCostTracker } from './pages/ops/OpsCostTracker';
+import { OpsSystemHealth } from './pages/ops/OpsSystemHealth';
+import { OpsFOAChat } from './pages/ops/OpsFOAChat';
+import { OpsActionLog } from './pages/ops/OpsActionLog';
+
 export function AppRouter() {
   return (
     <BrowserRouter>
@@ -256,6 +267,25 @@ export function AppRouter() {
 
         {/* Service Purchase Wizard */}
         <Route path="/command-center/services/buy" element={<ServicePurchaseWizardPage />} />
+
+        {/* Ops Dashboard (POD) - Admin only */}
+        <Route
+          path="/ops"
+          element={
+            <ProtectedRoute requireAuth requireAdmin>
+              <OpsLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<OpsDashboard />} />
+          <Route path="metrics" element={<OpsMetricsExplorer />} />
+          <Route path="alerts" element={<OpsAlertsPage />} />
+          <Route path="incidents" element={<OpsIncidentsPage />} />
+          <Route path="costs" element={<OpsCostTracker />} />
+          <Route path="health" element={<OpsSystemHealth />} />
+          <Route path="foa" element={<OpsFOAChat />} />
+          <Route path="actions" element={<OpsActionLog />} />
+        </Route>
 
         {/* Campaign Landing Pages - Catch-all must be LAST */}
         <Route path="/learn/:slug" element={<CampaignLandingPage />} />

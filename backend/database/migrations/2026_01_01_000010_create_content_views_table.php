@@ -9,6 +9,9 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Schema::hasTable('content_views')) {
+            return;
+        }
         Schema::create('content_views', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('smb_id')->nullable();

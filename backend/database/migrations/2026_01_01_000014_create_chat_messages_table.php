@@ -9,6 +9,9 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Schema::hasTable('chat_messages')) {
+            return;
+        }
         Schema::create('chat_messages', function (Blueprint $table) {
             $table->id();
             $table->uuid('session_id');

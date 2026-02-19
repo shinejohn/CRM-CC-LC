@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasColumn('customers', 'community_id')) {
+            return;
+        }
         Schema::table('customers', function (Blueprint $table) {
-            $table->uuid('community_id')->nullable()->after('tenant_id');
+            $table->unsignedBigInteger('community_id')->nullable()->after('tenant_id');
             $table->foreign('community_id')
                 ->references('id')
                 ->on('communities')

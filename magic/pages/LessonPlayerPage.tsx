@@ -77,57 +77,9 @@ export function LessonPlayerPage({
       {/* Course Catalog */}
       <motion.div variants={itemVariants}>
         <h2 className="text-xl font-bold text-slate-900 mb-6">All Courses</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[{
-          title: 'AI Automation Basics',
-          duration: '20 min',
-          level: 'Beginner',
-          image: 'bg-emerald-100'
-        }, {
-          title: 'Advanced Customer Service',
-          duration: '35 min',
-          level: 'Intermediate',
-          image: 'bg-purple-100'
-        }, {
-          title: 'Sales Funnel Mastery',
-          duration: '45 min',
-          level: 'Advanced',
-          image: 'bg-amber-100'
-        }, {
-          title: 'Content Strategy 101',
-          duration: '25 min',
-          level: 'Beginner',
-          image: 'bg-rose-100'
-        }, {
-          title: 'Understanding Analytics',
-          duration: '30 min',
-          level: 'Intermediate',
-          image: 'bg-cyan-100'
-        }, {
-          title: 'Team Collaboration',
-          duration: '15 min',
-          level: 'Beginner',
-          image: 'bg-indigo-100'
-        }].map((course, i) => <div key={i} className="bg-white rounded-xl border border-slate-100 overflow-hidden hover:shadow-md transition-shadow cursor-pointer group">
-              <div className={`h-40 ${course.image} flex items-center justify-center`}>
-                <div className="w-12 h-12 bg-white/50 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Play className="w-5 h-5 text-slate-700 fill-current ml-0.5" />
-                </div>
-              </div>
-              <div className="p-5">
-                <h3 className="font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
-                  {course.title}
-                </h3>
-                <div className="flex items-center justify-between text-sm text-slate-500">
-                  <div className="flex items-center gap-1">
-                    <Clock className="w-3 h-3" /> {course.duration}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Award className="w-3 h-3" /> {course.level}
-                  </div>
-                </div>
-              </div>
-            </div>)}
+        {/* Mock courses commented out - wire to GET /v1/content API */}
+        <div className="text-center py-12 text-slate-500">
+          No courses available. Wire to content API to load real courses.
         </div>
       </motion.div>
     </motion.div>;

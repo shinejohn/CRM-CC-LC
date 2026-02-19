@@ -99,32 +99,9 @@ export function CourseDetailPage({
         <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide mb-4">
           Course Curriculum
         </h3>
+        {/* Mock curriculum commented out - wire to GET /v1/content/{id} API */}
         <div className="space-y-1">
-          {[{
-          title: 'Introduction to Sarah',
-          duration: '2 min',
-          status: 'completed'
-        }, {
-          title: 'Setting Up Your First Campaign',
-          duration: '4 min',
-          status: 'completed'
-        }, {
-          title: 'Configuring Email Preferences',
-          duration: '3 min',
-          status: 'completed'
-        }, {
-          title: 'Optimizing Send Times',
-          duration: '3 min',
-          status: 'in-progress'
-        }, {
-          title: 'Understanding Reports',
-          duration: '2 min',
-          status: 'locked'
-        }, {
-          title: 'Advanced Tips & Tricks',
-          duration: '1 min',
-          status: 'locked'
-        }].map((lesson, i) => <div key={i} className={`flex items-center justify-between p-3 rounded-lg transition-colors ${lesson.status === 'in-progress' ? 'bg-blue-50 border border-blue-100' : 'hover:bg-slate-50'}`}>
+          {[].map((lesson: { title: string; duration: string; status: string }, i: number) => <div key={i} className={`flex items-center justify-between p-3 rounded-lg transition-colors ${lesson.status === 'in-progress' ? 'bg-blue-50 border border-blue-100' : 'hover:bg-slate-50'}`}>
               <div className="flex items-center gap-3">
                 {lesson.status === 'completed' ? <CheckCircle2 className="w-5 h-5 text-emerald-500" /> : lesson.status === 'in-progress' ? <div className="w-5 h-5 rounded-full border-2 border-blue-600 border-t-transparent animate-spin" /> : <Circle className="w-5 h-5 text-slate-300" />}
                 <span className={`font-medium ${lesson.status === 'completed' ? 'text-slate-500' : 'text-slate-900'}`}>
@@ -161,18 +138,9 @@ export function CourseDetailPage({
         <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide mb-4">
           Reviews
         </h3>
+        {/* Mock reviews commented out */}
         <div className="space-y-6">
-          {[{
-          author: 'Mike T.',
-          date: '2 days ago',
-          rating: 5,
-          text: 'Very helpful! Sarah is now my favorite AI employee.'
-        }, {
-          author: 'Sarah L.',
-          date: '1 week ago',
-          rating: 5,
-          text: 'Short but packed with useful tips.'
-        }].map((review, i) => <div key={i} className="border-b border-slate-100 last:border-0 pb-6 last:pb-0">
+          {[].map((review: { author: string; date: string; rating: number; text: string }, i: number) => <div key={i} className="border-b border-slate-100 last:border-0 pb-6 last:pb-0">
               <div className="flex items-center gap-1 mb-2">
                 {[...Array(5)].map((_, j) => <Star key={j} className={`w-4 h-4 ${j < review.rating ? 'text-amber-400 fill-current' : 'text-slate-200'}`} />)}
               </div>

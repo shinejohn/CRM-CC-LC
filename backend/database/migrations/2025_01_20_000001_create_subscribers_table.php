@@ -11,7 +11,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        error_log("LOG: RUNNING UP ON SUBSCRIBERS");
+        // Drop dependent tables first (FK from subscriber_communities to subscribers)
+        if (Schema::hasTable('subscriber_communities')) {
+            Schema::dropIfExists('subscriber_communities');
+        }
         Schema::dropIfExists('subscribers');
         Schema::create('subscribers', function (Blueprint $table) {
             $table->id();

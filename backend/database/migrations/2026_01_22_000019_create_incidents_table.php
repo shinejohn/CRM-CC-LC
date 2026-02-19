@@ -47,6 +47,9 @@ return new class extends Migration
         // Indexes
         DB::statement('CREATE INDEX idx_incidents_status ON ops.incidents(status) WHERE status NOT IN (\'resolved\', \'postmortem\')');
         DB::statement('CREATE INDEX idx_incidents_started ON ops.incidents(started_at DESC)');
+
+        // Add FK from alerts to incidents (alerts created before incidents)
+        DB::statement('ALTER TABLE ops.alerts ADD CONSTRAINT alerts_incident_id_foreign FOREIGN KEY (incident_id) REFERENCES ops.incidents(id)');
     }
 
     /**

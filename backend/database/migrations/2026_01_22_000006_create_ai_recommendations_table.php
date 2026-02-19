@@ -64,7 +64,6 @@ return new class extends Migration
             // Validity
             $table->timestampTz('valid_until')->nullable();
             $table->uuid('superseded_by')->nullable();
-            $table->foreign('superseded_by')->references('id')->on('ops.ai_recommendations');
             
             $table->timestampTz('created_at')->useCurrent();
             $table->timestampTz('updated_at')->useCurrent()->useCurrentOnUpdate();
@@ -72,6 +71,11 @@ return new class extends Migration
 
         // Reset search path
         DB::statement('SET search_path TO public');
+
+        // Add self-referential FK after table exists (avoids constraint order issue)
+        Schema::table('ops.ai_recommendations', function (Blueprint $table) {
+            $table->foreign('superseded_by')->references('id')->on('ops.ai_recommendations');
+        });
 
         // Indexes
         DB::statement('CREATE INDEX idx_ai_recommendations_status ON ops.ai_recommendations(status, priority)');

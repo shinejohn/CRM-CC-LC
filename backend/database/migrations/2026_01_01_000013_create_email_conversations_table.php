@@ -8,6 +8,9 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Schema::hasTable('email_conversations')) {
+            return;
+        }
         Schema::create('email_conversations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('smb_id')->nullable();

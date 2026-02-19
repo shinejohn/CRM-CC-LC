@@ -41,6 +41,7 @@ export interface NavItem {
   path: string;
   badge?: number | string;
   featureFlag?: FeatureFlagKey;
+  adminOnly?: boolean;
   children?: NavItem[];
 }
 

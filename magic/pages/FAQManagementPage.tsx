@@ -31,77 +31,8 @@ export function FAQManagementPage({
   const [reviewingFAQ, setReviewingFAQ] = useState<FAQ | null>(null);
   const [userAnswer, setUserAnswer] = useState('');
   const [isRefining, setIsRefining] = useState(false);
-  const [faqs, setFaqs] = useState<FAQ[]>([{
-    id: '1',
-    question: 'What is your cancellation policy?',
-    answer: 'Appointments can be cancelled or rescheduled up to 24 hours in advance with no charge. Same-day cancellations incur a $50 service fee.',
-    category: 'Policies & Terms',
-    visible: true,
-    aiEnabled: true,
-    createdBy: 'user',
-    status: 'confirmed',
-    lastUpdated: 'Dec 20, 2024',
-    shareOnAlphaSite: true
-  }, {
-    id: '2',
-    question: 'Do you offer emergency services?',
-    proposedAnswer: 'Yes, we provide 24/7 emergency plumbing services. Our emergency response team is available around the clock to handle urgent plumbing issues. Emergency service rates apply, and we aim to respond within 2 hours of your call.',
-    answer: '',
-    category: 'Services',
-    visible: false,
-    aiEnabled: true,
-    createdBy: 'ai',
-    status: 'proposed',
-    lastUpdated: 'Dec 19, 2024',
-    shareOnAlphaSite: false
-  }, {
-    id: '3',
-    question: 'What areas do you service?',
-    answer: 'We service all of Orange County and parts of Los Angeles County. Call us to confirm if we service your specific area.',
-    category: 'Services',
-    visible: true,
-    aiEnabled: true,
-    createdBy: 'user',
-    status: 'confirmed',
-    lastUpdated: 'Dec 18, 2024',
-    shareOnAlphaSite: true
-  }, {
-    id: '4',
-    question: 'Do you offer warranties on your work?',
-    proposedAnswer: 'Yes, all our work comes with a comprehensive 1-year warranty on labor. We also honor all manufacturer warranties on parts and materials. If you experience any issues with our work within the warranty period, we will return to address them at no additional charge.',
-    answer: '',
-    category: 'Policies & Terms',
-    visible: false,
-    aiEnabled: true,
-    createdBy: 'ai',
-    status: 'proposed',
-    lastUpdated: 'Dec 17, 2024',
-    shareOnAlphaSite: false
-  }, {
-    id: '5',
-    question: 'What payment methods do you accept?',
-    userRoughAnswer: 'we take cash checks credit cards venmo zelle pretty much everything',
-    answer: '',
-    category: 'Pricing',
-    visible: false,
-    aiEnabled: true,
-    createdBy: 'user',
-    status: 'needs-review',
-    lastUpdated: 'Dec 16, 2024',
-    shareOnAlphaSite: false
-  }, {
-    id: '6',
-    question: 'How much does a typical service call cost?',
-    proposedAnswer: 'Our standard service call fee is $89, which includes a comprehensive diagnosis of your plumbing issue. This fee is waived if you proceed with the recommended repair work.',
-    answer: '',
-    category: 'Pricing',
-    visible: false,
-    aiEnabled: true,
-    createdBy: 'ai',
-    status: 'proposed',
-    lastUpdated: 'Dec 15, 2024',
-    shareOnAlphaSite: false
-  }]);
+  // Mock data commented out - wire to GET/POST /v1/faq-categories/* API
+  const [faqs, setFaqs] = useState<FAQ[]>([]);
   const categories = ['all', 'Services', 'Pricing', 'Policies & Terms', 'General'];
   const statuses = ['all', 'confirmed', 'proposed', 'needs-review'];
   const filteredFAQs = faqs.filter(faq => {
