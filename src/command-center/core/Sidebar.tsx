@@ -7,6 +7,8 @@ import {
   ChevronLeft, ChevronRight, Sparkles, Activity
 } from 'lucide-react';
 import { NavItem } from '@/types/command-center';
+import { useFeatureFlags } from '@/hooks/useFeatureFlag';
+import { useNotificationBadge } from '@/hooks/useNotificationBadge';
 
 interface SidebarProps {
   collapsed: boolean;
@@ -17,20 +19,23 @@ interface SidebarProps {
 
 const navItems: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, path: '/command-center' },
-  { id: 'activities', label: 'Activities', icon: Activity, path: '/command-center/activities', badge: 5 },
+  { id: 'activities', label: 'Activities', icon: Activity, path: '/command-center/activities', badge: 'dynamic' },
   { id: 'customers', label: 'Customers', icon: Users, path: '/command-center/customers' },
   { id: 'content', label: 'Content', icon: FileText, path: '/command-center/content' },
   { id: 'campaigns', label: 'Campaigns', icon: Megaphone, path: '/command-center/campaigns' },
   { id: 'services', label: 'Services', icon: ShoppingBag, path: '/command-center/services' },
   { id: 'ai-hub', label: 'AI Hub', icon: Sparkles, path: '/command-center/ai-hub' },
   { id: 'calendar', label: 'Calendar', icon: Calendar, path: '/command-center/calendar' },
-  { id: 'messages', label: 'Messages', icon: MessageSquare, path: '/command-center/messages', badge: 3 },
+  { id: 'messages', label: 'Messages', icon: MessageSquare, path: '/command-center/messages', badge: 'dynamic' },
+  { id: 'loyalty', label: 'Loyalty', icon: Sparkles, path: '/command-center/loyalty', featureFlag: 'loyalty_program' },
+  { id: 'job-board', label: 'Job Board', icon: FileText, path: '/command-center/job-board', featureFlag: 'job_board' },
 ];
 
 export function Sidebar({ collapsed, onToggle, activeItem = 'dashboard', onNavigate }: SidebarProps) {
   const navigate = useNavigate();
-  const location = useLocation();
-  
+  const { unreadCount } = useNotificationBadge();
+  const featureFlags = useFeatureFlags();
+
   const handleNavigate = (path: string) => {
     if (onNavigate) {
       onNavigate(path);
@@ -51,13 +56,23 @@ export function Sidebar({ collapsed, onToggle, activeItem = 'dashboard', onNavig
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeItem === item.id;
-            
+            const featureEnabled = item.featureFlag ? featureFlags[item.featureFlag] : true;
+            const showComingSoon = item.featureFlag && !featureEnabled;
+            const badgeValue =
+              item.badge === 'dynamic' && item.id === 'messages'
+                ? unreadCount
+                : item.badge === 'dynamic' && item.id === 'activities'
+                  ? undefined
+                  : item.badge;
+
             return (
               <li key={item.id}>
                 <button
-                  onClick={() => handleNavigate(item.path)}
+                  onClick={() => !showComingSoon && handleNavigate(item.path)}
+                  disabled={showComingSoon}
                   className={`
                     w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors
+                    ${showComingSoon ? 'opacity-60 cursor-not-allowed' : ''}
                     ${isActive 
                       ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' 
                       : 'text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-700'
@@ -72,9 +87,14 @@ export function Sidebar({ collapsed, onToggle, activeItem = 'dashboard', onNavig
                       <span className="flex-1 text-left text-sm font-medium">
                         {item.label}
                       </span>
-                      {item.badge && (
+                      {showComingSoon && (
+                        <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">
+                          Soon
+                        </span>
+                      )}
+                      {!showComingSoon && badgeValue != null && badgeValue !== 0 && (
                         <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                          {item.badge}
+                          {badgeValue}
                         </span>
                       )}
                     </>

@@ -5,6 +5,7 @@ import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { RightPanel } from './RightPanel';
 import { LayoutProvider, useLayout } from './LayoutContext';
+import { ConnectionStatus } from '@/components/ConnectionStatus';
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -48,6 +49,10 @@ function AppShellContent({ children, businessName }: AppShellProps) {
 
   return (
     <div className="h-screen flex flex-col bg-gray-50 dark:bg-slate-900 transition-colors">
+      {/* Connection status - top-right corner */}
+      <div className="fixed top-4 right-4 z-40">
+        <ConnectionStatus showLabel={false} />
+      </div>
       {/* Fixed Header */}
       <Header 
         isAIMode={aiMode}

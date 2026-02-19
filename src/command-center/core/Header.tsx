@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Bell, ChevronDown, Search, Settings, LogOut, User } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { useNotificationBadge } from '@/hooks/useNotificationBadge';
 
 interface HeaderProps {
   isAIMode: boolean;
@@ -13,6 +14,7 @@ interface HeaderProps {
 export function Header({ isAIMode, onToggleMode, businessName = 'My Business' }: HeaderProps) {
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const { unreadCount } = useNotificationBadge();
 
   return (
     <header className="h-16 bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 shadow-sm">
@@ -54,9 +56,13 @@ export function Header({ isAIMode, onToggleMode, businessName = 'My Business' }:
         <ModeToggle isAIMode={isAIMode} onToggle={onToggleMode} />
         
         {/* Notifications */}
-        <Button variant="ghost" size="icon" className="relative">
+        <Button variant="ghost" size="icon" className="relative" aria-label={`Notifications${unreadCount > 0 ? ` (${unreadCount} unread)` : ''}`}>
           <Bell className="w-5 h-5 text-gray-500 dark:text-slate-400" />
-          <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
+          {unreadCount > 0 && (
+            <span className="absolute top-1 right-1 min-w-[18px] h-[18px] px-1 flex items-center justify-center bg-red-500 text-white text-xs font-bold rounded-full">
+              {unreadCount > 99 ? '99+' : unreadCount}
+            </span>
+          )}
         </Button>
 
         {/* Profile Dropdown */}

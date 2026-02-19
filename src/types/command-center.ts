@@ -23,13 +23,24 @@ export interface UserPreferences {
   notificationsEnabled: boolean;
 }
 
-// Navigation
+// Navigation - FeatureFlagKey aligned with src/services/featureFlags.ts
+export type FeatureFlagKey =
+  | 'loyalty_program'
+  | 'process_builder'
+  | 'automation_rules'
+  | 'job_board'
+  | 'implementation_tracker'
+  | 'video_tutorials'
+  | 'certifications'
+  | 'community_forum';
+
 export interface NavItem {
   id: string;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
   path: string;
   badge?: number | string;
+  featureFlag?: FeatureFlagKey;
   children?: NavItem[];
 }
 

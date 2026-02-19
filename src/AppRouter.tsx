@@ -48,6 +48,7 @@ import { SearchPlaygroundPage } from './pages/LearningCenter/Search/Playground';
 import { TrainingIndexPage } from './pages/LearningCenter/Training/Index';
 import { PresentationPlayerPage } from './pages/LearningCenter/Presentation/Player';
 import { CampaignLandingPage } from './pages/LearningCenter/Campaign/LandingPage';
+import { ContentLessonPage } from './pages/LearningCenter/Content/LessonPage';
 import { CampaignListPage as LearningCampaignListPage } from './pages/LearningCenter/Campaign/List';
 import { ReviewDashboard } from './pages/LearningCenter/Campaign/ReviewDashboard';
 import { GettingStartedIndexPage } from './pages/LearningCenter/GettingStarted/Index';
@@ -87,6 +88,7 @@ import { AIPersonalityDetailPage } from './pages/AIPersonalities/Detail';
 import { AIPersonalityAssignPage } from './pages/AIPersonalities/Assign';
 import { AIPersonalityContactsPage } from './pages/AIPersonalities/Contacts';
 import { ServicePurchaseWizardPage } from './command-center/modules/services/wizard';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 export function AppRouter() {
   return (
@@ -149,8 +151,15 @@ export function AppRouter() {
         <Route path="/outbound/phone/create" element={<StandaloneCreatePhoneCampaign />} />
         <Route path="/outbound/sms/create" element={<StandaloneCreateSmsCampaign />} />
 
-        {/* Command Center Routes */}
-        <Route path="/command-center" element={<CommandCenterDashboardPage />} />
+        {/* Command Center Routes - Protected */}
+        <Route
+          path="/command-center"
+          element={
+            <ProtectedRoute requireAuth>
+              <CommandCenterDashboardPage />
+            </ProtectedRoute>
+          }
+        />
 
         {/* AI Personalities Routes */}
         <Route path="/ai-personalities" element={<AIPersonalitiesDashboardPage />} />
@@ -167,6 +176,7 @@ export function AppRouter() {
         <Route path="/learning/search" element={<SearchPlaygroundPage />} />
         <Route path="/learning/training" element={<TrainingIndexPage />} />
         <Route path="/learning/presentation/:id" element={<PresentationPlayerPage />} />
+        <Route path="/learning/content/:slug" element={<ContentLessonPage />} />
 
         {/* Getting Started Routes - Must come BEFORE /learn/:slug catch-all */}
         <Route path="/learn/getting-started" element={<GettingStartedIndexPage />} />

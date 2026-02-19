@@ -82,6 +82,9 @@ class ApiClient {
           message: response.statusText,
           status: response.status,
         }));
+        window.dispatchEvent(
+          new CustomEvent('global:api-error', { detail: { error, endpoint } })
+        );
         throw error;
       }
 
@@ -93,6 +96,12 @@ class ApiClient {
         return this.request<T>(endpoint, { ...options, retries: retries - 1 });
       }
 
+      const msg = error instanceof Error ? error.message : 'Network error';
+      window.dispatchEvent(
+        new CustomEvent('global:api-error', {
+          detail: { error: { message: msg, status: 0 }, endpoint },
+        })
+      );
       if (error instanceof Error) {
         throw new Error(`API request failed: ${error.message}`);
       }

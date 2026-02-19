@@ -8,6 +8,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { queryClient } from '../lib/queryClient';
 import { useAuthStore } from '../stores/authStore';
 import { authService } from '../services/authService';
+import { GlobalErrorHandler } from '../components/GlobalErrorHandler';
 
 interface AppProviderProps {
   children: ReactNode;
@@ -27,6 +28,7 @@ export function AppProvider({ children }: AppProviderProps) {
   return (
     <QueryClientProvider client={queryClient}>
       {children}
+      <GlobalErrorHandler />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

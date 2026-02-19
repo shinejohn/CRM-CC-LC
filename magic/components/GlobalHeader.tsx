@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Search, Bell, User, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNotificationBadge } from '@/hooks/useNotificationBadge';
+import { ConnectionStatus } from '@/components/ConnectionStatus';
+
 export function GlobalHeader() {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const { unreadCount } = useNotificationBadge();
   return <div className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6 fixed top-0 left-64 right-0 z-40">
       {/* Left: Brand */}
       <div className="flex items-center gap-4">
@@ -21,11 +25,18 @@ export function GlobalHeader() {
           </kbd>
         </button>
 
+        {/* Connection Status */}
+        <ConnectionStatus showLabel={false} className="mr-2" />
+
         {/* Notifications */}
         <div className="relative">
-          <button onClick={() => setShowNotifications(!showNotifications)} className="relative p-2 hover:bg-slate-100 rounded-lg transition-colors">
+          <button onClick={() => setShowNotifications(!showNotifications)} className="relative p-2 hover:bg-slate-100 rounded-lg transition-colors" aria-label={`Notifications${unreadCount > 0 ? ` (${unreadCount} unread)` : ''}`}>
             <Bell className="w-5 h-5 text-slate-600" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
+            {unreadCount > 0 && (
+              <span className="absolute top-1 right-1 min-w-[18px] h-[18px] px-1 flex items-center justify-center bg-red-500 text-white text-xs font-bold rounded-full">
+                {unreadCount > 99 ? '99+' : unreadCount}
+              </span>
+            )}
           </button>
 
           <AnimatePresence>
