@@ -3,6 +3,8 @@ import { SparklesIcon, CheckCircleIcon, ClockIcon, PlusCircleIcon, HeartIcon } f
 import { VoiceControls } from '../components/VoiceControls';
 interface AIModeHubProps {
   onNavigate: (path: string) => void;
+  /** When in customer context, pass for AI to use full business profile */
+  customerId?: string | null;
 }
 interface Message {
   sender: string;
@@ -20,7 +22,8 @@ interface AIEmployee {
   accentColor: string;
 }
 export const AIModeHub = ({
-  onNavigate
+  onNavigate,
+  customerId,
 }: AIModeHubProps) => {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
@@ -71,11 +74,13 @@ export const AIModeHub = ({
       const API_BASE = import.meta.env?.VITE_API_URL || 'http://localhost:8000/api/v1';
       const token = typeof localStorage !== 'undefined' ? localStorage.getItem('auth_token') : null;
       const convCtx = [...messages, { sender: 'You', text, isAI: false }].slice(-10).map((m: { sender?: string; text: string; isAI?: boolean }) => ({ role: m.isAI ? 'assistant' : 'user', content: m.text }));
+      const body: Record<string, unknown> = { message: text, conversation_context: convCtx };
+      if (customerId) body.customer_id = customerId;
       const res = await fetch(`${API_BASE}/personalities/${pid}/generate-response`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) },
         credentials: 'include',
-        body: JSON.stringify({ message: text, conversation_context: convCtx }),
+        body: JSON.stringify(body),
       });
       const data = await res.json();
       const responseText = data?.data?.response ?? data?.response ?? 'Sorry, I could not get a response.';

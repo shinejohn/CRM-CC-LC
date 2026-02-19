@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\DB;
 class PersonalityService
 {
     protected OpenRouterService $openRouterService;
+    protected SmbProfileService $smbProfileService;
 
-    public function __construct(OpenRouterService $openRouterService)
+    public function __construct(OpenRouterService $openRouterService, SmbProfileService $smbProfileService)
     {
         $this->openRouterService = $openRouterService;
+        $this->smbProfileService = $smbProfileService;
     }
 
     /**
@@ -199,12 +201,16 @@ class PersonalityService
     ): string {
         // Build system prompt with personality context
         $additionalContext = [];
-        
+
         if ($customer) {
             $additionalContext['customer'] = [
                 'business_name' => $customer->business_name,
                 'industry' => $customer->industry_category,
             ];
+            // Intelligence Hub: inject full profile, AI context, and summary for richer AI responses
+            $additionalContext['business_profile'] = $this->smbProfileService->buildFullProfile($customer);
+            $additionalContext['ai_context'] = $this->smbProfileService->getAIContext($customer);
+            $additionalContext['intelligence_summary'] = $this->smbProfileService->buildIntelligenceSummary($customer);
         }
 
         $systemPrompt = $personality->getFullSystemPrompt($additionalContext);

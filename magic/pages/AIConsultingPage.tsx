@@ -7,9 +7,12 @@ import { SessionScheduler } from '../components/SessionScheduler';
 import { ConsultingChat } from '../components/ConsultingChat';
 interface AIConsultingPageProps {
   onNavigate?: (page: string) => void;
+  /** When in customer context, pass for AI to use full business profile */
+  customerId?: string | null;
 }
 export function AIConsultingPage({
-  onNavigate
+  onNavigate,
+  customerId,
 }: AIConsultingPageProps) {
   const containerVariants = {
     hidden: {
@@ -76,7 +79,7 @@ export function AIConsultingPage({
         {/* Right Column - Chat & Scheduling */}
         <div className="lg:col-span-1 space-y-8">
           <motion.div variants={itemVariants} className="h-[500px]">
-            <ConsultingChat />
+            <ConsultingChat customerId={customerId} />
           </motion.div>
 
           <motion.div variants={itemVariants}>

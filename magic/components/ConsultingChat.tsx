@@ -11,7 +11,14 @@ interface Message {
   timestamp: string;
 }
 
-export function ConsultingChat({ personalityId }: { personalityId?: string | null }) {
+export function ConsultingChat({
+  personalityId,
+  customerId,
+}: {
+  personalityId?: string | null;
+  /** When provided, AI receives full business profile context for personalized responses */
+  customerId?: string | null;
+}) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -73,6 +80,10 @@ export function ConsultingChat({ personalityId }: { personalityId?: string | nul
         role: m.sender === 'ai' ? 'assistant' : 'user',
         content: m.text,
       }));
+      const body: Record<string, unknown> = { message: text, conversation_context: convCtx };
+      if (customerId) {
+        body.customer_id = customerId;
+      }
       const res = await fetch(`${API_BASE}/personalities/${pid}/generate-response`, {
         method: 'POST',
         headers: {
@@ -80,7 +91,7 @@ export function ConsultingChat({ personalityId }: { personalityId?: string | nul
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         credentials: 'include',
-        body: JSON.stringify({ message: text, conversation_context: convCtx }),
+        body: JSON.stringify(body),
       });
       const data = await res.json();
       const responseText = data?.data?.response ?? data?.response ?? 'Sorry, I could not get a response.';

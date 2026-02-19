@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Component } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Check, Lightbulb, AlertCircle, Sparkles, ChevronRight, Rocket } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Lightbulb, AlertCircle, Sparkles, ChevronRight, Rocket, MapPin, Users } from 'lucide-react';
+import { communityService } from '@/services/communityService';
 
 const API_BASE = import.meta.env?.VITE_API_URL || 'http://localhost:8000/api/v1';
 async function createOutboundCampaign(payload: {
@@ -37,6 +38,9 @@ interface WizardState {
   // Discovery Data
   businessName: string;
   community: string;
+  communityId?: string;
+  targetCategory?: string;
+  targetCompletenessMin?: number;
   customerValueRanking: string[];
   businessCategory: 'service' | 'experience' | 'product' | '';
   // Service Business Fields
@@ -882,6 +886,8 @@ export function MarketingCampaignWizard() {
   const [launching, setLaunching] = useState(false);
   const [launchError, setLaunchError] = useState<string | null>(null);
   const [launchSuccess, setLaunchSuccess] = useState(false);
+  const [communities, setCommunities] = useState<Array<{ id: string; name: string }>>([]);
+  const [businessCount, setBusinessCount] = useState<number | null>(null);
   const [state, setState] = useState<WizardState>({
     currentStep: 1,
     currentScreenIndex: 0,
@@ -919,6 +925,23 @@ export function MarketingCampaignWizard() {
       }));
     }
   }, [state.enhancements]);
+
+  useEffect(() => {
+    communityService.list().then((res) => {
+      const items = res?.data ?? [];
+      setCommunities(Array.isArray(items) ? items.map((c: { id: string; name: string }) => ({ id: c.id, name: c.name })) : []);
+    }).catch(() => setCommunities([]));
+  }, []);
+
+  useEffect(() => {
+    if (!state.communityId) {
+      setBusinessCount(null);
+      return;
+    }
+    communityService.getBusinesses(state.communityId, { profile_completeness_min: state.targetCompletenessMin }).then((res) => {
+      setBusinessCount(res?.meta?.total ?? (res?.data?.length ?? 0));
+    }).catch(() => setBusinessCount(null));
+  }, [state.communityId, state.targetCompletenessMin]);
   const handleNext = async () => {
     if (currentScreen.navigation.nextAction === 'finish') {
       setLaunching(true);
@@ -931,12 +954,16 @@ export function MarketingCampaignWizard() {
           state.eventName && state.eventDate && `Join us for ${state.eventName} on ${state.eventDate}.`,
           state.eventDescription && state.eventDescription,
         ].filter(Boolean).join('\n\n') || `Welcome! We're excited to connect with you from ${state.businessName || 'our business'}.`;
+        const recipientSegments: Record<string, unknown> = { has_email: true };
+        if (state.communityId) recipientSegments.community_id = state.communityId;
+        if (state.targetCategory) recipientSegments.category = state.targetCategory;
+        if (state.targetCompletenessMin != null) recipientSegments.profile_completeness_min = state.targetCompletenessMin;
         await createOutboundCampaign({
           name: campaignName,
           type: 'email',
           subject: state.eventName || `Update from ${state.businessName || 'Us'}`,
           message,
-          recipient_segments: { has_email: true },
+          recipient_segments: recipientSegments,
         });
         setLaunchSuccess(true);
       } catch (err) {
@@ -1104,6 +1131,38 @@ export function MarketingCampaignWizard() {
                       {currentScreen.subtitle}
                     </p>}
                 </div>
+
+                {/* Community / Target Audience selector - first screen when communities available */}
+                {state.currentScreenIndex === 0 && communities.length > 0 && (
+                  <div className="mb-8 p-6 bg-white rounded-xl border border-[#E5E5E5]">
+                    <h3 className="font-bold text-[#1a1a1a] mb-2 flex items-center gap-2">
+                      <MapPin className="w-5 h-5 text-[#1E3A5F]" />
+                      Target by community
+                    </h3>
+                    <p className="text-sm text-[#666666] mb-4">
+                      Select a community to target its businesses. Campaign will reach businesses in that community.
+                    </p>
+                    <select
+                      value={state.communityId ?? ''}
+                      onChange={(e) => {
+                        const id = e.target.value || undefined;
+                        setState((prev) => ({ ...prev, communityId: id, community: communities.find((c) => c.id === id)?.name ?? prev.community }));
+                      }}
+                      className="w-full px-4 py-2 border border-[#E5E5E5] rounded-lg text-[#1a1a1a] focus:ring-2 focus:ring-[#1E3A5F]/20 focus:border-[#1E3A5F]"
+                    >
+                      <option value="">— No community filter —</option>
+                      {communities.map((c) => (
+                        <option key={c.id} value={c.id}>{c.name}</option>
+                      ))}
+                    </select>
+                    {state.communityId && businessCount != null && (
+                      <p className="mt-2 text-sm text-[#666666] flex items-center gap-1">
+                        <Users className="w-4 h-4" />
+                        {businessCount} businesses in this community
+                      </p>
+                    )}
+                  </div>
+                )}
 
                 {/* Content Blocks */}
                 <div className="space-y-6">

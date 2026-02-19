@@ -111,6 +111,18 @@ class CommunityController extends Controller
             $query->where('campaign_status', $request->input('campaign_status'));
         }
 
+        if ($request->has('category')) {
+            $query->where(function ($q) use ($request) {
+                $cat = $request->input('category');
+                $q->where('category', $cat)
+                    ->orWhere('industry_category', $cat);
+            });
+        }
+
+        if ($request->has('profile_completeness_min')) {
+            $query->where('profile_completeness', '>=', $request->input('profile_completeness_min'));
+        }
+
         $customers = $query->paginate($request->input('per_page', 20));
 
         return response()->json([

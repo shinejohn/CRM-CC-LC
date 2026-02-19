@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Target, ArrowRight, Check, X, Sparkles, Edit2, GripVertical, Lightbulb, Search, BarChart3, Download, MessageCircle } from 'lucide-react';
+import { smbService } from '@/services/smbService';
 
 const API_BASE = import.meta.env?.VITE_API_URL || 'http://localhost:8000/api/v1';
-async function fetchSmbProfile(): Promise<{ name?: string; category?: string; location?: string } | null> {
+async function fetchSmbProfile(smbId?: string | null): Promise<{ name?: string; category?: string; location?: string; differentiator?: string; uniqueSellingPoints?: string[] } | null> {
   try {
+    if (smbId) {
+      const fullProfile = await smbService.getFullProfile(smbId);
+      const gd = fullProfile?.google_data;
+      const ed = fullProfile?.enriched_data;
+      const sr = fullProfile?.survey_responses as Record<string, unknown> | undefined;
+      return {
+        name: fullProfile?.name ?? (fullProfile as { business_name?: string })?.business_name,
+        category: fullProfile?.category ?? (fullProfile as { mapped_category?: string })?.mapped_category,
+        location: gd?.address ?? (ed as { address?: string })?.address,
+        differentiator: (sr?.unique_selling_points as string[])?.[0] ?? (fullProfile as { unique_selling_points?: string[] })?.unique_selling_points?.[0],
+        uniqueSellingPoints: (fullProfile as { unique_selling_points?: string[] })?.unique_selling_points ?? (sr?.unique_selling_points as string[]),
+      };
+    }
     const token = localStorage.getItem('auth_token');
     const res = await fetch(`${API_BASE}/smb/profile`, {
-      headers: {
-        Accept: 'application/json',
-        ...(token && { Authorization: `Bearer ${token}` }),
-      },
+      headers: { Accept: 'application/json', ...(token && { Authorization: `Bearer ${token}` }) },
       credentials: 'include',
     });
     if (!res.ok) return null;
@@ -28,6 +39,8 @@ async function fetchSmbProfile(): Promise<{ name?: string; category?: string; lo
 interface MarketingDiagnosticWizardProps {
   onComplete?: (data: DiagnosticData) => void;
   onCancel?: () => void;
+  /** When in customer context, use full profile to pre-fill and skip known answers */
+  smbId?: string | null;
 }
 interface DiagnosticData {
   businessConfirmed: boolean;
@@ -50,7 +63,8 @@ interface BusinessInfo {
 }
 export function MarketingDiagnosticWizard({
   onComplete,
-  onCancel
+  onCancel,
+  smbId,
 }: MarketingDiagnosticWizardProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [isAIExpanded, setIsAIExpanded] = useState(false);
@@ -85,7 +99,7 @@ export function MarketingDiagnosticWizard({
   const totalSteps = 7;
 
   useEffect(() => {
-    fetchSmbProfile().then((profile) => {
+    fetchSmbProfile(smbId).then((profile) => {
       if (profile?.name || profile?.category || profile?.location) {
         setBusinessInfo((prev) => ({
           ...prev,
@@ -93,9 +107,11 @@ export function MarketingDiagnosticWizard({
           category: profile.category ?? prev.category,
           location: profile.location ?? prev.location,
         }));
+        if (profile.differentiator) setDifferentiator((d) => (d ? d : profile.differentiator === 'custom' ? 'custom' : profile.differentiator ?? ''));
+        if ((profile.uniqueSellingPoints?.length ?? 0) > 0) setBusinessConfirmed((b) => b || true);
       }
     });
-  }, []);
+  }, [smbId]);
   const subtypeOptions = [{
     id: 'emergency',
     label: 'Emergency & Repairs',

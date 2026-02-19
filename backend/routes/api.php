@@ -284,7 +284,17 @@ Route::prefix('v1')->group(function () {
             Route::get('/{id}', [\App\Http\Controllers\Api\CommunityController::class, 'show']);
             Route::put('/{id}', [\App\Http\Controllers\Api\CommunityController::class, 'update']);
             Route::get('/{id}/smbs', [\App\Http\Controllers\Api\CommunityController::class, 'smbs']);
+            Route::get('/{id}/businesses', [\App\Http\Controllers\Api\CommunityController::class, 'smbs']);
             Route::get('/{id}/stats', [\App\Http\Controllers\Api\CommunityController::class, 'stats']);
+        });
+
+        // SMB Intelligence Hub API (full profile, AI context, enrichment)
+        Route::prefix('smb')->group(function () {
+            Route::get('/{id}/full-profile', [\App\Http\Controllers\Api\V1\SmbProfileController::class, 'fullProfile']);
+            Route::get('/{id}/ai-context', [\App\Http\Controllers\Api\V1\SmbProfileController::class, 'aiContext']);
+            Route::get('/{id}/intelligence-summary', [\App\Http\Controllers\Api\V1\SmbProfileController::class, 'intelligenceSummary']);
+            Route::patch('/{id}/profile/{section}', [\App\Http\Controllers\Api\V1\SmbProfileController::class, 'updateSection']);
+            Route::post('/{id}/enrich', [\App\Http\Controllers\Api\V1\SmbProfileController::class, 'enrich']);
         });
 
         // Bulk operations
