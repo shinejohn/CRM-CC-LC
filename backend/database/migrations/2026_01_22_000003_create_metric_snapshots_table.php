@@ -28,7 +28,7 @@ return new class extends Migration
                 granularity VARCHAR(20) DEFAULT \'point\',
                 metadata JSONB,
                 created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-                UNIQUE (id, recorded_at)
+                PRIMARY KEY (id, recorded_at)
             ) PARTITION BY RANGE (recorded_at)
         ');
 
