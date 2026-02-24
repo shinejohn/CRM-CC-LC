@@ -48,6 +48,12 @@ export const mainNavigation: NavItem[] = [
     icon: Brain,
     path: '/command-center/ai',
   },
+  {
+    id: 'intelligence-hub',
+    label: 'Intelligence Hub',
+    icon: Brain,
+    path: '/command-center/intelligence-hub',
+  },
 ];
 
 export const secondaryNavigation: NavItem[] = [

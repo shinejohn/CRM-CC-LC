@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate, useLocation } from 'react-router';
-import { 
-  LayoutDashboard, Users, FileText, Megaphone, 
+import { useNavigate } from 'react-router';
+import {
+  LayoutDashboard, Users, FileText, Megaphone,
   ShoppingBag, MessageSquare, Calendar, Settings,
   ChevronLeft, ChevronRight, Sparkles, Activity,
-  Shield
+  Shield, Brain
 } from 'lucide-react';
 import { NavItem } from '@/types/command-center';
 import { useFeatureFlags } from '@/hooks/useFeatureFlag';
@@ -25,8 +25,10 @@ const navItems: NavItem[] = [
   { id: 'customers', label: 'Customers', icon: Users, path: '/command-center/customers' },
   { id: 'content', label: 'Content', icon: FileText, path: '/command-center/content' },
   { id: 'campaigns', label: 'Campaigns', icon: Megaphone, path: '/command-center/campaigns' },
+  { id: 'commerce', label: 'Promote & Advertise', icon: Megaphone, path: '/command-center/commerce' },
   { id: 'services', label: 'Services', icon: ShoppingBag, path: '/command-center/services' },
   { id: 'ai-hub', label: 'AI Hub', icon: Sparkles, path: '/command-center/ai-hub' },
+  { id: 'intelligence-hub', label: 'Intelligence Hub', icon: Brain, path: '/command-center/intelligence-hub' },
   { id: 'calendar', label: 'Calendar', icon: Calendar, path: '/command-center/calendar' },
   { id: 'messages', label: 'Messages', icon: MessageSquare, path: '/command-center/messages', badge: 'dynamic' },
   { id: 'loyalty', label: 'Loyalty', icon: Sparkles, path: '/command-center/loyalty', featureFlag: 'loyalty_program' },
@@ -80,8 +82,8 @@ export function Sidebar({ collapsed, onToggle, activeItem = 'dashboard', onNavig
                   className={`
                     w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors
                     ${showComingSoon ? 'opacity-60 cursor-not-allowed' : ''}
-                    ${isActive 
-                      ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' 
+                    ${isActive
+                      ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
                       : 'text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-700'
                     }
                   `}
@@ -123,7 +125,7 @@ export function Sidebar({ collapsed, onToggle, activeItem = 'dashboard', onNavig
           <Settings className="w-5 h-5 flex-shrink-0" />
           {!collapsed && <span className="text-sm font-medium">Settings</span>}
         </button>
-        
+
         <button
           onClick={onToggle}
           className="w-full flex items-center justify-center gap-2 px-3 py-2 mt-2 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"

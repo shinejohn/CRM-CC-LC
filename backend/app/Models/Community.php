@@ -11,11 +11,7 @@ class Community extends Model
 {
     use HasFactory;
 
-    protected $keyType = 'string';
-    public $incrementing = false;
-
     protected $fillable = [
-        'id',
         'name',
         'slug',
         'state',
@@ -28,17 +24,6 @@ class Community extends Model
     protected $casts = [
         'settings' => 'array',
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($community) {
-            if (empty($community->id)) {
-                $community->id = (string) Str::uuid();
-            }
-        });
-    }
 
     /**
      * Get all customers in this community

@@ -11,12 +11,10 @@ return new class extends Migration
     public function up(): void
     {
         // Only create schema if using PostgreSQL
-        if (DB::getDriverName() !== 'pgsql') {
-            return;
+        if (DB::getDriverName() === 'pgsql') {
+            DB::statement('DROP SCHEMA IF EXISTS ops CASCADE');
+            DB::statement('CREATE SCHEMA IF NOT EXISTS ops');
         }
-
-        // Create ops schema for operations-related tables
-        DB::statement('CREATE SCHEMA IF NOT EXISTS ops');
     }
 
     /**

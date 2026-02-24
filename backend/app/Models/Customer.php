@@ -181,6 +181,7 @@ class Customer extends Model
         'stage_entered_at' => 'datetime',
         'trial_started_at' => 'datetime',
         'trial_ends_at' => 'datetime',
+        'trial_active' => 'boolean',
         'stage_history' => 'array',
     ];
 

@@ -18,7 +18,6 @@ class CommunityFactory extends Factory
         $name = $this->faker->city();
 
         return [
-            'uuid' => (string) Str::uuid(),
             'name' => $name,
             'slug' => Str::slug($name) . '-' . Str::random(6),
             'state' => $this->faker->stateAbbr(),

@@ -16,7 +16,7 @@ class AdApiTest extends TestCase
 
     public function test_can_list_ads(): void
     {
-        $response = $this->getJson('/api/v1/ads');
+        $response = $this->getJson('/api/v1/ads?tenant_id=00000000-0000-0000-0000-000000000000');
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -55,7 +55,7 @@ class AdApiTest extends TestCase
 
     public function test_can_list_ad_templates(): void
     {
-        $response = $this->getJson('/api/v1/ads/templates');
+        $response = $this->getJson('/api/v1/ads/templates?tenant_id=00000000-0000-0000-0000-000000000000');
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -69,7 +69,7 @@ class AdApiTest extends TestCase
     {
         $data = [
             'name' => 'Test Ad Template',
-            'type' => 'social',
+            'ad_type' => 'image',
             'platform' => 'facebook',
             'template' => 'Test template',
             'tenant_id' => '00000000-0000-0000-0000-000000000000',
@@ -85,7 +85,7 @@ class AdApiTest extends TestCase
     {
         $adId = 'test-ad-id';
 
-        $response = $this->getJson("/api/v1/ads/{$adId}");
+        $response = $this->getJson("/api/v1/ads/{$adId}?tenant_id=00000000-0000-0000-0000-000000000000");
 
         $response->assertStatus(200)
             ->assertJsonStructure(['data']);
@@ -98,6 +98,7 @@ class AdApiTest extends TestCase
         $data = [
             'title' => 'Updated Ad Title',
             'status' => 'active',
+            'tenant_id' => '00000000-0000-0000-0000-000000000000',
         ];
 
         $response = $this->putJson("/api/v1/ads/{$adId}", $data);

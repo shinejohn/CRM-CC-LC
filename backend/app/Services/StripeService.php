@@ -79,4 +79,61 @@ class StripeService
     {
         return $this->stripe->paymentIntents->retrieve($paymentIntentId);
     }
+
+    /**
+     * Create a Stripe customer
+     */
+    public function createCustomer(string $email, string $name, array $metadata = []): \Stripe\Customer
+    {
+        try {
+            return $this->stripe->customers->create([
+                'email' => $email,
+                'name' => $name,
+                'metadata' => $metadata,
+            ]);
+        } catch (Exception $e) {
+            Log::error('Stripe customer creation failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
+     * Create a Stripe subscription
+     */
+    public function createSubscription(string $customerId, string $priceId, array $metadata = []): \Stripe\Subscription
+    {
+        try {
+            $data = [
+                'customer' => $customerId,
+                'items' => [
+                    ['price' => $priceId],
+                ],
+                'payment_behavior' => 'default_incomplete',
+                'payment_settings' => ['save_default_payment_method' => 'on_subscription'],
+                'expand' => ['latest_invoice.payment_intent'],
+            ];
+
+            if (!empty($metadata)) {
+                $data['metadata'] = $metadata;
+            }
+
+            return $this->stripe->subscriptions->create($data);
+        } catch (Exception $e) {
+            Log::error('Stripe subscription creation failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
+     * Cancel a Stripe subscription
+     */
+    public function cancelSubscription(string $subscriptionId): \Stripe\Subscription
+    {
+        try {
+            return $this->stripe->subscriptions->cancel($subscriptionId);
+        } catch (Exception $e) {
+            Log::error('Stripe subscription cancellation failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
 }

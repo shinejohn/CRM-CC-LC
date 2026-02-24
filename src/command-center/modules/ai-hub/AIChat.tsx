@@ -9,12 +9,16 @@ import { Textarea } from '@/components/ui/textarea';
 import { AIMessage } from './AIMessage';
 import { ToolCallIndicator } from './ToolCallIndicator';
 import { useAI } from '../../hooks/useAI';
+import { useBusinessIntelligenceContext } from '../../hooks/useBusinessIntelligenceContext';
 
 export function AIChat() {
   const [input, setInput] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Intelligence Hub: auto-inject business profile into AI context
+  const { enrichedContext, isLoading: isProfileLoading } = useBusinessIntelligenceContext();
 
   const {
     messages,
@@ -24,7 +28,7 @@ export function AIChat() {
     sendMessage,
     regenerate,
     abortStream,
-  } = useAI();
+  } = useAI({ context: enrichedContext });
 
   // Get current tool calls from messages
   const currentToolCalls = messages

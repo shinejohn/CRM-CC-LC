@@ -45,6 +45,7 @@ use App\Http\Controllers\Api\MunicipalAdminController;
 use App\Http\Controllers\Api\InteractionController;
 use App\Http\Controllers\Api\V1\MessageController;
 use App\Http\Controllers\Api\V1\CommunicationWebhookController;
+use App\Http\Controllers\Api\CssnSubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -672,6 +673,32 @@ Route::prefix('v1')->group(function () {
         Route::delete('/{uuid}', [MessageController::class, 'cancel']);
         Route::get('/stats/queue', [MessageController::class, 'queueStats']);
         Route::get('/stats/channels', [MessageController::class, 'channelStats']);
+    });
+
+    // CSSN Subscription Manager API
+    Route::prefix('cssn')->middleware('auth:sanctum')->group(function () {
+        Route::post('/subscribe', [CssnSubscriptionController::class, 'subscribe']);
+        Route::get('/subscription/{smbId}', [CssnSubscriptionController::class, 'showSubscription']);
+        Route::patch('/subscription/{id}', [CssnSubscriptionController::class, 'updateSubscription']);
+        Route::post('/campaign', [CssnSubscriptionController::class, 'startCampaign']);
+        
+        Route::get('/preferences/{smbId}', [CssnSubscriptionController::class, 'getPreferences']);
+        Route::put('/preferences/{smbId}', [CssnSubscriptionController::class, 'updatePreferences']);
+        
+        Route::get('/reports/{smbId}', [CssnSubscriptionController::class, 'getReports']);
+    });
+
+    // Social Studio API
+    Route::prefix('studio')->middleware('auth:sanctum')->group(function () {
+        Route::get('/credits/{smbId}', [\App\Http\Controllers\Api\SocialStudioController::class, 'getCredits']);
+        Route::post('/credits/purchase', [\App\Http\Controllers\Api\SocialStudioController::class, 'purchaseCredits']);
+        Route::post('/credits/subscribe', [\App\Http\Controllers\Api\SocialStudioController::class, 'subscribe']);
+        
+        Route::post('/generate/post-copy', [\App\Http\Controllers\Api\SocialStudioController::class, 'generatePostCopy']);
+        
+        Route::get('/accounts/{smbId}', [\App\Http\Controllers\Api\SocialStudioController::class, 'getAccounts']);
+        Route::post('/accounts/connect', [\App\Http\Controllers\Api\SocialStudioController::class, 'connectAccount']);
+        Route::post('/accounts/callback', [\App\Http\Controllers\Api\SocialStudioController::class, 'callbackAccount']);
     });
 });
 

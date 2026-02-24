@@ -23,14 +23,26 @@ export interface CommunityBusiness {
   business_name: string;
   community_id: string;
   category?: string;
+  mapped_category?: string;
+  stage?: 'prospect' | 'onboarding' | 'active' | 'churned';
   campaign_status?: string;
   engagement_tier?: number;
   profile_completeness?: number;
+  google_data?: {
+    place_id?: string;
+    rating?: number;
+    review_count?: number;
+    address?: string;
+  };
+  subscription_tier?: string;
+  last_enriched_at?: string | null;
   [key: string]: unknown;
 }
 
 export interface CommunityListFilters {
   state?: string;
+  status?: string;
+  search?: string;
   per_page?: number;
   page?: number;
 }
@@ -39,6 +51,8 @@ export interface CommunityBusinessFilters {
   engagement_tier?: number;
   campaign_status?: string;
   category?: string;
+  stage?: string;
+  search?: string;
   profile_completeness_min?: number;
   per_page?: number;
   page?: number;

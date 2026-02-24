@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { Routes, Route, Navigate, Outlet } from 'react-router';
 import { AuthGuard } from './core/AuthGuard';
 import { AppShell } from './core/AppShell';
@@ -11,12 +11,14 @@ const Customers = lazy(() => import('./pages/CustomersPage').catch(() => ({ defa
 const CustomerDetail = lazy(() => import('./pages/CustomerDetailPage').catch(() => ({ default: () => <div>Customer Detail - Coming Soon</div> })));
 const Content = lazy(() => import('./pages/ContentPage').catch(() => ({ default: () => <div>Content - Coming Soon</div> })));
 const Campaigns = lazy(() => import('./pages/CampaignsPage').catch(() => ({ default: () => <div>Campaigns - Coming Soon</div> })));
+const CommerceHub = lazy(() => import('./pages/CommerceHubPage').then(m => ({ default: m.CommerceHubPage })).catch(() => ({ default: () => <div>Commerce Hub - Coming Soon</div> })));
 const CampaignDetail = lazy(() => import('./pages/CampaignDetailPage').catch(() => ({ default: () => <div>Campaign Detail - Coming Soon</div> })));
 const Services = lazy(() => import('./pages/ServicesPage').catch(() => ({ default: () => <div>Services - Coming Soon</div> })));
 const AIHub = lazy(() => import('./pages/AIHubPage').catch(() => ({ default: () => <div>AI Hub - Coming Soon</div> })));
 const CrmDashboard = lazy(() => import('./modules/crm/Dashboard').then(m => ({ default: m.CrmDashboard })));
-const Settings = lazy(() => import('./pages/SettingsPage').catch(() => ({ default: () => <div>Settings - Coming Soon</div> })));
+const Settings = lazy(() => import('./pages/SettingsPage').then(m => ({ default: m.SettingsPage })).catch(() => ({ default: () => <div>Settings - Coming Soon</div> })));
 const LoginPage = lazy(() => import('./pages/LoginPage').then(m => ({ default: m.LoginPage })));
+const IntelligenceHub = lazy(() => import('./modules/intelligence-hub/MyBusinessProfilePage').then(m => ({ default: m.MyBusinessProfilePage })));
 
 // Layout wrapper for protected routes
 function ProtectedLayout() {
@@ -81,6 +83,12 @@ export function AppRouter() {
           </Suspense>
         } />
 
+        <Route path="commerce" element={
+          <Suspense fallback={<LoadingScreen />}>
+            <CommerceHub />
+          </Suspense>
+        } />
+
         <Route path="campaigns/:id" element={
           <Suspense fallback={<LoadingScreen />}>
             <CampaignDetail />
@@ -102,6 +110,12 @@ export function AppRouter() {
         <Route path="crm" element={
           <Suspense fallback={<LoadingScreen />}>
             <CrmDashboard />
+          </Suspense>
+        } />
+
+        <Route path="intelligence-hub" element={
+          <Suspense fallback={<LoadingScreen />}>
+            <IntelligenceHub />
           </Suspense>
         } />
 

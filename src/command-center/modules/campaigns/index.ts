@@ -6,6 +6,7 @@
 export { CampaignsPage } from './CampaignsPage';
 export { CampaignCard } from './CampaignCard';
 export { CampaignWizard } from './CampaignWizard';
+export { MarketingDiagnosticWizard } from './MarketingDiagnosticWizard';
 export { CampaignDetailPage } from './CampaignDetailPage';
 export { useCampaigns } from './useCampaigns';
 export type {

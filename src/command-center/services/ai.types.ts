@@ -47,6 +47,12 @@ export interface ChatContext {
   businessContext?: Record<string, unknown>;
   currentPage?: string;
   selectedContent?: string;
+  /** Intelligence Hub: full evolving business profile */
+  business_profile?: Record<string, unknown>;
+  /** Intelligence Hub: AI-relevant fields for prompt injection */
+  ai_context?: Record<string, unknown>;
+  /** Intelligence Hub: condensed text summary for system prompt */
+  intelligence_summary?: string;
 }
 
 export interface GenerationRequest {
