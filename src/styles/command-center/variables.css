@@ -11,28 +11,28 @@
   --cc-text-secondary: #4b5563;
   --cc-text-muted: #9ca3af;
   --cc-border: #e5e7eb;
-  
+
   /* Accent Colors */
   --cc-accent-blue: #3b82f6;
   --cc-accent-purple: #8b5cf6;
   --cc-accent-green: #10b981;
   --cc-accent-orange: #f97316;
   --cc-accent-red: #ef4444;
-  
+
   /* Gradients */
   --cc-gradient-primary: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
   --cc-gradient-ai: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
-  
+
   /* Shadows */
   --cc-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --cc-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --cc-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  
+
   /* Transitions */
   --cc-transition-fast: 150ms ease;
   --cc-transition-normal: 200ms ease;
   --cc-transition-slow: 300ms ease;
-  
+
   /* Spacing */
   --cc-sidebar-width: 256px;
   --cc-sidebar-collapsed: 64px;
@@ -48,9 +48,54 @@
   --cc-text-secondary: #cbd5e1;
   --cc-text-muted: #64748b;
   --cc-border: #334155;
-  
+
   --cc-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --cc-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
   --cc-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
 }
 
+/* ============================================
+   NEXUS THEME UTILITIES
+   ============================================ */
+
+.glass-panel {
+  @apply bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-white/20 dark:border-slate-700/50 shadow-sm;
+}
+
+.glass-card {
+  @apply bg-white/40 dark:bg-slate-800/40 backdrop-blur-sm border border-white/30 dark:border-slate-700/50 rounded-xl shadow-sm hover:shadow-md transition-all;
+}
+
+.nexus-card {
+  @apply relative overflow-hidden rounded-xl border-2 shadow-lg hover:shadow-xl transition-all duration-300;
+}
+
+.nav-item {
+  @apply flex items-center gap-3 px-3 py-2 rounded-lg transition-colors font-medium text-sm;
+}
+
+.nav-item-active {
+  @apply bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 font-semibold;
+}
+
+.nav-item-inactive {
+  @apply text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s infinite;
+}

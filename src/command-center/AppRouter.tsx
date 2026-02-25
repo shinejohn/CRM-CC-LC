@@ -1,7 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Routes, Route, Navigate, Outlet } from 'react-router';
 import { AuthGuard } from './core/AuthGuard';
-import { AppShell } from './core/AppShell';
+import { CommandCenterLayout } from './layouts/CommandCenterLayout';
 import { LoadingScreen } from '@/components/ui/LoadingScreen';
 
 // Lazy load pages for code splitting
@@ -23,9 +23,9 @@ const IntelligenceHub = lazy(() => import('./modules/intelligence-hub/MyBusiness
 // Layout wrapper for protected routes
 function ProtectedLayout() {
   return (
-    <AppShell>
+    <CommandCenterLayout>
       <Outlet />
-    </AppShell>
+    </CommandCenterLayout>
   );
 }
 
@@ -117,6 +117,26 @@ export function AppRouter() {
           <Suspense fallback={<LoadingScreen />}>
             <IntelligenceHub />
           </Suspense>
+        } />
+
+        {/* --- Nexus Zone Routes (Phase 2 & 3) --- */}
+        <Route path="define" element={
+          <div className="flex h-[80vh] items-center justify-center text-slate-500 font-bold uppercase tracking-wider">Define Zone - In Development</div>
+        } />
+        <Route path="attract" element={
+          <div className="flex h-[80vh] items-center justify-center text-slate-500 font-bold uppercase tracking-wider">Attract Zone - In Development</div>
+        } />
+        <Route path="sell" element={
+          <div className="flex h-[80vh] items-center justify-center text-slate-500 font-bold uppercase tracking-wider">Sell Zone - In Development</div>
+        } />
+        <Route path="deliver" element={
+          <div className="flex h-[80vh] items-center justify-center text-slate-500 font-bold uppercase tracking-wider">Deliver Zone - In Development</div>
+        } />
+        <Route path="measure" element={
+          <div className="flex h-[80vh] items-center justify-center text-slate-500 font-bold uppercase tracking-wider">Measure Zone - In Development</div>
+        } />
+        <Route path="automate" element={
+          <div className="flex h-[80vh] items-center justify-center text-slate-500 font-bold uppercase tracking-wider">Automate Zone - In Development</div>
         } />
 
         <Route path="settings/*" element={
