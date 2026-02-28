@@ -40,7 +40,7 @@
 ---
 
 ## PROJECT 2: Permission & BusinessMode Infrastructure
-**Status:** IN PROGRESS
+**Status:** COMPLETE
 **Started:** 2026-02-28
 
 ### Actions:
@@ -252,4 +252,34 @@
 10. Created `CC-3.0-REVIEW-REPORT.md` with full cross-project verification results
 
 ### Result:
-All 8 projects verified. No regressions. No deferred work. See `CC-3.0-REVIEW-REPORT.md` for detailed findings.
+All 8 projects verified. 3 failures identified — remediated in follow-up below.
+
+---
+
+## PROJECT: Review Remediation (3 Failures)
+**Status:** COMPLETE
+**Started:** 2026-02-28
+
+### Fix 1: usePermission Integration
+1. Exported `Resource`, `Action`, `Role` types and `PERMISSION_MATRIX` from `src/hooks/usePermission.ts`
+2. Added `checkPermission(role, action, resource)` non-hook utility for batch permission checks
+3. Integrated into `NavigationRail.tsx`: added `resource?: Resource` to NavChild, filters children by user role permissions, hides empty verb sections
+4. Integrated into `Dashboard.tsx`: verb card action buttons disabled when user lacks view permission for mapped resource
+5. Integrated into all 6 verb index pages (DefineIndex, AttractIndex, DeliverIndex, MeasureIndex, AutomateIndex, SellIndex): quick action buttons disabled based on resource permissions
+6. Verified: `grep -r "usePermission\|checkPermission" src/` → 19 matches across 9 files
+
+### Fix 2: Sidebar.tsx onNavigate Removal
+1. Removed `onNavigate?: (path: string) => void` prop from SidebarProps interface
+2. Removed `handleNavigate` wrapper — uses `navigate()` directly
+3. Migrated all structural Tailwind colors to nexus design tokens (kept semantic badge colors)
+4. Verified: `grep -r "onNavigate" src/` → zero results
+
+### Fix 3: Design Token Migration (3 Pages)
+1. `ServicesPage.tsx`: Full token migration — kept TYPE_COLORS (semantic category), statusConfig (semantic status), active filter tab (semantic)
+2. `AITeamPage.tsx`: Full token migration — kept column borders (semantic pipeline stages), medium/high urgency (semantic)
+3. `CommerceHubPage.tsx`: Full token migration — kept SVG chart colors (data visualization), category icon backgrounds (semantic), Quick Create hover borders (semantic)
+4. Verified: `grep -r "bg-white\|bg-slate-\|text-slate-900\|bg-blue-600\|text-gray-900\|bg-gray-" src/command-center/pages/{ServicesPage,AITeamPage,CommerceHubPage}.tsx` → zero results
+
+### Build Verification:
+- `npm run build` — zero errors, 2.50s
+- All 3 review failures now pass

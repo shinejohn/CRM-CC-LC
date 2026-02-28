@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
 import { FileText, Calendar, Layers, Stethoscope, ArrowRight, TrendingUp } from 'lucide-react';
 import { PageHeader, MetricCard, DataCard, StatusBadge } from '@/components/shared';
+import { usePermission, type Resource } from '@/hooks/usePermission';
 
 // TODO: wire to API — replace with real content/campaign data
 const mockArticles = [
@@ -24,6 +25,8 @@ const mockEvents = [
 
 export function AttractIndex() {
   const navigate = useNavigate();
+  const { allowed: canCreateContent } = usePermission('create', 'content');
+  const { allowed: canCreateCampaigns } = usePermission('create', 'campaigns');
 
   return (
     <div className="space-y-6">
@@ -120,18 +123,23 @@ export function AttractIndex() {
           <DataCard title="Quick Actions" icon={Stethoscope}>
             <div className="space-y-3">
               {[
-                { label: 'Write Article', href: '/command-center/attract/articles' },
-                { label: 'Create Event', href: '/command-center/attract/events' },
-                { label: 'Run Campaign', href: '/command-center/attract/campaigns' },
-                { label: 'Marketing Diagnostic', href: '/command-center/attract/diagnostic' },
+                { label: 'Write Article', href: '/command-center/attract/articles', allowed: canCreateContent },
+                { label: 'Create Event', href: '/command-center/attract/events', allowed: canCreateContent },
+                { label: 'Run Campaign', href: '/command-center/attract/campaigns', allowed: canCreateCampaigns },
+                { label: 'Marketing Diagnostic', href: '/command-center/attract/diagnostic', allowed: canCreateCampaigns },
               ].map((action) => (
                 <button
                   key={action.label}
-                  onClick={() => navigate(action.href)}
-                  className="w-full flex items-center justify-between p-3 rounded-lg border border-[var(--nexus-card-border)] bg-[var(--nexus-bg-secondary)] hover:bg-[var(--nexus-card-bg-hover)] transition-colors group"
+                  onClick={() => action.allowed && navigate(action.href)}
+                  disabled={!action.allowed}
+                  className={`w-full flex items-center justify-between p-3 rounded-lg border border-[var(--nexus-card-border)] transition-colors group ${
+                    action.allowed
+                      ? 'bg-[var(--nexus-bg-secondary)] hover:bg-[var(--nexus-card-bg-hover)]'
+                      : 'bg-[var(--nexus-bg-secondary)] opacity-50 cursor-not-allowed'
+                  }`}
                 >
                   <span className="text-sm font-medium text-[var(--nexus-text-primary)]">{action.label}</span>
-                  <ArrowRight className="w-4 h-4 text-[var(--nexus-text-tertiary)] group-hover:text-[var(--nexus-accent-primary)] transition-colors" />
+                  <ArrowRight className={`w-4 h-4 transition-colors ${action.allowed ? 'text-[var(--nexus-text-tertiary)] group-hover:text-[var(--nexus-accent-primary)]' : 'text-[var(--nexus-text-tertiary)]'}`} />
                 </button>
               ))}
             </div>

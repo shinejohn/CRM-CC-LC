@@ -20,6 +20,7 @@ interface Column {
   jobs: Job[];
 }
 
+// Column border colors are semantic — they identify pipeline stages
 const MOCK_COLUMNS: Column[] = [
   {
     id: 'quote',
@@ -58,8 +59,9 @@ const MOCK_COLUMNS: Column[] = [
   },
 ];
 
+// Semantic urgency colors — intentional, these indicate priority levels
 const urgencyStyles = {
-  low: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400',
+  low: 'bg-[var(--nexus-bg-secondary)] text-[var(--nexus-text-secondary)]',
   medium: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
   high: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
 };
@@ -104,12 +106,12 @@ export default function AITeamPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6 shrink-0">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Job Board</h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+          <h1 className="text-2xl font-bold text-[var(--nexus-text-primary)]">Job Board</h1>
+          <p className="text-sm text-[var(--nexus-text-secondary)] mt-1">
             Track jobs across your AI team pipeline
           </p>
         </div>
-        <button className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-sm flex items-center gap-2 text-sm">
+        <button className="px-4 py-2 bg-[var(--nexus-accent-primary)] text-white font-semibold rounded-lg hover:bg-[var(--nexus-button-hover)] transition-colors shadow-sm flex items-center gap-2 text-sm">
           <Plus className="w-4 h-4" /> New Quote
         </button>
       </div>
@@ -123,10 +125,10 @@ export default function AITeamPage() {
       </div>
 
       {/* Toolbar */}
-      <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 mb-6 shrink-0">
+      <div className="bg-[var(--nexus-card-bg)] rounded-xl shadow-sm border border-[var(--nexus-card-border)] p-4 mb-6 shrink-0">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-700 rounded-lg p-1">
+            <div className="flex items-center gap-1 bg-[var(--nexus-bg-secondary)] rounded-lg p-1">
               {[
                 { mode: 'board' as const, icon: Layout },
                 { mode: 'list' as const, icon: List },
@@ -137,8 +139,8 @@ export default function AITeamPage() {
                   onClick={() => setViewMode(mode)}
                   className={`p-1.5 rounded transition-colors ${
                     viewMode === mode
-                      ? 'bg-white dark:bg-slate-600 shadow-sm text-blue-600 dark:text-blue-400'
-                      : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                      ? 'bg-[var(--nexus-card-bg)] shadow-sm text-[var(--nexus-accent-primary)]'
+                      : 'text-[var(--nexus-text-secondary)] hover:text-[var(--nexus-text-primary)]'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -146,14 +148,14 @@ export default function AITeamPage() {
               ))}
             </div>
 
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-50 dark:bg-slate-700 rounded-lg w-64">
-              <Search className="w-4 h-4 text-slate-400" />
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-[var(--nexus-bg-secondary)] rounded-lg w-64">
+              <Search className="w-4 h-4 text-[var(--nexus-text-tertiary)]" />
               <input
                 type="text"
                 placeholder="Search jobs..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                className="bg-transparent outline-none text-sm flex-1 text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
+                className="bg-transparent outline-none text-sm flex-1 text-[var(--nexus-text-primary)] placeholder:text-[var(--nexus-text-tertiary)]"
               />
             </div>
           </div>
@@ -167,31 +169,31 @@ export default function AITeamPage() {
             <div key={column.id} className="w-80 flex flex-col h-full">
               {/* Column Header */}
               <div
-                className={`bg-slate-100 dark:bg-slate-800 rounded-t-xl p-4 border-t-4 ${column.color} shrink-0`}
+                className={`bg-[var(--nexus-bg-secondary)] rounded-t-xl p-4 border-t-4 ${column.color} shrink-0`}
               >
                 <div className="flex justify-between items-center mb-1">
-                  <h3 className="font-bold text-slate-700 dark:text-slate-300 text-sm">
+                  <h3 className="font-bold text-[var(--nexus-text-secondary)] text-sm">
                     {column.title}
                   </h3>
-                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                  <span className="text-xs font-medium text-[var(--nexus-text-secondary)]">
                     {column.jobs.length} jobs
                   </span>
                 </div>
-                <span className="font-bold text-slate-900 dark:text-white">
+                <span className="font-bold text-[var(--nexus-text-primary)]">
                   {getColumnTotal(column.jobs)}
                 </span>
               </div>
 
               {/* Jobs List */}
-              <div className="bg-slate-50/50 dark:bg-slate-800/30 border-x border-b border-slate-200 dark:border-slate-700 rounded-b-xl p-3 flex-1 overflow-y-auto space-y-3">
+              <div className="bg-[var(--nexus-bg-secondary)]/50 border-x border-b border-[var(--nexus-card-border)] rounded-b-xl p-3 flex-1 overflow-y-auto space-y-3">
                 {column.jobs.map(job => (
                   <Card
                     key={job.id}
-                    className="cursor-pointer hover:shadow-md transition-shadow bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700"
+                    className="cursor-pointer hover:shadow-md transition-shadow bg-[var(--nexus-card-bg)] border-[var(--nexus-card-border)]"
                   >
                     <CardContent className="p-4">
                       <div className="flex justify-between items-start mb-2">
-                        <h4 className="font-semibold text-slate-900 dark:text-white text-sm">
+                        <h4 className="font-semibold text-[var(--nexus-text-primary)] text-sm">
                           {job.client}
                         </h4>
                         <span
@@ -201,17 +203,17 @@ export default function AITeamPage() {
                           {job.urgency}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mb-2">{job.service}</p>
+                      <p className="text-xs text-[var(--nexus-text-secondary)] mb-2">{job.service}</p>
                       <div className="flex justify-between items-center">
-                        <span className="font-bold text-slate-900 dark:text-white text-sm">
+                        <span className="font-bold text-[var(--nexus-text-primary)] text-sm">
                           ${job.price.toLocaleString()}
                         </span>
-                        <span className="text-xs text-slate-500 dark:text-slate-400">{job.status}</span>
+                        <span className="text-xs text-[var(--nexus-text-secondary)]">{job.status}</span>
                       </div>
                     </CardContent>
                   </Card>
                 ))}
-                <button className="w-full py-2 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-lg text-slate-400 hover:border-blue-300 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all text-sm font-medium flex items-center justify-center gap-1">
+                <button className="w-full py-2 border-2 border-dashed border-[var(--nexus-card-border)] rounded-lg text-[var(--nexus-text-tertiary)] hover:border-[var(--nexus-accent-primary)] hover:text-[var(--nexus-accent-primary)] hover:bg-[var(--nexus-bg-secondary)] transition-all text-sm font-medium flex items-center justify-center gap-1">
                   <Plus className="w-4 h-4" /> New Job
                 </button>
               </div>

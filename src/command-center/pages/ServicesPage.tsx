@@ -21,6 +21,7 @@ interface MockService {
   description: string;
 }
 
+// Semantic category colors — intentional, these identify service types
 const TYPE_COLORS: Record<string, { bg: string; text: string }> = {
   article: { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-600 dark:text-blue-400' },
   ads: { bg: 'bg-purple-100 dark:bg-purple-900/30', text: 'text-purple-600 dark:text-purple-400' },
@@ -29,6 +30,7 @@ const TYPE_COLORS: Record<string, { bg: string; text: string }> = {
   email: { bg: 'bg-orange-100 dark:bg-orange-900/30', text: 'text-orange-600 dark:text-orange-400' },
 };
 
+// Semantic status colors — intentional, these indicate operational state
 const statusConfig: Record<ServiceStatus, { label: string; color: string; icon: React.ElementType }> = {
   active: {
     label: 'Active',
@@ -112,12 +114,12 @@ export default function ServicesPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6 shrink-0">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Service Management</h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+          <h1 className="text-2xl font-bold text-[var(--nexus-text-primary)]">Service Management</h1>
+          <p className="text-sm text-[var(--nexus-text-secondary)] mt-1">
             Manage your active subscriptions, content, and campaigns.
           </p>
         </div>
-        <button className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-sm flex items-center gap-2 text-sm">
+        <button className="px-4 py-2 bg-[var(--nexus-accent-primary)] text-white font-semibold rounded-lg hover:bg-[var(--nexus-button-hover)] transition-colors shadow-sm flex items-center gap-2 text-sm">
           <Plus className="w-4 h-4" /> Add Service
         </button>
       </div>
@@ -129,22 +131,22 @@ export default function ServicesPage() {
           <div className="lg:col-span-4 flex flex-col h-full overflow-hidden">
             {/* Search */}
             <div className="flex items-center gap-2 mb-4">
-              <div className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg flex-1">
-                <Search className="w-4 h-4 text-slate-400" />
+              <div className="flex items-center gap-2 px-3 py-2 bg-[var(--nexus-card-bg)] border border-[var(--nexus-card-border)] rounded-lg flex-1">
+                <Search className="w-4 h-4 text-[var(--nexus-text-tertiary)]" />
                 <input
                   type="text"
                   placeholder="Search services..."
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
-                  className="bg-transparent outline-none text-sm flex-1 text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
+                  className="bg-transparent outline-none text-sm flex-1 text-[var(--nexus-text-primary)] placeholder:text-[var(--nexus-text-tertiary)]"
                 />
               </div>
-              <button className="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+              <button className="p-2 text-[var(--nexus-text-secondary)] hover:bg-[var(--nexus-bg-secondary)] rounded-lg transition-colors">
                 <SlidersHorizontal className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Type Tabs */}
+            {/* Type Tabs — semantic active-filter color kept intentionally */}
             <div className="flex gap-1 mb-4 overflow-x-auto shrink-0">
               {TYPE_FILTERS.map(filter => (
                 <button
@@ -153,7 +155,7 @@ export default function ServicesPage() {
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors ${
                     typeFilter === filter
                       ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
-                      : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800'
+                      : 'text-[var(--nexus-text-secondary)] hover:bg-[var(--nexus-bg-secondary)]'
                   }`}
                 >
                   {filter}
@@ -175,8 +177,8 @@ export default function ServicesPage() {
                     key={service.id}
                     className={`cursor-pointer transition-all ${
                       isSelected
-                        ? 'ring-2 ring-blue-500 shadow-md'
-                        : 'hover:shadow-sm border-slate-200 dark:border-slate-700'
+                        ? 'ring-2 ring-[var(--nexus-accent-primary)] shadow-md'
+                        : 'hover:shadow-sm border-[var(--nexus-card-border)]'
                     }`}
                     onClick={() => setSelectedId(service.id)}
                   >
@@ -187,7 +189,7 @@ export default function ServicesPage() {
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex justify-between items-start">
-                            <h3 className="font-semibold text-slate-900 dark:text-white text-sm truncate">
+                            <h3 className="font-semibold text-[var(--nexus-text-primary)] text-sm truncate">
                               {service.name}
                             </h3>
                             <span
@@ -197,10 +199,10 @@ export default function ServicesPage() {
                               {status.label}
                             </span>
                           </div>
-                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                          <p className="text-xs text-[var(--nexus-text-secondary)] mt-0.5">
                             {service.typeLabel}
                           </p>
-                          <p className="text-xs text-slate-400 dark:text-slate-500 mt-1">
+                          <p className="text-xs text-[var(--nexus-text-tertiary)] mt-1">
                             Updated {service.lastUpdated}
                           </p>
                         </div>
@@ -211,7 +213,7 @@ export default function ServicesPage() {
               })}
 
               {filteredServices.length === 0 && (
-                <div className="text-center py-12 text-slate-400">
+                <div className="text-center py-12 text-[var(--nexus-text-tertiary)]">
                   <Search className="w-8 h-8 mx-auto mb-2 opacity-50" />
                   <p className="text-sm">No services match your filters</p>
                 </div>
@@ -220,7 +222,7 @@ export default function ServicesPage() {
           </div>
 
           {/* Right Panel: Detail View */}
-          <div className="lg:col-span-8 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 h-full overflow-hidden flex flex-col">
+          <div className="lg:col-span-8 bg-[var(--nexus-card-bg)] rounded-2xl shadow-sm border border-[var(--nexus-card-border)] h-full overflow-hidden flex flex-col">
             <AnimatePresence mode="wait">
               <motion.div
                 key={selected.id}
@@ -255,60 +257,60 @@ function ServiceDetail({ service }: { service: MockService }) {
             <Icon className={`w-8 h-8 ${colors.text}`} />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white">{service.name}</h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">{service.typeLabel}</p>
+            <h2 className="text-xl font-bold text-[var(--nexus-text-primary)]">{service.name}</h2>
+            <p className="text-sm text-[var(--nexus-text-secondary)] mt-1">{service.typeLabel}</p>
             <div className="flex items-center gap-3 mt-2">
               <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium ${status.color}`}>
                 <StatusIcon className="w-3.5 h-3.5" />
                 {status.label}
               </span>
-              <span className="text-xs text-slate-400 dark:text-slate-500">
+              <span className="text-xs text-[var(--nexus-text-tertiary)]">
                 Last updated {service.lastUpdated}
               </span>
             </div>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <button className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
+          <button className="p-2 text-[var(--nexus-text-tertiary)] hover:text-[var(--nexus-text-secondary)] hover:bg-[var(--nexus-bg-secondary)] rounded-lg transition-colors">
             <Settings className="w-5 h-5" />
           </button>
-          <button className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
+          <button className="p-2 text-[var(--nexus-text-tertiary)] hover:text-[var(--nexus-text-secondary)] hover:bg-[var(--nexus-bg-secondary)] rounded-lg transition-colors">
             <ExternalLink className="w-5 h-5" />
           </button>
-          <button className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
+          <button className="p-2 text-[var(--nexus-text-tertiary)] hover:text-[var(--nexus-text-secondary)] hover:bg-[var(--nexus-bg-secondary)] rounded-lg transition-colors">
             <MoreVertical className="w-5 h-5" />
           </button>
         </div>
       </div>
 
       {/* Description */}
-      <div className="bg-slate-50 dark:bg-slate-900/50 rounded-xl p-5 border border-slate-100 dark:border-slate-700">
-        <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Description</h3>
-        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{service.description}</p>
+      <div className="bg-[var(--nexus-bg-secondary)] rounded-xl p-5 border border-[var(--nexus-card-border)]">
+        <h3 className="text-sm font-semibold text-[var(--nexus-text-secondary)] mb-2">Description</h3>
+        <p className="text-sm text-[var(--nexus-text-secondary)] leading-relaxed">{service.description}</p>
       </div>
 
       {/* Quick Stats */}
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-slate-50 dark:bg-slate-900/50 rounded-xl p-4 border border-slate-100 dark:border-slate-700 text-center">
-          <p className="text-2xl font-bold text-slate-900 dark:text-white">12</p>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Items Created</p>
+        <div className="bg-[var(--nexus-bg-secondary)] rounded-xl p-4 border border-[var(--nexus-card-border)] text-center">
+          <p className="text-2xl font-bold text-[var(--nexus-text-primary)]">12</p>
+          <p className="text-xs text-[var(--nexus-text-secondary)] mt-1">Items Created</p>
         </div>
-        <div className="bg-slate-50 dark:bg-slate-900/50 rounded-xl p-4 border border-slate-100 dark:border-slate-700 text-center">
-          <p className="text-2xl font-bold text-slate-900 dark:text-white">89%</p>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Completion Rate</p>
+        <div className="bg-[var(--nexus-bg-secondary)] rounded-xl p-4 border border-[var(--nexus-card-border)] text-center">
+          <p className="text-2xl font-bold text-[var(--nexus-text-primary)]">89%</p>
+          <p className="text-xs text-[var(--nexus-text-secondary)] mt-1">Completion Rate</p>
         </div>
-        <div className="bg-slate-50 dark:bg-slate-900/50 rounded-xl p-4 border border-slate-100 dark:border-slate-700 text-center">
-          <p className="text-2xl font-bold text-slate-900 dark:text-white">4.8</p>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Avg Rating</p>
+        <div className="bg-[var(--nexus-bg-secondary)] rounded-xl p-4 border border-[var(--nexus-card-border)] text-center">
+          <p className="text-2xl font-bold text-[var(--nexus-text-primary)]">4.8</p>
+          <p className="text-xs text-[var(--nexus-text-secondary)] mt-1">Avg Rating</p>
         </div>
       </div>
 
       {/* Actions */}
-      <div className="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-700">
-        <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+      <div className="flex items-center gap-3 pt-4 border-t border-[var(--nexus-card-border)]">
+        <button className="px-4 py-2 bg-[var(--nexus-accent-primary)] text-white rounded-lg hover:bg-[var(--nexus-button-hover)] transition-colors text-sm font-medium">
           View Details
         </button>
-        <button className="px-4 py-2 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors text-sm font-medium">
+        <button className="px-4 py-2 bg-[var(--nexus-bg-secondary)] text-[var(--nexus-text-secondary)] rounded-lg hover:bg-[var(--nexus-card-bg-hover)] transition-colors text-sm font-medium">
           Edit Settings
         </button>
         {service.status === 'issue' && (

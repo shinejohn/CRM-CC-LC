@@ -9,17 +9,20 @@ import {
 import { PageHeader, DataCard } from '@/components/shared';
 import { useAuthStore } from '@/stores/authStore';
 import { useBusinessMode } from '@/hooks/useBusinessMode';
+import { checkPermission, type Resource, type Role } from '@/hooks/usePermission';
 
 interface VerbCardProps {
   verb: string;
   icon: React.ElementType;
   metrics: { label: string; value: string }[];
-  action: { label: string; href: string };
+  action: { label: string; href: string; resource: Resource };
   delay: number;
 }
 
 function VerbCard({ verb, icon: Icon, metrics, action, delay }: VerbCardProps) {
   const navigate = useNavigate();
+  const userRole = (useAuthStore((s) => s.user?.role) ?? 'viewer') as Role;
+  const canView = checkPermission(userRole, 'view', action.resource);
 
   return (
     <motion.div
@@ -48,8 +51,13 @@ function VerbCard({ verb, icon: Icon, metrics, action, delay }: VerbCardProps) {
           </div>
 
           <button
-            onClick={() => navigate(action.href)}
-            className="flex items-center gap-2 text-sm font-medium text-[var(--nexus-accent-primary)] hover:underline transition-colors"
+            onClick={() => canView && navigate(action.href)}
+            disabled={!canView}
+            className={`flex items-center gap-2 text-sm font-medium transition-colors ${
+              canView
+                ? 'text-[var(--nexus-accent-primary)] hover:underline'
+                : 'text-[var(--nexus-text-tertiary)] cursor-not-allowed opacity-50'
+            }`}
           >
             {action.label}
             <ArrowRight className="w-4 h-4" />
@@ -98,7 +106,7 @@ export function Dashboard() {
         { label: 'Profile completion', value: '78%' },
         { label: 'FAQ gaps', value: '2 unanswered' },
       ],
-      action: { label: 'Complete FAQ', href: '/command-center/define/faq' },
+      action: { label: 'Complete FAQ', href: '/command-center/define/faq', resource: 'settings' },
       delay: 0.05,
     },
     {
@@ -108,7 +116,7 @@ export function Dashboard() {
         { label: 'Articles live', value: '3' },
         { label: 'Events upcoming', value: '1' },
       ],
-      action: { label: 'Create event', href: '/command-center/attract/events' },
+      action: { label: 'Create event', href: '/command-center/attract/events', resource: 'content' },
       delay: 0.1,
     },
     {
@@ -118,7 +126,7 @@ export function Dashboard() {
         { label: t('customers'), value: '12' },
         { label: `Active ${t('deals').toLowerCase()}`, value: '4' },
       ],
-      action: { label: `View ${t('pipeline')}`, href: '/command-center/sell/pipeline' },
+      action: { label: `View ${t('pipeline')}`, href: '/command-center/sell/pipeline', resource: 'deals' },
       delay: 0.15,
     },
     {
@@ -128,7 +136,7 @@ export function Dashboard() {
         { label: 'Active services', value: '5' },
         { label: 'Pending invoices', value: '1' },
       ],
-      action: { label: 'View invoices', href: '/command-center/deliver/billing' },
+      action: { label: 'View invoices', href: '/command-center/deliver/billing', resource: 'billing' },
       delay: 0.2,
     },
     {
@@ -138,7 +146,7 @@ export function Dashboard() {
         { label: 'Total views', value: '847' },
         { label: 'Change this week', value: '+12%' },
       ],
-      action: { label: 'Full report', href: '/command-center/measure/reports' },
+      action: { label: 'Full report', href: '/command-center/measure/reports', resource: 'analytics' },
       delay: 0.25,
     },
     {
@@ -148,7 +156,7 @@ export function Dashboard() {
         { label: 'AI employees', value: '2' },
         { label: 'Actions this week', value: '14 posts' },
       ],
-      action: { label: 'Configure team', href: '/command-center/automate' },
+      action: { label: 'Configure team', href: '/command-center/automate', resource: 'ai-employees' },
       delay: 0.3,
     },
   ];

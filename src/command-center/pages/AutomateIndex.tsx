@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Bot, Cpu, Workflow, ArrowRight, Zap, Lock } from 'lucide-react';
 import { PageHeader, MetricCard, DataCard, StatusBadge } from '@/components/shared';
 import { useFeatureAccess } from '@/hooks/useFeatureAccess';
+import { usePermission } from '@/hooks/usePermission';
 
 interface AIEmployee {
   name: string;
@@ -38,6 +39,7 @@ const statusBadgeMap: Record<string, 'active' | 'pending' | 'inactive'> = {
 export function AutomateIndex() {
   const navigate = useNavigate();
   const aiAccess = useFeatureAccess('ai_employees');
+  const { allowed: canViewAI } = usePermission('view', 'ai-employees');
 
   const activeCount = mockEmployees.filter((e) => e.status === 'active').length;
 
@@ -124,12 +126,17 @@ export function AutomateIndex() {
               ].map((action) => (
                 <button
                   key={action.label}
-                  onClick={() => navigate(action.href)}
-                  className="flex items-center gap-3 p-4 rounded-lg border border-[var(--nexus-card-border)] bg-[var(--nexus-bg-secondary)] hover:bg-[var(--nexus-card-bg-hover)] transition-colors group"
+                  onClick={() => canViewAI && navigate(action.href)}
+                  disabled={!canViewAI}
+                  className={`flex items-center gap-3 p-4 rounded-lg border border-[var(--nexus-card-border)] transition-colors group ${
+                    canViewAI
+                      ? 'bg-[var(--nexus-bg-secondary)] hover:bg-[var(--nexus-card-bg-hover)]'
+                      : 'bg-[var(--nexus-bg-secondary)] opacity-50 cursor-not-allowed'
+                  }`}
                 >
                   <action.icon className="w-5 h-5 text-[var(--nexus-accent-primary)]" />
                   <span className="text-sm font-medium text-[var(--nexus-text-primary)]">{action.label}</span>
-                  <ArrowRight className="w-4 h-4 ml-auto text-[var(--nexus-text-tertiary)] group-hover:text-[var(--nexus-accent-primary)] transition-colors" />
+                  <ArrowRight className={`w-4 h-4 ml-auto transition-colors ${canViewAI ? 'text-[var(--nexus-text-tertiary)] group-hover:text-[var(--nexus-accent-primary)]' : 'text-[var(--nexus-text-tertiary)]'}`} />
                 </button>
               ))}
             </div>

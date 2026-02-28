@@ -6,6 +6,7 @@ import {
   ArrowRight, CheckCircle2, AlertCircle,
 } from 'lucide-react';
 import { PageHeader, DataCard } from '@/components/shared';
+import { usePermission } from '@/hooks/usePermission';
 
 // TODO: wire to API — derive from actual profile data
 const profileFields = [
@@ -24,6 +25,7 @@ const completionPercent = Math.round((completedCount / profileFields.length) * 1
 
 export function DefineIndex() {
   const navigate = useNavigate();
+  const { allowed: canEditSettings } = usePermission('edit', 'settings');
 
   return (
     <div className="space-y-6">
@@ -37,7 +39,7 @@ export function DefineIndex() {
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}>
           <DataCard title="Profile Completion" icon={Building2}
             headerAction={
-              <button onClick={() => navigate('/command-center/define/profile')} className="text-xs font-medium text-[var(--nexus-accent-primary)] hover:underline flex items-center gap-1">
+              <button onClick={() => canEditSettings && navigate('/command-center/define/profile')} disabled={!canEditSettings} className={`text-xs font-medium flex items-center gap-1 ${canEditSettings ? 'text-[var(--nexus-accent-primary)] hover:underline' : 'text-[var(--nexus-text-tertiary)] cursor-not-allowed opacity-50'}`}>
                 Edit Profile <ArrowRight className="w-3 h-3" />
               </button>
             }
@@ -87,8 +89,13 @@ export function DefineIndex() {
                   </div>
                 </div>
                 <button
-                  onClick={() => navigate('/command-center/define/survey')}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium bg-[var(--nexus-button-bg)] text-white hover:bg-[var(--nexus-button-hover)] transition-colors"
+                  onClick={() => canEditSettings && navigate('/command-center/define/survey')}
+                  disabled={!canEditSettings}
+                  className={`w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                    canEditSettings
+                      ? 'bg-[var(--nexus-button-bg)] text-white hover:bg-[var(--nexus-button-hover)]'
+                      : 'bg-[var(--nexus-bg-secondary)] text-[var(--nexus-text-tertiary)] cursor-not-allowed'
+                  }`}
                 >
                   Take Survey
                   <ArrowRight className="w-4 h-4" />
@@ -101,7 +108,7 @@ export function DefineIndex() {
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
             <DataCard title="FAQ Coverage" icon={HelpCircle}
               headerAction={
-                <button onClick={() => navigate('/command-center/define/faq')} className="text-xs font-medium text-[var(--nexus-accent-primary)] hover:underline flex items-center gap-1">
+                <button onClick={() => canEditSettings && navigate('/command-center/define/faq')} disabled={!canEditSettings} className={`text-xs font-medium flex items-center gap-1 ${canEditSettings ? 'text-[var(--nexus-accent-primary)] hover:underline' : 'text-[var(--nexus-text-tertiary)] cursor-not-allowed opacity-50'}`}>
                   Edit FAQs <ArrowRight className="w-3 h-3" />
                 </button>
               }

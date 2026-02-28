@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
 import { BarChart3, Eye, MousePointerClick, DollarSign, ArrowRight, TrendingUp } from 'lucide-react';
 import { PageHeader, MetricCard, DataCard } from '@/components/shared';
+import { usePermission } from '@/hooks/usePermission';
 
 // TODO: wire to API — replace with real analytics data
 const trendData = [
@@ -14,6 +15,7 @@ const trendData = [
 
 export function MeasureIndex() {
   const navigate = useNavigate();
+  const { allowed: canViewAnalytics } = usePermission('view', 'analytics');
 
   return (
     <div className="space-y-6">
@@ -94,12 +96,17 @@ export function MeasureIndex() {
               ].map((action) => (
                 <button
                   key={action.label}
-                  onClick={() => navigate(action.href)}
-                  className="flex items-center gap-3 p-4 rounded-lg border border-[var(--nexus-card-border)] bg-[var(--nexus-bg-secondary)] hover:bg-[var(--nexus-card-bg-hover)] transition-colors group"
+                  onClick={() => canViewAnalytics && navigate(action.href)}
+                  disabled={!canViewAnalytics}
+                  className={`flex items-center gap-3 p-4 rounded-lg border border-[var(--nexus-card-border)] transition-colors group ${
+                    canViewAnalytics
+                      ? 'bg-[var(--nexus-bg-secondary)] hover:bg-[var(--nexus-card-bg-hover)]'
+                      : 'bg-[var(--nexus-bg-secondary)] opacity-50 cursor-not-allowed'
+                  }`}
                 >
                   <action.icon className="w-5 h-5 text-[var(--nexus-accent-primary)]" />
                   <span className="text-sm font-medium text-[var(--nexus-text-primary)]">{action.label}</span>
-                  <ArrowRight className="w-4 h-4 ml-auto text-[var(--nexus-text-tertiary)] group-hover:text-[var(--nexus-accent-primary)] transition-colors" />
+                  <ArrowRight className={`w-4 h-4 ml-auto transition-colors ${canViewAnalytics ? 'text-[var(--nexus-text-tertiary)] group-hover:text-[var(--nexus-accent-primary)]' : 'text-[var(--nexus-text-tertiary)]'}`} />
                 </button>
               ))}
             </div>

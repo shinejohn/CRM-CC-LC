@@ -1,6 +1,6 @@
 import { useAuthStore } from '@/stores/authStore';
 
-type Resource =
+export type Resource =
   | 'customers'
   | 'contacts'
   | 'deals'
@@ -15,9 +15,9 @@ type Resource =
   | 'settings'
   | 'integrations';
 
-type Action = 'view' | 'create' | 'edit' | 'delete' | 'manage';
+export type Action = 'view' | 'create' | 'edit' | 'delete' | 'manage';
 
-type Role = 'owner' | 'admin' | 'member' | 'viewer';
+export type Role = 'owner' | 'admin' | 'member' | 'viewer';
 
 interface PermissionResult {
   allowed: boolean;
@@ -26,7 +26,7 @@ interface PermissionResult {
 
 type PermissionSet = Set<Action>;
 
-const PERMISSION_MATRIX: Record<Resource, Record<Role, PermissionSet>> = {
+export const PERMISSION_MATRIX: Record<Resource, Record<Role, PermissionSet>> = {
   customers: {
     owner:   new Set(['view', 'create', 'edit', 'delete', 'manage']),
     admin:   new Set(['view', 'create', 'edit', 'delete', 'manage']),
@@ -106,6 +106,12 @@ const PERMISSION_MATRIX: Record<Resource, Record<Role, PermissionSet>> = {
     viewer:  new Set([]),
   },
 };
+
+/** Non-hook utility for batch permission checks (e.g. NavigationRail filtering) */
+export function checkPermission(role: Role, action: Action, resource: Resource): boolean {
+  const rolePerms = PERMISSION_MATRIX[resource]?.[role];
+  return rolePerms?.has(action) ?? false;
+}
 
 export function usePermission(action: Action, resource: Resource): PermissionResult {
   const user = useAuthStore((s) => s.user);

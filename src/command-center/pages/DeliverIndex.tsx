@@ -6,6 +6,7 @@ import {
   DollarSign, AlertCircle, CheckCircle2,
 } from 'lucide-react';
 import { PageHeader, MetricCard, DataCard, StatusBadge } from '@/components/shared';
+import { usePermission, type Resource } from '@/hooks/usePermission';
 
 // TODO: wire to API — replace with real services/billing data
 const mockServices = [
@@ -25,6 +26,8 @@ const platforms = [
 
 export function DeliverIndex() {
   const navigate = useNavigate();
+  const { allowed: canViewBilling } = usePermission('view', 'billing');
+  const { allowed: canManageServices } = usePermission('manage', 'services');
 
   return (
     <div className="space-y-6">
@@ -103,18 +106,23 @@ export function DeliverIndex() {
           <DataCard title="Quick Actions">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {[
-                { label: 'View Invoices', href: '/command-center/deliver/billing', icon: CreditCard },
-                { label: 'Check Platforms', href: '/command-center/deliver/platforms', icon: Globe },
-                { label: 'Manage Services', href: '/command-center/deliver', icon: Briefcase },
+                { label: 'View Invoices', href: '/command-center/deliver/billing', icon: CreditCard, allowed: canViewBilling },
+                { label: 'Check Platforms', href: '/command-center/deliver/platforms', icon: Globe, allowed: true },
+                { label: 'Manage Services', href: '/command-center/deliver', icon: Briefcase, allowed: canManageServices },
               ].map((action) => (
                 <button
                   key={action.label}
-                  onClick={() => navigate(action.href)}
-                  className="flex items-center gap-3 p-4 rounded-lg border border-[var(--nexus-card-border)] bg-[var(--nexus-bg-secondary)] hover:bg-[var(--nexus-card-bg-hover)] transition-colors group"
+                  onClick={() => action.allowed && navigate(action.href)}
+                  disabled={!action.allowed}
+                  className={`flex items-center gap-3 p-4 rounded-lg border border-[var(--nexus-card-border)] transition-colors group ${
+                    action.allowed
+                      ? 'bg-[var(--nexus-bg-secondary)] hover:bg-[var(--nexus-card-bg-hover)]'
+                      : 'bg-[var(--nexus-bg-secondary)] opacity-50 cursor-not-allowed'
+                  }`}
                 >
                   <action.icon className="w-5 h-5 text-[var(--nexus-accent-primary)]" />
                   <span className="text-sm font-medium text-[var(--nexus-text-primary)]">{action.label}</span>
-                  <ArrowRight className="w-4 h-4 ml-auto text-[var(--nexus-text-tertiary)] group-hover:text-[var(--nexus-accent-primary)] transition-colors" />
+                  <ArrowRight className={`w-4 h-4 ml-auto transition-colors ${action.allowed ? 'text-[var(--nexus-text-tertiary)] group-hover:text-[var(--nexus-accent-primary)]' : 'text-[var(--nexus-text-tertiary)]'}`} />
                 </button>
               ))}
             </div>

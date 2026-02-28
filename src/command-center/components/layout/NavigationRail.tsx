@@ -12,11 +12,14 @@ import {
   Cpu, Workflow, Cog,
 } from 'lucide-react';
 import { useBusinessMode } from '@/hooks/useBusinessMode';
+import { useAuthStore } from '@/stores/authStore';
+import { checkPermission, type Resource, type Role } from '@/hooks/usePermission';
 
 interface NavChild {
   label: string | (() => string);
   href: string;
   icon: React.ElementType;
+  resource?: Resource;
 }
 
 interface VerbSection {
@@ -37,9 +40,9 @@ const useNavSections = (): VerbSection[] => {
       href: '/command-center/define',
       icon: Building2,
       children: [
-        { label: 'Business Profile', href: '/command-center/define/profile', icon: UserCircle },
-        { label: 'Survey', href: '/command-center/define/survey', icon: ClipboardList },
-        { label: 'FAQ', href: '/command-center/define/faq', icon: HelpCircle },
+        { label: 'Business Profile', href: '/command-center/define/profile', icon: UserCircle, resource: 'settings' },
+        { label: 'Survey', href: '/command-center/define/survey', icon: ClipboardList, resource: 'settings' },
+        { label: 'FAQ', href: '/command-center/define/faq', icon: HelpCircle, resource: 'settings' },
       ],
     },
     {
@@ -48,10 +51,10 @@ const useNavSections = (): VerbSection[] => {
       href: '/command-center/attract',
       icon: Megaphone,
       children: [
-        { label: 'Diagnostic', href: '/command-center/attract/diagnostic', icon: Stethoscope },
-        { label: 'Campaigns', href: '/command-center/attract/campaigns', icon: Layers },
-        { label: 'Articles', href: '/command-center/attract/articles', icon: FileText },
-        { label: 'Events', href: '/command-center/attract/events', icon: Calendar },
+        { label: 'Diagnostic', href: '/command-center/attract/diagnostic', icon: Stethoscope, resource: 'campaigns' },
+        { label: 'Campaigns', href: '/command-center/attract/campaigns', icon: Layers, resource: 'campaigns' },
+        { label: 'Articles', href: '/command-center/attract/articles', icon: FileText, resource: 'content' },
+        { label: 'Events', href: '/command-center/attract/events', icon: Calendar, resource: 'content' },
       ],
     },
     {
@@ -60,10 +63,10 @@ const useNavSections = (): VerbSection[] => {
       href: '/command-center/sell',
       icon: TrendingUp,
       children: [
-        { label: () => t('pipeline'), href: '/command-center/sell/pipeline', icon: Kanban },
-        { label: () => t('proposals'), href: '/command-center/sell/proposals', icon: FileCheck },
-        { label: () => t('customers'), href: '/command-center/sell/customers', icon: Users },
-        { label: () => t('activities'), href: '/command-center/sell/activities', icon: Activity },
+        { label: () => t('pipeline'), href: '/command-center/sell/pipeline', icon: Kanban, resource: 'deals' },
+        { label: () => t('proposals'), href: '/command-center/sell/proposals', icon: FileCheck, resource: 'deals' },
+        { label: () => t('customers'), href: '/command-center/sell/customers', icon: Users, resource: 'customers' },
+        { label: () => t('activities'), href: '/command-center/sell/activities', icon: Activity, resource: 'customers' },
       ],
     },
     {
@@ -72,10 +75,10 @@ const useNavSections = (): VerbSection[] => {
       href: '/command-center/deliver',
       icon: Package,
       children: [
-        { label: 'Services', href: '/command-center/deliver', icon: Briefcase },
-        { label: 'Orders', href: '/command-center/deliver/orders', icon: ShoppingCart },
-        { label: 'Invoices', href: '/command-center/deliver/billing', icon: CreditCard },
-        { label: 'Platforms', href: '/command-center/deliver/platforms', icon: Gauge },
+        { label: 'Services', href: '/command-center/deliver', icon: Briefcase, resource: 'services' },
+        { label: 'Orders', href: '/command-center/deliver/orders', icon: ShoppingCart, resource: 'services' },
+        { label: 'Invoices', href: '/command-center/deliver/billing', icon: CreditCard, resource: 'billing' },
+        { label: 'Platforms', href: '/command-center/deliver/platforms', icon: Gauge, resource: 'services' },
       ],
     },
     {
@@ -84,9 +87,9 @@ const useNavSections = (): VerbSection[] => {
       href: '/command-center/measure',
       icon: BarChart3,
       children: [
-        { label: 'Performance', href: '/command-center/measure', icon: BarChart3 },
-        { label: 'Reports', href: '/command-center/measure/reports', icon: FileText },
-        { label: 'Analytics', href: '/command-center/measure/analytics', icon: Activity },
+        { label: 'Performance', href: '/command-center/measure', icon: BarChart3, resource: 'analytics' },
+        { label: 'Reports', href: '/command-center/measure/reports', icon: FileText, resource: 'analytics' },
+        { label: 'Analytics', href: '/command-center/measure/analytics', icon: Activity, resource: 'analytics' },
       ],
     },
     {
@@ -95,9 +98,9 @@ const useNavSections = (): VerbSection[] => {
       href: '/command-center/automate',
       icon: Bot,
       children: [
-        { label: 'AI Employees', href: '/command-center/automate', icon: Cpu },
-        { label: 'Workflows', href: '/command-center/automate/workflows', icon: Workflow },
-        { label: 'Processes', href: '/command-center/automate/processes', icon: Cog },
+        { label: 'AI Employees', href: '/command-center/automate', icon: Cpu, resource: 'ai-employees' },
+        { label: 'Workflows', href: '/command-center/automate/workflows', icon: Workflow, resource: 'ai-employees' },
+        { label: 'Processes', href: '/command-center/automate/processes', icon: Cog, resource: 'ai-employees' },
       ],
     },
   ];
@@ -123,6 +126,7 @@ export function NavigationRail({ className }: { className?: string }) {
   });
 
   const sections = useNavSections();
+  const userRole = (useAuthStore((s) => s.user?.role) ?? 'viewer') as Role;
   const width = collapsed ? 64 : 256;
 
   const toggleVerb = (verb: string) => {
@@ -176,6 +180,13 @@ export function NavigationRail({ className }: { className?: string }) {
           const expanded = expandedVerbs.has(section.verb);
           const verbActive = isVerbActive(section);
 
+          // Filter children by permission — hide items the user cannot view
+          const visibleChildren = section.children.filter(
+            (child) => !child.resource || checkPermission(userRole, 'view', child.resource)
+          );
+          // Hide entire verb section if no children are accessible
+          if (visibleChildren.length === 0) return null;
+
           return (
             <div key={section.verb} className="mb-1">
               {/* Verb Header */}
@@ -217,7 +228,7 @@ export function NavigationRail({ className }: { className?: string }) {
                     transition={{ duration: 0.25, ease: 'easeInOut' }}
                     className="overflow-hidden"
                   >
-                    {section.children.map((child) => {
+                    {visibleChildren.map((child) => {
                       const active = isPathActive(child.href);
                       const childLabel = getChildLabel(child.label);
 

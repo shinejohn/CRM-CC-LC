@@ -16,7 +16,6 @@ interface SidebarProps {
   collapsed: boolean;
   onToggle: () => void;
   activeItem?: string;
-  onNavigate?: (path: string) => void;
 }
 
 const navItems: NavItem[] = [
@@ -36,23 +35,15 @@ const navItems: NavItem[] = [
   { id: 'ops', label: 'Operations', icon: Shield, path: '/ops', adminOnly: true },
 ];
 
-export function Sidebar({ collapsed, onToggle, activeItem = 'dashboard', onNavigate }: SidebarProps) {
+export function Sidebar({ collapsed, onToggle, activeItem = 'dashboard' }: SidebarProps) {
   const navigate = useNavigate();
   const { unreadCount } = useNotificationBadge();
   const featureFlags = useFeatureFlags();
   const { isAdmin } = useCurrentUser();
 
-  const handleNavigate = (path: string) => {
-    if (onNavigate) {
-      onNavigate(path);
-    } else {
-      navigate(path);
-    }
-  };
-
   return (
     <motion.aside
-      className="fixed left-0 top-16 bottom-0 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 z-30 flex flex-col"
+      className="fixed left-0 top-16 bottom-0 bg-[var(--nexus-nav-bg)] border-r border-[var(--nexus-nav-border)] z-30 flex flex-col"
       animate={{ width: collapsed ? 64 : 256 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
     >
@@ -77,14 +68,14 @@ export function Sidebar({ collapsed, onToggle, activeItem = 'dashboard', onNavig
             return (
               <li key={item.id}>
                 <button
-                  onClick={() => !showComingSoon && handleNavigate(item.path)}
+                  onClick={() => !showComingSoon && navigate(item.path)}
                   disabled={showComingSoon}
                   className={`
                     w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors
                     ${showComingSoon ? 'opacity-60 cursor-not-allowed' : ''}
                     ${isActive
-                      ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400'
-                      : 'text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-700'
+                      ? 'bg-[var(--nexus-nav-active)] text-[var(--nexus-accent-primary)]'
+                      : 'text-[var(--nexus-text-secondary)] hover:bg-[var(--nexus-bg-secondary)]'
                     }
                   `}
                   aria-label={item.label}
@@ -116,10 +107,10 @@ export function Sidebar({ collapsed, onToggle, activeItem = 'dashboard', onNavig
       </nav>
 
       {/* Settings & Collapse Toggle */}
-      <div className="p-2 border-t border-gray-200 dark:border-slate-700">
+      <div className="p-2 border-t border-[var(--nexus-nav-border)]">
         <button
-          onClick={() => handleNavigate('/command-center/settings')}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+          onClick={() => navigate('/command-center/settings')}
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[var(--nexus-text-secondary)] hover:bg-[var(--nexus-bg-secondary)] transition-colors"
           aria-label="Settings"
         >
           <Settings className="w-5 h-5 flex-shrink-0" />
@@ -128,7 +119,7 @@ export function Sidebar({ collapsed, onToggle, activeItem = 'dashboard', onNavig
 
         <button
           onClick={onToggle}
-          className="w-full flex items-center justify-center gap-2 px-3 py-2 mt-2 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+          className="w-full flex items-center justify-center gap-2 px-3 py-2 mt-2 rounded-lg text-[var(--nexus-text-tertiary)] hover:text-[var(--nexus-text-secondary)] hover:bg-[var(--nexus-bg-secondary)] transition-colors"
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
           {collapsed ? (
@@ -144,4 +135,3 @@ export function Sidebar({ collapsed, onToggle, activeItem = 'dashboard', onNavig
     </motion.aside>
   );
 }
-
