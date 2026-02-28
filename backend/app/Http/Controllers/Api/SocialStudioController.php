@@ -12,6 +12,7 @@ use App\Models\SocialStudio\StudioContent;
 use App\Models\SocialStudio\StudioConnectedAccount;
 use App\Services\StripeService;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class SocialStudioController extends Controller
 {
@@ -156,43 +157,53 @@ class SocialStudioController extends Controller
             return response()->json(['message' => 'Insufficient credits'], 402);
         }
 
-        // Deduct credits
-        $credits->balance -= $totalCost;
-        $credits->lifetime_consumed += $totalCost;
-        $credits->save();
+        try {
+            DB::beginTransaction();
 
-        // Generate content mock response
-        $generatedOutputs = [];
-        foreach ($validated['platforms'] as $platform) {
-            $generatedOutputs[$platform] = [
-                'copy' => "Exciting update for our followers on {$platform}! " . $validated['source_brief'],
-                'hashtags' => ['#fibo', '#socialstudio', "#{$platform}"],
-            ];
+            // Deduct credits
+            $credits->balance -= $totalCost;
+            $credits->lifetime_consumed += $totalCost;
+            $credits->save();
+
+            // Generate content mock response
+            $generatedOutputs = [];
+            foreach ($validated['platforms'] as $platform) {
+                $generatedOutputs[$platform] = [
+                    'copy' => "Exciting update for our followers on {$platform}! " . $validated['source_brief'],
+                    'hashtags' => ['#fibo', '#socialstudio', "#{$platform}"],
+                ];
+            }
+
+            $contentRecord = StudioContent::create([
+                'smb_id' => $validated['smb_id'],
+                'content_type' => 'post_copy',
+                'source_brief' => $validated['source_brief'],
+                'generated_output' => $generatedOutputs,
+                'credits_consumed' => $totalCost,
+                'status' => 'draft',
+            ]);
+
+            StudioCreditTransaction::create([
+                'smb_id' => $validated['smb_id'],
+                'type' => 'consume',
+                'amount' => -$totalCost,
+                'balance_after' => $credits->balance,
+                'action_type' => 'post_copy_generation',
+                'content_id' => $contentRecord->id,
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'message' => 'Content generated',
+                'content' => $contentRecord,
+                'balance' => $credits->balance
+            ], 201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Social Studio Generate Post Failed: ' . $e->getMessage());
+            return response()->json(['message' => 'Failed to generate post copy'], 500);
         }
-
-        $contentRecord = StudioContent::create([
-            'smb_id' => $validated['smb_id'],
-            'content_type' => 'post_copy',
-            'source_brief' => $validated['source_brief'],
-            'generated_output' => $generatedOutputs,
-            'credits_consumed' => $totalCost,
-            'status' => 'draft',
-        ]);
-
-        StudioCreditTransaction::create([
-            'smb_id' => $validated['smb_id'],
-            'type' => 'consume',
-            'amount' => -$totalCost,
-            'balance_after' => $credits->balance,
-            'action_type' => 'post_copy_generation',
-            'content_id' => $contentRecord->id,
-        ]);
-
-        return response()->json([
-            'message' => 'Content generated',
-            'content' => $contentRecord,
-            'balance' => $credits->balance
-        ], 201);
     }
 
     /**

@@ -1,64 +1,33 @@
-/**
- * Axios API client with Sanctum auth, CSRF, and error handling
- */
+import axios from "axios";
+import { useAuthStore } from "@/stores/authStore";
 
-import axios, { type AxiosError } from 'axios';
-import { env } from '../config/env';
-import type { ApiError } from '../types/common';
+const API_BASE = import.meta.env.VITE_API_URL || "https://api.fibonacco.com/v1";
 
-function normalizeError(error: AxiosError): ApiError {
-  const response = error.response;
-  if (response?.data && typeof response.data === 'object') {
-    const data = response.data as { message?: string; errors?: Record<string, string[]> };
-    return {
-      message: data.message || error.message || 'Request failed',
-      errors: data.errors,
-      status: response.status,
-    };
-  }
-  return {
-    message: error.message || 'Network request failed',
-    status: response?.status,
-  };
-}
-
-const api = axios.create({
-  baseURL: env.apiUrl,
-  timeout: env.apiTimeout,
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json',
-  },
-  withCredentials: true,
+export const apiClient = axios.create({
+  baseURL: API_BASE,
+  timeout: 30000,
+  headers: { "Content-Type": "application/json" },
 });
 
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('auth_token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  const tenantId = localStorage.getItem('tenant_id');
-  if (tenantId) {
-    config.headers['X-Tenant-ID'] = tenantId;
-  }
+// Request interceptor — injects auth token
+apiClient.interceptors.request.use((config) => {
+  const token = useAuthStore.getState().token;
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
-api.interceptors.response.use(
+// Response interceptor — handles 401 redirect, error normalization
+apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('auth_token');
-      window.location.href = '/login';
+      useAuthStore.getState().logout();
+      window.location.href = "/login";
     }
-    return Promise.reject(normalizeError(error));
+    return Promise.reject({
+      message: error.response?.data?.message || "An error occurred",
+      status: error.response?.status || 500,
+      errors: error.response?.data?.errors || {},
+    });
   }
 );
-
-/** Fetch Sanctum CSRF cookie before login (required for Laravel Sanctum) */
-export const getCsrfCookie = () =>
-  axios.get(`${env.apiBaseUrl}/sanctum/csrf-cookie`, {
-    withCredentials: true,
-  });
-
-export default api;

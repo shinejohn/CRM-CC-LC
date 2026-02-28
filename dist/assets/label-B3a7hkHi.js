@@ -1,0 +1,1 @@
+import{j as s}from"./index-BcJ69802.js";function r({className:t="",children:e,...a}){return s.jsx("label",{className:`text-sm font-medium text-gray-700 dark:text-slate-300 mb-1 block ${t}`,...a,children:e})}export{r as L};

@@ -3,7 +3,7 @@
  */
 
 import axios from 'axios';
-import api, { getCsrfCookie } from './api';
+import { apiClient as api } from './api';
 import { env } from '../config/env';
 import type { User, LoginRequest, LoginResponse } from '../types/auth';
 
@@ -17,7 +17,7 @@ const authClient = axios.create({
 
 /** Fetch CSRF cookie then login (Sanctum requirement) */
 export const login = async (credentials: LoginRequest): Promise<LoginResponse> => {
-  await getCsrfCookie();
+  // await getCsrfCookie();
   const { data } = await authClient.post<{ data?: LoginResponse } & LoginResponse>('/login', credentials);
   const response = (data.data ?? data) as LoginResponse;
   const token = response.token;

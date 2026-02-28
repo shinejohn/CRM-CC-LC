@@ -1,0 +1,1443 @@
+magic/components/AccountTeamPanel.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ActiveServiceCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ActiveServicesGrid.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ActivityFeed.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ActivityFeed.tsx(19,10): error TS6133: 'formatTimeAgo' is declared but its value is never read.
+magic/components/AddAIParticipantModal.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/AddAIParticipantModal.tsx(1,27): error TS6133: 'Component' is declared but its value is never read.
+magic/components/AddAIParticipantModal.tsx(3,73): error TS6133: 'Zap' is declared but its value is never read.
+magic/components/AddAIParticipantModal.tsx(3,78): error TS6133: 'Brain' is declared but its value is never read.
+magic/components/AddAIParticipantModal.tsx(3,111): error TS6133: 'DollarSign' is declared but its value is never read.
+magic/components/AddAIParticipantModal.tsx(3,130): error TS6133: 'Shield' is declared but its value is never read.
+magic/components/AdvisoryRecommendation.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/AdvisoryRecommendation.tsx(2,18): error TS6133: 'AnimatePresence' is declared but its value is never read.
+magic/components/AdvisoryRecommendation.tsx(3,85): error TS6133: 'TrendingUp' is declared but its value is never read.
+magic/components/AIAssistantWidget.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/AIAssistantWidget.tsx(6,10): error TS6133: 'isMinimized' is declared but its value is never read.
+magic/components/AIAssistantWidget.tsx(6,23): error TS6133: 'setIsMinimized' is declared but its value is never read.
+magic/components/AIEmployeePerformanceTable.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/AIHandoffDecisionPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/AIHandoffDecisionPanel.tsx(3,10): error TS6133: 'Users' is declared but its value is never read.
+magic/components/AIHandoffDecisionPanel.tsx(3,34): error TS6133: 'ArrowRight' is declared but its value is never read.
+magic/components/AIHandoffDecisionPanel.tsx(3,108): error TS6133: 'AlertCircle' is declared but its value is never read.
+magic/components/AIInsightsPanel.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/AIModeMenu.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/AIModeMenu.tsx(6,9): error TS2304: Cannot find name 'ReactNode'.
+magic/components/AIPresentationPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/AIRecommendationsPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/AIServiceAdvisor.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/AISessionLayout.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/AISessionLayout.tsx(11,13): error TS2304: Cannot find name 'ReactNode'.
+magic/components/AIWorkflowPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/AIWorkflowPanel.tsx(1,38): error TS6133: 'Component' is declared but its value is never read.
+magic/components/AIWorkflowPanel.tsx(211,9): error TS6133: 'getStatusIcon' is declared but its value is never read.
+magic/components/AIWorkflowPanel.tsx(225,9): error TS6133: 'getNodeClass' is declared but its value is never read.
+magic/components/AIWorkflowPanel.tsx(564,9): error TS2304: Cannot find name 'ElementType'.
+magic/components/AIWorkflowPanel.tsx(570,12): error TS2304: Cannot find name 'ReactNode'.
+magic/components/AppShell.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/AppShell.tsx(8,13): error TS2304: Cannot find name 'ReactNode'.
+magic/components/BusinessContactCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/BusinessHealthScore.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/BusinessInfoSection.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/BusinessProfileForm.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/BusinessProfileForm.tsx(1,38): error TS6133: 'Component' is declared but its value is never read.
+magic/components/BusinessProfileForm.tsx(2,18): error TS6133: 'AnimatePresence' is declared but its value is never read.
+magic/components/BusinessProfileForm.tsx(99,9): error TS6133: 'getStatusIcon' is declared but its value is never read.
+magic/components/BusinessProfileForm.tsx(109,9): error TS6133: 'getConfidenceBadge' is declared but its value is never read.
+magic/components/BusinessProfileForm.tsx(419,13): error TS2304: Cannot find name 'ReactNode'.
+magic/components/CalendarView.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/ChatPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/ColorPicker.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/CommandCenterHeader.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/CommunicationPrefsSection.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/ConsultingChat.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/CreateInvoiceModal.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/CreateInvoiceModal.tsx(3,25): error TS6133: 'Calendar' is declared but its value is never read.
+magic/components/CreateInvoiceModal.tsx(19,17): error TS6133: 'setItems' is declared but its value is never read.
+magic/components/DarkModeToggle.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/DataAnalyticsPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/DataAnalyticsPanel.tsx(2,39): error TS6133: 'LineChartIcon' is declared but its value is never read.
+magic/components/DataAnalyticsPanel.tsx(2,81): error TS6133: 'ShoppingCartIcon' is declared but its value is never read.
+magic/components/DataAnalyticsPanel.tsx(2,115): error TS6133: 'CalendarIcon' is declared but its value is never read.
+magic/components/DataAnalyticsPanel.tsx(2,198): error TS6133: 'PlusIcon' is declared but its value is never read.
+magic/components/DataAnalyticsPanel.tsx(2,208): error TS6133: 'MinusIcon' is declared but its value is never read.
+magic/components/DataAnalyticsPanel.tsx(2,219): error TS6133: 'AlertCircleIcon' is declared but its value is never read.
+magic/components/DataReportPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/DataReportPanel.tsx(7,11): error TS6196: 'Meeting' is declared but never used.
+magic/components/DataReportPanel.tsx(15,11): error TS6196: 'Insight' is declared but never used.
+magic/components/DataReportPanel.tsx(248,117): error TS2367: This comparison appears to be unintentional because the types '"neutral"' and '"down"' have no overlap.
+magic/components/DealCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/DeleteConfirmationModal.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/DeleteConfirmationModal.tsx(4,60): error TS6133: 'DialogDescription' is declared but its value is never read.
+magic/components/EmptyState.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ErrorState.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ExpandableChat.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/Facilitator.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/Facilitator.tsx(3,10): error TS6133: 'UserIcon' is declared but its value is never read.
+magic/components/FAQEditModal.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/FAQsSection.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/GlobalHeader.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/GoalProgressCards.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/Header.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/ImplementationTracker.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/InvoiceCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/JobCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/LoadingState.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/LogVisitModal.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/LogVisitModal.tsx(3,70): error TS6133: 'AlertCircle' is declared but its value is never read.
+magic/components/MarkDealLostModal.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/MarkDealWonModal.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/MarketingPlanForm.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/MarketingPlanForm.tsx(2,38): error TS6133: 'AlertCircleIcon' is declared but its value is never read.
+magic/components/MarketingPlanForm.tsx(2,81): error TS6133: 'TrendingUpIcon' is declared but its value is never read.
+magic/components/MarketingPlanForm.tsx(2,97): error TS6133: 'DollarSignIcon' is declared but its value is never read.
+magic/components/MarketingPlanForm.tsx(2,113): error TS6133: 'CalendarIcon' is declared but its value is never read.
+magic/components/MetricCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/MetricCard.tsx(2,37): error TS6133: 'BoxIcon' is declared but its value is never read.
+magic/components/MetricCard.tsx(15,9): error TS2749: 'BoxIcon' refers to a value, but is being used as a type here. Did you mean 'typeof BoxIcon'?
+magic/components/MetricCard.tsx(37,9): error TS2749: 'BoxIcon' refers to a value, but is being used as a type here. Did you mean 'typeof BoxIcon'?
+magic/components/ModeSwitcher.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/NavigationMenu.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/NavigationMenu.tsx(3,203): error TS6133: 'ClockIcon' is declared but its value is never read.
+magic/components/NavigationMenu.tsx(7,9): error TS2304: Cannot find name 'ReactNode'.
+magic/components/NotesPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/OrchestratorChatMessage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/OrchestratorChatMessage.tsx(6,9): error TS2304: Cannot find name 'ElementType'.
+magic/components/OrchestratorDecisionPrompt.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/OrchestratorDecisionPrompt.tsx(3,35): error TS6133: 'Send' is declared but its value is never read.
+magic/components/OrchestratorDecisionPrompt.tsx(3,87): error TS6133: 'Users' is declared but its value is never read.
+magic/components/Participants.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/Participants.tsx(1,27): error TS6133: 'Component' is declared but its value is never read.
+magic/components/Participants.tsx(3,44): error TS6133: 'Mic' is declared but its value is never read.
+magic/components/Participants.tsx(3,57): error TS6133: 'Video' is declared but its value is never read.
+magic/components/PresentationPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/Presenter.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ProcessesSection.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/ProposalCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ProposalCard.tsx(3,1): error TS6133: 'FileText' is declared but its value is never read.
+magic/components/ProposalCard.tsx(16,11): error TS6133: 'id' is declared but its value is never read.
+magic/components/ProposalForm.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/QuickActionsBar.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/QuickActionsBar.tsx(3,71): error TS6133: 'BoxIcon' is declared but its value is never read.
+magic/components/QuickActionsBar.tsx(5,9): error TS2749: 'BoxIcon' refers to a value, but is being used as a type here. Did you mean 'typeof BoxIcon'?
+magic/components/QuickActionsBar.tsx(30,29): error TS6133: 'index' is declared but its value is never read.
+magic/components/QuickCreateModal.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/RecordButton.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/RecordButton.tsx(24,21): error TS2454: Variable 'interval' is used before being assigned.
+magic/components/RecordPaymentModal.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/RevenueTrendChart.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/RevenueTrendChart.tsx(23,9): error TS6133: 'goal' is declared but its value is never read.
+magic/components/ScheduleActivityModal.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/ScreensShowcaseSection.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/ScreensShowcaseSection.tsx(1,25): error TS6133: 'Component' is declared but its value is never read.
+magic/components/ScreensShowcaseSection.tsx(68,3): error TS6133: 'index' is declared but its value is never read.
+magic/components/SendPaymentReminderModal.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/SendPaymentReminderModal.tsx(3,19): error TS6133: 'AlertCircle' is declared but its value is never read.
+magic/components/ServiceCatalog.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceCatalog.tsx(128,13): error TS2353: Object literal may only specify known properties, and 'shadow' does not exist in type 'string[] | TargetAndTransition'.
+magic/components/ServiceDetailModal.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceManagement/AdServiceView.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceManagement/AdServiceView.tsx(8,3): error TS6133: 'service' is declared but its value is never read.
+magic/components/ServiceManagement/AdServiceView.tsx(49,33): error TS6133: 'idx' is declared but its value is never read.
+magic/components/ServiceManagement/ArticleServiceView.tsx(1,1): error TS6192: All imports in import declaration are unused.
+magic/components/ServiceManagement/ArticleServiceView.tsx(2,42): error TS6133: 'CheckCircle2' is declared but its value is never read.
+magic/components/ServiceManagement/ArticleServiceView.tsx(2,56): error TS6133: 'AlertCircle' is declared but its value is never read.
+magic/components/ServiceManagement/BookingSystemView.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceManagement/BookingSystemView.tsx(2,43): error TS6133: 'CheckCircle' is declared but its value is never read.
+magic/components/ServiceManagement/BookingSystemView.tsx(6,35): error TS6133: 'service' is declared but its value is never read.
+magic/components/ServiceManagement/ClassifiedServiceView.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceManagement/ClassifiedServiceView.tsx(2,30): error TS6133: 'MousePointer' is declared but its value is never read.
+magic/components/ServiceManagement/ClassifiedServiceView.tsx(6,39): error TS6133: 'service' is declared but its value is never read.
+magic/components/ServiceManagement/CouponServiceView.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceManagement/CouponServiceView.tsx(2,15): error TS6133: 'RefreshCw' is declared but its value is never read.
+magic/components/ServiceManagement/CouponServiceView.tsx(2,33): error TS6133: 'BarChart3' is declared but its value is never read.
+magic/components/ServiceManagement/CouponServiceView.tsx(6,35): error TS6133: 'service' is declared but its value is never read.
+magic/components/ServiceManagement/EmailAdServiceView.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceManagement/EmailAdServiceView.tsx(6,36): error TS6133: 'service' is declared but its value is never read.
+magic/components/ServiceManagement/EnhancedServiceDetailModal.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceManagement/EnhancedServiceDetailModal.tsx(28,68): error TS2741: Property 'onAction' is missing in type '{ service: any; }' but required in type 'ArticleServiceViewProps'.
+magic/components/ServiceManagement/EnhancedServiceDetailModal.tsx(29,66): error TS2741: Property 'onAction' is missing in type '{ service: any; }' but required in type 'AdServiceViewProps'.
+magic/components/ServiceManagement/EventServiceView.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceManagement/EventServiceView.tsx(6,34): error TS6133: 'service' is declared but its value is never read.
+magic/components/ServiceManagement/PollServiceView.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceManagement/PollServiceView.tsx(2,21): error TS6133: 'PieChart' is declared but its value is never read.
+magic/components/ServiceManagement/PollServiceView.tsx(6,33): error TS6133: 'service' is declared but its value is never read.
+magic/components/ServiceManagement/ServiceActionModal.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceManagement/ServiceActionModal.tsx(20,20): error TS6133: 'setFormData' is declared but its value is never read.
+magic/components/ServiceManagement/ServiceDetailView.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceManagement/ServicesList.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceManagement/SocialPostServiceView.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceManagement/SocialPostServiceView.tsx(6,39): error TS6133: 'service' is declared but its value is never read.
+magic/components/ServiceMetricsCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceMetricsCard.tsx(26,3): error TS6133: 'id' is declared but its value is never read.
+magic/components/ServiceMetricsCard.tsx(29,3): error TS6133: 'type' is declared but its value is never read.
+magic/components/ServiceUpsellChatMessage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceUpsellChatMessage.tsx(3,22): error TS6133: 'DollarSign' is declared but its value is never read.
+magic/components/ServiceUpsellPrompt.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/ServiceUpsellPrompt.tsx(3,85): error TS6133: 'Zap' is declared but its value is never read.
+magic/components/SessionScheduler.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/components/Sidebar.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/Sidebar.tsx(2,103): error TS6133: 'ClipboardList' is declared but its value is never read.
+magic/components/Sidebar.tsx(2,207): error TS6133: 'Menu' is declared but its value is never read.
+magic/components/Sidebar.tsx(4,1): error TS6133: 'cn' is declared but its value is never read.
+magic/components/Sidebar.tsx(4,20): error TS2307: Cannot find module '../lib/utils' or its corresponding type declarations.
+magic/components/SurveysSection.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/SurveysSection.tsx(3,49): error TS6133: 'Plus' is declared but its value is never read.
+magic/components/TaskJugglerModal.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/TaskJugglerModal.tsx(3,38): error TS6133: 'AlertCircle' is declared but its value is never read.
+magic/components/TemplateLibrary.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/TemplateLibrary.tsx(1,27): error TS6133: 'Component' is declared but its value is never read.
+magic/components/TemplateLibrary.tsx(3,56): error TS6133: 'Clock' is declared but its value is never read.
+magic/components/TemplateLibrary.tsx(3,83): error TS6133: 'Filter' is declared but its value is never read.
+magic/components/TemplateLibrary.tsx(3,115): error TS6133: 'Archive' is declared but its value is never read.
+magic/components/TemplateLibrary.tsx(245,9): error TS2304: Cannot find name 'ElementType'.
+magic/components/ToastNotification.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/ToastNotification.tsx(3,39): error TS6133: 'X' is declared but its value is never read.
+magic/components/TranscriptDownloadButton.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/TranscriptDownloadButton.tsx(1,27): error TS6133: 'createElement' is declared but its value is never read.
+magic/components/TranscriptDownloadButton.tsx(2,10): error TS6133: 'DownloadIcon' is declared but its value is never read.
+magic/components/ui/dropdown-menu.tsx(2,1): error TS6133: 'ChevronRight' is declared but its value is never read.
+magic/components/ui/dropdown-menu.tsx(57,4): error TS6133: 'ref' is declared but its value is never read.
+magic/components/VideoCall.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/components/VideoCall.tsx(41,10): error TS6133: 'recordingData' is declared but its value is never read.
+magic/components/VoiceControls.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/contexts/BusinessModeContext.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/contexts/BusinessModeContext.tsx(57,13): error TS2304: Cannot find name 'ReactNode'.
+magic/contexts/ThemeContext.tsx(177,19): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+magic/pages/ActivitiesPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ActivitiesPage.tsx(3,51): error TS6133: 'Clock' is declared but its value is never read.
+magic/pages/ActivitiesPage.tsx(9,32): error TS6133: 'onNavigate' is declared but its value is never read.
+magic/pages/ActivitiesPage.tsx(13,5): error TS6133: 'mode' is declared but its value is never read.
+magic/pages/ActivityLogFullView.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/AddEditCustomerForm.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/AIConsultingPage.tsx(1,1): error TS6192: All imports in import declaration are unused.
+magic/pages/AIConsultingPage.tsx(58,18): error TS2740: Type '{}' is missing the following properties from type 'ProposalCardListProps': id, quoteNumber, company, amount, and 2 more.
+magic/pages/AIEmployeeConfigurationPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/AIEmployeeConfigurationPage.tsx(3,61): error TS6133: 'AlertTriangle' is declared but its value is never read.
+magic/pages/AIEmployeeDetailPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/AIInterfacePage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/AIInterfacePage.tsx(10,33): error TS6133: 'onNavigate' is declared but its value is never read.
+magic/pages/AIModeHub.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/AIModeHub.tsx(2,41): error TS6133: 'ClockIcon' is declared but its value is never read.
+magic/pages/AIModeHub.tsx(25,3): error TS6133: 'onNavigate' is declared but its value is never read.
+magic/pages/AIRecommendationsFullView.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/AIWorkflowPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/AlphaSiteComponentsPage.tsx(1,27): error TS6133: 'Component' is declared but its value is never read.
+magic/pages/AlphaSiteComponentsPage.tsx(3,21): error TS6133: 'Plus' is declared but its value is never read.
+magic/pages/AlphaSiteComponentsPage.tsx(3,127): error TS6133: 'Type' is declared but its value is never read.
+magic/pages/AlphaSiteComponentsPage.tsx(3,139): error TS6133: 'Phone' is declared but its value is never read.
+magic/pages/AlphaSiteComponentsPage.tsx(3,154): error TS6133: 'Star' is declared but its value is never read.
+magic/pages/AlphaSiteComponentsPage.tsx(3,216): error TS6133: 'Settings' is declared but its value is never read.
+magic/pages/AlphaSiteComponentsPage.tsx(3,226): error TS6133: 'Copy' is declared but its value is never read.
+magic/pages/AlphaSiteComponentsPage.tsx(3,232): error TS6133: 'ExternalLink' is declared but its value is never read.
+magic/pages/AutomationRuleBuilder.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/AutomationRuleBuilder.tsx(3,77): error TS6133: 'ArrowDown' is declared but its value is never read.
+magic/pages/B2BDashboard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/B2BDashboard.tsx(3,67): error TS6133: 'Clock' is declared but its value is never read.
+magic/pages/B2BDashboard.tsx(22,9): error TS6133: 'customers' is declared but its value is never read.
+magic/pages/BillingDashboard.tsx(1,1): error TS6192: All imports in import declaration are unused.
+magic/pages/BillingDashboard.tsx(3,44): error TS6133: 'AlertTriangle' is declared but its value is never read.
+magic/pages/BillingDashboard.tsx(3,59): error TS6133: 'CheckCircle2' is declared but its value is never read.
+magic/pages/BusinessConfiguratorPage.tsx(3,267): error TS6133: 'ArrowLeft' is declared but its value is never read.
+magic/pages/BusinessConfiguratorPage.tsx(3,337): error TS6133: 'MapPin' is declared but its value is never read.
+magic/pages/BusinessHealthScoreDetail.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/BusinessInfoEditPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/BusinessInfoEditPage.tsx(3,40): error TS6133: 'Clock' is declared but its value is never read.
+magic/pages/BusinessModeSettingsPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/BusinessProfilePage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/CampaignBuilderPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/CentralCommandDashboard.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/CentralCommandDashboard.tsx(3,127): error TS6133: 'FileText' is declared but its value is never read.
+magic/pages/ClientProposalPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/CollectionsDashboard.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ContactDetailPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ContactsListPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ContactsListPage.tsx(3,24): error TS6133: 'Filter' is declared but its value is never read.
+magic/pages/ContentCreationFlow.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ContentCreationFlow.tsx(1,27): error TS6133: 'Component' is declared but its value is never read.
+magic/pages/ContentCreationFlow.tsx(3,110): error TS6133: 'TrendingUp' is declared but its value is never read.
+magic/pages/ContentCreationFlow.tsx(12,3): error TS6133: 'onNavigate' is declared but its value is never read.
+magic/pages/ContentCreationFlow.tsx(17,10): error TS6133: 'creationMethod' is declared but its value is never read.
+magic/pages/ContentLibrary.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ContentLibrary.tsx(3,99): error TS6133: 'Calendar' is declared but its value is never read.
+magic/pages/ContentManagerDashboard.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ContentManagerDashboard.tsx(3,84): error TS6133: 'TrendingUp' is declared but its value is never read.
+magic/pages/ContentManagerDashboard.tsx(3,96): error TS6133: 'Clock' is declared but its value is never read.
+magic/pages/ContentManagerDashboard.tsx(3,103): error TS6133: 'ChevronRight' is declared but its value is never read.
+magic/pages/ContentManagerDashboard.tsx(3,128): error TS6133: 'BarChart3' is declared but its value is never read.
+magic/pages/ContentManagerDashboard.tsx(3,169): error TS6133: 'Edit' is declared but its value is never read.
+magic/pages/ContentManagerDashboard.tsx(3,175): error TS6133: 'Eye' is declared but its value is never read.
+magic/pages/ContentManagerDashboard.tsx(3,180): error TS6133: 'Copy' is declared but its value is never read.
+magic/pages/ContentManagerDashboard.tsx(22,41): error TS6133: 'onNavigate' is declared but its value is never read.
+magic/pages/ContentManagerDashboard.tsx(117,9): error TS6133: 'getTypeIcon' is declared but its value is never read.
+magic/pages/ContentManagerDashboard.tsx(131,9): error TS6133: 'getTypeLabel' is declared but its value is never read.
+magic/pages/ContentScheduling.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ContentScheduling.tsx(2,1): error TS6133: 'motion' is declared but its value is never read.
+magic/pages/ContentScheduling.tsx(3,50): error TS6133: 'Mail' is declared but its value is never read.
+magic/pages/ContentScheduling.tsx(3,56): error TS6133: 'Share2' is declared but its value is never read.
+magic/pages/ContentScheduling.tsx(3,64): error TS6133: 'TrendingUp' is declared but its value is never read.
+magic/pages/ContentScheduling.tsx(11,3): error TS6133: 'onNavigate' is declared but its value is never read.
+magic/pages/ContentScheduling.tsx(18,10): error TS6133: 'selectedPublications' is declared but its value is never read.
+magic/pages/ContentTypeSelection.tsx(1,17): error TS6133: 'useState' is declared but its value is never read.
+magic/pages/ContentTypeSelection.tsx(3,115): error TS6133: 'AlertCircle' is declared but its value is never read.
+magic/pages/ContentTypeSelection.tsx(3,135): error TS6133: 'ChevronRight' is declared but its value is never read.
+magic/pages/ConversationPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ConversationPage.tsx(1,46): error TS6133: 'Component' is declared but its value is never read.
+magic/pages/CourseDetailPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/CustomerDetailPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/CustomerDetailPage.tsx(3,42): error TS6133: 'MoreVertical' is declared but its value is never read.
+magic/pages/CustomerDetailPage.tsx(3,171): error TS6133: 'Award' is declared but its value is never read.
+magic/pages/CustomersListPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/DataReportCall.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/DealDetailPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/FAQManagementPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/FAQManagementPage.tsx(3,21): error TS6133: 'Plus' is declared but its value is never read.
+magic/pages/FAQManagementPage.tsx(3,42): error TS6133: 'Trash2' is declared but its value is never read.
+magic/pages/FAQManagementPage.tsx(3,60): error TS6133: 'Eye' is declared but its value is never read.
+magic/pages/FAQManagementPage.tsx(3,65): error TS6133: 'EyeOff' is declared but its value is never read.
+magic/pages/FAQManagementPage.tsx(3,73): error TS6133: 'Filter' is declared but its value is never read.
+magic/pages/FAQManagementPage.tsx(3,81): error TS6133: 'ChevronDown' is declared but its value is never read.
+magic/pages/FAQManagementPage.tsx(27,10): error TS6133: 'editingFAQ' is declared but its value is never read.
+magic/pages/FAQManagementPage.tsx(28,10): error TS6133: 'isCreating' is declared but its value is never read.
+magic/pages/FAQManagementPage.tsx(29,10): error TS6133: 'showAIAssistant' is declared but its value is never read.
+magic/pages/FAQManagementPage.tsx(29,27): error TS6133: 'setShowAIAssistant' is declared but its value is never read.
+magic/pages/FAQManagementPage.tsx(30,10): error TS6133: 'aiPrompt' is declared but its value is never read.
+magic/pages/FAQManagementPage.tsx(30,20): error TS6133: 'setAiPrompt' is declared but its value is never read.
+magic/pages/ImplementationProjectDetail.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ImplementationProjectDetail.tsx(3,75): error TS6133: 'Download' is declared but its value is never read.
+magic/pages/IntegrationsPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/InvoiceDetailPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/InvoicesListPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/JobBoardPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/JobBoardPage.tsx(3,69): error TS6133: 'TrendingUp' is declared but its value is never read.
+magic/pages/LearningCenterHub.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/LearningCenterHub.tsx(1,27): error TS6133: 'Component' is declared but its value is never read.
+magic/pages/LearningCenterHub.tsx(3,53): error TS6133: 'Sparkles' is declared but its value is never read.
+magic/pages/LearningCenterHub.tsx(3,63): error TS6133: 'Filter' is declared but its value is never read.
+magic/pages/LearningLessonPage.tsx(1,46): error TS6133: 'Component' is declared but its value is never read.
+magic/pages/LearningLessonPage.tsx(3,121): error TS6133: 'TrendingUp' is declared but its value is never read.
+magic/pages/LessonPlayerPage.tsx(1,1): error TS6192: All imports in import declaration are unused.
+magic/pages/LessonPlayerPage.tsx(3,1): error TS6133: 'CourseCatalog' is declared but its value is never read.
+magic/pages/LessonPlayerPage.tsx(3,31): error TS2307: Cannot find module '../components/CourseCatalog' or its corresponding type declarations.
+magic/pages/LoyaltyProgramPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/LoyaltyProgramPage.tsx(3,22): error TS6133: 'Award' is declared but its value is never read.
+magic/pages/LoyaltyProgramPage.tsx(3,47): error TS6133: 'Users' is declared but its value is never read.
+magic/pages/LoyaltyProgramPage.tsx(3,54): error TS6133: 'DollarSign' is declared but its value is never read.
+magic/pages/MarketingCampaignWizard.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/MarketingCampaignWizard.tsx(1,38): error TS6133: 'Component' is declared but its value is never read.
+magic/pages/MarketingCampaignWizard.tsx(903,23): error TS6133: 'setSidebarOpen' is declared but its value is never read.
+magic/pages/MarketingCampaignWizard.tsx(907,9): error TS6133: 'totalSteps' is declared but its value is never read.
+magic/pages/MarketingCampaignWizard.tsx(930,35): error TS7006: Parameter 'res' implicitly has an 'any' type.
+magic/pages/MarketingCampaignWizard.tsx(941,120): error TS7006: Parameter 'res' implicitly has an 'any' type.
+magic/pages/MarketingDiagnosticWizard.tsx(3,37): error TS6133: 'X' is declared but its value is never read.
+magic/pages/MarketingDiagnosticWizard.tsx(65,3): error TS6133: 'onComplete' is declared but its value is never read.
+magic/pages/MarketingDiagnosticWizard.tsx(66,3): error TS6133: 'onCancel' is declared but its value is never read.
+magic/pages/MarketingDiagnosticWizard.tsx(70,10): error TS6133: 'isAIExpanded' is declared but its value is never read.
+magic/pages/MarketingDiagnosticWizard.tsx(71,10): error TS6133: 'aiMessages' is declared but its value is never read.
+magic/pages/MarketingDiagnosticWizard.tsx(75,10): error TS6133: 'userInput' is declared but its value is never read.
+magic/pages/MarketingDiagnosticWizard.tsx(75,21): error TS6133: 'setUserInput' is declared but its value is never read.
+magic/pages/MarketingDiagnosticWizard.tsx(1052,31): error TS6198: All destructured elements are unused.
+magic/pages/MarketingReportPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/MyBusinessProfilePage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/MyBusinessProfilePage.tsx(70,10): error TS6133: 'isGenerating' is declared but its value is never read.
+magic/pages/MyBusinessProfilePage.tsx(97,38): error TS2881: This expression is never nullish.
+magic/pages/MyBusinessProfilePage.tsx(127,9): error TS6133: 'handleGenerateComponent' is declared but its value is never read.
+magic/pages/MyBusinessProfilePage.tsx(147,9): error TS6133: 'handleDeleteComponent' is declared but its value is never read.
+magic/pages/MyBusinessProfilePage.tsx(347,67): error TS7006: Parameter 't' implicitly has an 'any' type.
+magic/pages/MyBusinessProfilePage.tsx(347,70): error TS7006: Parameter 'i' implicitly has an 'any' type.
+magic/pages/MyBusinessProfilePage.tsx(357,65): error TS7006: Parameter 's' implicitly has an 'any' type.
+magic/pages/MyBusinessProfilePage.tsx(357,68): error TS7006: Parameter 'i' implicitly has an 'any' type.
+magic/pages/MyBusinessProfilePage.tsx(367,70): error TS7006: Parameter 'q' implicitly has an 'any' type.
+magic/pages/MyBusinessProfilePage.tsx(367,73): error TS7006: Parameter 'i' implicitly has an 'any' type.
+magic/pages/MyBusinessProfilePage.tsx(410,87): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+magic/pages/MyBusinessProfilePage.tsx(420,85): error TS7006: Parameter 'f' implicitly has an 'any' type.
+magic/pages/MyBusinessProfilePage.tsx(420,88): error TS7006: Parameter 'i' implicitly has an 'any' type.
+magic/pages/MyBusinessProfilePage.tsx(455,81): error TS7006: Parameter 'c' implicitly has an 'any' type.
+magic/pages/MyBusinessProfilePage.tsx(455,84): error TS7006: Parameter 'i' implicitly has an 'any' type.
+magic/pages/MyBusinessProfilePage.tsx(473,47): error TS7006: Parameter 'src' implicitly has an 'any' type.
+magic/pages/MyServicesPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/MyServicesPage.tsx(2,63): error TS6133: 'ArrowUpRight' is declared but its value is never read.
+magic/pages/MyServicesPage.tsx(2,77): error TS6133: 'Zap' is declared but its value is never read.
+magic/pages/MyServicesPage.tsx(2,82): error TS6133: 'AlertTriangle' is declared but its value is never read.
+magic/pages/MyServicesPage.tsx(2,97): error TS6133: 'CheckCircle2' is declared but its value is never read.
+magic/pages/MyServicesPage.tsx(612,32): error TS6133: 'onNavigate' is declared but its value is never read.
+magic/pages/MyServicesPage.tsx(848,124): error TS2322: Type 'string' is not assignable to type '"active" | "paused"'.
+magic/pages/OrderHistoryPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/OrderHistoryPage.tsx(3,39): error TS6133: 'Filter' is declared but its value is never read.
+magic/pages/OverviewDashboard.tsx(56,39): error TS6133: 'isError' is declared but its value is never read.
+magic/pages/OverviewDashboard.tsx(74,9): error TS6133: 'customerChange' is declared but its value is never read.
+magic/pages/OverviewDashboard.tsx(227,55): error TS2339: Property 'recent' does not exist on type '{ total_revenue?: number | undefined; recent_revenue?: number | undefined; paid?: number | undefined; total?: number | undefined; }'.
+magic/pages/OverviewDashboard.tsx(244,19): error TS2322: Type '{ revenue: number; }[]' is not assignable to type '{ date: string; revenue: number; }[]'.
+  Property 'date' is missing in type '{ revenue: number; }' but required in type '{ date: string; revenue: number; }'.
+magic/pages/PerformanceDashboard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/PlanComparisonPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/PlanUpgradeFlow.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/PlanUpgradeFlow.tsx(3,20): error TS6133: 'CreditCard' is declared but its value is never read.
+magic/pages/PlanUpgradeFlow.tsx(3,44): error TS6133: 'ArrowLeft' is declared but its value is never read.
+magic/pages/PlanUpgradeFlow.tsx(11,16): error TS6133: 'setStep' is declared but its value is never read.
+magic/pages/PresentationCall.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ProcessBuilderPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ProfilePage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ProfilePage.tsx(27,24): error TS6133: 'setIsConfigured' is declared but its value is never read.
+magic/pages/ProfilePage.tsx(62,23): error TS6133: 'setTeamMembers' is declared but its value is never read.
+magic/pages/ProposalDetailPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/QuotesListPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/RetailDashboard.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/RetailDashboard.tsx(3,33): error TS6133: 'TrendingUp' is declared but its value is never read.
+magic/pages/RetailDashboard.tsx(3,70): error TS6133: 'Gift' is declared but its value is never read.
+magic/pages/RevenueDetailReport.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/SchedulePage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ServiceConfigurationPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ServiceConfigurationPage.tsx(3,59): error TS6133: 'Trash2' is declared but its value is never read.
+magic/pages/ServiceManagementPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/ServiceManagementPage.tsx(6,53): error TS6133: 'Layout' is declared but its value is never read.
+magic/pages/ServiceManagementPage.tsx(87,11): error TS2322: Type '"edit"' is not assignable to type '"add"'.
+magic/pages/ServiceManagementPage.tsx(94,11): error TS2322: Type '"delete"' is not assignable to type '"add"'.
+magic/pages/ServiceManagementPage.tsx(111,13): error TS2322: Type '"edit"' is not assignable to type '"add"'.
+magic/pages/ServicesDashboard.tsx(1,1): error TS6192: All imports in import declaration are unused.
+magic/pages/StrategySessionDetail.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/StrategySessionDetail.tsx(3,38): error TS6133: 'MapPin' is declared but its value is never read.
+magic/pages/SubscriptionEnrollmentWizard.tsx(1,27): error TS6133: 'Children' is declared but its value is never read.
+magic/pages/SubscriptionEnrollmentWizard.tsx(3,209): error TS6133: 'Edit2' is declared but its value is never read.
+magic/pages/SubscriptionEnrollmentWizard.tsx(3,216): error TS6133: 'Upload' is declared but its value is never read.
+magic/pages/SubscriptionEnrollmentWizard.tsx(3,233): error TS6133: 'ImageIcon' is declared but its value is never read.
+magic/pages/SubscriptionEnrollmentWizard.tsx(286,10): error TS6133: 'viewingPackage' is declared but its value is never read.
+magic/pages/SubscriptionEnrollmentWizard.tsx(286,26): error TS6133: 'setViewingPackage' is declared but its value is never read.
+magic/pages/SurveyBuilderPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/SurveyBuilderPage.tsx(3,21): error TS6133: 'Plus' is declared but its value is never read.
+magic/pages/SurveyBuilderPage.tsx(17,3): error TS6133: 'surveyId' is declared but its value is never read.
+magic/pages/SurveyManagementPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/TeamUsersPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+magic/pages/UnifiedCommandCenter.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+magic/pages/UnifiedCommandCenter.tsx(3,54): error TS6133: 'Share2' is declared but its value is never read.
+magic/pages/UnifiedCommandCenter.tsx(3,62): error TS6133: 'Voicemail' is declared but its value is never read.
+magic/pages/UnifiedCommandCenter.tsx(3,194): error TS6133: 'MoreVertical' is declared but its value is never read.
+src/App.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/app/AppRouter.tsx(24,49): error TS1261: Already included file name '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/components/crm/CustomersListPage.tsx' differs from file name '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/components/CRM/CustomersListPage.tsx' only in casing.
+  The file is in the program because:
+    Imported via "@/components/crm/CustomersListPage" from file '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/app/AppRouter.tsx'
+    Matched by include pattern 'src' in '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/tsconfig.json'
+src/app/AppRouter.tsx(25,50): error TS1261: Already included file name '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/components/crm/CustomerDetailPage.tsx' differs from file name '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/components/CRM/CustomerDetailPage.tsx' only in casing.
+  The file is in the program because:
+    Imported via "@/components/crm/CustomerDetailPage" from file '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/app/AppRouter.tsx'
+    Matched by include pattern 'src' in '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/tsconfig.json'
+src/app/AppRouter.tsx(26,48): error TS1261: Already included file name '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/components/crm/ContactsListPage.tsx' differs from file name '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/components/CRM/ContactsListPage.tsx' only in casing.
+  The file is in the program because:
+    Imported via "@/components/crm/ContactsListPage" from file '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/app/AppRouter.tsx'
+    Matched by include pattern 'src' in '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/tsconfig.json'
+src/app/AppRouter.tsx(27,49): error TS1261: Already included file name '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/components/crm/ContactDetailPage.tsx' differs from file name '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/components/CRM/ContactDetailPage.tsx' only in casing.
+  The file is in the program because:
+    Imported via "@/components/crm/ContactDetailPage" from file '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/app/AppRouter.tsx'
+    Matched by include pattern 'src' in '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/tsconfig.json'
+src/app/AppRouter.tsx(28,49): error TS1261: Already included file name '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/components/crm/PipelineDashboard.tsx' differs from file name '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/components/CRM/PipelineDashboard.tsx' only in casing.
+  The file is in the program because:
+    Imported via "@/components/crm/PipelineDashboard" from file '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/app/AppRouter.tsx'
+    Matched by include pattern 'src' in '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/tsconfig.json'
+src/app/AppRouter.tsx(29,46): error TS1261: Already included file name '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/components/crm/DealDetailPage.tsx' differs from file name '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/components/CRM/DealDetailPage.tsx' only in casing.
+  The file is in the program because:
+    Imported via "@/components/crm/DealDetailPage" from file '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/app/AppRouter.tsx'
+    Matched by include pattern 'src' in '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/tsconfig.json'
+src/app/AppRouter.tsx(30,46): error TS1261: Already included file name '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/components/crm/ActivitiesPage.tsx' differs from file name '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/components/CRM/ActivitiesPage.tsx' only in casing.
+  The file is in the program because:
+    Imported via "@/components/crm/ActivitiesPage" from file '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/app/AppRouter.tsx'
+    Matched by include pattern 'src' in '/Users/johnshine/Dropbox/Fibonacco/Learning-Center/tsconfig.json'
+src/AppRouter.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/AppRouter.tsx(11,10): error TS2614: Module '"./pages/LoginPage"' has no exported member 'LoginPage'. Did you mean to use 'import LoginPage from "./pages/LoginPage"' instead?
+src/AppRouter.tsx(78,1): error TS6133: 'OutboundDashboardPage' is declared but its value is never read.
+src/AppRouter.tsx(79,1): error TS6133: 'CreateEmailCampaignPage' is declared but its value is never read.
+src/AppRouter.tsx(80,1): error TS6133: 'CreatePhoneCampaignPage' is declared but its value is never read.
+src/AppRouter.tsx(81,1): error TS6133: 'CreateSmsCampaignPage' is declared but its value is never read.
+src/AppRouter.tsx(82,1): error TS6133: 'ConversationsPage' is declared but its value is never read.
+src/AppRouter.tsx(83,1): error TS6133: 'RepliesPage' is declared but its value is never read.
+src/AppRouter.tsx(84,1): error TS6133: 'CallsPage' is declared but its value is never read.
+src/command-center/AppProviders.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/CommandCenterApp.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/components/ai/AccountManagerAI.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/components/ai/AccountManagerBar.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/components/ai/ExpandableChat.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/components/ai/ExpandableChat.tsx(13,40): error TS6133: 'context' is declared but its value is never read.
+src/command-center/components/ai/ServiceUpsellPrompt.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/components/ai/ServiceUpsellPrompt.tsx(2,10): error TS6133: 'Target' is declared but its value is never read.
+src/command-center/components/errors/ApiErrorDisplay.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/components/layout/CommandCenterHeader.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/components/layout/NavigationRail.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/components/layout/RightSidebar.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/components/shared/ActionCard.tsx(1,1): error TS6192: All imports in import declaration are unused.
+src/command-center/components/shared/ActivityFeed.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/components/shared/ColorPicker.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/components/shared/ColorPicker.tsx(46,160): error TS2322: Type '{ children: Element; className: string; align: string; onClick: (e: any) => any; }' is not assignable to type 'IntrinsicAttributes & PopoverContentProps'.
+  Property 'align' does not exist on type 'IntrinsicAttributes & PopoverContentProps'.
+src/command-center/components/shared/ColorPicker.tsx(46,182): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/command-center/components/shared/MetricCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/components/shared/ZoneHeader.tsx(43,171): error TS2339: Property 'gradient' does not exist on type '{ className: string; headerClass: string; iconBg: string; iconColor: string; textClass: string; contentBg: string; itemHover: string; }'.
+src/command-center/components/ui/ColorPicker.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/components/ui/ConnectionStatus.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/components/ui/DarkModeToggle.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/config/navigation.ts(3,19): error TS6133: 'Calendar' is declared but its value is never read.
+src/command-center/core/AppShell.tsx(1,17): error TS6133: 'useState' is declared but its value is never read.
+src/command-center/core/AuthContext.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/core/AuthContext.tsx(11,3): error TS6133: 'Business' is declared but its value is never read.
+src/command-center/core/AuthGuard.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/core/Header.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/core/LayoutContext.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/core/RightPanel.tsx(6,33): error TS2307: Cannot find module '../../hooks/useNavCommander' or its corresponding type declarations.
+src/command-center/core/Sidebar.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/core/ThemeProvider.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/hooks/useAccountManager.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/hooks/useAccountManager.tsx(65,43): error TS6133: 'zone' is declared but its value is never read.
+src/command-center/hooks/useActivities.ts(29,39): error TS6133: 'autoRefresh' is declared but its value is never read.
+src/command-center/hooks/useAI.ts(12,3): error TS6133: 'StreamingChunk' is declared but its value is never read.
+src/command-center/hooks/useApi.ts(116,61): error TS2345: Argument of type 'D' is not assignable to parameter of type 'RequestConfig | undefined'.
+  Type 'D' is not assignable to type 'RequestConfig'.
+src/command-center/hooks/useChannel.ts(9,22): error TS6133: 'unsubscribe' is declared but its value is never read.
+src/command-center/hooks/usePermissions.ts(14,11): error TS6133: 'user' is declared but its value is never read.
+src/command-center/hooks/useServices.ts(151,25): error TS2345: Argument of type '(s: Record<string, unknown>) => Service' is not assignable to parameter of type '((value: unknown, index: number, array: unknown[]) => Service) & ((value: any, index: number, array: any[]) => Service)'.
+  Type '(s: Record<string, unknown>) => Service' is not assignable to type '(value: unknown, index: number, array: unknown[]) => Service'.
+    Types of parameters 's' and 'value' are incompatible.
+      Type 'unknown' is not assignable to type 'Record<string, unknown>'.
+src/command-center/hooks/useWebSocket.ts(4,43): error TS6133: 'WebSocketMessage' is declared but its value is never read.
+src/command-center/modules/activities/ActivitiesPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/activities/ActivitiesPage.tsx(2,1): error TS6133: 'motion' is declared but its value is never read.
+src/command-center/modules/activities/ActivitiesPage.tsx(4,9): error TS6133: 'Filter' is declared but its value is never read.
+src/command-center/modules/activities/ActivitiesPage.tsx(4,17): error TS6133: 'Calendar' is declared but its value is never read.
+src/command-center/modules/activities/ActivitiesPage.tsx(4,27): error TS6133: 'Clock' is declared but its value is never read.
+src/command-center/modules/activities/ActivitiesPage.tsx(5,3): error TS6133: 'Phone' is declared but its value is never read.
+src/command-center/modules/activities/ActivitiesPage.tsx(5,10): error TS6133: 'Mail' is declared but its value is never read.
+src/command-center/modules/activities/ActivitiesPage.tsx(5,16): error TS6133: 'MessageSquare' is declared but its value is never read.
+src/command-center/modules/activities/ActivitiesPage.tsx(5,31): error TS6133: 'Users' is declared but its value is never read.
+src/command-center/modules/activities/ActivitiesPage.tsx(6,3): error TS6133: 'ChevronDown' is declared but its value is never read.
+src/command-center/modules/activities/ActivitiesPage.tsx(6,16): error TS6133: 'MoreVertical' is declared but its value is never read.
+src/command-center/modules/activities/ActivitiesPage.tsx(18,1): error TS6133: 'ApiErrorDisplay' is declared but its value is never read.
+src/command-center/modules/activities/ActivityFilters.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/activities/CreateActivityModal.tsx(92,51): error TS2322: Type '{ children: Element[]; className: string; onClose: () => void; }' is not assignable to type 'IntrinsicAttributes & Omit<DialogContentProps & RefAttributes<HTMLDivElement>, "ref"> & RefAttributes<...>'.
+  Property 'onClose' does not exist on type 'IntrinsicAttributes & Omit<DialogContentProps & RefAttributes<HTMLDivElement>, "ref"> & RefAttributes<...>'.
+src/command-center/modules/ai-hub/__tests__/AIMessage.test.tsx(2,26): error TS6133: 'fireEvent' is declared but its value is never read.
+src/command-center/modules/ai-hub/__tests__/AIMessage.test.tsx(48,9): error TS6133: 'mockMessageWithToolCalls' is declared but its value is never read.
+src/command-center/modules/ai-hub/__tests__/AIPersonalitySelector.test.tsx(2,26): error TS6133: 'fireEvent' is declared but its value is never read.
+src/command-center/modules/ai-hub/__tests__/AIWorkflowPanel.test.tsx(2,26): error TS6133: 'fireEvent' is declared but its value is never read.
+src/command-center/modules/ai-hub/AIChat.tsx(21,39): error TS6133: 'isProfileLoading' is declared but its value is never read.
+src/command-center/modules/campaigns/CampaignCard.tsx(11,3): error TS6133: 'Users' is declared but its value is never read.
+src/command-center/modules/campaigns/CampaignDetailPage.tsx(6,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/campaigns/CampaignDetailPage.tsx(16,22): error TS6133: 'getCampaignStats' is declared but its value is never read.
+src/command-center/modules/campaigns/CampaignWizard.tsx(10,3): error TS6133: 'Calendar' is declared but its value is never read.
+src/command-center/modules/campaigns/CampaignWizard.tsx(27,32): error TS6196: 'CampaignTemplateCategory' is declared but never used.
+src/command-center/modules/campaigns/CampaignWizard.tsx(79,9): error TS6133: 'enrichedContext' is declared but its value is never read.
+src/command-center/modules/campaigns/CampaignWizard.tsx(86,16): error TS7006: Parameter 'res' implicitly has an 'any' type.
+src/command-center/modules/campaigns/CampaignWizard.tsx(87,17): error TS7006: Parameter 'err' implicitly has an 'any' type.
+src/command-center/modules/campaigns/CampaignWizard.tsx(102,16): error TS7006: Parameter 'res' implicitly has an 'any' type.
+src/command-center/modules/campaigns/CampaignWizard.tsx(103,17): error TS7006: Parameter 'err' implicitly has an 'any' type.
+src/command-center/modules/content/AIContentGenerator.tsx(4,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/content/AIContentGenerator.tsx(7,44): error TS6133: 'Image' is declared but its value is never read.
+src/command-center/modules/content/AIContentGenerator.tsx(18,1): error TS6133: 'Badge' is declared but its value is never read.
+src/command-center/modules/content/ContentCard.tsx(4,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/content/ContentCard.tsx(9,36): error TS6133: 'Share2' is declared but its value is never read.
+src/command-center/modules/content/ContentCard.tsx(55,20): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ article: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>; email: ForwardRefExoticComponent<...>; social: ForwardRefExoticComponent<...>; video: ForwardRefExoticComponent<...>; image: ForwardRefExoticComponent<...>; }'.
+  No index signature with a parameter of type 'string' was found on type '{ article: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>; email: ForwardRefExoticComponent<...>; social: ForwardRefExoticComponent<...>; video: ForwardRefExoticComponent<...>; image: ForwardRefExoticComponent<...>; }'.
+src/command-center/modules/content/ContentCard.tsx(110,37): error TS2322: Type '(e: any) => void' is not assignable to type '() => void'.
+  Target signature provides too few arguments. Expected 1 or more, but got 0.
+src/command-center/modules/content/ContentCard.tsx(110,47): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/command-center/modules/content/ContentCard.tsx(115,37): error TS2322: Type '(e: any) => void' is not assignable to type '() => void'.
+  Target signature provides too few arguments. Expected 1 or more, but got 0.
+src/command-center/modules/content/ContentCard.tsx(115,47): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/command-center/modules/content/ContentCard.tsx(120,37): error TS2322: Type '(e: any) => void' is not assignable to type '() => void'.
+  Target signature provides too few arguments. Expected 1 or more, but got 0.
+src/command-center/modules/content/ContentCard.tsx(120,47): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/command-center/modules/content/ContentCard.tsx(127,21): error TS2322: Type '(e: any) => void' is not assignable to type '() => void'.
+  Target signature provides too few arguments. Expected 1 or more, but got 0.
+src/command-center/modules/content/ContentCard.tsx(127,31): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/command-center/modules/content/ContentFilters.tsx(4,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/content/ContentLibrary.tsx(4,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/content/ContentManagerDashboard.tsx(4,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/content/ContentManagerDashboard.tsx(7,17): error TS6133: 'Filter' is declared but its value is never read.
+src/command-center/modules/content/ContentScheduling.tsx(4,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/content/ContentScheduling.tsx(5,10): error TS6133: 'Calendar' is declared but its value is never read.
+src/command-center/modules/content/ContentTemplateLibrary.tsx(4,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/content/ContentTemplateLibrary.tsx(5,28): error TS6133: 'Sparkles' is declared but its value is never read.
+src/command-center/modules/content/CreateContentModal.tsx(5,1): error TS6192: All imports in import declaration are unused.
+src/command-center/modules/content/index.ts(6,10): error TS2300: Duplicate identifier 'ContentFilters'.
+src/command-center/modules/content/index.ts(14,24): error TS2300: Duplicate identifier 'ContentFilters'.
+src/command-center/modules/crm/Dashboard.tsx(2,1): error TS6133: 'Link' is declared but its value is never read.
+src/command-center/modules/crm/Dashboard.tsx(7,3): error TS6133: 'TrendingUp' is declared but its value is never read.
+src/command-center/modules/crm/Dashboard.tsx(9,3): error TS6133: 'BarChart3' is declared but its value is never read.
+src/command-center/modules/crm/Dashboard.tsx(10,3): error TS6133: 'Calendar' is declared but its value is never read.
+src/command-center/modules/crm/Dashboard.tsx(11,3): error TS6133: 'ArrowRight' is declared but its value is never read.
+src/command-center/modules/crm/Dashboard.tsx(13,3): error TS6133: 'Clock' is declared but its value is never read.
+src/command-center/modules/crm/Dashboard.tsx(16,3): error TS6133: 'BookOpen' is declared but its value is never read.
+src/command-center/modules/crm/Dashboard.tsx(19,1): error TS6133: 'Button' is declared but its value is never read.
+src/command-center/modules/crm/Dashboard.tsx(20,1): error TS6192: All imports in import declaration are unused.
+src/command-center/modules/crm/Dashboard.tsx(20,52): error TS2305: Module '"@/components/ui/card"' has no exported member 'CardDescription'.
+src/command-center/modules/crm/Dashboard.tsx(55,9): error TS6133: 'formatDuration' is declared but its value is never read.
+src/command-center/modules/crm/Dashboard.tsx(134,52): error TS2339: Property 'revenue' does not exist on type 'CrmAnalytics'.
+src/command-center/modules/crm/Dashboard.tsx(135,61): error TS2339: Property 'interactions' does not exist on type 'CrmAnalytics'.
+src/command-center/modules/crm/Dashboard.tsx(136,68): error TS2339: Property 'revenue' does not exist on type 'CrmAnalytics'.
+src/command-center/modules/crm/Dashboard.tsx(160,38): error TS2339: Property 'by_stage' does not exist on type 'CustomerMetrics'.
+src/command-center/modules/crm/Dashboard.tsx(160,52): error TS7006: Parameter 'stage' implicitly has an 'any' type.
+src/command-center/modules/crm/Dashboard.tsx(186,26): error TS2339: Property 'interactions' does not exist on type 'CrmAnalytics'.
+src/command-center/modules/crm/Dashboard.tsx(186,51): error TS7006: Parameter 'interaction' implicitly has an 'any' type.
+src/command-center/modules/cssn/components/CssnDashboardWidget.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/cssn/components/CssnDashboardWidget.tsx(2,52): error TS2305: Module '"@/components/ui/card"' has no exported member 'CardDescription'.
+src/command-center/modules/cssn/components/CssnSubscriptionPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/cssn/components/CssnSubscriptionPage.tsx(2,52): error TS2305: Module '"@/components/ui/card"' has no exported member 'CardDescription'.
+src/command-center/modules/cssn/components/CssnSubscriptionPage.tsx(2,69): error TS2305: Module '"@/components/ui/card"' has no exported member 'CardFooter'.
+src/command-center/modules/cssn/components/CssnSubscriptionPage.tsx(7,19): error TS6133: 'Zap' is declared but its value is never read.
+src/command-center/modules/cssn/components/CssnSubscriptionPage.tsx(8,26): error TS2307: Cannot find module '@/hooks/use-toast' or its corresponding type declarations.
+src/command-center/modules/customers/CustomerCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/customers/CustomerCard.tsx(90,48): error TS2322: Type '{ children: (Element | undefined)[]; align: "end"; onClick: (e: any) => any; }' is not assignable to type 'IntrinsicAttributes & DropdownMenuContentProps'.
+  Property 'onClick' does not exist on type 'IntrinsicAttributes & DropdownMenuContentProps'.
+src/command-center/modules/customers/CustomerCard.tsx(90,58): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/command-center/modules/customers/CustomerCard.tsx(96,21): error TS2322: Type '(e: any) => void' is not assignable to type '() => void'.
+  Target signature provides too few arguments. Expected 1 or more, but got 0.
+src/command-center/modules/customers/CustomerCard.tsx(96,31): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/command-center/modules/customers/CustomerDetailPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/customers/CustomerDetailPage.tsx(16,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/command-center/modules/customers/CustomerDetailPage.tsx(37,76): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/command-center/modules/customers/CustomerDetailPage.tsx(164,33): error TS2719: Type 'TimelineItem[]' is not assignable to type 'TimelineItem[]'. Two different types with this name exist, but they are unrelated.
+  Type 'TimelineItem' is not assignable to type 'TimelineItem'. Two different types with this name exist, but they are unrelated.
+    Types of property 'type' are incompatible.
+      Type 'string' is not assignable to type '"email" | "note" | "phone" | "sms" | "meeting"'.
+src/command-center/modules/customers/CustomerDetailPage.tsx(230,21): error TS6133: 'updated' is declared but its value is never read.
+src/command-center/modules/customers/CustomerFilters.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/customers/CustomerFilters.tsx(17,9): error TS6133: 'stages' is declared but its value is never read.
+src/command-center/modules/customers/CustomersListPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/customers/CustomersListPage.tsx(4,17): error TS6133: 'Filter' is declared but its value is never read.
+src/command-center/modules/customers/CustomersListPage.tsx(231,9): error TS2322: Type '(formData: { name: string; email: string; phone?: string; company?: string; stage?: CustomerStage; tags?: string[]; }) => Promise<Customer>' is not assignable to type '(data: Partial<Customer>) => Promise<Customer>'.
+  Types of parameters 'formData' and 'data' are incompatible.
+    Type 'Partial<Customer>' is not assignable to type '{ name: string; email: string; phone?: string | undefined; company?: string | undefined; stage?: CustomerStage | undefined; tags?: string[] | undefined; }'.
+      Types of property 'name' are incompatible.
+        Type 'string | undefined' is not assignable to type 'string'.
+          Type 'undefined' is not assignable to type 'string'.
+src/command-center/modules/customers/CustomerTimeline.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/customers/EditCustomerModal.tsx(7,20): error TS6133: 'CustomerStage' is declared but its value is never read.
+src/command-center/modules/customers/EngagementScoreCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/dashboard/Dashboard.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/dashboard/Dashboard.tsx(14,9): error TS6133: 'isDarkMode' is declared but its value is never read.
+src/command-center/modules/dashboard/Dashboard.tsx(15,52): error TS6133: 'refreshDashboard' is declared but its value is never read.
+src/command-center/modules/dashboard/DashboardGrid.tsx(41,57): error TS6133: 'activities' is declared but its value is never read.
+src/command-center/modules/dashboard/DashboardGrid.tsx(164,34): error TS6133: 'index' is declared but its value is never read.
+src/command-center/modules/dashboard/QuickActionDock.tsx(8,52): error TS6133: 'TooltipContent' is declared but its value is never read.
+src/command-center/modules/services/ActiveServiceCard.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/services/InvoicesList.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/services/ServiceCatalog.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/services/ServicesDashboard.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/command-center/modules/services/ServicesDashboard.tsx(4,52): error TS6133: 'Settings' is declared but its value is never read.
+src/command-center/modules/services/ServicesDashboard.tsx(6,29): error TS6133: 'CardHeader' is declared but its value is never read.
+src/command-center/modules/services/ServicesDashboard.tsx(6,41): error TS6133: 'CardTitle' is declared but its value is never read.
+src/command-center/modules/services/wizard/components/mobile/MobileCartSummary.tsx(11,78): error TS6133: 'currentStep' is declared but its value is never read.
+src/command-center/modules/services/wizard/components/steps/OutcomeSelectorStep.tsx(3,20): error TS6133: 'Outcome' is declared but its value is never read.
+src/command-center/modules/services/wizard/components/steps/RemainingSteps.tsx(3,31): error TS2307: Cannot find module '../types' or its corresponding type declarations.
+src/command-center/modules/services/wizard/components/steps/RemainingSteps.tsx(42,5): error TS6133: 'onNext' is declared but its value is never read.
+src/command-center/modules/services/wizard/components/steps/ServiceConfiguratorStep.tsx(13,5): error TS6133: 'onUpdateConfig' is declared but its value is never read.
+src/command-center/modules/services/wizard/components/steps/ServiceSelectorStep.tsx(2,26): error TS6133: 'Info' is declared but its value is never read.
+src/command-center/modules/social-studio/components/ConnectedAccountsList.tsx(2,52): error TS2305: Module '"@/components/ui/card"' has no exported member 'CardDescription'.
+src/command-center/modules/social-studio/components/CreditManager.tsx(2,52): error TS2305: Module '"@/components/ui/card"' has no exported member 'CardDescription'.
+src/command-center/modules/social-studio/components/CreditManager.tsx(2,69): error TS2305: Module '"@/components/ui/card"' has no exported member 'CardFooter'.
+src/command-center/modules/social-studio/components/CreditManager.tsx(4,22): error TS6133: 'CheckCircle2' is declared but its value is never read.
+src/command-center/modules/social-studio/components/CreditManager.tsx(10,46): error TS6133: 'cost' is declared but its value is never read.
+src/command-center/modules/social-studio/components/PostGenerator.tsx(2,52): error TS2305: Module '"@/components/ui/card"' has no exported member 'CardFooter'.
+src/command-center/pages/ActivitiesPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/pages/AIHubPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/pages/CampaignDetailPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/pages/CampaignsPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/pages/ContentPage.tsx(1,1): error TS6192: All imports in import declaration are unused.
+src/command-center/pages/CustomerDetailPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/pages/CustomersPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/pages/ServicesPage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/command-center/stores/aiStore.ts(45,11): error TS6133: 'get' is declared but its value is never read.
+src/command-center/stores/rootStore.ts(30,35): error TS6133: 'get' is declared but its value is never read.
+src/components/AIWorkflowPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/AIWorkflowPanel.tsx(2,86): error TS6133: 'AlertCircleIcon' is declared but its value is never read.
+src/components/AIWorkflowPanel.tsx(2,207): error TS6133: 'PlusCircleIcon' is declared but its value is never read.
+src/components/AIWorkflowPanel.tsx(147,18): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/components/AIWorkflowPanel.tsx(149,13): error TS2345: Argument of type '(prevLogs: never[]) => { id: number; time: string; message: any; }[]' is not assignable to parameter of type 'SetStateAction<never[]>'.
+  Type '(prevLogs: never[]) => { id: number; time: string; message: any; }[]' is not assignable to type '(prevState: never[]) => never[]'.
+    Type '{ id: number; time: string; message: any; }[]' is not assignable to type 'never[]'.
+      Type '{ id: number; time: string; message: any; }' is not assignable to type 'never'.
+src/components/AIWorkflowPanel.tsx(187,25): error TS7006: Parameter 'status' implicitly has an 'any' type.
+src/components/AIWorkflowPanel.tsx(201,24): error TS7006: Parameter 'status' implicitly has an 'any' type.
+src/components/AIWorkflowPanel.tsx(215,27): error TS7006: Parameter 'node' implicitly has an 'any' type.
+src/components/AIWorkflowPanel.tsx(484,52): error TS2339: Property 'id' does not exist on type 'never'.
+src/components/AIWorkflowPanel.tsx(485,68): error TS2339: Property 'time' does not exist on type 'never'.
+src/components/AIWorkflowPanel.tsx(486,62): error TS2339: Property 'message' does not exist on type 'never'.
+src/components/analytics/MarketingReportPage.tsx(14,94): error TS2322: Type 'string' is not assignable to type 'number[]'.
+src/components/analytics/MarketingReportPage.tsx(15,94): error TS2322: Type '"emerald"' is not assignable to type '"green" | "blue" | "red" | "purple" | "amber" | undefined'.
+src/components/analytics/MarketingReportPage.tsx(15,110): error TS2322: Type 'string' is not assignable to type 'number[]'.
+src/components/analytics/MarketingReportPage.tsx(16,92): error TS2322: Type 'string' is not assignable to type 'number[]'.
+src/components/analytics/MarketingReportPage.tsx(17,91): error TS2322: Type '"orange"' is not assignable to type '"green" | "blue" | "red" | "purple" | "amber" | undefined'.
+src/components/analytics/MarketingReportPage.tsx(17,106): error TS2322: Type 'string' is not assignable to type 'number[]'.
+src/components/billing/CollectionsDashboard.tsx(48,21): error TS2322: Type '"emerald"' is not assignable to type '"green" | "blue" | "red" | "purple" | "amber" | undefined'.
+src/components/billing/CreateInvoiceModal.tsx(2,10): error TS2305: Module '"@/components/shared"' has no exported member 'Button'.
+src/components/billing/InvoiceDetailPage.tsx(3,59): error TS2305: Module '"@/components/shared"' has no exported member 'Button'.
+src/components/billing/InvoicesListPage.tsx(1,57): error TS2305: Module '"@/components/shared"' has no exported member 'Button'.
+src/components/billing/OrderHistoryPage.tsx(1,57): error TS2305: Module '"@/components/shared"' has no exported member 'Button'.
+src/components/BusinessProfileForm.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/BusinessProfileForm.tsx(2,38): error TS6133: 'BuildingIcon' is declared but its value is never read.
+src/components/BusinessProfileForm.tsx(2,63): error TS6133: 'TrendingUpIcon' is declared but its value is never read.
+src/components/BusinessProfileForm.tsx(2,79): error TS6133: 'DollarSignIcon' is declared but its value is never read.
+src/components/BusinessProfileForm.tsx(2,95): error TS6133: 'ShieldIcon' is declared but its value is never read.
+src/components/BusinessProfileForm.tsx(2,107): error TS6133: 'PackageIcon' is declared but its value is never read.
+src/components/BusinessProfileForm.tsx(2,131): error TS6133: 'AlertTriangleIcon' is declared but its value is never read.
+src/components/BusinessProfileForm.tsx(19,28): error TS6133: 'setConfidenceLevels' is declared but its value is never read.
+src/components/BusinessProfileForm.tsx(90,25): error TS7006: Parameter 'status' implicitly has an 'any' type.
+src/components/BusinessProfileForm.tsx(102,30): error TS7006: Parameter 'level' implicitly has an 'any' type.
+src/components/CalendarView.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/CalendarView.tsx(8,24): error TS7006: Parameter 'date' implicitly has an 'any' type.
+src/components/CalendarView.tsx(39,23): error TS7006: Parameter 'date' implicitly has an 'any' type.
+src/components/CalendarView.tsx(45,19): error TS7006: Parameter 'date' implicitly has an 'any' type.
+src/components/CalendarView.tsx(50,22): error TS7006: Parameter 'date' implicitly has an 'any' type.
+src/components/CalendarView.tsx(54,21): error TS7006: Parameter 'date' implicitly has an 'any' type.
+src/components/CalendarView.tsx(58,28): error TS7006: Parameter 'date' implicitly has an 'any' type.
+src/components/CalendarView.tsx(62,22): error TS7006: Parameter 'date' implicitly has an 'any' type.
+src/components/ChatPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/ConnectionStatus.tsx(6,8): error TS6133: 'React' is declared but its value is never read.
+src/components/ConnectionStatus.tsx(7,1): error TS6192: All imports in import declaration are unused.
+src/components/crm/ActivitiesPage.tsx(1,32): error TS6133: 'LoadingState' is declared but its value is never read.
+src/components/crm/ContactDetailPage.tsx(3,10): error TS6133: 'PageHeader' is declared but its value is never read.
+src/components/crm/CustomerDetailPage.tsx(73,34): error TS2322: Type '"active" | "inactive" | "lead"' is not assignable to type '"pending" | "completed" | "draft" | "archived" | "cancelled" | "active" | "overdue" | "inactive"'.
+  Type '"lead"' is not assignable to type '"pending" | "completed" | "draft" | "archived" | "cancelled" | "active" | "overdue" | "inactive"'.
+src/components/crm/CustomerDetailPage.tsx(119,29): error TS2322: Type '"emerald"' is not assignable to type '"green" | "blue" | "red" | "purple" | "amber" | undefined'.
+src/components/crm/CustomersListPage.tsx(23,41): error TS2322: Type '"active" | "inactive" | "lead"' is not assignable to type '"pending" | "completed" | "draft" | "archived" | "cancelled" | "active" | "overdue" | "inactive"'.
+  Type '"lead"' is not assignable to type '"pending" | "completed" | "draft" | "archived" | "cancelled" | "active" | "overdue" | "inactive"'.
+src/components/crm/DealDetailPage.tsx(62,21): error TS2322: Type '"emerald"' is not assignable to type '"green" | "blue" | "red" | "purple" | "amber" | undefined'.
+src/components/crm/PipelineDashboard.tsx(34,21): error TS2322: Type '"emerald"' is not assignable to type '"green" | "blue" | "red" | "purple" | "amber" | undefined'.
+src/components/CRM/PipelineStageCard.tsx(18,7): error TS6133: 'stageLabels' is declared but its value is never read.
+src/components/CtaSection.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/dashboard/CentralCommandDashboard.tsx(32,25): error TS2322: Type 'string' is not assignable to type 'number[]'.
+src/components/dashboard/DataReportPanel.tsx(40,29): error TS2322: Type '(value: number) => [string, "Revenue"]' is not assignable to type 'Formatter<number, "Revenue"> & ((value: number, name: "Revenue", item: Payload<number, "Revenue">, index: number, payload: Payload<number, "Revenue">[]) => ReactNode | [...])'.
+  Type '(value: number) => [string, "Revenue"]' is not assignable to type 'Formatter<number, "Revenue">'.
+    Types of parameters 'value' and 'value' are incompatible.
+      Type 'number | undefined' is not assignable to type 'number'.
+        Type 'undefined' is not assignable to type 'number'.
+src/components/DataAnalyticsPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/DataAnalyticsPanel.tsx(2,39): error TS6133: 'LineChartIcon' is declared but its value is never read.
+src/components/DataAnalyticsPanel.tsx(2,115): error TS6133: 'CalendarIcon' is declared but its value is never read.
+src/components/DataAnalyticsPanel.tsx(2,198): error TS6133: 'PlusIcon' is declared but its value is never read.
+src/components/DataAnalyticsPanel.tsx(2,208): error TS6133: 'MinusIcon' is declared but its value is never read.
+src/components/DataAnalyticsPanel.tsx(14,28): error TS6133: 'setConfidenceLevels' is declared but its value is never read.
+src/components/DataAnalyticsPanel.tsx(50,25): error TS7006: Parameter 'status' implicitly has an 'any' type.
+src/components/DataAnalyticsPanel.tsx(62,30): error TS7006: Parameter 'level' implicitly has an 'any' type.
+src/components/DataReportPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/ExpandableChat.test.tsx(7,35): error TS2739: Type '{}' is missing the following properties from type 'ExpandableChatProps': messages, addMessage
+src/components/ExpandableChat.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/Facilitator.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/Facilitator.tsx(4,3): error TS7031: Binding element 'isVisible' implicitly has an 'any' type.
+src/components/Facilitator.tsx(5,3): error TS7031: Binding element 'isVideoOff' implicitly has an 'any' type.
+src/components/FeatureGate.tsx(6,8): error TS6133: 'React' is declared but its value is never read.
+src/components/FeaturesSection.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/FeaturesSection.tsx(2,68): error TS6133: 'FileCheckIcon' is declared but its value is never read.
+src/components/FeaturesSection.tsx(2,101): error TS6133: 'UsersIcon' is declared but its value is never read.
+src/components/FeaturesSection.tsx(2,139): error TS6133: 'RefreshCwIcon' is declared but its value is never read.
+src/components/FileExplorer.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/FileExplorer.tsx(2,171): error TS6133: 'CalendarIcon' is declared but its value is never read.
+src/components/FileExplorer.tsx(14,23): error TS7006: Parameter 'fileName' implicitly has an 'any' type.
+src/components/FileExplorer.tsx(27,24): error TS7006: Parameter 'folder' implicitly has an 'any' type.
+src/components/FileExplorer.tsx(30,18): error TS7053: Element implicitly has an 'any' type because expression of type 'any' can't be used to index type '{ recordings: boolean; transcripts: boolean; presentations: boolean; reports: boolean; }'.
+src/components/FileExplorer.tsx(33,27): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/components/FileExplorer.tsx(36,29): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/components/FileExplorer.tsx(36,35): error TS7006: Parameter 'action' implicitly has an 'any' type.
+src/components/FileExplorer.tsx(49,26): error TS7006: Parameter 'fileId' implicitly has an 'any' type.
+src/components/FileExplorer.tsx(145,20): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ recordings: boolean; transcripts: boolean; presentations: boolean; reports: boolean; }'.
+  No index signature with a parameter of type 'string' was found on type '{ recordings: boolean; transcripts: boolean; presentations: boolean; reports: boolean; }'.
+src/components/FileExplorer.tsx(146,60): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ recordings: boolean; transcripts: boolean; presentations: boolean; reports: boolean; }'.
+  No index signature with a parameter of type 'string' was found on type '{ recordings: boolean; transcripts: boolean; presentations: boolean; reports: boolean; }'.
+src/components/FileExplorer.tsx(149,22): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ recordings: { id: number; name: string; size: string; date: string; type: string; }[]; transcripts: { id: number; name: string; size: string; date: string; type: string; }[]; presentations: { id: number; name: string; size: string; date: string; type: string; }[]; reports: { ...; }[]; }'.
+  No index signature with a parameter of type 'string' was found on type '{ recordings: { id: number; name: string; size: string; date: string; type: string; }[]; transcripts: { id: number; name: string; size: string; date: string; type: string; }[]; presentations: { id: number; name: string; size: string; date: string; type: string; }[]; reports: { ...; }[]; }'.
+src/components/FileExplorer.tsx(158,93): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ recordings: boolean; transcripts: boolean; presentations: boolean; reports: boolean; }'.
+  No index signature with a parameter of type 'string' was found on type '{ recordings: boolean; transcripts: boolean; presentations: boolean; reports: boolean; }'.
+src/components/FileExplorer.tsx(181,24): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ recordings: { id: number; name: string; size: string; date: string; type: string; }[]; transcripts: { id: number; name: string; size: string; date: string; type: string; }[]; presentations: { id: number; name: string; size: string; date: string; type: string; }[]; reports: { ...; }[]; }'.
+  No index signature with a parameter of type 'string' was found on type '{ recordings: { id: number; name: string; size: string; date: string; type: string; }[]; transcripts: { id: number; name: string; size: string; date: string; type: string; }[]; presentations: { id: number; name: string; size: string; date: string; type: string; }[]; reports: { ...; }[]; }'.
+src/components/FileExplorer.tsx(181,50): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/components/FileExplorer.tsx(181,146): error TS2339: Property 'id' does not exist on type 'never'.
+src/components/FileExplorer.tsx(242,33): error TS2339: Property 'type' does not exist on type 'never'.
+src/components/FileExplorer.tsx(242,120): error TS2339: Property 'type' does not exist on type 'never'.
+src/components/FileExplorer.tsx(247,58): error TS2339: Property 'name' does not exist on type 'never'.
+src/components/FileExplorer.tsx(251,58): error TS2339: Property 'size' does not exist on type 'never'.
+src/components/FileExplorer.tsx(255,58): error TS2339: Property 'date' does not exist on type 'never'.
+src/components/FileExplorer.tsx(259,69): error TS2339: Property 'type' does not exist on type 'never'.
+src/components/Footer.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/GlobalErrorHandler.tsx(21,7): error TS6133: 'TOAST_EVENT' is declared but its value is never read.
+src/components/GlobalErrorHandler.tsx(111,13): error TS2345: Argument of type '() => () => boolean' is not assignable to parameter of type 'EffectCallback'.
+  Type '() => boolean' is not assignable to type 'void | Destructor'.
+    Type '() => boolean' is not assignable to type 'Destructor'.
+      Type 'boolean' is not assignable to type 'void | { [UNDEFINED_VOID_ONLY]: never; }'.
+src/components/header/AccountManagerButton.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/header/BrandBar.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/header/LearnSearchBar.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/header/MainNavigation.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/header/NewMainHeader.test.tsx(1,32): error TS6133: 'vi' is declared but its value is never read.
+src/components/header/NewMainHeader.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/header/SecondarySubNavigationBar.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/header/SubNavigationBar.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/header/SubNavigationBar.tsx(24,27): error TS6133: 'index' is declared but its value is never read.
+src/components/header/UserProfileArea.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/HeroSection.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/learning/CampaignLandingPage.tsx(3,34): error TS2307: Cannot find module './CampaignRenderer' or its corresponding type declarations.
+src/components/learning/CampaignLandingPage.tsx(4,10): error TS2305: Module '"@/components/shared"' has no exported member 'Button'.
+src/components/learning/LearningCenterHub.tsx(21,25): error TS2322: Type '{ children: Element[]; key: string; className: string; onClick: () => void | Promise<void>; }' is not assignable to type 'IntrinsicAttributes & DataCardProps'.
+  Property 'onClick' does not exist on type 'IntrinsicAttributes & DataCardProps'.
+src/components/LearningCenter/AITraining/TrainingOverview.tsx(91,19): error TS2322: Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'ComponentType<{ size?: number | undefined; className?: string | undefined; }>'.
+  Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'FunctionComponent<{ size?: number | undefined; className?: string | undefined; }>'.
+    Types of property 'propTypes' are incompatible.
+      Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>> | undefined' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }> | undefined'.
+        Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }>'.
+          Types of property 'size' are incompatible.
+            Type 'Validator<string | number | null | undefined> | undefined' is not assignable to type 'Validator<number | null | undefined> | undefined'.
+              Type 'Validator<string | number | null | undefined>' is not assignable to type 'Validator<number | null | undefined>'.
+                Type 'string | number | null | undefined' is not assignable to type 'number | null | undefined'.
+                  Type 'string' is not assignable to type 'number'.
+src/components/LearningCenter/AITraining/TrainingOverview.tsx(92,19): error TS2322: Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'ComponentType<{ size?: number | undefined; className?: string | undefined; }>'.
+  Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'FunctionComponent<{ size?: number | undefined; className?: string | undefined; }>'.
+    Types of property 'propTypes' are incompatible.
+      Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>> | undefined' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }> | undefined'.
+        Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }>'.
+          Types of property 'size' are incompatible.
+            Type 'Validator<string | number | null | undefined> | undefined' is not assignable to type 'Validator<number | null | undefined> | undefined'.
+              Type 'Validator<string | number | null | undefined>' is not assignable to type 'Validator<number | null | undefined>'.
+                Type 'string | number | null | undefined' is not assignable to type 'number | null | undefined'.
+                  Type 'string' is not assignable to type 'number'.
+src/components/LearningCenter/AITraining/TrainingOverview.tsx(93,19): error TS2322: Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'ComponentType<{ size?: number | undefined; className?: string | undefined; }>'.
+  Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'FunctionComponent<{ size?: number | undefined; className?: string | undefined; }>'.
+    Types of property 'propTypes' are incompatible.
+      Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>> | undefined' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }> | undefined'.
+        Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }>'.
+          Types of property 'size' are incompatible.
+            Type 'Validator<string | number | null | undefined> | undefined' is not assignable to type 'Validator<number | null | undefined> | undefined'.
+              Type 'Validator<string | number | null | undefined>' is not assignable to type 'Validator<number | null | undefined>'.
+                Type 'string | number | null | undefined' is not assignable to type 'number | null | undefined'.
+                  Type 'string' is not assignable to type 'number'.
+src/components/LearningCenter/AITraining/TrainingOverview.tsx(94,19): error TS2322: Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'ComponentType<{ size?: number | undefined; className?: string | undefined; }>'.
+  Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'FunctionComponent<{ size?: number | undefined; className?: string | undefined; }>'.
+    Types of property 'propTypes' are incompatible.
+      Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>> | undefined' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }> | undefined'.
+        Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }>'.
+          Types of property 'size' are incompatible.
+            Type 'Validator<string | number | null | undefined> | undefined' is not assignable to type 'Validator<number | null | undefined> | undefined'.
+              Type 'Validator<string | number | null | undefined>' is not assignable to type 'Validator<number | null | undefined>'.
+                Type 'string | number | null | undefined' is not assignable to type 'number | null | undefined'.
+                  Type 'string' is not assignable to type 'number'.
+src/components/LearningCenter/AITraining/TrainingOverview.tsx(111,3): error TS6133: 'type' is declared but its value is never read.
+src/components/LearningCenter/AITraining/TrainingOverview.tsx(183,52): error TS6133: 'Icon' is declared but its value is never read.
+src/components/LearningCenter/Articles/ArticleEditor.tsx(2,19): error TS6133: 'Eye' is declared but its value is never read.
+src/components/LearningCenter/BusinessProfile/ProfileSurveyBuilder.tsx(2,30): error TS6133: 'Edit2' is declared but its value is never read.
+src/components/LearningCenter/BusinessProfile/QuestionEditor.test.tsx(7,35): error TS2741: Property 'sectionId' is missing in type '{ onClose: () => void; onSave: () => void; }' but required in type 'QuestionEditorProps'.
+src/components/LearningCenter/BusinessProfile/QuestionEditor.tsx(198,23): error TS2322: Type '{ min: number; max?: number | undefined; min_label?: string; max_label?: string; }' is not assignable to type '{ min: number; max: number; min_label?: string | undefined; max_label?: string | undefined; }'.
+  Types of property 'max' are incompatible.
+    Type 'number | undefined' is not assignable to type 'number'.
+      Type 'undefined' is not assignable to type 'number'.
+src/components/LearningCenter/BusinessProfile/QuestionEditor.tsx(215,23): error TS2322: Type '{ max: number; min?: number | undefined; min_label?: string; max_label?: string; }' is not assignable to type '{ min: number; max: number; min_label?: string | undefined; max_label?: string | undefined; }'.
+  Types of property 'min' are incompatible.
+    Type 'number | undefined' is not assignable to type 'number'.
+      Type 'undefined' is not assignable to type 'number'.
+src/components/LearningCenter/Campaign/ContactSalesModal.test.tsx(3,1): error TS6133: 'userEvent' is declared but its value is never read.
+src/components/LearningCenter/Common/AgentAccessSelector.test.tsx(2,18): error TS6133: 'screen' is declared but its value is never read.
+src/components/LearningCenter/Common/EmbeddingIndicator.tsx(52,21): error TS2339: Property 'animate' does not exist on type '{ icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>; label: string; color: string; iconColor: string; } | { ...; } | { ...; } | { ...; }'.
+  Property 'animate' does not exist on type '{ icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>; label: string; color: string; iconColor: string; }'.
+src/components/LearningCenter/Common/ErrorBoundary.test.tsx(23,24): error TS2304: Cannot find name 'vi'.
+src/components/LearningCenter/Common/ErrorBoundary.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/LearningCenter/FAQ/FAQBulkImport.test.tsx(1,32): error TS6133: 'vi' is declared but its value is never read.
+src/components/LearningCenter/FAQ/FAQBulkImport.tsx(2,18): error TS6133: 'FileText' is declared but its value is never read.
+src/components/LearningCenter/FAQ/FAQBulkImport.tsx(25,10): error TS6133: 'parsedData' is declared but its value is never read.
+src/components/LearningCenter/FAQ/FAQBulkImport.tsx(101,56): error TS2554: Expected 0 arguments, but got 2.
+src/components/LearningCenter/FAQ/FAQBulkImport.tsx(106,21): error TS2345: Argument of type '{ imported: number; errors: string[]; }' is not assignable to parameter of type 'SetStateAction<ImportResult | null>'.
+  Property 'warnings' is missing in type '{ imported: number; errors: string[]; }' but required in type 'ImportResult'.
+src/components/LearningCenter/FAQ/FAQCard.tsx(2,42): error TS6133: 'ThumbsUp' is declared but its value is never read.
+src/components/LearningCenter/FAQ/FAQCard.tsx(2,52): error TS6133: 'ThumbsDown' is declared but its value is never read.
+src/components/LearningCenter/FAQ/FAQCard.tsx(29,9): error TS6133: 'helpfulnessScore' is declared but its value is never read.
+src/components/LearningCenter/FAQ/FAQCategoryManager.test.tsx(13,54): error TS2322: Type '{ onClose: () => void; }' is not assignable to type 'IntrinsicAttributes'.
+  Property 'onClose' does not exist on type 'IntrinsicAttributes'.
+src/components/LearningCenter/FAQ/FAQEditor.test.tsx(47,54): error TS2345: Argument of type '{ id: string; question: string; answer: string; category: string; source: "owner"; validation_status: "unverified"; is_public: boolean; allowed_agents: never[]; tags: never[]; applies_to_industries: never[]; }' is not assignable to parameter of type 'FAQItem'.
+  Type '{ id: string; question: string; answer: string; category: string; source: "owner"; validation_status: "unverified"; is_public: boolean; allowed_agents: never[]; tags: never[]; applies_to_industries: never[]; }' is missing the following properties from type 'FAQItem': related_faqs, tenant_id, embedding_status, has_embedding, and 8 more.
+src/components/LearningCenter/FAQ/FAQEditor.test.tsx(89,57): error TS2345: Argument of type '{ id: string; question: string; answer: string; category: string; source: "owner"; validation_status: "unverified"; is_public: true; allowed_agents: never[]; tags: never[]; applies_to_industries: never[]; }' is not assignable to parameter of type 'FAQItem'.
+  Type '{ id: string; question: string; answer: string; category: string; source: "owner"; validation_status: "unverified"; is_public: true; allowed_agents: never[]; tags: never[]; applies_to_industries: never[]; }' is missing the following properties from type 'FAQItem': related_faqs, tenant_id, embedding_status, has_embedding, and 8 more.
+src/components/LearningCenter/FAQ/FAQEditor.tsx(2,19): error TS6133: 'Eye' is declared but its value is never read.
+src/components/LearningCenter/FAQ/FAQList.test.tsx(107,55): error TS2345: Argument of type '{ data: { id: string; tenant_id: string; question: string; answer: string; category: string; source: "owner"; validation_status: "unverified"; is_public: boolean; allowed_agents: never[]; tags: never[]; ... 11 more ...; created_by: string; }[]; meta: { ...; }; }' is not assignable to parameter of type 'PaginatedResponse<FAQItem>'.
+  Types of property 'meta' are incompatible.
+    Type '{ total: number; page: number; per_page: number; }' is missing the following properties from type '{ current_page: number; last_page: number; per_page: number; total: number; }': current_page, last_page
+src/components/LearningCenter/FAQ/FAQList.test.tsx(129,25): error TS2353: Object literal may only specify known properties, and 'page' does not exist in type '{ current_page: number; last_page: number; per_page: number; total: number; }'.
+src/components/LearningCenter/FAQ/FAQList.test.tsx(140,55): error TS2345: Argument of type '{ data: { id: string; tenant_id: string; question: string; answer: string; category: string; source: "owner"; validation_status: "unverified"; is_public: boolean; allowed_agents: never[]; tags: never[]; ... 11 more ...; created_by: string; }[]; meta: { ...; }; }' is not assignable to parameter of type 'PaginatedResponse<FAQItem>'.
+  Types of property 'meta' are incompatible.
+    Type '{ total: number; page: number; per_page: number; }' is missing the following properties from type '{ current_page: number; last_page: number; per_page: number; total: number; }': current_page, last_page
+src/components/LearningCenter/FAQ/FAQList.test.tsx(156,25): error TS2353: Object literal may only specify known properties, and 'page' does not exist in type '{ current_page: number; last_page: number; per_page: number; total: number; }'.
+src/components/LearningCenter/FAQ/FAQList.tsx(56,9): error TS6133: 'handleSelectAll' is declared but its value is never read.
+src/components/LearningCenter/Layout/CategorySidebar.tsx(3,3): error TS6133: 'HelpCircle' is declared but its value is never read.
+src/components/LearningCenter/Layout/SearchHeader.tsx(1,27): error TS6133: 'useCallback' is declared but its value is never read.
+src/components/LearningCenter/Presentation/FibonaccoPlayer.tsx(49,29): error TS6196: 'Slide' is declared but never used.
+src/components/LearningCenter/Presentation/FibonaccoPlayer.tsx(109,26): error TS6133: 'setConversationId' is declared but its value is never read.
+src/components/LearningCenter/Presentation/FibonaccoPlayer.tsx(116,17): error TS18048: 'presentation.meta' is possibly 'undefined'.
+src/components/LearningCenter/Presentation/FibonaccoPlayer.tsx(228,13): error TS2322: Type '{ content: any; isActive: true; theme: string; }' is not assignable to type 'IntrinsicAttributes & HeroSlideProps'.
+  Property 'theme' does not exist on type 'IntrinsicAttributes & HeroSlideProps'.
+src/components/LearningCenter/Presentation/FibonaccoPlayer.tsx(238,39): error TS2339: Property 'avatar_url' does not exist on type 'Presenter | { id: string; name: string; role?: string | undefined; personality?: string | undefined; communication_style?: string | undefined; }'.
+  Property 'avatar_url' does not exist on type '{ id: string; name: string; role?: string | undefined; personality?: string | undefined; communication_style?: string | undefined; }'.
+src/components/LearningCenter/Presentation/FibonaccoPlayer.tsx(240,47): error TS2339: Property 'avatar_url' does not exist on type 'Presenter | { id: string; name: string; role?: string | undefined; personality?: string | undefined; communication_style?: string | undefined; }'.
+  Property 'avatar_url' does not exist on type '{ id: string; name: string; role?: string | undefined; personality?: string | undefined; communication_style?: string | undefined; }'.
+src/components/LearningCenter/Presentation/FibonaccoPlayer.tsx(269,45): error TS2339: Property 'communication_style' does not exist on type 'Presenter | { id: string; name: string; role?: string | undefined; personality?: string | undefined; communication_style?: string | undefined; }'.
+  Property 'communication_style' does not exist on type 'Presenter'.
+src/components/LearningCenter/Presentation/FibonaccoPlayer.tsx(395,40): error TS2339: Property 'email_hook' does not exist on type 'PresentationMeta | { title?: string | undefined; theme?: string | undefined; duration?: number | undefined; slideCount?: number | undefined; audioBaseUrl?: string | undefined; }'.
+  Property 'email_hook' does not exist on type '{ title?: string | undefined; theme?: string | undefined; duration?: number | undefined; slideCount?: number | undefined; audioBaseUrl?: string | undefined; }'.
+src/components/LearningCenter/Presentation/slides/BenefitsSlide.tsx(19,3): error TS2322: Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'ComponentType<{ size?: number | undefined; className?: string | undefined; }>'.
+  Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'FunctionComponent<{ size?: number | undefined; className?: string | undefined; }>'.
+    Types of property 'propTypes' are incompatible.
+      Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>> | undefined' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }> | undefined'.
+        Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }>'.
+          Types of property 'size' are incompatible.
+            Type 'Validator<string | number | null | undefined> | undefined' is not assignable to type 'Validator<number | null | undefined> | undefined'.
+              Type 'Validator<string | number | null | undefined>' is not assignable to type 'Validator<number | null | undefined>'.
+                Type 'string | number | null | undefined' is not assignable to type 'number | null | undefined'.
+                  Type 'string' is not assignable to type 'number'.
+src/components/LearningCenter/Presentation/slides/BenefitsSlide.tsx(20,3): error TS2322: Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'ComponentType<{ size?: number | undefined; className?: string | undefined; }>'.
+  Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'FunctionComponent<{ size?: number | undefined; className?: string | undefined; }>'.
+    Types of property 'propTypes' are incompatible.
+      Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>> | undefined' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }> | undefined'.
+        Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }>'.
+          Types of property 'size' are incompatible.
+            Type 'Validator<string | number | null | undefined> | undefined' is not assignable to type 'Validator<number | null | undefined> | undefined'.
+              Type 'Validator<string | number | null | undefined>' is not assignable to type 'Validator<number | null | undefined>'.
+                Type 'string | number | null | undefined' is not assignable to type 'number | null | undefined'.
+                  Type 'string' is not assignable to type 'number'.
+src/components/LearningCenter/Presentation/slides/BenefitsSlide.tsx(21,3): error TS2322: Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'ComponentType<{ size?: number | undefined; className?: string | undefined; }>'.
+  Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'FunctionComponent<{ size?: number | undefined; className?: string | undefined; }>'.
+    Types of property 'propTypes' are incompatible.
+      Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>> | undefined' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }> | undefined'.
+        Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }>'.
+          Types of property 'size' are incompatible.
+            Type 'Validator<string | number | null | undefined> | undefined' is not assignable to type 'Validator<number | null | undefined> | undefined'.
+              Type 'Validator<string | number | null | undefined>' is not assignable to type 'Validator<number | null | undefined>'.
+                Type 'string | number | null | undefined' is not assignable to type 'number | null | undefined'.
+                  Type 'string' is not assignable to type 'number'.
+src/components/LearningCenter/Presentation/slides/BenefitsSlide.tsx(22,3): error TS2322: Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'ComponentType<{ size?: number | undefined; className?: string | undefined; }>'.
+  Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'FunctionComponent<{ size?: number | undefined; className?: string | undefined; }>'.
+    Types of property 'propTypes' are incompatible.
+      Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>> | undefined' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }> | undefined'.
+        Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }>'.
+          Types of property 'size' are incompatible.
+            Type 'Validator<string | number | null | undefined> | undefined' is not assignable to type 'Validator<number | null | undefined> | undefined'.
+              Type 'Validator<string | number | null | undefined>' is not assignable to type 'Validator<number | null | undefined>'.
+                Type 'string | number | null | undefined' is not assignable to type 'number | null | undefined'.
+                  Type 'string' is not assignable to type 'number'.
+src/components/LearningCenter/Presentation/slides/BenefitsSlide.tsx(23,3): error TS2322: Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'ComponentType<{ size?: number | undefined; className?: string | undefined; }>'.
+  Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'FunctionComponent<{ size?: number | undefined; className?: string | undefined; }>'.
+    Types of property 'propTypes' are incompatible.
+      Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>> | undefined' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }> | undefined'.
+        Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }>'.
+          Types of property 'size' are incompatible.
+            Type 'Validator<string | number | null | undefined> | undefined' is not assignable to type 'Validator<number | null | undefined> | undefined'.
+              Type 'Validator<string | number | null | undefined>' is not assignable to type 'Validator<number | null | undefined>'.
+                Type 'string | number | null | undefined' is not assignable to type 'number | null | undefined'.
+                  Type 'string' is not assignable to type 'number'.
+src/components/LearningCenter/Presentation/slides/BenefitsSlide.tsx(45,9): error TS6133: 'iconColors' is declared but its value is never read.
+src/components/LearningCenter/Presentation/slides/ConceptSlide.tsx(2,24): error TS6133: 'TrendingUp' is declared but its value is never read.
+src/components/LearningCenter/Presentation/slides/DataSlide.tsx(2,1): error TS6133: 'BarChart3' is declared but its value is never read.
+src/components/LearningCenter/Presentation/slides/FlowSlide.tsx(48,26): error TS18048: 'content.steps' is possibly 'undefined'.
+src/components/LearningCenter/Presentation/slides/HeroSlide.tsx(2,1): error TS6133: 'PlayCircle' is declared but its value is never read.
+src/components/LearningCenter/Presentation/slides/ResultsSlide.tsx(2,22): error TS6133: 'CheckCircle2' is declared but its value is never read.
+src/components/LearningCenter/Presentation/slides/SocialProofSlide.tsx(2,10): error TS6133: 'Users' is declared but its value is never read.
+src/components/LearningCenter/Presentation/slides/StepSlide.tsx(138,26): error TS18048: 'content.steps' is possibly 'undefined'.
+src/components/LearningCenter/VectorSearch/EmbeddingStatus.tsx(73,11): error TS2322: Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'ComponentType<{ size?: number | undefined; className?: string | undefined; }>'.
+  Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'FunctionComponent<{ size?: number | undefined; className?: string | undefined; }>'.
+    Types of property 'propTypes' are incompatible.
+      Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>> | undefined' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }> | undefined'.
+        Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }>'.
+          Types of property 'size' are incompatible.
+            Type 'Validator<string | number | null | undefined> | undefined' is not assignable to type 'Validator<number | null | undefined> | undefined'.
+              Type 'Validator<string | number | null | undefined>' is not assignable to type 'Validator<number | null | undefined>'.
+                Type 'string | number | null | undefined' is not assignable to type 'number | null | undefined'.
+                  Type 'string' is not assignable to type 'number'.
+src/components/LearningCenter/VectorSearch/EmbeddingStatus.tsx(79,11): error TS2322: Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'ComponentType<{ size?: number | undefined; className?: string | undefined; }>'.
+  Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'FunctionComponent<{ size?: number | undefined; className?: string | undefined; }>'.
+    Types of property 'propTypes' are incompatible.
+      Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>> | undefined' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }> | undefined'.
+        Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }>'.
+          Types of property 'size' are incompatible.
+            Type 'Validator<string | number | null | undefined> | undefined' is not assignable to type 'Validator<number | null | undefined> | undefined'.
+              Type 'Validator<string | number | null | undefined>' is not assignable to type 'Validator<number | null | undefined>'.
+                Type 'string | number | null | undefined' is not assignable to type 'number | null | undefined'.
+                  Type 'string' is not assignable to type 'number'.
+src/components/LearningCenter/VectorSearch/EmbeddingStatus.tsx(86,11): error TS2322: Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'ComponentType<{ size?: number | undefined; className?: string | undefined; }>'.
+  Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'FunctionComponent<{ size?: number | undefined; className?: string | undefined; }>'.
+    Types of property 'propTypes' are incompatible.
+      Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>> | undefined' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }> | undefined'.
+        Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }>'.
+          Types of property 'size' are incompatible.
+            Type 'Validator<string | number | null | undefined> | undefined' is not assignable to type 'Validator<number | null | undefined> | undefined'.
+              Type 'Validator<string | number | null | undefined>' is not assignable to type 'Validator<number | null | undefined>'.
+                Type 'string | number | null | undefined' is not assignable to type 'number | null | undefined'.
+                  Type 'string' is not assignable to type 'number'.
+src/components/LearningCenter/VectorSearch/EmbeddingStatus.tsx(92,11): error TS2322: Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'ComponentType<{ size?: number | undefined; className?: string | undefined; }>'.
+  Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'FunctionComponent<{ size?: number | undefined; className?: string | undefined; }>'.
+    Types of property 'propTypes' are incompatible.
+      Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>> | undefined' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }> | undefined'.
+        Type 'WeakValidationMap<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type 'WeakValidationMap<{ size?: number | undefined; className?: string | undefined; }>'.
+          Types of property 'size' are incompatible.
+            Type 'Validator<string | number | null | undefined> | undefined' is not assignable to type 'Validator<number | null | undefined> | undefined'.
+              Type 'Validator<string | number | null | undefined>' is not assignable to type 'Validator<number | null | undefined>'.
+                Type 'string | number | null | undefined' is not assignable to type 'number | null | undefined'.
+                  Type 'string' is not assignable to type 'number'.
+src/components/LearningCenter/VectorSearch/SearchPlayground.tsx(2,18): error TS6133: 'Sparkles' is declared but its value is never read.
+src/components/LearningCenter/VectorSearch/SearchPlayground.tsx(2,28): error TS6133: 'TrendingUp' is declared but its value is never read.
+src/components/MainNavigationHeader.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/MarketingPlanForm.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/MarketingPlanForm.tsx(3,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/components/MarketingPlanForm.tsx(185,25): error TS7006: Parameter 'status' implicitly has an 'any' type.
+src/components/Navbar.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/NavigationMenu.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/NavigationMenu.tsx(3,175): error TS6133: 'UserPlusIcon' is declared but its value is never read.
+src/components/NavigationMenu.tsx(11,32): error TS7006: Parameter 'event' implicitly has an 'any' type.
+src/components/NavigationMenu.tsx(12,47): error TS2339: Property 'contains' does not exist on type 'never'.
+src/components/NotesPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/NotesPanel.tsx(4,3): error TS7031: Binding element 'notes' implicitly has an 'any' type.
+src/components/NotesPanel.tsx(31,21): error TS7006: Parameter 'note' implicitly has an 'any' type.
+src/components/NotesPanel.tsx(31,27): error TS7006: Parameter 'index' implicitly has an 'any' type.
+src/components/NotesPanel.tsx(36,32): error TS7006: Parameter 'item' implicitly has an 'any' type.
+src/components/NotesPanel.tsx(36,38): error TS7006: Parameter 'itemIndex' implicitly has an 'any' type.
+src/components/notifications/NotificationsPage.tsx(1,32): error TS2305: Module '"@/components/shared"' has no exported member 'Button'.
+src/components/ops/OpsAlertBanner.tsx(5,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ops/OpsCostChart.tsx(5,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ops/OpsFOAChatMessage.tsx(5,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ops/OpsHealthGrid.tsx(5,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ops/OpsIncidentTimeline.tsx(5,1): error TS6133: 'React' is declared but its value is never read.
+src/components/PageHeader.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/Participants.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/Participants.tsx(4,3): error TS7031: Binding element 'participants' implicitly has an 'any' type.
+src/components/Participants.tsx(7,83): error TS7006: Parameter 'acc' implicitly has an 'any' type.
+src/components/Participants.tsx(7,88): error TS7006: Parameter 'p' implicitly has an 'any' type.
+src/components/Participants.tsx(16,22): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/components/Participants.tsx(19,22): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/components/Participants.tsx(20,26): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/components/Participants.tsx(29,23): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/components/Participants.tsx(30,26): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/components/Participants.tsx(39,22): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/components/Participants.tsx(40,26): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/components/Participants.tsx(49,29): error TS7006: Parameter 'id' implicitly has an 'any' type.
+src/components/Participants.tsx(56,27): error TS7006: Parameter 'participant' implicitly has an 'any' type.
+src/components/Participants.tsx(104,25): error TS7006: Parameter 'participant' implicitly has an 'any' type.
+src/components/PresentationPanel.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/PresentationPanel.tsx(2,45): error TS6133: 'ExpandIcon' is declared but its value is never read.
+src/components/PresentationPanel.tsx(2,57): error TS6133: 'MinimizeIcon' is declared but its value is never read.
+src/components/PresentationPanel.tsx(6,10): error TS6133: 'fullscreen' is declared but its value is never read.
+src/components/PresentationPanel.tsx(6,22): error TS6133: 'setFullscreen' is declared but its value is never read.
+src/components/PresentationPanel.tsx(43,21): error TS7006: Parameter 'index' implicitly has an 'any' type.
+src/components/Presenter.test.tsx(7,35): error TS2741: Property 'isVideoOff' is missing in type '{}' but required in type '{ isVideoOff: any; }'.
+src/components/Presenter.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/Presenter.tsx(4,3): error TS7031: Binding element 'isVideoOff' implicitly has an 'any' type.
+src/components/PricingSection.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ProposalForm.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/ProposalForm.tsx(2,38): error TS6133: 'AlertCircleIcon' is declared but its value is never read.
+src/components/ProposalForm.tsx(2,70): error TS6133: 'UsersIcon' is declared but its value is never read.
+src/components/ProposalForm.tsx(2,81): error TS6133: 'CalendarIcon' is declared but its value is never read.
+src/components/ProposalForm.tsx(2,95): error TS6133: 'TargetIcon' is declared but its value is never read.
+src/components/ProposalForm.tsx(2,107): error TS6133: 'DollarSignIcon' is declared but its value is never read.
+src/components/ProposalForm.tsx(2,123): error TS6133: 'FileTextIcon' is declared but its value is never read.
+src/components/ProposalForm.tsx(2,257): error TS6133: 'ClipboardCheckIcon' is declared but its value is never read.
+src/components/ProposalForm.tsx(2,277): error TS6133: 'ZapIcon' is declared but its value is never read.
+src/components/ProposalForm.tsx(19,28): error TS6133: 'setConfidenceLevels' is declared but its value is never read.
+src/components/ProposalForm.tsx(89,25): error TS7006: Parameter 'status' implicitly has an 'any' type.
+src/components/ProposalForm.tsx(101,30): error TS7006: Parameter 'level' implicitly has an 'any' type.
+src/components/ProtectedRoute.tsx(7,8): error TS6133: 'React' is declared but its value is never read.
+src/components/ProtectedRoute.tsx(40,12): error TS2339: Property 'permissions' does not exist on type 'User'.
+src/components/RecordButton.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/RecordButton.tsx(4,3): error TS7031: Binding element 'onRecordingComplete' implicitly has an 'any' type.
+src/components/RecordButton.tsx(10,9): error TS7034: Variable 'interval' implicitly has type 'any' in some locations where its type cannot be determined.
+src/components/RecordButton.tsx(18,32): error TS7005: Variable 'interval' implicitly has an 'any' type.
+src/components/RecordButton.tsx(20,22): error TS7006: Parameter 'seconds' implicitly has an 'any' type.
+src/components/RecordButton.tsx(51,147): error TS2322: Type '{ size: number; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'.
+  Property 'size' does not exist on type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'.
+src/components/ScreensShowcaseSection.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/TestimonialsSection.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/TranscriptDownloadButton.test.tsx(7,35): error TS2741: Property 'disabled' is missing in type '{ sessionId: string; }' but required in type '{ sessionId: any; disabled: any; }'.
+src/components/TranscriptDownloadButton.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/TranscriptDownloadButton.tsx(1,27): error TS6133: 'createElement' is declared but its value is never read.
+src/components/TranscriptDownloadButton.tsx(2,10): error TS6133: 'DownloadIcon' is declared but its value is never read.
+src/components/TranscriptDownloadButton.tsx(4,3): error TS7031: Binding element 'sessionId' implicitly has an 'any' type.
+src/components/TranscriptDownloadButton.tsx(5,3): error TS7031: Binding element 'disabled' implicitly has an 'any' type.
+src/components/ui/dropdown-menu.tsx(2,1): error TS6133: 'MoreVertical' is declared but its value is never read.
+src/components/ui/LoadingScreen.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/ui/tabs.tsx(1,44): error TS6133: 'useState' is declared but its value is never read.
+src/components/ui/toaster.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/ui/tooltip.tsx(95,44): error TS6133: 'asChild' is declared but its value is never read.
+src/components/UseCasesSection.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/components/VideoCall.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/VideoCall.tsx(17,10): error TS6133: 'recordingData' is declared but its value is never read.
+src/components/VideoCall.tsx(22,22): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/components/VideoCall.tsx(25,34): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/components/VideoCall.tsx(28,35): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/components/VoiceControls.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/components/VoiceControls.tsx(4,3): error TS7031: Binding element 'isListening' implicitly has an 'any' type.
+src/components/VoiceControls.tsx(5,3): error TS7031: Binding element 'setIsListening' implicitly has an 'any' type.
+src/components/VoiceControls.tsx(6,3): error TS7031: Binding element 'onTranscriptUpdate' implicitly has an 'any' type.
+src/components/VoiceControls.tsx(7,3): error TS7031: Binding element 'transcript' implicitly has an 'any' type.
+src/components/VoiceControls.tsx(8,3): error TS7031: Binding element 'setTranscript' implicitly has an 'any' type.
+src/components/VoiceControls.tsx(9,3): error TS7031: Binding element 'addMessage' implicitly has an 'any' type.
+src/components/VoiceControls.tsx(23,28): error TS7006: Parameter 'event' implicitly has an 'any' type.
+src/components/VoiceControls.tsx(65,21): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/hooks/ops/useOpsFOA.ts(93,51): error TS2345: Argument of type '{ status?: string | undefined; page?: number | undefined; perPage?: number | undefined; } | undefined' is not assignable to parameter of type '{ status?: "pending" | "completed" | "failed" | "running" | "rolled_back" | undefined; page?: number | undefined; perPage?: number | undefined; } | undefined'.
+  Type '{ status?: string | undefined; page?: number | undefined; perPage?: number | undefined; }' is not assignable to type '{ status?: "pending" | "completed" | "failed" | "running" | "rolled_back" | undefined; page?: number | undefined; perPage?: number | undefined; }'.
+    Types of property 'status' are incompatible.
+      Type 'string | undefined' is not assignable to type '"pending" | "completed" | "failed" | "running" | "rolled_back" | undefined'.
+        Type 'string' is not assignable to type '"pending" | "completed" | "failed" | "running" | "rolled_back" | undefined'.
+src/hooks/ops/useOpsMetrics.ts(51,52): error TS2345: Argument of type '{ category?: string | undefined; isActive?: boolean | undefined; search?: string | undefined; page?: number | undefined; perPage?: number | undefined; } | undefined' is not assignable to parameter of type '({ category?: "email" | "system" | "financial" | "infrastructure" | "growth" | "cost" | undefined; isActive?: boolean | undefined; search?: string | undefined; } & PaginationParams) | undefined'.
+  Type '{ category?: string | undefined; isActive?: boolean | undefined; search?: string | undefined; page?: number | undefined; perPage?: number | undefined; }' is not assignable to type '{ category?: "email" | "system" | "financial" | "infrastructure" | "growth" | "cost" | undefined; isActive?: boolean | undefined; search?: string | undefined; } & PaginationParams'.
+    Type '{ category?: string | undefined; isActive?: boolean | undefined; search?: string | undefined; page?: number | undefined; perPage?: number | undefined; }' is not assignable to type '{ category?: "email" | "system" | "financial" | "infrastructure" | "growth" | "cost" | undefined; isActive?: boolean | undefined; search?: string | undefined; }'.
+      Types of property 'category' are incompatible.
+        Type 'string | undefined' is not assignable to type '"email" | "system" | "financial" | "infrastructure" | "growth" | "cost" | undefined'.
+          Type 'string' is not assignable to type '"email" | "system" | "financial" | "infrastructure" | "growth" | "cost" | undefined'.
+src/hooks/useAlerts.ts(5,20): error TS6133: 'useMutation' is declared but its value is never read.
+src/hooks/useAlerts.ts(5,33): error TS6133: 'useQueryClient' is declared but its value is never read.
+src/hooks/useAuth.ts(11,41): error TS2339: Property 'setAuth' does not exist on type 'AuthState'.
+src/hooks/useAuth.ts(11,50): error TS2339: Property 'clearAuth' does not exist on type 'AuthState'.
+src/hooks/useNewsletters.ts(5,20): error TS6133: 'useMutation' is declared but its value is never read.
+src/hooks/useNewsletters.ts(5,33): error TS6133: 'useQueryClient' is declared but its value is never read.
+src/hooks/usePersonalities.ts(5,20): error TS6133: 'useMutation' is declared but its value is never read.
+src/hooks/usePersonalities.ts(5,33): error TS6133: 'useQueryClient' is declared but its value is never read.
+src/hooks/useRealtime.ts(42,57): error TS2352: Conversion of type '"*"[]' to type 'RealtimeEventType[]' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type '"*"' is not comparable to type 'RealtimeEventType'.
+src/index.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/pages/Action/ArticlePage.tsx(13,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/pages/Action/EventsPage.tsx(13,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/pages/AIPersonalities/Assign.tsx(2,10): error TS6133: 'useParams' is declared but its value is never read.
+src/pages/AIPersonalities/Assign.tsx(6,3): error TS6133: 'Users' is declared but its value is never read.
+src/pages/AIPersonalities/Assign.tsx(19,40): error TS6133: 'customerApi' is declared but its value is never read.
+src/pages/AIPersonalities/Assign.tsx(22,9): error TS6133: 'navigate' is declared but its value is never read.
+src/pages/AIPersonalities/Contacts.tsx(6,3): error TS6133: 'Phone' is declared but its value is never read.
+src/pages/AIPersonalities/Contacts.tsx(7,3): error TS6133: 'MessageSquare' is declared but its value is never read.
+src/pages/AIPersonalities/Contacts.tsx(9,3): error TS6133: 'Plus' is declared but its value is never read.
+src/pages/AIPersonalities/Contacts.tsx(13,3): error TS6133: 'Clock' is declared but its value is never read.
+src/pages/AIPersonalities/Contacts.tsx(19,3): error TS6133: 'updateContactPreferences' is declared but its value is never read.
+src/pages/AIPersonalities/Dashboard.tsx(7,3): error TS6133: 'ArrowRight' is declared but its value is never read.
+src/pages/AIPersonalities/Dashboard.tsx(12,3): error TS6133: 'MessageCircle' is declared but its value is never read.
+src/pages/AIPersonalities/Dashboard.tsx(13,3): error TS6133: 'TrendingUp' is declared but its value is never read.
+src/pages/AIPersonalities/Dashboard.tsx(14,3): error TS6133: 'Clock' is declared but its value is never read.
+src/pages/AIPersonalities/Detail.tsx(11,3): error TS6133: 'Users' is declared but its value is never read.
+src/pages/AIWorkflowPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/AIWorkflowPage.tsx(28,22): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/pages/AIWorkflowPage.tsx(31,34): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/pages/BusinessProfilePage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/BusinessProfilePage.tsx(29,22): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/pages/BusinessProfilePage.tsx(32,34): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/pages/ClientProposalPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/ClientProposalPage.tsx(29,22): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/pages/ClientProposalPage.tsx(32,34): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/pages/CommandCenter/Dashboard.tsx(9,3): error TS6133: 'Plus' is declared but its value is never read.
+src/pages/CommandCenter/Dashboard.tsx(13,3): error TS6133: 'CheckCircle' is declared but its value is never read.
+src/pages/CommandCenter/Dashboard.tsx(14,3): error TS6133: 'Clock' is declared but its value is never read.
+src/pages/CommandCenter/Dashboard.tsx(16,3): error TS6133: 'Edit' is declared but its value is never read.
+src/pages/CommandCenter/Dashboard.tsx(28,77): error TS2339: Property 'permissions' does not exist on type 'User'.
+src/pages/CRM/Analytics/Interest.tsx(4,3): error TS6133: 'TrendingUp' is declared but its value is never read.
+src/pages/CRM/Analytics/Interest.tsx(7,3): error TS6133: 'Calendar' is declared but its value is never read.
+src/pages/CRM/Analytics/Learning.tsx(7,3): error TS6133: 'Users' is declared but its value is never read.
+src/pages/CRM/Analytics/Purchases.tsx(11,3): error TS6133: 'CheckCircle' is declared but its value is never read.
+src/pages/CRM/Campaigns/List.tsx(8,3): error TS6133: 'TrendingUp' is declared but its value is never read.
+src/pages/CRM/Campaigns/List.tsx(9,3): error TS6133: 'Eye' is declared but its value is never read.
+src/pages/CRM/Campaigns/List.tsx(10,3): error TS6133: 'Calendar' is declared but its value is never read.
+src/pages/CRM/Campaigns/List.tsx(11,3): error TS6133: 'Filter' is declared but its value is never read.
+src/pages/CRM/Customers/Detail.tsx(3,76): error TS6133: 'Building2' is declared but its value is never read.
+src/pages/CRM/Dashboard.tsx(10,3): error TS6133: 'Calendar' is declared but its value is never read.
+src/pages/CRM/Pipeline/KanbanBoard.tsx(106,9): error TS6133: 'handleDragStart' is declared but its value is never read.
+src/pages/DataAnalyticsPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/DataAnalyticsPage.tsx(29,22): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/pages/DataAnalyticsPage.tsx(32,34): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/pages/DataReportCall.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/DataReportCall.tsx(30,22): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/pages/DataReportCall.tsx(33,34): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/pages/FilesPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/LearningCenter/Campaign/LandingPage.tsx(51,9): error TS6133: 'isKeyboardUser' is declared but its value is never read.
+src/pages/LearningCenter/Campaign/List.tsx(4,24): error TS6133: 'ExternalLink' is declared but its value is never read.
+src/pages/LearningCenter/Campaign/ReviewDashboard.tsx(4,32): error TS6133: 'ChevronRight' is declared but its value is never read.
+src/pages/LearningCenter/FAQ/Index.tsx(12,3): error TS6133: 'Filter' is declared but its value is never read.
+src/pages/LearningCenter/GettingStarted/Index.tsx(3,86): error TS6133: 'TrendingUp' is declared but its value is never read.
+src/pages/LearningCenter/GettingStarted/Index.tsx(3,98): error TS6133: 'Clock' is declared but its value is never read.
+src/pages/LearningCenter/GettingStarted/Index.tsx(3,105): error TS6133: 'Users' is declared but its value is never read.
+src/pages/LearningCenter/GettingStarted/Index.tsx(31,56): error TS2448: Block-scoped variable 'sections' used before its declaration.
+src/pages/LearningCenter/GettingStarted/Index.tsx(31,56): error TS2454: Variable 'sections' is used before being assigned.
+src/pages/LearningCenter/GettingStarted/QuickStart.tsx(3,23): error TS6133: 'Circle' is declared but its value is never read.
+src/pages/LearningCenter/GettingStarted/QuickStart.tsx(3,102): error TS6133: 'Clock' is declared but its value is never read.
+src/pages/LearningCenter/GettingStarted/QuickStart.tsx(35,53): error TS2448: Block-scoped variable 'steps' used before its declaration.
+src/pages/LearningCenter/GettingStarted/QuickStart.tsx(35,53): error TS2454: Variable 'steps' is used before being assigned.
+src/pages/LearningCenter/Inbound/Replies.tsx(3,10): error TS6133: 'Mail' is declared but its value is never read.
+src/pages/LearningCenter/Index.tsx(14,3): error TS6133: 'CheckCircle2' is declared but its value is never read.
+src/pages/LearningCenter/Index.tsx(329,36): error TS6133: 'index' is declared but its value is never read.
+src/pages/LearningCenter/Search/Playground.tsx(7,3): error TS6133: 'Database' is declared but its value is never read.
+src/pages/LearningCenter/Services/BillingDashboard.tsx(5,10): error TS6133: 'CreditCard' is declared but its value is never read.
+src/pages/LearningCenter/Services/BillingDashboard.tsx(5,22): error TS6133: 'Download' is declared but its value is never read.
+src/pages/LearningCenter/Services/Catalog.tsx(5,33): error TS6133: 'Tag' is declared but its value is never read.
+src/pages/LearningCenter/Services/Checkout.tsx(8,10): error TS6133: 'email' is declared but its value is never read.
+src/pages/LearningCenter/Services/Checkout.tsx(8,17): error TS6133: 'setEmail' is declared but its value is never read.
+src/pages/LearningCenter/Services/Checkout.tsx(9,10): error TS6133: 'name' is declared but its value is never read.
+src/pages/LearningCenter/Services/Checkout.tsx(9,16): error TS6133: 'setName' is declared but its value is never read.
+src/pages/LearningCenter/Services/Detail.tsx(6,51): error TS6133: 'Tag' is declared but its value is never read.
+src/pages/LearningCenter/Services/OrderConfirmation.tsx(5,32): error TS6133: 'ArrowLeft' is declared but its value is never read.
+src/pages/LearningCenter/Services/OrderConfirmation.tsx(9,9): error TS6133: 'navigate' is declared but its value is never read.
+src/pages/LearningCenter/Training/Index.tsx(14,3): error TS6133: 'Cpu' is declared but its value is never read.
+src/pages/MarketingReportPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/MarketingReportPage.tsx(35,24): error TS6133: 'setParticipants' is declared but its value is never read.
+src/pages/ops/OpsActionLog.tsx(5,1): error TS6133: 'React' is declared but its value is never read.
+src/pages/ops/OpsAlertsPage.tsx(5,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/ops/OpsCostTracker.tsx(5,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/ops/OpsDashboard.tsx(7,1): error TS6133: 'React' is declared but its value is never read.
+src/pages/ops/OpsDashboard.tsx(9,46): error TS6133: 'BarChart3' is declared but its value is never read.
+src/pages/ops/OpsIncidentsPage.tsx(6,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/ops/OpsIncidentsPage.tsx(187,26): error TS2367: This comparison appears to be unintentional because the types '"investigating" | "identified" | "monitoring"' and '"resolved"' have no overlap.
+src/pages/ops/OpsLayout.tsx(5,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/ops/OpsMetricsExplorer.tsx(5,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/ops/OpsMetricsExplorer.tsx(24,43): error TS6133: 'loadingSnapshots' is declared but its value is never read.
+src/pages/ops/OpsSystemHealth.tsx(5,1): error TS6133: 'React' is declared but its value is never read.
+src/pages/ops/OpsSystemHealth.tsx(9,1): error TS6133: 'OpsHealthGrid' is declared but its value is never read.
+src/pages/Outbound/Dashboard.tsx(7,3): error TS6133: 'Plus' is declared but its value is never read.
+src/pages/Outbound/Dashboard.tsx(21,10): error TS6133: 'getCampaignAnalytics' is declared but its value is never read.
+src/pages/Outbound/Email/Create.tsx(4,3): error TS6133: 'Mail' is declared but its value is never read.
+src/pages/Outbound/Email/Create.tsx(7,3): error TS6133: 'Send' is declared but its value is never read.
+src/pages/Outbound/Email/Create.tsx(8,3): error TS6133: 'Calendar' is declared but its value is never read.
+src/pages/Outbound/Email/Create.tsx(9,3): error TS6133: 'Users' is declared but its value is never read.
+src/pages/Outbound/Email/Create.tsx(13,3): error TS6133: 'X' is declared but its value is never read.
+src/pages/Outbound/Email/Create.tsx(21,1): error TS6133: 'getCampaignRecipients' is declared but its value is never read.
+src/pages/Outbound/Email/Create.tsx(29,10): error TS6133: 'recipientCount' is declared but its value is never read.
+src/pages/Outbound/Email/Create.tsx(29,26): error TS6133: 'setRecipientCount' is declared but its value is never read.
+src/pages/Outbound/Email/Create.tsx(98,13): error TS6133: 'campaign' is declared but its value is never read.
+src/pages/Outbound/Phone/Create.tsx(4,3): error TS6133: 'Phone' is declared but its value is never read.
+src/pages/Outbound/Phone/Create.tsx(7,3): error TS6133: 'Calendar' is declared but its value is never read.
+src/pages/Outbound/Phone/Create.tsx(8,3): error TS6133: 'Users' is declared but its value is never read.
+src/pages/Outbound/Phone/Create.tsx(88,13): error TS6133: 'campaign' is declared but its value is never read.
+src/pages/Outbound/SMS/Create.tsx(4,3): error TS6133: 'MessageSquare' is declared but its value is never read.
+src/pages/Outbound/SMS/Create.tsx(7,3): error TS6133: 'Calendar' is declared but its value is never read.
+src/pages/Outbound/SMS/Create.tsx(8,3): error TS6133: 'Users' is declared but its value is never read.
+src/pages/Outbound/SMS/Create.tsx(99,13): error TS6133: 'campaign' is declared but its value is never read.
+src/pages/PresentationCall.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/PresentationCall.tsx(31,22): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/pages/PresentationCall.tsx(34,34): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/pages/ProfilePage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/ProfilePage.tsx(24,24): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/pages/SchedulePage.tsx(1,1): error TS6133: 'React' is declared but its value is never read.
+src/pages/SignUpPage.tsx(1,8): error TS6133: 'React' is declared but its value is never read.
+src/pages/SignUpPage.tsx(18,24): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/pages/SignUpPage.tsx(37,30): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/pages/SponsorPage.tsx(3,23): error TS6133: 'Award' is declared but its value is never read.
+src/pages/SponsorPage.tsx(3,30): error TS6133: 'Target' is declared but its value is never read.
+src/providers/AppProvider.tsx(5,8): error TS6133: 'React' is declared but its value is never read.
+src/providers/AppProvider.tsx(18,18): error TS2339: Property 'setAuth' does not exist on type 'AuthState'.
+src/providers/AppProvider.tsx(18,27): error TS2339: Property 'clearAuth' does not exist on type 'AuthState'.
+src/services/alertService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/alertService.ts(11,68): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/alertService.ts(14,56): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/alertService.ts(17,57): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/alertService.ts(20,62): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/alertService.ts(25,62): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/alertService.ts(28,71): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/analyticsService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/analyticsService.ts(11,92): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/analyticsService.ts(14,84): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/analyticsService.ts(17,85): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/analyticsService.ts(20,84): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/analyticsService.ts(23,96): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/analyticsService.ts(26,174): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/approvalService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/approvalService.ts(11,74): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/approvalService.ts(14,62): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/approvalService.ts(17,73): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/approvalService.ts(22,91): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/approvalService.ts(25,86): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/authService.ts(6,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/authService.ts(6,15): error TS2305: Module '"./api"' has no exported member 'getCsrfCookie'.
+src/services/campaignService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/campaignService.ts(6,44): error TS6196: 'CampaignSend' is declared but never used.
+src/services/campaignService.ts(11,74): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/campaignService.ts(14,62): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/campaignService.ts(17,93): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/campaignService.ts(20,78): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/campaignService.ts(23,96): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/command-center/ad-api.ts(90,24): error TS2339: Property 'data' does not exist on type 'GeneratedAd[]'.
+src/services/command-center/ad-api.ts(100,24): error TS2339: Property 'data' does not exist on type 'GeneratedAd'.
+src/services/command-center/ad-api.ts(113,24): error TS2339: Property 'data' does not exist on type 'GeneratedAd'.
+src/services/command-center/ad-api.ts(126,24): error TS2339: Property 'data' does not exist on type 'GeneratedAd'.
+src/services/command-center/ad-api.ts(152,24): error TS2339: Property 'data' does not exist on type 'GeneratedAd'.
+src/services/command-center/ad-api.ts(166,24): error TS2339: Property 'data' does not exist on type 'AdTemplate[]'.
+src/services/command-center/ad-api.ts(186,24): error TS2339: Property 'data' does not exist on type 'AdTemplate'.
+src/services/command-center/publishing-api.ts(85,24): error TS2339: Property 'data' does not exist on type 'PublishingDashboard'.
+src/services/command-center/publishing-api.ts(99,24): error TS2339: Property 'data' does not exist on type 'PublishingCalendar'.
+src/services/command-center/publishing-api.ts(113,24): error TS2339: Property 'data' does not exist on type 'PublishingAnalytics'.
+src/services/communityService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/communityService.ts(65,14): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/communityService.ts(68,65): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/communityService.ts(75,14): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/contentService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/contentService.ts(11,80): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/contentService.ts(14,68): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/contentService.ts(17,78): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/contentService.ts(20,74): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/contentService.ts(23,73): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/crm/advanced-analytics-api.ts(46,24): error TS2339: Property 'data' does not exist on type 'EngagementScore'.
+src/services/crm/advanced-analytics-api.ts(60,24): error TS2339: Property 'data' does not exist on type 'CampaignROI'.
+src/services/crm/advanced-analytics-api.ts(72,24): error TS2339: Property 'data' does not exist on type 'PredictiveScore'.
+src/services/crm/analytics-api.ts(113,24): error TS2339: Property 'data' does not exist on type 'InterestAnalytics'.
+src/services/crm/analytics-api.ts(123,24): error TS2339: Property 'data' does not exist on type 'PurchaseAnalytics'.
+src/services/crm/analytics-api.ts(133,24): error TS2339: Property 'data' does not exist on type 'LearningAnalytics'.
+src/services/crm/analytics-api.ts(143,24): error TS2339: Property 'data' does not exist on type 'CampaignPerformance'.
+src/services/crm/campaign-generation-api.ts(110,24): error TS2339: Property 'data' does not exist on type 'CampaignData'.
+src/services/crm/campaign-generation-api.ts(118,24): error TS2339: Property 'data' does not exist on type 'CampaignTemplate[]'.
+src/services/crm/campaign-generation-api.ts(130,24): error TS2339: Property 'data' does not exist on type 'CampaignSuggestion[]'.
+src/services/crm/conversion-tracking.ts(7,1): error TS6192: All imports in import declaration are unused.
+src/services/crm/conversion-tracking.ts(64,24): error TS2551: Property 'customer_email' does not exist on type 'LandingPageViewEvent | ServiceInterestEvent | ServicePurchaseEvent'. Did you mean 'customer_id'?
+  Property 'customer_email' does not exist on type 'ServiceInterestEvent'.
+src/services/crm/conversion-tracking.ts(67,34): error TS2551: Property 'customer_email' does not exist on type 'LandingPageViewEvent | ServiceInterestEvent | ServicePurchaseEvent'. Did you mean 'customer_id'?
+  Property 'customer_email' does not exist on type 'ServiceInterestEvent'.
+src/services/crm/conversion-tracking.ts(76,35): error TS2551: Property 'customer_email' does not exist on type 'LandingPageViewEvent | ServiceInterestEvent | ServicePurchaseEvent'. Did you mean 'customer_id'?
+  Property 'customer_email' does not exist on type 'ServiceInterestEvent'.
+src/services/crm/conversion-tracking.ts(168,15): error TS6133: 'customer' is declared but its value is never read.
+src/services/crm/conversion-tracking.ts(209,5): error TS2561: Object literal may only specify known properties, but 'customer_email' does not exist in type 'ConversionEvent'. Did you mean to write 'customer_id'?
+src/services/crm/conversion-tracking.ts(228,5): error TS2353: Object literal may only specify known properties, and 'slide_number' does not exist in type 'ConversionEvent'.
+src/services/crm/conversion-tracking.ts(280,5): error TS2353: Object literal may only specify known properties, and 'amount' does not exist in type 'ConversionEvent'.
+src/services/crm/dashboard-api.ts(112,24): error TS2339: Property 'data' does not exist on type 'CrmAnalytics'.
+src/services/crm/notifications-api.ts(38,44): error TS2367: This comparison appears to be unintentional because the types 'number | boolean' and 'string' have no overlap.
+src/services/customerRecommendationsService.ts(6,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/customerRecommendationsService.ts(22,14): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/customerService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/customerService.ts(11,83): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/customerService.ts(14,62): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/customerService.ts(17,63): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/customerService.ts(20,68): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/customerService.ts(25,81): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/customerService.ts(28,81): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/emergencyService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/emergencyService.ts(11,84): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/emergencyService.ts(14,72): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/emergencyService.ts(17,73): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/emergencyService.ts(20,78): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/emergencyService.ts(23,78): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/faqService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/faqService.ts(11,75): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/faqService.ts(14,63): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/faqService.ts(17,64): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/faqService.ts(20,69): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/faqService.ts(25,66): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/faqService.ts(28,70): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/learning/campaign-api.ts(15,3): error TS6133: 'landingPage' is declared but its value is never read.
+src/services/learning/campaign-api.ts(218,15): error TS6133: 'hasContent' is declared but its value is never read.
+src/services/learning/campaign-api.ts(264,30): error TS2339: Property 'narration' does not exist on type '{ id: number; component: string; content: Record<string, unknown>; audioUrl?: string | undefined; requiresPersonalization: boolean; }'.
+src/services/learning/campaign-api.ts(285,26): error TS2339: Property 'narration' does not exist on type '{ id: number; component: string; content: Record<string, unknown>; audioUrl?: string | undefined; requiresPersonalization: boolean; }'.
+src/services/learning/campaign-api.ts(299,7): error TS2322: Type '{ audio_url: any; narration: any; id: number; component: string; content: Record<string, unknown>; audioUrl?: string | undefined; requiresPersonalization: boolean; }[]' is not assignable to type 'Slide[]'.
+  Type '{ audio_url: any; narration: any; id: number; component: string; content: Record<string, unknown>; audioUrl?: string; requiresPersonalization: boolean; }' is not assignable to type 'Slide'.
+    Types of property 'component' are incompatible.
+      Type 'string' is not assignable to type 'SlideComponentType'.
+src/services/learning/campaign-api.ts(301,44): error TS2551: Property 'audio_url' does not exist on type '{ id: number; component: string; content: Record<string, unknown>; audioUrl?: string | undefined; requiresPersonalization: boolean; }'. Did you mean 'audioUrl'?
+src/services/learning/knowledge-api.test.ts(121,51): error TS2353: Object literal may only specify known properties, and 'category' does not exist in type 'FAQFilters'.
+src/services/learning/knowledge-api.ts(204,12): error TS2678: Type '"fulltext"' is not comparable to type '"hybrid" | "semantic" | "keyword" | undefined'.
+src/services/learning/search-api.ts(31,64): error TS6133: 'index' is declared but its value is never read.
+src/services/newsletterService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/newsletterService.ts(11,78): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/newsletterService.ts(14,66): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/newsletterService.ts(17,67): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/newsletterService.ts(20,72): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/newsletterService.ts(25,73): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/newsletterService.ts(28,90): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/newsletterService.ts(31,72): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/operations/operations-api.ts(204,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(219,42): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(236,44): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(263,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(287,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(303,35): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(312,55): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(328,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(344,42): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(353,62): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(365,60): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(385,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(410,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(430,49): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(447,44): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(471,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(494,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(515,44): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(536,44): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(555,74): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(577,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(597,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(621,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(644,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(660,39): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(669,50): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(684,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(706,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(731,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/operations/operations-api.ts(749,33): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.
+src/services/opsService.ts(6,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/orderService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/orderService.ts(11,68): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/orderService.ts(14,56): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/orderService.ts(17,66): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/outbound/campaign-api.ts(54,24): error TS2339: Property 'data' does not exist on type 'RecipientList'.
+src/services/outbound/campaign-api.ts(71,24): error TS2339: Property 'data' does not exist on type 'CampaignAnalytics'.
+src/services/outbound/email-api.ts(69,24): error TS2339: Property 'data' does not exist on type 'EmailCampaign[]'.
+src/services/outbound/email-api.ts(79,24): error TS2339: Property 'data' does not exist on type 'EmailCampaign'.
+src/services/outbound/email-api.ts(92,24): error TS2339: Property 'data' does not exist on type 'EmailCampaign'.
+src/services/outbound/email-api.ts(102,24): error TS2339: Property 'data' does not exist on type 'EmailTemplate[]'.
+src/services/outbound/email-api.ts(119,24): error TS2339: Property 'data' does not exist on type 'EmailTemplate'.
+src/services/outbound/phone-api.ts(63,24): error TS2339: Property 'data' does not exist on type 'PhoneCampaign[]'.
+src/services/outbound/phone-api.ts(73,24): error TS2339: Property 'data' does not exist on type 'PhoneCampaign'.
+src/services/outbound/phone-api.ts(86,24): error TS2339: Property 'data' does not exist on type 'PhoneCampaign'.
+src/services/outbound/phone-api.ts(96,24): error TS2339: Property 'data' does not exist on type 'PhoneScript[]'.
+src/services/outbound/phone-api.ts(111,24): error TS2339: Property 'data' does not exist on type 'PhoneScript'.
+src/services/outbound/sms-api.ts(63,24): error TS2339: Property 'data' does not exist on type 'SmsCampaign[]'.
+src/services/outbound/sms-api.ts(73,24): error TS2339: Property 'data' does not exist on type 'SmsCampaign'.
+src/services/outbound/sms-api.ts(86,24): error TS2339: Property 'data' does not exist on type 'SmsCampaign'.
+src/services/outbound/sms-api.ts(96,24): error TS2339: Property 'data' does not exist on type 'SmsTemplate[]'.
+src/services/outbound/sms-api.ts(111,24): error TS2339: Property 'data' does not exist on type 'SmsTemplate'.
+src/services/personalities/contact-api.ts(40,19): error TS2339: Property 'data' does not exist on type '{ success: boolean; message: string; }'.
+src/services/personalities/contact-api.ts(53,19): error TS2339: Property 'data' does not exist on type '{ success: boolean; message: string; }'.
+src/services/personalities/contact-api.ts(63,24): error TS2339: Property 'data' does not exist on type 'ContactPreferences'.
+src/services/personalities/contact-api.ts(77,19): error TS2339: Property 'data' does not exist on type '{ success: boolean; message: string; }'.
+src/services/personalities/personality-api.ts(98,24): error TS2339: Property 'data' does not exist on type 'AiPersonality[]'.
+src/services/personalities/personality-api.ts(108,24): error TS2339: Property 'data' does not exist on type 'AiPersonality'.
+src/services/personalities/personality-api.ts(121,24): error TS2339: Property 'data' does not exist on type 'AiPersonality'.
+src/services/personalities/personality-api.ts(135,24): error TS2339: Property 'data' does not exist on type 'AiPersonality'.
+src/services/personalities/personality-api.ts(157,24): error TS2339: Property 'data' does not exist on type 'PersonalityAssignment'.
+src/services/personalities/personality-api.ts(169,10): error TS18047: 'response.data' is possibly 'null'.
+src/services/personalities/personality-api.ts(169,24): error TS2339: Property 'data' does not exist on type 'PersonalityAssignment'.
+src/services/personalities/personality-api.ts(185,24): error TS2339: Property 'data' does not exist on type 'PersonalityAssignment[]'.
+src/services/personalities/personality-api.ts(202,24): error TS2339: Property 'data' does not exist on type '{ response: string; personality_id: string; personality_name: string; }'.
+src/services/personalityService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/personalityService.ts(16,67): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/personalityService.ts(19,71): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/personalityService.ts(22,87): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/personalityService.ts(28,14): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/personalityService.ts(31,108): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/realtime.ts(87,21): error TS2352: Conversion of type '{ listen: (ev: string, cb: (e: unknown) => void) => void; }' to type '{ stopListening: (ev: string) => void; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'stopListening' is missing in type '{ listen: (ev: string, cb: (e: unknown) => void) => void; }' but required in type '{ stopListening: (ev: string) => void; }'.
+src/services/realtime.ts(88,12): error TS2352: Conversion of type '{ listen: (ev: string, cb: (e: unknown) => void) => void; }' to type '{ stopListening: (ev: string) => void; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'stopListening' is missing in type '{ listen: (ev: string, cb: (e: unknown) => void) => void; }' but required in type '{ stopListening: (ev: string) => void; }'.
+src/services/searchService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/searchService.ts(18,82): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/searchService.ts(21,91): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/searchService.ts(24,89): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/searchService.ts(27,70): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/serviceService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/serviceService.ts(11,68): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/serviceService.ts(14,60): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/serviceService.ts(17,74): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/serviceService.ts(20,78): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/smbService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/smbService.ts(11,60): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/smbService.ts(14,66): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/smbService.ts(18,75): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/smbService.ts(22,82): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/smbService.ts(26,88): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/smbService.ts(30,86): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/smbService.ts(34,101): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/subscriberService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/subscriberService.ts(11,84): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/subscriberService.ts(14,72): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/subscriberService.ts(17,115): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/subscriberService.ts(20,121): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/surveyService.ts(5,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/services/surveyService.ts(11,69): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/surveyService.ts(14,73): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/surveyService.ts(17,93): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/surveyService.ts(20,74): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/surveyService.ts(23,76): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/services/websocket.ts(56,14): error TS2307: Cannot find module 'laravel-echo' or its corresponding type declarations.
+src/services/websocket.ts(57,14): error TS2307: Cannot find module 'pusher-js' or its corresponding type declarations.
+src/test/setup.ts(2,10): error TS6133: 'expect' is declared but its value is never read.
+src/utils/campaign-content-generator.ts(21,9): error TS6133: 'slides' is declared but its value is never read.
+src/utils/navigation-tracker.ts(30,16): error TS2339: Property 'runId' does not exist on type 'Omit<NavigationLog, "timestamp" | "sessionId" | "runId">'.
+src/utils/navigation-tracker.ts(45,5): error TS2353: Object literal may only specify known properties, and 'runId' does not exist in type 'Omit<NavigationLog, "timestamp" | "sessionId" | "runId">'.
+src/utils/navigation-tracker.ts(60,5): error TS2353: Object literal may only specify known properties, and 'runId' does not exist in type 'Omit<NavigationLog, "timestamp" | "sessionId" | "runId">'.
+src/utils/navigation-tracker.ts(75,5): error TS2353: Object literal may only specify known properties, and 'runId' does not exist in type 'Omit<NavigationLog, "timestamp" | "sessionId" | "runId">'.
+src/utils/navigation-tracker.ts(90,5): error TS2353: Object literal may only specify known properties, and 'runId' does not exist in type 'Omit<NavigationLog, "timestamp" | "sessionId" | "runId">'.
+src/utils/navigation-tracker.ts(105,5): error TS2353: Object literal may only specify known properties, and 'runId' does not exist in type 'Omit<NavigationLog, "timestamp" | "sessionId" | "runId">'.

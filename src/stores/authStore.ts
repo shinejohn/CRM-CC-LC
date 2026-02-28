@@ -1,18 +1,29 @@
-/**
- * Zustand auth store: user, token, isAuthenticated
- */
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import type { User } from '../types/auth';
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  business_id: string;
+  business_name: string;
+  role: "owner" | "admin" | "member";
+  avatar_url?: string;
+  subscription_tier: "free" | "influencer" | "expert" | "sponsor";
+}
 
 interface AuthState {
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
-  setAuth: (user: User, token: string) => void;
-  clearAuth: () => void;
+  isLoading: boolean;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
+  setUser: (user: User) => void;
+  setToken: (token: string) => void;
 }
+
+const API_BASE = import.meta.env.VITE_API_URL || "https://api.fibonacco.com/v1";
 
 export const useAuthStore = create<AuthState>()(
   persist(
@@ -20,20 +31,32 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       token: null,
       isAuthenticated: false,
-      setAuth: (user, token) => {
-        localStorage.setItem('auth_token', token);
-        set({ user, token, isAuthenticated: true });
+      isLoading: false,
+      login: async (email, password) => {
+        set({ isLoading: true });
+        try {
+          const response = await fetch(`${API_BASE}/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+          const data = await response.json();
+          set({
+            user: data.user,
+            token: data.token,
+            isAuthenticated: true,
+            isLoading: false,
+          });
+        } catch {
+          set({ isLoading: false });
+          throw new Error("Login failed");
+        }
       },
-      clearAuth: () => {
-        localStorage.removeItem('auth_token');
-        set({ user: null, token: null, isAuthenticated: false });
-      },
+      logout: () =>
+        set({ user: null, token: null, isAuthenticated: false }),
+      setUser: (user) => set({ user, isAuthenticated: true }),
+      setToken: (token) => set({ token }),
     }),
-    {
-      name: 'auth-storage',
-      onRehydrateStorage: () => (state, error) => {
-        if (!error && state?.token) localStorage.setItem('auth_token', state.token);
-      },
-    }
+    { name: "fibonacco-auth" }
   )
 );
