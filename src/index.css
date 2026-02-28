@@ -191,3 +191,37 @@ pre {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+/* ============================================
+   NEXUS DYNAMIC THEME VARIABLES (Phase 3)
+   ============================================ */
+:root {
+  --nexus-00a4ef: #00a4ef;
+  --nexus-00cc6a: #00cc6a;
+  --nexus-00d4ff: #00d4ff;
+  --nexus-059669: #059669;
+  --nexus-10b981: #10b981;
+  --nexus-152d4a: #152d4a;
+  --nexus-1a1a1a: #1a1a1a;
+  --nexus-1e3a5f: #1e3a5f;
+  --nexus-2563eb: #2563eb;
+  --nexus-2d5a8a: #2d5a8a;
+  --nexus-34a853: #34a853;
+  --nexus-3b82f6: #3b82f6;
+  --nexus-4285f4: #4285f4;
+  --nexus-64748b: #64748b;
+  --nexus-666666: #666666;
+  --nexus-8b5cf6: #8b5cf6;
+  --nexus-cbd5e1: #cbd5e1;
+  --nexus-d97706: #d97706;
+  --nexus-dc2626: #dc2626;
+  --nexus-e2e8f0: #e2e8f0;
+  --nexus-e5e5e5: #e5e5e5;
+  --nexus-e6fff2: #e6fff2;
+  --nexus-ea4335: #ea4335;
+  --nexus-f1f5f9: #f1f5f9;
+  --nexus-fafaf8: #fafaf8;
+  --nexus-fbbc05: #fbbc05;
+  --nexus-ff6b35: #ff6b35;
+  --nexus-ffb800: #ffb800;
+  --nexus-fff9e6: #fff9e6;
+}

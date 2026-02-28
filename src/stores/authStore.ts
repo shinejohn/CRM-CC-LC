@@ -7,7 +7,7 @@ export interface User {
   email: string;
   business_id: string;
   business_name: string;
-  role: "owner" | "admin" | "member";
+  role: "owner" | "admin" | "member" | "viewer";
   avatar_url?: string;
   subscription_tier: "free" | "influencer" | "expert" | "sponsor";
 }

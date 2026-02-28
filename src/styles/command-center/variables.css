@@ -55,6 +55,94 @@
 }
 
 /* ============================================
+   NEXUS SEMANTIC DESIGN TOKENS
+   Maps semantic names to concrete values for
+   both light and dark themes.
+   ============================================ */
+
+:root {
+  /* Text */
+  --nexus-text-primary: #111827;
+  --nexus-text-secondary: #4b5563;
+  --nexus-text-tertiary: #9ca3af;
+
+  /* Backgrounds */
+  --nexus-bg-page: #f9fafb;
+  --nexus-bg-secondary: #f3f4f6;
+
+  /* Cards */
+  --nexus-card-bg: #ffffff;
+  --nexus-card-bg-hover: #f9fafb;
+  --nexus-card-border: #e5e7eb;
+  --nexus-card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06);
+  --nexus-card-shadow-hover: 0 4px 12px -2px rgb(0 0 0 / 0.1);
+
+  /* Navigation */
+  --nexus-nav-bg: #ffffff;
+  --nexus-nav-border: #e5e7eb;
+  --nexus-nav-active: #eff6ff;
+
+  /* Inputs */
+  --nexus-input-bg: #ffffff;
+  --nexus-input-border: #d1d5db;
+
+  /* Dividers */
+  --nexus-divider: #e5e7eb;
+
+  /* Accents */
+  --nexus-accent-primary: #3b82f6;
+  --nexus-accent-danger: #ef4444;
+
+  /* Brand */
+  --nexus-brand-primary: #3b82f6;
+
+  /* Buttons */
+  --nexus-button-bg: #3b82f6;
+  --nexus-button-hover: #2563eb;
+}
+
+.dark {
+  /* Text */
+  --nexus-text-primary: #f8fafc;
+  --nexus-text-secondary: #cbd5e1;
+  --nexus-text-tertiary: #64748b;
+
+  /* Backgrounds */
+  --nexus-bg-page: #0f172a;
+  --nexus-bg-secondary: #1e293b;
+
+  /* Cards */
+  --nexus-card-bg: #1e293b;
+  --nexus-card-bg-hover: #334155;
+  --nexus-card-border: #334155;
+  --nexus-card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.2);
+  --nexus-card-shadow-hover: 0 4px 12px -2px rgb(0 0 0 / 0.3);
+
+  /* Navigation */
+  --nexus-nav-bg: #0f172a;
+  --nexus-nav-border: #1e293b;
+  --nexus-nav-active: rgba(59, 130, 246, 0.15);
+
+  /* Inputs */
+  --nexus-input-bg: #1e293b;
+  --nexus-input-border: #475569;
+
+  /* Dividers */
+  --nexus-divider: #334155;
+
+  /* Accents */
+  --nexus-accent-primary: #60a5fa;
+  --nexus-accent-danger: #f87171;
+
+  /* Brand */
+  --nexus-brand-primary: #60a5fa;
+
+  /* Buttons */
+  --nexus-button-bg: #3b82f6;
+  --nexus-button-hover: #2563eb;
+}
+
+/* ============================================
    NEXUS THEME UTILITIES
    ============================================ */
 

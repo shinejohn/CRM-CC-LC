@@ -18,13 +18,13 @@ export function CommandCenterLayout({ children, businessName = "Fibonacco" }: Co
 
     return (
         <AccountManagerProvider>
-            <div className="h-screen w-full flex bg-slate-50 dark:bg-slate-900 overflow-hidden font-sans text-slate-900 dark:text-slate-100 transition-colors relative">
+            <div className="h-screen w-full flex bg-[var(--nexus-bg-page)] overflow-hidden font-sans text-[var(--nexus-text-primary)] transition-colors relative">
 
-                {/* 140px Navigation Rail */}
+                {/* Navigation Rail (256px expanded / 64px collapsed) */}
                 <NavigationRail />
 
-                {/* Main Container - Pushed 140px right */}
-                <div className="flex-1 flex flex-col ml-[140px] relative transition-all duration-300">
+                {/* Main Container - uses ml matching sidebar default width */}
+                <div className="flex-1 flex flex-col ml-[var(--cc-sidebar-width)] relative transition-all duration-300">
 
                     <CommandCenterHeader
                         businessName={businessName}
@@ -34,7 +34,7 @@ export function CommandCenterLayout({ children, businessName = "Fibonacco" }: Co
                     <AccountManagerBar />
 
                     {/* Main Content Viewport */}
-                    <main className="flex-1 overflow-y-auto p-4 md:p-8 relative bg-slate-50/50 dark:bg-slate-900/50">
+                    <main className="flex-1 overflow-y-auto p-4 md:p-8 relative">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={location.pathname}

@@ -18,7 +18,7 @@ export default function LearningCenterHub() {
                     <DataCard
                         key={campaign.id}
                         className="flex flex-col h-full hover:border-[var(--nexus-accent-primary)] transition-all cursor-pointer group shadow-sm hover:shadow-md"
-                        onClick={() => navigate(`/learn/${campaign.slug}`)}
+                        onClick={() => navigate(campaign.slug)}
                     >
                         <div className="flex-1 space-y-4">
                             <div className="flex justify-between items-start">
