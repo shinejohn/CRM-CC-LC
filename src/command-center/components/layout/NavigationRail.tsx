@@ -2,7 +2,8 @@ import React from 'react';
 import { NavLink, useLocation } from 'react-router';
 import {
     Command, UserCircle, Target, ShoppingCart,
-    Truck, BarChart3, Zap
+    Truck, BarChart3, Zap,
+    Users, CreditCard, FileText, Bot, GraduationCap, Briefcase, Settings, Building2
 } from 'lucide-react';
 
 const navItems = [
@@ -13,6 +14,14 @@ const navItems = [
     { zone: 'deliver', href: '/command-center/deliver', label: 'Deliver', icon: Truck, color: 'text-lavender-600 dark:text-purple-400', activeBg: 'bg-purple-50 dark:bg-purple-900/20' },
     { zone: 'measure', href: '/command-center/measure', label: 'Measure', icon: BarChart3, color: 'text-ocean-600 dark:text-cyan-400', activeBg: 'bg-cyan-50 dark:bg-cyan-900/20' },
     { zone: 'automate', href: '/command-center/automate', label: 'Automate', icon: Zap, color: 'text-violet-600 dark:text-indigo-400', activeBg: 'bg-indigo-50 dark:bg-indigo-900/20' },
+    { zone: 'crm', href: '/command-center/crm', label: 'CRM', icon: Users, color: 'text-indigo-600 dark:text-indigo-400', activeBg: 'bg-indigo-50 dark:bg-indigo-900/20' },
+    { zone: 'billing', href: '/command-center/billing', label: 'Billing', icon: CreditCard, color: 'text-emerald-600 dark:text-emerald-400', activeBg: 'bg-emerald-50 dark:bg-emerald-900/20' },
+    { zone: 'content', href: '/command-center/content', label: 'Content', icon: FileText, color: 'text-blue-600 dark:text-blue-400', activeBg: 'bg-blue-50 dark:bg-blue-900/20' },
+    { zone: 'ai-employees', href: '/command-center/ai-team', label: 'AI Team', icon: Bot, color: 'text-purple-600 dark:text-purple-400', activeBg: 'bg-purple-50 dark:bg-purple-900/20' },
+    { zone: 'learning', href: '/command-center/learn', label: 'Learn', icon: GraduationCap, color: 'text-amber-600 dark:text-amber-400', activeBg: 'bg-amber-50 dark:bg-amber-900/20' },
+    { zone: 'services', href: '/command-center/services', label: 'Services', icon: Briefcase, color: 'text-rose-600 dark:text-rose-400', activeBg: 'bg-rose-50 dark:bg-rose-900/20' },
+    { zone: 'business', href: '/command-center/business', label: 'Business', icon: Building2, color: 'text-slate-600 dark:text-slate-400', activeBg: 'bg-slate-100 dark:bg-slate-800' },
+    { zone: 'settings', href: '/command-center/settings', label: 'Settings', icon: Settings, color: 'text-gray-600 dark:text-gray-400', activeBg: 'bg-gray-100 dark:bg-gray-800' },
 ];
 
 export function NavigationRail({ className }: { className?: string }) {

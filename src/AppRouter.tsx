@@ -82,13 +82,14 @@ import { CreateSmsCampaignPage } from './pages/LearningCenter/Outbound/SMS/Creat
 import { ConversationsPage } from './pages/LearningCenter/Inbound/Conversations';
 import { RepliesPage } from './pages/LearningCenter/Inbound/Replies';
 import { CallsPage } from './pages/LearningCenter/Inbound/Calls';
-import { CommandCenterDashboardPage } from './pages/CommandCenter/Dashboard';
 import { AIPersonalitiesDashboardPage } from './pages/AIPersonalities/Dashboard';
 import { AIPersonalityDetailPage } from './pages/AIPersonalities/Detail';
 import { AIPersonalityAssignPage } from './pages/AIPersonalities/Assign';
 import { AIPersonalityContactsPage } from './pages/AIPersonalities/Contacts';
 import { ServicePurchaseWizardPage } from './command-center/modules/services/wizard';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { getCommandCenterRoutes } from './command-center/AppRouter';
+
 
 // Ops Dashboard (POD) - Admin only
 import { OpsLayout } from './pages/ops/OpsLayout';
@@ -162,15 +163,8 @@ export function AppRouter() {
         <Route path="/outbound/phone/create" element={<StandaloneCreatePhoneCampaign />} />
         <Route path="/outbound/sms/create" element={<StandaloneCreateSmsCampaign />} />
 
-        {/* Command Center Routes - Protected */}
-        <Route
-          path="/command-center"
-          element={
-            <ProtectedRoute requireAuth>
-              <CommandCenterDashboardPage />
-            </ProtectedRoute>
-          }
-        />
+        {/* Command Center Routes */}
+        {getCommandCenterRoutes()}
 
         {/* AI Personalities Routes */}
         <Route path="/ai-personalities" element={<AIPersonalitiesDashboardPage />} />

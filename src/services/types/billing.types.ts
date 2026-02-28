@@ -3,10 +3,14 @@ export interface Invoice {
     customer_id: string;
     customer_name: string;
     amount: number;
-    status: "paid" | "pending" | "overdue" | "draft";
+    status: "paid" | "pending" | "overdue" | "draft" | "sent" | "cancelled";
     issue_date: string;
     due_date: string;
     items: InvoiceItem[];
+    invoice_number?: string;
+    tax?: number;
+    total?: number;
+    paid_date?: string;
 }
 
 export interface InvoiceItem {
@@ -24,6 +28,29 @@ export interface Order {
     amount: number;
     status: "completed" | "processing" | "cancelled" | "refunded";
     date: string;
+    order_number?: string;
+    items?: OrderItem[];
+}
+
+export interface OrderItem {
+    id: string;
+    description: string;
+    quantity: number;
+    unit_price: number;
+    amount: number;
+}
+
+export interface Collection {
+    id: string;
+    invoice_id: string;
+    customer_id: string;
+    customer_name: string;
+    amount_due: number;
+    amount_collected: number;
+    status: "pending" | "partial" | "collected" | "written_off";
+    due_date: string;
+    last_contact_date?: string;
+    notes?: string;
 }
 
 export interface CollectionMetrics {
