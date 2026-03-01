@@ -1,0 +1,218 @@
+---
+description: Laravel and PHP conventions for the Fibonacco monorepo. Apply to ALL PHP files.
+globs: ["**/*.php", "config/**", "app/**", "database/**", "routes/**"]
+alwaysApply: true
+---
+
+# Fibonacco Laravel/PHP Rules
+
+## Architecture Context
+This is a Laravel + Inertia.js monorepo deployed on Railway. It serves MULTIPLE apps
+(Day.News, GoEventCity, DowntownGuide, GoLocalVoices, AlphaSite) from the SAME codebase.
+The current app is determined by the PLATFORM_KEY environment variable. The production
+database is PostgreSQL. Production runs with `config:cache` enabled.
+
+## PHP File Structure (every file, no exceptions)
+
+```php
+<?php
+
+declare(strict_types=1);
+```
+
+Every PHP file begins with `<?php` followed by `declare(strict_types=1);` on the next line.
+
+## Class Declarations
+
+All classes in these directories MUST be `final` unless explicitly `abstract`:
+- `app/Models/`
+- `app/Services/`
+- `app/Jobs/`
+- `app/Http/Controllers/`
+- `app/Actions/`
+
+```php
+// ✅ Correct
+final class ArticleController extends Controller
+
+// ❌ Wrong
+class ArticleController extends Controller
+```
+
+## Environment Variables — CRITICAL
+
+**NEVER use `env()` outside of `config/` files.**
+
+Railway production runs `config:cache`, which compiles all config into a single cached file.
+After caching, `env()` returns `null` everywhere except inside `config/*.php` files.
+
+```php
+// ❌ WILL BREAK IN PRODUCTION — env() in a Service class
+final class AiService
+{
+    public function call(): string
+    {
+        $key = env('OPENAI_API_KEY'); // Returns null in production!
+    }
+}
+
+// ✅ Correct — reference config, which reads env at cache time
+// In config/services.php:
+'openai' => [
+    'key' => env('OPENAI_API_KEY'),
+],
+
+// In app/Services/AiService.php:
+final class AiService
+{
+    public function call(): string
+    {
+        $key = config('services.openai.key'); // Always works
+    }
+}
+```
+
+When adding a new environment variable:
+1. Add it to the appropriate `config/*.php` file with `env('VAR_NAME', 'default')`
+2. Add it to `.env.example` with a comment explaining its purpose
+3. Reference it in application code ONLY via `config('file.key')`
+
+## Model Conventions
+
+Every Eloquent model MUST:
+1. Use the `HasUuids` trait (all tables use UUID primary keys)
+2. Be declared `final`
+3. Define `$fillable` or `$guarded` explicitly
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
+
+final class Article extends Model
+{
+    use HasUuids;
+
+    protected $fillable = [
+        'title',
+        'body',
+        'community_id',
+    ];
+}
+```
+
+## Migration Rules
+
+Database is PostgreSQL. NEVER use MySQL-specific syntax.
+
+### Forbidden (MySQL-only):
+- `->unsigned()` — PostgreSQL integers are always signed
+- `$table->tinyInteger()` / `$table->mediumInteger()` — use `smallInteger()` or `integer()`
+- `ENUM` columns — use `string()` with validation or a check constraint
+- `AUTO_INCREMENT` — handled by `->primary()` or `->uuid()`
+- `DATETIME` — use `timestamp()` or `timestampTz()`
+
+### Primary Keys:
+```php
+// ❌ Wrong — creates auto-increment integer
+$table->id();
+
+// ✅ Correct — UUID primary key matching HasUuids trait
+$table->uuid('id')->primary();
+```
+
+### Foreign Keys:
+```php
+// ❌ Wrong — creates integer column, but target table has UUID PK
+$table->foreignId('user_id')->constrained();
+
+// ✅ Correct — UUID foreign key matching UUID primary keys
+$table->foreignUuid('user_id')->constrained();
+```
+
+### Rollbacks:
+Every migration MUST have a `down()` method that fully reverses `up()`:
+```php
+public function down(): void
+{
+    Schema::dropIfExists('articles');
+}
+```
+
+## Debug Code — NEVER COMMIT
+
+Never include any of these in committed code:
+- `dd()`, `dump()`, `ray()`, `var_dump()`, `print_r()`
+- `\Log::debug()` with sensitive data
+- Commented-out code blocks longer than 3 lines
+
+Use `Log::info()` or `Log::warning()` for production-appropriate logging.
+
+## Multi-App Awareness
+
+This codebase serves multiple apps. The current app identity comes from:
+```php
+config('app.platform_key') // Returns: 'day-news', 'go-event-city', etc.
+```
+
+**NEVER hardcode app-specific content in shared code.** This includes:
+- App names ("Day.News", "GoEventCity")
+- Social media URLs
+- Copyright text
+- Logo paths
+- Navigation links that are app-specific
+
+Instead, put app-specific data in config files and read via `config()`:
+```php
+// In config/footer.php:
+'day-news' => [
+    'tagline' => 'Your Local News Source',
+],
+
+// In middleware or controller:
+$footerConfig = config('footer.' . config('app.platform_key'));
+```
+
+## Inertia Shared Data
+
+Share data with all Inertia pages via `HandleInertiaRequests` middleware.
+Never pass app-specific branding data directly from individual controllers.
+
+```php
+// In HandleInertiaRequests.php share() method:
+'appName' => config('app.name'),
+'platformKey' => config('app.platform_key'),
+'footerConfig' => $this->footerConfig(),
+```
+
+## Route Definitions
+
+Prefer controller-based routes over closures. Closure routes cannot be cached
+by `route:cache`, which is required for Railway production performance.
+
+```php
+// ❌ Cannot be cached
+Route::get('/articles', function () { ... });
+
+// ✅ Can be cached
+Route::get('/articles', [ArticleController::class, 'index']);
+```
+
+## Storage and File Access
+
+If your code writes to or reads from `storage/app/public/`:
+- Verify that the Dockerfile or deploy script contains `php artisan storage:link`
+- Never assume the symlink exists — check in production
+
+```php
+// Store files
+Storage::disk('public')->put('images/photo.jpg', $contents);
+
+// Generate URL (requires storage:link in production)
+$url = Storage::disk('public')->url('images/photo.jpg');
+```

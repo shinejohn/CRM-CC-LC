@@ -1,0 +1,219 @@
+---
+description: Frontend conventions for React/TypeScript/Inertia in the Fibonacco monorepo. Apply to ALL JS/TS/TSX/JSX/Vue files.
+globs: ["resources/js/**", "**/*.ts", "**/*.tsx", "**/*.jsx", "**/*.vue"]
+alwaysApply: true
+---
+
+# Fibonacco Frontend Rules
+
+## Architecture Context
+This is a Laravel + Inertia.js + React app with server-side rendering (SSR).
+The frontend code runs in TWO environments: the browser AND Node.js (during SSR).
+The app serves MULTIPLE brands from the same codebase — never hardcode brand-specific content.
+
+## SSR Compatibility — CRITICAL
+
+All frontend code may execute in Node.js where browser APIs don't exist.
+
+```tsx
+// ❌ CRASHES DURING SSR — window doesn't exist in Node.js
+window.scrollTo(0, 0);
+document.title = 'Hello';
+localStorage.setItem('key', 'value');
+
+// ✅ Always guard browser-only APIs
+if (typeof window !== 'undefined') {
+    window.scrollTo(0, 0);
+}
+
+// ✅ For React effects, useEffect only runs in browser
+useEffect(() => {
+    document.title = 'Hello';  // Safe — useEffect is browser-only
+}, []);
+```
+
+APIs that require guards: `window`, `document`, `navigator`, `localStorage`,
+`sessionStorage`, `location`, `history`, `alert`, `confirm`, `prompt`,
+`requestAnimationFrame`, `IntersectionObserver`, `ResizeObserver`, `MutationObserver`.
+
+## TypeScript — No 'any' Type
+
+Never use `any`. It defeats TypeScript's purpose and hides bugs that surface in production.
+
+```tsx
+// ❌ Lazy — hides type errors
+const data: any = response.data;
+function handleClick(e: any) { ... }
+const items = props.items as any[];
+
+// ✅ Define interfaces for everything
+interface ArticleResponse {
+    id: string;
+    title: string;
+    body: string;
+    published_at: string | null;
+}
+
+const data: ArticleResponse = response.data;
+function handleClick(e: React.MouseEvent<HTMLButtonElement>) { ... }
+```
+
+When the type is genuinely uncertain, use `unknown` with type guards:
+```tsx
+function parseResponse(data: unknown): Article {
+    if (typeof data === 'object' && data !== null && 'title' in data) {
+        return data as Article;
+    }
+    throw new Error('Invalid article data');
+}
+```
+
+Use `import type` for type-only imports:
+```tsx
+import type { Article, Category } from '@/types';
+import { formatDate } from '@/utils/date';
+```
+
+## Navigation — Inertia Link vs <a>
+
+This is a Single Page Application. Using `<a>` for internal links causes full page reloads,
+destroys client state, and breaks the SPA experience.
+
+```tsx
+// ❌ Full page reload — kills SPA state, flashes white, loses form data
+<a href="/dashboard">Dashboard</a>
+<a href={`/articles/${article.id}`}>Read More</a>
+
+// ✅ Inertia SPA navigation — smooth, preserves state
+import { Link } from '@inertiajs/react';
+<Link href="/dashboard">Dashboard</Link>
+<Link href={`/articles/${article.id}`}>Read More</Link>
+
+// ✅ External links — these correctly use <a>
+<a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+    Facebook
+</a>
+```
+
+**Rule of thumb:** If the URL starts with `/` it's internal → use `<Link>`.
+If it starts with `http` it's external → use `<a target="_blank">`.
+
+## Accessibility — REQUIRED, Not Optional
+
+Every interactive element needs an accessible name. Screen readers and automated
+testing tools (including our own SiteHealth scanner) flag these as errors.
+
+```tsx
+// ❌ No accessible name — screen reader says "button"
+<button onClick={toggleMenu}>☰</button>
+<button onClick={handleSearch}><SearchIcon /></button>
+<input type="text" placeholder="Search..." />
+
+// ✅ Accessible
+<button onClick={toggleMenu} aria-label="Toggle navigation menu">☰</button>
+<button onClick={handleSearch} aria-label="Search articles"><SearchIcon /></button>
+<label htmlFor="site-search" className="sr-only">Search articles</label>
+<input id="site-search" type="text" placeholder="Search..." />
+```
+
+Requirements:
+- Icon-only buttons: MUST have `aria-label`
+- Toggle buttons: MUST have `aria-label` AND `role="switch"` with `aria-checked`
+- Form inputs: MUST have associated `<label>` (visible or `sr-only`) or `aria-label`
+- Images: MUST have `alt` text (empty `alt=""` only for decorative images)
+- Modals: MUST have `role="dialog"` and `aria-labelledby` pointing to the title
+
+## Multi-App Branding — NEVER HARDCODE
+
+This codebase renders multiple apps. The footer, header, social links, copyright,
+and any brand-specific content MUST come from Inertia shared props, not hardcoded strings.
+
+```tsx
+// ❌ BRANDING LEAK — This will show "Go Event City" on Day.News
+<footer>
+    <p>© 2026 Go Event City. All rights reserved.</p>
+    <a href="https://facebook.com/goeventcity">Facebook</a>
+</footer>
+
+// ✅ Dynamic — renders correctly for whichever app is running
+const { footerConfig } = usePage().props;
+<footer>
+    <p>{footerConfig.copyright}</p>
+    {footerConfig.social.map(link => (
+        <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer"
+           aria-label={`${footerConfig.appName} on ${link.name}`}>
+            {link.name}
+        </a>
+    ))}
+</footer>
+```
+
+**NEVER put these strings directly in component files:**
+- App names: "Day.News", "GoEventCity", "DowntownGuide", "GoLocalVoices", "AlphaSite"
+- Social media URLs for specific apps
+- Copyright text
+- App-specific navigation links
+- App-specific taglines or descriptions
+
+All of these come from `usePage().props` which is populated by the middleware.
+
+## Debug Code — Remove Before Commit
+
+Never commit:
+- `console.log()`, `console.debug()`, `console.info()` (console.warn and console.error are OK)
+- `debugger` statements
+- Commented-out code blocks longer than 3 lines
+- `// TODO` items that reference the current task (finish them or create a ticket)
+
+## Component Patterns
+
+### Props: Always type explicitly
+```tsx
+interface ArticleCardProps {
+    article: Article;
+    onBookmark?: (id: string) => void;
+    className?: string;
+}
+
+export default function ArticleCard({ article, onBookmark, className }: ArticleCardProps) {
+```
+
+### Events: Use specific types, not 'any'
+```tsx
+// ❌
+const handleChange = (e: any) => { ... }
+
+// ✅
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => { ... }
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => { ... }
+const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => { ... }
+```
+
+### Buttons: Always specify type
+```tsx
+// ❌ Defaults to type="submit" — causes unexpected form submissions
+<button onClick={handleClick}>Click Me</button>
+
+// ✅ Explicit type prevents accidental form submission
+<button type="button" onClick={handleClick}>Click Me</button>
+```
+
+## Import Hygiene
+
+Remove unused imports. Every import must be used.
+
+```tsx
+// ❌ useState and useCallback imported but only useState is used
+import { useState, useEffect, useCallback } from 'react';
+
+// ✅ Only import what you use
+import { useState, useEffect } from 'react';
+```
+
+## File Naming
+
+- Pages: `PascalCase.tsx` matching the Inertia route (e.g., `resources/js/Pages/Articles/Index.tsx`)
+- Components: `PascalCase.tsx` (e.g., `ArticleCard.tsx`)
+- Utilities: `camelCase.ts` (e.g., `formatDate.ts`)
+- Types: `camelCase.ts` in a `types/` directory (e.g., `types/article.ts`)
+- Hooks: `useCamelCase.ts` (e.g., `useArticles.ts`)

@@ -1,0 +1,122 @@
+---
+description: Railway deployment and production environment rules for Fibonacco. Apply to Dockerfiles, deploy configs, env files, and any code touching infrastructure.
+globs: ["Dockerfile*", "docker-compose*", "nixpacks.toml", "railway.*", ".env*", "scripts/**"]
+alwaysApply: false
+---
+
+# Fibonacco Railway Deployment Rules
+
+## Platform Overview
+Fibonacco runs on Railway with:
+- PostgreSQL databases (NOT MySQL)
+- Valkey (Redis-compatible) for caching and queues
+- Inertia SSR (Node.js process alongside PHP)
+- `config:cache` enabled in production
+- `php artisan storage:link` required for public file access
+- Multiple services from a single monorepo
+
+## Environment Variables
+
+### Railway Reference Syntax
+Use Railway's variable interpolation for database connections:
+```env
+DATABASE_URL=${{Postgres Publishing.DATABASE_URL}}
+DB_HOST=${{Postgres Publishing.PGHOST}}
+```
+
+### NEVER:
+- Hardcode `.railway.internal` hostnames in code — they can change between deploys
+- Hardcode `localhost`, `127.0.0.1`, or `0.0.0.0` with port numbers in committed code
+- Commit `.env` files with real credentials
+- Use `env()` outside of `config/` files (breaks `config:cache`)
+
+### ALWAYS:
+- Use `config('key')` to read environment values in application code
+- Add new env vars to `.env.example` when adding them to `config/*.php`
+- Set `PLATFORM_KEY` for each Railway service to identify which app it serves
+
+## Dockerfile / Deploy Script Requirements
+
+Every deploy pipeline MUST include:
+```dockerfile
+# Storage symlink (required for public file access)
+RUN php artisan storage:link
+
+# Config and route caching (required for production performance)
+RUN php artisan config:cache
+RUN php artisan route:cache
+RUN php artisan view:cache
+
+# Vite build (both client and SSR)
+RUN npm ci && npm run build
+# If SSR build exists:
+RUN npm run build:ssr || true
+```
+
+After the Vite build step, the manifest MUST exist at one of:
+- `public/build/manifest.json`
+- `public/build/.vite/manifest.json`
+
+Without the manifest, Inertia SSR crashes on every page load.
+
+## Service Identity
+
+Each Railway service has a PLATFORM_KEY env var:
+
+| Railway Service | PLATFORM_KEY | APP_URL |
+|-----------------|-------------|---------|
+| Day News | day-news | https://day.news |
+| GoEventCity | go-event-city | https://goeventcity.com |
+| Downtown Guide | downtown-guide | https://downtownguide.com |
+| Go Local Voices | go-local-voices | https://golocalvoices.com |
+| AlphaSite | alpha-site | https://alphasite.ai |
+
+When writing code that behaves differently per app, ALWAYS use:
+```php
+$platformKey = config('app.platform_key');
+```
+
+## Database Constraints
+
+### PostgreSQL Only
+This project uses PostgreSQL exclusively. MySQL syntax will cause migration failures.
+
+### No Cross-Database Joins
+Railway runs separate PostgreSQL instances per service group. You cannot JOIN across
+different database instances. Use API calls between services instead.
+
+### Migration Deploy Order
+Migrations run automatically on deploy (`php artisan migrate --force`).
+Ensure migrations are idempotent — they should not fail if run twice.
+
+## Monorepo Rebuild Awareness
+
+A push to the monorepo triggers rebuilds on ALL connected Railway services.
+- Environment variables persist across deploys (they don't reset)
+- If a service's env var references a renamed/deleted Railway service, it will crash
+- Build failures in shared code affect ALL services simultaneously
+
+## SSR Process
+
+Inertia SSR runs as a separate Node.js process alongside PHP. The SSR process:
+- Requires the Vite manifest to exist
+- Executes React components in Node.js (no browser APIs available)
+- Crashes if any component uses `window`, `document`, etc. without guards
+- Must be restarted when frontend code changes
+
+## Healthcheck
+
+Railway expects a health endpoint. Ensure your app responds to:
+```
+GET /up  →  200 OK
+```
+
+## Troubleshooting Patterns
+
+If services crash after deploy, check in this order:
+1. **Env var references** — Did a Railway service get renamed?
+2. **Database connectivity** — `pg_isready -h $DB_HOST -p $DB_PORT`
+3. **Vite manifest** — Does `public/build/manifest.json` exist?
+4. **Storage link** — Does `public/storage` symlink exist?
+5. **Config cache** — Can `php artisan config:cache` succeed?
+6. **Route cache** — Can `php artisan route:cache` succeed?
