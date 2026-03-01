@@ -1,0 +1,806 @@
+#!/bin/bash
+# ============================================================================
+# ship.sh v3 — Fibonacco Universal Pre-Deploy Validation Script
+# ============================================================================
+# Works across ALL Fibonacco repos by auto-detecting project structure:
+#   - Learning Center (backend/ + src/ React SPA)
+#   - TaskJuggler (taskjuggler-api/ + 9 Vue frontends)
+#   - 4people (apps/api-core/ + apps/platform-web/)
+#   - 4healthcare (taskjuggler-api/ + 4doctors-web/)
+#   - Multisite (Laravel root + Inertia/React SSR)
+#
+# Catches the issues that cause Railway deploy failures:
+#   - RouteGroup array_merge TypeError (composer scripts during install phase)
+#   - Duplicate route names (route:cache fails)
+#   - env() in app/ code (breaks under config:cache)
+#   - MySQL syntax in migrations (Railway = PostgreSQL)
+#   - Missing down() in migrations, $table->id() instead of uuid()
+#   - console.log/debugger in production code
+#   - TypeScript 'any' types
+#   - Broken PHP syntax
+#   - composer.lock out of sync
+#   - .env.example missing vars referenced in config/
+#   - Large files / forbidden files staged
+#   - Hardcoded localhost or Railway hostnames
+#
+# Usage:
+#   ./ship.sh --check                     — run all checks (recommended before push)
+#   ./ship.sh "commit message"            — test, commit, push
+#   ./ship.sh "commit message" --dry      — test only, don't commit/push
+#   ./ship.sh "commit message" --force    — skip tests, just commit/push (emergency)
+#   ./ship.sh --report                    — generate ship-report.log
+#   ./ship.sh --help                      — show help
+# ============================================================================
+
+set +e
+
+# ── Colors ──
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+DIM='\033[2m'
+NC='\033[0m'
+
+# ── Timing ──
+SHIP_START=$(date +%s)
+phase_start() { PHASE_START=$(date +%s); }
+phase_end() {
+    local elapsed=$(( $(date +%s) - PHASE_START ))
+    echo -e "  ${DIM}(${elapsed}s)${NC}"
+}
+
+# ── Args ──
+COMMIT_MSG=""
+MODE="normal"
+ERRORS=0
+WARNINGS=0
+REPORT_FILE=""
+
+for arg in "$@"; do
+    case "$arg" in
+        --check)   MODE="dry" ;;
+        --dry)     MODE="dry" ;;
+        --force)   MODE="force" ;;
+        --report)  MODE="dry"; REPORT_FILE="ship-report-$(date +%Y%m%d-%H%M%S).log" ;;
+        --help|-h)
+            echo "Usage: ./ship.sh \"commit message\" [options]"
+            echo ""
+            echo "Options:"
+            echo "  --check     Run all checks, no commit (recommended)"
+            echo "  --dry       Alias for --check with commit message"
+            echo "  --force     Skip checks, commit and push (emergency)"
+            echo "  --report    Generate ship-report.log"
+            echo "  -h, --help  Show this help"
+            exit 0
+            ;;
+        -*)
+            echo -e "${RED}Unknown option: $arg${NC}"
+            exit 1
+            ;;
+        *)
+            if [[ -z "$COMMIT_MSG" ]]; then
+                COMMIT_MSG="$arg"
+            fi
+            ;;
+    esac
+done
+
+if [[ "$MODE" == "normal" && -z "$COMMIT_MSG" ]]; then
+    echo -e "${RED}Usage: ./ship.sh \"commit message\" [--dry|--force]${NC}"
+    echo -e "       ./ship.sh --check"
+    exit 1
+fi
+
+# ── Logging ──
+log() {
+    echo -e "$1"
+    if [[ -n "$REPORT_FILE" ]]; then
+        echo -e "$1" | sed 's/\x1b\[[0-9;]*m//g' >> "$REPORT_FILE"
+    fi
+}
+inc_errors()   { ERRORS=$((ERRORS + 1)); }
+inc_warnings() { WARNINGS=$((WARNINGS + 1)); }
+
+log ""
+log "${BOLD}${CYAN}╔══════════════════════════════════════════════════════╗${NC}"
+log "${BOLD}${CYAN}║          🚀 FIBONACCO SHIP v3 (Universal)           ║${NC}"
+log "${BOLD}${CYAN}║          $(date '+%Y-%m-%d %H:%M:%S')                       ║${NC}"
+log "${BOLD}${CYAN}╚══════════════════════════════════════════════════════╝${NC}"
+log ""
+
+# ============================================================================
+# PROJECT DETECTION — auto-detect structure
+# ============================================================================
+BACKEND_DIR=""
+FRONTEND_DIR=""
+PROJECT_TYPE="unknown"
+HAS_INERTIA=false
+IS_MULTIAPP=false
+
+# Detect backend directory (where artisan lives)
+if [[ -f "artisan" ]]; then
+    BACKEND_DIR="."
+    PROJECT_TYPE="monolith"
+elif [[ -f "backend/artisan" ]]; then
+    BACKEND_DIR="backend"
+    PROJECT_TYPE="learning-center"
+elif [[ -f "taskjuggler-api/artisan" ]]; then
+    BACKEND_DIR="taskjuggler-api"
+    PROJECT_TYPE="taskjuggler"
+elif [[ -f "apps/api-core/artisan" ]]; then
+    BACKEND_DIR="apps/api-core"
+    PROJECT_TYPE="4people"
+fi
+
+# Detect frontend
+if [[ -f "package.json" ]]; then
+    FRONTEND_DIR="."
+elif [[ -f "src/package.json" ]]; then
+    FRONTEND_DIR="src"
+fi
+
+# Detect Inertia
+if [[ -n "$BACKEND_DIR" ]] && grep -q 'inertiajs' "${BACKEND_DIR}/composer.json" 2>/dev/null; then
+    HAS_INERTIA=true
+fi
+if [[ -n "$FRONTEND_DIR" ]] && grep -q '@inertiajs' "${FRONTEND_DIR}/package.json" 2>/dev/null; then
+    HAS_INERTIA=true
+fi
+
+# Detect multi-app
+if grep -rq 'PLATFORM_KEY\|platform_key' "${BACKEND_DIR}/config/" 2>/dev/null; then
+    IS_MULTIAPP=true
+fi
+
+log "${BOLD}${BLUE}━━━ Project Detection ━━━${NC}"
+log "  Backend:   ${CYAN}${BACKEND_DIR:-none}${NC}"
+log "  Frontend:  ${CYAN}${FRONTEND_DIR:-none}${NC}"
+log "  Type:      ${CYAN}${PROJECT_TYPE}${NC}"
+log "  Inertia:   ${CYAN}${HAS_INERTIA}${NC}"
+log "  Multi-app: ${CYAN}${IS_MULTIAPP}${NC}"
+log ""
+
+if [[ -z "$BACKEND_DIR" && -z "$FRONTEND_DIR" ]]; then
+    log "${RED}Could not detect project structure. Run from repo root.${NC}"
+    exit 1
+fi
+
+# ── Emergency Force Push ──
+if [[ "$MODE" == "force" ]]; then
+    log "${YELLOW}⚡ FORCE MODE — skipping all checks${NC}"
+    if [[ -n "$BACKEND_DIR" ]]; then
+        SYNTAX_FAIL=false
+        for f in $(git diff --name-only --cached 2>/dev/null | grep '\.php$'); do
+            if [[ -f "$f" ]] && ! php -l "$f" > /dev/null 2>&1; then
+                log "  ${RED}❌ SYNTAX ERROR in $f — refusing even force push${NC}"
+                SYNTAX_FAIL=true
+            fi
+        done
+        if [[ "$SYNTAX_FAIL" == true ]]; then
+            log "${RED}Fix syntax errors first. Cannot ship broken PHP.${NC}"
+            exit 1
+        fi
+    fi
+    git add -A
+    git commit -m "$COMMIT_MSG"
+    git push
+    log "${GREEN}✅ Force pushed.${NC}"
+    exit 0
+fi
+
+# ============================================================================
+# PHASE 1: STAGING SAFETY
+# ============================================================================
+log "${BOLD}${BLUE}━━━ Phase 1: Staging Safety ━━━${NC}"
+phase_start
+
+# Large files (>5MB)
+LARGE_FILES=$(git diff --cached --name-only 2>/dev/null | while read f; do
+    if [[ -f "$f" ]]; then
+        SIZE=$(stat -f%z "$f" 2>/dev/null || stat -c%s "$f" 2>/dev/null || echo 0)
+        if [[ $SIZE -gt 5000000 ]]; then
+            echo "$f ($((SIZE / 1048576))MB)"
+        fi
+    fi
+done)
+if [[ -n "$LARGE_FILES" ]]; then
+    log "  ${RED}❌ Large files staged (>5MB):${NC}"
+    echo "$LARGE_FILES" | while read f; do log "     $f"; done
+    inc_errors
+else
+    log "  ${GREEN}✓${NC} No oversized files"
+fi
+
+# Forbidden paths
+FORBIDDEN=$(git diff --cached --name-only 2>/dev/null | grep -E '(^|/)node_modules/|(^|/)vendor/|^\.env$|\.env\.local$|^\.env\.production$' || true)
+if [[ -n "$FORBIDDEN" ]]; then
+    log "  ${RED}❌ Forbidden files staged:${NC}"
+    echo "$FORBIDDEN" | while read f; do log "     $f"; done
+    inc_errors
+else
+    log "  ${GREEN}✓${NC} No forbidden files staged"
+fi
+
+phase_end
+log ""
+
+# ============================================================================
+# PHASE 2: PHP CHECKS
+# ============================================================================
+if [[ -n "$BACKEND_DIR" ]]; then
+    log "${BOLD}${BLUE}━━━ Phase 2: PHP Checks ━━━${NC}"
+    phase_start
+
+    CHANGED_PHP=$(
+        { git diff --name-only HEAD 2>/dev/null
+          git diff --name-only --cached 2>/dev/null
+          git ls-files --others --exclude-standard 2>/dev/null
+        } | grep '\.php$' | grep "^${BACKEND_DIR}/" | sort -u
+    ) || true
+
+    if [[ -z "$CHANGED_PHP" && "$BACKEND_DIR" == "." ]]; then
+        CHANGED_PHP=$(
+            { git diff --name-only HEAD 2>/dev/null
+              git diff --name-only --cached 2>/dev/null
+              git ls-files --others --exclude-standard 2>/dev/null
+            } | grep '\.php$' | sort -u
+        ) || true
+    fi
+
+    if [[ -z "$CHANGED_PHP" ]]; then
+        PHP_COUNT=0
+    else
+        PHP_COUNT=$(echo "$CHANGED_PHP" | wc -l | tr -d ' ')
+    fi
+    log "  PHP files changed: ${BOLD}$PHP_COUNT${NC}"
+
+    for FILE in $CHANGED_PHP; do
+        if [[ ! -f "$FILE" ]]; then continue; fi
+
+        # Syntax check
+        SYNTAX_RESULT=$(php -l "$FILE" 2>&1)
+        if [[ $? -ne 0 ]]; then
+            log "  ${RED}❌ SYNTAX ERROR: $FILE${NC}"
+            log "     ${RED}$(echo "$SYNTAX_RESULT" | head -3)${NC}"
+            inc_errors
+            continue
+        fi
+
+        # env() in app/ code
+        if echo "$FILE" | grep -qE '/app/'; then
+            ENV_CALLS=$(grep -nE "env\(\s*'" "$FILE" 2>/dev/null | head -3)
+            if [[ -n "$ENV_CALLS" ]]; then
+                log "  ${RED}❌ env() in app/ code: $FILE${NC}"
+                echo "$ENV_CALLS" | while read line; do log "     ${RED}$line${NC}"; done
+                log "     ${RED}Use config('key') — env() breaks under config:cache${NC}"
+                inc_errors
+            fi
+        fi
+
+        # dd(), dump(), ray()
+        DEBUG_CALLS=$(grep -nE '\b(dd|dump|ray)\s*\(' "$FILE" 2>/dev/null | grep -v '//' | head -3)
+        if [[ -n "$DEBUG_CALLS" ]]; then
+            log "  ${YELLOW}⚠️  Debug function in: $FILE${NC}"
+            echo "$DEBUG_CALLS" | while read line; do log "     ${YELLOW}$line${NC}"; done
+            inc_warnings
+        fi
+
+        # HasUuids on models
+        if echo "$FILE" | grep -q '/Models/'; then
+            if grep -q 'class.*extends Model' "$FILE" && ! grep -q 'HasUuids' "$FILE"; then
+                log "  ${YELLOW}⚠️  Model missing HasUuids trait: $FILE${NC}"
+                inc_warnings
+            fi
+        fi
+    done
+
+    if [[ "$PHP_COUNT" -gt 0 ]]; then
+        log "  ${GREEN}✓${NC} PHP checks complete"
+    fi
+
+    phase_end
+    log ""
+
+    # ========================================================================
+    # PHASE 3: MIGRATION VALIDATION
+    # ========================================================================
+    CHANGED_MIGRATIONS=$(echo "$CHANGED_PHP" | grep 'database/migrations/' || true)
+    if [[ -z "$CHANGED_MIGRATIONS" ]]; then
+        MIGRATION_COUNT=0
+    else
+        MIGRATION_COUNT=$(echo "$CHANGED_MIGRATIONS" | wc -l | tr -d ' ')
+    fi
+
+    if [[ "$MIGRATION_COUNT" -gt 0 ]]; then
+        log "${BOLD}${BLUE}━━━ Phase 3: Migration Validation ━━━${NC}"
+        phase_start
+
+        for MIGRATION in $CHANGED_MIGRATIONS; do
+            if [[ ! -f "$MIGRATION" ]]; then continue; fi
+            log "  Checking: ${CYAN}$(basename "$MIGRATION")${NC}"
+
+            if ! php -l "$MIGRATION" > /dev/null 2>&1; then
+                log "    ${RED}❌ PHP syntax error${NC}"
+                inc_errors
+                continue
+            fi
+
+            if ! grep -q 'function down' "$MIGRATION"; then
+                log "    ${YELLOW}⚠️  No down() method (rollback won't work)${NC}"
+                inc_warnings
+            fi
+
+            # Check for MySQL syntax — skip comments and PostgreSQL CREATE TYPE statements
+            MYSQL_HITS=$(grep -nE '\bunsigned\b|\btinyint\b|\bmediumint\b|\bAUTO_INCREMENT\b' "$MIGRATION" 2>/dev/null | grep -v '//' | head -3)
+            # Check for $table->enum() (MySQL) but not DB::statement CREATE TYPE AS ENUM (PostgreSQL)
+            ENUM_HITS=$(grep -nE '\$table->enum\(|\->enum\(' "$MIGRATION" 2>/dev/null | head -3)
+            # Check for dateTime() — should be timestamp/timestampTz
+            DATETIME_HITS=$(grep -nE '\bdateTime\(' "$MIGRATION" 2>/dev/null | grep -v '//' | head -3)
+            MYSQL_HITS="${MYSQL_HITS}${ENUM_HITS:+$'\n'$ENUM_HITS}${DATETIME_HITS:+$'\n'$DATETIME_HITS}"
+            MYSQL_HITS=$(echo "$MYSQL_HITS" | sed '/^$/d')
+            if [[ -n "$MYSQL_HITS" ]]; then
+                log "    ${RED}❌ MySQL syntax (Railway uses PostgreSQL):${NC}"
+                echo "$MYSQL_HITS" | while read line; do log "       $line"; done
+                inc_errors
+            fi
+
+            if grep -qE '\$table->id\(\)' "$MIGRATION" 2>/dev/null; then
+                log "    ${YELLOW}⚠️  Uses \$table->id() — should be \$table->uuid('id')->primary()${NC}"
+                inc_warnings
+            fi
+
+            if grep -qE 'foreignId\(' "$MIGRATION" 2>/dev/null; then
+                log "    ${YELLOW}⚠️  Uses foreignId() — should this be foreignUuid()?${NC}"
+                inc_warnings
+            fi
+
+            log "    ${GREEN}✓${NC} OK"
+        done
+
+        phase_end
+        log ""
+    fi
+
+    # ========================================================================
+    # PHASE 4: LARAVEL BOOT CHECK
+    # ========================================================================
+    log "${BOLD}${BLUE}━━━ Phase 4: Laravel Boot Check ━━━${NC}"
+    phase_start
+
+    ARTISAN="php ${BACKEND_DIR}/artisan"
+
+    # Config cache
+    CONFIG_RESULT=$($ARTISAN config:cache 2>&1)
+    if [[ $? -ne 0 ]]; then
+        log "  ${RED}❌ Config compilation failed:${NC}"
+        echo "$CONFIG_RESULT" | tail -5
+        inc_errors
+    else
+        log "  ${GREEN}✓${NC} Config compiles"
+        $ARTISAN config:clear > /dev/null 2>&1
+    fi
+
+    # Route cache (catches duplicate route names!)
+    ROUTE_RESULT=$($ARTISAN route:cache 2>&1)
+    if [[ $? -ne 0 ]]; then
+        if echo "$ROUTE_RESULT" | grep -qi 'closure'; then
+            log "  ${YELLOW}⚠️  Closure routes can't be cached (not a deploy blocker)${NC}"
+            inc_warnings
+        elif echo "$ROUTE_RESULT" | grep -qi 'already been assigned name'; then
+            log "  ${RED}❌ DUPLICATE ROUTE NAME detected:${NC}"
+            echo "$ROUTE_RESULT" | grep -i 'assigned name' | head -5
+            log "     ${RED}Rename one of the duplicate routes before deploying${NC}"
+            inc_errors
+        else
+            log "  ${RED}❌ Route compilation failed:${NC}"
+            echo "$ROUTE_RESULT" | tail -10
+            inc_errors
+        fi
+    else
+        log "  ${GREEN}✓${NC} Routes compile (no duplicate names)"
+    fi
+    $ARTISAN route:clear > /dev/null 2>&1
+
+    # Event cache
+    EVENT_RESULT=$($ARTISAN event:cache 2>&1)
+    if [[ $? -ne 0 ]]; then
+        log "  ${YELLOW}⚠️  Event cache issue:${NC}"
+        echo "$EVENT_RESULT" | tail -5
+        inc_warnings
+    else
+        log "  ${GREEN}✓${NC} Events compile"
+        $ARTISAN event:clear > /dev/null 2>&1
+    fi
+
+    # Package discover
+    DISCOVER_RESULT=$($ARTISAN package:discover --ansi 2>&1)
+    if [[ $? -ne 0 ]]; then
+        log "  ${RED}❌ Package discovery failed:${NC}"
+        echo "$DISCOVER_RESULT" | tail -10
+        inc_errors
+    else
+        log "  ${GREEN}✓${NC} Package discovery OK"
+    fi
+
+    # Composer lock sync
+    if [[ -f "${BACKEND_DIR}/composer.json" && -f "${BACKEND_DIR}/composer.lock" ]]; then
+        COMPOSER_VALIDATE=$(cd "$BACKEND_DIR" && composer validate --no-check-all --no-check-publish 2>&1)
+        if echo "$COMPOSER_VALIDATE" | grep -qi 'lock file is not up to date'; then
+            log "  ${RED}❌ composer.lock out of sync — run: composer update --lock${NC}"
+            inc_errors
+        else
+            log "  ${GREEN}✓${NC} composer.lock in sync"
+        fi
+    fi
+
+    phase_end
+    log ""
+
+    # ========================================================================
+    # PHASE 5: NIXPACKS / DEPLOY CONFIG CHECK
+    # ========================================================================
+    log "${BOLD}${BLUE}━━━ Phase 5: Deploy Config ━━━${NC}"
+    phase_start
+
+    # Find nixpacks.toml
+    NIXPACKS_FILE=""
+    for candidate in "${BACKEND_DIR}/nixpacks.toml" "nixpacks.toml" "Railway/nixpacks.toml"; do
+        if [[ -f "$candidate" ]]; then
+            NIXPACKS_FILE="$candidate"
+            break
+        fi
+    done
+
+    if [[ -n "$NIXPACKS_FILE" ]]; then
+        log "  ${GREEN}✓${NC} Found: $NIXPACKS_FILE"
+
+        # Check for --no-scripts (the bug we fixed!)
+        if grep -q 'composer install' "$NIXPACKS_FILE" 2>/dev/null; then
+            INSTALL_PHASE=$(grep -A1 '\[phases.install\]' "$NIXPACKS_FILE" 2>/dev/null | grep 'composer')
+            if [[ -n "$INSTALL_PHASE" ]] && ! echo "$INSTALL_PHASE" | grep -q '\-\-no-scripts'; then
+                log "  ${RED}❌ Nixpacks install phase runs composer WITHOUT --no-scripts${NC}"
+                log "     ${RED}This causes RouteGroup errors in Docker. Add --no-scripts to install phase.${NC}"
+                inc_errors
+            else
+                log "  ${GREEN}✓${NC} Install phase uses --no-scripts"
+            fi
+
+            # Check for duplicate composer install in build phase
+            BUILD_COMPOSER=$(grep -A5 '\[phases.build\]' "$NIXPACKS_FILE" 2>/dev/null | grep 'composer install')
+            if [[ -n "$BUILD_COMPOSER" ]]; then
+                log "  ${YELLOW}⚠️  Build phase also runs 'composer install' — redundant with install phase${NC}"
+                log "     ${YELLOW}Use explicit artisan commands in build phase instead${NC}"
+                inc_warnings
+            fi
+        fi
+
+        # Check that build phase caches config/routes
+        if ! grep -q 'config:cache' "$NIXPACKS_FILE" 2>/dev/null; then
+            log "  ${YELLOW}⚠️  nixpacks.toml missing 'config:cache' in build phase${NC}"
+            inc_warnings
+        fi
+        if ! grep -q 'route:cache' "$NIXPACKS_FILE" 2>/dev/null; then
+            log "  ${YELLOW}⚠️  nixpacks.toml missing 'route:cache' in build phase${NC}"
+            inc_warnings
+        fi
+    elif [[ -f "Dockerfile" ]] || [[ -f "${BACKEND_DIR}/Dockerfile" ]]; then
+        log "  ${GREEN}✓${NC} Dockerfile present"
+    else
+        log "  ${CYAN}ℹ${NC}  No nixpacks.toml or Dockerfile (Railway auto-detect)"
+    fi
+
+    # .env.example sync
+    if [[ -f "${BACKEND_DIR}/.env.example" && -d "${BACKEND_DIR}/config" ]]; then
+        CONFIG_ENVS=$(grep -rohE "env\(\s*'([A-Z_]+)'" "${BACKEND_DIR}/config/" 2>/dev/null | grep -oE "'[A-Z_]+'" | tr -d "'" | sort -u)
+        MISSING_FROM_EXAMPLE=""
+        for var in $CONFIG_ENVS; do
+            if ! grep -q "^${var}=" "${BACKEND_DIR}/.env.example" 2>/dev/null; then
+                case "$var" in
+                    # Skip standard Laravel framework vars — only flag custom/project-specific ones
+                    APP_*|LOG_*|DB_*|MAIL_*|REDIS_*|CACHE_*|SESSION_*|QUEUE_*|SQS_*|MEMCACHED_*|DYNAMODB_*|BEANSTALKD_*|PAPERTRAIL_*|AUTH_*|MYSQL_*) continue ;;
+                esac
+                MISSING_FROM_EXAMPLE+="$var "
+            fi
+        done
+        if [[ -n "$MISSING_FROM_EXAMPLE" ]]; then
+            log "  ${YELLOW}⚠️  Env vars in config/ not in .env.example: ${MISSING_FROM_EXAMPLE}${NC}"
+            inc_warnings
+        else
+            log "  ${GREEN}✓${NC} .env.example covers config/ env vars"
+        fi
+    fi
+
+    # Hardcoded Railway hostnames
+    HARDCODED_RAILWAY=$(grep -rl '\.railway\.internal' "${BACKEND_DIR}/app/" "${BACKEND_DIR}/config/" "${BACKEND_DIR}/routes/" 2>/dev/null || true)
+    if [[ -n "$HARDCODED_RAILWAY" ]]; then
+        log "  ${RED}❌ Hardcoded Railway hostnames:${NC}"
+        echo "$HARDCODED_RAILWAY" | while read f; do log "     $f"; done
+        inc_errors
+    else
+        log "  ${GREEN}✓${NC} No hardcoded Railway hostnames"
+    fi
+
+    # Hardcoded localhost
+    HARDCODED_LOCAL=$(grep -rlnE '(localhost|127\.0\.0\.1|0\.0\.0\.0):[0-9]+' "${BACKEND_DIR}/app/" "${BACKEND_DIR}/config/" "${BACKEND_DIR}/routes/" 2>/dev/null \
+        | grep -v '.example' | head -5 || true)
+    if [[ -n "$HARDCODED_LOCAL" ]]; then
+        log "  ${YELLOW}⚠️  Hardcoded localhost URLs:${NC}"
+        echo "$HARDCODED_LOCAL" | while read f; do log "     ${YELLOW}$f${NC}"; done
+        inc_warnings
+    else
+        log "  ${GREEN}✓${NC} No hardcoded localhost URLs"
+    fi
+
+    phase_end
+    log ""
+fi
+
+# ============================================================================
+# PHASE 6: FRONTEND CHECKS
+# ============================================================================
+if [[ -n "$FRONTEND_DIR" && -f "${FRONTEND_DIR}/package.json" ]]; then
+    log "${BOLD}${BLUE}━━━ Phase 6: Frontend Checks ━━━${NC}"
+    phase_start
+
+    CHANGED_JS=$(
+        { git diff --name-only HEAD 2>/dev/null
+          git diff --name-only --cached 2>/dev/null
+          git ls-files --others --exclude-standard 2>/dev/null
+        } | grep -E '\.(ts|tsx|js|jsx|vue)$' | sort -u
+    ) || true
+
+    if [[ -z "$CHANGED_JS" ]]; then
+        JS_COUNT=0
+    else
+        JS_COUNT=$(echo "$CHANGED_JS" | wc -l | tr -d ' ')
+    fi
+    log "  JS/TS/Vue files changed: ${BOLD}$JS_COUNT${NC}"
+
+    # console.log / debugger
+    if [[ "$JS_COUNT" -gt 0 ]]; then
+        CONSOLE_HITS=""
+        for FILE in $CHANGED_JS; do
+            if [[ ! -f "$FILE" ]]; then continue; fi
+            if echo "$FILE" | grep -qE '\.(test|spec)\.(ts|tsx|js|jsx)$'; then continue; fi
+            if echo "$FILE" | grep -qE 'node_modules|vendor|dist/|\.cjs$'; then continue; fi
+            # Skip root-level utility scripts
+            if [[ "$(dirname "$FILE")" == "." ]]; then continue; fi
+            HITS=$(grep -nE '^\s*(console\.(log|debug|info)\(|debugger\b)' "$FILE" 2>/dev/null | head -3 || true)
+            if [[ -n "$HITS" ]]; then
+                CONSOLE_HITS+="  $FILE:\n$HITS\n"
+            fi
+        done
+        if [[ -n "$CONSOLE_HITS" ]]; then
+            log "  ${YELLOW}⚠️  console.log/debugger in production code:${NC}"
+            echo -e "$CONSOLE_HITS" | head -15
+            inc_warnings
+        else
+            log "  ${GREEN}✓${NC} No debug statements"
+        fi
+
+        # TypeScript 'any' types
+        ANY_HITS=""
+        for FILE in $CHANGED_JS; do
+            if [[ ! -f "$FILE" ]]; then continue; fi
+            if echo "$FILE" | grep -qE '\.(js|jsx)$'; then continue; fi
+            if echo "$FILE" | grep -qE 'node_modules|vendor|dist/'; then continue; fi
+            HITS=$(grep -nE ':\s*any\b|<any>|as any' "$FILE" 2>/dev/null | head -3 || true)
+            if [[ -n "$HITS" ]]; then
+                ANY_COUNT=$(grep -cE ':\s*any\b|<any>|as any' "$FILE" 2>/dev/null || echo 0)
+                ANY_HITS+="  $FILE ($ANY_COUNT instances)\n"
+            fi
+        done
+        if [[ -n "$ANY_HITS" ]]; then
+            log "  ${YELLOW}⚠️  TypeScript 'any' types:${NC}"
+            echo -e "$ANY_HITS" | head -10
+            inc_warnings
+        else
+            log "  ${GREEN}✓${NC} No 'any' types"
+        fi
+    fi
+
+    # TypeScript compilation (if tsconfig exists in frontend dir)
+    TSCONFIG=""
+    for candidate in "${FRONTEND_DIR}/tsconfig.json" "tsconfig.json"; do
+        if [[ -f "$candidate" ]]; then
+            TSCONFIG="$candidate"
+            break
+        fi
+    done
+    # Vite build (run first — if this passes, TS errors are just strict-mode noise)
+    VITE_BUILD_OK=false
+    if grep -q '"build"' "${FRONTEND_DIR}/package.json" 2>/dev/null; then
+        # Check if build script needs env vars (monorepo service selector)
+        BUILD_SCRIPT=$(grep '"build"' "${FRONTEND_DIR}/package.json" | head -1)
+        if echo "$BUILD_SCRIPT" | grep -qE 'monorepo-build|RAILWAY_SERVICE_NAME'; then
+            log "  ${CYAN}ℹ${NC}  Monorepo build (needs RAILWAY_SERVICE_NAME) — skipping local build test"
+        else
+            log "  ${CYAN}Vite build...${NC}"
+            BUILD_RESULT=$(cd "$FRONTEND_DIR" && npm run build 2>&1)
+            if [[ $? -ne 0 ]]; then
+                # Check if it failed because of missing env var for monorepo
+                if echo "$BUILD_RESULT" | grep -qi 'RAILWAY_SERVICE_NAME\|could not determine workspace'; then
+                    log "  ${CYAN}ℹ${NC}  Monorepo build skipped (needs RAILWAY_SERVICE_NAME)"
+                else
+                    log "  ${RED}❌ Build FAILED:${NC}"
+                    echo "$BUILD_RESULT" | tail -15
+                    inc_errors
+                fi
+            else
+                log "  ${GREEN}✓${NC} Build passed"
+                VITE_BUILD_OK=true
+            fi
+        fi
+    fi
+
+    # TypeScript strict check
+    if [[ -n "$TSCONFIG" ]] && command -v npx &> /dev/null; then
+        log "  ${CYAN}TypeScript check...${NC}"
+        TSC_RESULT=$(npx tsc --noEmit -p "$TSCONFIG" 2>&1)
+        if [[ $? -ne 0 ]]; then
+            TSC_ERRORS=$(echo "$TSC_RESULT" | grep -c 'error TS' || echo 0)
+            if [[ "$VITE_BUILD_OK" == true ]]; then
+                log "  ${YELLOW}⚠️  TypeScript strict: $TSC_ERRORS errors (build still passes)${NC}"
+                echo "$TSC_RESULT" | grep 'error TS' | head -5
+                inc_warnings
+            else
+                log "  ${RED}❌ TypeScript: $TSC_ERRORS errors${NC}"
+                echo "$TSC_RESULT" | grep 'error TS' | head -10
+                inc_errors
+            fi
+        else
+            log "  ${GREEN}✓${NC} TypeScript passes"
+        fi
+    fi
+
+    # Inertia-specific: SSR build
+    if [[ "$HAS_INERTIA" == true ]]; then
+        if grep -q '"build:ssr"' "${FRONTEND_DIR}/package.json" 2>/dev/null; then
+            log "  ${CYAN}SSR build...${NC}"
+            SSR_RESULT=$(cd "$FRONTEND_DIR" && npm run build:ssr 2>&1)
+            if [[ $? -ne 0 ]]; then
+                log "  ${RED}❌ SSR build FAILED:${NC}"
+                echo "$SSR_RESULT" | tail -15
+                inc_errors
+            else
+                log "  ${GREEN}✓${NC} SSR build passed"
+            fi
+        fi
+    fi
+
+    phase_end
+    log ""
+fi
+
+# ============================================================================
+# PHASE 7: INERTIA / MULTI-APP CHECKS (only if detected)
+# ============================================================================
+if [[ "$HAS_INERTIA" == true || "$IS_MULTIAPP" == true ]]; then
+    log "${BOLD}${BLUE}━━━ Phase 7: Platform-Specific Checks ━━━${NC}"
+    phase_start
+
+    if [[ "$HAS_INERTIA" == true ]]; then
+        # SSR-incompatible code
+        if [[ -n "$CHANGED_JS" ]]; then
+            SSR_ISSUES=""
+            for FILE in $CHANGED_JS; do
+                if [[ ! -f "$FILE" ]]; then continue; fi
+                BARE_WINDOW=$(grep -nE '(?<!typeof )(window\.|document\.|localStorage|sessionStorage)' "$FILE" 2>/dev/null \
+                    | grep -v 'typeof' | grep -v '//' | grep -v '\.d\.ts' | head -3 || true)
+                if [[ -n "$BARE_WINDOW" ]]; then
+                    SSR_ISSUES+="  $FILE\n"
+                fi
+            done
+            if [[ -n "$SSR_ISSUES" ]]; then
+                log "  ${YELLOW}⚠️  SSR-incompatible code (window/document without guard):${NC}"
+                echo -e "$SSR_ISSUES" | head -10
+                inc_warnings
+            else
+                log "  ${GREEN}✓${NC} No SSR issues"
+            fi
+        fi
+
+        # Vite manifest
+        if [[ ! -f "public/build/manifest.json" ]] && [[ ! -f "public/build/.vite/manifest.json" ]]; then
+            log "  ${YELLOW}⚠️  Vite manifest missing — SSR may crash${NC}"
+            inc_warnings
+        fi
+    fi
+
+    if [[ "$IS_MULTIAPP" == true ]]; then
+        # Branding leak check
+        BRAND_DIRS=("resources/js/Components" "resources/js/Layouts" "src/components" "src/layouts")
+        for dir in "${BRAND_DIRS[@]}"; do
+            if [[ -d "$dir" ]]; then
+                HARDCODED_BRANDS=$(grep -rlE '"Go ?Event ?City"|"Day\.News"|"DowntownGuide"|"GoLocalVoices"' "$dir" 2>/dev/null || true)
+                if [[ -n "$HARDCODED_BRANDS" ]]; then
+                    log "  ${RED}❌ Hardcoded app names in shared components:${NC}"
+                    echo "$HARDCODED_BRANDS" | while read f; do log "     $f"; done
+                    inc_errors
+                fi
+            fi
+        done
+        if [[ -z "$HARDCODED_BRANDS" ]]; then
+            log "  ${GREEN}✓${NC} No branding leaks"
+        fi
+    fi
+
+    phase_end
+    log ""
+fi
+
+# ============================================================================
+# SUMMARY
+# ============================================================================
+SHIP_ELAPSED=$(( $(date +%s) - SHIP_START ))
+
+log "${BOLD}${BLUE}━━━ Summary ━━━${NC}"
+log ""
+log "  ${DIM}Duration: ${SHIP_ELAPSED}s${NC}"
+log ""
+
+if [[ $WARNINGS -gt 0 ]]; then
+    log "  ${YELLOW}⚠️  Warnings:  $WARNINGS${NC}"
+fi
+if [[ $ERRORS -gt 0 ]]; then
+    log "  ${RED}❌ Errors:    $ERRORS${NC}"
+    log ""
+    log "${RED}${BOLD}══════════════════════════════════════════════════════${NC}"
+    log "${RED}${BOLD}  BLOCKED — Fix $ERRORS error(s) before shipping     ${NC}"
+    log "${RED}${BOLD}══════════════════════════════════════════════════════${NC}"
+    log ""
+    log "  To force: ${YELLOW}./ship.sh \"message\" --force${NC}"
+    if [[ -n "$REPORT_FILE" ]]; then
+        log "  Report:   ${CYAN}$REPORT_FILE${NC}"
+    fi
+    exit 1
+fi
+
+log "  ${GREEN}${BOLD}✅ ALL CHECKS PASSED${NC}"
+log ""
+
+# ── Dry run stops here ──
+if [[ "$MODE" == "dry" || -z "$COMMIT_MSG" ]]; then
+    log "  ${CYAN}Dry run complete. No commit made.${NC}"
+    if [[ -n "$REPORT_FILE" ]]; then
+        log "  Report: ${CYAN}$REPORT_FILE${NC}"
+    fi
+    exit 0
+fi
+
+# ============================================================================
+# COMMIT & PUSH
+# ============================================================================
+log "${BOLD}${BLUE}━━━ Ship It ━━━${NC}"
+
+git add -A
+log "  ${CYAN}Files being committed:${NC}"
+git diff --cached --stat | head -20
+log ""
+
+git commit -m "$COMMIT_MSG"
+if [[ $? -ne 0 ]]; then
+    log "  ${YELLOW}Nothing to commit${NC}"
+    exit 0
+fi
+
+log "  ${CYAN}Pushing to origin...${NC}"
+git push
+PUSH_EXIT=$?
+
+if [[ $PUSH_EXIT -ne 0 ]]; then
+    log "  ${RED}❌ Push failed. Try: git pull --rebase && ./ship.sh \"$COMMIT_MSG\"${NC}"
+    exit 1
+fi
+
+log ""
+log "${GREEN}${BOLD}╔══════════════════════════════════════════════════════╗${NC}"
+log "${GREEN}${BOLD}║            🚀 SHIPPED SUCCESSFULLY                  ║${NC}"
+log "${GREEN}${BOLD}╚══════════════════════════════════════════════════════╝${NC}"
+log ""
+log "  Commit:   ${CYAN}$COMMIT_MSG${NC}"
+log "  Duration: ${CYAN}${SHIP_ELAPSED}s${NC}"
+log ""
