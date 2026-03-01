@@ -64,7 +64,7 @@ Route::prefix('v1')->group(function () {
     // Public subscription endpoints
     Route::prefix('subscribe')->group(function () {
         Route::post('/', [SubscriptionController::class, 'register']);
-        Route::get('/verify/{token}', [SubscriptionController::class, 'verify'])->name('subscriber.verify');
+        Route::get('/verify/{token}', [SubscriptionController::class, 'verify'])->name('api.subscriber.verify');
         Route::get('/unsubscribe/{token}', [SubscriptionController::class, 'unsubscribe']);
     });
 
