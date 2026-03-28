@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Invoice extends Model
 {
-    use HasUuids, SoftDeletes;
+    use \App\Traits\HasTenantScope, HasUuids, SoftDeletes;
 
     protected $fillable = [
         'tenant_id',
@@ -66,9 +66,10 @@ class Invoice extends Model
 
     public function isOverdue(): bool
     {
-        if (!$this->due_date || $this->balance_due <= 0) {
+        if (! $this->due_date || $this->balance_due <= 0) {
             return false;
         }
+
         return now()->startOfDay()->isAfter($this->due_date);
     }
 

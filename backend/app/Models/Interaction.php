@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Interaction extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $fillable = [
         'tenant_id',
@@ -94,7 +93,7 @@ class Interaction extends Model
     /**
      * Mark interaction as completed and trigger next step creation
      */
-    public function complete(string $outcome = null, string $outcomeDetails = null): ?Interaction
+    public function complete(?string $outcome = null, ?string $outcomeDetails = null): ?Interaction
     {
         $this->update([
             'status' => 'completed',
@@ -112,7 +111,7 @@ class Interaction extends Model
      */
     public function isOverdue(): bool
     {
-        if (!$this->due_at || $this->status === 'completed' || $this->status === 'cancelled') {
+        if (! $this->due_at || $this->status === 'completed' || $this->status === 'cancelled') {
             return false;
         }
 
@@ -124,11 +123,11 @@ class Interaction extends Model
      */
     public function isDueSoon(): bool
     {
-        if (!$this->due_at || $this->status === 'completed' || $this->status === 'cancelled') {
+        if (! $this->due_at || $this->status === 'completed' || $this->status === 'cancelled') {
             return false;
         }
 
-        return now()->addDay()->isAfter($this->due_at) && !now()->isAfter($this->due_at);
+        return now()->addDay()->isAfter($this->due_at) && ! now()->isAfter($this->due_at);
     }
 
     /**
@@ -136,7 +135,7 @@ class Interaction extends Model
      */
     public function getFormattedStatusAttribute(): string
     {
-        return match($this->status) {
+        return match ($this->status) {
             'pending' => 'Pending',
             'in_progress' => 'In Progress',
             'completed' => 'Completed',
@@ -146,4 +145,3 @@ class Interaction extends Model
         };
     }
 }
-

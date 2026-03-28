@@ -10,9 +10,10 @@ use Illuminate\Support\Str;
 
 class Conversation extends Model
 {
-    use HasFactory, \Illuminate\Database\Eloquent\Concerns\HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, \Illuminate\Database\Eloquent\Concerns\HasUuids;
 
     protected $keyType = 'string';
+
     public $incrementing = false;
 
     protected $fillable = [
@@ -65,7 +66,7 @@ class Conversation extends Model
                 $conversation->tenant_id = (string) Str::uuid();
             }
             if (empty($conversation->session_id)) {
-                $conversation->session_id = 'session_' . Str::random(32);
+                $conversation->session_id = 'session_'.Str::random(32);
             }
         });
     }
@@ -103,7 +104,7 @@ class Conversation extends Model
      */
     public function getFormattedDurationAttribute(): string
     {
-        if (!$this->duration_seconds) {
+        if (! $this->duration_seconds) {
             return 'N/A';
         }
 
@@ -113,6 +114,7 @@ class Conversation extends Model
         if ($minutes > 0) {
             return "{$minutes}m {$seconds}s";
         }
+
         return "{$seconds}s";
     }
 }

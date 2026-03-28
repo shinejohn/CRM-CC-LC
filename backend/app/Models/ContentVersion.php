@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ContentVersion extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $fillable = [
         'content_id',

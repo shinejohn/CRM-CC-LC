@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CampaignRecipient extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $fillable = [
         'campaign_id',

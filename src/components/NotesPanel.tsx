@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PlusIcon, XIcon } from 'lucide-react';
 export const NotesPanel = ({
   notes
-}) => {
+}: { notes: Array<{ category: string, items: string[] }> }) => {
   const [newCategory, setNewCategory] = useState('');
   const [isAddingCategory, setIsAddingCategory] = useState(false);
   return <div className="h-full flex flex-col">

@@ -7,6 +7,13 @@ export const VoiceControls = ({
   transcript,
   setTranscript,
   addMessage
+}: {
+  isListening: boolean;
+  setIsListening: (v: boolean) => void;
+  onTranscriptUpdate: (t: string) => void;
+  transcript: string;
+  setTranscript: (t: string) => void;
+  addMessage: (msg: { sender: string; text: string; isAI: boolean }) => void;
 }) => {
   const [isSpeaking, setIsSpeaking] = useState(false);
   // Initialize speech recognition
@@ -16,11 +23,11 @@ export const VoiceControls = ({
       console.error('Speech recognition not supported in this browser');
       return;
     }
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
-    recognition.onresult = event => {
+    recognition.onresult = (event: any) => {
       const last = event.results.length - 1;
       const text = event.results[last][0].transcript;
       setTranscript(text);
@@ -62,7 +69,7 @@ export const VoiceControls = ({
       }, 1000);
     }
   };
-  const speakText = text => {
+  const speakText = (text: string) => {
     if (!('speechSynthesis' in window)) {
       console.error('Speech synthesis not supported');
       return;

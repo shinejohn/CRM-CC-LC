@@ -59,7 +59,7 @@ export default function DealDetailPage() {
                     label="Deal Value"
                     value={formatCurrency(deal.value)}
                     icon={Target}
-                    color="emerald"
+                    color="green"
                 />
                 <MetricCard
                     label="Probability"

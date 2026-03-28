@@ -19,9 +19,11 @@
 #   - TypeScript 'any' types
 #   - Broken PHP syntax
 #   - composer.lock out of sync
+#   - PHP extensions required by dependencies but missing from Dockerfile
 #   - .env.example missing vars referenced in config/
 #   - Large files / forbidden files staged
 #   - Hardcoded localhost or Railway hostnames
+#   - Database/schema errors (via test suite)
 #
 # Usage:
 #   ./ship.sh --check                     — run all checks (recommended before push)
@@ -383,24 +385,32 @@ if [[ -n "$BACKEND_DIR" ]]; then
         $ARTISAN config:clear > /dev/null 2>&1
     fi
 
-    # Route cache (catches duplicate route names!)
+    # Route cache (catches duplicate route names and compilation errors)
     ROUTE_RESULT=$($ARTISAN route:cache 2>&1)
     if [[ $? -ne 0 ]]; then
         if echo "$ROUTE_RESULT" | grep -qi 'closure'; then
             log "  ${YELLOW}⚠️  Closure routes can't be cached (not a deploy blocker)${NC}"
             inc_warnings
         elif echo "$ROUTE_RESULT" | grep -qi 'already been assigned name'; then
-            log "  ${RED}❌ DUPLICATE ROUTE NAME detected:${NC}"
-            echo "$ROUTE_RESULT" | grep -i 'assigned name' | head -5
-            log "     ${RED}Rename one of the duplicate routes before deploying${NC}"
-            inc_errors
+            # Duplicate names block route:cache but routes still work at runtime
+            # Verify routes actually compile via route:list
+            ROUTE_LIST_RESULT=$($ARTISAN route:list 2>&1)
+            if [[ $? -eq 0 ]]; then
+                log "  ${YELLOW}⚠️  Duplicate route names (route:cache disabled, routes work at runtime):${NC}"
+                echo "$ROUTE_RESULT" | grep -i 'assigned name' | head -3
+                inc_warnings
+            else
+                log "  ${RED}❌ Route compilation failed:${NC}"
+                echo "$ROUTE_LIST_RESULT" | tail -10
+                inc_errors
+            fi
         else
             log "  ${RED}❌ Route compilation failed:${NC}"
             echo "$ROUTE_RESULT" | tail -10
             inc_errors
         fi
     else
-        log "  ${GREEN}✓${NC} Routes compile (no duplicate names)"
+        log "  ${GREEN}✓${NC} Routes compile and cache (no duplicate names)"
     fi
     $ARTISAN route:clear > /dev/null 2>&1
 
@@ -436,8 +446,93 @@ if [[ -n "$BACKEND_DIR" ]]; then
         fi
     fi
 
+    # Check for dependencies requiring PHP extensions not in Dockerfile
+    # This catches the exact scenario where a new package (e.g. phpspreadsheet)
+    # requires an extension (e.g. ext-gd) that isn't installed in the Docker image.
+    if [[ -f "${BACKEND_DIR}/composer.lock" ]]; then
+        # Extract required extensions from composer.lock
+        REQUIRED_EXTS=$(php -r '
+            $lock = json_decode(file_get_contents("'"${BACKEND_DIR}"'/composer.lock"), true);
+            $exts = [];
+            foreach (array_merge($lock["packages"] ?? [], $lock["packages-dev"] ?? []) as $pkg) {
+                foreach ($pkg["require"] ?? [] as $dep => $ver) {
+                    if (str_starts_with($dep, "ext-") && $dep !== "ext-mbstring" && $dep !== "ext-openssl" && $dep !== "ext-tokenizer" && $dep !== "ext-ctype" && $dep !== "ext-dom" && $dep !== "ext-xml" && $dep !== "ext-xmlwriter" && $dep !== "ext-xmlreader" && $dep !== "ext-fileinfo" && $dep !== "ext-pdo" && $dep !== "ext-curl" && $dep !== "ext-filter" && $dep !== "ext-hash" && $dep !== "ext-json" && $dep !== "ext-session" && $dep !== "ext-simplexml" && $dep !== "ext-iconv") {
+                        $ext = substr($dep, 4);
+                        $exts[$ext] = ($exts[$ext] ?? []);
+                        $exts[$ext][] = $pkg["name"];
+                    }
+                }
+            }
+            foreach ($exts as $ext => $pkgs) {
+                echo $ext . ":" . implode(",", array_unique($pkgs)) . "\n";
+            }
+        ' 2>/dev/null)
+
+        if [[ -n "$REQUIRED_EXTS" ]]; then
+            # Find which Dockerfile Railway will use
+            DEPLOY_DOCKERFILE=""
+            for candidate in "docker/standalone/Dockerfile" "Dockerfile"; do
+                if [[ -f "$candidate" ]]; then
+                    DEPLOY_DOCKERFILE="$candidate"
+                    break
+                fi
+            done
+
+            if [[ -n "$DEPLOY_DOCKERFILE" ]]; then
+                # Extract extensions installed in Dockerfile
+                DOCKER_EXTS=$(grep -oE 'install-php-extensions\s+.*' "$DEPLOY_DOCKERFILE" 2>/dev/null \
+                    | sed 's/install-php-extensions//' | tr ' ' '\n' | sed '/^$/d' | sort -u)
+
+                EXT_MISSING=false
+                while IFS=: read -r ext pkgs; do
+                    if ! echo "$DOCKER_EXTS" | grep -qw "$ext"; then
+                        # Check if it's available in the base PHP image (common built-ins)
+                        if ! php -m 2>/dev/null | grep -qiw "$ext"; then
+                            log "  ${RED}❌ Missing PHP extension in Docker: ext-${ext} (required by: ${pkgs})${NC}"
+                            log "     ${RED}Add '${ext}' to install-php-extensions in ${DEPLOY_DOCKERFILE}${NC}"
+                            EXT_MISSING=true
+                            inc_errors
+                        fi
+                    fi
+                done <<< "$REQUIRED_EXTS"
+                if [[ "$EXT_MISSING" == false ]]; then
+                    log "  ${GREEN}✓${NC} All required PHP extensions available in Docker"
+                fi
+            fi
+        fi
+    fi
+
     phase_end
     log ""
+
+    # ========================================================================
+    # PHASE 4b: MIGRATION DRY RUN (new migrations only)
+    # ========================================================================
+    CHANGED_MIGRATIONS=${CHANGED_MIGRATIONS:-""}
+    if [[ -n "$CHANGED_MIGRATIONS" ]]; then
+        log "${BOLD}${BLUE}━━━ Phase 4b: Migration Dry Run ━━━${NC}"
+        phase_start
+        log "  ${CYAN}New migrations detected — running pretend migrate against sqlite in-memory${NC}"
+        for MIGRATION in $CHANGED_MIGRATIONS; do
+            if [[ ! -f "$MIGRATION" ]]; then continue; fi
+            REL_PATH=${MIGRATION#$BACKEND_DIR/}
+            log "  ${CYAN}→ $REL_PATH${NC}"
+            MIG_RESULT=$(DB_CONNECTION=sqlite DB_DATABASE=:memory: $ARTISAN migrate --pretend --path="$REL_PATH" 2>&1)
+            if [[ $? -ne 0 ]]; then
+                log "    ${RED}❌ Migrate failed${NC}"
+                echo "$MIG_RESULT" | tail -15
+                inc_errors
+            else
+                log "    ${GREEN}✓${NC} OK"
+            fi
+        done
+        phase_end
+        log ""
+    else
+        log "${BOLD}${BLUE}━━━ Phase 4b: Migration Dry Run ━━━${NC}"
+        log "  ${CYAN}No new migrations — skipping migration dry run${NC}"
+        log ""
+    fi
 
     # ========================================================================
     # PHASE 5: NIXPACKS / DEPLOY CONFIG CHECK

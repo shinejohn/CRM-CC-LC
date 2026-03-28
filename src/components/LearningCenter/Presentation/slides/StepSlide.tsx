@@ -135,7 +135,7 @@ export const StepSlide: React.FC<StepSlideProps> = ({
                     </p>
                   )}
                 </div>
-                {index < content.steps.length - 1 && (
+                {index < content.steps!.length - 1 && (
                   <ArrowRight size={24} className="text-gray-400 flex-shrink-0 hidden md:block" />
                 )}
               </React.Fragment>

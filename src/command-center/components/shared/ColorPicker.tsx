@@ -43,7 +43,7 @@ export function ColorPicker({
                     <Palette className="w-4 h-4 opacity-70" />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-64 p-4 rounded-xl shadow-xl border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md" align="end" onClick={(e) => e.stopPropagation()}>
+            <PopoverContent className="w-64 p-4 rounded-xl shadow-xl border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md">
                 <div className="space-y-4">
                     <div>
                         <h4 className="font-semibold text-sm text-slate-800 dark:text-slate-200 mb-1">Customize Card</h4>

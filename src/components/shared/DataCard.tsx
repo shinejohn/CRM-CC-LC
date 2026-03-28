@@ -15,6 +15,7 @@ interface DataCardProps {
     isEmpty?: boolean;
     emptyMessage?: string;
     noPadding?: boolean;
+    onClick?: () => void;
 }
 
 export function DataCard({
@@ -28,9 +29,11 @@ export function DataCard({
     isEmpty,
     emptyMessage,
     noPadding,
+    onClick,
 }: DataCardProps) {
     return (
         <div
+            onClick={onClick}
             className={cn(
                 "rounded-xl border border-[var(--nexus-card-border)] bg-[var(--nexus-card-bg)]",
                 "shadow-[var(--nexus-card-shadow)] hover:shadow-[var(--nexus-card-shadow-hover)]",

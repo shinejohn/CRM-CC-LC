@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class GeneratedContent extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $table = 'generated_content';
 
@@ -80,7 +80,7 @@ class GeneratedContent extends Model
     /**
      * Create a new version
      */
-    public function createVersion(string $changeNotes = null, ?string $userId = null): ContentVersion
+    public function createVersion(?string $changeNotes = null, ?string $userId = null): ContentVersion
     {
         $latestVersion = $this->versions()->orderBy('version_number', 'desc')->first();
         $versionNumber = $latestVersion ? $latestVersion->version_number + 1 : 1;

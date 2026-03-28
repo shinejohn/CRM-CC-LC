@@ -68,7 +68,7 @@ export async function initWebSocket(config?: Partial<WebSocketConfig>): Promise<
       auth: {
         headers: config?.token
           ? { Authorization: `Bearer ${config.token}` }
-          : undefined,
+          : {},
       },
     });
 

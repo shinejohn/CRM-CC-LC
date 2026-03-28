@@ -8,7 +8,7 @@ import { DataAnalyticsPage } from './pages/DataAnalyticsPage';
 import { ClientProposalPage } from './pages/ClientProposalPage';
 import { AIWorkflowPage } from './pages/AIWorkflowPage';
 import { FilesPage } from './pages/FilesPage';
-import { LoginPage } from './pages/LoginPage';
+import LoginPage from "./pages/LoginPage";
 import { SignUpPage } from './pages/SignUpPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { SchedulePage } from './pages/SchedulePage';
@@ -18,6 +18,7 @@ import { CommunityInfluencerPage } from './pages/Marketing/CommunityInfluencerPa
 import { CommunityExpertPage } from './pages/Marketing/CommunityExpertPage';
 import { SponsorsPage } from './pages/Marketing/SponsorsPage';
 import { AdsPage } from './pages/Marketing/AdsPage';
+import { ProductCatalogPage } from './pages/Marketing/ProductCatalogPage';
 
 // Action Pages
 import { ArticlePage } from './pages/Action/ArticlePage';
@@ -32,6 +33,7 @@ import { AIPage } from './pages/Action/AIPage';
 // Business Pages
 import { SurveyPage } from './pages/Business/SurveyPage';
 import { SubscriptionsPage } from './pages/Business/SubscriptionsPage';
+import { ROIDashboardPage } from './pages/Business/ROIDashboardPage';
 import { TodosPage } from './pages/Business/TodosPage';
 import { DashboardPage } from './pages/Business/DashboardPage';
 
@@ -125,6 +127,7 @@ export function AppRouter() {
         <Route path="/community-expert" element={<CommunityExpertPage />} />
         <Route path="/sponsors" element={<SponsorsPage />} />
         <Route path="/ads" element={<AdsPage />} />
+        <Route path="/product-catalog" element={<ProductCatalogPage />} />
 
         {/* Action Menu Routes */}
         <Route path="/article" element={<ArticlePage />} />
@@ -140,6 +143,7 @@ export function AppRouter() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/survey" element={<SurveyPage />} />
         <Route path="/subscriptions" element={<SubscriptionsPage />} />
+        <Route path="/subscriptions/roi" element={<ROIDashboardPage />} />
         <Route path="/todos" element={<TodosPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
 

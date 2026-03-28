@@ -87,7 +87,7 @@ export async function listAds(params?: {
     '/api/v1/ads',
     { params }
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -97,7 +97,7 @@ export async function getAd(id: string): Promise<GeneratedAd> {
   const response = await apiClient.get<{ data: GeneratedAd }>(
     `/api/v1/ads/${id}`
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -110,7 +110,7 @@ export async function generateFromCampaign(
     '/api/v1/ads/generate-from-campaign',
     request
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -123,7 +123,7 @@ export async function generateFromContent(
     '/api/v1/ads/generate-from-content',
     request
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -149,7 +149,7 @@ export async function updateAd(
     `/api/v1/ads/${id}`,
     updates
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -163,7 +163,7 @@ export async function getAdTemplates(params?: {
     '/api/v1/ads/templates',
     { params }
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -183,5 +183,5 @@ export async function createAdTemplate(request: {
     '/api/v1/ads/templates',
     request
   );
-  return response.data.data;
+  return response.data;
 }

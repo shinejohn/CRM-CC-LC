@@ -1,0 +1,6 @@
+src/command-center/modules/services/wizard/components/steps/RemainingSteps.tsx(3,31): error TS2307: Cannot find module '../types' or its corresponding type declarations.
+src/services/websocket.ts(68,7): error TS2322: Type '{ headers: { Authorization: string; } | undefined; }' is not assignable to type '{ headers: Record<string, string>; } & { headers: Record<string, string>; } & DeprecatedAuthOptions'.
+  Type '{ headers: { Authorization: string; } | undefined; }' is not assignable to type '{ headers: Record<string, string>; }'.
+    Types of property 'headers' are incompatible.
+      Type '{ Authorization: string; } | undefined' is not assignable to type 'Record<string, string>'.
+        Type 'undefined' is not assignable to type 'Record<string, string>'.

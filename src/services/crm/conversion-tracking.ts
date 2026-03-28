@@ -6,8 +6,7 @@
 import { conversationApi, customerApi } from './crm-api';
 import type { Customer, Conversation } from './crm-api';
 
-export interface ConversionEvent {
-  type: 'landing_page_view' | 'presentation_view' | 'presentation_complete' | 'service_interest' | 'service_purchase';
+export interface BaseConversionEvent {
   customer_id?: string;
   customer_slug?: string;
   campaign_id?: string;
@@ -18,7 +17,7 @@ export interface ConversionEvent {
   metadata?: Record<string, unknown>;
 }
 
-export interface LandingPageViewEvent extends ConversionEvent {
+export interface LandingPageViewEvent extends BaseConversionEvent {
   type: 'landing_page_view';
   campaign_slug: string;
   customer_email?: string;
@@ -26,21 +25,25 @@ export interface LandingPageViewEvent extends ConversionEvent {
   customer_name?: string;
 }
 
-export interface PresentationViewEvent extends ConversionEvent {
+export interface PresentationViewEvent extends BaseConversionEvent {
   type: 'presentation_view';
   presentation_id: string;
-  customer_id?: string;
   slide_number?: number;
 }
 
-export interface ServiceInterestEvent extends ConversionEvent {
+export interface PresentationCompleteEvent extends BaseConversionEvent {
+  type: 'presentation_complete';
+  presentation_id: string;
+}
+
+export interface ServiceInterestEvent extends BaseConversionEvent {
   type: 'service_interest';
   service_id: string;
   service_name: string;
   customer_id: string;
 }
 
-export interface ServicePurchaseEvent extends ConversionEvent {
+export interface ServicePurchaseEvent extends BaseConversionEvent {
   type: 'service_purchase';
   service_id: string;
   service_name: string;
@@ -48,6 +51,13 @@ export interface ServicePurchaseEvent extends ConversionEvent {
   amount?: number;
   currency?: string;
 }
+
+export type ConversionEvent =
+  | LandingPageViewEvent
+  | PresentationViewEvent
+  | PresentationCompleteEvent
+  | ServiceInterestEvent
+  | ServicePurchaseEvent;
 
 /**
  * Track a conversion event
@@ -58,27 +68,30 @@ export async function trackConversion(event: ConversionEvent): Promise<void> {
     let customerId: string | undefined = event.customer_id;
 
     if (!customerId && (event.type === 'landing_page_view' || event.type === 'service_interest' || event.type === 'service_purchase')) {
-      const landingEvent = event as LandingPageViewEvent | ServiceInterestEvent | ServicePurchaseEvent;
-      
       // Try to find customer by email or phone
-      if (landingEvent.customer_email || (landingEvent as ServiceInterestEvent | ServicePurchaseEvent).customer_id) {
+      if (
+        (event.type === 'landing_page_view' && event.customer_email) ||
+        ((event.type === 'service_interest' || event.type === 'service_purchase') && event.customer_id)
+      ) {
         try {
+          const searchEmail = event.type === 'landing_page_view' ? event.customer_email : undefined;
+          
           const customers = await customerApi.list({
-            search: landingEvent.customer_email || undefined,
+            search: searchEmail || undefined,
           });
           
-          const existingCustomer = customers.data.find(
-            (c) => c.email === (landingEvent as LandingPageViewEvent).customer_email
-          );
+          const existingCustomer = searchEmail ? customers.data.find(
+            (c) => c.email === searchEmail
+          ) : undefined;
           
           if (existingCustomer) {
             customerId = existingCustomer.id;
-          } else if (landingEvent.customer_email) {
+          } else if (event.type === 'landing_page_view' && event.customer_email) {
             // Create new customer from landing page
             const newCustomer = await customerApi.create({
-              business_name: (landingEvent as LandingPageViewEvent).customer_name || 'New Customer',
-              email: (landingEvent as LandingPageViewEvent).customer_email,
-              phone: (landingEvent as LandingPageViewEvent).customer_phone,
+              business_name: event.customer_name || 'New Customer',
+              email: event.customer_email,
+              phone: event.customer_phone,
               lead_source: 'learning_center',
               lead_score: 10,
             });

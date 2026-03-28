@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'municipal_admin' => \App\Http\Middleware\MunicipalAdminMiddleware::class,
+            'bridge.auth' => \App\Http\Middleware\BridgeAuthMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

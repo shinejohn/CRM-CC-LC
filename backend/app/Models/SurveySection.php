@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SurveySection extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $fillable = [
         'tenant_id',
@@ -37,9 +37,3 @@ class SurveySection extends Model
         return $this->hasMany(SurveyQuestion::class, 'section_id')->orderBy('display_order');
     }
 }
-
-
-
-
-
-

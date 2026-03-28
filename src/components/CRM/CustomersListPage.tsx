@@ -20,7 +20,7 @@ export default function CustomersListPage() {
         {
             header: "Status",
             accessorKey: "status",
-            cell: (row) => <StatusBadge status={row.status} />,
+            cell: (row) => <StatusBadge status={row.status as any} />,
         },
         {
             header: "LTV",

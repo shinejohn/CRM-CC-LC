@@ -174,7 +174,7 @@ export const EmbeddingStatus: React.FC = () => {
 };
 
 interface StatCardProps {
-  icon: React.ComponentType<{ size?: number; className?: string }>;
+  icon: React.ComponentType<{ size?: number | string; className?: string }>;
   value: number;
   label: string;
   color: 'emerald' | 'blue' | 'amber' | 'red';

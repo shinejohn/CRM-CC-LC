@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Quote extends Model
 {
-    use HasUuids, SoftDeletes;
+    use \App\Traits\HasTenantScope, HasUuids, SoftDeletes;
 
     protected $fillable = [
         'tenant_id',
@@ -62,9 +62,10 @@ class Quote extends Model
 
     public function isExpired(): bool
     {
-        if (!$this->valid_until || $this->status !== 'sent') {
+        if (! $this->valid_until || $this->status !== 'sent') {
             return false;
         }
+
         return now()->isAfter($this->valid_until);
     }
 }

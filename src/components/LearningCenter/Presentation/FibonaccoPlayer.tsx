@@ -113,7 +113,7 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
 
   const slides = presentation.slides || [];
   const activeSlide = slides[currentSlide];
-  const theme = presentation.meta.theme || 'blue';
+  const theme = presentation.meta?.theme || 'blue';
 
   // Audio handling
   useEffect(() => {
@@ -225,7 +225,7 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
           <SlideComponent
             content={activeSlide.content as any}
             isActive={true}
-            theme={theme}
+            {...({ theme } as any)}
           />
         )}
       </div>
@@ -235,9 +235,9 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
         <div className="absolute bottom-24 left-0 right-0 px-6 z-20">
           <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg">
             <div className="flex items-center gap-3">
-              {presentation.presenter.avatar_url ? (
+              {(presentation.presenter as any).avatar_url ? (
                 <img
-                  src={presentation.presenter.avatar_url}
+                  src={(presentation.presenter as any).avatar_url}
                   alt={presentation.presenter.name}
                   className="w-12 h-12 rounded-full"
                 />
@@ -266,7 +266,7 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
                   <p className="text-sm text-gray-700">{activeSlide.narration}</p>
                 ) : (
                   <p className="text-sm text-gray-500 italic">
-                    {presentation.presenter.communication_style || 'Presenting slide content...'}
+                    {(presentation.presenter as any).communication_style || 'Presenting slide content...'}
                   </p>
                 )}
               </div>
@@ -392,7 +392,7 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
           }
         }}
         presenterName={presentation.presenter?.name}
-        customerId={presentation.meta?.email_hook ? undefined : undefined} // Extract from presentation
+        customerId={(presentation.meta as any)?.email_hook ? undefined : undefined} // Extract from presentation
         presentationId={presentation.id}
         conversationId={conversationId}
         onResume={() => {

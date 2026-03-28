@@ -45,7 +45,7 @@ export default function CollectionsDashboard() {
                     label="Collection Rate"
                     value={`${mockMetrics.collection_rate}%`}
                     icon={TrendingUp}
-                    color="emerald"
+                    color="green"
                     isLoading={isLoading}
                 />
                 <MetricCard

@@ -3,7 +3,7 @@ import { DownloadIcon, FileTextIcon, CheckIcon, LoaderIcon } from 'lucide-react'
 export const TranscriptDownloadButton = ({
   sessionId,
   disabled
-}) => {
+}: { sessionId: string; disabled?: boolean }) => {
   const [downloadStatus, setDownloadStatus] = useState('idle'); // idle, downloading, complete
   const handleDownload = () => {
     if (disabled) return;

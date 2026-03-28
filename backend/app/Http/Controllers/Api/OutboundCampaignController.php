@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOutboundCampaignRequest;
+use App\Jobs\CampaignPreFlightJob;
+use App\Models\CampaignRecipient;
 use App\Models\Customer;
 use App\Models\OutboundCampaign;
-use App\Models\CampaignRecipient;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class OutboundCampaignController extends Controller
 {
@@ -21,8 +21,8 @@ class OutboundCampaignController extends Controller
     public function index(Request $request): JsonResponse
     {
         $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        
-        if (!$tenantId) {
+
+        if (! $tenantId) {
             return response()->json(['error' => 'Tenant ID required'], 400);
         }
 
@@ -58,7 +58,7 @@ class OutboundCampaignController extends Controller
     public function show(Request $request, string $id): JsonResponse
     {
         $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        
+
         $campaign = OutboundCampaign::where('tenant_id', $tenantId)
             ->with('recipients.customer')
             ->findOrFail($id);
@@ -72,8 +72,8 @@ class OutboundCampaignController extends Controller
     public function store(StoreOutboundCampaignRequest $request): JsonResponse
     {
         $tenantId = $request->getTenantId();
-        
-        if (!$tenantId) {
+
+        if (! $tenantId) {
             return response()->json(['error' => 'Tenant ID required'], 400);
         }
 
@@ -104,7 +104,7 @@ class OutboundCampaignController extends Controller
     public function update(Request $request, string $id): JsonResponse
     {
         $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        
+
         $campaign = OutboundCampaign::where('tenant_id', $tenantId)->findOrFail($id);
 
         $validator = Validator::make($request->all(), [
@@ -142,7 +142,7 @@ class OutboundCampaignController extends Controller
     public function destroy(Request $request, string $id): JsonResponse
     {
         $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        
+
         $campaign = OutboundCampaign::where('tenant_id', $tenantId)->findOrFail($id);
 
         $campaign->delete();
@@ -156,7 +156,7 @@ class OutboundCampaignController extends Controller
     public function getRecipients(Request $request, string $id): JsonResponse
     {
         $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        
+
         $campaign = OutboundCampaign::where('tenant_id', $tenantId)->findOrFail($id);
 
         $recipients = $this->buildRecipientList($tenantId, $campaign->type, $campaign->recipient_segments ?? []);
@@ -253,7 +253,7 @@ class OutboundCampaignController extends Controller
     public function start(Request $request, string $id): JsonResponse
     {
         $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        
+
         $campaign = OutboundCampaign::where('tenant_id', $tenantId)->findOrFail($id);
 
         if ($campaign->status !== 'draft' && $campaign->status !== 'scheduled') {
@@ -286,6 +286,11 @@ class OutboundCampaignController extends Controller
                 'started_at' => now(),
             ]);
 
+            // For email campaigns, run pre-flight ZeroBounce validation first
+            if ($campaign->type === 'email') {
+                CampaignPreFlightJob::dispatch($campaign);
+            }
+
             // Queue jobs for sending
             $recipients = CampaignRecipient::where('campaign_id', $campaign->id)
                 ->where('status', 'pending')
@@ -312,7 +317,7 @@ class OutboundCampaignController extends Controller
     public function analytics(Request $request, string $id): JsonResponse
     {
         $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        
+
         $campaign = OutboundCampaign::where('tenant_id', $tenantId)->findOrFail($id);
 
         $campaign->load('recipients');

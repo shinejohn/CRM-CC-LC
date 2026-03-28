@@ -35,7 +35,7 @@ export const notificationsApi = {
   }) => {
     const searchParams = new URLSearchParams();
     Object.entries(params || {}).forEach(([k, v]) => {
-      if (v !== undefined && v !== null && v !== '') searchParams.set(k, String(v));
+      if (v !== undefined && v !== null && String(v) !== '') searchParams.set(k, String(v));
     });
     const query = searchParams.toString();
     return apiClient.get<{

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CrmContact extends Model
 {
-    use HasUuids, SoftDeletes;
+    use \App\Traits\HasTenantScope, HasUuids, SoftDeletes;
 
     protected $table = 'crm_contacts';
 

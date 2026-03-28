@@ -60,7 +60,7 @@ export async function listPhoneCampaigns(params?: {
     '/api/v1/outbound/phone/campaigns',
     { params }
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -70,7 +70,7 @@ export async function getPhoneCampaign(id: string): Promise<PhoneCampaign> {
   const response = await apiClient.get<{ data: PhoneCampaign }>(
     `/api/v1/outbound/campaigns/${id}`
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -83,7 +83,7 @@ export async function createPhoneCampaign(
     '/api/v1/outbound/phone/campaigns',
     request
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -93,7 +93,7 @@ export async function getPhoneScripts(): Promise<PhoneScript[]> {
   const response = await apiClient.get<{ data: PhoneScript[] }>(
     '/api/v1/outbound/phone/scripts'
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -108,5 +108,5 @@ export async function createPhoneScript(request: {
     '/api/v1/outbound/phone/scripts',
     request
   );
-  return response.data.data;
+  return response.data;
 }

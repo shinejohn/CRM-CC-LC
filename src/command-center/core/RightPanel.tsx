@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { X, Mic, Send, Paperclip } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useNavCommander } from '../../hooks/useNavCommander';
+import { useNavCommander } from '../hooks/useNavCommander';
 
 interface RightPanelProps {
   isAIMode: boolean;

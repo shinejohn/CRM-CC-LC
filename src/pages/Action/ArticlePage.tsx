@@ -10,7 +10,7 @@ import {
   Search,
   RefreshCw,
 } from 'lucide-react';
-import api from '@/services/api';
+import { apiClient as api } from '@/services/api';
 
 interface Article {
   id: string;

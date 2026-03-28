@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Customer;
 use App\Models\EmailSuppression;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -10,9 +11,13 @@ use Illuminate\Support\Facades\Mail;
 class EmailService
 {
     protected string $provider;
+
     protected string $fallbackProvider;
+
     protected ?string $sendgridApiKey;
+
     protected array $sesConfig;
+
     protected array $postalConfig;
 
     public function __construct()
@@ -29,8 +34,9 @@ class EmailService
      */
     public function sendViaSendGrid(string $to, string $subject, string $htmlContent, ?string $textContent = null, array $options = []): ?array
     {
-        if (!$this->sendgridApiKey) {
+        if (! $this->sendgridApiKey) {
             Log::error('SendGrid API key not configured');
+
             return null;
         }
 
@@ -85,6 +91,7 @@ class EmailService
 
             if ($response->successful()) {
                 $messageId = $response->header('X-Message-Id');
+
                 return [
                     'success' => true,
                     'message_id' => $messageId,
@@ -100,6 +107,7 @@ class EmailService
             return null;
         } catch (\Exception $e) {
             Log::error('SendGrid error', ['error' => $e->getMessage()]);
+
             return null;
         }
     }
@@ -112,8 +120,9 @@ class EmailService
         $apiUrl = $this->postalConfig['api_url'] ?? null;
         $serverKey = $this->postalConfig['server_key'] ?? null;
 
-        if (!$apiUrl || !$serverKey) {
+        if (! $apiUrl || ! $serverKey) {
             Log::error('Postal API not configured');
+
             return null;
         }
 
@@ -127,30 +136,30 @@ class EmailService
                 'plain_body' => $textContent ?? strip_tags($htmlContent),
             ];
 
-            if (!empty($options['tag'])) {
+            if (! empty($options['tag'])) {
                 $payload['tag'] = $options['tag'];
             }
 
             $ipPool = $options['ip_pool'] ?? ($this->postalConfig['default_ip_pool'] ?? null);
-            if (!empty($ipPool)) {
+            if (! empty($ipPool)) {
                 $payload['ip_pool'] = $ipPool;
             }
 
             $headers = [];
-            if (!empty($options['campaign_id'])) {
+            if (! empty($options['campaign_id'])) {
                 $headers['X-Fibonacco-Campaign-ID'] = (string) $options['campaign_id'];
             }
-            if (!empty($options['recipient_id'])) {
+            if (! empty($options['recipient_id'])) {
                 $headers['X-Fibonacco-Recipient-ID'] = (string) $options['recipient_id'];
             }
-            if (!empty($headers)) {
+            if (! empty($headers)) {
                 $payload['headers'] = $headers;
             }
 
             $response = Http::withHeaders([
                 'X-Server-API-Key' => $serverKey,
                 'Content-Type' => 'application/json',
-            ])->post(rtrim($apiUrl, '/') . '/api/v1/send/message', $payload);
+            ])->post(rtrim($apiUrl, '/').'/api/v1/send/message', $payload);
 
             if ($response->successful()) {
                 $data = $response->json();
@@ -176,6 +185,7 @@ class EmailService
             ];
         } catch (\Exception $e) {
             Log::error('Postal error', ['error' => $e->getMessage()]);
+
             return [
                 'success' => false,
                 'provider' => 'postal',
@@ -192,10 +202,10 @@ class EmailService
         // SES integration would use AWS SDK
         // For now, fall back to Laravel Mail facade
         try {
-            Mail::html($htmlContent, function ($message) use ($to, $subject, $textContent, $options) {
+            Mail::html($htmlContent, function ($message) use ($to, $subject, $textContent) {
                 $message->to($to)
                     ->subject($subject);
-                
+
                 if ($textContent) {
                     $message->text($textContent);
                 }
@@ -207,6 +217,7 @@ class EmailService
             ];
         } catch (\Exception $e) {
             Log::error('SES email error', ['error' => $e->getMessage()]);
+
             return null;
         }
     }
@@ -216,11 +227,21 @@ class EmailService
      */
     public function send(string $to, string $subject, string $htmlContent, ?string $textContent = null, array $options = []): ?array
     {
-        if (EmailSuppression::where('email', $to)->exists()) {
+        if (EmailSuppression::where('email_address', $to)->exists()) {
             return [
                 'success' => false,
                 'provider' => 'suppression',
                 'error' => 'Recipient is suppressed',
+            ];
+        }
+
+        // Also check ZeroBounce suppression on the customer record
+        $customer = Customer::where('email', $to)->orWhere('primary_email', $to)->first();
+        if ($customer && $customer->email_suppressed) {
+            return [
+                'success' => false,
+                'provider' => 'suppression',
+                'error' => "Suppressed by ZeroBounce: {$customer->email_suppressed_reason}",
             ];
         }
 
@@ -250,11 +271,11 @@ class EmailService
     public function sendBulk(array $recipients, string $subject, string $htmlContent, ?string $textContent = null, array $options = []): array
     {
         $results = [];
-        
+
         foreach ($recipients as $recipient) {
             $email = is_array($recipient) ? $recipient['email'] : $recipient;
             $recipientOptions = array_merge($options, is_array($recipient) ? $recipient : []);
-            
+
             $results[] = [
                 'email' => $email,
                 'result' => $this->send($email, $subject, $htmlContent, $textContent, $recipientOptions),

@@ -26,10 +26,10 @@ export const BusinessProfilePage = () => {
     text: 'TechSolutions has shown strong financial growth with a CAGR of 18.7% over the last 3 years. Their revenue increased from $4.2M in 2020 to $5.9M in 2022, with improving gross margins from 62% to 68%. Their EBITDA margin of 22.4% is above the industry average.',
     isAI: true
   }]);
-  const addMessage = message => {
+  const addMessage = (message: { sender: string; text: string; isAI: boolean }) => {
     setMessages([...messages, message]);
   };
-  const handleTranscriptUpdate = text => {
+  const handleTranscriptUpdate = (text: string) => {
     setTranscript(text);
   };
   const participants = [{

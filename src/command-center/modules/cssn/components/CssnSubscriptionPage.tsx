@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Network, Zap, CheckCircle2 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from '@/components/ui/toaster';
 
 // Placeholder types based on Laravel models
 interface CssnSubscription {
@@ -28,7 +28,7 @@ export function CssnSubscriptionPage({
     // Normally provided by a Context or API hook
     smbId = "mock-smb-id"
 }) {
-    const { toast } = useToast();
+    // useToast replaced with direct toast import
     const [subscription, setSubscription] = useState<CssnSubscription | null>(null);
     const [preferences, setPreferences] = useState<CssnPreferences>({
         auto_distribute_coupons: true,

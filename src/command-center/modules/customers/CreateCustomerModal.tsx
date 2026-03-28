@@ -10,7 +10,7 @@ interface CreateCustomerModalProps {
   open: boolean;
   onClose: () => void;
   onCreated: (customer: Customer) => void;
-  createCustomer: (data: Partial<Customer>) => Promise<Customer>;
+  createCustomer: (data: { name: string; email: string; phone?: string; company?: string; stage?: CustomerStage; tags?: string[] }) => Promise<Customer>;
 }
 
 export function CreateCustomerModal({ 

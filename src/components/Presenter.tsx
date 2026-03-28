@@ -2,7 +2,7 @@ import React from 'react';
 import { UserIcon } from 'lucide-react';
 export const Presenter = ({
   isVideoOff
-}) => {
+}: { isVideoOff: boolean }) => {
   return <div className="bg-gray-900 rounded-lg overflow-hidden flex-1 flex items-center justify-center relative">
       {isVideoOff ? <div className="flex flex-col items-center justify-center text-white">
           <div className="bg-gray-700 p-6 rounded-full mb-2">

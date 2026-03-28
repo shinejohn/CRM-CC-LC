@@ -3,13 +3,13 @@ import { Link } from 'react-router';
 import { MenuIcon, HomeIcon, PresentationIcon, BarChart2Icon, TrendingUpIcon, BriefcaseIcon, DatabaseIcon, XIcon, FileTextIcon, NetworkIcon, FolderIcon, UserIcon, LogInIcon, UserPlusIcon, CalendarIcon, ShoppingCartIcon } from 'lucide-react';
 export const NavigationMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
   useEffect(() => {
-    const handleClickOutside = event => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };

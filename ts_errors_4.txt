@@ -1,0 +1,167 @@
+src/command-center/core/RightPanel.tsx(6,33): error TS2307: Cannot find module '../../hooks/useNavCommander' or its corresponding type declarations.
+src/command-center/hooks/useApi.ts(116,61): error TS2345: Argument of type 'D' is not assignable to parameter of type 'RequestConfig | undefined'.
+  Type 'D' is not assignable to type 'RequestConfig'.
+src/command-center/hooks/useServices.ts(151,25): error TS2345: Argument of type '(s: Record<string, unknown>) => Service' is not assignable to parameter of type '((value: unknown, index: number, array: unknown[]) => Service) & ((value: any, index: number, array: any[]) => Service)'.
+  Type '(s: Record<string, unknown>) => Service' is not assignable to type '(value: unknown, index: number, array: unknown[]) => Service'.
+    Types of parameters 's' and 'value' are incompatible.
+      Type 'unknown' is not assignable to type 'Record<string, unknown>'.
+src/command-center/modules/campaigns/CampaignWizard.tsx(86,16): error TS7006: Parameter 'res' implicitly has an 'any' type.
+src/command-center/modules/campaigns/CampaignWizard.tsx(87,17): error TS7006: Parameter 'err' implicitly has an 'any' type.
+src/command-center/modules/campaigns/CampaignWizard.tsx(102,16): error TS7006: Parameter 'res' implicitly has an 'any' type.
+src/command-center/modules/campaigns/CampaignWizard.tsx(103,17): error TS7006: Parameter 'err' implicitly has an 'any' type.
+src/command-center/modules/cssn/components/CssnSubscriptionPage.tsx(8,26): error TS2307: Cannot find module '@/hooks/use-toast' or its corresponding type declarations.
+src/command-center/modules/customers/CustomerCard.tsx(90,48): error TS2322: Type '{ children: (Element | undefined)[]; align: "end"; onClick: (e: any) => any; }' is not assignable to type 'IntrinsicAttributes & DropdownMenuContentProps'.
+  Property 'onClick' does not exist on type 'IntrinsicAttributes & DropdownMenuContentProps'.
+src/command-center/modules/customers/CustomerCard.tsx(90,58): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/command-center/modules/customers/CustomerCard.tsx(96,21): error TS2322: Type '(e: any) => void' is not assignable to type '() => void'.
+  Target signature provides too few arguments. Expected 1 or more, but got 0.
+src/command-center/modules/customers/CustomerCard.tsx(96,31): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/command-center/modules/services/wizard/components/steps/RemainingSteps.tsx(3,31): error TS2307: Cannot find module '../types' or its corresponding type declarations.
+src/components/BusinessProfileForm.tsx(90,25): error TS7006: Parameter 'status' implicitly has an 'any' type.
+src/components/BusinessProfileForm.tsx(102,30): error TS7006: Parameter 'level' implicitly has an 'any' type.
+src/components/CRM/CustomerDetailPage.tsx(73,34): error TS2322: Type '"active" | "inactive" | "lead"' is not assignable to type '"pending" | "completed" | "draft" | "archived" | "cancelled" | "active" | "overdue" | "inactive"'.
+  Type '"lead"' is not assignable to type '"pending" | "completed" | "draft" | "archived" | "cancelled" | "active" | "overdue" | "inactive"'.
+src/components/CRM/CustomerDetailPage.tsx(119,29): error TS2322: Type '"emerald"' is not assignable to type '"green" | "blue" | "red" | "purple" | "amber" | undefined'.
+src/components/CRM/CustomersListPage.tsx(23,41): error TS2322: Type '"active" | "inactive" | "lead"' is not assignable to type '"pending" | "completed" | "draft" | "archived" | "cancelled" | "active" | "overdue" | "inactive"'.
+  Type '"lead"' is not assignable to type '"pending" | "completed" | "draft" | "archived" | "cancelled" | "active" | "overdue" | "inactive"'.
+src/components/dashboard/CentralCommandDashboard.tsx(32,25): error TS2322: Type 'string' is not assignable to type 'number[]'.
+src/components/dashboard/DataReportPanel.tsx(40,29): error TS2322: Type '(value: number) => [string, "Revenue"]' is not assignable to type 'Formatter<number, "Revenue"> & ((value: number, name: "Revenue", item: Payload<number, "Revenue">, index: number, payload: Payload<number, "Revenue">[]) => ReactNode | [...])'.
+  Type '(value: number) => [string, "Revenue"]' is not assignable to type 'Formatter<number, "Revenue">'.
+    Types of parameters 'value' and 'value' are incompatible.
+      Type 'number | undefined' is not assignable to type 'number'.
+        Type 'undefined' is not assignable to type 'number'.
+src/components/DataAnalyticsPanel.tsx(50,25): error TS7006: Parameter 'status' implicitly has an 'any' type.
+src/components/DataAnalyticsPanel.tsx(62,30): error TS7006: Parameter 'level' implicitly has an 'any' type.
+src/components/ExpandableChat.test.tsx(7,35): error TS2739: Type '{}' is missing the following properties from type 'ExpandableChatProps': messages, addMessage
+src/components/Facilitator.tsx(4,3): error TS7031: Binding element 'isVisible' implicitly has an 'any' type.
+src/components/Facilitator.tsx(5,3): error TS7031: Binding element 'isVideoOff' implicitly has an 'any' type.
+src/components/GlobalErrorHandler.tsx(111,13): error TS2345: Argument of type '() => () => boolean' is not assignable to parameter of type 'EffectCallback'.
+  Type '() => boolean' is not assignable to type 'void | Destructor'.
+    Type '() => boolean' is not assignable to type 'Destructor'.
+      Type 'boolean' is not assignable to type 'void | { [UNDEFINED_VOID_ONLY]: never; }'.
+src/components/learning/LearningCenterHub.tsx(21,25): error TS2322: Type '{ children: Element[]; key: string; className: string; onClick: () => void | Promise<void>; }' is not assignable to type 'IntrinsicAttributes & DataCardProps'.
+  Property 'onClick' does not exist on type 'IntrinsicAttributes & DataCardProps'.
+src/components/LearningCenter/BusinessProfile/QuestionEditor.test.tsx(7,35): error TS2741: Property 'sectionId' is missing in type '{ onClose: () => void; onSave: () => void; }' but required in type 'QuestionEditorProps'.
+src/components/LearningCenter/BusinessProfile/QuestionEditor.tsx(198,23): error TS2322: Type '{ min: number; max?: number | undefined; min_label?: string; max_label?: string; }' is not assignable to type '{ min: number; max: number; min_label?: string | undefined; max_label?: string | undefined; }'.
+  Types of property 'max' are incompatible.
+    Type 'number | undefined' is not assignable to type 'number'.
+      Type 'undefined' is not assignable to type 'number'.
+src/components/LearningCenter/BusinessProfile/QuestionEditor.tsx(215,23): error TS2322: Type '{ max: number; min?: number | undefined; min_label?: string; max_label?: string; }' is not assignable to type '{ min: number; max: number; min_label?: string | undefined; max_label?: string | undefined; }'.
+  Types of property 'min' are incompatible.
+    Type 'number | undefined' is not assignable to type 'number'.
+      Type 'undefined' is not assignable to type 'number'.
+src/components/LearningCenter/Common/EmbeddingIndicator.tsx(52,21): error TS2339: Property 'animate' does not exist on type '{ icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>; label: string; color: string; iconColor: string; } | { ...; } | { ...; } | { ...; }'.
+  Property 'animate' does not exist on type '{ icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>; label: string; color: string; iconColor: string; }'.
+src/components/LearningCenter/Common/ErrorBoundary.test.tsx(23,24): error TS2304: Cannot find name 'vi'.
+src/components/LearningCenter/FAQ/FAQBulkImport.tsx(101,56): error TS2554: Expected 0 arguments, but got 2.
+src/components/LearningCenter/FAQ/FAQBulkImport.tsx(106,21): error TS2345: Argument of type '{ imported: number; errors: string[]; }' is not assignable to parameter of type 'SetStateAction<ImportResult | null>'.
+  Property 'warnings' is missing in type '{ imported: number; errors: string[]; }' but required in type 'ImportResult'.
+src/components/LearningCenter/FAQ/FAQCategoryManager.test.tsx(13,54): error TS2322: Type '{ onClose: () => void; }' is not assignable to type 'IntrinsicAttributes'.
+  Property 'onClose' does not exist on type 'IntrinsicAttributes'.
+src/components/LearningCenter/FAQ/FAQEditor.test.tsx(47,54): error TS2345: Argument of type '{ id: string; question: string; answer: string; category: string; source: "owner"; validation_status: "unverified"; is_public: boolean; allowed_agents: never[]; tags: never[]; applies_to_industries: never[]; }' is not assignable to parameter of type 'FAQItem'.
+  Type '{ id: string; question: string; answer: string; category: string; source: "owner"; validation_status: "unverified"; is_public: boolean; allowed_agents: never[]; tags: never[]; applies_to_industries: never[]; }' is missing the following properties from type 'FAQItem': related_faqs, tenant_id, embedding_status, has_embedding, and 8 more.
+src/components/LearningCenter/FAQ/FAQEditor.test.tsx(89,57): error TS2345: Argument of type '{ id: string; question: string; answer: string; category: string; source: "owner"; validation_status: "unverified"; is_public: true; allowed_agents: never[]; tags: never[]; applies_to_industries: never[]; }' is not assignable to parameter of type 'FAQItem'.
+  Type '{ id: string; question: string; answer: string; category: string; source: "owner"; validation_status: "unverified"; is_public: true; allowed_agents: never[]; tags: never[]; applies_to_industries: never[]; }' is missing the following properties from type 'FAQItem': related_faqs, tenant_id, embedding_status, has_embedding, and 8 more.
+src/components/LearningCenter/FAQ/FAQList.test.tsx(107,55): error TS2345: Argument of type '{ data: { id: string; tenant_id: string; question: string; answer: string; category: string; source: "owner"; validation_status: "unverified"; is_public: boolean; allowed_agents: never[]; tags: never[]; ... 11 more ...; created_by: string; }[]; meta: { ...; }; }' is not assignable to parameter of type 'PaginatedResponse<FAQItem>'.
+  Types of property 'meta' are incompatible.
+    Type '{ total: number; page: number; per_page: number; }' is missing the following properties from type '{ current_page: number; last_page: number; per_page: number; total: number; }': current_page, last_page
+src/components/LearningCenter/FAQ/FAQList.test.tsx(129,25): error TS2353: Object literal may only specify known properties, and 'page' does not exist in type '{ current_page: number; last_page: number; per_page: number; total: number; }'.
+src/components/LearningCenter/FAQ/FAQList.test.tsx(140,55): error TS2345: Argument of type '{ data: { id: string; tenant_id: string; question: string; answer: string; category: string; source: "owner"; validation_status: "unverified"; is_public: boolean; allowed_agents: never[]; tags: never[]; ... 11 more ...; created_by: string; }[]; meta: { ...; }; }' is not assignable to parameter of type 'PaginatedResponse<FAQItem>'.
+  Types of property 'meta' are incompatible.
+    Type '{ total: number; page: number; per_page: number; }' is missing the following properties from type '{ current_page: number; last_page: number; per_page: number; total: number; }': current_page, last_page
+src/components/LearningCenter/FAQ/FAQList.test.tsx(156,25): error TS2353: Object literal may only specify known properties, and 'page' does not exist in type '{ current_page: number; last_page: number; per_page: number; total: number; }'.
+src/components/LearningCenter/Presentation/FibonaccoPlayer.tsx(116,17): error TS18048: 'presentation.meta' is possibly 'undefined'.
+src/components/LearningCenter/Presentation/FibonaccoPlayer.tsx(228,13): error TS2322: Type '{ content: any; isActive: true; theme: string; }' is not assignable to type 'IntrinsicAttributes & HeroSlideProps'.
+  Property 'theme' does not exist on type 'IntrinsicAttributes & HeroSlideProps'.
+src/components/LearningCenter/Presentation/FibonaccoPlayer.tsx(238,39): error TS2339: Property 'avatar_url' does not exist on type 'Presenter | { id: string; name: string; role?: string | undefined; personality?: string | undefined; communication_style?: string | undefined; }'.
+  Property 'avatar_url' does not exist on type '{ id: string; name: string; role?: string | undefined; personality?: string | undefined; communication_style?: string | undefined; }'.
+src/components/LearningCenter/Presentation/FibonaccoPlayer.tsx(240,47): error TS2339: Property 'avatar_url' does not exist on type 'Presenter | { id: string; name: string; role?: string | undefined; personality?: string | undefined; communication_style?: string | undefined; }'.
+  Property 'avatar_url' does not exist on type '{ id: string; name: string; role?: string | undefined; personality?: string | undefined; communication_style?: string | undefined; }'.
+src/components/LearningCenter/Presentation/FibonaccoPlayer.tsx(269,45): error TS2339: Property 'communication_style' does not exist on type 'Presenter | { id: string; name: string; role?: string | undefined; personality?: string | undefined; communication_style?: string | undefined; }'.
+  Property 'communication_style' does not exist on type 'Presenter'.
+src/components/LearningCenter/Presentation/FibonaccoPlayer.tsx(395,40): error TS2339: Property 'email_hook' does not exist on type 'PresentationMeta | { title?: string | undefined; theme?: string | undefined; duration?: number | undefined; slideCount?: number | undefined; audioBaseUrl?: string | undefined; }'.
+  Property 'email_hook' does not exist on type '{ title?: string | undefined; theme?: string | undefined; duration?: number | undefined; slideCount?: number | undefined; audioBaseUrl?: string | undefined; }'.
+src/components/LearningCenter/Presentation/slides/FlowSlide.tsx(48,26): error TS18048: 'content.steps' is possibly 'undefined'.
+src/components/LearningCenter/Presentation/slides/StepSlide.tsx(138,26): error TS18048: 'content.steps' is possibly 'undefined'.
+src/components/MarketingPlanForm.tsx(3,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/components/MarketingPlanForm.tsx(185,25): error TS7006: Parameter 'status' implicitly has an 'any' type.
+src/components/NavigationMenu.tsx(11,32): error TS7006: Parameter 'event' implicitly has an 'any' type.
+src/components/NavigationMenu.tsx(12,47): error TS2339: Property 'contains' does not exist on type 'never'.
+src/components/PresentationPanel.tsx(43,21): error TS7006: Parameter 'index' implicitly has an 'any' type.
+src/components/Presenter.test.tsx(7,35): error TS2741: Property 'isVideoOff' is missing in type '{}' but required in type '{ isVideoOff: any; }'.
+src/components/Presenter.tsx(4,3): error TS7031: Binding element 'isVideoOff' implicitly has an 'any' type.
+src/components/ProposalForm.tsx(89,25): error TS7006: Parameter 'status' implicitly has an 'any' type.
+src/components/ProposalForm.tsx(101,30): error TS7006: Parameter 'level' implicitly has an 'any' type.
+src/components/ProtectedRoute.tsx(40,12): error TS2339: Property 'permissions' does not exist on type 'User'.
+src/components/TranscriptDownloadButton.test.tsx(7,35): error TS2741: Property 'disabled' is missing in type '{ sessionId: string; }' but required in type '{ sessionId: any; disabled: any; }'.
+src/components/TranscriptDownloadButton.tsx(4,3): error TS7031: Binding element 'sessionId' implicitly has an 'any' type.
+src/components/TranscriptDownloadButton.tsx(5,3): error TS7031: Binding element 'disabled' implicitly has an 'any' type.
+src/components/VideoCall.tsx(22,22): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/components/VideoCall.tsx(25,34): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/components/VideoCall.tsx(28,35): error TS7006: Parameter 'data' implicitly has an 'any' type.
+src/hooks/ops/useOpsFOA.ts(93,51): error TS2345: Argument of type '{ status?: string | undefined; page?: number | undefined; perPage?: number | undefined; } | undefined' is not assignable to parameter of type '{ status?: "pending" | "completed" | "failed" | "running" | "rolled_back" | undefined; page?: number | undefined; perPage?: number | undefined; } | undefined'.
+  Type '{ status?: string | undefined; page?: number | undefined; perPage?: number | undefined; }' is not assignable to type '{ status?: "pending" | "completed" | "failed" | "running" | "rolled_back" | undefined; page?: number | undefined; perPage?: number | undefined; }'.
+    Types of property 'status' are incompatible.
+      Type 'string | undefined' is not assignable to type '"pending" | "completed" | "failed" | "running" | "rolled_back" | undefined'.
+        Type 'string' is not assignable to type '"pending" | "completed" | "failed" | "running" | "rolled_back" | undefined'.
+src/hooks/ops/useOpsMetrics.ts(51,52): error TS2345: Argument of type '{ category?: string | undefined; isActive?: boolean | undefined; search?: string | undefined; page?: number | undefined; perPage?: number | undefined; } | undefined' is not assignable to parameter of type '({ category?: "email" | "system" | "growth" | "financial" | "infrastructure" | "cost" | undefined; isActive?: boolean | undefined; search?: string | undefined; } & PaginationParams) | undefined'.
+  Type '{ category?: string | undefined; isActive?: boolean | undefined; search?: string | undefined; page?: number | undefined; perPage?: number | undefined; }' is not assignable to type '{ category?: "email" | "system" | "growth" | "financial" | "infrastructure" | "cost" | undefined; isActive?: boolean | undefined; search?: string | undefined; } & PaginationParams'.
+    Type '{ category?: string | undefined; isActive?: boolean | undefined; search?: string | undefined; page?: number | undefined; perPage?: number | undefined; }' is not assignable to type '{ category?: "email" | "system" | "growth" | "financial" | "infrastructure" | "cost" | undefined; isActive?: boolean | undefined; search?: string | undefined; }'.
+      Types of property 'category' are incompatible.
+        Type 'string | undefined' is not assignable to type '"email" | "system" | "growth" | "financial" | "infrastructure" | "cost" | undefined'.
+          Type 'string' is not assignable to type '"email" | "system" | "growth" | "financial" | "infrastructure" | "cost" | undefined'.
+src/hooks/useAuth.ts(11,41): error TS2339: Property 'setAuth' does not exist on type 'AuthState'.
+src/hooks/useAuth.ts(11,50): error TS2339: Property 'clearAuth' does not exist on type 'AuthState'.
+src/hooks/useRealtime.ts(42,57): error TS2352: Conversion of type '"*"[]' to type 'RealtimeEventType[]' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type '"*"' is not comparable to type 'RealtimeEventType'.
+src/pages/Action/ArticlePage.tsx(13,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/pages/Action/EventsPage.tsx(13,8): error TS1192: Module '"/Users/johnshine/Dropbox/Fibonacco/Learning-Center/src/services/api"' has no default export.
+src/pages/AIWorkflowPage.tsx(28,22): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/pages/AIWorkflowPage.tsx(31,34): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/pages/BusinessProfilePage.tsx(29,22): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/pages/BusinessProfilePage.tsx(32,34): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/pages/ClientProposalPage.tsx(29,22): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/pages/ClientProposalPage.tsx(32,34): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/pages/CommandCenter/Dashboard.tsx(28,77): error TS2339: Property 'permissions' does not exist on type 'User'.
+src/pages/DataAnalyticsPage.tsx(29,22): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/pages/DataAnalyticsPage.tsx(32,34): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/pages/DataReportCall.tsx(30,22): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/pages/DataReportCall.tsx(33,34): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/pages/LearningCenter/GettingStarted/Index.tsx(31,56): error TS2448: Block-scoped variable 'sections' used before its declaration.
+src/pages/LearningCenter/GettingStarted/Index.tsx(31,56): error TS2454: Variable 'sections' is used before being assigned.
+src/pages/LearningCenter/GettingStarted/QuickStart.tsx(35,53): error TS2448: Block-scoped variable 'steps' used before its declaration.
+src/pages/LearningCenter/GettingStarted/QuickStart.tsx(35,53): error TS2454: Variable 'steps' is used before being assigned.
+src/pages/ops/OpsIncidentsPage.tsx(187,26): error TS2367: This comparison appears to be unintentional because the types '"investigating" | "identified" | "monitoring"' and '"resolved"' have no overlap.
+src/pages/PresentationCall.tsx(31,22): error TS7006: Parameter 'message' implicitly has an 'any' type.
+src/pages/PresentationCall.tsx(34,34): error TS7006: Parameter 'text' implicitly has an 'any' type.
+src/pages/ProfilePage.tsx(24,24): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/pages/SignUpPage.tsx(18,24): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/pages/SignUpPage.tsx(37,30): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/providers/AppProvider.tsx(18,18): error TS2339: Property 'setAuth' does not exist on type 'AuthState'.
+src/providers/AppProvider.tsx(18,27): error TS2339: Property 'clearAuth' does not exist on type 'AuthState'.
+src/services/authService.ts(32,11): error TS2304: Cannot find name 'apiClient'.
+src/services/authService.ts(40,26): error TS2304: Cannot find name 'apiClient'.
+src/services/authService.ts(46,26): error TS2304: Cannot find name 'apiClient'.
+src/services/communityService.ts(63,5): error TS2304: Cannot find name 'api'.
+src/services/communityService.ts(71,5): error TS2304: Cannot find name 'api'.
+src/services/crm/dashboard-api.ts(112,24): error TS2339: Property 'data' does not exist on type 'CrmAnalytics'.
+src/services/crm/notifications-api.ts(38,44): error TS2367: This comparison appears to be unintentional because the types 'number | boolean' and 'string' have no overlap.
+src/services/customerRecommendationsService.ts(20,5): error TS2304: Cannot find name 'api'.
+src/services/learning/campaign-api.ts(264,30): error TS2339: Property 'narration' does not exist on type '{ id: number; component: string; content: Record<string, unknown>; audioUrl?: string | undefined; requiresPersonalization: boolean; }'.
+src/services/learning/campaign-api.ts(285,26): error TS2339: Property 'narration' does not exist on type '{ id: number; component: string; content: Record<string, unknown>; audioUrl?: string | undefined; requiresPersonalization: boolean; }'.
+src/services/learning/campaign-api.ts(299,7): error TS2322: Type '{ audio_url: any; narration: any; id: number; component: string; content: Record<string, unknown>; audioUrl?: string | undefined; requiresPersonalization: boolean; }[]' is not assignable to type 'Slide[]'.
+  Type '{ audio_url: any; narration: any; id: number; component: string; content: Record<string, unknown>; audioUrl?: string; requiresPersonalization: boolean; }' is not assignable to type 'Slide'.
+    Types of property 'component' are incompatible.
+      Type 'string' is not assignable to type 'SlideComponentType'.
+src/services/learning/campaign-api.ts(301,44): error TS2551: Property 'audio_url' does not exist on type '{ id: number; component: string; content: Record<string, unknown>; audioUrl?: string | undefined; requiresPersonalization: boolean; }'. Did you mean 'audioUrl'?
+src/services/learning/knowledge-api.test.ts(121,51): error TS2353: Object literal may only specify known properties, and 'category' does not exist in type 'FAQFilters'.
+src/services/learning/knowledge-api.ts(204,12): error TS2678: Type '"fulltext"' is not comparable to type '"hybrid" | "semantic" | "keyword" | undefined'.
+src/services/personalities/contact-api.ts(40,19): error TS2339: Property 'data' does not exist on type '{ success: boolean; message: string; }'.
+src/services/personalities/contact-api.ts(53,19): error TS2339: Property 'data' does not exist on type '{ success: boolean; message: string; }'.
+src/services/personalities/contact-api.ts(77,19): error TS2339: Property 'data' does not exist on type '{ success: boolean; message: string; }'.
+src/services/realtime.ts(87,21): error TS2352: Conversion of type '{ listen: (ev: string, cb: (e: unknown) => void) => void; }' to type '{ stopListening: (ev: string) => void; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'stopListening' is missing in type '{ listen: (ev: string, cb: (e: unknown) => void) => void; }' but required in type '{ stopListening: (ev: string) => void; }'.
+src/services/realtime.ts(88,12): error TS2352: Conversion of type '{ listen: (ev: string, cb: (e: unknown) => void) => void; }' to type '{ stopListening: (ev: string) => void; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'stopListening' is missing in type '{ listen: (ev: string, cb: (e: unknown) => void) => void; }' but required in type '{ stopListening: (ev: string) => void; }'.
+src/services/websocket.ts(56,14): error TS2307: Cannot find module 'laravel-echo' or its corresponding type declarations.
+src/services/websocket.ts(57,14): error TS2307: Cannot find module 'pusher-js' or its corresponding type declarations.

@@ -15,7 +15,7 @@ export const SignUpPage = () => {
   const [error, setError] = useState('');
   const [passwordStrength, setPasswordStrength] = useState(0);
   const navigate = useNavigate();
-  const handleChange = e => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       name,
       value
@@ -34,7 +34,7 @@ export const SignUpPage = () => {
       setPasswordStrength(strength);
     }
   };
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     // Validation

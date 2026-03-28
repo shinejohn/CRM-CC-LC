@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CrmActivity extends Model
 {
-    use HasUuids, SoftDeletes;
+    use \App\Traits\HasTenantScope, HasUuids, SoftDeletes;
 
     protected $table = 'crm_activities';
 
@@ -56,9 +56,10 @@ class CrmActivity extends Model
 
     public function isOverdue(): bool
     {
-        if (!$this->scheduled_at || $this->status === 'completed' || $this->status === 'cancelled') {
+        if (! $this->scheduled_at || $this->status === 'completed' || $this->status === 'cancelled') {
             return false;
         }
+
         return now()->isAfter($this->scheduled_at);
     }
 }

@@ -24,10 +24,15 @@ apiClient.interceptors.response.use(
       useAuthStore.getState().logout();
       window.location.href = "/login";
     }
+    const data = error.response?.data as Record<string, unknown> | undefined;
+    const messageFromBody =
+      (typeof data?.message === "string" && data.message) ||
+      (typeof data?.error === "string" && data.error) ||
+      "An error occurred";
     return Promise.reject({
-      message: error.response?.data?.message || "An error occurred",
+      message: messageFromBody,
       status: error.response?.status || 500,
-      errors: error.response?.data?.errors || {},
+      errors: (data?.errors as Record<string, unknown>) || {},
     });
   }
 );

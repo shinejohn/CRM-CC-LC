@@ -5,7 +5,7 @@ export const CalendarView = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   // TODO: Connect to real API endpoint for scheduled calls data
   const scheduledCalls: Array<{ id: number; title: string; date: Date; duration: number; participants: number; type: string }> = [];
-  const getMonthData = date => {
+  const getMonthData = (date: Date) => {
     const year = date.getFullYear();
     const month = date.getMonth();
     // First day of the month
@@ -36,30 +36,30 @@ export const CalendarView = () => {
   const nextMonth = () => {
     setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1));
   };
-  const formatMonth = date => {
+  const formatMonth = (date: Date) => {
     return date.toLocaleDateString('en-US', {
       month: 'long',
       year: 'numeric'
     });
   };
-  const isToday = date => {
+  const isToday = (date: Date | null) => {
     if (!date) return false;
     const today = new Date();
     return date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear();
   };
-  const isSelected = date => {
+  const isSelected = (date: Date | null) => {
     if (!date || !selectedDate) return false;
     return date.getDate() === selectedDate.getDate() && date.getMonth() === selectedDate.getMonth() && date.getFullYear() === selectedDate.getFullYear();
   };
-  const hasEvents = date => {
+  const hasEvents = (date: Date | null) => {
     if (!date) return false;
     return scheduledCalls.some(call => call.date.getDate() === date.getDate() && call.date.getMonth() === date.getMonth() && call.date.getFullYear() === date.getFullYear());
   };
-  const getEventsForDate = date => {
+  const getEventsForDate = (date: Date | null) => {
     if (!date) return [];
     return scheduledCalls.filter(call => call.date.getDate() === date.getDate() && call.date.getMonth() === date.getMonth() && call.date.getFullYear() === date.getFullYear());
   };
-  const formatTime = date => {
+  const formatTime = (date: Date) => {
     return date.toLocaleTimeString('en-US', {
       hour: '2-digit',
       minute: '2-digit'

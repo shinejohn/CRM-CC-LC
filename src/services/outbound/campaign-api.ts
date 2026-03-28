@@ -51,7 +51,7 @@ export async function getCampaignRecipients(campaignId: string): Promise<Recipie
   const response = await apiClient.get<{ data: RecipientList }>(
     `/api/v1/outbound/campaigns/${campaignId}/recipients`
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -68,5 +68,5 @@ export async function getCampaignAnalytics(campaignId: string): Promise<Campaign
   const response = await apiClient.get<{ data: CampaignAnalytics }>(
     `/api/v1/outbound/campaigns/${campaignId}/analytics`
   );
-  return response.data.data;
+  return response.data;
 }

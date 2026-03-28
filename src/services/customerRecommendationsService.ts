@@ -3,7 +3,7 @@
  * GET /v1/customers/{id}/recommendations
  */
 
-import api from './api';
+import { apiClient } from '@/services/api';
 import type { ApiResponse } from '../types/common';
 
 export interface AIRecommendation {
@@ -17,7 +17,7 @@ export interface AIRecommendation {
 
 export const customerRecommendationsService = {
   getForCustomer: (customerId: string) =>
-    api
+    apiClient
       .get<ApiResponse<AIRecommendation[]>>(`/customers/${customerId}/recommendations`)
-      .then((r) => r.data.data ?? r.data ?? []),
+      .then((r: any) => r.data.data ?? r.data ?? []),
 };

@@ -2,7 +2,7 @@
  * Community operations for Command Center
  */
 
-import api from './api';
+import { apiClient } from '@/services/api';
 import type { ApiResponse, PaginatedResponse } from '../types/common';
 
 export interface Community {
@@ -60,17 +60,17 @@ export interface CommunityBusinessFilters {
 
 export const communityService = {
   list: (filters?: CommunityListFilters) =>
-    api
+    apiClient
       .get<PaginatedResponse<Community>>('/communities', { params: filters })
-      .then((r) => r.data),
+      .then((r: any) => r.data),
 
   get: (id: string) =>
-    api.get<ApiResponse<Community>>(`/communities/${id}`).then((r) => r.data.data),
+    apiClient.get<ApiResponse<Community>>(`/communities/${id}`).then((r: any) => r.data.data),
 
   getBusinesses: (communityId: string, filters?: CommunityBusinessFilters) =>
-    api
+    apiClient
       .get<PaginatedResponse<CommunityBusiness>>(`/communities/${communityId}/businesses`, {
         params: filters,
       })
-      .then((r) => r.data),
+      .then((r: any) => r.data),
 };

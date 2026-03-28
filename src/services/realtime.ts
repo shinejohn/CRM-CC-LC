@@ -84,8 +84,8 @@ export function subscribeToSmbChannel(
         cb(payload);
       });
       unsubs.push(() => {
-        if (typeof (channel as { stopListening: (ev: string) => void }).stopListening === 'function') {
-          (channel as { stopListening: (ev: string) => void }).stopListening(event);
+        if (typeof (channel as unknown as { stopListening: (ev: string) => void }).stopListening === 'function') {
+          (channel as unknown as { stopListening: (ev: string) => void }).stopListening(event);
         }
       });
     }

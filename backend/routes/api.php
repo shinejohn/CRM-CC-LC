@@ -1,51 +1,51 @@
 <?php
 
+use App\Http\Controllers\Api\AdminSubscriberController;
+use App\Http\Controllers\Api\AIController;
+use App\Http\Controllers\Api\AlertCategoryController;
+use App\Http\Controllers\Api\AlertController;
+use App\Http\Controllers\Api\AlertTrackingController;
 use App\Http\Controllers\Api\ApprovalController;
-use App\Http\Controllers\Api\KnowledgeController;
-use App\Http\Controllers\Api\SurveyController;
 use App\Http\Controllers\Api\ArticleController;
-use App\Http\Controllers\Api\EventController;
-use App\Http\Controllers\Api\SearchController;
-use App\Http\Controllers\Api\PresentationController;
+use App\Http\Controllers\Api\BillingController;
+use App\Http\Controllers\Api\BusinessIngestController;
 use App\Http\Controllers\Api\CampaignController;
-use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\CommunitySubscriptionController;
 use App\Http\Controllers\Api\ConversationController;
+use App\Http\Controllers\Api\CssnSubscriptionController;
+use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\EmergencyBroadcastController;
+use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\KnowledgeController;
+use App\Http\Controllers\Api\MunicipalAdminController;
+use App\Http\Controllers\Api\NewsletterController;
+use App\Http\Controllers\Api\NewsletterScheduleController;
+use App\Http\Controllers\Api\NewsletterTemplateController;
+use App\Http\Controllers\Api\NewsletterTrackingController;
+use App\Http\Controllers\Api\PresentationController;
+use App\Http\Controllers\Api\ProductCatalogController;
+use App\Http\Controllers\Api\ProvisioningTaskController;
+use App\Http\Controllers\Api\PublishingBridgeController;
+use App\Http\Controllers\Api\SearchController;
+use App\Http\Controllers\Api\ServiceSubscriptionController;
+use App\Http\Controllers\Api\SponsorController;
+use App\Http\Controllers\Api\SubscriberAlertController;
+use App\Http\Controllers\Api\SubscriberController;
+use App\Http\Controllers\Api\SubscriberROIController;
+use App\Http\Controllers\Api\SubscriptionController;
+use App\Http\Controllers\Api\SurveyController;
 use App\Http\Controllers\Api\TrainingController;
 use App\Http\Controllers\Api\TTSController;
-use App\Http\Controllers\Api\AIController;
-use App\Http\Controllers\Api\ServiceController;
-use App\Http\Controllers\Api\ServiceCategoryController;
-use App\Http\Controllers\Api\OrderController;
-use App\Http\Controllers\Api\ServiceSubscriptionController;
-use App\Http\Controllers\Api\BillingController;
-use App\Http\Controllers\Api\ProvisioningTaskController;
-use App\Http\Controllers\Api\WebhookController;
-use App\Http\Controllers\Api\SubscriptionController;
-use App\Http\Controllers\Api\SubscriberController;
-use App\Http\Controllers\Api\AdminSubscriberController;
+use App\Http\Controllers\Api\V1\ActivityController as CrmActivityController;
+use App\Http\Controllers\Api\V1\ContactController as CrmContactController;
 use App\Http\Controllers\Api\V1\ContentController;
 use App\Http\Controllers\Api\V1\ContentTrackingController;
 use App\Http\Controllers\Api\V1\DealController;
-use App\Http\Controllers\Api\V1\QuoteController;
 use App\Http\Controllers\Api\V1\InvoiceController;
-use App\Http\Controllers\Api\V1\NotificationController;
-use App\Http\Controllers\Api\V1\ContactController as CrmContactController;
-use App\Http\Controllers\Api\V1\ActivityController as CrmActivityController;
-use App\Http\Controllers\Api\NewsletterController;
-use App\Http\Controllers\Api\SponsorController;
-use App\Http\Controllers\Api\NewsletterTemplateController;
-use App\Http\Controllers\Api\NewsletterScheduleController;
-use App\Http\Controllers\Api\NewsletterTrackingController;
-use App\Http\Controllers\Api\AlertController;
-use App\Http\Controllers\Api\AlertCategoryController;
-use App\Http\Controllers\Api\SubscriberAlertController;
-use App\Http\Controllers\Api\AlertTrackingController;
-use App\Http\Controllers\Api\EmergencyBroadcastController;
-use App\Http\Controllers\Api\MunicipalAdminController;
-use App\Http\Controllers\Api\InteractionController;
 use App\Http\Controllers\Api\V1\MessageController;
-use App\Http\Controllers\Api\V1\CommunicationWebhookController;
-use App\Http\Controllers\Api\CssnSubscriptionController;
+use App\Http\Controllers\Api\V1\NotificationController;
+use App\Http\Controllers\Api\V1\QuoteController;
+use App\Http\Controllers\Api\WebhookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -268,6 +268,13 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', [NotificationController::class, 'destroy']);
         });
 
+        Route::prefix('subscriber-roi')->group(function () {
+            Route::get('/{customerId}/summary', [SubscriberROIController::class, 'summary']);
+            Route::get('/{customerId}/{yearMonth}', [SubscriberROIController::class, 'monthReport'])
+                ->where('yearMonth', '\d{4}-\d{2}');
+            Route::get('/{customerId}', [SubscriberROIController::class, 'currentMonth']);
+        });
+
         // CRM API - Activities (call logs, meetings)
         Route::prefix('crm-activities')->group(function () {
             Route::get('/', [CrmActivityController::class, 'index']);
@@ -335,85 +342,83 @@ Route::prefix('v1')->group(function () {
             Route::get('/templates', [\App\Http\Controllers\Api\InteractionController::class, 'templates']);
             Route::post('/templates', [\App\Http\Controllers\Api\InteractionController::class, 'createTemplate']);
         });
-    });
 
-    // Training API
-    Route::prefix('training')->group(function () {
-        Route::get('/', [TrainingController::class, 'index']);
-        Route::get('/{id}', [TrainingController::class, 'show']);
-        Route::post('/{id}/helpful', [TrainingController::class, 'markHelpful']);
-        Route::post('/{id}/not-helpful', [TrainingController::class, 'markNotHelpful']);
-    });
+        // Training API
+        Route::prefix('training')->group(function () {
+            Route::get('/', [TrainingController::class, 'index']);
+            Route::get('/{id}', [TrainingController::class, 'show']);
+            Route::post('/{id}/helpful', [TrainingController::class, 'markHelpful']);
+            Route::post('/{id}/not-helpful', [TrainingController::class, 'markNotHelpful']);
+        });
 
-    // AI Account Manager Routes
-    Route::prefix('account-manager')->group(function () {
-        // Assignment
-        Route::post('customers/{customer}/assign', [\App\Http\Controllers\Api\AccountManagerController::class, 'assign']);
-        Route::get('customers/{customer}', [\App\Http\Controllers\Api\AccountManagerController::class, 'getForCustomer']);
+        // AI Account Manager Routes
+        Route::prefix('account-manager')->group(function () {
+            // Assignment
+            Route::post('customers/{customer}/assign', [\App\Http\Controllers\Api\AccountManagerController::class, 'assign']);
+            Route::get('customers/{customer}', [\App\Http\Controllers\Api\AccountManagerController::class, 'getForCustomer']);
 
-        // Proactive outreach
-        Route::post('customers/{customer}/outreach', [\App\Http\Controllers\Api\AccountManagerController::class, 'initiateOutreach']);
+            // Proactive outreach
+            Route::post('customers/{customer}/outreach', [\App\Http\Controllers\Api\AccountManagerController::class, 'initiateOutreach']);
 
-        // Dialog
-        Route::post('customers/{customer}/dialog/start', [\App\Http\Controllers\Api\AccountManagerController::class, 'startDialog']);
-        Route::post('dialog/{execution}/respond', [\App\Http\Controllers\Api\AccountManagerController::class, 'processResponse']);
+            // Dialog
+            Route::post('customers/{customer}/dialog/start', [\App\Http\Controllers\Api\AccountManagerController::class, 'startDialog']);
+            Route::post('dialog/{execution}/respond', [\App\Http\Controllers\Api\AccountManagerController::class, 'processResponse']);
 
-        // Generate response
-        Route::post('customers/{customer}/respond', [\App\Http\Controllers\Api\AccountManagerController::class, 'generateResponse']);
+            // Generate response
+            Route::post('customers/{customer}/respond', [\App\Http\Controllers\Api\AccountManagerController::class, 'generateResponse']);
 
-        // Personalities management
-        Route::get('personalities', [\App\Http\Controllers\Api\AccountManagerController::class, 'listPersonalities']);
-        Route::get('personalities/{personality}', [\App\Http\Controllers\Api\AccountManagerController::class, 'showPersonality']);
-    });
+            // Personalities management
+            Route::get('personalities', [\App\Http\Controllers\Api\AccountManagerController::class, 'listPersonalities']);
+            Route::get('personalities/{personality}', [\App\Http\Controllers\Api\AccountManagerController::class, 'showPersonality']);
+        });
 
-    // TTS API
-    Route::prefix('tts')->group(function () {
-        Route::post('/generate', [TTSController::class, 'generate']);
-        Route::post('/batch', [TTSController::class, 'batchGenerate']);
-        Route::get('/voices', [TTSController::class, 'voices']);
-    });
+        // TTS API
+        Route::prefix('tts')->group(function () {
+            Route::post('/generate', [TTSController::class, 'generate']);
+            Route::post('/batch', [TTSController::class, 'batchGenerate']);
+            Route::get('/voices', [TTSController::class, 'voices']);
+        });
 
-    // AI/OpenRouter API
-    Route::prefix('ai')->group(function () {
-        Route::post('/chat', [AIController::class, 'chat']);
-        Route::post('/context', [AIController::class, 'getContext']);
-        Route::get('/models', [AIController::class, 'models']);
-    });
+        // AI/OpenRouter API
+        Route::prefix('ai')->group(function () {
+            Route::post('/chat', [AIController::class, 'chat']);
+            Route::post('/context', [AIController::class, 'getContext']);
+            Route::get('/models', [AIController::class, 'models']);
+        });
 
-    // Services API
-    Route::prefix('services')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Api\ServiceController::class, 'index']);
-        Route::get('/type/{type}', [\App\Http\Controllers\Api\ServiceController::class, 'byType']);
-        Route::get('/{id}', [\App\Http\Controllers\Api\ServiceController::class, 'show']);
-    });
+        // Services API
+        Route::prefix('services')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Api\ServiceController::class, 'index']);
+            Route::get('/type/{type}', [\App\Http\Controllers\Api\ServiceController::class, 'byType']);
+            Route::get('/{id}', [\App\Http\Controllers\Api\ServiceController::class, 'show']);
+        });
 
-    Route::prefix('service-categories')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Api\ServiceCategoryController::class, 'index']);
-        Route::get('/{id}', [\App\Http\Controllers\Api\ServiceCategoryController::class, 'show']);
-    });
+        Route::prefix('service-categories')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Api\ServiceCategoryController::class, 'index']);
+            Route::get('/{id}', [\App\Http\Controllers\Api\ServiceCategoryController::class, 'show']);
+        });
 
-    // Orders API
-    Route::prefix('orders')->group(function () {
-        Route::get('/', [\App\Http\Controllers\Api\OrderController::class, 'index']);
-        Route::post('/checkout', [\App\Http\Controllers\Api\OrderController::class, 'checkout']);
-        Route::get('/{id}', [\App\Http\Controllers\Api\OrderController::class, 'show']);
-    });
+        // Orders API
+        Route::prefix('orders')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Api\OrderController::class, 'index']);
+            Route::post('/checkout', [\App\Http\Controllers\Api\OrderController::class, 'checkout']);
+            Route::get('/{id}', [\App\Http\Controllers\Api\OrderController::class, 'show']);
+        });
 
-    // Service Subscriptions (active subscriptions for SMB/tenant)
-    Route::prefix('subscriptions')->group(function () {
-        Route::get('/', [ServiceSubscriptionController::class, 'index']);
-        Route::delete('/{id}', [ServiceSubscriptionController::class, 'destroy']);
-    });
+        // Service Subscriptions (active subscriptions for SMB/tenant)
+        Route::prefix('subscriptions')->group(function () {
+            Route::get('/', [ServiceSubscriptionController::class, 'index']);
+            Route::delete('/{id}', [ServiceSubscriptionController::class, 'destroy']);
+        });
 
-    // Billing API
-    Route::prefix('billing')->group(function () {
-        Route::get('/summary', [BillingController::class, 'summary']);
-    });
+        // Billing API
+        Route::prefix('billing')->group(function () {
+            Route::get('/summary', [BillingController::class, 'summary']);
+        });
 
-    Route::get('/invoices', [BillingController::class, 'invoices']);
-    Route::post('/invoices/{id}/pay', [BillingController::class, 'payInvoice']);
+        Route::get('/invoices', [BillingController::class, 'invoices']);
+        Route::post('/invoices/{id}/pay', [BillingController::class, 'payInvoice']);
 
-    Route::middleware(['auth:sanctum'])->group(function () {
         // Approvals API
         Route::prefix('approvals')->group(function () {
             Route::get('/', [ApprovalController::class, 'index']);
@@ -520,6 +525,23 @@ Route::prefix('v1')->group(function () {
                 Route::post('/templates', [\App\Http\Controllers\Api\SMSCampaignController::class, 'createTemplate']);
                 Route::post('/campaigns/{id}/sms-status', [\App\Http\Controllers\Api\SMSCampaignController::class, 'smsStatus']);
             });
+        });
+
+        // Product Catalog API
+        Route::prefix('products')->group(function () {
+            Route::get('/', [ProductCatalogController::class, 'index']);
+            Route::get('/{slug}', [ProductCatalogController::class, 'show']);
+            Route::get('/{slug}/can-purchase', [ProductCatalogController::class, 'canPurchase']);
+        });
+
+        // Community Subscriptions API
+        Route::prefix('community-subscriptions')->group(function () {
+            Route::get('/', [CommunitySubscriptionController::class, 'index']);
+            Route::post('/', [CommunitySubscriptionController::class, 'store']);
+            Route::get('/founder-check/{communityId}', [CommunitySubscriptionController::class, 'founderCheck']);
+            Route::get('/slot-availability/{communityId}', [CommunitySubscriptionController::class, 'slotAvailability']);
+            Route::get('/{id}', [CommunitySubscriptionController::class, 'show']);
+            Route::delete('/{id}', [CommunitySubscriptionController::class, 'destroy']);
         });
     });
 
@@ -656,6 +678,19 @@ Route::prefix('v1')->group(function () {
         Route::get('/{id}/audit', [EmergencyBroadcastController::class, 'auditLog']);
     });
 
+    // Ops Dashboard API (Command Center)
+    Route::prefix('ops')->middleware(['auth:sanctum', \App\Http\Middleware\MunicipalAdminMiddleware::class])->group(function () {
+        Route::get('/metrics', [\App\Http\Controllers\Api\V1\Ops\OpsController::class, 'getMetrics']);
+        Route::get('/health', [\App\Http\Controllers\Api\V1\Ops\OpsController::class, 'getHealthChecks']);
+        Route::get('/queues', [\App\Http\Controllers\Api\V1\Ops\OpsController::class, 'getQueueMetrics']);
+        Route::get('/costs', [\App\Http\Controllers\Api\V1\Ops\OpsController::class, 'getCosts']);
+        Route::get('/incidents', [\App\Http\Controllers\Api\V1\Ops\OpsController::class, 'getIncidents']);
+        Route::get('/pipeline', [\App\Http\Controllers\Api\V1\Ops\OpsController::class, 'getPipelineMetrics']);
+        Route::get('/actions', [\App\Http\Controllers\Api\V1\Ops\OpsController::class, 'getActionDefinitions']);
+        Route::get('/metric-definitions', [\App\Http\Controllers\Api\V1\Ops\OpsController::class, 'getMetricDefinitions']);
+        Route::get('/system-status', [\App\Http\Controllers\Api\V1\Ops\OpsController::class, 'getSystemStatus']);
+    });
+
     // Municipal Admin management (super admin only)
     Route::prefix('municipal-admins')->middleware(['auth:sanctum'])->group(function () {
         Route::get('/', [MunicipalAdminController::class, 'index']);
@@ -664,7 +699,7 @@ Route::prefix('v1')->group(function () {
         Route::delete('/{id}', [MunicipalAdminController::class, 'destroy']);
         Route::post('/{id}/verify', [MunicipalAdminController::class, 'verify']);
     });
-    
+
     // Communication Infrastructure (Module 0B) - Message Management
     Route::prefix('messages')->middleware('auth:sanctum')->group(function () {
         Route::post('/', [MessageController::class, 'send']);
@@ -681,10 +716,10 @@ Route::prefix('v1')->group(function () {
         Route::get('/subscription/{smbId}', [CssnSubscriptionController::class, 'showSubscription']);
         Route::patch('/subscription/{id}', [CssnSubscriptionController::class, 'updateSubscription']);
         Route::post('/campaign', [CssnSubscriptionController::class, 'startCampaign']);
-        
+
         Route::get('/preferences/{smbId}', [CssnSubscriptionController::class, 'getPreferences']);
         Route::put('/preferences/{smbId}', [CssnSubscriptionController::class, 'updatePreferences']);
-        
+
         Route::get('/reports/{smbId}', [CssnSubscriptionController::class, 'getReports']);
     });
 
@@ -693,12 +728,45 @@ Route::prefix('v1')->group(function () {
         Route::get('/credits/{smbId}', [\App\Http\Controllers\Api\SocialStudioController::class, 'getCredits']);
         Route::post('/credits/purchase', [\App\Http\Controllers\Api\SocialStudioController::class, 'purchaseCredits']);
         Route::post('/credits/subscribe', [\App\Http\Controllers\Api\SocialStudioController::class, 'subscribe']);
-        
+
         Route::post('/generate/post-copy', [\App\Http\Controllers\Api\SocialStudioController::class, 'generatePostCopy']);
-        
+
         Route::get('/accounts/{smbId}', [\App\Http\Controllers\Api\SocialStudioController::class, 'getAccounts']);
         Route::post('/accounts/connect', [\App\Http\Controllers\Api\SocialStudioController::class, 'connectAccount']);
         Route::post('/accounts/callback', [\App\Http\Controllers\Api\SocialStudioController::class, 'callbackAccount']);
+    });
+    // Email Platform API (Standalone Service within Command Center)
+    Route::prefix('email')->group(function () {
+        // Authenticated endpoints for external services to call
+        Route::middleware([\App\Http\Middleware\AuthenticateEmailClient::class])->group(function () {
+            Route::post('/send', [\App\Http\Controllers\Api\V1\EmailSendController::class, 'send']);
+            Route::post('/batch', [\App\Http\Controllers\Api\V1\EmailSendController::class, 'batch']);
+
+            Route::get('/metrics/summary', [\App\Http\Controllers\Api\V1\MetricsController::class, 'summary']);
+            Route::get('/metrics/suppression-health', [\App\Http\Controllers\Api\V1\MetricsController::class, 'suppressionHealth']);
+
+            Route::get('/suppressions', [\App\Http\Controllers\Api\V1\SuppressionController::class, 'index']);
+            Route::post('/suppressions', [\App\Http\Controllers\Api\V1\SuppressionController::class, 'store']);
+            Route::delete('/suppressions/{email}', [\App\Http\Controllers\Api\V1\SuppressionController::class, 'destroy']);
+
+            Route::get('/senders', [\App\Http\Controllers\Api\V1\SenderController::class, 'index']);
+            Route::post('/senders', [\App\Http\Controllers\Api\V1\SenderController::class, 'store']);
+        });
+
+        // Postal Delivery Webhook (unauthenticated, but signature checked within controller)
+        Route::post('/webhook/postal', [\App\Http\Controllers\Api\V1\WebhookController::class, 'handlePostalEvent']);
+    });
+    // Publishing Bridge API (called by Multisite, NOT by frontend)
+    Route::prefix('bridge')->middleware('bridge.auth')->group(function () {
+        Route::get('/ping', [PublishingBridgeController::class, 'ping']);
+        Route::get('/subscription-status/{externalId}/{communityId}', [PublishingBridgeController::class, 'subscriptionStatus']);
+        Route::get('/community-sponsors/{communityId}', [PublishingBridgeController::class, 'communitySponsors']);
+        Route::get('/active-influencers/{communityId}', [PublishingBridgeController::class, 'activeInfluencers']);
+        Route::get('/slot-availability/{communityId}', [PublishingBridgeController::class, 'slotAvailability']);
+
+        Route::post('/business-ingest', [BusinessIngestController::class, 'ingest']);
+        Route::post('/business-ingest/batch', [BusinessIngestController::class, 'batchIngest']);
+        Route::patch('/business-ingest/{externalId}/enrichment', [BusinessIngestController::class, 'enrichmentUpdate']);
     });
 });
 
@@ -728,7 +796,7 @@ Route::prefix('webhooks')->group(function () {
 
     // Postal inbound email webhook
     Route::post('postal/inbound', [WebhookController::class, 'inboundEmail']);
-    
+
     // Communication Infrastructure webhooks (Module 0B)
     Route::post('communication/postal', [\App\Http\Controllers\Api\V1\CommunicationWebhookController::class, 'postal']);
     Route::post('communication/ses', [\App\Http\Controllers\Api\V1\CommunicationWebhookController::class, 'ses']);
@@ -743,9 +811,3 @@ Route::post('/stripe/webhook', [\App\Http\Controllers\Api\StripeWebhookControlle
 Route::post('/outbound/phone/campaigns/{id}/call-status', [\App\Http\Controllers\Api\PhoneCampaignController::class, 'callStatus']);
 Route::post('/outbound/sms/campaigns/{id}/sms-status', [\App\Http\Controllers\Api\SMSCampaignController::class, 'smsStatus']);
 Route::post('/outbound/email/postal/webhook', [\App\Http\Controllers\Api\PostalWebhookController::class, 'handle']);
-
-
-
-
-
-

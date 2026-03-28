@@ -2,28 +2,28 @@
  * Customer CRUD and CRM operations
  */
 
-import api from './api';
+import { apiClient } from '@/services/api';
 import type { Customer, CustomerFilters, CustomerFormData } from '../types/customer';
 import type { PaginatedResponse, ApiResponse } from '../types/common';
 
 export const customerService = {
   list: (filters?: CustomerFilters) =>
-    api.get<PaginatedResponse<Customer>>('/customers', { params: filters }).then((r) => r.data),
+    apiClient.get<PaginatedResponse<Customer>>('/customers', { params: filters }).then((r: any) => r.data),
 
   get: (id: string) =>
-    api.get<ApiResponse<Customer>>(`/customers/${id}`).then((r) => r.data.data),
+    apiClient.get<ApiResponse<Customer>>(`/customers/${id}`).then((r: any) => r.data.data),
 
   create: (data: CustomerFormData) =>
-    api.post<ApiResponse<Customer>>('/customers', data).then((r) => r.data.data),
+    apiClient.post<ApiResponse<Customer>>('/customers', data).then((r: any) => r.data.data),
 
   update: (id: string, data: Partial<CustomerFormData>) =>
-    api.put<ApiResponse<Customer>>(`/customers/${id}`, data).then((r) => r.data.data),
+    apiClient.put<ApiResponse<Customer>>(`/customers/${id}`, data).then((r: any) => r.data.data),
 
-  delete: (id: string) => api.delete(`/customers/${id}`),
+  delete: (id: string) => apiClient.delete(`/customers/${id}`),
 
   getEngagementScore: (id: string) =>
-    api.get<ApiResponse<number>>(`/crm/customers/${id}/engagement-score`).then((r) => r.data.data),
+    apiClient.get<ApiResponse<number>>(`/crm/customers/${id}/engagement-score`).then((r: any) => r.data.data),
 
   getPredictiveScore: (id: string) =>
-    api.get<ApiResponse<number>>(`/crm/customers/${id}/predictive-score`).then((r) => r.data.data),
+    apiClient.get<ApiResponse<number>>(`/crm/customers/${id}/predictive-score`).then((r: any) => r.data.data),
 };

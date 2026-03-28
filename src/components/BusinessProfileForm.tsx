@@ -87,7 +87,7 @@ export const BusinessProfileForm = () => {
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
-  const getStatusIcon = status => {
+  const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
         return <CheckCircleIcon size={18} className="text-green-500" />;
@@ -99,7 +99,7 @@ export const BusinessProfileForm = () => {
         return null;
     }
   };
-  const getConfidenceBadge = level => {
+  const getConfidenceBadge = (level: number) => {
     let color = 'gray';
     if (level > 85) color = 'green';else if (level > 70) color = 'blue';else if (level > 50) color = 'yellow';else color = 'red';
     return <div className={`px-2 py-1 rounded-full text-xs font-medium bg-${color}-100 text-${color}-800 flex items-center`}>

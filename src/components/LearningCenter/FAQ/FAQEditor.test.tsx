@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '../../../test/test-utils';
 import userEvent from '@testing-library/user-event';
 import { FAQEditor } from './FAQEditor';
 import { knowledgeApi } from '@/services/learning/knowledge-api';
+import type { FAQItem } from '@/types/learning';
 
 // Mock the knowledge API
 vi.mock('@/services/learning/knowledge-api', () => ({
@@ -42,7 +43,7 @@ describe('FAQEditor', () => {
       allowed_agents: [],
       tags: [],
       applies_to_industries: [],
-    };
+    } as unknown as FAQItem;
 
     vi.mocked(knowledgeApi.getFAQ).mockResolvedValue(mockFAQ);
 
@@ -97,7 +98,7 @@ describe('FAQEditor', () => {
       allowed_agents: [],
       tags: [],
       applies_to_industries: [],
-    });
+    } as unknown as FAQItem);
 
     render(<FAQEditor onClose={mockOnClose} onSave={mockOnSave} />);
 

@@ -63,7 +63,7 @@ const FEATURE_REQUIREMENTS: Record<Feature, Tier> = {
 
 export function useFeatureAccess(feature: Feature): FeatureAccess {
   const user = useAuthStore((s) => s.user);
-  const userTier: Tier = user?.subscription_tier ?? 'free';
+  const userTier: Tier = (user?.subscription_tier as Tier) || 'free';
 
   const requiredTier = FEATURE_REQUIREMENTS[feature];
   const userLevel = TIER_HIERARCHY[userTier];

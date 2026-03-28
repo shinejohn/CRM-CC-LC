@@ -16,12 +16,12 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|Customer newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Customer query()
  */
-
 class Customer extends Model
 {
-    use HasFactory, SoftDeletes, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids, SoftDeletes;
 
     protected $keyType = 'string';
+
     public $incrementing = false;
 
     protected $fillable = [
@@ -42,6 +42,7 @@ class Customer extends Model
         'sub_category',
         'phone',
         'email',
+        'stripe_customer_id',
         'website',
         'address',
         'address_line1',
@@ -128,6 +129,12 @@ class Customer extends Model
         'trial_active',
         'days_in_stage',
         'stage_history',
+        // ZeroBounce email validation fields
+        'zb_status',
+        'zb_sub_status',
+        'zb_checked_at',
+        'email_suppressed',
+        'email_suppressed_reason',
     ];
 
     protected $casts = [
@@ -169,6 +176,8 @@ class Customer extends Model
         'rvm_opted_in' => 'boolean',
         'phone_opted_in' => 'boolean',
         'do_not_contact' => 'boolean',
+        'email_suppressed' => 'boolean',
+        'zb_checked_at' => 'datetime',
         'google_rating' => 'decimal:1',
         'yelp_rating' => 'decimal:1',
         'lead_score' => 'integer',
@@ -191,8 +200,8 @@ class Customer extends Model
             if (empty($customer->tenant_id)) {
                 $customer->tenant_id = (string) Str::uuid();
             }
-            if (empty($customer->slug) && !empty($customer->business_name)) {
-                $customer->slug = Str::slug($customer->business_name) . '-' . Str::random(6);
+            if (empty($customer->slug) && ! empty($customer->business_name)) {
+                $customer->slug = Str::slug($customer->business_name).'-'.Str::random(6);
             }
         });
     }
@@ -339,6 +348,7 @@ class Customer extends Model
     public function getTierName(): string
     {
         $tiers = config('fibonacco.engagement.tiers', []);
+
         return $tiers[$this->engagement_tier]['name'] ?? 'Unknown';
     }
 
@@ -356,8 +366,8 @@ class Customer extends Model
     public function canContactViaEmail(): bool
     {
         return $this->email_opted_in
-            && !$this->do_not_contact
-            && !empty($this->email);
+            && ! $this->do_not_contact
+            && ! empty($this->email);
     }
 
     /**
@@ -366,8 +376,8 @@ class Customer extends Model
     public function canContactViaSMS(): bool
     {
         return $this->sms_opted_in
-            && !$this->do_not_contact
-            && !empty($this->phone);
+            && ! $this->do_not_contact
+            && ! empty($this->phone);
     }
 
     /**
@@ -376,8 +386,8 @@ class Customer extends Model
     public function canContactViaRVM(): bool
     {
         return $this->rvm_opted_in
-            && !$this->do_not_contact
-            && !empty($this->phone);
+            && ! $this->do_not_contact
+            && ! empty($this->phone);
     }
 
     /**
@@ -386,8 +396,8 @@ class Customer extends Model
     public function canContactViaPhone(): bool
     {
         return $this->phone_opted_in
-            && !$this->do_not_contact
-            && !empty($this->phone);
+            && ! $this->do_not_contact
+            && ! empty($this->phone);
     }
 
     /**
@@ -421,9 +431,10 @@ class Customer extends Model
      */
     public function getDaysInCurrentStageAttribute(): int
     {
-        if (!$this->stage_entered_at) {
+        if (! $this->stage_entered_at) {
             return 0;
         }
+
         return $this->stage_entered_at->diffInDays(now());
     }
 
@@ -432,10 +443,11 @@ class Customer extends Model
      */
     public function getTrialDaysRemainingAttribute(): ?int
     {
-        if (!$this->trial_ends_at) {
+        if (! $this->trial_ends_at) {
             return null;
         }
         $remaining = now()->diffInDays($this->trial_ends_at, false);
+
         return max(0, $remaining);
     }
 

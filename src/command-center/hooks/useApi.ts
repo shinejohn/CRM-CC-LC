@@ -113,6 +113,6 @@ export function useApiMutation<T, D = any>(
   path: string,
   options?: UseApiOptions
 ) {
-  return useApi<T>((data: D) => apiService[method]<T>(path, data), options);
+  return useApi<T>((data: D) => (apiService as any)[method](path, data), options);
 }
 

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContentTemplate extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $fillable = [
         'tenant_id',

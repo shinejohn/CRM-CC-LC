@@ -27,10 +27,10 @@ export const DataReportCall = () => {
     text: 'The report shows a 23% increase in meeting efficiency while maintaining productivity. Additionally, 78% of action items are completed within deadlines, and team members are speaking for roughly equal amounts of time, indicating balanced participation.',
     isAI: true
   }]);
-  const addMessage = message => {
+  const addMessage = (message: { sender: string; text: string; isAI: boolean }) => {
     setMessages([...messages, message]);
   };
-  const handleTranscriptUpdate = text => {
+  const handleTranscriptUpdate = (text: string) => {
     setTranscript(text);
   };
   const participants = [{

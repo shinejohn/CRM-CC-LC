@@ -2,7 +2,7 @@
  * Search operations (semantic, full-text, hybrid)
  */
 
-import api from './api';
+import { apiClient } from '@/services/api';
 import type { ApiResponse } from '../types/common';
 
 export interface SearchResult {
@@ -15,14 +15,14 @@ export interface SearchResult {
 
 export const searchService = {
   semantic: (query: string, params?: Record<string, unknown>) =>
-    api.post<ApiResponse<SearchResult[]>>('/search', { query, ...params }).then((r) => r.data.data ?? r.data),
+    apiClient.post<ApiResponse<SearchResult[]>>('/search', { query, ...params }).then((r: any) => r.data.data ?? r.data),
 
   fullText: (query: string, params?: Record<string, unknown>) =>
-    api.post<ApiResponse<SearchResult[]>>('/search/fulltext', { query, ...params }).then((r) => r.data.data ?? r.data),
+    apiClient.post<ApiResponse<SearchResult[]>>('/search/fulltext', { query, ...params }).then((r: any) => r.data.data ?? r.data),
 
   hybrid: (query: string, params?: Record<string, unknown>) =>
-    api.post<ApiResponse<SearchResult[]>>('/search/hybrid', { query, ...params }).then((r) => r.data.data ?? r.data),
+    apiClient.post<ApiResponse<SearchResult[]>>('/search/hybrid', { query, ...params }).then((r: any) => r.data.data ?? r.data),
 
   getStatus: () =>
-    api.get<ApiResponse<{ status: string }>>('/search/status').then((r) => r.data.data ?? r.data),
+    apiClient.get<ApiResponse<{ status: string }>>('/search/status').then((r: any) => r.data.data ?? r.data),
 };

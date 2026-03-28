@@ -3,7 +3,7 @@
 // API client for /api/v1/ops/* and /api/v1/operations/* endpoints
 // ============================================
 
-import api from './api';
+import { apiClient } from '@/services/api';
 import { operationsApi } from './operations/operations-api';
 import type {
   OperationsDashboardSnapshot,
@@ -76,12 +76,12 @@ export const opsService = {
 
   /** Incidents CRUD */
   createIncident: async (payload: Partial<Incident>): Promise<Incident> => {
-    const res = await api.post<{ data: Incident }>('/operations/incidents', payload);
+    const res = await apiClient.post<{ data: Incident }>('/operations/incidents', payload);
     return res.data.data;
   },
 
   updateIncident: async (id: string, payload: Partial<Incident>): Promise<Incident> => {
-    const res = await api.put<{ data: Incident }>(`/operations/incidents/${id}`, payload);
+    const res = await apiClient.put<{ data: Incident }>(`/operations/incidents/${id}`, payload);
     return res.data.data;
   },
 
@@ -98,7 +98,7 @@ export const opsService = {
 
   /** FOA Chat - POST /operations/ai-sessions/chat */
   foaChat: async (payload: FOAChatRequest): Promise<FOAChatResponse> => {
-    const res = await api.post<{ data: FOAChatResponse }>('/operations/ai-sessions/chat', payload);
+    const res = await apiClient.post<{ data: FOAChatResponse }>('/operations/ai-sessions/chat', payload);
     return res.data.data;
   },
 

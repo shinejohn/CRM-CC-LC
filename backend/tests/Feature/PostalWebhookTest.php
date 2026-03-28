@@ -118,7 +118,7 @@ class PostalWebhookTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('email_suppressions', [
-            'email' => 'bounce@example.com',
+            'email_address' => 'bounce@example.com',
             'reason' => 'bounce_hard',
         ]);
     }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { CheckCircleIcon, ClockIcon, BarChart4Icon, UsersIcon, TargetIcon, PenToolIcon, RefreshCwIcon, EditIcon, SaveIcon, DownloadIcon } from 'lucide-react';
-import api from '@/services/api';
+import { apiClient as api } from '@/services/api';
 import { smbService } from '@/services/smbService';
 
 interface MarketingPlanSections {
@@ -182,7 +182,7 @@ export const MarketingPlanForm = () => {
       return () => clearTimeout(timer);
     }
   }, [aiTyping, planSections.marketingStrategy, planSections.budget]);
-  const getStatusIcon = status => {
+  const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
         return <CheckCircleIcon size={18} className="text-green-500" />;

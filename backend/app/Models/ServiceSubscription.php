@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ServiceSubscription extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids, SoftDeletes;
 
     protected $fillable = [
         'tenant_id',
@@ -56,9 +56,9 @@ class ServiceSubscription extends Model
 
     public function isTrial(): bool
     {
-        return $this->tier === 'trial' && 
-               $this->status === 'active' && 
-               $this->trial_expires_at && 
+        return $this->tier === 'trial' &&
+               $this->status === 'active' &&
+               $this->trial_expires_at &&
                $this->trial_expires_at->isFuture();
     }
 
@@ -73,10 +73,9 @@ class ServiceSubscription extends Model
         if ($this->tier === 'trial') {
             return $this->trial_expires_at && $this->trial_expires_at->isPast();
         }
-        
+
         return $this->subscription_expires_at && $this->subscription_expires_at->isPast();
     }
-
 
     protected function casts(): array
     {

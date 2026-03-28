@@ -10,7 +10,7 @@ vi.mock('@/services/learning/knowledge-api', () => ({
 
 describe('FAQCategoryManager', () => {
   it('renders FAQ category manager', () => {
-    const { container } = render(<FAQCategoryManager onClose={() => {}} />);
+    const { container } = render(<FAQCategoryManager />);
 
     expect(container.firstChild).toBeInTheDocument();
   });

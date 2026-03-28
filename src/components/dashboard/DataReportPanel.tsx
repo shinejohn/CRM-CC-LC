@@ -37,7 +37,7 @@ export function DataReportPanel({ title }: { title: string }) {
                         <Tooltip
                             contentStyle={{ backgroundColor: 'var(--nexus-card-bg)', borderColor: 'var(--nexus-card-border)', borderRadius: '8px', color: 'var(--nexus-text-primary)' }}
                             itemStyle={{ color: 'var(--nexus-brand-primary)' }}
-                            formatter={(value: number) => [`$${value.toLocaleString()}`, "Revenue"]}
+                            formatter={(value: any) => [`$${Number(value).toLocaleString()}`, "Revenue"]}
                         />
                         <Area type="monotone" dataKey="value" stroke="var(--nexus-brand-primary)" strokeWidth={2} fillOpacity={1} fill="url(#colorValue)" />
                     </AreaChart>

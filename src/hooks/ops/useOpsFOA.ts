@@ -87,7 +87,7 @@ export function useOpsFOA() {
 }
 
 /** Hook for action execution history (OpsActionLog page) */
-export function useOpsActionExecutions(params?: { status?: string; page?: number; perPage?: number }) {
+export function useOpsActionExecutions(params?: { status?: "pending" | "completed" | "failed" | "running" | "rolled_back"; page?: number; perPage?: number }) {
   return useQuery({
     queryKey: [...OPS_ACTIONS_KEY, params],
     queryFn: () => opsService.getActionExecutions(params),

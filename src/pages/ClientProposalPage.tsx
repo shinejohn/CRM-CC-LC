@@ -26,10 +26,10 @@ export const ClientProposalPage = () => {
     text: 'The executive summary should emphasize the unique value proposition and quantifiable benefits. Consider adding specific metrics like ROI projections and timeline milestones to make it more compelling.',
     isAI: true
   }]);
-  const addMessage = message => {
+  const addMessage = (message: { sender: string; text: string; isAI: boolean }) => {
     setMessages([...messages, message]);
   };
-  const handleTranscriptUpdate = text => {
+  const handleTranscriptUpdate = (text: string) => {
     setTranscript(text);
   };
   const participants = [{

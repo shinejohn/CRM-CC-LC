@@ -198,6 +198,7 @@ export const QuestionEditor: React.FC<QuestionEditorProps> = ({
                       scale_config: {
                         ...formData.scale_config,
                         min: parseInt(e.target.value),
+                        max: formData.scale_config?.max ?? 10,
                       },
                     })
                   }
@@ -214,6 +215,7 @@ export const QuestionEditor: React.FC<QuestionEditorProps> = ({
                       ...formData,
                       scale_config: {
                         ...formData.scale_config,
+                        min: formData.scale_config?.min ?? 1,
                         max: parseInt(e.target.value),
                       },
                     })

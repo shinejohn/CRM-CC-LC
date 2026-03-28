@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Str;
 
 class Community extends Model
 {
@@ -19,10 +18,14 @@ class Community extends Model
         'population',
         'timezone',
         'settings',
+        'launched_at',
+        'founder_window_days',
     ];
 
     protected $casts = [
         'settings' => 'array',
+        'launched_at' => 'datetime',
+        'founder_window_days' => 'integer',
     ];
 
     /**
@@ -77,4 +80,3 @@ class Community extends Model
         return $this->hasMany(RevenueRecord::class, 'community_id');
     }
 }
-

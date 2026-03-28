@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class OutboundCampaign extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $fillable = [
         'tenant_id',
@@ -88,6 +88,7 @@ class OutboundCampaign extends Model
         if ($this->sent_count === 0) {
             return 0;
         }
+
         return ($this->delivered_count / $this->sent_count) * 100;
     }
 
@@ -96,6 +97,7 @@ class OutboundCampaign extends Model
         if ($this->delivered_count === 0) {
             return 0;
         }
+
         return ($this->opened_count / $this->delivered_count) * 100;
     }
 
@@ -104,6 +106,7 @@ class OutboundCampaign extends Model
         if ($this->delivered_count === 0) {
             return 0;
         }
+
         return ($this->clicked_count / $this->delivered_count) * 100;
     }
 }

@@ -110,7 +110,7 @@ export async function getInterestAnalytics(days: number = 30): Promise<InterestA
   const response = await apiClient.get<{ data: InterestAnalytics }>('/api/v1/crm/analytics/interest', {
     params: { days },
   });
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -120,7 +120,7 @@ export async function getPurchaseAnalytics(days: number = 30): Promise<PurchaseA
   const response = await apiClient.get<{ data: PurchaseAnalytics }>('/api/v1/crm/analytics/purchases', {
     params: { days },
   });
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -130,7 +130,7 @@ export async function getLearningAnalytics(days: number = 30): Promise<LearningA
   const response = await apiClient.get<{ data: LearningAnalytics }>('/api/v1/crm/analytics/learning', {
     params: { days },
   });
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -140,5 +140,5 @@ export async function getCampaignPerformance(days: number = 30): Promise<Campaig
   const response = await apiClient.get<{ data: CampaignPerformance }>('/api/v1/crm/analytics/campaign-performance', {
     params: { days },
   });
-  return response.data.data;
+  return response.data;
 }

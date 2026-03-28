@@ -52,7 +52,7 @@ const statusColors = {
 
 export function ContentCard({ content, onDelete, onStatusChange }: ContentCardProps) {
   const navigate = useNavigate();
-  const TypeIcon = typeIcons[content.type] || FileText;
+  const TypeIcon = typeIcons[content.type as keyof typeof typeIcons] || FileText;
 
   return (
     <motion.div whileHover={{ y: -4 }}>
@@ -107,27 +107,24 @@ export function ContentCard({ content, onDelete, onStatusChange }: ContentCardPr
                   Edit
                 </DropdownMenuItem>
                 {content.status === 'draft' && onStatusChange && (
-                  <DropdownMenuItem onClick={(e) => { e.stopPropagation(); onStatusChange('review'); }}>
+                  <DropdownMenuItem onClick={() => onStatusChange('review')}>
                     Send to Review
                   </DropdownMenuItem>
                 )}
                 {content.status === 'review' && onStatusChange && (
-                  <DropdownMenuItem onClick={(e) => { e.stopPropagation(); onStatusChange('approved'); }}>
+                  <DropdownMenuItem onClick={() => onStatusChange('approved')}>
                     Approve
                   </DropdownMenuItem>
                 )}
                 {(content.status === 'approved' || content.status === 'review') && onStatusChange && (
-                  <DropdownMenuItem onClick={(e) => { e.stopPropagation(); onStatusChange('published'); }}>
+                  <DropdownMenuItem onClick={() => onStatusChange('published')}>
                     Publish
                   </DropdownMenuItem>
                 )}
                 {content.status !== 'archived' && (onStatusChange || onDelete) && (
                   <DropdownMenuItem
                     className="text-red-600"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onStatusChange ? onStatusChange('archived') : onDelete?.();
-                    }}
+                    onClick={() => onStatusChange ? onStatusChange('archived') : onDelete?.()}
                   >
                     <Trash2 className="w-4 h-4 mr-2" />
                     Archive

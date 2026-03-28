@@ -23,6 +23,7 @@ export function getCardStyle(colorName: string, isDarkMode: boolean) {
     return {
         className: `h-full bg-gradient-to-br ${scheme.gradient} border-2 ${scheme.border} overflow-hidden shadow-lg hover:shadow-xl transition-all cursor-pointer rounded-xl drop-shadow-sm`,
         headerClass: `p-5 flex items-center justify-between border-b ${isDarkMode ? 'border-white/10 bg-black/20' : 'border-white/50 bg-white/30'} backdrop-blur-sm`,
+        gradient: scheme.gradient,
         iconBg: scheme.iconBg,
         iconColor: scheme.iconColor,
         textClass: scheme.text,

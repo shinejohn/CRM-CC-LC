@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CrmNotification extends Model
 {
-    use HasUuids;
+    use \App\Traits\HasTenantScope, HasUuids;
 
     protected $table = 'crm_notifications';
 

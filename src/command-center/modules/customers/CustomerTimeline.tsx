@@ -2,7 +2,7 @@ import React from 'react';
 import { Clock, Mail, Phone, MessageSquare, FileText } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
-interface TimelineItem {
+export interface TimelineItem {
   id: string;
   type: 'email' | 'phone' | 'sms' | 'note' | 'meeting';
   title: string;

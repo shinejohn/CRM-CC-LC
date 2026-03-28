@@ -8,12 +8,26 @@ use Illuminate\Support\Facades\DB;
 class AlertRulesSeeder extends Seeder
 {
     /**
+     * @param  list<string>  $channels
+     */
+    private function pgTextArray(array $channels): \Illuminate\Contracts\Database\Query\Expression
+    {
+        $quoted = array_map(
+            fn (string $c) => "'".str_replace("'", "''", $c)."'",
+            $channels
+        );
+
+        return DB::raw('ARRAY['.implode(',', $quoted).']::text[]');
+    }
+
+    /**
      * Run the database seeds.
      */
     public function run(): void
     {
         if (DB::getDriverName() !== 'pgsql') {
             $this->command->warn('Alert rules seeder requires PostgreSQL. Skipping...');
+
             return;
         }
 
@@ -21,15 +35,15 @@ class AlertRulesSeeder extends Seeder
         $bounceRateMetric = DB::table('ops.metric_definitions')
             ->where('metric_key', 'email.bounce_rate')
             ->first();
-        
+
         $deliverabilityMetric = DB::table('ops.metric_definitions')
             ->where('metric_key', 'email.deliverability')
             ->first();
-        
+
         $errorRateMetric = DB::table('ops.metric_definitions')
             ->where('metric_key', 'infrastructure.error_rate')
             ->first();
-        
+
         $queueDepthMetric = DB::table('ops.metric_definitions')
             ->where('metric_key', 'system.queue_depth')
             ->first();
@@ -49,7 +63,7 @@ class AlertRulesSeeder extends Seeder
                 'condition_operator' => 'gt',
                 'condition_value' => 5.0,
                 'condition_window_seconds' => 3600,
-                'notification_channels' => json_encode(['slack', 'email']),
+                'notification_channels' => $this->pgTextArray(['slack', 'email']),
                 'evaluation_interval_seconds' => 300,
                 'cooldown_seconds' => 1800,
                 'is_active' => true,
@@ -69,7 +83,7 @@ class AlertRulesSeeder extends Seeder
                 'condition_operator' => 'lt',
                 'condition_value' => 95.0,
                 'condition_window_seconds' => 3600,
-                'notification_channels' => json_encode(['slack', 'email', 'sms']),
+                'notification_channels' => $this->pgTextArray(['slack', 'email', 'sms']),
                 'evaluation_interval_seconds' => 300,
                 'cooldown_seconds' => 1800,
                 'is_active' => true,
@@ -89,7 +103,7 @@ class AlertRulesSeeder extends Seeder
                 'condition_operator' => 'gt',
                 'condition_value' => 1.0,
                 'condition_window_seconds' => 300,
-                'notification_channels' => json_encode(['slack', 'email', 'pagerduty']),
+                'notification_channels' => $this->pgTextArray(['slack', 'email', 'pagerduty']),
                 'evaluation_interval_seconds' => 60,
                 'cooldown_seconds' => 600,
                 'is_active' => true,
@@ -109,7 +123,7 @@ class AlertRulesSeeder extends Seeder
                 'condition_operator' => 'gt',
                 'condition_value' => 1000,
                 'condition_window_seconds' => 300,
-                'notification_channels' => json_encode(['slack', 'email']),
+                'notification_channels' => $this->pgTextArray(['slack', 'email']),
                 'evaluation_interval_seconds' => 60,
                 'cooldown_seconds' => 1800,
                 'is_active' => true,
@@ -120,7 +134,7 @@ class AlertRulesSeeder extends Seeder
         $dbComponent = DB::table('ops.infrastructure_components')
             ->where('component_key', 'db.primary')
             ->first();
-        
+
         if ($dbComponent) {
             $alertRules[] = [
                 'id' => DB::raw('gen_random_uuid()'),
@@ -133,7 +147,7 @@ class AlertRulesSeeder extends Seeder
                 'condition_type' => 'threshold',
                 'condition_query' => "SELECT COUNT(*) FROM ops.health_checks WHERE component_id = '{$dbComponent->id}' AND status != 'healthy' AND checked_at > NOW() - INTERVAL '5 minutes'",
                 'condition_window_seconds' => 300,
-                'notification_channels' => json_encode(['slack', 'email', 'pagerduty']),
+                'notification_channels' => $this->pgTextArray(['slack', 'email', 'pagerduty']),
                 'evaluation_interval_seconds' => 60,
                 'cooldown_seconds' => 600,
                 'is_active' => true,
@@ -146,7 +160,7 @@ class AlertRulesSeeder extends Seeder
                 ->where('rule_key', $rule['rule_key'])
                 ->exists();
 
-            if (!$exists) {
+            if (! $exists) {
                 DB::table('ops.alert_rules')->insert($rule);
             }
         }
@@ -154,4 +168,3 @@ class AlertRulesSeeder extends Seeder
         $this->command->info('Alert rules seeded successfully.');
     }
 }
-

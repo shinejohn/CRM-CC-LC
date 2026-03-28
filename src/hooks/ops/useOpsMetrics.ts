@@ -40,7 +40,7 @@ export function useOpsMetricAggregates(params: {
 }
 
 export function useOpsMetricDefinitions(params?: {
-  category?: string;
+  category?: "email" | "system" | "growth" | "financial" | "infrastructure" | "cost";
   isActive?: boolean;
   search?: string;
   page?: number;

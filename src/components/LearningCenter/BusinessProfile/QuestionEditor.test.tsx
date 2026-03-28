@@ -4,7 +4,7 @@ import { QuestionEditor } from './QuestionEditor';
 
 describe('QuestionEditor', () => {
   it('renders question editor', () => {
-    const { container } = render(<QuestionEditor onClose={() => {}} onSave={() => {}} />);
+    const { container } = render(<QuestionEditor sectionId="test" onClose={() => {}} onSave={() => {}} />);
 
     expect(container.firstChild).toBeInTheDocument();
   });

@@ -9,9 +9,10 @@ use Illuminate\Support\Str;
 
 class PendingQuestion extends Model
 {
-    use HasFactory;
+    use \App\Traits\HasTenantScope, HasFactory;
 
     protected $keyType = 'string';
+
     public $incrementing = false;
 
     protected $fillable = [

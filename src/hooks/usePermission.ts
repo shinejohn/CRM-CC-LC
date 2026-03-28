@@ -120,7 +120,7 @@ export function usePermission(action: Action, resource: Resource): PermissionRes
     return { allowed: false, reason: 'role_restricted' };
   }
 
-  const role: Role = user.role;
+  const role: Role = (user.role as Role) || 'viewer';
   const resourcePerms = PERMISSION_MATRIX[resource];
   const rolePerms = resourcePerms[role];
 

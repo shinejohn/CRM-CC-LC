@@ -20,8 +20,8 @@ export const AIWorkflowPanel = () => {
   });
   const [zoomLevel, setZoomLevel] = useState(100);
   const [showDetails, setShowDetails] = useState(true);
-  const [selectedNode, setSelectedNode] = useState(null);
-  const [logs, setLogs] = useState([]);
+  const [selectedNode, setSelectedNode] = useState<string | null>(null);
+  const [logs, setLogs] = useState<{ id: number; time: string; message: string }[]>([]);
   // Simulating a workflow run
   useEffect(() => {
     if (workflowRunning) {
@@ -144,7 +144,7 @@ export const AIWorkflowPanel = () => {
       return () => clearTimeout(timer1);
     }
   }, [workflowRunning]);
-  const addLog = message => {
+  const addLog = (message: string) => {
     const timestamp = new Date().toLocaleTimeString();
     setLogs(prevLogs => [...prevLogs, {
       id: prevLogs.length,
@@ -184,7 +184,7 @@ export const AIWorkflowPanel = () => {
     setLogs([]);
     addLog('Workflow reset and ready to execute');
   };
-  const getStatusIcon = status => {
+  const getStatusIcon = (status: string) => {
     switch (status) {
       case 'idle':
         return <ClockIcon size={16} className="text-gray-400" />;
@@ -198,7 +198,7 @@ export const AIWorkflowPanel = () => {
         return null;
     }
   };
-  const getNodeClass = status => {
+  const getNodeClass = (status: string) => {
     switch (status) {
       case 'idle':
         return 'border-gray-300 bg-white';
@@ -212,7 +212,7 @@ export const AIWorkflowPanel = () => {
         return 'border-gray-300 bg-white';
     }
   };
-  const handleNodeClick = node => {
+  const handleNodeClick = (node: string) => {
     setSelectedNode(selectedNode === node ? null : node);
   };
   return <div className="h-full flex flex-col bg-white">

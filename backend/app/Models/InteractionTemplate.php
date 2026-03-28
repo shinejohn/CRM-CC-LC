@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class InteractionTemplate extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $fillable = [
         'tenant_id',
@@ -37,7 +37,7 @@ class InteractionTemplate extends Model
 
         // Find step with step_number = 1 or lowest step_number
         $firstStep = collect($this->steps)->sortBy('step_number')->first();
-        
+
         return $firstStep ?: null;
     }
 
@@ -51,7 +51,7 @@ class InteractionTemplate extends Model
         }
 
         $nextStepNumber = $currentStepNumber + 1;
-        
+
         return collect($this->steps)->firstWhere('step_number', $nextStepNumber);
     }
 
@@ -60,12 +60,12 @@ class InteractionTemplate extends Model
      */
     public function validateSteps(): bool
     {
-        if (empty($this->steps) || !is_array($this->steps)) {
+        if (empty($this->steps) || ! is_array($this->steps)) {
             return false;
         }
 
         foreach ($this->steps as $step) {
-            if (!isset($step['step_number']) || !isset($step['type']) || !isset($step['title'])) {
+            if (! isset($step['step_number']) || ! isset($step['type']) || ! isset($step['title'])) {
                 return false;
             }
         }
@@ -73,4 +73,3 @@ class InteractionTemplate extends Model
         return true;
     }
 }
-

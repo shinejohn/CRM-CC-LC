@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { StopCircleIcon, LoaderIcon } from 'lucide-react';
 export const RecordButton = ({
   onRecordingComplete
-}) => {
+}: { onRecordingComplete?: (data: { duration: number; date: string; filename: string }) => void }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
   const [recordingStatus, setRecordingStatus] = useState('idle'); // idle, recording, processing, complete
   useEffect(() => {
-    let interval;
+    let interval: NodeJS.Timeout | undefined;
     if (isRecording) {
       interval = setInterval(() => {
         setRecordingTime(prev => prev + 1);
       }, 1000);
-    } else if (!isRecording && recordingTime !== 0) {
-      clearInterval(interval);
     }
-    return () => clearInterval(interval);
-  }, [isRecording, recordingTime]);
-  const formatTime = seconds => {
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isRecording]);
+  const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
     const secs = (seconds % 60).toString().padStart(2, '0');
     return `${mins}:${secs}`;
@@ -48,7 +48,7 @@ export const RecordButton = ({
   return <div className="relative">
       <button onClick={toggleRecording} disabled={recordingStatus === 'processing'} className={`p-3 rounded-full flex items-center justify-center relative
           ${isRecording ? 'bg-red-500 text-white animate-pulse' : recordingStatus === 'processing' ? 'bg-gray-400 text-white' : 'bg-gray-600 hover:bg-gray-500 text-white'}`}>
-        {recordingStatus === 'processing' ? <LoaderIcon size={20} className="animate-spin" /> : isRecording ? <StopCircleIcon size={20} /> : <div size={20} />}
+        {recordingStatus === 'processing' ? <LoaderIcon size={20} className="animate-spin" /> : isRecording ? <StopCircleIcon size={20} /> : <div className="w-5 h-5 rounded-full bg-red-500" />}
       </button>
       {isRecording && <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-red-500 text-white text-xs px-2 py-1 rounded-md whitespace-nowrap">
           {formatTime(recordingTime)}

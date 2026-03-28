@@ -19,14 +19,14 @@ export const VideoCall = () => {
   const [isChatCollapsed, setIsChatCollapsed] = useState(false);
   // TODO: Connect to real API endpoint for messages
   const [messages, setMessages] = useState<Array<{ sender: string; text: string; isAI: boolean }>>([]);
-  const addMessage = message => {
+  const addMessage = (message: { sender: string; text: string; isAI: boolean }) => {
     setMessages([...messages, message]);
   };
-  const handleTranscriptUpdate = text => {
+  const handleTranscriptUpdate = (text: string) => {
     setTranscript(text);
   };
-  const handleRecordingComplete = data => {
-    setRecordingData(data);
+  const handleRecordingComplete = (data: { duration: number; date: string; filename: string }) => {
+    setRecordingData(data as any);
   };
   // TODO: Connect to real API endpoint for participants
   const participants: Array<{ id: number; name: string; image: string }> = [];

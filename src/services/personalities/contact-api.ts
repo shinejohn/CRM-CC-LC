@@ -33,11 +33,10 @@ export interface ScheduleContactRequest {
 export async function contactCustomer(
   request: ContactRequest
 ): Promise<{ success: boolean; message: string }> {
-  const response = await apiClient.post<{ success: boolean; message: string }>(
+  return apiClient.post<{ success: boolean; message: string }>(
     '/api/v1/personality-contacts/contact',
     request
   );
-  return response.data;
 }
 
 /**
@@ -46,11 +45,10 @@ export async function contactCustomer(
 export async function scheduleContact(
   request: ScheduleContactRequest
 ): Promise<{ success: boolean; message: string }> {
-  const response = await apiClient.post<{ success: boolean; message: string }>(
+  return apiClient.post<{ success: boolean; message: string }>(
     '/api/v1/personality-contacts/schedule',
     request
   );
-  return response.data;
 }
 
 /**
@@ -60,7 +58,7 @@ export async function getContactPreferences(customerId: string): Promise<Contact
   const response = await apiClient.get<{ data: ContactPreferences }>(
     `/api/v1/personality-contacts/customers/${customerId}/preferences`
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -70,9 +68,8 @@ export async function updateContactPreferences(
   customerId: string,
   preferences: Partial<ContactPreferences>
 ): Promise<{ success: boolean; message: string }> {
-  const response = await apiClient.put<{ success: boolean; message: string }>(
+  return apiClient.put<{ success: boolean; message: string }>(
     `/api/v1/personality-contacts/customers/${customerId}/preferences`,
     preferences
   );
-  return response.data;
 }

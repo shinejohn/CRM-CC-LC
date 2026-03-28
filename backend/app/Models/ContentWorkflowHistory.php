@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ContentWorkflowHistory extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $table = 'content_workflow_history';
 
     public $timestamps = true;
+
     const UPDATED_AT = null;
 
     protected $fillable = [

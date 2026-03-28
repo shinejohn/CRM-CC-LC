@@ -70,7 +70,7 @@ export default function CustomerDetailPage() {
                     { label: customer.name },
                 ]}
                 actions={
-                    <StatusBadge status={customer.status} size="md" />
+                    <StatusBadge status={customer.status as any} size="md" />
                 }
             />
 
@@ -116,7 +116,7 @@ export default function CustomerDetailPage() {
                         <MetricCard
                             label="Lifetime Value"
                             value={formatCurrency(customer.ltv)}
-                            color="emerald"
+                            color="green"
                         />
                         <MetricCard
                             label="Active Deals"

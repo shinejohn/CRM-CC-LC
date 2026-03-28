@@ -3,7 +3,7 @@ import { UserCircleIcon, BriefcaseIcon } from 'lucide-react';
 export const Facilitator = ({
   isVisible,
   isVideoOff
-}) => {
+}: { isVisible: boolean; isVideoOff: boolean }) => {
   if (!isVisible) return null;
   return <div className="relative w-full h-full bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg overflow-hidden shadow-lg">
       {isVideoOff ? <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-800">

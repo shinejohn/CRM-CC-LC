@@ -5,11 +5,12 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  business_id: string;
-  business_name: string;
-  role: "owner" | "admin" | "member" | "viewer";
+  business_id?: string;
+  business_name?: string;
+  role?: "owner" | "admin" | "member" | "viewer" | string;
   avatar_url?: string;
-  subscription_tier: "free" | "influencer" | "expert" | "sponsor";
+  subscription_tier?: "free" | "influencer" | "expert" | "sponsor" | string;
+  permissions?: string[];
 }
 
 interface AuthState {
@@ -21,6 +22,8 @@ interface AuthState {
   logout: () => void;
   setUser: (user: User) => void;
   setToken: (token: string) => void;
+  setAuth: (user: User, token: string) => void;
+  clearAuth: () => void;
 }
 
 const API_BASE = import.meta.env.VITE_API_URL || "https://api.fibonacco.com/v1";
@@ -56,6 +59,8 @@ export const useAuthStore = create<AuthState>()(
         set({ user: null, token: null, isAuthenticated: false }),
       setUser: (user) => set({ user, isAuthenticated: true }),
       setToken: (token) => set({ token }),
+      setAuth: (user, token) => set({ user, token, isAuthenticated: true }),
+      clearAuth: () => set({ user: null, token: null, isAuthenticated: false }),
     }),
     { name: "fibonacco-auth" }
   )

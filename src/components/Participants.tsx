@@ -1,22 +1,34 @@
 import React, { useState } from 'react';
 import { MicIcon, MicOffIcon, VideoIcon, VideoOffIcon, HandIcon, MoreVerticalIcon, UserMinusIcon } from 'lucide-react';
+interface Participant {
+  id: string | number;
+  name: string;
+  image: string;
+}
+
+interface ParticipantState {
+  isMuted: boolean;
+  isVideoOff: boolean;
+  hasHandRaised: boolean;
+}
+
 export const Participants = ({
   participants
-}) => {
-  const [openMenuId, setOpenMenuId] = useState(null);
-  const [participantStates, setParticipantStates] = useState(participants.reduce((acc, p) => ({
+}: { participants: Participant[] }) => {
+  const [openMenuId, setOpenMenuId] = useState<string | number | null>(null);
+  const [participantStates, setParticipantStates] = useState<Record<string | number, ParticipantState>>(participants.reduce((acc, p) => ({
     ...acc,
     [p.id]: {
       isMuted: Math.random() > 0.5,
       isVideoOff: false,
       hasHandRaised: false
     }
-  }), {}));
+  }), {} as Record<string | number, ParticipantState>));
   const showAsList = participants.length > 3;
-  const toggleMenu = id => {
+  const toggleMenu = (id: string | number) => {
     setOpenMenuId(openMenuId === id ? null : id);
   };
-  const toggleMute = id => {
+  const toggleMute = (id: string | number) => {
     setParticipantStates(prev => ({
       ...prev,
       [id]: {
@@ -26,7 +38,7 @@ export const Participants = ({
     }));
     setOpenMenuId(null);
   };
-  const toggleVideo = id => {
+  const toggleVideo = (id: string | number) => {
     setParticipantStates(prev => ({
       ...prev,
       [id]: {
@@ -36,7 +48,7 @@ export const Participants = ({
     }));
     setOpenMenuId(null);
   };
-  const toggleHand = id => {
+  const toggleHand = (id: string | number) => {
     setParticipantStates(prev => ({
       ...prev,
       [id]: {
@@ -46,7 +58,7 @@ export const Participants = ({
     }));
     setOpenMenuId(null);
   };
-  const removeParticipant = id => {
+  const removeParticipant = (id: string | number) => {
     // In real app, this would remove the participant
     console.log('Remove participant:', id);
     setOpenMenuId(null);

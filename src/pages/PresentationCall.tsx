@@ -28,10 +28,10 @@ export const PresentationCall = () => {
     text: "Certainly! I'll provide summaries of each slide as we progress through the presentation.",
     isAI: true
   }]);
-  const addMessage = message => {
+  const addMessage = (message: { sender: string; text: string; isAI: boolean }) => {
     setMessages([...messages, message]);
   };
-  const handleTranscriptUpdate = text => {
+  const handleTranscriptUpdate = (text: string) => {
     setTranscript(text);
   };
   const participants = [{

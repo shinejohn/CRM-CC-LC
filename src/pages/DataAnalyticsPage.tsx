@@ -26,10 +26,10 @@ export const DataAnalyticsPage = () => {
     text: "The revenue analysis shows strong growth at 18.7% YoY, exceeding the industry average of 12.3%. Gross margins have improved from 62% to 68%, and there's a significant opportunity for expansion in the Asia Pacific region which currently represents only 13% of revenue despite being 28% of the global market.",
     isAI: true
   }]);
-  const addMessage = message => {
+  const addMessage = (message: { sender: string; text: string; isAI: boolean }) => {
     setMessages([...messages, message]);
   };
-  const handleTranscriptUpdate = text => {
+  const handleTranscriptUpdate = (text: string) => {
     setTranscript(text);
   };
   const participants = [{

@@ -9,20 +9,12 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { EngagementScoreCard } from './EngagementScoreCard';
-import { CustomerTimeline } from './CustomerTimeline';
+import { CustomerTimeline, type TimelineItem } from './CustomerTimeline';
 import { EditCustomerModal } from './EditCustomerModal';
 import { useCustomer, useUpdateCustomer } from '@/hooks/useCustomers';
 import { useQuery } from '@tanstack/react-query';
-import api from '@/services/api';
+import { apiClient } from '@/services/api';
 import { mapApiCustomerToUi, type ApiCustomer } from './customerMap';
-
-interface TimelineItem {
-  id: string;
-  type: string;
-  title: string;
-  description: string;
-  timestamp: string;
-}
 
 export function CustomerDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -34,7 +26,7 @@ export function CustomerDetailPage() {
   const timelineQuery = useQuery({
     queryKey: ['customers', id, 'timeline'],
     queryFn: () =>
-      api.get<{ data: TimelineItem[] }>(`/customers/${id}/timeline`).then((r) => r.data.data ?? []),
+      apiClient.get<{ data: TimelineItem[] }>(`/customers/${id}/timeline`).then((r) => r.data.data ?? []),
     enabled: !!id,
   });
   const updateCustomerMutation = useUpdateCustomer();

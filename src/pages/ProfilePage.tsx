@@ -21,7 +21,7 @@ export const ProfilePage = () => {
   const [formData, setFormData] = useState({
     ...userData
   });
-  const handleChange = e => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const {
       name,
       value

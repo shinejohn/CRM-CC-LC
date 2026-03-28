@@ -11,10 +11,10 @@ export default function MarketingReportPage() {
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <MetricCard label="Total Impressions" value="1.2M" icon={Users} color="blue" trend="+12.5%" />
-                <MetricCard label="Click-Through Rate" value="4.8%" icon={MousePointerClick} color="emerald" trend="+0.4%" />
-                <MetricCard label="Conversions" value="3,492" icon={Target} color="purple" trend="+8.2%" />
-                <MetricCard label="Cost per Acquisition" value="$42.50" icon={TrendingUp} color="orange" trend="-2.1%" />
+                <MetricCard label="Total Impressions" value="1.2M" icon={Users} color="blue" change={{ value: 12.5, direction: "up" }} />
+                <MetricCard label="Click-Through Rate" value="4.8%" icon={MousePointerClick} color="green" change={{ value: 0.4, direction: "up" }} />
+                <MetricCard label="Conversions" value="3,492" icon={Target} color="purple" change={{ value: 8.2, direction: "up" }} />
+                <MetricCard label="Cost per Acquisition" value="$42.50" icon={TrendingUp} color="amber" change={{ value: 2.1, direction: "down" }} />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

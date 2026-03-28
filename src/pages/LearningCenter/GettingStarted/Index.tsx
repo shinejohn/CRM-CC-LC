@@ -28,12 +28,6 @@ export const GettingStartedIndexPage: React.FC = () => {
     });
   };
   
-  const progressPercentage = (completedSections.size / sections.length) * 100;
-  const breadcrumbs = [
-    { label: 'Learning Center', href: '/learning' },
-    { label: 'Getting Started' },
-  ];
-
   const sections = [
     {
       id: 'overview',
@@ -76,6 +70,12 @@ export const GettingStartedIndexPage: React.FC = () => {
       gradient: 'from-orange-500 to-red-500',
       features: ['Account configuration', 'Permission setup', 'Initial settings'],
     },
+  ];
+
+  const progressPercentage = (completedSections.size / sections.length) * 100;
+  const breadcrumbs = [
+    { label: 'Learning Center', href: '/learning' },
+    { label: 'Getting Started' },
   ];
 
   const quickActions = [

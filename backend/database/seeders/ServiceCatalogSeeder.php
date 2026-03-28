@@ -326,11 +326,14 @@ class ServiceCatalogSeeder extends Seeder
 
     private function createService(array $data): Service
     {
+        $categoryId = $data['category_id'] ?? null;
+        unset($data['category_id']);
+
         return Service::firstOrCreate(
             ['slug' => $data['slug']],
             array_merge($data, [
                 'id' => (string) Str::uuid(),
-                'service_category_id' => $data['category_id'],
+                'service_category_id' => $categoryId,
                 'is_active' => true,
                 'track_inventory' => false,
             ])

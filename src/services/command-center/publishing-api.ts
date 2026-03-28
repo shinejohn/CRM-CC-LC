@@ -82,7 +82,7 @@ export async function getPublishingDashboard(params?: {
     '/api/v1/publishing/dashboard',
     { params }
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -96,7 +96,7 @@ export async function getPublishingCalendar(params?: {
     '/api/v1/publishing/calendar',
     { params }
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -110,7 +110,7 @@ export async function getPublishingAnalytics(params?: {
     '/api/v1/publishing/analytics',
     { params }
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**

@@ -176,7 +176,9 @@ export const campaignApi = {
       component: string;
       content: Record<string, unknown>;
       audioUrl?: string;
+      audio_url?: string;
       requiresPersonalization: boolean;
+      narration?: string;
     }> = [];
     
     // Try presentation slides first (if they have actual content)
@@ -298,8 +300,9 @@ export const campaignApi = {
       template_id: template.template_id,
       slides: mappedSlides.map(slide => ({
         ...slide,
+        component: slide.component as any,
         audio_url: slide.audioUrl || slide.audio_url,
-        narration: (slide as any).narration || '',
+        narration: slide.narration || '',
       })),
       presenter: {
         id: landing_page.ai_persona.toLowerCase(),

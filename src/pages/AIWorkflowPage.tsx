@@ -25,10 +25,10 @@ export const AIWorkflowPage = () => {
     text: 'For data preprocessing, I recommend a three-stage pipeline: 1) Data cleaning to handle missing values and outliers, 2) Feature engineering to create relevant variables, and 3) Normalization to ensure consistent scales. This approach has shown to improve model performance by 23% in similar use cases.',
     isAI: true
   }]);
-  const addMessage = message => {
+  const addMessage = (message: { sender: string; text: string; isAI: boolean }) => {
     setMessages([...messages, message]);
   };
-  const handleTranscriptUpdate = text => {
+  const handleTranscriptUpdate = (text: string) => {
     setTranscript(text);
   };
   const participants = [{

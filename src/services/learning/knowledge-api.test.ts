@@ -118,7 +118,7 @@ describe('knowledge-api', () => {
 
       vi.mocked(apiClient.get).mockResolvedValue(mockData);
 
-      const result = await knowledgeApi.getFAQs({ category: 'cat-1' }, 1, 25);
+      const result = await knowledgeApi.getFAQs({ category: 'cat-1' } as any, 1, 25);
 
       expect(apiClient.get).toHaveBeenCalled();
       expect(result).toEqual(mockData);

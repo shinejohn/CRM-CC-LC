@@ -9,11 +9,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('smbs')) {
+        if (! Schema::hasTable('smbs')) {
             Schema::create('smbs', function (Blueprint $table) {
                 $table->id();
                 $table->uuid('uuid')->unique();
-                $table->bigInteger('community_id')->unsigned();
+                $table->bigInteger('community_id');
 
                 $table->string('business_name');
                 $table->string('dba_name')->nullable();
@@ -23,7 +23,7 @@ return new class extends Migration
                 $table->string('primary_contact_name')->nullable();
                 $table->string('primary_email')->nullable();
                 $table->string('primary_phone', 50)->nullable();
-                
+
                 if (DB::getDriverName() === 'pgsql') {
                     $table->jsonb('secondary_contacts')->default(DB::raw("'[]'::jsonb"));
                 } else {
@@ -34,7 +34,7 @@ return new class extends Migration
                 $table->string('city', 100)->nullable();
                 $table->string('state', 2)->nullable();
                 $table->string('zip', 10)->nullable();
-                
+
                 if (DB::getDriverName() === 'pgsql') {
                     $table->jsonb('coordinates')->nullable();
                 } else {
@@ -58,7 +58,7 @@ return new class extends Migration
 
                 $table->string('service_model', 50)->nullable();
                 $table->string('subscription_tier', 50)->default('free');
-                
+
                 if (DB::getDriverName() === 'pgsql') {
                     $table->jsonb('services_activated')->default(DB::raw("'[]'::jsonb"));
                     $table->jsonb('services_approved_pending')->default(DB::raw("'[]'::jsonb"));
@@ -75,7 +75,7 @@ return new class extends Migration
 
                 $table->string('source', 50)->nullable();
                 $table->integer('data_quality_score')->default(0);
-                
+
                 if (DB::getDriverName() === 'pgsql') {
                     $table->jsonb('metadata')->default(DB::raw("'{}'::jsonb"));
                 } else {
@@ -94,12 +94,14 @@ return new class extends Migration
         // Try rotating between bigint and uuid if it fails? No, that's crazy.
         // Just try adding the constraint explicitly.
         try {
-            DB::statement('ALTER TABLE smbs ADD CONSTRAINT smbs_community_id_foreign FOREIGN KEY (community_id) REFERENCES communities(id) ON DELETE CASCADE');
+            if (\Illuminate\Support\Facades\DB::getDriverName() !== 'sqlite') {
+                \Illuminate\Support\Facades\DB::statement('ALTER TABLE smbs ADD CONSTRAINT smbs_community_id_foreign FOREIGN KEY (community_id) REFERENCES communities(id) ON DELETE CASCADE');
+            }
         } catch (\Exception $e) {
             if (str_contains($e->getMessage(), 'already exists')) {
                 // Ignore
             } else {
-                error_log("FOREIGN KEY ERROR: " . $e->getMessage());
+                error_log('FOREIGN KEY ERROR: '.$e->getMessage());
                 // If it fails with "bigint and uuid", one of them is the wrong type.
             }
         }

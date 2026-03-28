@@ -8,10 +8,10 @@ export default function CentralCommandDashboard() {
     const navigate = useNavigate();
 
     const metrics = [
-        { label: "Total Revenue YTD", value: formatCurrency(124500), icon: DollarSign, color: "emerald", trend: "+14.5%" },
-        { label: "Active Customers", value: "1,245", icon: Users, color: "blue", trend: "+5.2%" },
-        { label: "Website Traffic", value: "45.2K", icon: MousePointerClick, color: "purple", trend: "+12.1%" },
-        { label: "Conversion Rate", value: "3.4%", icon: TrendingUp, color: "orange", trend: "+1.2%" },
+        { label: "Total Revenue YTD", value: formatCurrency(124500), icon: DollarSign, color: "green", change: { value: 14.5, direction: "up" as const } },
+        { label: "Active Customers", value: "1,245", icon: Users, color: "blue", change: { value: 5.2, direction: "up" as const } },
+        { label: "Website Traffic", value: "45.2K", icon: MousePointerClick, color: "purple", change: { value: 12.1, direction: "up" as const } },
+        { label: "Conversion Rate", value: "3.4%", icon: TrendingUp, color: "amber", change: { value: 1.2, direction: "up" as const } },
     ];
 
     return (
@@ -29,7 +29,7 @@ export default function CentralCommandDashboard() {
                         value={m.value}
                         icon={m.icon}
                         color={m.color as any}
-                        trend={m.trend}
+                        change={m.change}
                     />
                 ))}
             </div>

@@ -107,7 +107,7 @@ export async function generateCampaign(
     '/api/v1/campaigns/generate',
     request
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -115,7 +115,7 @@ export async function generateCampaign(
  */
 export async function getCampaignTemplates(): Promise<CampaignTemplate[]> {
   const response = await apiClient.get<TemplatesResponse>('/api/v1/campaigns/templates');
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -127,5 +127,5 @@ export async function getCampaignSuggestions(
   const response = await apiClient.post<SuggestionsResponse>('/api/v1/campaigns/suggestions', {
     customer_id: customerId,
   });
-  return response.data.data;
+  return response.data;
 }

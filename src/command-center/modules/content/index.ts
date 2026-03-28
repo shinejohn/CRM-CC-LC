@@ -11,7 +11,7 @@ export { ContentLibrary } from './ContentLibrary';
 export { ContentScheduling } from './ContentScheduling';
 export { ContentTemplateLibrary } from './ContentTemplateLibrary';
 export { useContent } from '../../hooks/useContent';
-export type { Content, ContentFilters } from '../../hooks/useContent';
+export type { Content, ContentFilters as ContentTypeFilters } from '../../hooks/useContent';
 
 /** UnifiedContentCard - Display component for content items (used across pages) */
 export { ContentCard as UnifiedContentCard } from './ContentCard';

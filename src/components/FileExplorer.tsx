@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
 import { FolderIcon, FileIcon, ChevronDownIcon, ChevronRightIcon, DownloadIcon, PlusIcon, TrashIcon, FileTextIcon, FileImageIcon, FileAudioIcon, FileVideoIcon, StarIcon, CalendarIcon, MoreHorizontalIcon, FolderPlusIcon, XIcon } from 'lucide-react';
+interface FileItem {
+  id: number;
+  name: string;
+  size: string;
+  date: string;
+  type: string;
+}
+
+type FolderKey = 'recordings' | 'transcripts' | 'presentations' | 'reports';
+
 export const FileExplorer = ({
   isPersonal = false
 }) => {
-  const [expandedFolders, setExpandedFolders] = useState({
+  const [expandedFolders, setExpandedFolders] = useState<Record<FolderKey, boolean>>({
     recordings: true,
     transcripts: true,
     presentations: false,
     reports: false
   });
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [showDropdown, setShowDropdown] = useState(null);
-  const getFileIcon = fileName => {
+  const [selectedFile, setSelectedFile] = useState<FileItem | null>(null);
+  const [showDropdown, setShowDropdown] = useState<number | null>(null);
+  const getFileIcon = (fileName: string) => {
     if (fileName.endsWith('.txt') || fileName.endsWith('.pdf')) {
       return <FileTextIcon size={16} className="text-blue-500" />;
     } else if (fileName.endsWith('.jpg') || fileName.endsWith('.png')) {
@@ -24,16 +34,16 @@ export const FileExplorer = ({
       return <FileIcon size={16} className="text-gray-500" />;
     }
   };
-  const toggleFolder = folder => {
+  const toggleFolder = (folder: FolderKey) => {
     setExpandedFolders({
       ...expandedFolders,
       [folder]: !expandedFolders[folder]
     });
   };
-  const handleFileClick = file => {
+  const handleFileClick = (file: FileItem) => {
     setSelectedFile(file);
   };
-  const handleFileAction = (file, action) => {
+  const handleFileAction = (file: FileItem, action: string) => {
     setShowDropdown(null);
     if (action === 'download') {
       // Simulate file download
@@ -46,7 +56,7 @@ export const FileExplorer = ({
       alert(`Marking ${file.name} as favorite`);
     }
   };
-  const toggleDropdown = fileId => {
+  const toggleDropdown = (fileId: number) => {
     if (showDropdown === fileId) {
       setShowDropdown(null);
     } else {
@@ -54,7 +64,7 @@ export const FileExplorer = ({
     }
   };
   // Sample file structure
-  const fileStructure = {
+  const fileStructure: Record<FolderKey, FileItem[]> = {
     recordings: [{
       id: 1,
       name: 'team-meeting-2023-06-15.mp4',
@@ -140,7 +150,7 @@ export const FileExplorer = ({
         {/* Folders sidebar */}
         <div className="w-1/4 border-r border-gray-200 overflow-y-auto p-2 bg-gray-50">
           <div className="space-y-1">
-            {Object.keys(fileStructure).map(folder => <div key={folder} className="select-none">
+            {(Object.keys(fileStructure) as FolderKey[]).map(folder => <div key={folder} className="select-none">
                 <div className="flex items-center p-2 hover:bg-gray-100 rounded-md cursor-pointer" onClick={() => toggleFolder(folder)}>
                   {expandedFolders[folder] ? <ChevronDownIcon size={16} className="text-gray-500 mr-1" /> : <ChevronRightIcon size={16} className="text-gray-500 mr-1" />}
                   <FolderIcon size={16} className={`mr-2 ${expandedFolders[folder] ? 'text-blue-500' : 'text-gray-500'}`} />
@@ -155,7 +165,7 @@ export const FileExplorer = ({
         {/* Files list */}
         <div className="flex-1 overflow-y-auto">
           <div className="p-4">
-            {Object.keys(fileStructure).map(folder => <div key={folder} className={`mb-4 ${!expandedFolders[folder] && 'hidden'}`}>
+            {(Object.keys(fileStructure) as FolderKey[]).map(folder => <div key={folder} className={`mb-4 ${!expandedFolders[folder] && 'hidden'}`}>
                 <h3 className="text-sm font-medium text-gray-700 mb-2 capitalize">
                   {folder}
                 </h3>

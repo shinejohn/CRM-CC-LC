@@ -31,7 +31,7 @@ export default function PipelineDashboard() {
                     label="Closed Won (YTD)"
                     value={formatCurrency(wonValue)}
                     icon={Target}
-                    color="emerald"
+                    color="green"
                     isLoading={isLoading}
                 />
                 <MetricCard

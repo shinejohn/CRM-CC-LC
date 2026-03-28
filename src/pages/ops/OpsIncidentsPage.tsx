@@ -184,16 +184,14 @@ export function OpsIncidentsPage() {
                             Mark Identified
                           </button>
                         )}
-                        {inc.status !== 'resolved' && (
-                          <button
-                            onClick={() =>
-                              handleStatusChange(inc.id, 'resolved')
-                            }
-                            className="px-3 py-1.5 rounded bg-green-100 dark:bg-green-900/30 text-green-800 text-sm"
-                          >
-                            Mark Resolved
-                          </button>
-                        )}
+                        <button
+                          onClick={() =>
+                            handleStatusChange(inc.id, 'resolved')
+                          }
+                          className="px-3 py-1.5 rounded bg-green-100 dark:bg-green-900/30 text-green-800 text-sm"
+                        >
+                          Mark Resolved
+                        </button>
                       </>
                     )}
                   </div>

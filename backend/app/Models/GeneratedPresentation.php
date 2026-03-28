@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class GeneratedPresentation extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $fillable = [
         'tenant_id',
@@ -44,9 +44,3 @@ class GeneratedPresentation extends Model
         return $this->belongsTo(PresentationTemplate::class, 'template_id');
     }
 }
-
-
-
-
-
-

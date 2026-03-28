@@ -174,7 +174,7 @@ const DatasetCard: React.FC<DatasetCardProps> = ({ dataset }) => {
 };
 
 interface StatCardProps {
-  icon: React.ComponentType<{ size?: number; className?: string }>;
+  icon: React.ComponentType<{ size?: number | string; className?: string }>;
   value: string;
   label: string;
   color: 'emerald' | 'blue' | 'amber' | 'red';

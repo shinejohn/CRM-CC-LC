@@ -95,7 +95,7 @@ export async function listPersonalities(params?: {
     '/api/v1/personalities',
     { params }
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -105,7 +105,7 @@ export async function getPersonality(id: string): Promise<AiPersonality> {
   const response = await apiClient.get<{ data: AiPersonality }>(
     `/api/v1/personalities/${id}`
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -118,7 +118,7 @@ export async function createPersonality(
     '/api/v1/personalities',
     request
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -132,7 +132,7 @@ export async function updatePersonality(
     `/api/v1/personalities/${id}`,
     updates
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -154,7 +154,7 @@ export async function assignToCustomer(request: {
     '/api/v1/personalities/assign',
     request
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -166,7 +166,7 @@ export async function getCustomerPersonality(
   const response = await apiClient.get<{ data: PersonalityAssignment | null }>(
     `/api/v1/personalities/customers/${customerId}/personality`
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -182,7 +182,7 @@ export async function listAssignments(params?: {
     '/api/v1/personalities/assignments',
     { params }
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -199,5 +199,5 @@ export async function generateResponse(
   const response = await apiClient.post<{
     data: { response: string; personality_id: string; personality_name: string };
   }>(`/api/v1/personalities/${personalityId}/generate-response`, request);
-  return response.data.data;
+  return response.data;
 }

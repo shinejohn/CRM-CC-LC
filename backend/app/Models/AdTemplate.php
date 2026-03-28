@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdTemplate extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $fillable = [
         'tenant_id',
@@ -39,7 +39,7 @@ class AdTemplate extends Model
      */
     public function renderPrompt(array $variables): string
     {
-        if (!$this->prompt_template) {
+        if (! $this->prompt_template) {
             return '';
         }
 

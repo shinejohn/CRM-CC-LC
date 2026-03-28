@@ -15,7 +15,7 @@ interface BenefitsSlideProps {
   theme?: 'blue' | 'green' | 'purple' | 'orange';
 }
 
-const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+const iconMap: Record<string, React.ComponentType<{ size?: number | string; className?: string }>> = {
   search: Search,
   robot: Bot,
   megaphone: Megaphone,

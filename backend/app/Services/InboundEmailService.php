@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\Customer;
 use App\Events\InboundEmailReceived;
 use App\Models\Conversation;
+use App\Models\Customer;
+use App\Models\EmailSuppression;
 use Illuminate\Support\Facades\Log;
 
 class InboundEmailService
@@ -12,7 +13,29 @@ class InboundEmailService
     public function __construct(
         protected EmailIntentClassifier $intentClassifier,
         protected EmailSentimentAnalyzer $sentimentAnalyzer
-    ) {
+    ) {}
+
+    /**
+     * Detect opt-out keywords in email body and subject.
+     *
+     * Uses word boundary matching to avoid false positives
+     * (e.g. "unstoppable" should not match "stop").
+     */
+    public function detectOptOut(string $body, string $subject): bool
+    {
+        $keywords = [
+            'stop',
+            'unsubscribe',
+            'remove me',
+            'opt out',
+            'opt-out',
+            'do not contact',
+            'cancel subscription',
+        ];
+
+        $pattern = '/\b('.implode('|', array_map('preg_quote', $keywords)).')\b/i';
+
+        return (bool) preg_match($pattern, $body) || (bool) preg_match($pattern, $subject);
     }
 
     /**
@@ -26,6 +49,31 @@ class InboundEmailService
         ?string $messageId = null,
         ?string $inReplyTo = null
     ): array {
+        // Check for opt-out keywords before any other processing
+        if ($this->detectOptOut($body, $subject)) {
+            $customer->update([
+                'email_opted_in' => false,
+                'do_not_contact' => true,
+            ]);
+
+            EmailSuppression::create([
+                'email_address' => $fromEmail,
+                'reason' => 'unsubscribe',
+                'source' => 'inbound_email',
+            ]);
+
+            Log::info('Opt-out detected from inbound email', [
+                'customer_id' => $customer->id,
+                'email' => $fromEmail,
+                'subject' => $subject,
+            ]);
+
+            return [
+                'opted_out' => true,
+                'customer_id' => $customer->id,
+            ];
+        }
+
         // Classify intent
         $intent = $this->intentClassifier->classify($subject, $body);
 
@@ -72,14 +120,14 @@ class InboundEmailService
         return Conversation::create([
             'customer_id' => $customer->id,
             'tenant_id' => $customer->tenant_id,
-            'session_id' => 'session_' . \Illuminate\Support\Str::random(32),
+            'session_id' => 'session_'.\Illuminate\Support\Str::random(32),
             'entry_point' => 'email',
             'messages' => [
                 [
                     'role' => 'user',
                     'content' => $body,
                     'timestamp' => now()->toISOString(),
-                ]
+                ],
             ],
             'sentiment_trajectory' => [$sentiment],
             'outcome' => $intent['intent'],
@@ -92,4 +140,3 @@ class InboundEmailService
         ]);
     }
 }
-

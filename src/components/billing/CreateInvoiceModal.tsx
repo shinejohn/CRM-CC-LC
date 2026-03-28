@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Plus, Trash2, X } from "lucide-react";
+import { apiClient } from "@/services/api";
 
 export interface CreateInvoiceModalProps {
     isOpen: boolean;
@@ -11,13 +12,14 @@ export interface CreateInvoiceModalProps {
 }
 
 export function CreateInvoiceModal({ isOpen, onClose, onSuccess }: CreateInvoiceModalProps) {
-    const [items, setItems] = useState([{ id: "1", desc: "", qty: 1, price: 0 }]);
+    const [items, setItems] = useState([{ id: "1", description: "", quantity: 1, unit_price: 0 }]);
     const [customer, setCustomer] = useState("");
     const [dueDate, setDueDate] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     if (!isOpen) return null;
 
-    const handleAddItem = () => setItems([...items, { id: Date.now().toString(), desc: "", qty: 1, price: 0 }]);
+    const handleAddItem = () => setItems([...items, { id: Date.now().toString(), description: "", quantity: 1, unit_price: 0 }]);
 
     const handleRemoveItem = (id: string) => {
         if (items.length > 1) {
@@ -25,12 +27,30 @@ export function CreateInvoiceModal({ isOpen, onClose, onSuccess }: CreateInvoice
         }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleItemChange = (id: string, field: string, value: string | number) => {
+        setItems(items.map(item => item.id === id ? { ...item, [field]: value } : item));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setTimeout(() => {
+        setIsSubmitting(true);
+        try {
+            await apiClient.post('/billing/invoices', {
+                customer_id: customer,
+                due_date: dueDate,
+                items: items.map(i => ({
+                    description: i.description,
+                    quantity: Number(i.quantity),
+                    unit_price: Number(i.unit_price)
+                }))
+            });
             onSuccess?.();
             onClose();
-        }, 500);
+        } catch (error) {
+            console.error("Failed to create invoice", error);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -44,10 +64,7 @@ export function CreateInvoiceModal({ isOpen, onClose, onSuccess }: CreateInvoice
                         <h2 className="text-lg font-bold text-[var(--nexus-text-primary)]">Create New Invoice</h2>
                         <p className="text-sm text-[var(--nexus-text-secondary)]">Fill in the details to generate an invoice.</p>
                     </div>
-                    <button
-                        onClick={onClose}
-                        className="p-2 rounded-full text-[var(--nexus-text-secondary)] hover:bg-[var(--nexus-bg-secondary)] transition-colors"
-                    >
+                    <button onClick={onClose} className="p-2 rounded-full text-[var(--nexus-text-secondary)] hover:bg-[var(--nexus-bg-secondary)] transition-colors">
                         <X className="w-5 h-5" />
                     </button>
                 </div>
@@ -93,6 +110,8 @@ export function CreateInvoiceModal({ isOpen, onClose, onSuccess }: CreateInvoice
                                         <div className="flex-1 space-y-1">
                                             <Input
                                                 placeholder="Description"
+                                                value={item.description}
+                                                onChange={(e) => handleItemChange(item.id, 'description', e.target.value)}
                                                 className="bg-[var(--nexus-input-bg)] border-[var(--nexus-input-border)] text-[var(--nexus-text-primary)]"
                                                 required
                                             />
@@ -101,7 +120,8 @@ export function CreateInvoiceModal({ isOpen, onClose, onSuccess }: CreateInvoice
                                             <Input
                                                 type="number"
                                                 min="1"
-                                                defaultValue={1}
+                                                value={item.quantity}
+                                                onChange={(e) => handleItemChange(item.id, 'quantity', e.target.value)}
                                                 className="bg-[var(--nexus-input-bg)] border-[var(--nexus-input-border)] text-[var(--nexus-text-primary)] cursor-text"
                                                 required
                                             />
@@ -110,7 +130,10 @@ export function CreateInvoiceModal({ isOpen, onClose, onSuccess }: CreateInvoice
                                             <Input
                                                 type="number"
                                                 min="0"
+                                                step="0.01"
                                                 placeholder="Price"
+                                                value={item.unit_price}
+                                                onChange={(e) => handleItemChange(item.id, 'unit_price', e.target.value)}
                                                 className="bg-[var(--nexus-input-bg)] border-[var(--nexus-input-border)] text-[var(--nexus-text-primary)]"
                                                 required
                                             />
@@ -132,8 +155,8 @@ export function CreateInvoiceModal({ isOpen, onClose, onSuccess }: CreateInvoice
 
                 <div className="sticky bottom-0 z-10 flex justify-end gap-3 px-6 py-4 border-t border-[var(--nexus-divider)] bg-[var(--nexus-bg-page)]/95 backdrop-blur-sm rounded-b-2xl">
                     <Button type="button" variant="ghost" onClick={onClose} className="hover:bg-[var(--nexus-bg-secondary)]">Cancel</Button>
-                    <Button type="submit" form="invoice-form" className="bg-[var(--nexus-button-bg)] text-white hover:bg-[var(--nexus-button-hover)] border-0">
-                        Generate Invoice
+                    <Button type="submit" form="invoice-form" disabled={isSubmitting} className="bg-[var(--nexus-button-bg)] text-white hover:bg-[var(--nexus-button-hover)] border-0">
+                        {isSubmitting ? "Generating..." : "Generate Invoice"}
                     </Button>
                 </div>
             </div>

@@ -39,7 +39,7 @@ export function useRealtime(options: UseRealtimeOptions = {}) {
 
   useEffect(() => {
     if (eventTypes.length === 0 && !onEvent) return;
-    const types = eventTypes.length > 0 ? eventTypes : (['*'] as RealtimeEventType[]);
+    const types = eventTypes.length > 0 ? eventTypes : (['*'] as unknown as RealtimeEventType[]);
     const unsubs = types.map((t) => subscribeToRealtimeEvents(t, handleEvent));
     return () => unsubs.forEach((u) => u());
   }, [eventTypes.join(','), handleEvent, onEvent]);

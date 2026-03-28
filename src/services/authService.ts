@@ -3,7 +3,7 @@
  */
 
 import axios from 'axios';
-import { apiClient as api } from './api';
+import { apiClient } from './api';
 import { env } from '../config/env';
 import type { User, LoginRequest, LoginResponse } from '../types/auth';
 
@@ -29,7 +29,7 @@ export const login = async (credentials: LoginRequest): Promise<LoginResponse> =
 
 export const logout = async (): Promise<void> => {
   try {
-    await api.post('/logout');
+    await apiClient.post('/logout');
   } finally {
     localStorage.removeItem('auth_token');
   }
@@ -37,13 +37,13 @@ export const logout = async (): Promise<void> => {
 
 /** Get current authenticated user (Laravel returns at /api/user or /user) */
 export const getCurrentUser = async (): Promise<User> => {
-  const { data } = await api.get<{ data: User }>('/user');
+  const { data } = await apiClient.get<{ data: User }>('/user');
   return data.data ?? (data as unknown as User);
 };
 
 /** Refresh token (if backend supports) */
 export const refreshToken = async (): Promise<string> => {
-  const { data } = await api.post<{ token: string }>('/auth/refresh');
+  const { data } = await apiClient.post<{ token: string }>('/auth/refresh');
   return data.token;
 };
 

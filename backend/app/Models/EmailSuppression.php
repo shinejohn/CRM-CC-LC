@@ -3,28 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EmailSuppression extends Model
 {
-    use HasFactory, HasUuids;
+    use HasUuids;
 
     protected $fillable = [
-        'email',
+        'email_address',
+        'email_client_id',
         'reason',
-        'provider',
         'source',
-        'metadata',
     ];
 
-    protected function casts(): array
+    public function client(): BelongsTo
     {
-        return [
-            'metadata' => 'array',
-        ];
+        return $this->belongsTo(EmailClient::class, 'email_client_id');
     }
 }
-
-
-

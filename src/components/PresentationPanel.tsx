@@ -40,7 +40,7 @@ export const PresentationPanel = () => {
       setCurrentSlide(currentSlide - 1);
     }
   };
-  const goToSlide = index => {
+  const goToSlide = (index: number) => {
     setCurrentSlide(index);
     setShowThumbnails(false);
   };

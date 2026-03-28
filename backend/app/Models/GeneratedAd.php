@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class GeneratedAd extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $fillable = [
         'tenant_id',
@@ -92,6 +92,7 @@ class GeneratedAd extends Model
         if ($this->impressions === 0) {
             return 0;
         }
+
         return ($this->clicks / $this->impressions) * 100;
     }
 
@@ -100,6 +101,7 @@ class GeneratedAd extends Model
         if ($this->clicks === 0) {
             return 0;
         }
+
         return $this->spend / $this->clicks;
     }
 
@@ -108,6 +110,7 @@ class GeneratedAd extends Model
         if ($this->conversions === 0) {
             return 0;
         }
+
         return $this->spend / $this->conversions;
     }
 }

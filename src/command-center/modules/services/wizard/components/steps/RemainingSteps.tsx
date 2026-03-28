@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { orderApi } from '@/services/learning/order-api';
-import type { CartItem } from '../types';
-
+interface CartItem {
+  serviceId: string;
+  quantity: number;
+}
 interface StepProps {
     onNext: () => void;
     onBack: () => void;

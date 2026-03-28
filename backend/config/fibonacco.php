@@ -1,6 +1,11 @@
 <?php
 
 return [
+    /**
+     * Tenant ID for platform-imported businesses (Multisite → CC ingest).
+     */
+    'system_tenant_id' => env('FIBONACCO_SYSTEM_TENANT_ID', '00000000-0000-0000-0000-000000000001'),
+
     'engagement' => [
         'score_weights' => [
             'email_open' => 1,

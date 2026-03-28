@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class Event extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $table = 'events';
 
@@ -46,7 +46,7 @@ class Event extends Model
         });
 
         static::updating(function ($event) {
-            if ($event->isDirty('title') && !$event->isDirty('slug')) {
+            if ($event->isDirty('title') && ! $event->isDirty('slug')) {
                 $event->slug = Str::slug($event->title);
             }
         });

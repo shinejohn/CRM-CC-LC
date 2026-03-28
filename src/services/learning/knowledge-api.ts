@@ -155,9 +155,9 @@ export const knowledgeApi = {
     await apiClient.delete(`/v1/knowledge/${id}`);
   },
 
-  bulkImportFAQs: async (): Promise<{ imported: number; errors: string[] }> => {
+  bulkImportFAQs: async (file: File, options?: Record<string, boolean>): Promise<{ imported: number; errors: string[]; warnings: string[] }> => {
     // Backend may not have bulk import; return stub
-    return { imported: 0, errors: ['Bulk import not implemented for /v1/knowledge'] };
+    return { imported: 0, errors: ['Bulk import not implemented for /v1/knowledge'], warnings: [] };
   },
 
   markHelpful: async (id: string): Promise<void> => {
@@ -201,7 +201,6 @@ export const knowledgeApi = {
     const limit = query.limit ?? 10;
     const threshold = query.threshold ?? 0.7;
     switch (query.search_type) {
-      case 'fulltext':
       case 'keyword':
         return searchApi.fullText(q, { limit });
       case 'hybrid':

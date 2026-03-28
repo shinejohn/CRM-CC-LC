@@ -112,7 +112,7 @@ export function GlobalErrorHandler() {
     setItems([...toasts]);
     const fn = (t: Toast[]) => setItems(t);
     listeners.add(fn);
-    return () => listeners.delete(fn);
+    return () => { listeners.delete(fn); };
   }, []);
 
   const handleDismiss = useCallback((id: string) => {

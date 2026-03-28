@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Deal extends Model
 {
-    use HasUuids, SoftDeletes;
+    use \App\Traits\HasTenantScope, HasUuids, SoftDeletes;
 
     protected $fillable = [
         'tenant_id',

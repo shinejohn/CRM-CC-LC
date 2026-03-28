@@ -32,13 +32,6 @@ export const GettingStartedQuickStartPage: React.FC = () => {
     });
   };
   
-  const progressPercentage = (completedSteps.size / steps.length) * 100;
-  const breadcrumbs = [
-    { label: 'Learning Center', href: '/learning' },
-    { label: 'Getting Started', href: '/learn/getting-started' },
-    { label: 'Quick Start Guide' },
-  ];
-
   const steps = [
     {
       id: 1,
@@ -100,6 +93,13 @@ export const GettingStartedQuickStartPage: React.FC = () => {
       ],
       color: 'orange',
     },
+  ];
+
+  const progressPercentage = (completedSteps.size / steps.length) * 100;
+  const breadcrumbs = [
+    { label: 'Learning Center', href: '/learning' },
+    { label: 'Getting Started', href: '/learn/getting-started' },
+    { label: 'Quick Start Guide' },
   ];
 
   const colorClasses = {

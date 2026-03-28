@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Knowledge extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $table = 'knowledge_base';
 
@@ -56,9 +55,3 @@ class Knowledge extends Model
         return $this->belongsTo(FaqCategory::class, 'category', 'slug');
     }
 }
-
-
-
-
-
-

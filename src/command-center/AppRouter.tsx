@@ -44,6 +44,11 @@ const PlatformsPage = lazy(() => Promise.resolve({ default: () => <div>Platforms
 const MeasureIndex = lazy(() => import('./pages/MeasureIndex').then(m => ({ default: m.MeasureIndex })));
 const ReportsPage = lazy(() => import('@/pages/MarketingReportPage').then(m => ({ default: m.MarketingReportPage })).catch(() => ({ default: () => <div>Reports - Coming Soon</div> })));
 const AnalyticsPage = lazy(() => import('@/components/DataReportPanel').then(m => ({ default: m.DataReportPanel })).catch(() => ({ default: () => <div>Analytics - Coming Soon</div> })));
+const EmailHealthPage = lazy(() => import('./pages/EmailHealthPage').then(m => ({ default: m.EmailHealthPage })).catch(() => ({ default: () => <div>Email Health - Coming Soon</div> })));
+const ContactHealthPage = lazy(() => import('./pages/ContactHealthPage').then(m => ({ default: m.ContactHealthPage })).catch(() => ({ default: () => <div>Contact Health - Coming Soon</div> })));
+
+// ── ATTRACT verb (email) ──
+const InboundInboxPage = lazy(() => import('./pages/InboundInboxPage').then(m => ({ default: m.InboundInboxPage })).catch(() => ({ default: () => <div>Inbound Inbox - Coming Soon</div> })));
 
 // ── AUTOMATE verb ──
 const AutomateIndex = lazy(() => import('./pages/AutomateIndex').then(m => ({ default: m.AutomateIndex })));
@@ -104,6 +109,7 @@ export function getCommandCenterRoutes() {
       <Route path="attract/articles" element={<Suspense fallback={<LoadingScreen />}><ArticlesPage /></Suspense>} />
       <Route path="attract/events" element={<Suspense fallback={<LoadingScreen />}><EventsPage /></Suspense>} />
       <Route path="attract/diagnostic" element={<Suspense fallback={<LoadingScreen />}><DiagnosticPage /></Suspense>} />
+      <Route path="attract/inbox" element={<Suspense fallback={<LoadingScreen />}><InboundInboxPage /></Suspense>} />
 
       {/* ── SELL: CRM, pipeline & customer management ── */}
       <Route path="sell" element={<Suspense fallback={<LoadingScreen />}><SellIndex /></Suspense>} />
@@ -127,6 +133,8 @@ export function getCommandCenterRoutes() {
       <Route path="measure" element={<Suspense fallback={<LoadingScreen />}><MeasureIndex /></Suspense>} />
       <Route path="measure/reports" element={<Suspense fallback={<LoadingScreen />}><ReportsPage /></Suspense>} />
       <Route path="measure/analytics" element={<Suspense fallback={<LoadingScreen />}><AnalyticsPage /></Suspense>} />
+      <Route path="measure/email-health" element={<Suspense fallback={<LoadingScreen />}><EmailHealthPage /></Suspense>} />
+      <Route path="measure/contact-health" element={<Suspense fallback={<LoadingScreen />}><ContactHealthPage /></Suspense>} />
 
       {/* ── AUTOMATE: AI employees & workflows ── */}
       <Route path="automate" element={<Suspense fallback={<LoadingScreen />}><AutomateIndex /></Suspense>} />

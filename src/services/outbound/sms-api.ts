@@ -60,7 +60,7 @@ export async function listSmsCampaigns(params?: {
     '/api/v1/outbound/sms/campaigns',
     { params }
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -70,7 +70,7 @@ export async function getSmsCampaign(id: string): Promise<SmsCampaign> {
   const response = await apiClient.get<{ data: SmsCampaign }>(
     `/api/v1/outbound/campaigns/${id}`
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -83,7 +83,7 @@ export async function createSmsCampaign(
     '/api/v1/outbound/sms/campaigns',
     request
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -93,7 +93,7 @@ export async function getSmsTemplates(): Promise<SmsTemplate[]> {
   const response = await apiClient.get<{ data: SmsTemplate[] }>(
     '/api/v1/outbound/sms/templates'
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -108,5 +108,5 @@ export async function createSmsTemplate(request: {
     '/api/v1/outbound/sms/templates',
     request
   );
-  return response.data.data;
+  return response.data;
 }

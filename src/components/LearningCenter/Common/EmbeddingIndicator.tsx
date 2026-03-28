@@ -49,7 +49,7 @@ export const EmbeddingIndicator: React.FC<EmbeddingIndicatorProps> = ({
       <Icon
         size={12}
         className={config.iconColor}
-        {...(config.animate && { className: `${config.iconColor} animate-spin` })}
+        {...(('animate' in config && config.animate) && { className: `${config.iconColor} animate-spin` })}
       />
       <span>{config.label}</span>
     </div>

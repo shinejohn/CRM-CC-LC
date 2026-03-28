@@ -2,7 +2,7 @@
  * AI personality operations
  */
 
-import api from './api';
+import { apiClient } from '@/services/api';
 import type {
   AiPersonality,
   PersonalityAssignment,
@@ -13,22 +13,22 @@ import type { ApiResponse } from '../types/common';
 
 export const personalityService = {
   list: () =>
-    api.get<ApiResponse<AiPersonality[]>>('/personalities').then((r) => r.data.data ?? r.data),
+    apiClient.get<ApiResponse<AiPersonality[]>>('/personalities').then((r: any) => r.data.data ?? r.data),
 
   get: (id: string) =>
-    api.get<ApiResponse<AiPersonality>>(`/personalities/${id}`).then((r) => r.data.data),
+    apiClient.get<ApiResponse<AiPersonality>>(`/personalities/${id}`).then((r: any) => r.data.data),
 
   getAssignments: () =>
-    api.get<ApiResponse<PersonalityAssignment[]>>('/personalities/assignments').then((r) => r.data.data ?? r.data),
+    apiClient.get<ApiResponse<PersonalityAssignment[]>>('/personalities/assignments').then((r: any) => r.data.data ?? r.data),
 
   assignToCustomer: (personalityId: string, customerId: string) =>
-    api.post<ApiResponse<PersonalityAssignment>>('/personalities/assign', {
+    apiClient.post<ApiResponse<PersonalityAssignment>>('/personalities/assign', {
       personality_id: personalityId,
       customer_id: customerId,
-    }).then((r) => r.data.data),
+    }).then((r: any) => r.data.data),
 
   getCustomerPersonality: (customerId: string) =>
-    api.get<ApiResponse<AiPersonality | null>>(`/personalities/customers/${customerId}/personality`).then((r) => r.data.data),
+    apiClient.get<ApiResponse<AiPersonality | null>>(`/personalities/customers/${customerId}/personality`).then((r: any) => r.data.data),
 
   /**
    * Generate AI response using personality. Uses non-streaming (backend does not support SSE yet).
@@ -42,7 +42,7 @@ export const personalityService = {
       conversation_context: params.conversation_context ?? [],
       customer_id: params.customer_id,
     };
-    const response = await api.post<ApiResponse<GenerateResponseResult>>(
+    const response = await apiClient.post<ApiResponse<GenerateResponseResult>>(
       `/personalities/${personalityId}/generate-response`,
       body
     );

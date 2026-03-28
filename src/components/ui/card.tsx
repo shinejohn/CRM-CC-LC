@@ -55,3 +55,29 @@ export function CardTitle({ className = '', children, ...props }: CardTitleProps
   );
 }
 
+export interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export function CardDescription({ className = '', children, ...props }: CardDescriptionProps) {
+  return (
+    <p className={`text-sm text-gray-500 dark:text-slate-400 ${className}`} {...props}>
+      {children}
+    </p>
+  );
+}
+
+export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export function CardFooter({ className = '', children, ...props }: CardFooterProps) {
+  return (
+    <div className={`flex items-center p-6 pt-0 ${className}`} {...props}>
+      {children}
+    </div>
+  );
+}
+

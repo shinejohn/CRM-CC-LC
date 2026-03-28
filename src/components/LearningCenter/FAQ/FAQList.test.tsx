@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '../../../test/test-utils';
 import userEvent from '@testing-library/user-event';
 import { FAQList } from './FAQList';
 import { knowledgeApi } from '@/services/learning/knowledge-api';
+import type { FAQItem, PaginatedResponse } from '@/types/learning';
 
 // Mock SourceBadge to avoid source config errors (must be before component import)
 vi.mock('../../Common/SourceBadge', () => ({
@@ -94,10 +95,11 @@ describe('FAQList', () => {
     ],
     meta: {
       total: 3,
-      page: 1,
+      current_page: 1,
+      last_page: 1,
       per_page: 25,
     },
-  };
+  } as unknown as PaginatedResponse<FAQItem>;
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -126,8 +128,8 @@ describe('FAQList', () => {
   it('shows empty state when no FAQs exist', async () => {
     vi.mocked(knowledgeApi.getFAQs).mockResolvedValue({
       data: [],
-      meta: { total: 0, page: 1, per_page: 25 },
-    });
+      meta: { total: 0, current_page: 1, last_page: 1, per_page: 25 },
+    } as unknown as PaginatedResponse<FAQItem>);
 
     render(<FAQList />);
 
@@ -153,8 +155,8 @@ describe('FAQList', () => {
     const user = userEvent.setup();
     vi.mocked(knowledgeApi.getFAQs).mockResolvedValue({
       data: [],
-      meta: { total: 0, page: 1, per_page: 25 },
-    });
+      meta: { total: 0, current_page: 1, last_page: 1, per_page: 25 },
+    } as unknown as PaginatedResponse<FAQItem>);
 
     render(<FAQList onAddFAQ={mockOnAddFAQ} />);
 

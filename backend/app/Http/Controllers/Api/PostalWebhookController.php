@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\EmailClicked;
+use App\Events\EmailOpened;
 use App\Http\Controllers\Controller;
 use App\Models\CampaignRecipient;
 use App\Models\EmailDeliveryEvent;
 use App\Models\EmailSuppression;
-use App\Events\EmailOpened;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,7 +16,7 @@ class PostalWebhookController extends Controller
 {
     public function handle(Request $request): JsonResponse
     {
-        if (!$this->verifySignature($request)) {
+        if (! $this->verifySignature($request)) {
             return response()->json(['error' => 'Invalid signature'], 401);
         }
 
@@ -37,11 +38,12 @@ class PostalWebhookController extends Controller
             'received_at' => now(),
         ]);
 
-        if (!$recipient || !$event) {
+        if (! $recipient || ! $event) {
             Log::warning('Postal webhook for unknown recipient', [
                 'event' => $event,
                 'message_id' => $messageId,
             ]);
+
             return response()->json(['status' => 'ok']);
         }
 
@@ -88,10 +90,10 @@ class PostalWebhookController extends Controller
 
         switch ($event) {
             case 'MessageSent':
-                if (!$recipient->sent_at) {
+                if (! $recipient->sent_at) {
                     $updates['sent_at'] = $now;
                 }
-                if (!in_array($recipient->status, ['sent', 'delivered', 'opened', 'clicked', 'replied'])) {
+                if (! in_array($recipient->status, ['sent', 'delivered', 'opened', 'clicked', 'replied'])) {
                     $updates['status'] = 'sent';
                 }
                 break;
@@ -100,7 +102,7 @@ class PostalWebhookController extends Controller
                 if ($shouldIncrement) {
                     $updates['delivered_at'] = $now;
                 }
-                if (!in_array($recipient->status, ['opened', 'clicked', 'replied'])) {
+                if (! in_array($recipient->status, ['opened', 'clicked', 'replied'])) {
                     $updates['status'] = 'delivered';
                 }
                 if ($shouldIncrement) {
@@ -112,12 +114,12 @@ class PostalWebhookController extends Controller
                 if ($shouldIncrement) {
                     $updates['opened_at'] = $now;
                 }
-                if (!in_array($recipient->status, ['clicked', 'replied'])) {
+                if (! in_array($recipient->status, ['clicked', 'replied'])) {
                     $updates['status'] = 'opened';
                 }
                 if ($shouldIncrement) {
                     $campaign?->increment('opened_count');
-                    
+
                     // Fire EmailOpened event
                     if ($recipient->customer_id && $campaign) {
                         event(new EmailOpened(
@@ -144,9 +146,27 @@ class PostalWebhookController extends Controller
                 if ($shouldIncrementOpen) {
                     $campaign?->increment('opened_count');
                 }
+                if ($shouldIncrementOpen && $recipient->customer_id && $campaign) {
+                    event(new EmailOpened(
+                        customerId: $recipient->customer_id,
+                        campaignId: $campaign->id,
+                        messageId: $messageId
+                    ));
+                }
+                if ($shouldIncrementClick && $recipient->customer_id && $campaign) {
+                    $linkUrl = data_get($payload, 'url')
+                        ?? data_get($payload, 'link')
+                        ?? data_get($payload, 'message.url');
+                    event(new EmailClicked(
+                        customerId: $recipient->customer_id,
+                        campaignId: $campaign->id,
+                        messageId: $messageId,
+                        linkUrl: $linkUrl
+                    ));
+                }
                 break;
             case 'MessageDeliveryFailed':
-                if (!in_array($recipient->status, ['failed', 'bounced'])) {
+                if (! in_array($recipient->status, ['failed', 'bounced'])) {
                     $updates['status'] = 'failed';
                     $campaign?->increment('failed_count');
                 }
@@ -155,16 +175,16 @@ class PostalWebhookController extends Controller
                     ?? $recipient->error_message;
                 break;
             case 'MessageBounced':
-                if (!in_array($recipient->status, ['failed', 'bounced'])) {
+                if (! in_array($recipient->status, ['failed', 'bounced'])) {
                     $updates['status'] = 'bounced';
                     $campaign?->increment('failed_count');
                 }
                 $bounceType = data_get($payload, 'bounce.type') ?? 'unknown';
-                $updates['error_message'] = 'Bounce: ' . $bounceType;
+                $updates['error_message'] = 'Bounce: '.$bounceType;
                 $this->handleHardBounce($recipient, $bounceType, $messageId, $payload);
                 break;
             case 'MessageHeld':
-                if (!in_array($recipient->status, ['failed', 'bounced'])) {
+                if (! in_array($recipient->status, ['failed', 'bounced'])) {
                     $updates['status'] = 'failed';
                     $campaign?->increment('failed_count');
                 }
@@ -175,7 +195,7 @@ class PostalWebhookController extends Controller
                 return;
         }
 
-        if (!empty($updates)) {
+        if (! empty($updates)) {
             $recipient->update($updates);
         }
     }
@@ -186,21 +206,18 @@ class PostalWebhookController extends Controller
         ?string $messageId,
         array $payload
     ): void {
-        if ($bounceType !== 'HardFail' || !$recipient->email) {
+        if ($bounceType !== 'HardFail' || ! $recipient->email) {
             return;
         }
 
         EmailSuppression::updateOrCreate(
-            ['email' => $recipient->email],
+            [
+                'email_address' => $recipient->email,
+                'email_client_id' => null,
+            ],
             [
                 'reason' => 'bounce_hard',
-                'provider' => 'postal',
                 'source' => 'postal_webhook',
-                'metadata' => [
-                    'bounce_type' => $bounceType,
-                    'message_id' => $messageId,
-                    'payload_id' => data_get($payload, 'id'),
-                ],
             ]
         );
     }
@@ -211,8 +228,9 @@ class PostalWebhookController extends Controller
         $signature = $request->header('X-Postal-Signature');
         $payload = $request->getContent();
 
-        if (!$secret || !$signature) {
+        if (! $secret || ! $signature) {
             Log::warning('Postal webhook signature missing');
+
             return false;
         }
 
@@ -221,6 +239,3 @@ class PostalWebhookController extends Controller
         return hash_equals($expected, $signature);
     }
 }
-
-
-

@@ -69,8 +69,15 @@ export interface Activity {
   description: string;
   timestamp: string;
   customerId?: string;
-  metadata: Record<string, any>;
+  metadata?: Record<string, any>;
   status: 'pending' | 'in_progress' | 'completed' | 'cancelled';
+  priority?: 'low' | 'medium' | 'high';
+  assigned_to?: string;
+  related_to_type?: string;
+  related_to_id?: string;
+  due_date?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export type ActivityType = 

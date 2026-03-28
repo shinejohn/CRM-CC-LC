@@ -131,9 +131,9 @@ export const CrmDashboard: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {[
             { label: 'Total Customers', value: analytics.customers.total, icon: Users, color: 'bg-blue-500' },
-            { label: 'New Deals', value: analytics.revenue.deal_count, icon: ShoppingCart, color: 'bg-emerald-500' },
-            { label: 'Open Conversations', value: analytics.interactions.open_conversations, icon: MessageCircle, color: 'bg-indigo-500' },
-            { label: 'Avg. Value', value: formatCurrency(analytics.revenue.average_deal_value), icon: DollarSign, color: 'bg-purple-500' },
+            { label: 'New Deals', value: analytics.orders.recent, icon: ShoppingCart, color: 'bg-emerald-500' },
+            { label: 'Open Conversations', value: analytics.conversations.recent, icon: MessageCircle, color: 'bg-indigo-500' },
+            { label: 'Avg. Value', value: formatCurrency(analytics.orders.total > 0 ? analytics.orders.total_revenue / analytics.orders.total : 0), icon: DollarSign, color: 'bg-purple-500' },
           ].map((stat) => (
             <div key={stat.label} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between">
@@ -157,17 +157,17 @@ export const CrmDashboard: React.FC = () => {
             </div>
             <div className="p-6">
               <div className="space-y-6">
-                {analytics.customers.by_stage.map((stage) => (
-                  <div key={stage.stage}>
+                {Object.entries(analytics.customers.by_lead_score).map(([stage, count]) => (
+                  <div key={stage}>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-medium text-gray-900 capitalize">{stage.stage}</span>
-                      <span className="text-sm text-gray-600">{stage.count}</span>
+                      <span className="text-sm font-medium text-gray-900 capitalize">{stage}</span>
+                      <span className="text-sm text-gray-600">{count}</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2.5">
                       <div
                         className="bg-indigo-600 h-2.5 rounded-full"
                         style={{
-                          width: `${(stage.count / analytics.customers.total) * 100}%`,
+                          width: `${(count / analytics.customers.total) * 100}%`,
                         }}
                       />
                     </div>
@@ -183,20 +183,20 @@ export const CrmDashboard: React.FC = () => {
               <h3 className="text-lg font-semibold text-gray-900">Recent Activity</h3>
             </div>
             <div className="divide-y divide-gray-200">
-              {analytics.interactions.recent.map((interaction) => (
+              {analytics.recent_activity.conversations.map((interaction) => (
                 <div key={interaction.id} className="p-4 hover:bg-gray-50 transition-colors">
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
-                      {interaction.type === 'message' ? (
-                        <MessageCircle className="h-5 w-5 text-blue-500" />
-                      ) : (
+                      {interaction.outcome === 'Purchased' ? (
                         <CheckCircle className="h-5 w-5 text-emerald-500" />
+                      ) : (
+                        <MessageCircle className="h-5 w-5 text-blue-500" />
                       )}
                     </div>
                     <div className="ml-3 flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900">{interaction.customer_name}</p>
-                      <p className="text-sm text-gray-500 truncate">{interaction.description}</p>
-                      <p className="text-xs text-gray-400 mt-1">{interaction.time_ago}</p>
+                      <p className="text-sm font-medium text-gray-900">{interaction.customer?.business_name || 'Unknown'}</p>
+                      <p className="text-sm text-gray-500 truncate">Duration: {formatDuration(interaction.duration_seconds)}</p>
+                      <p className="text-xs text-gray-400 mt-1">{new Date(interaction.started_at).toLocaleDateString()}</p>
                     </div>
                   </div>
                 </div>

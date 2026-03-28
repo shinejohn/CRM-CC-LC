@@ -11,30 +11,38 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Service extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids, SoftDeletes;
 
     protected $fillable = [
         'tenant_id',
         'service_category_id',
         'name',
         'slug',
+        'product_slug',
         'description',
         'long_description',
         'images',
         'price',
         'compare_at_price',
-        'service_type', // 'day.news', 'goeventcity', 'downtownsguide', 'golocalvoices', 'alphasite', 'fibonacco'
+        'service_type', // 'day.news', 'goeventcity', 'downtownsguide', 'golocalvoices', 'alphasite', 'fibonacco', 'cross-platform'
+        'sold_by', // 'emma', 'patricia', 'self-serve', 'auto'
         'service_tier', // 'basic', 'standard', 'premium', 'enterprise'
         'is_subscription',
         'billing_period', // 'monthly', 'annual', 'one-time'
+        'billing_unit', // 'per-send', 'per-article', 'per-use', 'per-notice', 'per-poll', 'commission', 'per-listing', 'per-event', 'per-batch', 'per-post'
+        'commission_rate',
+        'max_per_community',
         'features',
         'capabilities',
+        'requires_products',
+        'platform_surfaces',
         'integrations',
         'quantity',
         'track_inventory',
         'sku',
         'is_active',
         'is_featured',
+        'is_perk',
         'stripe_price_id',
         'stripe_product_id',
         'metadata',
@@ -84,13 +92,17 @@ class Service extends Model
             'images' => 'array',
             'price' => 'decimal:2',
             'compare_at_price' => 'decimal:2',
+            'commission_rate' => 'decimal:2',
             'is_subscription' => 'boolean',
             'features' => 'array',
             'capabilities' => 'array',
+            'requires_products' => 'array',
+            'platform_surfaces' => 'array',
             'integrations' => 'array',
             'track_inventory' => 'boolean',
             'is_active' => 'boolean',
             'is_featured' => 'boolean',
+            'is_perk' => 'boolean',
             'metadata' => 'array',
         ];
     }

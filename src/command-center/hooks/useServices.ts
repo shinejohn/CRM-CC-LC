@@ -148,7 +148,7 @@ export function useServices(): UseServicesReturn {
 
       setSubscriptions(Array.isArray(subscriptionsData) ? subscriptionsData : []);
       setServices(
-        rawServices.map((s: Record<string, unknown>) =>
+        rawServices.map((s: any) =>
           mapBackendServiceToFrontend({
             id: String(s.id),
             name: String(s.name),

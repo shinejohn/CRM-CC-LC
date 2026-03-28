@@ -21,13 +21,13 @@ const LoginPage = safeLazy(() => import("@/pages/LoginPage"), "Login");
 const CentralCommandDashboard = safeLazy(() => import("@/components/dashboard/CentralCommandDashboard"), "Dashboard");
 
 // CRM
-const CustomersListPage = safeLazy(() => import("@/components/crm/CustomersListPage"), "Customers List");
-const CustomerDetailPage = safeLazy(() => import("@/components/crm/CustomerDetailPage"), "Customer Detail");
-const ContactsListPage = safeLazy(() => import("@/components/crm/ContactsListPage"), "Contacts List");
-const ContactDetailPage = safeLazy(() => import("@/components/crm/ContactDetailPage"), "Contact Detail");
-const PipelineDashboard = safeLazy(() => import("@/components/crm/PipelineDashboard"), "Pipeline Dashboard");
-const DealDetailPage = safeLazy(() => import("@/components/crm/DealDetailPage"), "Deal Detail");
-const ActivitiesPage = safeLazy(() => import("@/components/crm/ActivitiesPage"), "Activities");
+const CustomersListPage = safeLazy(() => import("@/components/CRM/CustomersListPage"), "Customers List");
+const CustomerDetailPage = safeLazy(() => import("@/components/CRM/CustomerDetailPage"), "Customer Detail");
+const ContactsListPage = safeLazy(() => import("@/components/CRM/ContactsListPage"), "Contacts List");
+const ContactDetailPage = safeLazy(() => import("@/components/CRM/ContactDetailPage"), "Contact Detail");
+const PipelineDashboard = safeLazy(() => import("@/components/CRM/PipelineDashboard"), "Pipeline Dashboard");
+const DealDetailPage = safeLazy(() => import("@/components/CRM/DealDetailPage"), "Deal Detail");
+const ActivitiesPage = safeLazy(() => import("@/components/CRM/ActivitiesPage"), "Activities");
 
 // Billing
 const InvoicesListPage = safeLazy(() => import("@/components/billing/InvoicesListPage"), "Invoices List");
@@ -51,6 +51,20 @@ const AIWorkflowPage = safeLazy(() => import("@/components/automation/AIWorkflow
 
 // Documents
 const ClientProposalPage = safeLazy(() => import("@/components/documents/ClientProposalPage"), "Proposals");
+
+// Product catalog & community subscriptions (named exports → default for React.lazy)
+const ProductCatalogPage = safeLazy(
+    () => import("@/pages/Marketing/ProductCatalogPage").then((m) => ({ default: m.ProductCatalogPage })),
+    "Product Catalog"
+);
+const CommunityInfluencerPage = safeLazy(
+    () => import("@/pages/Marketing/CommunityInfluencerPage").then((m) => ({ default: m.CommunityInfluencerPage })),
+    "Community Influencer"
+);
+const SubscriptionsPage = safeLazy(
+    () => import("@/pages/Business/SubscriptionsPage").then((m) => ({ default: m.SubscriptionsPage })),
+    "Subscriptions"
+);
 
 function PageLoader() {
     return (
@@ -116,6 +130,10 @@ export function AppRouter() {
                         <Route path="ai">
                             <Route path="workflows" element={React.createElement(AIWorkflowPage)} />
                         </Route>
+
+                        <Route path="product-catalog" element={React.createElement(ProductCatalogPage)} />
+                        <Route path="community-influencer" element={React.createElement(CommunityInfluencerPage)} />
+                        <Route path="subscriptions" element={React.createElement(SubscriptionsPage)} />
                     </Route>
                 </Routes>
             </Suspense>

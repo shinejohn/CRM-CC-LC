@@ -66,7 +66,7 @@ export async function listEmailCampaigns(params?: {
     '/api/v1/outbound/email/campaigns',
     { params }
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -76,7 +76,7 @@ export async function getEmailCampaign(id: string): Promise<EmailCampaign> {
   const response = await apiClient.get<{ data: EmailCampaign }>(
     `/api/v1/outbound/campaigns/${id}`
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -89,7 +89,7 @@ export async function createEmailCampaign(
     '/api/v1/outbound/email/campaigns',
     request
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -99,7 +99,7 @@ export async function getEmailTemplates(): Promise<EmailTemplate[]> {
   const response = await apiClient.get<{ data: EmailTemplate[] }>(
     '/api/v1/outbound/email/templates'
   );
-  return response.data.data;
+  return response.data;
 }
 
 /**
@@ -116,5 +116,5 @@ export async function createEmailTemplate(request: {
     '/api/v1/outbound/email/templates',
     request
   );
-  return response.data.data;
+  return response.data;
 }

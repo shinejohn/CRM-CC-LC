@@ -9,7 +9,7 @@ import {
   Stethoscope, Layers, FileText, Calendar,
   Kanban, FileCheck, Users, Activity,
   Briefcase, ShoppingCart, CreditCard, Gauge,
-  Cpu, Workflow, Cog,
+  Cpu, Workflow, Cog, Mail, Inbox, ShieldCheck,
 } from 'lucide-react';
 import { useBusinessMode } from '@/hooks/useBusinessMode';
 import { useAuthStore } from '@/stores/authStore';
@@ -53,6 +53,7 @@ const useNavSections = (): VerbSection[] => {
       children: [
         { label: 'Diagnostic', href: '/command-center/attract/diagnostic', icon: Stethoscope, resource: 'campaigns' },
         { label: 'Campaigns', href: '/command-center/attract/campaigns', icon: Layers, resource: 'campaigns' },
+        { label: 'Inbox', href: '/command-center/attract/inbox', icon: Inbox, resource: 'campaigns' },
         { label: 'Articles', href: '/command-center/attract/articles', icon: FileText, resource: 'content' },
         { label: 'Events', href: '/command-center/attract/events', icon: Calendar, resource: 'content' },
       ],
@@ -90,6 +91,8 @@ const useNavSections = (): VerbSection[] => {
         { label: 'Performance', href: '/command-center/measure', icon: BarChart3, resource: 'analytics' },
         { label: 'Reports', href: '/command-center/measure/reports', icon: FileText, resource: 'analytics' },
         { label: 'Analytics', href: '/command-center/measure/analytics', icon: Activity, resource: 'analytics' },
+        { label: 'Email Health', href: '/command-center/measure/email-health', icon: Mail, resource: 'analytics' },
+        { label: 'Contact Health', href: '/command-center/measure/contact-health', icon: ShieldCheck, resource: 'analytics' },
       ],
     },
     {

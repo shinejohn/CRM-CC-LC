@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    use HasFactory, HasUuids;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $fillable = [
         'tenant_id',
@@ -32,9 +32,3 @@ class Article extends Model
         'updated_at' => 'datetime',
     ];
 }
-
-
-
-
-
-

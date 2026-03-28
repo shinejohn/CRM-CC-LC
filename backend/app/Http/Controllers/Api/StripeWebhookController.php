@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order;
 use App\Models\Customer;
+use App\Models\Order;
 use App\Services\StripeService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -29,18 +29,21 @@ class StripeWebhookController extends Controller
         $sigHeader = $request->header('Stripe-Signature');
         $webhookSecret = config('services.stripe.webhook_secret');
 
-        if (!$webhookSecret) {
+        if (! $webhookSecret) {
             Log::error('Stripe webhook secret not configured');
+
             return response()->json(['error' => 'Webhook secret not configured'], 500);
         }
 
         try {
             $event = Webhook::constructEvent($payload, $sigHeader, $webhookSecret);
         } catch (SignatureVerificationException $e) {
-            Log::error('Stripe webhook signature verification failed: ' . $e->getMessage());
+            Log::error('Stripe webhook signature verification failed: '.$e->getMessage());
+
             return response()->json(['error' => 'Invalid signature'], 400);
         } catch (Exception $e) {
-            Log::error('Stripe webhook error: ' . $e->getMessage());
+            Log::error('Stripe webhook error: '.$e->getMessage());
+
             return response()->json(['error' => 'Webhook error'], 400);
         }
 
@@ -51,12 +54,14 @@ class StripeWebhookController extends Controller
                 'payment_intent.succeeded' => $this->handlePaymentIntentSucceeded($event->data->object),
                 'payment_intent.payment_failed' => $this->handlePaymentIntentFailed($event->data->object),
                 'charge.refunded' => $this->handleChargeRefunded($event->data->object),
-                default => Log::info('Unhandled Stripe webhook event: ' . $event->type),
+                'customer.subscription.deleted' => $this->handleSubscriptionDeleted($event->data->object),
+                'customer.subscription.updated' => $this->handleSubscriptionUpdated($event->data->object),
+                default => Log::info('Unhandled Stripe webhook event: '.$event->type),
             };
 
             return response()->json(['status' => 'success']);
         } catch (Exception $e) {
-            Log::error('Error handling Stripe webhook: ' . $e->getMessage(), [
+            Log::error('Error handling Stripe webhook: '.$e->getMessage(), [
                 'event_type' => $event->type,
                 'event_id' => $event->id,
             ]);
@@ -78,14 +83,16 @@ class StripeWebhookController extends Controller
         // Find order by session ID
         $order = Order::where('stripe_session_id', $session->id)->first();
 
-        if (!$order) {
+        if (! $order) {
             Log::warning('Order not found for Stripe session', ['session_id' => $session->id]);
+
             return;
         }
 
         // Only process if not already paid
         if ($order->payment_status === 'paid') {
             Log::info('Order already processed', ['order_id' => $order->id]);
+
             return;
         }
 
@@ -144,8 +151,9 @@ class StripeWebhookController extends Controller
         // Find order by payment intent ID
         $order = Order::where('stripe_payment_intent_id', $paymentIntent->id)->first();
 
-        if (!$order) {
+        if (! $order) {
             Log::warning('Order not found for payment intent', ['payment_intent_id' => $paymentIntent->id]);
+
             return;
         }
 
@@ -229,6 +237,13 @@ class StripeWebhookController extends Controller
                         $service->update(['is_active' => true]);
                     }
                 }
+
+                // Cancel associated subscriptions if refunded
+                \App\Models\ServiceSubscription::where('order_id', $order->id)->update([
+                    'status' => 'cancelled',
+                    'cancelled_at' => now(),
+                    'auto_renew' => false,
+                ]);
             });
         }
     }
@@ -238,7 +253,7 @@ class StripeWebhookController extends Controller
      */
     private function findOrCreateCustomer(Order $order): ?Customer
     {
-        if (!$order->customer_email) {
+        if (! $order->customer_email) {
             return null;
         }
 
@@ -247,7 +262,7 @@ class StripeWebhookController extends Controller
             ->where('email', $order->customer_email)
             ->first();
 
-        if (!$customer) {
+        if (! $customer) {
             // Create new customer
             $customer = Customer::create([
                 'tenant_id' => $order->tenant_id,
@@ -267,14 +282,14 @@ class StripeWebhookController extends Controller
      */
     private function trackPurchaseInCRM(Order $order, ?Customer $customer): void
     {
-        if (!$customer) {
+        if (! $customer) {
             return;
         }
 
         // Update customer lead score based on purchase
         $purchaseAmount = $order->total;
-        $scoreIncrease = min((int)($purchaseAmount / 10), 50); // Max 50 point increase
-        
+        $scoreIncrease = min((int) ($purchaseAmount / 10), 50); // Max 50 point increase
+
         $customer->increment('lead_score', $scoreIncrease);
         if ($customer->lead_score > 100) {
             $customer->update(['lead_score' => 100]);
@@ -293,8 +308,8 @@ class StripeWebhookController extends Controller
 
             // Add order details to conversation new_data_collected
             $order->load('items.service');
-            $services = $order->items->map(fn($item) => $item->service_name)->join(', ');
-            
+            $services = $order->items->map(fn ($item) => $item->service_name)->join(', ');
+
             $conversation->update([
                 'new_data_collected' => array_merge($conversation->new_data_collected ?? [], [
                     'order_id' => $order->id,
@@ -310,7 +325,7 @@ class StripeWebhookController extends Controller
                 'conversation_id' => $conversation->id,
             ]);
         } catch (Exception $e) {
-            Log::error('Failed to track purchase in CRM: ' . $e->getMessage());
+            Log::error('Failed to track purchase in CRM: '.$e->getMessage());
         }
     }
 
@@ -324,7 +339,7 @@ class StripeWebhookController extends Controller
         foreach ($order->items as $item) {
             $service = $item->service;
 
-            if (!$service) {
+            if (! $service) {
                 continue;
             }
 
@@ -340,12 +355,13 @@ class StripeWebhookController extends Controller
                         'tier' => $service->service_tier ?? 'basic',
                         'status' => 'active',
                         'subscription_started_at' => now(),
-                        'subscription_expires_at' => $service->billing_period === 'annual' 
-                            ? now()->addYear() 
+                        'subscription_expires_at' => $service->billing_period === 'annual'
+                            ? now()->addYear()
                             : now()->addMonth(),
                         'auto_renew' => true,
                         'monthly_amount' => $service->price,
                         'billing_cycle' => $service->billing_period === 'annual' ? 'annual' : 'monthly',
+                        'stripe_subscription_id' => $session->subscription ?? null,
                     ]);
 
                     Log::info('Service subscription created', [
@@ -353,12 +369,47 @@ class StripeWebhookController extends Controller
                         'service_id' => $service->id,
                     ]);
                 } catch (Exception $e) {
-                    Log::error('Failed to create subscription: ' . $e->getMessage());
+                    Log::error('Failed to create subscription: '.$e->getMessage());
                 }
             }
         }
 
         // Mark order as completed after fulfillment
         $order->update(['status' => 'completed']);
+    }
+
+    /**
+     * Handle customer.subscription.deleted event
+     */
+    private function handleSubscriptionDeleted(object $subscription): void
+    {
+        Log::info('Stripe subscription deleted', ['subscription_id' => $subscription->id]);
+
+        $serviceSubscription = \App\Models\ServiceSubscription::where('stripe_subscription_id', $subscription->id)->first();
+        if ($serviceSubscription) {
+            $serviceSubscription->update([
+                'status' => 'cancelled',
+                'cancelled_at' => now(),
+                'auto_renew' => false,
+            ]);
+        }
+    }
+
+    /**
+     * Handle customer.subscription.updated event
+     */
+    private function handleSubscriptionUpdated(object $subscription): void
+    {
+        Log::info('Stripe subscription updated', ['subscription_id' => $subscription->id]);
+
+        $serviceSubscription = \App\Models\ServiceSubscription::where('stripe_subscription_id', $subscription->id)->first();
+        if ($serviceSubscription) {
+            $status = $subscription->status === 'active' ? 'active' : ($subscription->status === 'past_due' ? 'suspended' : ($subscription->status === 'canceled' ? 'cancelled' : 'active'));
+            $serviceSubscription->update([
+                'status' => $status,
+                'auto_renew' => ! $subscription->cancel_at_period_end,
+                'subscription_expires_at' => \Carbon\Carbon::createFromTimestamp($subscription->current_period_end),
+            ]);
+        }
     }
 }

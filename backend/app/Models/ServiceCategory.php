@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ServiceCategory extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids, SoftDeletes;
 
     protected $fillable = [
         'tenant_id',

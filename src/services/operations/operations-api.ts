@@ -212,7 +212,7 @@ class OperationsApiService {
         },
       });
     } catch (error) {
-      handleApiError(error, 'getMetricDefinitions');
+      return handleApiError(error, 'getMetricDefinitions');
     }
   }
 
@@ -221,7 +221,7 @@ class OperationsApiService {
       const response = await apiClient.get<{ data: MetricDefinition }>(`${BASE_PATH}/metric-definitions/${id}`);
       return response.data;
     } catch (error) {
-      handleApiError(error, 'getMetricDefinition');
+      return handleApiError(error, 'getMetricDefinition');
     }
   }
 
@@ -248,7 +248,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseMetricSnapshot);
     } catch (error) {
-      handleApiError(error, 'getMetricSnapshots');
+      return handleApiError(error, 'getMetricSnapshots');
     }
   }
 
@@ -273,7 +273,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseMetricAggregate);
     } catch (error) {
-      handleApiError(error, 'getMetricAggregates');
+      return handleApiError(error, 'getMetricAggregates');
     }
   }
 
@@ -296,7 +296,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseAISession);
     } catch (error) {
-      handleApiError(error, 'getAISessions');
+      return handleApiError(error, 'getAISessions');
     }
   }
 
@@ -305,7 +305,7 @@ class OperationsApiService {
       const response = await apiClient.get<{ data: AISession }>(`${BASE_PATH}/ai-sessions/${id}`);
       return parseAISession(response.data);
     } catch (error) {
-      handleApiError(error, 'getAISession');
+      return handleApiError(error, 'getAISession');
     }
   }
 
@@ -314,7 +314,7 @@ class OperationsApiService {
       const response = await apiClient.post<{ data: AISession }>(`${BASE_PATH}/ai-sessions`, payload);
       return parseAISession(response.data);
     } catch (error) {
-      handleApiError(error, 'createAISession');
+      return handleApiError(error, 'createAISession');
     }
   }
 
@@ -337,7 +337,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseAIRecommendation);
     } catch (error) {
-      handleApiError(error, 'getAIRecommendations');
+      return handleApiError(error, 'getAIRecommendations');
     }
   }
 
@@ -346,7 +346,7 @@ class OperationsApiService {
       const response = await apiClient.get<{ data: AIRecommendation }>(`${BASE_PATH}/ai-recommendations/${id}`);
       return parseAIRecommendation(response.data);
     } catch (error) {
-      handleApiError(error, 'getAIRecommendation');
+      return handleApiError(error, 'getAIRecommendation');
     }
   }
 
@@ -358,7 +358,7 @@ class OperationsApiService {
       );
       return parseAIRecommendation(response.data);
     } catch (error) {
-      handleApiError(error, 'approveAIRecommendation');
+      return handleApiError(error, 'approveAIRecommendation');
     }
   }
 
@@ -370,7 +370,7 @@ class OperationsApiService {
       );
       return parseAIRecommendation(response.data);
     } catch (error) {
-      handleApiError(error, 'rejectAIRecommendation');
+      return handleApiError(error, 'rejectAIRecommendation');
     }
   }
 
@@ -395,7 +395,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseAIContextMemory);
     } catch (error) {
-      handleApiError(error, 'getAIContextMemory');
+      return handleApiError(error, 'getAIContextMemory');
     }
   }
 
@@ -423,7 +423,7 @@ class OperationsApiService {
       );
       return mapPaginated(response, parseInfrastructureComponent);
     } catch (error) {
-      handleApiError(error, 'getInfrastructureComponents');
+      return handleApiError(error, 'getInfrastructureComponents');
     }
   }
 
@@ -434,7 +434,7 @@ class OperationsApiService {
       );
       return parseInfrastructureComponent(response.data);
     } catch (error) {
-      handleApiError(error, 'getInfrastructureComponent');
+      return handleApiError(error, 'getInfrastructureComponent');
     }
   }
 
@@ -457,7 +457,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseHealthCheck);
     } catch (error) {
-      handleApiError(error, 'getHealthChecks');
+      return handleApiError(error, 'getHealthChecks');
     }
   }
 
@@ -480,7 +480,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseEmailIPReputation);
     } catch (error) {
-      handleApiError(error, 'getEmailIPReputation');
+      return handleApiError(error, 'getEmailIPReputation');
     }
   }
 
@@ -503,7 +503,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseQueueMetrics);
     } catch (error) {
-      handleApiError(error, 'getQueueMetrics');
+      return handleApiError(error, 'getQueueMetrics');
     }
   }
 
@@ -524,7 +524,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseRevenueSnapshot);
     } catch (error) {
-      handleApiError(error, 'getRevenueSnapshots');
+      return handleApiError(error, 'getRevenueSnapshots');
     }
   }
 
@@ -545,7 +545,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseCostTracking);
     } catch (error) {
-      handleApiError(error, 'getCostTracking');
+      return handleApiError(error, 'getCostTracking');
     }
   }
 
@@ -563,7 +563,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parsePipelineMetrics);
     } catch (error) {
-      handleApiError(error, 'getPipelineMetrics');
+      return handleApiError(error, 'getPipelineMetrics');
     }
   }
 
@@ -585,7 +585,7 @@ class OperationsApiService {
         },
       });
     } catch (error) {
-      handleApiError(error, 'getActionDefinitions');
+      return handleApiError(error, 'getActionDefinitions');
     }
   }
 
@@ -607,7 +607,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseActionExecution);
     } catch (error) {
-      handleApiError(error, 'getActionExecutions');
+      return handleApiError(error, 'getActionExecutions');
     }
   }
 
@@ -630,7 +630,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseAlertRule);
     } catch (error) {
-      handleApiError(error, 'getAlertRules');
+      return handleApiError(error, 'getAlertRules');
     }
   }
 
@@ -653,7 +653,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseAlert);
     } catch (error) {
-      handleApiError(error, 'getAlerts');
+      return handleApiError(error, 'getAlerts');
     }
   }
 
@@ -662,7 +662,7 @@ class OperationsApiService {
       const response = await apiClient.post<{ data: Alert }>(`${BASE_PATH}/alerts/${id}/acknowledge`);
       return parseAlert(response.data);
     } catch (error) {
-      handleApiError(error, 'acknowledgeAlert');
+      return handleApiError(error, 'acknowledgeAlert');
     }
   }
 
@@ -671,7 +671,7 @@ class OperationsApiService {
       const response = await apiClient.post<{ data: Alert }>(`${BASE_PATH}/alerts/${id}/resolve`, { notes });
       return parseAlert(response.data);
     } catch (error) {
-      handleApiError(error, 'resolveAlert');
+      return handleApiError(error, 'resolveAlert');
     }
   }
 
@@ -692,7 +692,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseIncident);
     } catch (error) {
-      handleApiError(error, 'getIncidents');
+      return handleApiError(error, 'getIncidents');
     }
   }
 
@@ -718,7 +718,7 @@ class OperationsApiService {
       );
       return mapPaginated(response, parseDevelopmentMilestone);
     } catch (error) {
-      handleApiError(error, 'getDevelopmentMilestones');
+      return handleApiError(error, 'getDevelopmentMilestones');
     }
   }
 
@@ -739,7 +739,7 @@ class OperationsApiService {
       });
       return mapPaginated(response, parseFeatureFlag);
     } catch (error) {
-      handleApiError(error, 'getFeatureFlags');
+      return handleApiError(error, 'getFeatureFlags');
     }
   }
 
@@ -751,7 +751,7 @@ class OperationsApiService {
       const response = await apiClient.get<{ data: OperationsDashboardSnapshot }>(`${BASE_PATH}/dashboard/snapshot`);
       return parseOperationsDashboardSnapshot(response.data);
     } catch (error) {
-      handleApiError(error, 'getDashboardSnapshot');
+      return handleApiError(error, 'getDashboardSnapshot');
     }
   }
 }

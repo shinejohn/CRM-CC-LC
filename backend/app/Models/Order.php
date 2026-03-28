@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids, SoftDeletes;
 
     protected $fillable = [
         'order_number',

@@ -59,7 +59,7 @@ export function CustomerCard({ customer, isSelected, onSelect, onDelete }: Custo
               <Checkbox
                 checked={isSelected}
                 onCheckedChange={onSelect}
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
               />
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold text-lg">
                 {customer.name.charAt(0).toUpperCase()}
@@ -82,19 +82,18 @@ export function CustomerCard({ customer, isSelected, onSelect, onDelete }: Custo
                   variant="ghost"
                   size="icon"
                   className="h-8 w-8"
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(e: React.MouseEvent) => e.stopPropagation()}
                 >
                   <MoreVertical className="w-4 h-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" onClick={(e) => e.stopPropagation()}>
+              <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={() => navigate(`/command-center/customers/${customer.id}`)}>
                   View Details
                 </DropdownMenuItem>
                 {onDelete && (
                   <DropdownMenuItem
-                    onClick={(e) => {
-                      e.stopPropagation();
+                    onClick={() => {
                       onDelete(customer.id);
                     }}
                     className="text-red-600 focus:text-red-600"

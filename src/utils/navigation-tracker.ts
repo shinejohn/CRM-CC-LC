@@ -22,7 +22,7 @@ interface NavigationLog {
   timestamp: number;
 }
 
-export const logNavigation = (log: Omit<NavigationLog, 'timestamp' | 'sessionId' | 'runId'>) => {
+export const logNavigation = (log: Omit<NavigationLog, 'timestamp' | 'sessionId'>) => {
   const payload: NavigationLog = {
     ...log,
     timestamp: Date.now(),
