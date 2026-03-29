@@ -1,19 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Str;
 
-class PendingQuestion extends Model
+final class PendingQuestion extends Model
 {
-    use \App\Traits\HasTenantScope, HasFactory;
-
-    protected $keyType = 'string';
-
-    public $incrementing = false;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $fillable = [
         'tenant_id',
@@ -46,17 +44,6 @@ class PendingQuestion extends Model
         'needs_verification' => 'boolean',
         'verified' => 'boolean',
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($question) {
-            if (empty($question->id)) {
-                $question->id = (string) Str::uuid();
-            }
-        });
-    }
 
     /**
      * Get the customer this question is for

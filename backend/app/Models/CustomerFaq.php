@@ -1,19 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Str;
 
-class CustomerFaq extends Model
+final class CustomerFaq extends Model
 {
-    use \App\Traits\HasTenantScope, HasFactory;
-
-    protected $keyType = 'string';
-
-    public $incrementing = false;
+    use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
     protected $fillable = [
         'tenant_id',
@@ -40,17 +38,6 @@ class CustomerFaq extends Model
         'should_ask_clarification' => 'boolean',
         'is_active' => 'boolean',
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($faq) {
-            if (empty($faq->id)) {
-                $faq->id = (string) Str::uuid();
-            }
-        });
-    }
 
     /**
      * Get the customer this FAQ belongs to

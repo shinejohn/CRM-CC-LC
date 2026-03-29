@@ -31,6 +31,12 @@ const ContactsPage = lazy(() => import('@/components/CRM/ContactsListPage').catc
 const ActivitiesPage = lazy(() => import('./pages/ActivitiesPage').catch(() => ({ default: () => <div>Activities - Coming Soon</div> })));
 const ProposalsPage = lazy(() => Promise.resolve({ default: () => <div>Proposals - Coming Soon</div> }));
 
+// ── Sarah pitch (CC internal) ──
+const PitchDashboardPage = lazy(() => import('./pages/pitch/PitchDashboardPage'));
+const PitchFollowUpsPage = lazy(() => import('./pages/pitch/PitchFollowUpsPage'));
+const PitchProposalsPage = lazy(() => import('./pages/pitch/PitchProposalsPage'));
+const SlotInventoryPage = lazy(() => import('./pages/pitch/SlotInventoryPage'));
+
 // ── DELIVER verb ──
 const DeliverIndex = lazy(() => import('./pages/DeliverIndex').then(m => ({ default: m.DeliverIndex })));
 const OrdersPage = lazy(() => import('@/components/billing/OrderHistoryPage').catch(() => ({ default: () => <div>Orders - Coming Soon</div> })));
@@ -119,6 +125,12 @@ export function getCommandCenterRoutes() {
       <Route path="sell/contacts" element={<Suspense fallback={<LoadingScreen />}><ContactsPage /></Suspense>} />
       <Route path="sell/activities" element={<Suspense fallback={<LoadingScreen />}><ActivitiesPage /></Suspense>} />
       <Route path="sell/proposals" element={<Suspense fallback={<LoadingScreen />}><ProposalsPage /></Suspense>} />
+
+      {/* ── PITCH: Sarah pitch engine (operator views) ── */}
+      <Route path="pitch" element={<Suspense fallback={<LoadingScreen />}><PitchDashboardPage /></Suspense>} />
+      <Route path="pitch/follow-ups" element={<Suspense fallback={<LoadingScreen />}><PitchFollowUpsPage /></Suspense>} />
+      <Route path="pitch/proposals" element={<Suspense fallback={<LoadingScreen />}><PitchProposalsPage /></Suspense>} />
+      <Route path="pitch/slots" element={<Suspense fallback={<LoadingScreen />}><SlotInventoryPage /></Suspense>} />
 
       {/* ── DELIVER: Services, billing & fulfillment ── */}
       <Route path="deliver" element={<Suspense fallback={<LoadingScreen />}><DeliverIndex /></Suspense>} />

@@ -50,7 +50,7 @@ export default function DealDetailPage() {
                     { label: deal.title },
                 ]}
                 actions={
-                    <StatusBadge status={deal.stage as any} size="md" />
+                    <StatusBadge status={deal.stage as "active" | "inactive" | "pending" | "completed" | "cancelled" | "overdue" | "draft" | "archived"} size="md" />
                 }
             />
 

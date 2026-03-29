@@ -768,6 +768,8 @@ Route::prefix('v1')->group(function () {
         Route::post('/business-ingest/batch', [BusinessIngestController::class, 'batchIngest']);
         Route::patch('/business-ingest/{externalId}/enrichment', [BusinessIngestController::class, 'enrichmentUpdate']);
     });
+
+    require __DIR__.'/pitch.php';
 });
 
 // Public tracking endpoints (no auth)

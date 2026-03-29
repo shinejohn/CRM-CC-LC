@@ -42,6 +42,10 @@ class Conversation extends Model
         'duration_seconds',
         'user_agent',
         'ip_address',
+        'pitch_subject',
+        'pitch_status',
+        'pitch_source',
+        'pitch_metadata',
     ];
 
     protected $casts = [
@@ -57,6 +61,7 @@ class Conversation extends Model
         'started_at' => 'datetime',
         'ended_at' => 'datetime',
         'duration_seconds' => 'integer',
+        'pitch_metadata' => 'array',
     ];
 
     protected static function booted()

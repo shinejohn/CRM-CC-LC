@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import { PresentationCall } from './pages/PresentationCall';
 import { DataReportCall } from './pages/DataReportCall';
@@ -92,6 +92,7 @@ import { ServicePurchaseWizardPage } from './command-center/modules/services/wiz
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { getCommandCenterRoutes } from './command-center/AppRouter';
 
+const PitchRouterPage = lazy(() => import('./pitch/PitchRouter'));
 
 // Ops Dashboard (POD) - Admin only
 import { OpsLayout } from './pages/ops/OpsLayout';
@@ -118,6 +119,14 @@ export function AppRouter() {
         <Route path="/ai-workflow" element={<AIWorkflowPage />} />
         <Route path="/files" element={<FilesPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/advertise/:communitySlug"
+          element={
+            <Suspense fallback={<div className="min-h-screen bg-slate-50 p-8 text-slate-600">Loading…</div>}>
+              <PitchRouterPage />
+            </Suspense>
+          }
+        />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/schedule" element={<SchedulePage />} />

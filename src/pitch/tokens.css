@@ -1,0 +1,63 @@
+/**
+ * Sarah Pitch Engine — design tokens.
+ * Scoped to .pitch-root so Command Center global styles are unaffected.
+ */
+.pitch-root {
+  /* Backgrounds */
+  --p-bg: #0d1229;
+  --p-panel: #1a2040;
+  --p-card: #1f2645;
+  --p-card-hover: #253060;
+  --p-border: #2a3260;
+  --p-border-light: #3a4280;
+  --p-message-bg: rgba(255, 255, 255, 0.06);
+  --p-header-bg: #0a0e22;
+
+  /* Text */
+  --p-text: #ffffff;
+  --p-muted: #8892b0;
+  --p-label: #6272a4;
+
+  /* Accent — platform colors */
+  --p-teal: #00d4ff;
+  --p-teal-soft: rgba(0, 212, 255, 0.12);
+  --p-teal-dim: #0099bb;
+  --p-green: #00cc6a;
+  --p-green-soft: rgba(0, 204, 106, 0.15);
+  --p-purple: #8b5cf6;
+  --p-orange: #ff6b35;
+  --p-amber: #f59e0b;
+  --p-amber-soft: rgba(245, 158, 11, 0.12);
+  --p-red: #ef4444;
+
+  /* Slot status */
+  --p-slot-open: #00cc6a;
+  --p-slot-low: #f59e0b;
+  --p-slot-full: #ef4444;
+  --p-slot-track: #2a3260;
+
+  /* Surfaces */
+  --p-upcoming-fill: #3d4566;
+  --p-active-fill: #151a35;
+
+  /* Spacing scale */
+  --p-space-1: 4px;
+  --p-space-2: 8px;
+  --p-space-3: 12px;
+  --p-space-4: 16px;
+  --p-space-5: 20px;
+  --p-space-6: 24px;
+  --p-space-8: 32px;
+  --p-space-10: 40px;
+  --p-space-12: 48px;
+  --p-space-16: 64px;
+
+  /* Radius */
+  --p-radius-sm: 8px;
+  --p-radius-md: 12px;
+  --p-radius-lg: 16px;
+  --p-radius-pill: 999px;
+
+  /* Typography */
+  --p-font-step-label: 11px;
+}

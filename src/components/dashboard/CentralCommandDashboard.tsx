@@ -28,7 +28,7 @@ export default function CentralCommandDashboard() {
                         label={m.label}
                         value={m.value}
                         icon={m.icon}
-                        color={m.color as any}
+                        color={m.color as "blue" | "green" | "amber" | "red" | "purple"}
                         change={m.change}
                     />
                 ))}

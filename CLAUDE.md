@@ -5,6 +5,25 @@ Single-app platform: Learning Center with campaign management, CRM, knowledge ba
 
 Stack: **Laravel 12 API** + **React 18 SPA** + **TypeScript**, deployed on **Railway** (Nixpacks) with **PostgreSQL**.
 
+## STOP — READ THIS BEFORE ANY CODE REVIEW OR GAP ANALYSIS
+
+**This mistake has been made multiple times and must not happen again.**
+
+The repo lives at `/Users/johnshine/Dropbox/Fibonacco/Learning-Center/`. Claude has Filesystem MCP access to it. The files in `/mnt/project/` are **stale read-only snapshots uploaded to project knowledge** — they are NEVER current after a build sprint.
+
+### The failure mode (this has happened repeatedly):
+1. User asks for a code review after completing a build
+2. Claude reads `/mnt/project/` files instead of the live repo
+3. Claude reports "not built" for things that are fully implemented
+4. User correctly identifies that Claude reviewed old snapshots, not the actual code
+5. Trust is damaged, time is wasted
+
+### The rule — no exceptions:
+- **ANY request involving what currently exists** (code review, gap analysis, audit, status check, "what's built", "what's missing") → use `Filesystem:list_directory`, `Filesystem:search_files`, `Filesystem:read_multiple_files`, `Filesystem:directory_tree` on `/Users/johnshine/Dropbox/Fibonacco/Learning-Center/`
+- **FIRST action on any code review request** → `Filesystem:list_directory` or `Filesystem:search_files` on the live repo path. Not /mnt/project/. Not project_knowledge_search. The live filesystem.
+- `/mnt/project/` is ONLY for reading spec documents and reference materials that were intentionally uploaded as project knowledge. It is NEVER a source of truth for implementation state.
+- If you catch yourself about to read a .tsx, .ts, .php, or .css file from `/mnt/project/` to evaluate what's built — STOP. That file is stale. Read it from the live repo instead.
+
 ## Project Structure
 ```
 /src/              → React SPA (Vite, React Router, Zustand, TanStack Query)

@@ -10,18 +10,18 @@ interface UseApiState<T> {
 
 interface UseApiOptions {
   immediate?: boolean;
-  onSuccess?: (data: any) => void;
+  onSuccess?: (data: unknown) => void;
   onError?: (error: ApiError) => void;
 }
 
 interface UseApiReturn<T> extends UseApiState<T> {
-  execute: (...args: any[]) => Promise<ApiResponse<T>>;
+  execute: (...args: unknown[]) => Promise<ApiResponse<T>>;
   reset: () => void;
   abort: () => void;
 }
 
 export function useApi<T>(
-  apiCall: (...args: any[]) => Promise<ApiResponse<T>>,
+  apiCall: (...args: unknown[]) => Promise<ApiResponse<T>>,
   options: UseApiOptions = {}
 ): UseApiReturn<T> {
   const { immediate = false, onSuccess, onError } = options;
@@ -43,7 +43,7 @@ export function useApi<T>(
     };
   }, []);
 
-  const execute = useCallback(async (...args: any[]): Promise<ApiResponse<T>> => {
+  const execute = useCallback(async (...args: unknown[]): Promise<ApiResponse<T>> => {
     // Abort previous request
     abortControllerRef.current?.abort();
     abortControllerRef.current = new AbortController();
@@ -108,11 +108,14 @@ export function useApiGet<T>(path: string, config?: RequestConfig, options?: Use
   return useApi<T>(() => apiService.get<T>(path, config), options);
 }
 
-export function useApiMutation<T, D = any>(
+export function useApiMutation<T, D = Record<string, unknown>>(
   method: 'post' | 'put' | 'patch' | 'delete',
   path: string,
   options?: UseApiOptions
 ) {
-  return useApi<T>((data: D) => (apiService as any)[method](path, data), options);
+  const methodFn = method === 'delete'
+    ? () => apiService.delete<T>(path)
+    : (...args: unknown[]) => apiService[method]<T>(path, args[0] as D);
+  return useApi<T>(methodFn, options);
 }
 

@@ -41,7 +41,7 @@ return new class extends Migration
                     $table->json('coordinates')->nullable();
                 }
 
-                $table->tinyInteger('engagement_tier')->default(4);
+                $table->smallInteger('engagement_tier')->default(4);
                 $table->integer('engagement_score')->default(0);
                 $table->timestamp('last_email_open')->nullable();
                 $table->timestamp('last_email_click')->nullable();

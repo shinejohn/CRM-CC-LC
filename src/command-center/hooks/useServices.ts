@@ -148,17 +148,19 @@ export function useServices(): UseServicesReturn {
 
       setSubscriptions(Array.isArray(subscriptionsData) ? subscriptionsData : []);
       setServices(
-        rawServices.map((s: any) =>
-          mapBackendServiceToFrontend({
-            id: String(s.id),
-            name: String(s.name),
-            description: s.description as string | undefined,
-            price: Number(s.price),
-            service_tier: s.service_tier as string | undefined,
-            billing_period: s.billing_period as string | undefined,
-            category: s.category as { id: string; name: string; slug: string } | null | undefined,
-            features: s.features as string[] | null | undefined,
-          })
+        rawServices.map((s: unknown) => {
+          const svc = s as Record<string, unknown>;
+          return mapBackendServiceToFrontend({
+            id: String(svc.id),
+            name: String(svc.name),
+            description: svc.description as string | undefined,
+            price: Number(svc.price),
+            service_tier: svc.service_tier as string | undefined,
+            billing_period: svc.billing_period as string | undefined,
+            category: svc.category as { id: string; name: string; slug: string } | null | undefined,
+            features: svc.features as string[] | null | undefined,
+          });
+        }
         )
       );
       setInvoices(Array.isArray(invoicesData) ? invoicesData : []);

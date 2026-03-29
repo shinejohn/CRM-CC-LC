@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class CampaignTimelineAction extends Model
+final class CampaignTimelineAction extends Model
 {
     protected $fillable = [
         'campaign_timeline_id',

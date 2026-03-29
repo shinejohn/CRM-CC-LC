@@ -7,7 +7,8 @@ interface CartItem {
 interface StepProps {
     onNext: () => void;
     onBack: () => void;
-    [key: string]: any;
+    onComplete?: () => void;
+    [key: string]: unknown;
 }
 
 interface CheckoutStepProps extends StepProps {

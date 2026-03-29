@@ -12,6 +12,7 @@ class ConversationMessage extends Model
     use HasFactory;
 
     protected $keyType = 'string';
+
     public $incrementing = false;
 
     protected $fillable = [
@@ -23,6 +24,8 @@ class ConversationMessage extends Model
         'response_time_ms',
         'actions_triggered',
         'timestamp',
+        'message_type',
+        'source',
     ];
 
     protected $casts = [

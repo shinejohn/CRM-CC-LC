@@ -20,7 +20,7 @@ export default function CustomersListPage() {
         {
             header: "Status",
             accessorKey: "status",
-            cell: (row) => <StatusBadge status={row.status as any} />,
+            cell: (row) => <StatusBadge status={row.status as "active" | "inactive" | "pending" | "completed" | "cancelled" | "overdue" | "draft" | "archived"} />,
         },
         {
             header: "LTV",

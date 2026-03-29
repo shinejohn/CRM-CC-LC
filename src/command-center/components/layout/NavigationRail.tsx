@@ -7,7 +7,7 @@ import {
   ChevronLeft, ChevronRight, ChevronDown,
   UserCircle, ClipboardList, HelpCircle,
   Stethoscope, Layers, FileText, Calendar,
-  Kanban, FileCheck, Users, Activity,
+  Kanban, FileCheck, Users, Activity, ChartLine,
   Briefcase, ShoppingCart, CreditCard, Gauge,
   Cpu, Workflow, Cog, Mail, Inbox, ShieldCheck,
 } from 'lucide-react';
@@ -66,6 +66,10 @@ const useNavSections = (): VerbSection[] => {
       children: [
         { label: () => t('pipeline'), href: '/command-center/sell/pipeline', icon: Kanban, resource: 'deals' },
         { label: () => t('proposals'), href: '/command-center/sell/proposals', icon: FileCheck, resource: 'deals' },
+        { label: 'Pitch dashboard', href: '/command-center/pitch', icon: ChartLine, resource: 'deals' },
+        { label: 'Pitch follow-ups', href: '/command-center/pitch/follow-ups', icon: Mail, resource: 'deals' },
+        { label: 'Pitch proposals', href: '/command-center/pitch/proposals', icon: FileCheck, resource: 'deals' },
+        { label: 'Slot inventory', href: '/command-center/pitch/slots', icon: Layers, resource: 'deals' },
         { label: () => t('customers'), href: '/command-center/sell/customers', icon: Users, resource: 'customers' },
         { label: () => t('activities'), href: '/command-center/sell/activities', icon: Activity, resource: 'customers' },
       ],
@@ -125,6 +129,7 @@ export function NavigationRail({ className }: { className?: string }) {
     if (path.includes('/deliver')) initial.add('deliver');
     if (path.includes('/measure')) initial.add('measure');
     if (path.includes('/automate')) initial.add('automate');
+    if (path.includes('/pitch')) initial.add('sell');
     return initial;
   });
 
@@ -152,6 +157,12 @@ export function NavigationRail({ className }: { className?: string }) {
   };
 
   const isVerbActive = (section: VerbSection) => {
+    if (section.verb === 'sell') {
+      return (
+        location.pathname.startsWith(section.href) ||
+        location.pathname.startsWith('/command-center/pitch')
+      );
+    }
     return location.pathname.startsWith(section.href);
   };
 

@@ -27,6 +27,7 @@ class Customer extends Model
     protected $fillable = [
         'tenant_id',
         'community_id',
+        'smb_id',
         'slug',
         'external_id',
         'business_name',
@@ -244,6 +245,16 @@ class Customer extends Model
     public function community(): BelongsTo
     {
         return $this->belongsTo(Community::class);
+    }
+
+    public function smb(): BelongsTo
+    {
+        return $this->belongsTo(SMB::class, 'smb_id');
+    }
+
+    public function pitchSessions(): HasMany
+    {
+        return $this->hasMany(PitchSession::class, 'customer_id');
     }
 
     /**

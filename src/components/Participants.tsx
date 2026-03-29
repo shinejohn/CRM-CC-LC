@@ -58,9 +58,8 @@ export const Participants = ({
     }));
     setOpenMenuId(null);
   };
-  const removeParticipant = (id: string | number) => {
-    // In real app, this would remove the participant
-    console.log('Remove participant:', id);
+  const removeParticipant = (_id: string | number) => {
+    // TODO: implement participant removal via API
     setOpenMenuId(null);
   };
   if (showAsList) {

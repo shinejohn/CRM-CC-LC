@@ -6,7 +6,7 @@ import { LoadingState } from "@/components/shared/LoadingState";
 import React from "react";
 
 // Safe lazy loader that provides a fallback component if the import fails
-function safeLazy(importFunc: () => Promise<any>, fallbackName: string) {
+function safeLazy(importFunc: () => Promise<{ default: React.ComponentType }>, fallbackName: string) {
     return lazy(() =>
         importFunc().catch(() => ({
             default: () => <div className="p-8">{fallbackName} Placeholder</div>,
@@ -66,6 +66,9 @@ const SubscriptionsPage = safeLazy(
     "Subscriptions"
 );
 
+const PitchDevPreviewPage = lazy(() => import("@/pitch/DevPreview"));
+const PitchRouterPage = lazy(() => import("@/pitch/PitchRouter"));
+
 function PageLoader() {
     return (
         <div className="p-8">
@@ -80,6 +83,24 @@ export function AppRouter() {
             <Suspense fallback={<PageLoader />}>
                 <Routes>
                     <Route path="/login" element={React.createElement(LoginPage)} />
+                    <Route
+                        path="/advertise/:communitySlug"
+                        element={
+                            <Suspense fallback={<PageLoader />}>
+                                <PitchRouterPage />
+                            </Suspense>
+                        }
+                    />
+                    {import.meta.env.DEV ? (
+                        <Route
+                            path="/pitch-dev"
+                            element={
+                                <Suspense fallback={<PageLoader />}>
+                                    <PitchDevPreviewPage />
+                                </Suspense>
+                            }
+                        />
+                    ) : null}
 
                     <Route
                         path="/"

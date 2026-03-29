@@ -15,6 +15,7 @@ import { useCustomer, useUpdateCustomer } from '@/hooks/useCustomers';
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '@/services/api';
 import { mapApiCustomerToUi, type ApiCustomer } from './customerMap';
+import { SMBPitchTab } from '@/components/pitch';
 
 export function CustomerDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -107,6 +108,7 @@ export function CustomerDetailPage() {
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="timeline">Timeline</TabsTrigger>
+              <TabsTrigger value="pitch">Pitch</TabsTrigger>
               <TabsTrigger value="content">Content</TabsTrigger>
               <TabsTrigger value="campaigns">Campaigns</TabsTrigger>
             </TabsList>
@@ -154,6 +156,70 @@ export function CustomerDetailPage() {
 
             <TabsContent value="timeline" className="mt-6">
               <CustomerTimeline timeline={timeline} />
+            </TabsContent>
+
+            <TabsContent value="pitch" className="mt-6">
+              <SMBPitchTab
+                businessName={customer.company ?? customer.name}
+                communityName="Clearwater"
+                pitchStatus="in_progress"
+                founderDaysRemaining={9}
+                sessions={[
+                  {
+                    id: 'sess-1',
+                    title: `Pitch — ${customer.company ?? customer.name}`,
+                    status: 'In progress',
+                    startedAt: 'Mar 18, 2026 · 10:12 AM',
+                    events: [
+                      {
+                        id: 'e1',
+                        kind: 'gate',
+                        label: 'Day.News gate: Accepted',
+                        at: '10:14 AM',
+                      },
+                      {
+                        id: 'e2',
+                        kind: 'product',
+                        label: 'Community Influencer: Added',
+                        at: '10:18 AM',
+                      },
+                      {
+                        id: 'e3',
+                        kind: 'proposal',
+                        label: 'Proposal drafted: $300/mo',
+                        at: '10:24 AM',
+                      },
+                    ],
+                  },
+                  {
+                    id: 'sess-0',
+                    title: 'Earlier session (abandoned)',
+                    status: 'Abandoned',
+                    startedAt: 'Feb 2, 2026 · 4:02 PM',
+                    events: [
+                      {
+                        id: 'e0',
+                        kind: 'abandoned',
+                        label: 'Left at: AlphaSite gate',
+                        at: '4:18 PM',
+                      },
+                      {
+                        id: 'e0b',
+                        kind: 'email',
+                        label: 'Resume email sent → Opened',
+                        at: 'Feb 3 · 9:01 AM',
+                      },
+                    ],
+                  },
+                ]}
+                gatesDeferred={[
+                  { id: 'gd1', name: 'AlphaSite', retryDate: 'Apr 12, 2026' },
+                  { id: 'gd2', name: 'Events', retryDate: 'Apr 28, 2026' },
+                ]}
+                productsDeferred={[
+                  { id: 'pd1', name: 'Ticket Sales', retryDate: 'Apr 1, 2026' },
+                ]}
+              />
             </TabsContent>
 
             <TabsContent value="content" className="mt-6">
@@ -241,7 +307,7 @@ export function CustomerDetailPage() {
   );
 }
 
-function InfoRow({ icon: Icon, label, value }: { icon: any; label: string; value: string }) {
+function InfoRow({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string }) {
   return (
     <div className="flex items-center gap-3">
       <Icon className="w-4 h-4 text-gray-400" />

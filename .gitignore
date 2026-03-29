@@ -1,4 +1,13 @@
-# ... existing content ...
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temp / debug output
+ts_errors*.txt
+emailfiles.zip
 
 # Test coverage
 coverage/

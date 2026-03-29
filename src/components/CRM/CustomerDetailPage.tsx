@@ -57,7 +57,7 @@ export default function CustomerDetailPage() {
 
     const dealColumns: ColumnDef<Deal>[] = [
         { header: "Title", accessorKey: "title" },
-        { header: "Stage", accessorKey: "stage", cell: (row) => <StatusBadge status={row.stage as any} /> },
+        { header: "Stage", accessorKey: "stage", cell: (row) => <StatusBadge status={row.stage as "active" | "inactive" | "pending" | "completed" | "cancelled" | "overdue" | "draft" | "archived"} /> },
         { header: "Value", accessorKey: "value", cell: (row) => formatCurrency(row.value) },
     ];
 
@@ -70,7 +70,7 @@ export default function CustomerDetailPage() {
                     { label: customer.name },
                 ]}
                 actions={
-                    <StatusBadge status={customer.status as any} size="md" />
+                    <StatusBadge status={customer.status as "active" | "inactive" | "pending" | "completed" | "cancelled" | "overdue" | "draft" | "archived"} size="md" />
                 }
             />
 
