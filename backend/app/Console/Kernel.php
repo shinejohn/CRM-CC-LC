@@ -79,6 +79,9 @@ class Kernel extends ConsoleKernel
         // Readership analytics sync — pull PP metrics nightly
         $schedule->job(new \App\Jobs\ReadershipSyncJob)->dailyAt('01:00');
 
+        // Publishing Platform data sync — pull communities & businesses nightly
+        $schedule->command('sync:from-publishing-platform')->dailyAt('01:30');
+
         // Communication Infrastructure (Module 0B)
         // Priority dispatcher - runs every 10 seconds
         $schedule->call(function () {

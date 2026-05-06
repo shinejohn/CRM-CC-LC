@@ -150,6 +150,100 @@ final class PublishingPlatformService
         return $this->request('POST', '/api/v1/bridge/alphasite', $data);
     }
 
+    // ─── WS-3: Data Export Endpoints (PP → CC sync) ──────────────────
+
+    /**
+     * Make an authenticated request to PP's bridge endpoints (Bearer token auth).
+     *
+     * @return array<string, mixed>
+     */
+    private function bridgeRequest(string $method, string $path, array $params = []): array
+    {
+        $url = $this->baseUrl() . $path;
+        $apiKey = config('services.publishing_bridge.api_key', '');
+
+        try {
+            Log::info("PublishingBridge {$method} {$path}", ['param_keys' => array_keys($params)]);
+
+            $http = Http::withToken($apiKey)
+                ->accept('application/json')
+                ->timeout(30);
+
+            $response = match (strtoupper($method)) {
+                'GET' => $http->get($url, $params),
+                'POST' => $http->post($url, $params),
+                default => throw new \InvalidArgumentException("Unsupported HTTP method: {$method}"),
+            };
+
+            if ($response->successful()) {
+                return $response->json() ?? [];
+            }
+
+            Log::error("PublishingBridge error: {$response->status()} {$method} {$path}", [
+                'body' => $response->body(),
+            ]);
+
+            return [];
+        } catch (\Throwable $e) {
+            Log::error("PublishingBridge connection error: {$method} {$path}", [
+                'error' => $e->getMessage(),
+            ]);
+
+            return [];
+        }
+    }
+
+    /**
+     * Pull all active communities from the Publishing Platform.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public function exportCommunities(): array
+    {
+        $result = $this->bridgeRequest('GET', '/api/v1/bridge/export/communities');
+
+        return $result['data'] ?? [];
+    }
+
+    /**
+     * Pull businesses from the Publishing Platform, optionally filtered by community.
+     *
+     * @return array{data: array<int, array<string, mixed>>, meta: array<string, int>}
+     */
+    public function exportBusinesses(?string $communityId = null, int $page = 1): array
+    {
+        $params = ['page' => $page];
+        if ($communityId !== null) {
+            $params['community_id'] = $communityId;
+        }
+
+        $result = $this->bridgeRequest('GET', '/api/v1/bridge/export/businesses', $params);
+
+        return [
+            'data' => $result['data'] ?? [],
+            'meta' => $result['meta'] ?? ['current_page' => 1, 'last_page' => 1, 'total' => 0],
+        ];
+    }
+
+    /**
+     * Pull active business subscriptions from the Publishing Platform.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public function exportBusinessSubscriptions(?string $communityId = null): array
+    {
+        $params = [];
+        if ($communityId !== null) {
+            $params['community_id'] = $communityId;
+        }
+
+        $result = $this->bridgeRequest('GET', '/api/v1/bridge/export/business-subscriptions', $params);
+
+        return $result['data'] ?? [];
+    }
+
+    // ─── WS-1: Readership Pull ─────────────────────────────────────────
+
     /**
      * Pull readership and impression data FROM the Publishing Platform.
      *

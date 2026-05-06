@@ -1,37 +1,33 @@
 #!/bin/bash
 # ============================================================================
-# ship.sh v3 — Fibonacco Universal Pre-Deploy Validation Script
+# ship.sh v4 — Fibonacco Universal Pre-Deploy Validation + AI Log Review
 # ============================================================================
+# Adds to v3:
+#   - Larastan static analysis (Phase 2b, if installed)
+#   - Laravel Pint format check (Phase 2c, if installed)
+#   - AI log review via Railway + Claude API (--review-logs, --fix)
+#   - --deep mode for extended validation
+#   - --use-manifest for pre-built commit messages
+#
 # Works across ALL Fibonacco repos by auto-detecting project structure:
 #   - Learning Center (backend/ + src/ React SPA)
-#   - TaskJuggler (taskjuggler-api/ + 9 Vue frontends)
-#   - 4people (apps/api-core/ + apps/platform-web/)
-#   - 4healthcare (taskjuggler-api/ + 4doctors-web/)
 #   - Multisite (Laravel root + Inertia/React SSR)
 #
-# Catches the issues that cause Railway deploy failures:
-#   - RouteGroup array_merge TypeError (composer scripts during install phase)
-#   - Duplicate route names (route:cache fails)
-#   - env() in app/ code (breaks under config:cache)
-#   - MySQL syntax in migrations (Railway = PostgreSQL)
-#   - Missing down() in migrations, $table->id() instead of uuid()
-#   - console.log/debugger in production code
-#   - TypeScript 'any' types
-#   - Broken PHP syntax
-#   - composer.lock out of sync
-#   - PHP extensions required by dependencies but missing from Dockerfile
-#   - .env.example missing vars referenced in config/
-#   - Large files / forbidden files staged
-#   - Hardcoded localhost or Railway hostnames
-#   - Database/schema errors (via test suite)
-#
 # Usage:
-#   ./ship.sh --check                     — run all checks (recommended before push)
-#   ./ship.sh "commit message"            — test, commit, push
-#   ./ship.sh "commit message" --dry      — test only, don't commit/push
-#   ./ship.sh "commit message" --force    — skip tests, just commit/push (emergency)
+#   ./ship.sh --check                     — run all checks (recommended)
+#   ./ship.sh "commit message"            — check + commit + push
+#   ./ship.sh "commit message" --deep     — slow mode, full validation
+#   ./ship.sh "commit message" --dry      — check only, no commit
+#   ./ship.sh "commit message" --force    — skip checks (emergency)
+#   ./ship.sh --use-manifest              — use built-in batch commit message
+#   ./ship.sh --review-logs               — AI analysis of Railway logs
+#   ./ship.sh --review-logs --fix         — AI analysis + patch proposals
+#   ./ship.sh --review-logs --since 24h   — time window (default 6h)
 #   ./ship.sh --report                    — generate ship-report.log
 #   ./ship.sh --help                      — show help
+#
+# Required env vars for optional features:
+#   ANTHROPIC_API_KEY    for --review-logs
 # ============================================================================
 
 set +e
@@ -57,42 +53,77 @@ phase_end() {
 # ── Args ──
 COMMIT_MSG=""
 MODE="normal"
+DEEP=false
+REVIEW_LOGS=false
+REVIEW_FIX=false
+LOGS_SINCE="6h"
 ERRORS=0
 WARNINGS=0
 REPORT_FILE=""
+USE_MANIFEST=false
 
-for arg in "$@"; do
-    case "$arg" in
-        --check)   MODE="dry" ;;
-        --dry)     MODE="dry" ;;
-        --force)   MODE="force" ;;
-        --report)  MODE="dry"; REPORT_FILE="ship-report-$(date +%Y%m%d-%H%M%S).log" ;;
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --check)       MODE="dry" ;;
+        --dry)         MODE="dry" ;;
+        --force)       MODE="force" ;;
+        --deep)        DEEP=true ;;
+        --review-logs) REVIEW_LOGS=true; MODE="dry" ;;
+        --fix)         REVIEW_FIX=true ;;
+        --since)       shift; LOGS_SINCE="$1" ;;
+        --report)      MODE="dry"; REPORT_FILE="ship-report-$(date +%Y%m%d-%H%M%S).log" ;;
+        --use-manifest|--batch-current) USE_MANIFEST=true ;;
         --help|-h)
-            echo "Usage: ./ship.sh \"commit message\" [options]"
-            echo ""
-            echo "Options:"
-            echo "  --check     Run all checks, no commit (recommended)"
-            echo "  --dry       Alias for --check with commit message"
-            echo "  --force     Skip checks, commit and push (emergency)"
-            echo "  --report    Generate ship-report.log"
-            echo "  -h, --help  Show this help"
+            cat <<'EOF'
+Usage: ./ship.sh "commit message" [options]
+       ./ship.sh --use-manifest [--deep|--dry|--force]
+       ./ship.sh --check [--deep]
+       ./ship.sh --review-logs [--fix] [--since <duration>]
+
+Options:
+  --check         Run all checks, no commit
+  --deep          Include Larastan, Pint, tests (if installed)
+  --dry           Alias for --check with commit message
+  --force         Skip checks, commit and push (emergency)
+  --use-manifest  Use the built-in batch commit message
+  --report        Generate ship-report-YYYYMMDD-HHMMSS.log
+  --review-logs   Pull Railway logs, group errors, ask Claude to analyze
+  --fix           With --review-logs, request patch proposals as diffs
+  --since <dur>   Time window for --review-logs (e.g. 1h, 24h, 7d; default 6h)
+  -h, --help      Show this help
+EOF
             exit 0
             ;;
         -*)
-            echo -e "${RED}Unknown option: $arg${NC}"
+            echo -e "${RED}Unknown option: $1${NC}"
             exit 1
             ;;
         *)
             if [[ -z "$COMMIT_MSG" ]]; then
-                COMMIT_MSG="$arg"
+                COMMIT_MSG="$1"
             fi
             ;;
     esac
+    shift
 done
 
-if [[ "$MODE" == "normal" && -z "$COMMIT_MSG" ]]; then
+# Built-in commit message for the current batch.
+# Edit before ./ship.sh --use-manifest when the batch changes.
+if [[ "$USE_MANIFEST" == true ]]; then
+    COMMIT_MSG=$(cat <<'SHIP_MANIFEST_EOF'
+feat: PP-CC data sync bridge — export endpoints + artisan sync command + Railway env setup
+
+PP side: DataExportBridgeController (communities, businesses, subscriptions export)
+CC side: SyncFromPublishingPlatform command, PublishingPlatformService bridge methods
+SHIP_MANIFEST_EOF
+)
+fi
+
+if [[ "$MODE" == "normal" && -z "$COMMIT_MSG" && "$REVIEW_LOGS" == false ]]; then
     echo -e "${RED}Usage: ./ship.sh \"commit message\" [--dry|--force]${NC}"
-    echo -e "       ./ship.sh --check"
+    echo -e "       ./ship.sh --use-manifest [--deep|--dry|--force]"
+    echo -e "       ./ship.sh --check [--deep]"
+    echo -e "       ./ship.sh --review-logs [--fix]"
     exit 1
 fi
 
@@ -108,7 +139,7 @@ inc_warnings() { WARNINGS=$((WARNINGS + 1)); }
 
 log ""
 log "${BOLD}${CYAN}╔══════════════════════════════════════════════════════╗${NC}"
-log "${BOLD}${CYAN}║          🚀 FIBONACCO SHIP v3 (Universal)           ║${NC}"
+log "${BOLD}${CYAN}║          🚀 FIBONACCO SHIP v4 (Universal)           ║${NC}"
 log "${BOLD}${CYAN}║          $(date '+%Y-%m-%d %H:%M:%S')                       ║${NC}"
 log "${BOLD}${CYAN}╚══════════════════════════════════════════════════════╝${NC}"
 log ""
@@ -163,11 +194,164 @@ log "  Frontend:  ${CYAN}${FRONTEND_DIR:-none}${NC}"
 log "  Type:      ${CYAN}${PROJECT_TYPE}${NC}"
 log "  Inertia:   ${CYAN}${HAS_INERTIA}${NC}"
 log "  Multi-app: ${CYAN}${IS_MULTIAPP}${NC}"
+log "  Deep mode: ${CYAN}${DEEP}${NC}"
 log ""
 
 if [[ -z "$BACKEND_DIR" && -z "$FRONTEND_DIR" ]]; then
     log "${RED}Could not detect project structure. Run from repo root.${NC}"
     exit 1
+fi
+
+# ============================================================================
+# AI LOG REVIEW MODE — pull Railway logs, analyze with Claude, exit
+# ============================================================================
+if [[ "$REVIEW_LOGS" == true ]]; then
+    log "${BOLD}${BLUE}━━━ AI Log Review ━━━${NC}"
+    phase_start
+
+    if ! command -v railway > /dev/null; then
+        log "  ${RED}❌ Railway CLI not installed${NC}"
+        exit 1
+    fi
+    if ! command -v jq > /dev/null; then
+        log "  ${RED}❌ jq not installed (brew install jq)${NC}"
+        exit 1
+    fi
+    if [[ -z "$ANTHROPIC_API_KEY" ]]; then
+        log "  ${RED}❌ ANTHROPIC_API_KEY not set${NC}"
+        exit 1
+    fi
+
+    log "  ${CYAN}Fetching Railway logs (last ${LOGS_SINCE})...${NC}"
+    LOGS_RAW=$(railway logs --since "$LOGS_SINCE" --json 2>&1)
+    RC=$?
+    if [[ $RC -ne 0 ]] || [[ -z "$LOGS_RAW" ]]; then
+        log "  ${RED}❌ Could not fetch logs (run: railway link)${NC}"
+        echo "$LOGS_RAW" | head -5
+        exit 1
+    fi
+
+    ERRORS_JSON=$(echo "$LOGS_RAW" | jq -c '
+        select(
+            (.severity // "" | test("error|critical|alert|emergency"; "i"))
+            or (.message // "" | test("Exception|ERROR|Fatal|Stack trace|SQLSTATE|Undefined|TypeError"; "i"))
+        )
+        | {
+            ts: (.timestamp // .ts // ""),
+            severity: (.severity // ""),
+            msg: .message,
+            ctx: (.attributes // .context // {})
+        }
+    ' 2>/dev/null)
+
+    if [[ -z "$ERRORS_JSON" ]]; then
+        log "  ${GREEN}✓ No errors in Railway logs for the last ${LOGS_SINCE}${NC}"
+        phase_end
+        exit 0
+    fi
+
+    TOTAL_COUNT=$(echo "$ERRORS_JSON" | wc -l | tr -d ' ')
+    NORMALIZED=$(echo "$ERRORS_JSON" | jq -r '.msg' | sed -E '
+        s/[0-9]{4}-[0-9]{2}-[0-9]{2}[T ][0-9:.+-]+//g;
+        s/\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b/<UUID>/g;
+        s/0x[0-9a-f]+/<ADDR>/g;
+        s/\b[0-9]{4,}\b/<NUM>/g;
+        s/\s+/ /g
+    ')
+    UNIQUE_COUNT=$(echo "$NORMALIZED" | cut -c1-120 | sort -u | wc -l | tr -d ' ')
+    log "  ${CYAN}${TOTAL_COUNT} error events, ${UNIQUE_COUNT} unique signatures${NC}"
+
+    TOP_ERRORS=$(paste <(echo "$NORMALIZED" | cut -c1-120) <(echo "$ERRORS_JSON") \
+        | sort | uniq -c -w120 | sort -rn | head -30 \
+        | awk -F'\t' '{
+            match($0, /^ *[0-9]+/); count = substr($0, RSTART, RLENGTH);
+            gsub(/^ *[0-9]+/, "", count); gsub(/ /, "", count);
+            print "{\"count\":" count+0 ",\"example\":" $2 "}"
+        }')
+
+    log "  ${CYAN}Gathering referenced source files...${NC}"
+    FILES_MENTIONED=$(echo "$ERRORS_JSON" | jq -r '.msg' \
+        | grep -oE '(app|routes|database|config)/[a-zA-Z0-9_/-]+\.(php|ts|tsx|js|jsx)' \
+        | sort -u | head -25)
+
+    CODE_CONTEXT=""
+    FILES_INCLUDED=0
+    for f in $FILES_MENTIONED; do
+        for path in "$f" "${BACKEND_DIR}/$f" "${FRONTEND_DIR}/$f"; do
+            if [[ -f "$path" ]]; then
+                CONTENT=$(head -300 "$path")
+                CODE_CONTEXT="${CODE_CONTEXT}
+
+=== ${path} ===
+${CONTENT}"
+                FILES_INCLUDED=$((FILES_INCLUDED + 1))
+                break
+            fi
+        done
+        [[ $FILES_INCLUDED -ge 15 ]] && break
+    done
+    log "  ${CYAN}Included ${FILES_INCLUDED} source files for context${NC}"
+
+    MODE_DIRECTIVE="Group errors by root cause. For each: 3-5 sentence diagnosis, file:line to fix, severity rating. No code changes."
+    if [[ "$REVIEW_FIX" == true ]]; then
+        MODE_DIRECTIVE="Group errors by root cause. For each: diagnosis, file:line, severity, and if confident propose a unified diff patch. Mark uncertain fixes as NEEDS HUMAN."
+    fi
+
+    log "  ${CYAN}Calling Claude (may take 30-60s)...${NC}"
+
+    REQUEST=$(jq -n \
+        --arg errors "$TOP_ERRORS" \
+        --arg code "$CODE_CONTEXT" \
+        --arg directive "$MODE_DIRECTIVE" \
+        --arg project "$PROJECT_TYPE" \
+        --arg since "$LOGS_SINCE" \
+        '{
+            model: "claude-sonnet-4-6",
+            max_tokens: 16000,
+            messages: [{
+                role: "user",
+                content: ("You are reviewing production errors from a Laravel API + React SPA on Railway. Project type: " + $project + ". Time window: " + $since + ".\n\nDIRECTIVE:\n" + $directive + "\n\nERRORS:\n" + $errors + "\n\nRELEVANT CODE:\n" + $code + "\n\nBegin analysis. Use markdown headings for each error group.")
+            }]
+        }')
+
+    RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
+        -H "x-api-key: $ANTHROPIC_API_KEY" \
+        -H "anthropic-version: 2023-06-01" \
+        -H "content-type: application/json" \
+        --data "$REQUEST")
+
+    API_ERROR=$(echo "$RESPONSE" | jq -r '.error.message // empty' 2>/dev/null)
+    if [[ -n "$API_ERROR" ]]; then
+        log "  ${RED}❌ Claude API error: ${API_ERROR}${NC}"
+        exit 1
+    fi
+
+    OUTPUT=$(echo "$RESPONSE" | jq -r '.content[0].text // empty')
+    if [[ -z "$OUTPUT" ]]; then
+        log "  ${RED}❌ Empty response from Claude${NC}"
+        exit 1
+    fi
+
+    REPORT_MD="log-review-$(date +%Y%m%d-%H%M%S).md"
+    {
+        echo "# Log Review — $(date '+%Y-%m-%d %H:%M:%S')"
+        echo ""
+        echo "- **Window:** last ${LOGS_SINCE}"
+        echo "- **Events:** ${TOTAL_COUNT} total, ${UNIQUE_COUNT} unique"
+        echo "- **Files included:** ${FILES_INCLUDED}"
+        echo ""
+        echo "---"
+        echo ""
+        echo "$OUTPUT"
+    } > "$REPORT_MD"
+
+    phase_end
+    log ""
+    log "  ${GREEN}✓ Analysis written: ${REPORT_MD}${NC}"
+    log ""
+    echo "$OUTPUT" | head -40 | while IFS= read -r line; do log "  $line"; done
+    log ""
+    exit 0
 fi
 
 # ── Emergency Force Push ──
@@ -305,6 +489,56 @@ if [[ -n "$BACKEND_DIR" ]]; then
 
     phase_end
     log ""
+
+    # ========================================================================
+    # PHASE 2b: LARASTAN / PHPSTAN (optional, if installed)
+    # ========================================================================
+    if [[ "$PHP_COUNT" -gt 0 && -f "${BACKEND_DIR}/vendor/bin/phpstan" ]]; then
+        log "${BOLD}${BLUE}━━━ Phase 2b: Static Analysis (Larastan) ━━━${NC}"
+        phase_start
+
+        REL_FILES=$(echo "$CHANGED_PHP" | sed "s|^${BACKEND_DIR}/||" | tr '\n' ' ')
+        PHPSTAN_RESULT=$(cd "$BACKEND_DIR" && vendor/bin/phpstan analyse \
+            --no-progress --error-format=raw --memory-limit=1G $REL_FILES 2>&1)
+        PHPSTAN_RC=$?
+
+        if [[ $PHPSTAN_RC -ne 0 ]]; then
+            ERR_COUNT=$(echo "$PHPSTAN_RESULT" | grep -cE ':[0-9]+:' || echo 0)
+            log "  ${RED}❌ Larastan found ${ERR_COUNT} errors:${NC}"
+            echo "$PHPSTAN_RESULT" | grep -E ':[0-9]+:' | head -20 | while read line; do log "     ${RED}${line}${NC}"; done
+            inc_errors
+        else
+            log "  ${GREEN}✓${NC} Larastan clean on $PHP_COUNT files"
+        fi
+
+        phase_end
+        log ""
+    elif [[ "$PHP_COUNT" -gt 0 && "$DEEP" == true ]]; then
+        log "${BOLD}${BLUE}━━━ Phase 2b: Static Analysis ━━━${NC}"
+        log "  ${DIM}Larastan not installed — skipping (composer require --dev larastan/larastan)${NC}"
+        log ""
+    fi
+
+    # ========================================================================
+    # PHASE 2c: LARAVEL PINT FORMAT CHECK (optional, if installed)
+    # ========================================================================
+    if [[ "$PHP_COUNT" -gt 0 && -f "${BACKEND_DIR}/vendor/bin/pint" ]]; then
+        log "${BOLD}${BLUE}━━━ Phase 2c: Format Check (Pint) ━━━${NC}"
+        phase_start
+
+        REL_FILES=$(echo "$CHANGED_PHP" | sed "s|^${BACKEND_DIR}/||" | tr '\n' ' ')
+        PINT_RESULT=$(cd "$BACKEND_DIR" && vendor/bin/pint --test $REL_FILES 2>&1)
+        if [[ $? -ne 0 ]]; then
+            log "  ${YELLOW}⚠️  Format issues — run: cd backend && vendor/bin/pint${NC}"
+            echo "$PINT_RESULT" | grep -E 'STYLE|FIXED' | head -5
+            inc_warnings
+        else
+            log "  ${GREEN}✓${NC} Format clean"
+        fi
+
+        phase_end
+        log ""
+    fi
 
     # ========================================================================
     # PHASE 3: MIGRATION VALIDATION
