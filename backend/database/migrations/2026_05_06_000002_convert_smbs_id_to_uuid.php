@@ -34,6 +34,14 @@ return new class extends Migration
             ['content_views', 'smb_id', false, null],
             ['advertiser_sessions', 'business_id', true, 'SET NULL'],
             ['sarah_messages', 'business_id', true, 'SET NULL'],
+            ['business_directory', 'claimed_smb_id', true, 'SET NULL'],
+            ['cssn_smb_preferences', 'smb_id', true, 'CASCADE'],
+            ['cssn_subscriptions', 'smb_id', true, 'CASCADE'],
+            ['cssn_smb_reports', 'smb_id', true, 'CASCADE'],
+            ['social_studio_credits', 'smb_id', true, 'CASCADE'],
+            ['social_studio_subscriptions', 'smb_id', true, 'CASCADE'],
+            ['social_studio_content', 'smb_id', true, 'CASCADE'],
+            ['social_studio_scheduled_posts', 'smb_id', true, 'CASCADE'],
         ];
     }
 

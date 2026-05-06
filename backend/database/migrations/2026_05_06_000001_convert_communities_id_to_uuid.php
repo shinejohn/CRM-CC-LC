@@ -38,6 +38,10 @@ return new class extends Migration
             ['smbs', 'community_id', true, 'CASCADE'],
             ['cssn_smb_reports', 'community_id', true, 'CASCADE'],
             ['advertiser_sessions', 'community_id', true, 'CASCADE'],
+            ['municipal_admins', 'community_id', true, 'CASCADE'],
+            ['cssn_subscriptions', 'community_id', true, 'CASCADE'],
+            ['community_slot_limits', 'community_id', true, 'CASCADE'],
+            ['influencer_waitlist', 'community_id', true, 'CASCADE'],
         ];
     }
 
