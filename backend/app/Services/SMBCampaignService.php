@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Customer;
 use App\Jobs\QueueNextCampaign;
 
-class SMBCampaignService
+final class SMBCampaignService
 {
     /**
      * Start Manifest Destiny campaign for customer

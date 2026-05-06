@@ -16,7 +16,7 @@ export interface CampaignEmails {
 /**
  * Load email templates from campaign data
  */
-export function getEmailTemplates(campaignData: any): CampaignEmails {
+export function getEmailTemplates(campaignData: { emails?: CampaignEmails }): CampaignEmails {
   return campaignData.emails || {};
 }
 
@@ -24,7 +24,7 @@ export function getEmailTemplates(campaignData: any): CampaignEmails {
  * Get a specific email template by key
  */
 export function getEmailTemplate(
-  campaignData: any,
+  campaignData: { emails?: CampaignEmails },
   templateKey: string
 ): EmailTemplate | null {
   const emails = getEmailTemplates(campaignData);
@@ -34,7 +34,7 @@ export function getEmailTemplate(
 /**
  * Get all email template keys for a campaign
  */
-export function getEmailTemplateKeys(campaignData: any): string[] {
+export function getEmailTemplateKeys(campaignData: { emails?: CampaignEmails }): string[] {
   const emails = getEmailTemplates(campaignData);
   return Object.keys(emails);
 }

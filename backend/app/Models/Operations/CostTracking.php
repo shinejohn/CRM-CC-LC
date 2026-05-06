@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Operations;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class CostTracking extends Model
+final class CostTracking extends Model
 {
+    use HasUuids;
+
     protected $table = 'ops.cost_tracking';
     
     protected $keyType = 'string';

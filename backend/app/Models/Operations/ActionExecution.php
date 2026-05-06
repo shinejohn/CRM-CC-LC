@@ -1,12 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Operations;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class ActionExecution extends Model
+final class ActionExecution extends Model
 {
+    use HasUuids;
+
     protected $table = 'ops.action_executions';
     
     protected $keyType = 'string';

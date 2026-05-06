@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
@@ -10,7 +12,7 @@ use App\Services\InvoiceService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class InvoiceController extends Controller
+final class InvoiceController extends Controller
 {
     public function __construct(
         protected InvoiceService $invoiceService

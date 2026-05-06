@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\CampaignSend;
@@ -7,7 +9,7 @@ use App\Models\Customer;
 use App\Models\Interaction;
 use Illuminate\Support\Facades\Log;
 
-class EmailFollowupService
+final class EmailFollowupService
 {
     /**
      * Determine and execute follow-up strategy for unopened email

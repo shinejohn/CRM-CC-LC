@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class EmailIntentClassifier
+final class EmailIntentClassifier
 {
     protected array $intentPatterns = [
         'question' => ['?', 'what', 'how', 'when', 'where', 'why', 'can you', 'could you', 'explain', 'help'],

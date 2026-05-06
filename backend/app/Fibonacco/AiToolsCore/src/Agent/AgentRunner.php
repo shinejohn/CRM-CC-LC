@@ -34,7 +34,7 @@ class AgentRunner
         // For the purpose of this task (Codebase modification), I will implement the structure using a
         // generic HTTP call to OpenRouter/Anthropic which the user can configure.
 
-        $apiKey = env('ANTHROPIC_API_KEY') ?? env('OPENROUTER_API_KEY');
+        $apiKey = config('services.anthropic.api_key') ?? config('services.openrouter.api_key');
         if (!$apiKey) {
             // Mock response if no key
             return new AgentResult(

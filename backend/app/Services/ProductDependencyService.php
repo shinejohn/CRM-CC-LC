@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\CommunitySubscription;
@@ -7,7 +9,7 @@ use App\Models\Customer;
 use App\Models\Service;
 use App\Models\ServiceSubscription;
 
-class ProductDependencyService
+final class ProductDependencyService
 {
     public function canPurchase(string $tenantId, string $productSlug): array
     {

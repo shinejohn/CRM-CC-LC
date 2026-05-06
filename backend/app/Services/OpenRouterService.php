@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Fibonacco\AiGatewayClient\AiGatewayClient;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class OpenRouterService
+final class OpenRouterService
 {
     protected AiGatewayClient $gateway;
 

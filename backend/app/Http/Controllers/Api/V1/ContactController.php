@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
@@ -10,7 +12,7 @@ use App\Services\CrmContactService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ContactController extends Controller
+final class ContactController extends Controller
 {
     public function __construct(
         protected CrmContactService $contactService

@@ -31,7 +31,7 @@ export interface AiPersonality {
   timezone: string;
   is_active: boolean;
   priority: number;
-  metadata: Record<string, any> | null;
+  metadata: Record<string, unknown> | null;
   notes: string | null;
   created_at: string;
   updated_at: string;
@@ -45,15 +45,20 @@ export interface PersonalityAssignment {
   status: 'active' | 'inactive' | 'archived';
   assigned_at: string;
   last_interaction_at: string | null;
-  assignment_rules: Record<string, any> | null;
-  context: Record<string, any> | null;
+  assignment_rules: Record<string, unknown> | null;
+  context: Record<string, unknown> | null;
   interaction_count: number;
   conversation_count: number;
   average_rating: number | null;
-  performance_metrics: Record<string, any> | null;
+  performance_metrics: Record<string, unknown> | null;
   notes: string | null;
   personality?: AiPersonality;
-  customer?: any;
+  customer?: {
+    id: string;
+    name: string;
+    email: string;
+    [key: string]: unknown;
+  };
   created_at: string;
   updated_at: string;
 }
@@ -148,7 +153,7 @@ export async function deletePersonality(id: string): Promise<void> {
 export async function assignToCustomer(request: {
   customer_id: string;
   personality_id?: string;
-  rules?: Record<string, any>;
+  rules?: Record<string, unknown>;
 }): Promise<PersonalityAssignment> {
   const response = await apiClient.post<{ data: PersonalityAssignment }>(
     '/api/v1/personalities/assign',

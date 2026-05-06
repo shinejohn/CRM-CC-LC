@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Emergency;
 
 use App\Contracts\Emergency\EmergencyBroadcastServiceInterface;
@@ -23,7 +25,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class EmergencyBroadcastService implements EmergencyBroadcastServiceInterface
+final class EmergencyBroadcastService implements EmergencyBroadcastServiceInterface
 {
     public function __construct(
         private EmailService $emailService,

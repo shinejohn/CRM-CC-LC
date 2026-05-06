@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\AdTemplate;
@@ -8,7 +10,7 @@ use App\Models\OutboundCampaign;
 use App\Models\GeneratedContent;
 use Illuminate\Support\Facades\Log;
 
-class AdGenerationService
+final class AdGenerationService
 {
     protected OpenRouterService $openRouterService;
 

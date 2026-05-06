@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Customer;
 use Illuminate\Support\Facades\Log;
 
-class ApprovalTokenService
+final class ApprovalTokenService
 {
     public function generateToken(string $customerId, string $serviceType, string $sourceId): string
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Contracts\Alert\AlertServiceInterface;
@@ -9,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class AlertController extends Controller
+final class AlertController extends Controller
 {
     public function __construct(
         private AlertServiceInterface $alertService

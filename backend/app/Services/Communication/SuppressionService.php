@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Communication;
 
 use App\Models\Communication\SuppressionList;
 use Illuminate\Support\Facades\Cache;
 
-class SuppressionService
+final class SuppressionService
 {
     private const CACHE_TTL = 3600; // 1 hour
 

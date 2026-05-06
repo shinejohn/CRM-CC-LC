@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { WizardState, CartItem, ServiceDefinition } from './types';
+import { WizardState, CartItem, ServiceDefinition, ServiceConfig } from './types';
 import { StepProgressBar, CartSidebar } from './components/shared';
 import { OutcomeSelectorStep } from './components/steps/OutcomeSelectorStep';
 import { ServiceSelectorStep } from './components/steps/ServiceSelectorStep';
@@ -65,7 +65,7 @@ export const ServicePurchaseWizardPage: React.FC = () => {
         setState(prev => ({ ...prev, selectedServices: prev.selectedServices.filter(s => s.serviceId !== serviceId) }));
     };
 
-    const handleUpdateConfig = (serviceId: string, config: any) => {
+    const handleUpdateConfig = (serviceId: string, config: ServiceConfig) => {
         setState(prev => ({
             ...prev,
             configuration: { ...prev.configuration, [serviceId]: config }

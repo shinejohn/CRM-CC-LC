@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Alert;
 
 use App\Models\Alert\Alert;
@@ -7,7 +9,7 @@ use App\Models\Alert\AlertCategory;
 use App\Models\Subscriber\Subscriber;
 use Illuminate\Support\Facades\DB;
 
-class TargetingEngine
+final class TargetingEngine
 {
     /**
      * Get recipients for an alert based on targeting criteria

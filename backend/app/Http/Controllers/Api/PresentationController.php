@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 
-class PresentationController extends Controller
+final class PresentationController extends Controller
 {
     protected OpenRouterService $openRouterService;
     protected ElevenLabsService $elevenLabsService;

@@ -151,6 +151,12 @@ final class CheckoutController extends Controller
             'products' => $products,
         ]);
 
+        // Post-purchase provisioning: slot claim, subscription, PP push, onboarding timeline
+        app(\App\Services\Pitch\PitchProvisioningService::class)->provision(
+            $session->fresh(),
+            $data['payment_intent_id'],
+        );
+
         return response()->json([
             'data' => $session->fresh()->load(['smb', 'customer', 'community', 'campaign']),
         ]);

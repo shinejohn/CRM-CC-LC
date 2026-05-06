@@ -1,5 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { VolumeIcon, StopCircleIcon, MicIcon } from 'lucide-react';
+
+/** Minimal Web Speech API type stubs (not in standard TS DOM lib) */
+interface SpeechRecognitionResultItem {
+  readonly transcript: string;
+  readonly confidence: number;
+}
+
+interface SpeechRecognitionResultList {
+  readonly length: number;
+  [index: number]: SpeechRecognitionResultItem;
+}
+
+interface SpeechRecognitionEventResult {
+  readonly results: {
+    readonly length: number;
+    [index: number]: SpeechRecognitionResultList;
+  };
+}
+
+interface SpeechRecognitionInstance {
+  continuous: boolean;
+  interimResults: boolean;
+  onresult: ((event: SpeechRecognitionEventResult) => void) | null;
+  onend: (() => void) | null;
+  start(): void;
+  stop(): void;
+}
 export const VoiceControls = ({
   isListening,
   setIsListening,
@@ -23,11 +50,11 @@ export const VoiceControls = ({
       console.error('Speech recognition not supported in this browser');
       return;
     }
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
+    const SpeechRecognitionCtor = (window as unknown as Record<string, unknown>).SpeechRecognition || (window as unknown as Record<string, unknown>).webkitSpeechRecognition;
+    const recognition = new (SpeechRecognitionCtor as new () => SpeechRecognitionInstance)();
     recognition.continuous = true;
     recognition.interimResults = true;
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event: SpeechRecognitionEventResult) => {
       const last = event.results.length - 1;
       const text = event.results[last][0].transcript;
       setTranscript(text);

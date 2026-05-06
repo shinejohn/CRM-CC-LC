@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Invoice;
@@ -9,7 +11,7 @@ use App\Models\Quote;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
-class InvoiceService
+final class InvoiceService
 {
     /**
      * Generate invoice number: INV-{YYYYMMDD}-{SEQ}

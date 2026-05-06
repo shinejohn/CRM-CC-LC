@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Cssn;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\SMB;
 use App\Models\Community;
 
-class CssnSmbReport extends Model
+final class CssnSmbReport extends Model
 {
     use HasFactory, HasUuids;
 

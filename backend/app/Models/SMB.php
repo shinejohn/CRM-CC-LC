@@ -1,19 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 /**
  * SMB (Small/Medium Business) Model
  * Maps to the 'smbs' table
  */
-class SMB extends Model
+final class SMB extends Model
 {
-    use HasFactory;
+    use HasUuids, HasFactory;
 
     protected $table = 'smbs';
 

@@ -1,24 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\CommunitySubscription;
 use App\Models\Customer;
 use App\Services\CommunitySubscriptionService;
-use App\Services\SlotEnforcementService;
+use App\Services\Pitch\SlotInventoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class CommunitySubscriptionController extends Controller
+final class CommunitySubscriptionController extends Controller
 {
     private CommunitySubscriptionService $subscriptionService;
 
-    private SlotEnforcementService $slotService;
+    private SlotInventoryService $slotService;
 
     public function __construct(
         CommunitySubscriptionService $subscriptionService,
-        SlotEnforcementService $slotService
+        SlotInventoryService $slotService
     ) {
         $this->subscriptionService = $subscriptionService;
         $this->slotService = $slotService;

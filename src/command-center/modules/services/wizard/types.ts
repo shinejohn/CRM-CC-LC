@@ -57,7 +57,7 @@ export interface ServiceConfig {
     eventsPerMonth?: number | 'custom';
     startDate?: string;
     // Add other dynamic config fields as needed
-    [key: string]: any;
+    [key: string]: string | number | undefined;
 }
 
 export interface BundleRecommendation {

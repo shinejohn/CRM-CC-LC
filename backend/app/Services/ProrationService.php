@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Service;
 use App\Models\ServiceSubscription;
 use Carbon\Carbon;
 
-class ProrationService
+final class ProrationService
 {
     /**
      * Calculate the prorated cost or credit for a subscription change.

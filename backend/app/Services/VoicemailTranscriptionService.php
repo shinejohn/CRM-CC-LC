@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-class VoicemailTranscriptionService
+final class VoicemailTranscriptionService
 {
     protected string $openaiApiKey;
 

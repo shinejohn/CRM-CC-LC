@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Contracts\CampaignOrchestratorInterface;
@@ -12,7 +14,7 @@ use App\Events\PipelineStageChanged;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
-class CampaignOrchestratorService implements CampaignOrchestratorInterface
+final class CampaignOrchestratorService implements CampaignOrchestratorInterface
 {
     public function __construct(
         protected CampaignActionExecutor $actionExecutor

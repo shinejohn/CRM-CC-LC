@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -7,7 +9,7 @@ use App\Models\ServiceCategory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ServiceCategoryController extends Controller
+final class ServiceCategoryController extends Controller
 {
     /**
      * List all service categories

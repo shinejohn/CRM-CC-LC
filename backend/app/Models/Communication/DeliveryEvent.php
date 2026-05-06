@@ -1,12 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Communication;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class DeliveryEvent extends Model
+final class DeliveryEvent extends Model
 {
+    use HasUuids;
+
     protected $table = 'delivery_events';
 
     protected $fillable = [

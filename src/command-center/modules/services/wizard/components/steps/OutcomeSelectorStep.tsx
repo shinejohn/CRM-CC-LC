@@ -14,7 +14,7 @@ interface OutcomeSelectorStepProps {
     businessType: string;
 }
 
-const IconMap: Record<string, React.FC<any>> = {
+const IconMap: Record<string, React.FC<{ size?: number | string; className?: string }>> = {
     Search,
     Target,
     Star,

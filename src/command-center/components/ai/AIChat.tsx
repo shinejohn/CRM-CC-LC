@@ -7,13 +7,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mic, Paperclip, RefreshCw, StopCircle, Sparkles } from 'lucide-react';
 import { useAI } from '../../hooks/useAI';
-import { AIMessage } from '../../services/ai.types';
+import type { AIMessage, ChatContext, ToolCall } from '../../services/ai.types';
 
 interface AIChatProps {
   className?: string;
-  context?: any;
+  context?: ChatContext;
   personalityId?: string;
-  onToolCall?: (toolCall: any) => void;
+  onToolCall?: (toolCall: Partial<ToolCall>) => void;
 }
 
 export function AIChat({ className, context, personalityId, onToolCall }: AIChatProps) {
@@ -212,7 +212,7 @@ function MessageBubble({ message }: { message: AIMessage }) {
   );
 }
 
-function ToolCallIndicator({ toolCall }: { toolCall: any }) {
+function ToolCallIndicator({ toolCall }: { toolCall: ToolCall }) {
   return (
     <div className="text-xs opacity-70 flex items-center gap-1">
       <span>🔧</span>

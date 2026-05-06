@@ -71,7 +71,7 @@ export const CampaignLandingPage: React.FC = () => {
       trackLandingPageView(slug, undefined, undefined, undefined, {
         timestamp: new Date().toISOString(),
         referrer: document.referrer,
-      }).catch((err) => console.error('Failed to track landing page view:', err));
+      }).catch(() => {});
     }
   }, [slug]);
 
@@ -134,8 +134,8 @@ export const CampaignLandingPage: React.FC = () => {
       if (pres.slides) {
         pres.slides = pres.slides.map(slide => ({
           ...slide,
-          content: personalizeObject(slide.content, fullPersonalization),
-          narration: slide.narration ? personalizeObject(slide.narration, fullPersonalization) : slide.narration,
+          content: personalizeObject(slide.content, fullPersonalization) as Record<string, unknown>,
+          narration: slide.narration ? personalizeObject(slide.narration, fullPersonalization) as string : slide.narration,
         }));
       }
       
@@ -143,7 +143,7 @@ export const CampaignLandingPage: React.FC = () => {
       
       announceToScreenReader(`Campaign loaded: ${data.campaign.title}`);
     } catch (err) {
-      console.error('Failed to load campaign:', err);
+      void err;
       const errorMessage = `Failed to load campaign: ${err instanceof Error ? err.message : 'Unknown error'}`;
       setError(errorMessage);
       announceToScreenReader(errorMessage, 'assertive');
@@ -180,7 +180,7 @@ export const CampaignLandingPage: React.FC = () => {
             content: campaignData.landing_page.utm_content,
           },
           cta_type: 'download_guide',
-        }).catch((err) => console.error('Failed to track conversion:', err));
+        }).catch(() => {});
       }
       
       // Download the file using utility function
@@ -188,7 +188,7 @@ export const CampaignLandingPage: React.FC = () => {
       
       announceToScreenReader('Guide download started');
     } catch (error) {
-      console.error('Failed to download guide:', error);
+      void error;
       const errorMessage = `Failed to download guide: ${error instanceof Error ? error.message : 'Unknown error'}`;
       // #region agent log
       trackAPICall(`/v1/learning/campaigns/${campaignId}/guide`, 'CampaignLandingPage', false, errorMessage);
@@ -216,7 +216,7 @@ export const CampaignLandingPage: React.FC = () => {
           content: landing_page.utm_content,
         },
         cta_type: primary_cta,
-      }).catch((err) => console.error('Failed to track conversion:', err));
+      }).catch(() => {});
     }
 
     // Announce action to screen readers
@@ -255,7 +255,7 @@ export const CampaignLandingPage: React.FC = () => {
         navigate('/schedule', { state: { campaign: landing_page.campaign_id } });
         break;
       default:
-        console.log('CTA action:', primary_cta);
+        break;
     }
   };
 
@@ -290,7 +290,7 @@ export const CampaignLandingPage: React.FC = () => {
         navigate('/signup', { state: { campaign: campaignData.landing_page.campaign_id, trial: true } });
         break;
       default:
-        console.log('Secondary CTA:', secondary_cta);
+        break;
     }
   };
 

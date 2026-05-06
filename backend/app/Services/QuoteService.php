@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Invoice;
@@ -9,7 +11,7 @@ use App\Models\QuoteItem;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
-class QuoteService
+final class QuoteService
 {
     /**
      * Generate quote number: Q-{YYYYMMDD}-{SEQ}

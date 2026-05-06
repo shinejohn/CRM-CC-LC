@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class EmailSentimentAnalyzer
+final class EmailSentimentAnalyzer
 {
     protected array $positiveWords = [
         'thanks', 'thank you', 'great', 'awesome', 'love', 'excellent', 'perfect', 

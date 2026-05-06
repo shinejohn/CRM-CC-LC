@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class ElevenLabsService
+final class ElevenLabsService
 {
     protected string $apiKey;
     protected string $baseUrl = 'https://api.elevenlabs.io/v1';

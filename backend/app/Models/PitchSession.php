@@ -43,6 +43,10 @@ final class PitchSession extends Model
         'pitch_completed_at',
         'business_name',
         'business_category',
+        'flow_mode',
+        'existing_products',
+        'upsell_rationale',
+        'existing_monthly_value',
     ];
 
     protected function casts(): array
@@ -61,6 +65,9 @@ final class PitchSession extends Model
             'resume_reminded_at' => 'datetime',
             'abandoned_at' => 'datetime',
             'pitch_completed_at' => 'datetime',
+            'existing_products' => 'array',
+            'upsell_rationale' => 'array',
+            'existing_monthly_value' => 'decimal:2',
         ];
     }
 

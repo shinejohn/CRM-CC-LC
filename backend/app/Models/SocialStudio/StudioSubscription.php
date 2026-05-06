@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\SocialStudio;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class StudioSubscription extends Model
+final class StudioSubscription extends Model
 {
-    use HasFactory;
+    use HasUuids, HasFactory;
 
     protected $table = 'social_studio_subscriptions';
 

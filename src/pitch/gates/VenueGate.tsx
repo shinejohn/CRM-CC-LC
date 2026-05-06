@@ -22,8 +22,8 @@ export function VenueGate(props: PitchGateBaseProps) {
 
   const venueHead = slotData.gec_venue_headliner ?? {
     total: 3,
-    held: 2,
-    available: 1,
+    held: 0,
+    available: 3,
     status: "open" as const,
   };
 

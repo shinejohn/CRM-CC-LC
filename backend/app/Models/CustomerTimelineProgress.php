@@ -1,12 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class CustomerTimelineProgress extends Model
+final class CustomerTimelineProgress extends Model
 {
+    use HasUuids;
+
     protected $table = 'customer_timeline_progress';
     
     protected $fillable = [

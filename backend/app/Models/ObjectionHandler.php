@@ -1,12 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class ObjectionHandler extends Model
+final class ObjectionHandler extends Model
 {
+    use HasUuids;
+
     protected $fillable = [
         'objection_type',
         'trigger_phrase',

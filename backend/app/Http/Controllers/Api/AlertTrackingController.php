@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Events\Alert\AlertClicked;
@@ -10,7 +12,7 @@ use App\Models\Alert\AlertSend;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class AlertTrackingController extends Controller
+final class AlertTrackingController extends Controller
 {
     /**
      * Track alert open

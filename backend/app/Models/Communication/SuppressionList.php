@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Communication;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class SuppressionList extends Model
+final class SuppressionList extends Model
 {
+    use HasUuids;
+
     protected $table = 'suppression_list';
 
     protected $fillable = [

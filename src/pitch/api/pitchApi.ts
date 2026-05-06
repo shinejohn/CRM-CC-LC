@@ -4,6 +4,7 @@ import type {
   PublicBusinessSearchHit,
   SlotStatus,
   SlotStatusLevel,
+  UpsellRecommendation,
 } from "@/pitch/types";
 
 /** Laravel returns models under `data` with snake_case keys. */
@@ -165,6 +166,10 @@ export function parsePitchSession(raw: JsonObject): PitchSession {
         ? raw.has_physical_location
         : undefined,
     hasEvents: raw.has_events as PitchSession["hasEvents"] | undefined,
+    flowMode: (raw.flow_mode as PitchSession["flowMode"]) ?? undefined,
+    existingProducts: raw.existing_products as string[] | undefined,
+    upsellRationale: raw.upsell_rationale as PitchSession["upsellRationale"] | undefined,
+    existingMonthlyValue: typeof raw.existing_monthly_value === "number" ? raw.existing_monthly_value : undefined,
   };
 }
 
@@ -185,6 +190,10 @@ function sessionToPatchPayload(data: Partial<PitchSession>): JsonObject {
   if (data.smbId !== undefined) out.smb_id = Number(data.smbId);
   if (data.customerId !== undefined) out.customer_id = data.customerId;
   if (data.communityId !== undefined) out.community_id = Number(data.communityId);
+  if (data.flowMode !== undefined) out.flow_mode = data.flowMode;
+  if (data.existingProducts !== undefined) out.existing_products = data.existingProducts;
+  if (data.upsellRationale !== undefined) out.upsell_rationale = data.upsellRationale;
+  if (data.existingMonthlyValue !== undefined) out.existing_monthly_value = data.existingMonthlyValue;
   return out;
 }
 
@@ -370,5 +379,32 @@ export async function pitchLogin(data: {
   );
   const payload = res.data.data ?? res.data;
   return { user: payload.user, token: payload.token };
+}
+
+/* ─── Customer Intelligence (upsell flow) ────────────────────────────── */
+
+export interface CustomerIntelligence {
+  customer_id: string;
+  business_name: string;
+  category: string;
+  community_id: string;
+  owned_products: string[];
+  current_monthly_value: number;
+  engagement: {
+    score: number;
+    tier: number | null;
+    email_opens_30d: number;
+    email_clicks_30d: number;
+    content_views_30d: number;
+  };
+  performance: Record<string, number>;
+  recommendations: UpsellRecommendation[];
+}
+
+export async function getCustomerIntelligence(customerId: string): Promise<CustomerIntelligence> {
+  const res = await apiClient.get<{ data: CustomerIntelligence }>(
+    `/customers/${encodeURIComponent(customerId)}/intelligence`,
+  );
+  return res.data.data;
 }
 

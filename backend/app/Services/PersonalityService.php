@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\AiPersonality;
@@ -10,7 +12,7 @@ use App\Services\OpenRouterService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
-class PersonalityService
+final class PersonalityService
 {
     protected OpenRouterService $openRouterService;
     protected SmbProfileService $smbProfileService;

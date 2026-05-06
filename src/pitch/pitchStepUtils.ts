@@ -32,6 +32,14 @@ const STEP_ORDER = [
   "auth_gate", "checkout", "done",
 ] as const;
 
+const UPSELL_STEP_ORDER = [
+  "goals", "your_plan", "proposal", "checkout", "done",
+] as const;
+
+export function stepOrderForMode(mode: "pitch" | "upsell"): readonly string[] {
+  return mode === "upsell" ? UPSELL_STEP_ORDER : STEP_ORDER;
+}
+
 export function normalizeFlowStep(last: string): (typeof STEP_ORDER)[number] | string {
   if (last === "proposal_built") return "proposal";
   if (last === "started") return "identify";

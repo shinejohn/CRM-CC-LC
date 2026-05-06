@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class OpenAIService
+final class OpenAIService
 {
     protected string $openaiApiKey;
     protected string $baseUrl = 'https://api.openai.com/v1';

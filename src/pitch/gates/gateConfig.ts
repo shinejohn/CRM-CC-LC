@@ -1,4 +1,4 @@
-import type { BusinessProfile, GateKey, PitchSession, PitchTrack } from "../types";
+import type { BusinessProfile, GateKey, PitchSession, PitchTrack, UpsellRecommendation } from "../types";
 
 /** Gate order per pitch track — matches Agent 2 brief in SARAH_MASTER_SPEC PART 5. */
 export const TRACK_GATE_SEQUENCES: Record<PitchTrack, GateKey[]> = {
@@ -68,6 +68,64 @@ export function determineGateOrder(session: PitchSession, profile: BusinessProfi
   const entryFiltered = entryFirst.filter(eligible);
   const rest = filtered.filter((g) => !entryFirst.includes(g));
   return [...entryFiltered, ...rest];
+}
+
+/**
+ * Determine gate order for upsell flow.
+ * Filters out gates for products already owned, reorders by recommendation priority.
+ */
+export function determineUpsellGateOrder(
+  session: PitchSession,
+  profile: BusinessProfile,
+  ownedProducts: string[],
+  recommendations: UpsellRecommendation[],
+): GateKey[] {
+  // Map product slugs to gate keys
+  const productToGate: Record<string, GateKey> = {
+    "community-influencer": "day_news",
+    "community-expert": "day_news",
+    "community-sponsor": "day_news",
+    "headliner": "day_news",
+    "premium-listing": "downtown_guide",
+    "display-ads": "day_news",
+    "event-reminders": "event_host",
+    "ticket-sales": "event_host",
+    "classifieds": "downtown_guide",
+    "coupons-deals": "downtown_guide",
+    "booking-system": "downtown_guide",
+    "ai-personal-assistant": "alphasite",
+    "ai-4-calls": "alphasite",
+    "ai-email-response": "alphasite",
+    "ai-chatbot": "alphasite",
+    "social-syndication": "golocalvoices",
+  };
+
+  // Get gates that have recommended products
+  const recommendedGates: GateKey[] = [];
+  const seen = new Set<GateKey>();
+  for (const rec of recommendations) {
+    const gate = productToGate[rec.product_slug];
+    if (gate && !seen.has(gate)) {
+      // Only include if the gate itself is eligible
+      if (gateIsEligible(gate, profile)) {
+        recommendedGates.push(gate);
+        seen.add(gate);
+      }
+    }
+  }
+
+  // If no recommendations map to gates, fall back to normal order minus completed gates
+  if (recommendedGates.length === 0) {
+    const normalOrder = determineGateOrder(session, profile);
+    const ownedGates = new Set<GateKey>();
+    for (const slug of ownedProducts) {
+      const g = productToGate[slug];
+      if (g) ownedGates.add(g);
+    }
+    return normalOrder.filter((g) => !ownedGates.has(g));
+  }
+
+  return recommendedGates;
 }
 
 export function pitchTrackFromOrgAndCategory(orgType: BusinessProfile["orgType"], category: string): PitchTrack {

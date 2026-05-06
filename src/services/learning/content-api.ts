@@ -16,7 +16,7 @@ export interface Content {
     headline?: string;
     subheadline?: string;
     content?: string;
-    [key: string]: any;
+    [key: string]: unknown;
   }>;
   article_body?: string;
   audio_base_url?: string;
@@ -24,7 +24,7 @@ export interface Content {
   service_type?: string;
   approval_button_text?: string;
   personalization_fields: string[];
-  metadata: Record<string, any>;
+  metadata: Record<string, unknown>;
   is_active: boolean;
   approval_url?: string;
   personalization?: {
@@ -162,9 +162,9 @@ export const contentApi = {
    * Download PDF
    */
   downloadPdf: async (slug: string, viewId?: number): Promise<Blob> => {
-    const params = viewId ? { view_id: viewId } : {};
+    const params: Record<string, string> = viewId ? { view_id: String(viewId) } : {};
     const response = await fetch(
-      `${import.meta.env.VITE_API_ENDPOINT || ''}/v1/content/${slug}/article/pdf?${new URLSearchParams(params as any).toString()}`,
+      `${import.meta.env.VITE_API_ENDPOINT || ''}/v1/content/${slug}/article/pdf?${new URLSearchParams(params).toString()}`,
       {
         method: 'GET',
         headers: {

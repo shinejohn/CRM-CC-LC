@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\V1;
 
 use App\Contracts\Communication\MessageServiceInterface;
@@ -10,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Carbon\Carbon;
 
-class MessageController extends Controller
+final class MessageController extends Controller
 {
     public function __construct(
         private MessageServiceInterface $messageService

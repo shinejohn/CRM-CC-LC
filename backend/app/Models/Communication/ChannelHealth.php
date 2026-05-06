@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Communication;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class ChannelHealth extends Model
+final class ChannelHealth extends Model
 {
+    use HasUuids;
+
     protected $table = 'channel_health';
 
     protected $fillable = [

@@ -44,8 +44,18 @@ return [
         'default_voice_id' => env('ELEVENLABS_DEFAULT_VOICE_ID', '21m00Tcm4TlvDq8ikWAM'),
     ],
 
+    'anthropic' => [
+        'api_key' => env('ANTHROPIC_API_KEY'),
+    ],
+
     'openrouter' => [
         'api_key' => env('OPENROUTER_API_KEY'),
+    ],
+
+    'ai_gateway' => [
+        'url' => env('AI_GATEWAY_URL', 'https://ai-gateway.fibonacco.com'),
+        'token' => env('AI_GATEWAY_TOKEN'),
+        'timeout' => (int) env('AI_GATEWAY_TIMEOUT', 120),
     ],
 
     'stripe' => [
@@ -91,6 +101,11 @@ return [
     'publishing_bridge' => [
         'api_key' => env('PUBLISHING_BRIDGE_API_KEY'),
         'base_url' => rtrim((string) env('PUBLISHING_BRIDGE_BASE_URL', ''), '/'),
+    ],
+
+    'publishing_platform' => [
+        'url' => rtrim((string) env('PUBLISHING_PLATFORM_URL', ''), '/'),
+        'secret' => env('PUBLISHING_PLATFORM_SECRET', ''),
     ],
 
 ];

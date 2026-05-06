@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Alert;
 
 use App\Contracts\Alert\AlertServiceInterface;
@@ -18,7 +20,7 @@ use App\Services\EmailService;
 use App\Services\SMSService;
 use Illuminate\Support\Facades\Log;
 
-class AlertService implements AlertServiceInterface
+final class AlertService implements AlertServiceInterface
 {
     public function __construct(
         private TargetingEngine $targeting,

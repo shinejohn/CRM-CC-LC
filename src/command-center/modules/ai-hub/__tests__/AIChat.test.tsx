@@ -11,7 +11,7 @@ vi.mock('../../../hooks/useAI', () => ({
 
 // Mock AIMessage component
 vi.mock('../AIMessage', () => ({
-  AIMessage: ({ message }: any) => (
+  AIMessage: ({ message }: { message: { id: string; role: string; content: string } }) => (
     <div data-testid={`message-${message.id}`}>
       <span data-testid={`message-role-${message.id}`}>{message.role}</span>
       <span data-testid={`message-content-${message.id}`}>{message.content}</span>
@@ -21,7 +21,7 @@ vi.mock('../AIMessage', () => ({
 
 // Mock ToolCallIndicator component
 vi.mock('../ToolCallIndicator', () => ({
-  ToolCallIndicator: ({ toolCall }: any) => (
+  ToolCallIndicator: ({ toolCall }: { toolCall: { id: string; name: string } }) => (
     <div data-testid={`tool-call-${toolCall.id}`}>{toolCall.name}</div>
   ),
 }));

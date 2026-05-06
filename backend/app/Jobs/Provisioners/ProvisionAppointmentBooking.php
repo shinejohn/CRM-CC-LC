@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Jobs\Provisioners;
 
 use App\Jobs\SendProvisioningCompleteEmail;
@@ -13,7 +15,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class ProvisionAppointmentBooking implements ShouldQueue
+final class ProvisionAppointmentBooking implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 

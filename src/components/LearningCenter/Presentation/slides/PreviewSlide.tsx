@@ -4,7 +4,7 @@ import { Eye } from 'lucide-react';
 interface PreviewSlideProps {
   content: {
     headline: string;
-    preview?: any;
+    preview?: Record<string, unknown>;
     note?: string;
   };
   isActive: boolean;

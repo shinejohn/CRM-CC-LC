@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Operations;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class QueueMetric extends Model
+final class QueueMetric extends Model
 {
+    use HasUuids;
+
     protected $table = 'ops.queue_metrics';
     
     protected $keyType = 'string';

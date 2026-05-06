@@ -1,5 +1,16 @@
 export type EntryMode = "pitch" | "upsell";
 
+export interface UpsellRecommendation {
+  product_slug: string;
+  product_name: string;
+  price: number;
+  reason: string;
+  trigger: string;
+  confidence: number;
+  projected_impact: string;
+  priority: number;
+}
+
 export type OrgType =
   | "smb"
   | "venue"
@@ -44,6 +55,14 @@ export interface PitchSession {
   productsAccepted?: AcceptedProduct[];
   productsDeclined?: DeclinedProduct[];
   proposalId?: string;
+  /** "pitch" for new customers, "upsell" for returning customers */
+  flowMode?: "pitch" | "upsell";
+  /** Product slugs the customer already owns (upsell mode) */
+  existingProducts?: string[];
+  /** AI-generated rationale for each recommended product */
+  upsellRationale?: UpsellRecommendation[];
+  /** What the customer currently pays monthly */
+  existingMonthlyValue?: number;
   /** Populated during Identify / Community steps */
   businessName?: string;
   businessCategory?: string;

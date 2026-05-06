@@ -3,14 +3,23 @@ import { Button } from "@/components/ui/button";
 import { Copy, Eye, FileText, Plus, Send, CheckCircle, Clock } from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
 
+interface Proposal {
+    id: string;
+    title: string;
+    client: string;
+    value: number;
+    status: 'active' | 'inactive' | 'pending' | 'completed' | 'cancelled' | 'overdue' | 'draft' | 'archived';
+    date: string;
+}
+
 export default function ClientProposalPage() {
-    const proposals = [
-        { id: "1", title: "Enterprise Software License", client: "Acme Corp", value: 125000, status: "sent", date: new Date().toISOString() },
+    const proposals: Proposal[] = [
+        { id: "1", title: "Enterprise Software License", client: "Acme Corp", value: 125000, status: "pending", date: new Date().toISOString() },
         { id: "2", title: "Q3 Marketing Retainer", client: "TechStart Inc", value: 15000, status: "draft", date: new Date().toISOString() },
-        { id: "3", title: "Security Audit", client: "Global Bank", value: 45000, status: "accepted", date: new Date(Date.now() - 86400000 * 5).toISOString() },
+        { id: "3", title: "Security Audit", client: "Global Bank", value: 45000, status: "completed", date: new Date(Date.now() - 86400000 * 5).toISOString() },
     ];
 
-    const columns: ColumnDef<any>[] = [
+    const columns: ColumnDef<Proposal>[] = [
         { header: "Proposal Name", accessorKey: "title", cell: (row) => <span className="font-medium text-[var(--nexus-text-primary)]">{row.title}</span> },
         { header: "Client", accessorKey: "client" },
         { header: "Value", accessorKey: "value", cell: (row) => formatCurrency(row.value) },

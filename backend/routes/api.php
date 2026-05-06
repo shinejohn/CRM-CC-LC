@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\CommunitySubscriptionController;
 use App\Http\Controllers\Api\ConversationController;
 use App\Http\Controllers\Api\CssnSubscriptionController;
 use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\CustomerIntelligenceController;
 use App\Http\Controllers\Api\EmergencyBroadcastController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\KnowledgeController;
@@ -214,6 +215,10 @@ Route::prefix('v1')->group(function () {
             Route::post('/{id}/campaign/start', [CustomerController::class, 'startCampaign']);
             Route::post('/{id}/campaign/pause', [CustomerController::class, 'pauseCampaign']);
             Route::post('/{id}/campaign/resume', [CustomerController::class, 'resumeCampaign']);
+
+            // Customer intelligence (upsell context, recommendations)
+            Route::get('/{customerId}/intelligence', [CustomerIntelligenceController::class, 'show'])
+                ->name('api.customers.intelligence');
         });
 
         // CRM API - Deals Pipeline
@@ -770,6 +775,7 @@ Route::prefix('v1')->group(function () {
     });
 
     require __DIR__.'/pitch.php';
+    require __DIR__.'/sarah.php';
 });
 
 // Public tracking endpoints (no auth)

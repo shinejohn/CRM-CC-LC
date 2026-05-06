@@ -16,6 +16,15 @@ import type {
   CampaignChannel,
 } from './campaign.types';
 
+interface CampaignEventPayload {
+  type: string;
+  id?: string;
+  campaignId?: string;
+  campaign?: Campaign;
+  count?: number;
+  completedAt?: string;
+}
+
 interface UseCampaignsFilters {
   status?: CampaignStatus | null;
   channel?: CampaignChannel | null;
@@ -37,7 +46,7 @@ interface UseCampaignsReturn {
   pauseCampaign: (id: string) => Promise<void>;
   resumeCampaign: (id: string) => Promise<void>;
   testCampaign: (id: string, recipients: string[]) => Promise<void>;
-  getCampaignStats: (id: string) => Promise<any>;
+  getCampaignStats: (id: string) => Promise<CampaignStats>;
   refreshCampaigns: () => Promise<void>;
 }
 
@@ -112,23 +121,28 @@ export function useCampaigns(filters: UseCampaignsFilters = {}): UseCampaignsRet
 
   // Real-time updates via WebSocket
   useEffect(() => {
-    const handleCampaignEvent = (payload: any) => {
+    const handleCampaignEvent = (rawPayload: unknown) => {
+      const payload = rawPayload as CampaignEventPayload;
       switch (payload.type) {
         case 'CAMPAIGN_CREATED':
-          setCampaigns(prev => [payload.campaign || payload, ...prev]);
+          if (payload.campaign) {
+            setCampaigns(prev => [payload.campaign!, ...prev]);
+          }
           fetchStats();
           break;
         case 'CAMPAIGN_UPDATED':
-          setCampaigns(prev =>
-            prev.map(c => (c.id === (payload.id || payload.campaign?.id) ? (payload.campaign || payload) : c))
-          );
+          if (payload.campaign) {
+            setCampaigns(prev =>
+              prev.map(c => (c.id === (payload.id || payload.campaign?.id) ? payload.campaign! : c))
+            );
+          }
           fetchStats();
           break;
         case 'CAMPAIGN_SENT':
           setCampaigns(prev =>
             prev.map(c =>
               c.id === payload.campaignId
-                ? { ...c, status: 'active' as const, sent: (c.sent || 0) + payload.count }
+                ? { ...c, status: 'active' as const, sent: (c.sent || 0) + (payload.count || 0) }
                 : c
             )
           );
@@ -212,8 +226,8 @@ export function useCampaigns(filters: UseCampaignsFilters = {}): UseCampaignsRet
     }
   }, []);
 
-  const getCampaignStats = useCallback(async (id: string): Promise<any> => {
-    const response = await apiService.get(`/v1/campaigns/${id}/stats`);
+  const getCampaignStats = useCallback(async (id: string): Promise<CampaignStats> => {
+    const response = await apiService.get<CampaignStats>(`/v1/campaigns/${id}/stats`);
     if (response.success && response.data) {
       return response.data;
     }

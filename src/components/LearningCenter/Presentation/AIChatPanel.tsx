@@ -90,13 +90,11 @@ export const AIChatPanel: React.FC<AIChatPanelProps> = ({
       if (response.suggested_actions && response.suggested_actions.length > 0) {
         try {
           await aiApi.processActions(response.suggested_actions);
-          console.log('AI actions processed successfully');
-        } catch (error) {
-          console.error('Failed to process AI actions:', error);
+        } catch (_actionError) {
+          // Action processing failed silently
         }
       }
-    } catch (error) {
-      console.error('Failed to send message:', error);
+    } catch (_error) {
       const errorMessage: Message = {
         id: `error-${Date.now()}`,
         role: 'assistant',

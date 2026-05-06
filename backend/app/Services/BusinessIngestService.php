@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Contracts\CampaignOrchestratorInterface;
@@ -10,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class BusinessIngestService
+final class BusinessIngestService
 {
     public function ingestBusiness(array $data): array
     {

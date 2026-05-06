@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Customer;
@@ -9,7 +11,7 @@ use App\Jobs\MakePhoneCall;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 
-class SMSResponseHandler
+final class SMSResponseHandler
 {
     public function __construct(
         protected SMSService $smsService,

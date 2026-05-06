@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Newsletter;
 
 use App\Models\Community;
@@ -8,7 +10,7 @@ use App\Models\Newsletter\NewsletterSchedule;
 use App\Models\Newsletter\NewsletterTemplate;
 use Illuminate\Support\Facades\View;
 
-class NewsletterBuilder
+final class NewsletterBuilder
 {
     public function build(Newsletter $newsletter, array $content): string
     {

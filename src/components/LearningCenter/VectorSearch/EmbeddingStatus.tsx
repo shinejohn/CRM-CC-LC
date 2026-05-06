@@ -2,8 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { RefreshCw, Play, CheckCircle2, Clock, XCircle, AlertCircle } from 'lucide-react';
 import { knowledgeApi } from '@/services/learning/knowledge-api';
 
+interface EmbeddingStatusData {
+  completed: number;
+  processing: number;
+  pending: number;
+  failed: number;
+  total: number;
+}
+
 export const EmbeddingStatus: React.FC = () => {
-  const [status, setStatus] = useState<any>(null);
+  const [status, setStatus] = useState<EmbeddingStatusData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

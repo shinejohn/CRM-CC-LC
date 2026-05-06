@@ -6,7 +6,7 @@ import { AIMessage as AIMessageType } from '@/types/command-center';
 
 // Mock ReactMarkdown
 vi.mock('react-markdown', () => ({
-  default: ({ children }: any) => <div data-testid="markdown">{children}</div>,
+  default: ({ children }: { children: React.ReactNode }) => <div data-testid="markdown">{children}</div>,
 }));
 
 describe('AIMessage', () => {

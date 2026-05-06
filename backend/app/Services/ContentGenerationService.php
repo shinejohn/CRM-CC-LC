@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\ContentTemplate;
@@ -7,7 +9,7 @@ use App\Models\GeneratedContent;
 use App\Models\OutboundCampaign;
 use Illuminate\Support\Facades\Log;
 
-class ContentGenerationService
+final class ContentGenerationService
 {
     protected OpenRouterService $openRouterService;
 

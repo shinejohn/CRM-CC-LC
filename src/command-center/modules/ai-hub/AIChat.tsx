@@ -10,6 +10,7 @@ import { AIMessage } from './AIMessage';
 import { ToolCallIndicator } from './ToolCallIndicator';
 import { useAI } from '../../hooks/useAI';
 import { useBusinessIntelligenceContext } from '../../hooks/useBusinessIntelligenceContext';
+import type { ToolCall } from '../../services/ai.types';
 
 export function AIChat() {
   const [input, setInput] = useState('');
@@ -33,7 +34,7 @@ export function AIChat() {
   // Get current tool calls from messages
   const currentToolCalls = messages
     .flatMap(m => m.metadata?.toolCalls || [])
-    .filter((tc: any) => tc.status === 'running' || tc.status === 'pending');
+    .filter((tc: Partial<ToolCall>) => tc.status === 'running' || tc.status === 'pending');
 
   // Auto-scroll to bottom
   useEffect(() => {

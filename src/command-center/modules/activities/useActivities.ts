@@ -1,7 +1,16 @@
 import { useState, useEffect, useCallback } from 'react';
 import { apiService } from '../../services/api.service';
 import { useWebSocket } from '../../hooks/useWebSocket';
-import { Activity, ActivityType } from '@/types/command-center';
+import type { Activity, ActivityType } from '@/types/command-center';
+import type { WebSocketMessage } from '../../services/websocket.types';
+
+interface ActivityEventPayload {
+  type?: string;
+  id?: string;
+  activity?: Activity;
+  nextActivity?: Activity;
+  nextInteraction?: Activity;
+}
 
 interface UseActivitiesFilters {
   type: ActivityType | null;
@@ -64,18 +73,23 @@ export function useActivities(filters: UseActivitiesFilters): UseActivitiesRetur
 
   // Real-time updates via WebSocket
   useEffect(() => {
-    const handleActivityEvent = (payload: any, message: any) => {
+    const handleActivityEvent = (rawPayload: unknown, message: WebSocketMessage) => {
+      const payload = rawPayload as ActivityEventPayload;
       const eventType = message.type || payload.type;
       
       switch (eventType) {
-        case 'ACTIVITY_CREATED':
-          setActivities(prev => [payload.activity || payload, ...prev]);
+        case 'ACTIVITY_CREATED': {
+          const created = payload.activity ?? (rawPayload as unknown as Activity);
+          setActivities(prev => [created, ...prev]);
           break;
-        case 'ACTIVITY_UPDATED':
+        }
+        case 'ACTIVITY_UPDATED': {
+          const updated = payload.activity ?? (rawPayload as unknown as Activity);
           setActivities(prev =>
-            prev.map(a => (a.id === (payload.id || payload.activity?.id) ? (payload.activity || payload) : a))
+            prev.map(a => (a.id === (payload.id || payload.activity?.id) ? updated : a))
           );
           break;
+        }
         case 'ACTIVITY_COMPLETED':
           setActivities(prev =>
             prev.map(a =>
@@ -85,8 +99,11 @@ export function useActivities(filters: UseActivitiesFilters): UseActivitiesRetur
             )
           );
           // If there's a next activity, add it
-          if (payload.nextActivity || payload.nextInteraction) {
-            setActivities(prev => [(payload.nextActivity || payload.nextInteraction), ...prev]);
+          {
+            const next = payload.nextActivity ?? payload.nextInteraction;
+            if (next) {
+              setActivities(prev => [next, ...prev]);
+            }
           }
           break;
       }
@@ -137,8 +154,9 @@ export function useActivities(filters: UseActivitiesFilters): UseActivitiesRetur
         );
         
         // Add the next activity if created
-        if (response.data?.metadata?.nextInteraction) {
-          return [response.data.metadata.nextInteraction, ...updated];
+        const nextInteraction = response.data?.metadata?.nextInteraction as Activity | undefined;
+        if (nextInteraction) {
+          return [nextInteraction, ...updated];
         }
         
         return updated;

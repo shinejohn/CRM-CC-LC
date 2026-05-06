@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\CrmContact;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class CrmContactService
+final class CrmContactService
 {
     /**
      * List contacts for tenant.

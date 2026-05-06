@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\ApprovalUpsell;
@@ -7,7 +9,7 @@ use App\Services\ApprovalService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class UpsellController extends Controller
+final class UpsellController extends Controller
 {
     public function __construct(
         protected ApprovalService $approvalService

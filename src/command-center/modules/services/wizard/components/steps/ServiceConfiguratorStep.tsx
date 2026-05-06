@@ -1,9 +1,9 @@
 import React from 'react';
-import { CartItem } from '../../types';
+import { CartItem, ServiceConfig } from '../../types';
 
 interface ServiceConfiguratorStepProps {
     selectedServices: CartItem[];
-    onUpdateConfig: (serviceId: string, config: any) => void;
+    onUpdateConfig: (serviceId: string, config: ServiceConfig) => void;
     onNext: () => void;
     onBack: () => void;
 }

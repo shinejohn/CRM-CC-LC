@@ -22,9 +22,9 @@ export function PerformerGate(props: PitchGateBaseProps) {
 
   const perfHead = slotData.gec_performer_headliner ?? {
     total: 5,
-    held: 4,
-    available: 1,
-    status: "almost_full" as const,
+    held: 0,
+    available: 5,
+    status: "open" as const,
   };
 
   const permissionAsk =

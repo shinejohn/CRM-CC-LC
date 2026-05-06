@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Communication;
 
 use App\Models\Communication\RateLimit;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Cache;
 
-class RateLimitService
+final class RateLimitService
 {
     private const REDIS_PREFIX = 'comm:rate:';
 

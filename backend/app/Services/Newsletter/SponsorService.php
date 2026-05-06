@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Newsletter;
 
 use App\Contracts\Newsletter\SponsorServiceInterface;
@@ -11,7 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class SponsorService implements SponsorServiceInterface
+final class SponsorService implements SponsorServiceInterface
 {
     public function getActive(int $communityId, string $type): Collection
     {

@@ -1,19 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Community;
 use App\Models\CommunitySubscription;
 use App\Models\Customer;
+use App\Services\Pitch\SlotInventoryService;
 use Illuminate\Support\Facades\Log;
 
-class CommunitySubscriptionService
+final class CommunitySubscriptionService
 {
     private StripeService $stripeService;
 
-    private SlotEnforcementService $slotService;
+    private SlotInventoryService $slotService;
 
-    public function __construct(StripeService $stripeService, SlotEnforcementService $slotService)
+    public function __construct(StripeService $stripeService, SlotInventoryService $slotService)
     {
         $this->stripeService = $stripeService;
         $this->slotService = $slotService;
@@ -116,7 +119,7 @@ class CommunitySubscriptionService
                 }
             }
             if ($slotReserved) {
-                $this->slotService->releaseSlot($communityId, $categoryGroup, $categorySubtype, $tier);
+                $this->slotService->releaseCategorySlot($communityId, $categoryGroup, $categorySubtype, $tier);
             }
             throw $e;
         }
@@ -142,7 +145,7 @@ class CommunitySubscriptionService
         }
 
         if ($sub->category_group) {
-            $this->slotService->releaseSlot(
+            $this->slotService->releaseCategorySlot(
                 $sub->community_id,
                 $sub->category_group,
                 $sub->category_subtype,

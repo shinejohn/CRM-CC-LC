@@ -73,6 +73,12 @@ class Kernel extends ConsoleKernel
         // Campaign Orchestrator - Advance days daily at midnight
         $schedule->job(new \App\Jobs\AdvanceCampaignDays)->dailyAt('00:00');
 
+        // Manifest Destiny — daily 9 AM run across all active timelines
+        $schedule->command('manifest-destiny:run')->dailyAt('09:00');
+
+        // Readership analytics sync — pull PP metrics nightly
+        $schedule->job(new \App\Jobs\ReadershipSyncJob)->dailyAt('01:00');
+
         // Communication Infrastructure (Module 0B)
         // Priority dispatcher - runs every 10 seconds
         $schedule->call(function () {

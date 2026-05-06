@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Communication;
 
 use App\Contracts\Communication\MessageServiceInterface;
@@ -14,7 +16,7 @@ use App\Jobs\Communication\ProcessMessage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
-class MessageService implements MessageServiceInterface
+final class MessageService implements MessageServiceInterface
 {
     public function __construct(
         private SuppressionService $suppression,

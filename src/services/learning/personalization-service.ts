@@ -48,25 +48,25 @@ export function replaceTemplateVariables(
  * Replace template variables in an object recursively
  */
 export function personalizeObject(
-  obj: any,
+  obj: unknown,
   data: PersonalizationData
-): any {
+): unknown {
   if (typeof obj === 'string') {
     return replaceTemplateVariables(obj, data);
   }
-  
+
   if (Array.isArray(obj)) {
     return obj.map(item => personalizeObject(item, data));
   }
-  
+
   if (obj && typeof obj === 'object') {
-    const personalized: Record<string, any> = {};
+    const personalized: Record<string, unknown> = {};
     for (const [key, value] of Object.entries(obj)) {
       personalized[key] = personalizeObject(value, data);
     }
     return personalized;
   }
-  
+
   return obj;
 }
 

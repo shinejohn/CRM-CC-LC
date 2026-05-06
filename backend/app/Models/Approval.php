@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,10 +11,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 use App\Models\Customer;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class Approval extends Model
+final class Approval extends Model
 {
-    use HasFactory;
+    use HasUuids, HasFactory;
 
     protected $guarded = [];
 

@@ -9,7 +9,7 @@ use Fibonacco\AiGatewayClient\AiGatewayClient;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class WorkflowOrchestrator
+final class WorkflowOrchestrator
 {
     public function __construct(
         protected AiGatewayClient $gateway

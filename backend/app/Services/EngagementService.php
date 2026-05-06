@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Approval;
@@ -8,7 +10,7 @@ use App\Models\EmailDeliveryEvent;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class EngagementService
+final class EngagementService
 {
     /**
      * Calculate engagement score based on recent activity

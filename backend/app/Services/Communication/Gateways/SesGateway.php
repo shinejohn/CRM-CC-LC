@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Communication\Gateways;
 
 use App\Contracts\Communication\GatewayInterface;
@@ -9,7 +11,7 @@ use App\DTOs\Communication\RateStatus;
 use Aws\Ses\SesClient;
 use Illuminate\Support\Facades\Log;
 
-class SesGateway implements GatewayInterface
+final class SesGateway implements GatewayInterface
 {
     private ?SesClient $client = null;
 

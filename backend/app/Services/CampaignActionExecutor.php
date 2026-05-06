@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Events\PipelineStageChanged;
@@ -13,7 +15,7 @@ use App\Models\PhoneScript;
 use App\Models\SmsTemplate;
 use Illuminate\Support\Facades\Log;
 
-class CampaignActionExecutor
+final class CampaignActionExecutor
 {
     public function __construct(
         protected SMSService $smsService,

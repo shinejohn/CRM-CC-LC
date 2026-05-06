@@ -1,7 +1,7 @@
 export interface WebSocketMessage {
   type: string;
   channel: string;
-  payload: any;
+  payload: unknown;
   timestamp: string;
   id?: string;
 }
@@ -27,5 +27,5 @@ export interface WebSocketState {
 }
 
 export type MessageHandler = (message: WebSocketMessage) => void;
-export type ChannelHandler = (payload: any, message: WebSocketMessage) => void;
+export type ChannelHandler = (payload: unknown, message: WebSocketMessage) => void;
 

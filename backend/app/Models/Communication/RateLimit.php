@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Communication;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class RateLimit extends Model
+final class RateLimit extends Model
 {
+    use HasUuids;
+
     protected $table = 'rate_limits';
 
     protected $fillable = [

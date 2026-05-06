@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Customer;
@@ -12,7 +14,7 @@ use App\Jobs\AM\SendProactiveSMS;
 use App\Jobs\AM\MakeProactiveCall;
 use Illuminate\Support\Facades\Log;
 
-class AccountManagerService
+final class AccountManagerService
 {
     public function __construct(
         protected DialogExecutorService $dialogExecutor,

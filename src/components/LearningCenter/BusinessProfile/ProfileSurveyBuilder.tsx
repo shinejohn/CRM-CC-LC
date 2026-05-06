@@ -3,10 +3,17 @@ import { Plus, GripVertical, Edit2, Eye, ChevronRight } from 'lucide-react';
 import { surveyApi } from '@/services/learning/survey-api';
 import type { SurveySection } from '@/types/learning';
 
+interface SurveyAnalytics {
+  avg_completion: number;
+  section_completion: Array<{ section_id: string; completion: number }>;
+  most_completed: string[];
+  least_completed: string[];
+}
+
 export const ProfileSurveyBuilder: React.FC = () => {
   const [sections, setSections] = useState<SurveySection[]>([]);
   const [loading, setLoading] = useState(true);
-  const [analytics, setAnalytics] = useState<any>(null);
+  const [analytics, setAnalytics] = useState<SurveyAnalytics | null>(null);
 
   useEffect(() => {
     loadData();

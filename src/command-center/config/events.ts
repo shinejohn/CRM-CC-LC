@@ -18,12 +18,13 @@ export function initializeEventBridge() {
   websocketService.subscribe('activity.*', (payload, message) => {
     const eventType = message.channel.replace('activity.', 'activity:');
     eventBus.emit(eventType, payload);
-    
+
     // Show notification for new activities
     if (message.channel === 'activity.created') {
+      const data = payload as Record<string, unknown>;
       notificationService.show({
         title: 'New Activity',
-        message: payload.description || 'A new activity was created',
+        message: (data.description as string) || 'A new activity was created',
         type: 'info',
       });
     }
@@ -39,9 +40,10 @@ export function initializeEventBridge() {
   websocketService.subscribe('notification.*', (payload, message) => {
     const eventType = message.channel.replace('notification.', 'notification:');
     eventBus.emit(eventType, payload);
-    
+
     if (message.channel === 'notification.new') {
-      notificationService.show(payload);
+      const data = payload as { title: string; message: string; type?: string };
+      notificationService.show(data);
     }
   });
 

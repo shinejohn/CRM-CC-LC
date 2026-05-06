@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\CrmActivity;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class CrmActivityService
+final class CrmActivityService
 {
     /**
      * List activities for tenant.

@@ -49,14 +49,17 @@ export function ActivitiesPage() {
     switch (activeTab) {
       case 'pending':
         return activity.status === 'pending';
-      case 'today':
+      case 'today': {
         const today = new Date().toDateString();
-        const scheduledAt = activity.metadata?.scheduledAt || activity.metadata?.dueAt || activity.timestamp;
+        const scheduledAt = (activity.metadata?.scheduledAt as string | undefined) || (activity.metadata?.dueAt as string | undefined) || activity.timestamp;
         return new Date(scheduledAt).toDateString() === today;
-      case 'overdue':
-        return activity.status === 'pending' && 
-               activity.metadata?.dueAt && 
-               new Date(activity.metadata.dueAt) < new Date();
+      }
+      case 'overdue': {
+        const dueAt = activity.metadata?.dueAt as string | undefined;
+        return activity.status === 'pending' &&
+               !!dueAt &&
+               new Date(dueAt) < new Date();
+      }
       default:
         return true;
     }
@@ -101,7 +104,7 @@ export function ActivitiesPage() {
       </div>
 
       {/* Tabs */}
-      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)}>
+      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'all' | 'pending' | 'today' | 'overdue')}>
         <TabsList>
           <TabsTrigger value="all">
             All
@@ -120,7 +123,7 @@ export function ActivitiesPage() {
             <Badge variant="secondary" className="ml-2">
               {activities.filter(a => {
                 const today = new Date().toDateString();
-                const scheduledAt = a.metadata?.scheduledAt || a.metadata?.dueAt || a.timestamp;
+                const scheduledAt = (a.metadata?.scheduledAt as string | undefined) || (a.metadata?.dueAt as string | undefined) || a.timestamp;
                 return new Date(scheduledAt).toDateString() === today;
               }).length}
             </Badge>
@@ -128,9 +131,10 @@ export function ActivitiesPage() {
           <TabsTrigger value="overdue">
             Overdue
             <Badge variant="destructive" className="ml-2">
-              {activities.filter(a => 
-                a.status === 'pending' && a.metadata?.dueAt && new Date(a.metadata.dueAt) < new Date()
-              ).length}
+              {activities.filter(a => {
+                const dueAt = a.metadata?.dueAt as string | undefined;
+                return a.status === 'pending' && !!dueAt && new Date(dueAt) < new Date();
+              }).length}
             </Badge>
           </TabsTrigger>
         </TabsList>
@@ -182,7 +186,7 @@ export function ActivitiesPage() {
 // Helper Functions
 function groupActivitiesByDate(activities: Activity[]): Record<string, Activity[]> {
   return activities.reduce((groups, activity) => {
-    const scheduledAt = activity.metadata?.scheduledAt || activity.metadata?.dueAt || activity.timestamp;
+    const scheduledAt = (activity.metadata?.scheduledAt as string | undefined) || (activity.metadata?.dueAt as string | undefined) || activity.timestamp;
     const date = new Date(scheduledAt).toDateString();
     if (!groups[date]) {
       groups[date] = [];

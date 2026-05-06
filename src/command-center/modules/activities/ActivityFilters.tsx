@@ -22,7 +22,7 @@ interface ActivityFiltersProps {
     priority: string | null;
     customerId: string | null;
   };
-  onChange: (filters: any) => void;
+  onChange: (filters: { type: ActivityType | null; priority: string | null; customerId: string | null }) => void;
 }
 
 export function ActivityFilters({ filters, onChange }: ActivityFiltersProps) {

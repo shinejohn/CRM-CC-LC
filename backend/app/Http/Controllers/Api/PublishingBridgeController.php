@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\CommunitySubscription;
-use App\Services\SlotEnforcementService;
+use App\Services\Pitch\SlotInventoryService;
 
-class PublishingBridgeController extends Controller
+final class PublishingBridgeController extends Controller
 {
-    private SlotEnforcementService $slotService;
+    private SlotInventoryService $slotService;
 
-    public function __construct(SlotEnforcementService $slotService)
+    public function __construct(SlotInventoryService $slotService)
     {
         $this->slotService = $slotService;
     }

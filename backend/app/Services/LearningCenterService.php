@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Contracts\ApprovalServiceInterface;
@@ -10,7 +12,7 @@ use App\Models\Content;
 use App\Models\ContentView;
 use App\Models\Customer;
 
-class LearningCenterService implements LearningCenterServiceInterface
+final class LearningCenterService implements LearningCenterServiceInterface
 {
     public function __construct(
         protected ApprovalServiceInterface $approvalService

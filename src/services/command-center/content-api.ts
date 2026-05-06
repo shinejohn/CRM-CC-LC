@@ -12,7 +12,7 @@ export interface ContentTemplate {
   description: string | null;
   prompt_template: string;
   variables: string[] | null;
-  structure: Record<string, any> | null;
+  structure: Record<string, unknown> | null;
   is_active: boolean;
   created_at: string;
   updated_at: string;
@@ -27,16 +27,16 @@ export interface GeneratedContent {
   status: 'draft' | 'review' | 'approved' | 'published' | 'archived';
   content: string;
   excerpt: string | null;
-  metadata: Record<string, any> | null;
+  metadata: Record<string, unknown> | null;
   campaign_id: string | null;
   template_id: string | null;
-  generation_params: Record<string, any> | null;
+  generation_params: Record<string, unknown> | null;
   assigned_to: string | null;
   scheduled_publish_at: string | null;
   published_at: string | null;
   published_by: string | null;
   published_channels: string[] | null;
-  publishing_metadata: Record<string, any> | null;
+  publishing_metadata: Record<string, unknown> | null;
   notes: string | null;
   created_at: string;
   updated_at: string;
@@ -50,7 +50,7 @@ export interface GenerateContentRequest {
     topic?: string;
     tags?: string[];
     category?: string;
-    [key: string]: any;
+    [key: string]: unknown;
   };
 }
 
@@ -58,7 +58,7 @@ export interface GenerateFromCampaignRequest {
   campaign_id: string;
   type: 'article' | 'blog' | 'social' | 'email' | 'landing_page';
   template_id?: string;
-  parameters?: Record<string, any>;
+  parameters?: Record<string, unknown>;
 }
 
 /**
@@ -123,7 +123,7 @@ export async function updateContent(
     title?: string;
     content?: string;
     excerpt?: string;
-    metadata?: Record<string, any>;
+    metadata?: Record<string, unknown>;
     status?: string;
     scheduled_publish_at?: string;
     notes?: string;
@@ -208,7 +208,7 @@ export async function createContentTemplate(request: {
   prompt_template: string;
   description?: string;
   variables?: string[];
-  structure?: Record<string, any>;
+  structure?: Record<string, unknown>;
 }): Promise<ContentTemplate> {
   const response = await apiClient.post<{ data: ContentTemplate }>(
     '/api/v1/generated-content/templates',

@@ -58,11 +58,11 @@ export const CreatePhoneCampaignPage: React.FC = () => {
     }
   };
 
-  const handleSegmentChange = (key: string, value: any) => {
+  const handleSegmentChange = (key: string, value: string | boolean) => {
     const newSegments = { ...segments, [key]: value };
     setSegments(newSegments);
-    
-    const recipientSegments: Record<string, any> = {};
+
+    const recipientSegments: Record<string, string | number | boolean> = {};
     if (newSegments.industry_category) {
       recipientSegments.industry_category = newSegments.industry_category;
     }

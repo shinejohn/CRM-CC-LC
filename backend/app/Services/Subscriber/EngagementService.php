@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Subscriber;
 
 use App\Models\Subscriber\Subscriber;
 use App\Models\Subscriber\SubscriberEvent;
 use Illuminate\Database\Eloquent\Collection;
 
-class EngagementService
+final class EngagementService
 {
     /**
      * Calculate engagement score for subscriber

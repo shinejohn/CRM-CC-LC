@@ -38,7 +38,7 @@ export function useActivities(options: UseActivitiesOptions = {}): UseActivities
     setError(null);
     
     try {
-      const params: Record<string, any> = {
+      const params: Record<string, string | number> = {
         limit,
       };
       
@@ -72,7 +72,8 @@ export function useActivities(options: UseActivitiesOptions = {}): UseActivities
   }, [fetchActivities]);
 
   // Subscribe to real-time updates
-  useChannel('activity.*', (payload, message) => {
+  useChannel('activity.*', (rawPayload, message) => {
+    const payload = rawPayload as Partial<Activity> & { id?: string };
     if (message.channel === 'activity.created') {
       setActivities(prev => [payload as Activity, ...prev].slice(0, limit));
       setTotalCount(prev => prev + 1);

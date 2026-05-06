@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Contracts\Emergency\EmergencyBroadcastServiceInterface;
@@ -10,7 +12,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class EmergencyBroadcastController extends Controller
+final class EmergencyBroadcastController extends Controller
 {
     public function __construct(
         private EmergencyBroadcastServiceInterface $emergencyService

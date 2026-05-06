@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\CampaignRecipient;
@@ -10,7 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
-class SubscriberROIService
+final class SubscriberROIService
 {
     /**
      * @return array<string, mixed>

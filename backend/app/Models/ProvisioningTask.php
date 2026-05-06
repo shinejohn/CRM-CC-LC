@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Customer;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class ProvisioningTask extends Model
+final class ProvisioningTask extends Model
 {
-    use HasFactory;
+    use HasUuids, HasFactory;
 
     protected $guarded = [];
 

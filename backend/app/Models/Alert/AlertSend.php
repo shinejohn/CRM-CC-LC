@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Alert;
 
 use App\Models\Subscriber\Subscriber;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class AlertSend extends Model
+final class AlertSend extends Model
 {
-    use HasFactory;
+    use HasUuids, HasFactory;
 
     protected $fillable = [
         'alert_id',

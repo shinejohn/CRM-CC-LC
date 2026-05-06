@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router";
 import { PITCH_PROGRESS_STEPS } from "./_constants";
-import type { PitchSession, SarahMessage, SlotStatus } from "./types";
+import type { EntryMode, PitchSession, SarahMessage, SlotStatus } from "./types";
 import { PitchShell } from "./shell/PitchShell";
 import { SarahPanel } from "./shell/SarahPanel";
 import { ResumePrompt } from "./components/ResumePrompt";
@@ -23,6 +23,7 @@ import {
   normalizeFlowStep,
   progressForStep,
   slotDataForGates,
+  stepOrderForMode,
 } from "./pitchStepUtils";
 import { mapGateQueryParam } from "./pitchUrlParams";
 import { slotInventoryKey } from "@/pitch/api/pitchApi";
@@ -75,6 +76,24 @@ export default function PitchRouter() {
 
   const profile = useMemo(() => (session ? businessProfileFromSession(session) : null), [session]);
 
+  const entryMode: EntryMode = session?.flowMode === "upsell" ? "upsell" : "pitch";
+
+  // Upsell mode: skip identify/profile_type/community — jump straight to goals
+  useEffect(() => {
+    if (session?.flowMode === "upsell" && flowStep === "identify") {
+      void updateStep("goals", {});
+    }
+  }, [session?.flowMode, flowStep, updateStep]);
+
+  // Upsell mode: append a welcome-back Sarah message once
+  const upsellGreetedRef = useRef(false);
+  useEffect(() => {
+    if (session?.flowMode === "upsell" && !upsellGreetedRef.current) {
+      upsellGreetedRef.current = true;
+      appendSarah("Welcome back! Let's look at what could help your business grow even more.");
+    }
+  }, [session?.flowMode, appendSarah]);
+
   const influencerSlotFromInventory: SlotStatus | undefined = useMemo(() => {
     if (!session?.communityId) return undefined;
     const cat = categorySlugForSlots(session);
@@ -118,15 +137,12 @@ export default function PitchRouter() {
   }, [flowStep]);
 
   const handleBack = useCallback(async () => {
-    const order = [
-      "identify", "profile_type", "community", "goals", "your_plan", "proposal",
-      "auth_gate", "checkout",
-    ] as const;
-    const idx = order.indexOf(flowStep as (typeof order)[number]);
+    const order = stepOrderForMode(entryMode);
+    const idx = order.indexOf(flowStep);
     if (idx <= 0) return;
     const prev = order[idx - 1];
     await updateStep(prev, {});
-  }, [flowStep, updateStep]);
+  }, [flowStep, updateStep, entryMode]);
 
   if (!communitySlug) {
     return (
@@ -254,7 +270,9 @@ export default function PitchRouter() {
             session={session}
             profile={profile}
             slotData={gateSlotMap}
-            entryMode="pitch"
+            entryMode={entryMode}
+            ownedProducts={session.existingProducts}
+            recommendations={session.upsellRationale}
             profileComplete
             fastPathGateKey={fastPathGateKey}
             onProgressSubLabel={setProgressSubLabel}

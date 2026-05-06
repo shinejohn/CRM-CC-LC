@@ -5,18 +5,19 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { aiService } from '../services/ai.service';
-import { 
-  AIMessage, 
-  AIPersonality, 
-  ChatContext, 
+import {
+  AIMessage,
+  AIPersonality,
+  ChatContext,
   StreamingChunk,
-  GenerationRequest 
+  GenerationRequest,
+  ToolCall,
 } from '../services/ai.types';
 
 interface UseAIOptions {
   personalityId?: string;
   context?: ChatContext;
-  onToolCall?: (toolCall: any) => void;
+  onToolCall?: (toolCall: Partial<ToolCall>) => void;
 }
 
 interface UseAIReturn {
@@ -105,7 +106,9 @@ export function useAI(options: UseAIOptions = {}): UseAIReturn {
             break;
           
           case 'tool_call':
-            options.onToolCall?.(chunk.toolCall);
+            if (chunk.toolCall) {
+              options.onToolCall?.(chunk.toolCall);
+            }
             setMessages(prev =>
               prev.map(m =>
                 m.id === assistantMessageId
@@ -115,7 +118,7 @@ export function useAI(options: UseAIOptions = {}): UseAIReturn {
                         ...m.metadata,
                         toolCalls: [
                           ...(m.metadata?.toolCalls || []),
-                          chunk.toolCall as any,
+                          chunk.toolCall as ToolCall,
                         ],
                       },
                     }

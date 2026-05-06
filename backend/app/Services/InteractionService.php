@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Interaction;
@@ -7,7 +9,7 @@ use App\Models\InteractionTemplate;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Log;
 
-class InteractionService
+final class InteractionService
 {
     /**
      * Create a new interaction for a customer

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Enums\PipelineStage;
@@ -16,7 +18,7 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|Customer newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Customer query()
  */
-class Customer extends Model
+final class Customer extends Model
 {
     use \App\Traits\HasTenantScope, HasFactory, HasUuids, SoftDeletes;
 

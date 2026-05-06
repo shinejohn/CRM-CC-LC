@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
-class WorkflowResult
+final class WorkflowResult
 {
     public function __construct(
         public readonly bool $success,

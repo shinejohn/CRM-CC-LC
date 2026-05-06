@@ -5,7 +5,16 @@ import { Badge } from '@/components/ui/badge';
 import { Users, Award, Star, ShieldCheck, Mail, ArrowRight, Zap, Target, ExternalLink, CheckCircle2 } from 'lucide-react';
 
 export const SponsorsPage: React.FC = () => {
-  const [currentSponsorships, setCurrentSponsorships] = React.useState<any[]>([]);
+  interface Sponsorship {
+    id: string;
+    name: string;
+    status: string;
+    tier: string;
+    benefits: string[];
+    renewalDate: string;
+  }
+
+  const [currentSponsorships, setCurrentSponsorships] = React.useState<Sponsorship[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {

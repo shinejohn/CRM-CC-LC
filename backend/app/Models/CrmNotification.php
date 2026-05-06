@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class CrmNotification extends Model
+final class CrmNotification extends Model
 {
     use \App\Traits\HasTenantScope, HasUuids;
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -14,7 +16,7 @@ use App\Services\StripeService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
-class SocialStudioController extends Controller
+final class SocialStudioController extends Controller
 {
     protected StripeService $stripeService;
 

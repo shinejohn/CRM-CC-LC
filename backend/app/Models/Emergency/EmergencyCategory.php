@@ -1,13 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Emergency;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class EmergencyCategory extends Model
+final class EmergencyCategory extends Model
 {
-    use HasFactory;
+    use HasUuids, HasFactory;
 
     protected $fillable = [
         'slug',

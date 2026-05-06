@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Events\InboundEmailReceived;
@@ -8,7 +10,7 @@ use App\Jobs\SendEmailCampaign;
 use App\Services\AccountManagerService;
 use Illuminate\Support\Facades\Log;
 
-class InboundEmailRoutingService
+final class InboundEmailRoutingService
 {
     public function __construct(
         protected ?AccountManagerService $accountManagerService = null

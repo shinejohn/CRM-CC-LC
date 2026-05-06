@@ -25,16 +25,12 @@ export const ReviewDashboard: React.FC = () => {
         setLoading(true);
         setError(null);
         try {
-            // Debug logging as per troubleshooting guide
-            console.log('ReviewDashboard: Loading campaigns...');
             const allCampaigns = await campaignApi.getAllCampaigns();
-            console.log('ReviewDashboard: Loaded campaigns', allCampaigns.length);
 
             setCampaigns(allCampaigns);
             setFilteredCampaigns(allCampaigns);
-        } catch (error) {
-            console.error('ReviewDashboard: Failed to load campaigns:', error);
-            setError('Failed to load campaigns. Please check console for details.');
+        } catch (_error) {
+            setError('Failed to load campaigns.');
         } finally {
             setLoading(false);
         }
@@ -61,14 +57,6 @@ export const ReviewDashboard: React.FC = () => {
         }
 
         setFilteredCampaigns(filtered);
-
-        // Debug logging
-        console.log('ReviewDashboard render:', {
-            loading,
-            error,
-            campaignsCount: campaigns.length,
-            filteredCount: filtered.length
-        });
     };
 
     const getCampaignType = (campaignId: string) => {

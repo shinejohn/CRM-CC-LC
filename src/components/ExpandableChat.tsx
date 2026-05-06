@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import { ChatPanel } from './ChatPanel';
 import { ChevronUpIcon, ChevronDownIcon, MessageCircleIcon } from 'lucide-react';
+
+interface ChatMessage {
+  sender: string;
+  text: string;
+  isAI: boolean;
+}
+
 interface ExpandableChatProps {
-  messages: any[];
-  addMessage: (message: any) => void;
+  messages: ChatMessage[];
+  addMessage: (message: ChatMessage) => void;
   defaultExpanded?: boolean;
 }
 export const ExpandableChat = ({

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Communication;
 
 use App\Contracts\Communication\ChannelInterface;
@@ -8,7 +10,7 @@ use App\Services\Communication\Channels\SmsChannel;
 use App\Services\Communication\Channels\PushChannel;
 use InvalidArgumentException;
 
-class ChannelFactory
+final class ChannelFactory
 {
     public function __construct(
         private EmailChannel $emailChannel,

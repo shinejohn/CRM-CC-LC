@@ -1,13 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Enums\PipelineStage;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class CampaignTimeline extends Model
+final class CampaignTimeline extends Model
 {
+    use HasUuids;
+
     protected $fillable = [
         'name',
         'slug',

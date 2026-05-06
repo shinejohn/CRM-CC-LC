@@ -55,7 +55,7 @@ export function CustomersListPage() {
   const deleteCustomerMutation = useDeleteCustomer();
 
   const customers = useMemo(() => {
-    const items = (data?.data ?? []) as ApiCustomer[];
+    const items = (data?.data ?? []) as unknown as ApiCustomer[];
     return items.map(mapApiCustomerToUi);
   }, [data?.data]);
 
@@ -235,7 +235,12 @@ export function CustomersListPage() {
 }
 
 // Sub-components
-function StatsCard({ label, value, icon: Icon, color }: any) {
+function StatsCard({ label, value, icon: Icon, color }: {
+  label: string;
+  value: number;
+  icon: React.ComponentType<{ className?: string }>;
+  color: 'blue' | 'green' | 'purple' | 'red';
+}) {
   const colorClasses = {
     blue: 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400',
     green: 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400',
@@ -246,7 +251,7 @@ function StatsCard({ label, value, icon: Icon, color }: any) {
   return (
     <Card>
       <CardContent className="p-4 flex items-center gap-4">
-        <div className={`p-3 rounded-lg ${colorClasses[color as keyof typeof colorClasses]}`}>
+        <div className={`p-3 rounded-lg ${colorClasses[color]}`}>
           <Icon className="w-5 h-5" />
         </div>
         <div>
@@ -306,7 +311,11 @@ function ErrorState({ message, onRetry }: { message: string; onRetry: () => void
   );
 }
 
-function Pagination({ page, totalPages, onPageChange }: any) {
+function Pagination({ page, totalPages, onPageChange }: {
+  page: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}) {
   return (
     <div className="flex items-center justify-center gap-2 mt-6">
       <Button

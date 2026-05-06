@@ -1,12 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class ObjectionEncounter extends Model
+final class ObjectionEncounter extends Model
 {
+    use HasUuids;
+
     protected $fillable = [
         'customer_id',
         'objection_handler_id',

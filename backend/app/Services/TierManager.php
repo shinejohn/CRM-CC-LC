@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Customer;
 use App\Events\SMB\SMBTierChanged;
 use App\Jobs\SendPremiumWelcome;
 
-class TierManager
+final class TierManager
 {
     /**
      * Upgrade customer to higher tier (lower tier number = higher tier)

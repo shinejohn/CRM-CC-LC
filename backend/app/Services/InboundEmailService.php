@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Events\InboundEmailReceived;
@@ -8,7 +10,7 @@ use App\Models\Customer;
 use App\Models\EmailSuppression;
 use Illuminate\Support\Facades\Log;
 
-class InboundEmailService
+final class InboundEmailService
 {
     public function __construct(
         protected EmailIntentClassifier $intentClassifier,

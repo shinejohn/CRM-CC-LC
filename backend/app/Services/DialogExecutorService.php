@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Customer;
@@ -9,7 +11,7 @@ use App\Models\DialogTreeNode;
 use App\Models\DialogExecution;
 use Illuminate\Support\Facades\Log;
 
-class DialogExecutorService
+final class DialogExecutorService
 {
     /**
      * Start a new dialog execution.

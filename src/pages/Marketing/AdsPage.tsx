@@ -13,7 +13,20 @@ import {
 export const AdsPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const [campaigns, setCampaigns] = useState<any[]>([]);
+  interface AdCampaign {
+    id: string;
+    name: string;
+    status: string;
+    type: string;
+    spent: string;
+    budget: string;
+    impressions: string;
+    clicks: string;
+    ctr: string;
+    endDate: string;
+  }
+
+  const [campaigns, setCampaigns] = useState<AdCampaign[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   React.useEffect(() => {

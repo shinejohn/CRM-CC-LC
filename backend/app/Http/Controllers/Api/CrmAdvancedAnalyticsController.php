@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -7,7 +9,7 @@ use App\Services\CrmAdvancedAnalyticsService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
-class CrmAdvancedAnalyticsController extends Controller
+final class CrmAdvancedAnalyticsController extends Controller
 {
     public function __construct(
         private CrmAdvancedAnalyticsService $analyticsService

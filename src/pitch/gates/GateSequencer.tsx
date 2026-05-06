@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ComponentType } from "react";
-import type { AcceptedProduct, BusinessProfile, EntryMode, GateKey, PitchSession, SlotStatus } from "../types";
-import { determineGateOrder } from "./gateConfig";
+import type { AcceptedProduct, BusinessProfile, EntryMode, GateKey, PitchSession, SlotStatus, UpsellRecommendation } from "../types";
+import { determineGateOrder, determineUpsellGateOrder } from "./gateConfig";
 import { FastPathNav } from "../components/FastPathNav";
 import { DayNewsGate } from "./DayNewsGate";
 import { DowntownGuideGate } from "./DowntownGuideGate";
@@ -64,6 +64,10 @@ export interface GateSequencerProps {
   profileComplete?: boolean;
   /** Jump to a gate when `?gate=` matches (e.g. events → event_host). */
   fastPathGateKey?: GateKey | string;
+  /** Products the customer already owns (for upsell filtering) */
+  ownedProducts?: string[];
+  /** AI recommendations for gate ordering in upsell mode */
+  recommendations?: UpsellRecommendation[];
 }
 
 export function GateSequencer({
@@ -79,8 +83,15 @@ export function GateSequencer({
   onProgressSubLabel,
   profileComplete = true,
   fastPathGateKey,
+  ownedProducts,
+  recommendations,
 }: GateSequencerProps) {
-  const order = useMemo(() => determineGateOrder(session, profile), [session, profile]);
+  const order = useMemo(() => {
+    if (entryMode === "upsell" && ownedProducts?.length && recommendations?.length) {
+      return determineUpsellGateOrder(session, profile, ownedProducts, recommendations);
+    }
+    return determineGateOrder(session, profile);
+  }, [session, profile, entryMode, ownedProducts, recommendations]);
   const orderKey = order.join("|");
   const [index, setIndex] = useState(0);
   const gateBufferRef = useRef<AcceptedProduct[]>([]);

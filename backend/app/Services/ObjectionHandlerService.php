@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Customer;
@@ -8,7 +10,7 @@ use App\Models\ObjectionHandler;
 use App\Models\ObjectionEncounter;
 use Illuminate\Support\Facades\Log;
 
-class ObjectionHandlerService
+final class ObjectionHandlerService
 {
     /**
      * Handle an objection from a customer.

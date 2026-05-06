@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -9,7 +11,7 @@ use App\Models\CampaignRecipient;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
-class PhoneCampaignController extends Controller
+final class PhoneCampaignController extends Controller
 {
     /**
      * List phone campaigns

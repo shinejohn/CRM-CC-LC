@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Communication;
 
 use App\Jobs\Communication\ProcessMessages;
 use Illuminate\Support\Facades\DB;
 
-class PriorityDispatcher
+final class PriorityDispatcher
 {
     /**
      * Dispatch message processing jobs based on queue depth

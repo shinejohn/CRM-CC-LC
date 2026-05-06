@@ -1,12 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Operations;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class AIContextMemory extends Model
+final class AIContextMemory extends Model
 {
+    use HasUuids;
+
     protected $table = 'ops.ai_context_memory';
     
     protected $keyType = 'string';

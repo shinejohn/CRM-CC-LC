@@ -25,10 +25,16 @@ export interface Interaction {
   conversation_id?: string;
   outcome?: string;
   outcome_details?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
   created_at: string;
   updated_at: string;
-  customer?: any;
+  customer?: {
+    id: string;
+    name: string;
+    email: string;
+    phone?: string;
+    [key: string]: unknown;
+  };
   template?: InteractionTemplate;
   next_interaction?: Interaction;
   previous_interaction?: Interaction;
@@ -48,7 +54,7 @@ export interface InteractionTemplate {
     scheduled_offset_days?: number;
     due_offset_days?: number;
     next_step?: number;
-    metadata?: Record<string, any>;
+    metadata?: Record<string, unknown>;
   }>;
   is_active: boolean;
   is_default: boolean;
@@ -70,7 +76,7 @@ export interface CreateInteractionData {
   campaign_id?: string;
   conversation_id?: string;
   entry_point?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface StartWorkflowData {

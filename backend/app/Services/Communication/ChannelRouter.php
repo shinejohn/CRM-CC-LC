@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Communication;
 
 use App\DTOs\Communication\MessageRequest;
@@ -7,7 +9,7 @@ use App\DTOs\Communication\RoutingDecision;
 use App\Models\Communication\ChannelHealth;
 use InvalidArgumentException;
 
-class ChannelRouter
+final class ChannelRouter
 {
     public function __construct(
         private array $config = []

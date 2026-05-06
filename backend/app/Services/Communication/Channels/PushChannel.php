@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Communication\Channels;
 
 use App\Contracts\Communication\ChannelInterface;
@@ -9,7 +11,7 @@ use App\DTOs\Communication\SendResult;
 use App\DTOs\Communication\ChannelHealth;
 use App\Services\Communication\Gateways\FCMGateway;
 
-class PushChannel implements ChannelInterface
+final class PushChannel implements ChannelInterface
 {
     private ?GatewayInterface $gateway = null;
 

@@ -53,7 +53,7 @@ export interface DashboardCard {
   defaultColor: string;
   position: { row: number; col: number };
   size: { rows: number; cols: number };
-  data?: any;
+  data?: Record<string, unknown>;
 }
 
 export type CardType = 
@@ -69,7 +69,7 @@ export interface Activity {
   description: string;
   timestamp: string;
   customerId?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
   status: 'pending' | 'in_progress' | 'completed' | 'cancelled';
   priority?: 'low' | 'medium' | 'high';
   assigned_to?: string;
@@ -116,8 +116,8 @@ export interface AIMessage {
 export interface ToolCall {
   id: string;
   name: string;
-  arguments: Record<string, any>;
-  result?: any;
+  arguments: Record<string, unknown>;
+  result?: unknown;
 }
 
 export interface Citation {
@@ -129,7 +129,7 @@ export interface Citation {
 // Events
 export interface CommandCenterEvent {
   type: EventType;
-  payload: any;
+  payload: unknown;
   timestamp: string;
   source: string;
 }

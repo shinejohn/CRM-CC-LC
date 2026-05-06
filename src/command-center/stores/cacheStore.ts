@@ -7,7 +7,7 @@ interface CacheEntry<T> {
 }
 
 interface CacheState {
-  cache: Map<string, CacheEntry<any>>;
+  cache: Map<string, CacheEntry<unknown>>;
   
   // Actions
   get: <T>(key: string) => T | null;

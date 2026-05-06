@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Newsletter;
 
 use App\Contracts\Newsletter\NewsletterServiceInterface;
@@ -11,7 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class NewsletterService implements NewsletterServiceInterface
+final class NewsletterService implements NewsletterServiceInterface
 {
     public function __construct(
         private ContentAggregator $aggregator,

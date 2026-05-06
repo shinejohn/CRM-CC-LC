@@ -55,7 +55,7 @@ interface FibonaccoPlayerProps {
   onComplete?: () => void;
 }
 
-const slideComponents: Record<string, React.ComponentType<any>> = {
+const slideComponents = {
   HeroSlide,
   ProblemSlide,
   SolutionSlide,
@@ -90,7 +90,7 @@ const slideComponents: Record<string, React.ComponentType<any>> = {
   IntegrationSlide,
   PreviewSlide,
   StorySlide,
-};
+} as unknown as Record<string, React.ComponentType<Record<string, unknown>>>;
 
 export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
   presentation,
@@ -210,9 +210,9 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
     setIsFullscreen(!isFullscreen);
   };
 
-  const SlideComponent = activeSlide
-    ? slideComponents[activeSlide.component] || HeroSlide
-    : HeroSlide;
+  const SlideComponent: React.ComponentType<Record<string, unknown>> = activeSlide
+    ? slideComponents[activeSlide.component] || slideComponents['HeroSlide']
+    : slideComponents['HeroSlide'];
 
   return (
     <div
@@ -223,9 +223,9 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
       <div className="flex-1 relative overflow-hidden">
         {activeSlide && (
           <SlideComponent
-            content={activeSlide.content as any}
+            content={activeSlide.content}
             isActive={true}
-            {...({ theme } as any)}
+            theme={theme}
           />
         )}
       </div>
@@ -235,9 +235,9 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
         <div className="absolute bottom-24 left-0 right-0 px-6 z-20">
           <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg">
             <div className="flex items-center gap-3">
-              {(presentation.presenter as any).avatar_url ? (
+              {'avatar_url' in presentation.presenter && presentation.presenter.avatar_url ? (
                 <img
-                  src={(presentation.presenter as any).avatar_url}
+                  src={presentation.presenter.avatar_url}
                   alt={presentation.presenter.name}
                   className="w-12 h-12 rounded-full"
                 />
@@ -266,7 +266,7 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
                   <p className="text-sm text-gray-700">{activeSlide.narration}</p>
                 ) : (
                   <p className="text-sm text-gray-500 italic">
-                    {(presentation.presenter as any).communication_style || 'Presenting slide content...'}
+                    {'communication_style' in presentation.presenter ? presentation.presenter.communication_style : 'Presenting slide content...'}
                   </p>
                 )}
               </div>
@@ -392,7 +392,7 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
           }
         }}
         presenterName={presentation.presenter?.name}
-        customerId={(presentation.meta as any)?.email_hook ? undefined : undefined} // Extract from presentation
+        customerId={undefined}
         presentationId={presentation.id}
         conversationId={conversationId}
         onResume={() => {

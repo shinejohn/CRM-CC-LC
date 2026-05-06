@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Subscriber;
 
 use App\Contracts\Subscriber\ListServiceInterface;
@@ -9,7 +11,7 @@ use App\Models\Subscriber\CommunitySmsList;
 use App\Models\Subscriber\SubscriberAlertPreference;
 use App\Models\Community;
 
-class ListService implements ListServiceInterface
+final class ListService implements ListServiceInterface
 {
     public function getNewsletterRecipients(string $communityId, string $frequency): array
     {

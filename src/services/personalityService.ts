@@ -2,6 +2,7 @@
  * AI personality operations
  */
 
+import type { AxiosResponse } from 'axios';
 import { apiClient } from '@/services/api';
 import type {
   AiPersonality,
@@ -13,22 +14,22 @@ import type { ApiResponse } from '../types/common';
 
 export const personalityService = {
   list: () =>
-    apiClient.get<ApiResponse<AiPersonality[]>>('/personalities').then((r: any) => r.data.data ?? r.data),
+    apiClient.get<ApiResponse<AiPersonality[]>>('/personalities').then((r: AxiosResponse<ApiResponse<AiPersonality[]>>) => r.data.data ?? r.data),
 
   get: (id: string) =>
-    apiClient.get<ApiResponse<AiPersonality>>(`/personalities/${id}`).then((r: any) => r.data.data),
+    apiClient.get<ApiResponse<AiPersonality>>(`/personalities/${id}`).then((r: AxiosResponse<ApiResponse<AiPersonality>>) => r.data.data),
 
   getAssignments: () =>
-    apiClient.get<ApiResponse<PersonalityAssignment[]>>('/personalities/assignments').then((r: any) => r.data.data ?? r.data),
+    apiClient.get<ApiResponse<PersonalityAssignment[]>>('/personalities/assignments').then((r: AxiosResponse<ApiResponse<PersonalityAssignment[]>>) => r.data.data ?? r.data),
 
   assignToCustomer: (personalityId: string, customerId: string) =>
     apiClient.post<ApiResponse<PersonalityAssignment>>('/personalities/assign', {
       personality_id: personalityId,
       customer_id: customerId,
-    }).then((r: any) => r.data.data),
+    }).then((r: AxiosResponse<ApiResponse<PersonalityAssignment>>) => r.data.data),
 
   getCustomerPersonality: (customerId: string) =>
-    apiClient.get<ApiResponse<AiPersonality | null>>(`/personalities/customers/${customerId}/personality`).then((r: any) => r.data.data),
+    apiClient.get<ApiResponse<AiPersonality | null>>(`/personalities/customers/${customerId}/personality`).then((r: AxiosResponse<ApiResponse<AiPersonality | null>>) => r.data.data),
 
   /**
    * Generate AI response using personality. Uses non-streaming (backend does not support SSE yet).

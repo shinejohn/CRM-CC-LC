@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Communication\Gateways;
 
 use App\Contracts\Communication\GatewayInterface;
@@ -9,7 +11,7 @@ use App\DTOs\Communication\RateStatus;
 use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Log;
 
-class TwilioGateway implements GatewayInterface
+final class TwilioGateway implements GatewayInterface
 {
     private ?Client $client = null;
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -8,7 +10,7 @@ use App\Models\Newsletter\NewsletterContentItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class NewsletterTrackingController extends Controller
+final class NewsletterTrackingController extends Controller
 {
     /**
      * Track newsletter open (pixel)

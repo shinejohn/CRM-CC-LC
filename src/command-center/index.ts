@@ -52,5 +52,4 @@ export { useAI } from './hooks/useAI';
 export { useAIStore } from './stores/aiStore';
 
 // Config exports
-export { mainNavigation, secondaryNavigation } from './config/navigation';
 export { initializeEventBridge } from './config/events';

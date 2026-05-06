@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\V1;
 
 use App\Contracts\LearningCenterServiceInterface;
@@ -11,7 +13,7 @@ use App\Models\ContentView;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ContentTrackingController extends Controller
+final class ContentTrackingController extends Controller
 {
     public function __construct(
         protected LearningCenterServiceInterface $learningCenterService

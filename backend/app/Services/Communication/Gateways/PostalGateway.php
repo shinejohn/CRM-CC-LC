@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Communication\Gateways;
 
 use App\Contracts\Communication\GatewayInterface;
@@ -9,7 +11,7 @@ use App\DTOs\Communication\RateStatus;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class PostalGateway implements GatewayInterface
+final class PostalGateway implements GatewayInterface
 {
     private string $apiKey;
     private string $apiUrl;

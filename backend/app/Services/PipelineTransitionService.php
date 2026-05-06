@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Customer;
@@ -7,7 +9,7 @@ use App\Enums\PipelineStage;
 use App\Events\PipelineStageChanged;
 use Illuminate\Support\Facades\Log;
 
-class PipelineTransitionService
+final class PipelineTransitionService
 {
     public function __construct(
         protected ?CampaignOrchestratorService $orchestrator = null

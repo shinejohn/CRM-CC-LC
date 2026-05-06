@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Newsletter;
 
 use App\Services\EmailService;
@@ -9,7 +11,7 @@ use Illuminate\Support\Facades\Log;
  * Adapter to bridge Newsletter Engine with EmailService (Module 0B equivalent)
  * This wraps EmailService to provide the interface expected by NewsletterService
  */
-class MessageServiceAdapter
+final class MessageServiceAdapter
 {
     public function __construct(
         private EmailService $emailService

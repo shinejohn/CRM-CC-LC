@@ -11,8 +11,19 @@ export const AlertManagementPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [activeAlerts, setActiveAlerts] = React.useState<any[]>([]);
-  const [pendingApprovals, setPendingApprovals] = React.useState<any[]>([]);
+  interface Alert {
+    id: string;
+    type: string;
+    title: string;
+    area: string;
+    channel?: string;
+    expires?: string;
+    requestedBy?: string;
+    submitted?: string;
+  }
+
+  const [activeAlerts, setActiveAlerts] = React.useState<Alert[]>([]);
+  const [pendingApprovals, setPendingApprovals] = React.useState<Alert[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {

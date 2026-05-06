@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -7,7 +9,7 @@ use App\Models\Service;
 use App\Services\ProductDependencyService;
 use Illuminate\Http\Request;
 
-class ProductCatalogController extends Controller
+final class ProductCatalogController extends Controller
 {
     private ProductDependencyService $dependencyService;
 

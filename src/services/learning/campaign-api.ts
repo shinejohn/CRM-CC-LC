@@ -4,54 +4,70 @@
 
 import { apiClient } from './api-client';
 import { generateCampaignSlides } from '@/utils/campaign-content-generator';
-import type { Presentation } from '@/types/learning';
+import type { Presentation, SlideComponentType } from '@/types/learning';
 
 /**
  * Generate narration text for a slide based on its content
  */
 function generateNarrationText(
-  slide: { id: number; component: string; content: Record<string, any> },
+  slide: { id: number; component: string; content: Record<string, unknown> },
   campaign: CampaignData['campaign'],
   landingPage: CampaignLandingPage
 ): string {
   const { component, content } = slide;
-  
+
+  // Helpers to safely extract typed values from Record<string, unknown>
+  const str = (key: string): string | undefined => {
+    const v = content[key];
+    return typeof v === 'string' ? v : undefined;
+  };
+  const arr = (key: string): unknown[] | undefined => {
+    const v = content[key];
+    return Array.isArray(v) ? v : undefined;
+  };
+
   // Generate narration based on component type and content
   switch (component) {
     case 'HeroSlide':
-      return content.headline 
-        ? `${content.headline}. ${content.subheadline || ''}`
+      return str('headline')
+        ? `${str('headline')}. ${str('subheadline') || ''}`
         : `Welcome to ${campaign.title || 'this presentation'}`;
-    
+
     case 'ProblemSlide':
-      return content.problem || `Let's talk about the challenges facing ${campaign.type || 'businesses'} today.`;
-    
-    case 'SolutionSlide':
-      if (content.benefits && content.benefits.length > 0) {
-        return `${content.title || 'The Solution'}. ${content.solution || ''} ${content.benefits.join('. ')}`;
+      return str('problem') || `Let's talk about the challenges facing ${campaign.type || 'businesses'} today.`;
+
+    case 'SolutionSlide': {
+      const benefits = arr('benefits') as string[] | undefined;
+      if (benefits && benefits.length > 0) {
+        return `${str('title') || 'The Solution'}. ${str('solution') || ''} ${benefits.join('. ')}`;
       }
-      return content.solution || `Here's how we can help solve these challenges.`;
-    
-    case 'StatsSlide':
-      if (content.stats && content.stats.length > 0) {
-        const statsText = content.stats.map((s: any) => `${s.value} ${s.label}`).join(', ');
-        return `${content.headline || 'Here are some important statistics'}. ${statsText}`;
+      return str('solution') || `Here's how we can help solve these challenges.`;
+    }
+
+    case 'StatsSlide': {
+      const stats = arr('stats') as Array<{ value: string; label: string }> | undefined;
+      if (stats && stats.length > 0) {
+        const statsText = stats.map((s) => `${s.value} ${s.label}`).join(', ');
+        return `${str('headline') || 'Here are some important statistics'}. ${statsText}`;
       }
-      return content.headline || 'Let me share some important statistics with you.';
-    
+      return str('headline') || 'Let me share some important statistics with you.';
+    }
+
     case 'ComparisonSlide':
-      return content.headline || 'Let me show you the difference between the old way and the new way.';
-    
-    case 'ProcessSlide':
-      if (content.steps && content.steps.length > 0) {
-        const stepsText = content.steps.map((s: any) => `Step ${s.number}: ${s.title}`).join('. ');
-        return `${content.headline || 'Here\'s how it works'}. ${stepsText}`;
+      return str('headline') || 'Let me show you the difference between the old way and the new way.';
+
+    case 'ProcessSlide': {
+      const steps = arr('steps') as Array<{ number: number; title: string }> | undefined;
+      if (steps && steps.length > 0) {
+        const stepsText = steps.map((s) => `Step ${s.number}: ${s.title}`).join('. ');
+        return `${str('headline') || 'Here\'s how it works'}. ${stepsText}`;
       }
-      return content.headline || 'Let me walk you through the process.';
-    
+      return str('headline') || 'Let me walk you through the process.';
+    }
+
     case 'CTASlide':
-      return content.headline || `Ready to get started? ${content.subheadline || 'Take action today.'}`;
-    
+      return str('headline') || `Ready to get started? ${str('subheadline') || 'Take action today.'}`;
+
     default:
       return `Slide ${slide.id}: ${campaign.title || 'Continuing the presentation'}`;
   }
@@ -108,7 +124,7 @@ export interface CampaignData {
     content_type?: string;
     requires_personalization?: boolean;
     audio_file: string;
-    content?: Record<string, any>;
+    content?: Record<string, unknown>;
     narration?: string;
     duration_seconds?: number;
     title?: string;
@@ -124,6 +140,7 @@ export interface CampaignData {
       component: string;
       audioFile: string;
       requiresPersonalization: boolean;
+      content?: Record<string, unknown>;
     }>;
   };
   article?: {
@@ -190,8 +207,8 @@ export const campaignApi = {
         mappedSlides = presentation.slides.map((slide, index) => ({
           id: slide.id || index + 1,
           component: slide.component,
-          content: (slide as any).content || {},
-          audioUrl: presentation.audio?.baseUrl 
+          content: slide.content || {},
+          audioUrl: presentation.audio?.baseUrl
             ? `${presentation.audio.baseUrl}${slide.audioFile || ''}`
             : landing_page.audio_base_url 
             ? `${landing_page.audio_base_url}slide-${String(index + 1).padStart(2, '0')}.mp3`
@@ -217,18 +234,18 @@ export const campaignApi = {
         const mappedComponent = componentMap[originalComponent] || originalComponent;
         
         // If component is invalid and no content exists, we'll generate it
-        const hasContent = (slide as any).content && Object.keys((slide as any).content).length > 0;
-        
+        const hasContent = slide.content && Object.keys(slide.content).length > 0;
+
         return {
           id: slide.slide_num || index + 1,
           component: mappedComponent,
-          content: (slide as any).content || {},
-          audioUrl: landing_page.audio_base_url 
+          content: slide.content || {},
+          audioUrl: landing_page.audio_base_url
             ? `${landing_page.audio_base_url}${slide.audio_file || `slide-${String(index + 1).padStart(2, '0')}.mp3`}`
             : undefined,
           requiresPersonalization: slide.requires_personalization || false,
-          narration: (slide as any).narration || generateNarrationText(
-            { id: slide.slide_num || index + 1, component: mappedComponent, content: (slide as any).content || {} },
+          narration: slide.narration || generateNarrationText(
+            { id: slide.slide_num || index + 1, component: mappedComponent, content: slide.content || {} },
             campaign,
             landing_page
           ),
@@ -249,12 +266,12 @@ export const campaignApi = {
       if (mappedSlides.length === 0 || mappedSlides.every(s => !s.content || Object.keys(s.content).length === 0)) {
         mappedSlides = generatedSlides.map(slide => ({
           id: slide.id,
-          component: slide.component as any,
+          component: slide.component,
           content: slide.content,
           audio_url: slide.audioUrl,
-          audioUrl: slide.audioUrl, // Support both formats
+          audioUrl: slide.audioUrl,
           requiresPersonalization: slide.requiresPersonalization,
-          narration: generateNarrationText(slide, campaign, landing_page), // Add narration
+          narration: generateNarrationText(slide, campaign, landing_page),
         }));
       } else {
         // Complete missing slides
@@ -271,7 +288,7 @@ export const campaignApi = {
           })),
           ...missingSlides.map(slide => ({
             id: slide.id,
-            component: slide.component as any,
+            component: slide.component,
             content: slide.content,
             audio_url: slide.audioUrl,
             audioUrl: slide.audioUrl,
@@ -300,7 +317,7 @@ export const campaignApi = {
       template_id: template.template_id,
       slides: mappedSlides.map(slide => ({
         ...slide,
-        component: slide.component as any,
+        component: slide.component as SlideComponentType,
         audio_url: slide.audioUrl || slide.audio_url,
         narration: slide.narration || '',
       })),

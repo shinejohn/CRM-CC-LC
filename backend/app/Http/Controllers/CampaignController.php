@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Services\WorkflowOrchestrator;
 use App\Models\WorkflowExecution;
 use Illuminate\Http\Request;
 
-class CampaignController extends Controller
+final class CampaignController extends Controller
 {
     public function __construct(
         protected WorkflowOrchestrator $orchestrator

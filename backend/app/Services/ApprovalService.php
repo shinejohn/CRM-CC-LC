@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Contracts\ApprovalServiceInterface;
@@ -19,7 +21,7 @@ use App\Models\ApprovalUpsell;
 use App\Models\ProvisioningTask;
 use Illuminate\Support\Facades\Log;
 
-class ApprovalService implements ApprovalServiceInterface
+final class ApprovalService implements ApprovalServiceInterface
 {
     public function __construct(
         protected ApprovalTokenService $tokenService

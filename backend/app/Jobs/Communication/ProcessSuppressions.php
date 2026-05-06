@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Jobs\Communication;
 
 use App\Models\Communication\MessageQueue;
@@ -11,13 +13,11 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class ProcessSuppressions implements ShouldQueue
+final class ProcessSuppressions implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public function handle(SuppressionService $suppressionService): void
-    
-    public function handle(): void
     {
         // Process hard bounces
         $hardBounces = DeliveryEvent::where('event_type', 'bounced')

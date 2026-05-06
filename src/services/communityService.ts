@@ -2,6 +2,7 @@
  * Community operations for Command Center
  */
 
+import type { AxiosResponse } from 'axios';
 import { apiClient } from '@/services/api';
 import type { ApiResponse, PaginatedResponse } from '../types/common';
 
@@ -62,15 +63,15 @@ export const communityService = {
   list: (filters?: CommunityListFilters) =>
     apiClient
       .get<PaginatedResponse<Community>>('/communities', { params: filters })
-      .then((r: any) => r.data),
+      .then((r: AxiosResponse<PaginatedResponse<Community>>) => r.data),
 
   get: (id: string) =>
-    apiClient.get<ApiResponse<Community>>(`/communities/${id}`).then((r: any) => r.data.data),
+    apiClient.get<ApiResponse<Community>>(`/communities/${id}`).then((r: AxiosResponse<ApiResponse<Community>>) => r.data.data),
 
   getBusinesses: (communityId: string, filters?: CommunityBusinessFilters) =>
     apiClient
       .get<PaginatedResponse<CommunityBusiness>>(`/communities/${communityId}/businesses`, {
         params: filters,
       })
-      .then((r: any) => r.data),
+      .then((r: AxiosResponse<PaginatedResponse<CommunityBusiness>>) => r.data),
 };

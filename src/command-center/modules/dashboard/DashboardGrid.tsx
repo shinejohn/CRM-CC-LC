@@ -9,11 +9,22 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '../../core/ThemeProvider';
 import { ColorPicker } from '../../components/ui/ColorPicker';
-import { DashboardCard } from '@/types/command-center';
+import { DashboardCard, Activity } from '@/types/command-center';
+
+interface DashboardCardItem {
+  id: string;
+  title?: string;
+  status?: string;
+  from?: string;
+  subject?: string;
+  message?: string;
+  event?: string;
+  time?: string;
+}
 
 interface DashboardGridProps {
   widgets: DashboardCard[];
-  activities: any[];
+  activities: Activity[];
 }
 
 const defaultCards: DashboardCard[] = [
@@ -136,7 +147,7 @@ function DashboardCardContent({
   isDarkMode: boolean;
 }) {
   // Mock data - in real implementation, this comes from API
-  const mockData: Record<string, any[]> = {
+  const mockData: Record<string, DashboardCardItem[]> = {
     tasks: [
       { id: '1', title: 'Review marketing copy', status: 'In Progress' },
       { id: '2', title: 'Update quarterly goals', status: 'Pending' },

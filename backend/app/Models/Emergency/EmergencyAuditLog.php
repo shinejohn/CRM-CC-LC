@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Emergency;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class EmergencyAuditLog extends Model
+final class EmergencyAuditLog extends Model
 {
-    use HasFactory;
+    use HasUuids, HasFactory;
 
     public $timestamps = false;
 

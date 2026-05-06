@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { apiService } from '../services/api.service';
-import { DashboardCard } from '@/types/command-center';
+import { DashboardCard, Activity } from '@/types/command-center';
 
 interface DashboardMetric {
   id: string;
@@ -8,14 +8,14 @@ interface DashboardMetric {
   value: string | number;
   change?: number;
   changeLabel?: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
   color: string;
 }
 
 interface UseDashboardReturn {
   metrics: DashboardMetric[];
   widgets: DashboardCard[];
-  activities: any[];
+  activities: Activity[];
   isLoading: boolean;
   error: string | null;
   refreshDashboard: () => Promise<void>;
@@ -25,7 +25,7 @@ interface UseDashboardReturn {
 export function useDashboard(): UseDashboardReturn {
   const [metrics, setMetrics] = useState<DashboardMetric[]>([]);
   const [widgets, setWidgets] = useState<DashboardCard[]>([]);
-  const [activities, setActivities] = useState<any[]>([]);
+  const [activities, setActivities] = useState<Activity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

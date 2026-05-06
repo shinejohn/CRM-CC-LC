@@ -10,7 +10,7 @@ interface UseWebSocketOptions {
 interface UseWebSocketReturn {
   connectionState: ConnectionState;
   isConnected: boolean;
-  send: (type: string, channel: string, payload: any) => void;
+  send: (type: string, channel: string, payload: unknown) => void;
   subscribe: (channel: string, handler: ChannelHandler) => () => void;
   unsubscribe: (channel: string, handler: ChannelHandler) => void;
   connect: () => void;
@@ -33,9 +33,9 @@ export function useWebSocket(options: UseWebSocketOptions = {}): UseWebSocketRet
     websocketService.connect({
       url: wsUrl,
       token: tokens.accessToken,
-      onOpen: () => console.log('WebSocket connected'),
-      onClose: (event) => console.log('WebSocket closed:', event.code),
-      onError: (error) => console.error('WebSocket error:', error),
+      onOpen: () => {},
+      onClose: () => {},
+      onError: () => {},
     });
 
     const unsubscribe = websocketService.onStateChange(setConnectionState);
@@ -56,7 +56,7 @@ export function useWebSocket(options: UseWebSocketOptions = {}): UseWebSocketRet
     };
   }, []);
 
-  const send = useCallback((type: string, channel: string, payload: any) => {
+  const send = useCallback((type: string, channel: string, payload: unknown) => {
     websocketService.send({ type, channel, payload });
   }, []);
 

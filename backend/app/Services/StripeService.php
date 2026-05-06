@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Exception;
@@ -9,7 +11,7 @@ use Stripe\PaymentIntent;
 use Stripe\Stripe;
 use Stripe\StripeClient;
 
-class StripeService
+final class StripeService
 {
     private StripeClient $stripe;
 

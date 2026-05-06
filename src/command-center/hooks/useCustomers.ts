@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { apiService } from '../services/api.service';
-import { Customer, CustomerStage } from '@/types/command-center';
+import { Customer, CustomerStage, Activity } from '@/types/command-center';
 
 interface CustomerFilters {
   stage: CustomerStage | null;
@@ -88,7 +88,7 @@ export function useCustomers(filters: CustomerFilters) {
 
 export function useCustomer(id: string) {
   const [customer, setCustomer] = useState<Customer | null>(null);
-  const [timeline, setTimeline] = useState<any[]>([]);
+  const [timeline, setTimeline] = useState<Activity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -99,7 +99,7 @@ export function useCustomer(id: string) {
     try {
       const [customerRes, timelineRes] = await Promise.all([
         apiService.get<Customer>(`/v1/customers/${id}`),
-        apiService.get<any[]>(`/v1/customers/${id}/timeline`),
+        apiService.get<Activity[]>(`/v1/customers/${id}/timeline`),
       ]);
       
       if (customerRes.success && customerRes.data) {

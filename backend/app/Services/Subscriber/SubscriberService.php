@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Subscriber;
 
 use App\Contracts\Subscriber\SubscriberServiceInterface;
@@ -16,7 +18,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 
-class SubscriberService implements SubscriberServiceInterface
+final class SubscriberService implements SubscriberServiceInterface
 {
     public function register(array $data): Subscriber
     {

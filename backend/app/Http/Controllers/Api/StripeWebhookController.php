@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\Log;
 use Stripe\Exception\SignatureVerificationException;
 use Stripe\Webhook;
 
-class StripeWebhookController extends Controller
+final class StripeWebhookController extends Controller
 {
     public function __construct(
         private StripeService $stripeService

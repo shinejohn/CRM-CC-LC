@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
@@ -12,7 +14,7 @@ use Illuminate\Http\JsonResponse;
  * SMB Full Profile & Intelligence Hub API
  * Aggregates business data from customers, surveys, campaigns, and enrichment.
  */
-class SmbProfileController extends Controller
+final class SmbProfileController extends Controller
 {
     public function __construct(
         private SmbProfileService $smbProfileService

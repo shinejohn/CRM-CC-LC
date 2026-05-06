@@ -1,13 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Operations;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class AlertRule extends Model
+final class AlertRule extends Model
 {
+    use HasUuids;
+
     protected $table = 'ops.alert_rules';
     
     protected $keyType = 'string';

@@ -1,13 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Operations;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class AIRecommendation extends Model
+final class AIRecommendation extends Model
 {
+    use HasUuids;
+
     protected $table = 'ops.ai_recommendations';
     
     protected $keyType = 'string';

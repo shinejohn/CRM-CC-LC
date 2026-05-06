@@ -1,12 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class RevenueRecord extends Model
+final class RevenueRecord extends Model
 {
+    use HasUuids;
+
     protected $fillable = ['amount', 'recorded_at', 'community_id', 'description', 'source'];
 
     protected $casts = [

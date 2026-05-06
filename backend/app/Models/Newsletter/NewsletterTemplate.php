@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Newsletter;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class NewsletterTemplate extends Model
+final class NewsletterTemplate extends Model
 {
-    use HasFactory;
+    use HasUuids, HasFactory;
 
     protected $fillable = [
         'slug',

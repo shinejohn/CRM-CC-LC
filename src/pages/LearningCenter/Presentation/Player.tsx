@@ -72,8 +72,7 @@ export const PresentationPlayerPage: React.FC = () => {
         presentation={presentation}
         autoPlay={false}
         onComplete={() => {
-          // Handle completion
-          console.log('Presentation completed');
+          // Presentation completed
         }}
       />
     </div>

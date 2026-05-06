@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Communication\Channels;
 
 use App\Contracts\Communication\ChannelInterface;
@@ -10,7 +12,7 @@ use App\DTOs\Communication\ChannelHealth;
 use App\Services\Communication\Gateways\PostalGateway;
 use App\Services\Communication\Gateways\SesGateway;
 
-class EmailChannel implements ChannelInterface
+final class EmailChannel implements ChannelInterface
 {
     private ?GatewayInterface $gateway = null;
 

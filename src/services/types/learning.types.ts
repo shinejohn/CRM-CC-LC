@@ -13,7 +13,7 @@ export interface Campaign {
         tone: string;
     };
     slides?: CampaignSlide[];
-    [key: string]: any; // Allow fallback for other json properties
+    [key: string]: unknown;
 }
 
 export interface CampaignSlide {
@@ -24,8 +24,8 @@ export interface CampaignSlide {
     media_url?: string;
     cta_text?: string;
     cta_link?: string;
-    interactive_elements?: any[];
-    [key: string]: any;
+    interactive_elements?: Record<string, unknown>[];
+    [key: string]: unknown;
 }
 
 /**
@@ -81,7 +81,7 @@ export interface CampaignDataSlide {
     slide_num: number;
     component: string;
     title: string;
-    content: Record<string, any>;
+    content: Record<string, unknown>;
     narration: string;
     duration_seconds: number;
     audio_file: string;

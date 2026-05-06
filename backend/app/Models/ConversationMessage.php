@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class ConversationMessage extends Model
+final class ConversationMessage extends Model
 {
-    use HasFactory;
+    use HasUuids, HasFactory;
 
     protected $keyType = 'string';
 

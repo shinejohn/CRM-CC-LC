@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Contracts\SMBServiceInterface;
@@ -12,7 +14,7 @@ use App\Events\SMB\SMBUpdated;
 use App\Events\SMB\SMBEngagementChanged;
 use Illuminate\Contracts\Pagination\Paginator;
 
-class SMBService implements SMBServiceInterface
+final class SMBService implements SMBServiceInterface
 {
     public function __construct(
         private EngagementService $engagementService,

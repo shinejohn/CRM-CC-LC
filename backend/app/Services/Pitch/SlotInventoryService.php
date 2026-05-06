@@ -5,13 +5,33 @@ declare(strict_types=1);
 namespace App\Services\Pitch;
 
 use App\Models\CommunitySlotInventory;
+use App\Models\CommunitySlotLimit;
 use App\Models\SMB;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Canonical slot management service.
+ *
+ * Handles both platform-level slot inventory (CommunitySlotInventory — Day.News
+ * headliners, influencers, etc.) and category-level slot limits (CommunitySlotLimit —
+ * the subscription-tier ceiling enforced during pitch checkout).
+ *
+ * Merged from the former SlotEnforcementService (community ceiling + category limits)
+ * and the original SlotInventoryService (platform-specific slots with caching + watchers).
+ */
 final class SlotInventoryService
 {
+    // ─── Constants ───────────────────────────────────────────────────
+
     private const CACHE_TTL_SECONDS = 300;
+
+    /**
+     * Hard ceiling: maximum total influencer slots across all categories in one community.
+     */
+    private const COMMUNITY_CEILING = 37;
+
+    // ─── Platform Slot Inventory (CommunitySlotInventory) ────────────
 
     public function cacheKey(int|string $communityId, string $slotType, string $category, string $platform = 'day_news'): string
     {
@@ -158,6 +178,177 @@ final class SlotInventoryService
             }
         }
     }
+
+    // ─── Category Slot Limits (CommunitySlotLimit) — merged from SlotEnforcementService ──
+
+    /**
+     * Check if a category-level slot is available (for subscription checkout).
+     */
+    public function checkAvailability(
+        string $communityId,
+        string $categoryGroup,
+        ?string $categorySubtype,
+        string $tier = 'influencer'
+    ): array {
+        $slot = CommunitySlotLimit::where('community_id', $communityId)
+            ->where('category_group', $categoryGroup)
+            ->where('category_subtype', $categorySubtype)
+            ->first();
+
+        if (! $slot) {
+            return [
+                'available' => false,
+                'reason' => 'No slot limits configured for this category',
+                'remaining' => 0,
+                'max' => 0,
+            ];
+        }
+
+        if ($tier === 'expert') {
+            $remaining = $slot->expertSlotsRemaining();
+
+            return [
+                'available' => $remaining > 0,
+                'remaining' => $remaining,
+                'max' => $slot->max_expert_slots,
+                'current' => $slot->current_expert_count,
+            ];
+        }
+
+        // Influencer: check both category limit AND community ceiling
+        $remaining = $slot->influencerSlotsRemaining();
+
+        $totalInfluencers = CommunitySlotLimit::where('community_id', $communityId)
+            ->sum('current_influencer_count');
+
+        $ceilingRemaining = max(0, self::COMMUNITY_CEILING - $totalInfluencers);
+
+        return [
+            'available' => $remaining > 0 && $ceilingRemaining > 0,
+            'remaining' => min($remaining, $ceilingRemaining),
+            'max' => $slot->max_influencer_slots,
+            'current' => $slot->current_influencer_count,
+            'community_ceiling_remaining' => $ceilingRemaining,
+        ];
+    }
+
+    /**
+     * Reserve a category-level slot using row-level locking.
+     */
+    public function reserveSlot(
+        string $communityId,
+        string $categoryGroup,
+        ?string $categorySubtype,
+        string $tier = 'influencer'
+    ): bool {
+        return DB::transaction(function () use ($communityId, $categoryGroup, $categorySubtype, $tier) {
+            $slot = CommunitySlotLimit::where('community_id', $communityId)
+                ->where('category_group', $categoryGroup)
+                ->where('category_subtype', $categorySubtype)
+                ->lockForUpdate()
+                ->first();
+
+            if (! $slot) {
+                return false;
+            }
+
+            if ($tier === 'expert') {
+                if ($slot->expertSlotsRemaining() <= 0) {
+                    return false;
+                }
+                $slot->increment('current_expert_count');
+
+                return true;
+            }
+
+            // Influencer: check both category limit and community ceiling
+            if ($slot->influencerSlotsRemaining() <= 0) {
+                return false;
+            }
+
+            $totalInfluencers = CommunitySlotLimit::where('community_id', $communityId)
+                ->sum('current_influencer_count');
+
+            if ($totalInfluencers >= self::COMMUNITY_CEILING) {
+                return false;
+            }
+
+            $slot->increment('current_influencer_count');
+
+            return true;
+        });
+    }
+
+    /**
+     * Release a category-level slot when a subscription is cancelled.
+     */
+    public function releaseCategorySlot(
+        string $communityId,
+        string $categoryGroup,
+        ?string $categorySubtype,
+        string $tier = 'influencer'
+    ): bool {
+        return DB::transaction(function () use ($communityId, $categoryGroup, $categorySubtype, $tier) {
+            $slot = CommunitySlotLimit::where('community_id', $communityId)
+                ->where('category_group', $categoryGroup)
+                ->where('category_subtype', $categorySubtype)
+                ->lockForUpdate()
+                ->first();
+
+            if (! $slot) {
+                return false;
+            }
+
+            $column = $tier === 'expert' ? 'current_expert_count' : 'current_influencer_count';
+
+            if ($slot->$column > 0) {
+                $slot->decrement($column);
+            }
+
+            return true;
+        });
+    }
+
+    /**
+     * Full availability overview for all categories in a community (used by bridge endpoint).
+     */
+    public function getAvailabilityOverview(string $communityId): array
+    {
+        $slots = CommunitySlotLimit::where('community_id', $communityId)
+            ->orderBy('category_group')
+            ->orderBy('category_subtype')
+            ->get();
+
+        $totalInfluencers = $slots->sum('current_influencer_count');
+
+        $categories = [];
+        foreach ($slots as $slot) {
+            $categories[] = [
+                'category_group' => $slot->category_group,
+                'category_subtype' => $slot->category_subtype,
+                'influencer' => [
+                    'max' => $slot->max_influencer_slots,
+                    'current' => $slot->current_influencer_count,
+                    'remaining' => $slot->influencerSlotsRemaining(),
+                ],
+                'expert' => [
+                    'max' => $slot->max_expert_slots,
+                    'current' => $slot->current_expert_count,
+                    'remaining' => $slot->expertSlotsRemaining(),
+                ],
+            ];
+        }
+
+        return [
+            'community_id' => $communityId,
+            'community_ceiling' => self::COMMUNITY_CEILING,
+            'total_influencers' => $totalInfluencers,
+            'ceiling_remaining' => max(0, self::COMMUNITY_CEILING - $totalInfluencers),
+            'categories' => $categories,
+        ];
+    }
+
+    // ─── Private Helpers ─────────────────────────────────────────────
 
     /**
      * @param  array<int, mixed>  $deferred

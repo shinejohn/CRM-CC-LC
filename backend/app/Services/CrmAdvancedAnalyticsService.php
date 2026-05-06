@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Customer;
@@ -9,7 +11,7 @@ use App\Models\ServiceSubscription;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-class CrmAdvancedAnalyticsService
+final class CrmAdvancedAnalyticsService
 {
     /**
      * Calculate customer engagement score

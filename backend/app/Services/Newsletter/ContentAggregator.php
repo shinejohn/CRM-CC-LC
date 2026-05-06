@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Newsletter;
 
 use App\Models\Article;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class ContentAggregator
+final class ContentAggregator
 {
     public function aggregate(int $communityId, string $type, Carbon $date): array
     {

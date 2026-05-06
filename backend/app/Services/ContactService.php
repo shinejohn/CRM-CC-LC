@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\AiPersonality;
@@ -11,7 +13,7 @@ use App\Services\SMSService;
 use App\Services\PhoneService;
 use Illuminate\Support\Facades\Log;
 
-class ContactService
+final class ContactService
 {
     protected PersonalityService $personalityService;
     protected EmailService $emailService;

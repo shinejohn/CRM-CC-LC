@@ -58,8 +58,8 @@ describe('EventBus', () => {
 
     const history = eventBus.getHistory('test:event');
     expect(history).toHaveLength(2);
-    expect(history[0].payload.data).toBe('test1');
-    expect(history[1].payload.data).toBe('test2');
+    expect((history[0].payload as Record<string, string>).data).toBe('test1');
+    expect((history[1].payload as Record<string, string>).data).toBe('test2');
   });
 
   test('should limit history size', () => {

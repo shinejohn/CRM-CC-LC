@@ -4,7 +4,18 @@ import { conversationApi } from '@/services/crm/crm-api';
 import { MessageSquare, Clock, User, Search } from 'lucide-react';
 
 export const ConversationsPage: React.FC = () => {
-  const [conversations, setConversations] = useState<any[]>([]);
+  interface Conversation {
+    id: string;
+    session_id?: string;
+    customer?: {
+      business_name?: string;
+    };
+    entry_point?: string;
+    started_at: string;
+    outcome?: string;
+  }
+
+  const [conversations, setConversations] = useState<Conversation[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
 

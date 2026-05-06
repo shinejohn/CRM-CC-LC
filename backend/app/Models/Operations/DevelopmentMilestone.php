@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Operations;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class DevelopmentMilestone extends Model
+final class DevelopmentMilestone extends Model
 {
+    use HasUuids;
+
     protected $table = 'ops.development_milestones';
     
     protected $keyType = 'string';

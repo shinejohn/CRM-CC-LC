@@ -15,9 +15,9 @@ class AiGatewayClient
 
     public function __construct()
     {
-        $this->baseUrl = rtrim(config('ai-gateway-client.url') ?? env('AI_GATEWAY_URL'), '/');
-        $this->token = config('ai-gateway-client.token') ?? env('AI_GATEWAY_TOKEN') ?? '';
-        $this->timeout = (int) (config('ai-gateway-client.timeout') ?? 120);
+        $this->baseUrl = rtrim((string) (config('ai-gateway-client.url') ?? config('services.ai_gateway.url') ?? 'https://ai-gateway.fibonacco.com'), '/');
+        $this->token = (string) (config('ai-gateway-client.token') ?? config('services.ai_gateway.token') ?? '');
+        $this->timeout = (int) (config('ai-gateway-client.timeout') ?? config('services.ai_gateway.timeout') ?? 120);
     }
 
     /**

@@ -23,7 +23,7 @@ interface ActivityCardProps {
   onClick?: () => void;
 }
 
-const activityIcons: Record<ActivityType, React.ComponentType<any>> = {
+const activityIcons: Record<ActivityType, React.ComponentType<{ className?: string }>> = {
   phone_call: Phone,
   email: Mail,
   sms: MessageSquare,
@@ -53,10 +53,11 @@ export function ActivityCard({ activity, onComplete, onCancel, onClick }: Activi
   
   const Icon = activityIcons[activity.type] || FileText;
   const priorityClass = priorityColors[activity.metadata?.priority as keyof typeof priorityColors] || priorityColors.normal;
-  const scheduledAt = activity.metadata?.scheduledAt || activity.metadata?.dueAt || activity.timestamp;
-  const isOverdue = activity.status === 'pending' && 
-                    activity.metadata?.dueAt && 
-                    new Date(activity.metadata.dueAt) < new Date();
+  const scheduledAt = (activity.metadata?.scheduledAt as string | undefined) || (activity.metadata?.dueAt as string | undefined) || activity.timestamp;
+  const dueAt = activity.metadata?.dueAt as string | undefined;
+  const isOverdue = activity.status === 'pending' &&
+                    !!dueAt &&
+                    new Date(dueAt) < new Date();
 
   return (
     <motion.div
@@ -122,7 +123,7 @@ export function ActivityCard({ activity, onComplete, onCancel, onClick }: Activi
                 {activity.customerId && (
                   <span className="flex items-center gap-1">
                     <User className="w-3 h-3" />
-                    {activity.metadata?.customerName || 'Customer'}
+                    {(activity.metadata?.customerName as string | undefined) || 'Customer'}
                   </span>
                 )}
                 <span className="flex items-center gap-1">

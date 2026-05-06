@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { Routes, Route, Navigate, Outlet } from 'react-router';
+import { Routes, Route, Navigate, Outlet, Link } from 'react-router';
 import { AuthGuard } from './core/AuthGuard';
 import { CommandCenterLayout } from './layouts/CommandCenterLayout';
 import { LoadingScreen } from '@/components/ui/LoadingScreen';
@@ -11,8 +11,8 @@ const LoginPage = lazy(() => import('./pages/LoginPage').then(m => ({ default: m
 // ── DEFINE verb ──
 const DefineIndex = lazy(() => import('./pages/DefineIndex').then(m => ({ default: m.DefineIndex })));
 const BusinessProfileEdit = lazy(() => import('@/pages/BusinessProfilePage').then(m => ({ default: m.BusinessProfilePage })).catch(() => ({ default: () => <div>Business Profile - Coming Soon</div> })));
-const SurveyPage = lazy(() => import('@/pages/Business/SurveyPage').then(m => ({ default: m.SurveyPage })).catch(() => ({ default: () => <div>Survey - Coming Soon</div> })));
-const FAQBuilderPage = lazy(() => Promise.resolve({ default: () => <div>FAQ Builder - Coming Soon</div> }));
+const SurveyPage = lazy(() => Promise.resolve({ default: () => <div className="p-8 text-center text-[var(--nexus-text-secondary)]">Survey - Coming Soon</div> }));
+const FAQBuilderPage = lazy(() => import('./pages/FAQBuilderPage').then(m => ({ default: m.FAQBuilderPage })));
 
 // ── ATTRACT verb ──
 const AttractIndex = lazy(() => import('./pages/AttractIndex').then(m => ({ default: m.AttractIndex })));
@@ -20,7 +20,7 @@ const CampaignsPage = lazy(() => import('./pages/CampaignsPage').catch(() => ({ 
 const CampaignDetail = lazy(() => import('./pages/CampaignDetailPage').catch(() => ({ default: () => <div>Campaign Detail - Coming Soon</div> })));
 const ArticlesPage = lazy(() => import('@/pages/Action/ArticlePage').then(m => ({ default: m.ArticlePage })).catch(() => ({ default: () => <div>Articles - Coming Soon</div> })));
 const EventsPage = lazy(() => import('@/pages/Action/EventsPage').then(m => ({ default: m.EventsPage })).catch(() => ({ default: () => <div>Events - Coming Soon</div> })));
-const DiagnosticPage = lazy(() => Promise.resolve({ default: () => <div>Marketing Diagnostic - Coming Soon</div> }));
+const DiagnosticPage = lazy(() => import('./pages/DiagnosticPage').then(m => ({ default: m.DiagnosticPage })));
 
 // ── SELL verb ──
 const SellIndex = lazy(() => import('./pages/SellIndex').then(m => ({ default: m.SellIndex })));
@@ -29,13 +29,20 @@ const CustomersPage = lazy(() => import('./pages/CustomersPage').catch(() => ({ 
 const CustomerDetail = lazy(() => import('./pages/CustomerDetailPage').catch(() => ({ default: () => <div>Customer Detail - Coming Soon</div> })));
 const ContactsPage = lazy(() => import('@/components/CRM/ContactsListPage').catch(() => ({ default: () => <div>Contacts - Coming Soon</div> })));
 const ActivitiesPage = lazy(() => import('./pages/ActivitiesPage').catch(() => ({ default: () => <div>Activities - Coming Soon</div> })));
-const ProposalsPage = lazy(() => Promise.resolve({ default: () => <div>Proposals - Coming Soon</div> }));
+const ProposalsPage = lazy(() => import('./pages/ProposalsPage').then(m => ({ default: m.ProposalsPage })));
 
 // ── Sarah pitch (CC internal) ──
 const PitchDashboardPage = lazy(() => import('./pages/pitch/PitchDashboardPage'));
 const PitchFollowUpsPage = lazy(() => import('./pages/pitch/PitchFollowUpsPage'));
 const PitchProposalsPage = lazy(() => import('./pages/pitch/PitchProposalsPage'));
 const SlotInventoryPage = lazy(() => import('./pages/pitch/SlotInventoryPage'));
+
+// ── Sarah campaign builder (CC internal) ──
+const SarahDashboardPage = lazy(() => import('./pages/sarah/SarahDashboardPage'));
+const SarahSessionsPage = lazy(() => import('./pages/sarah/SarahSessionsPage'));
+const SarahSessionDetailPage = lazy(() => import('./pages/sarah/SarahSessionDetailPage'));
+const SarahCampaignsPage = lazy(() => import('./pages/sarah/SarahCampaignsPage'));
+const SarahCampaignDetailPage = lazy(() => import('./pages/sarah/SarahCampaignDetailPage'));
 
 // ── DELIVER verb ──
 const DeliverIndex = lazy(() => import('./pages/DeliverIndex').then(m => ({ default: m.DeliverIndex })));
@@ -44,7 +51,7 @@ const BillingDashboard = lazy(() => import('@/pages/LearningCenter/Services/Bill
 const InvoicesPage = lazy(() => import('@/components/billing/InvoicesListPage').catch(() => ({ default: () => <div>Invoices - Coming Soon</div> })));
 const InvoiceDetail = lazy(() => import('@/components/billing/InvoiceDetailPage').catch(() => ({ default: () => <div>Invoice Detail - Coming Soon</div> })));
 const CollectionsPage = lazy(() => import('@/components/billing/CollectionsDashboard').catch(() => ({ default: () => <div>Collections - Coming Soon</div> })));
-const PlatformsPage = lazy(() => Promise.resolve({ default: () => <div>Platforms - Coming Soon</div> }));
+const PlatformsPage = lazy(() => import('./pages/PlatformsPage').then(m => ({ default: m.PlatformsPage })));
 
 // ── MEASURE verb ──
 const MeasureIndex = lazy(() => import('./pages/MeasureIndex').then(m => ({ default: m.MeasureIndex })));
@@ -59,8 +66,8 @@ const InboundInboxPage = lazy(() => import('./pages/InboundInboxPage').then(m =>
 // ── AUTOMATE verb ──
 const AutomateIndex = lazy(() => import('./pages/AutomateIndex').then(m => ({ default: m.AutomateIndex })));
 const WorkflowsPage = lazy(() => import('@/pages/AIWorkflowPage').then(m => ({ default: m.AIWorkflowPage })).catch(() => ({ default: () => <div>Workflows - Coming Soon</div> })));
-const AIEmployeesPage = lazy(() => Promise.resolve({ default: () => <div>AI Employees - Coming Soon</div> }));
-const ProcessesPage = lazy(() => Promise.resolve({ default: () => <div>Processes - Coming Soon</div> }));
+const AIEmployeesPage = lazy(() => import('./pages/AIEmployeesPage').then(m => ({ default: m.AIEmployeesPage })));
+const ProcessesPage = lazy(() => import('./pages/ProcessesPage').then(m => ({ default: m.ProcessesPage })));
 
 // ── LEARN ──
 const LearningHub = lazy(() => import('@/components/learning/LearningCenterHub'));
@@ -69,9 +76,9 @@ const CampaignLandingPage = lazy(() => import('@/components/learning/CampaignLan
 // ── SETTINGS ──
 const Settings = lazy(() => import('./pages/SettingsPage').then(m => ({ default: m.SettingsPage })).catch(() => ({ default: () => <div>Settings - Coming Soon</div> })));
 const ProfilePage = lazy(() => import('@/pages/ProfilePage').then(m => ({ default: m.ProfilePage })).catch(() => ({ default: () => <div>Profile - Coming Soon</div> })));
-const TeamPage = lazy(() => Promise.resolve({ default: () => <div>Team - Coming Soon</div> }));
-const IntegrationsPage = lazy(() => Promise.resolve({ default: () => <div>Integrations - Coming Soon</div> }));
-const BusinessModePage = lazy(() => Promise.resolve({ default: () => <div>Business Mode - Coming Soon</div> }));
+const TeamPage = lazy(() => import('./pages/TeamPage').then(m => ({ default: m.TeamPage })));
+const IntegrationsPage = lazy(() => import('./pages/IntegrationsPage').then(m => ({ default: m.IntegrationsPage })));
+const BusinessModePage = lazy(() => import('./pages/BusinessModePage').then(m => ({ default: m.BusinessModePage })));
 
 // ── Other ──
 const CommerceHub = lazy(() => import('./pages/CommerceHubPage').then(m => ({ default: m.CommerceHubPage })).catch(() => ({ default: () => <div>Commerce Hub - Coming Soon</div> })));
@@ -132,6 +139,13 @@ export function getCommandCenterRoutes() {
       <Route path="pitch/proposals" element={<Suspense fallback={<LoadingScreen />}><PitchProposalsPage /></Suspense>} />
       <Route path="pitch/slots" element={<Suspense fallback={<LoadingScreen />}><SlotInventoryPage /></Suspense>} />
 
+      {/* ── SARAH: Campaign builder (operator views) ── */}
+      <Route path="sarah" element={<Suspense fallback={<LoadingScreen />}><SarahDashboardPage /></Suspense>} />
+      <Route path="sarah/sessions" element={<Suspense fallback={<LoadingScreen />}><SarahSessionsPage /></Suspense>} />
+      <Route path="sarah/sessions/:id" element={<Suspense fallback={<LoadingScreen />}><SarahSessionDetailPage /></Suspense>} />
+      <Route path="sarah/campaigns" element={<Suspense fallback={<LoadingScreen />}><SarahCampaignsPage /></Suspense>} />
+      <Route path="sarah/campaigns/:id" element={<Suspense fallback={<LoadingScreen />}><SarahCampaignDetailPage /></Suspense>} />
+
       {/* ── DELIVER: Services, billing & fulfillment ── */}
       <Route path="deliver" element={<Suspense fallback={<LoadingScreen />}><DeliverIndex /></Suspense>} />
       <Route path="deliver/orders" element={<Suspense fallback={<LoadingScreen />}><OrdersPage /></Suspense>} />
@@ -160,11 +174,11 @@ export function getCommandCenterRoutes() {
 
       {/* ── SETTINGS ── */}
       <Route path="settings" element={<Suspense fallback={<LoadingScreen />}><Settings /></Suspense>} />
-      <Route path="settings/*" element={<Suspense fallback={<LoadingScreen />}><Settings /></Suspense>} />
       <Route path="settings/profile" element={<Suspense fallback={<LoadingScreen />}><ProfilePage /></Suspense>} />
       <Route path="settings/team" element={<Suspense fallback={<LoadingScreen />}><TeamPage /></Suspense>} />
       <Route path="settings/integrations" element={<Suspense fallback={<LoadingScreen />}><IntegrationsPage /></Suspense>} />
       <Route path="settings/mode" element={<Suspense fallback={<LoadingScreen />}><BusinessModePage /></Suspense>} />
+      <Route path="settings/*" element={<Suspense fallback={<LoadingScreen />}><Settings /></Suspense>} />
 
       {/* ── Other ── */}
       <Route path="commerce" element={<Suspense fallback={<LoadingScreen />}><CommerceHub /></Suspense>} />
@@ -181,7 +195,25 @@ export function getCommandCenterRoutes() {
       <Route path="intelligence-hub" element={<Navigate to="/command-center/define" replace />} />
       <Route path="customers" element={<Navigate to="/command-center/sell/customers" replace />} />
       <Route path="activities" element={<Navigate to="/command-center/sell/activities" replace />} />
+
+      {/* 404 catch-all within Command Center — must be last */}
+      <Route path="*" element={<CCNotFoundPage />} />
     </Route>
+  );
+}
+
+function CCNotFoundPage() {
+  return (
+    <div className="flex flex-col items-center justify-center py-24 px-4">
+      <h1 className="text-4xl font-bold text-gray-900 mb-2">404</h1>
+      <p className="text-lg text-gray-600 mb-6">This page does not exist in the Command Center.</p>
+      <Link
+        to="/command-center/dashboard"
+        className="px-5 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium"
+      >
+        Back to Dashboard
+      </Link>
+    </div>
   );
 }
 

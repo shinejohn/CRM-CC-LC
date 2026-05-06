@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router';
 import { PresentationCall } from './pages/PresentationCall';
 import { DataReportCall } from './pages/DataReportCall';
 import { MarketingReportPage } from './pages/MarketingReportPage';
@@ -15,27 +15,17 @@ import { SchedulePage } from './pages/SchedulePage';
 
 // Marketing Pages
 import { CommunityInfluencerPage } from './pages/Marketing/CommunityInfluencerPage';
-import { CommunityExpertPage } from './pages/Marketing/CommunityExpertPage';
 import { SponsorsPage } from './pages/Marketing/SponsorsPage';
 import { AdsPage } from './pages/Marketing/AdsPage';
 import { ProductCatalogPage } from './pages/Marketing/ProductCatalogPage';
 
 // Action Pages
-import { ArticlePage } from './pages/Action/ArticlePage';
-import { EventsPage } from './pages/Action/EventsPage';
-import { ClassifiedsPage } from './pages/Action/ClassifiedsPage';
-import { AnnouncementsPage } from './pages/Action/AnnouncementsPage';
-import { CouponsPage } from './pages/Action/CouponsPage';
-import { IncentivesPage } from './pages/Action/IncentivesPage';
-import { TicketsPage } from './pages/Action/TicketsPage';
-import { AIPage } from './pages/Action/AIPage';
+// NOTE: ArticlePage and EventsPage imports removed — /article and /events routes
+// now redirect to their Command Center equivalents via <Navigate>.
 
 // Business Pages
-import { SurveyPage } from './pages/Business/SurveyPage';
 import { SubscriptionsPage } from './pages/Business/SubscriptionsPage';
 import { ROIDashboardPage } from './pages/Business/ROIDashboardPage';
-import { TodosPage } from './pages/Business/TodosPage';
-import { DashboardPage } from './pages/Business/DashboardPage';
 
 // User Pages
 import { SponsorPage } from './pages/SponsorPage';
@@ -77,13 +67,8 @@ import { OutboundDashboardPage as StandaloneOutboundDashboard } from './pages/Ou
 import { CreateEmailCampaignPage as StandaloneCreateEmailCampaign } from './pages/Outbound/Email/Create';
 import { CreatePhoneCampaignPage as StandaloneCreatePhoneCampaign } from './pages/Outbound/Phone/Create';
 import { CreateSmsCampaignPage as StandaloneCreateSmsCampaign } from './pages/Outbound/SMS/Create';
-import { OutboundDashboardPage } from './pages/LearningCenter/Outbound/Dashboard';
-import { CreateEmailCampaignPage } from './pages/LearningCenter/Outbound/Email/Create';
-import { CreatePhoneCampaignPage } from './pages/LearningCenter/Outbound/Phone/Create';
-import { CreateSmsCampaignPage } from './pages/LearningCenter/Outbound/SMS/Create';
-import { ConversationsPage } from './pages/LearningCenter/Inbound/Conversations';
-import { RepliesPage } from './pages/LearningCenter/Inbound/Replies';
-import { CallsPage } from './pages/LearningCenter/Inbound/Calls';
+// NOTE: LearningCenter/Outbound/* and LearningCenter/Inbound/* page imports were
+// removed — they were imported but never referenced in any route definition.
 import { AIPersonalitiesDashboardPage } from './pages/AIPersonalities/Dashboard';
 import { AIPersonalityDetailPage } from './pages/AIPersonalities/Detail';
 import { AIPersonalityAssignPage } from './pages/AIPersonalities/Assign';
@@ -133,33 +118,26 @@ export function AppRouter() {
 
         {/* Marketing Plan Routes */}
         <Route path="/community-influencer" element={<CommunityInfluencerPage />} />
-        <Route path="/community-expert" element={<CommunityExpertPage />} />
+
         <Route path="/sponsors" element={<SponsorsPage />} />
         <Route path="/ads" element={<AdsPage />} />
         <Route path="/product-catalog" element={<ProductCatalogPage />} />
 
-        {/* Action Menu Routes */}
-        <Route path="/article" element={<ArticlePage />} />
-        <Route path="/events" element={<EventsPage />} />
-        <Route path="/classifieds" element={<ClassifiedsPage />} />
-        <Route path="/announcements" element={<AnnouncementsPage />} />
-        <Route path="/coupons" element={<CouponsPage />} />
-        <Route path="/incentives" element={<IncentivesPage />} />
-        <Route path="/tickets" element={<TicketsPage />} />
-        <Route path="/ai" element={<AIPage />} />
+        {/* Action Menu Routes (redirects to their CommandCenter equivalents) */}
+        <Route path="/article" element={<Navigate to="/command-center/attract/articles" replace />} />
+        <Route path="/events" element={<Navigate to="/command-center/attract/events" replace />} />
 
         {/* Business Profile Routes */}
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/survey" element={<SurveyPage />} />
+        {/* /profile is already defined above (line 121) — removed duplicate */}
         <Route path="/subscriptions" element={<SubscriptionsPage />} />
         <Route path="/subscriptions/roi" element={<ROIDashboardPage />} />
-        <Route path="/todos" element={<TodosPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
 
         {/* User Menu Routes */}
         <Route path="/sponsor" element={<SponsorPage />} />
 
-        {/* CRM Routes */}
+        {/* CRM Routes (standalone, no CC layout)
+            Canonical CRM paths are /command-center/sell/* (CC layout, auth-guarded).
+            These /crm/* routes are kept for backward compatibility and direct-link access. */}
         <Route path="/crm" element={<CrmDashboardPage />} />
         <Route path="/crm/dashboard" element={<CrmDashboardPage />} />
         <Route path="/crm/customers" element={<CustomerListPage />} />
@@ -170,7 +148,8 @@ export function AppRouter() {
         <Route path="/crm/analytics/learning" element={<LearningAnalyticsPage />} />
         <Route path="/crm/campaigns" element={<CampaignListPage />} />
 
-        {/* Outbound Campaign Routes (Standalone - for backward compatibility) */}
+        {/* Outbound Campaign Routes (standalone, no CC layout — backward compatibility).
+            No canonical CC equivalent exists yet; these are the primary outbound routes. */}
         <Route path="/outbound" element={<StandaloneOutboundDashboard />} />
         <Route path="/outbound/email/create" element={<StandaloneCreateEmailCampaign />} />
         <Route path="/outbound/phone/create" element={<StandaloneCreatePhoneCampaign />} />
@@ -261,6 +240,7 @@ export function AppRouter() {
         {/* Campaign Landing Pages */}
         <Route path="/learning/campaigns" element={<LearningCampaignListPage />} />
         <Route path="/learning/campaigns/review" element={<ReviewDashboard />} />
+        {/* Short aliases — canonical paths are /learning/campaigns and /learning/campaigns/review above */}
         <Route path="/campaigns" element={<LearningCampaignListPage />} />
         <Route path="/campaigns/review" element={<ReviewDashboard />} />
 
@@ -294,9 +274,27 @@ export function AppRouter() {
           <Route path="actions" element={<OpsActionLog />} />
         </Route>
 
-        {/* Campaign Landing Pages - Catch-all must be LAST */}
+        {/* Campaign Landing Pages - Catch-all for /learn/:slug */}
         <Route path="/learn/:slug" element={<CampaignLandingPage />} />
+
+        {/* 404 catch-all — must be the very last route */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
+  );
+}
+
+function NotFoundPage() {
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">
+      <h1 className="text-4xl font-bold text-gray-900 mb-2">404</h1>
+      <p className="text-lg text-gray-600 mb-6">Page not found</p>
+      <Link
+        to="/"
+        className="px-5 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium"
+      >
+        Back to Home
+      </Link>
+    </div>
   );
 }

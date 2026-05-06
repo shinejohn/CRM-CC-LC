@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Models\Customer;
@@ -8,7 +10,7 @@ use App\Models\Knowledge;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class CampaignGenerationService
+final class CampaignGenerationService
 {
     public function __construct(
         private OpenRouterService $openRouterService

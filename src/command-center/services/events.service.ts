@@ -1,15 +1,18 @@
 // Command Center Event Bus Service
 // CC-SVC-04: Event Bus
 
-type EventHandler<T = any> = (payload: T) => void;
+type EventHandler<T = unknown> = (payload: T) => void;
+
+/** Internal handler type — always accepts unknown */
+type InternalHandler = (payload: unknown) => void;
 
 interface EventSubscription {
   unsubscribe: () => void;
 }
 
 class EventBus {
-  private handlers = new Map<string, Set<EventHandler>>();
-  private history: Array<{ event: string; payload: any; timestamp: Date }> = [];
+  private handlers = new Map<string, Set<InternalHandler>>();
+  private history: Array<{ event: string; payload: unknown; timestamp: Date }> = [];
   private historyLimit = 100;
 
   /**
@@ -19,7 +22,10 @@ class EventBus {
     if (!this.handlers.has(event)) {
       this.handlers.set(event, new Set());
     }
-    this.handlers.get(event)!.add(handler);
+    // Cast to internal handler — callers are responsible for matching
+    // the emitted payload type to their handler's expected type.
+    const internalHandler = handler as InternalHandler;
+    this.handlers.get(event)!.add(internalHandler);
 
     return {
       unsubscribe: () => this.off(event, handler),
@@ -43,7 +49,8 @@ class EventBus {
   off<T>(event: string, handler: EventHandler<T>): void {
     const eventHandlers = this.handlers.get(event);
     if (eventHandlers) {
-      eventHandlers.delete(handler);
+      const internalHandler = handler as InternalHandler;
+      eventHandlers.delete(internalHandler);
       if (eventHandlers.size === 0) {
         this.handlers.delete(event);
       }

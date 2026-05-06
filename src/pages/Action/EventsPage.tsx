@@ -100,6 +100,18 @@ export const EventsPage: React.FC = () => {
     });
   };
 
+  const calculateDuration = (startStr: string, endStr: string | null) => {
+    if (!endStr) return '';
+    const start = new Date(startStr);
+    const end = new Date(endStr);
+    const diffHours = (end.getTime() - start.getTime()) / (1000 * 60 * 60);
+    if (diffHours <= 0) return '';
+    if (diffHours === 1) return ' (1 hr)';
+    const hours = Math.floor(diffHours);
+    const mins = Math.round((diffHours - hours) * 60);
+    return ` (${hours}${mins > 0 ? ` hr ${mins} min` : ' hrs'})`;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -202,11 +214,25 @@ export const EventsPage: React.FC = () => {
                 <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
                   <Calendar className="w-4 h-4 flex-shrink-0" />
                   {formatDate(event.start_at)}
+                  {calculateDuration(event.start_at, event.end_at)}
                 </div>
                 {event.location && (
-                  <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
-                    <MapPin className="w-4 h-4 flex-shrink-0" />
-                    <span className="line-clamp-1">{event.location}</span>
+                  <div className="flex flex-col gap-2 text-sm text-gray-600 mb-4">
+                    <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4 flex-shrink-0" />
+                        <span className="line-clamp-1">{event.location}</span>
+                    </div>
+                    <div className="w-full h-32 rounded overflow-hidden shadow-sm border border-gray-100">
+                        <iframe
+                            width="100%"
+                            height="100%"
+                            frameBorder="0"
+                            scrolling="no"
+                            marginHeight={0}
+                            marginWidth={0}
+                            src={`https://maps.google.com/maps?q=${encodeURIComponent(event.location)}&t=&z=13&ie=UTF8&iwloc=&output=embed`}
+                        />
+                    </div>
                   </div>
                 )}
                 <span

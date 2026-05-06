@@ -80,8 +80,8 @@ export interface CampaignData {
     requires_personalization: boolean;
     audio_file: string;
   }>;
-  outline?: any[];
-  suggestions?: any[];
+  outline?: Array<{ title: string; description?: string }>;
+  suggestions?: CampaignSuggestion[];
 }
 
 export interface GenerateCampaignResponse {
