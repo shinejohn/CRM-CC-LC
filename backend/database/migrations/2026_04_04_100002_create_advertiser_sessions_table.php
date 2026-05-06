@@ -13,7 +13,7 @@ return new class extends Migration
         Schema::create('advertiser_sessions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('business_id')->nullable();
-            $table->foreignUuid('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->uuid('user_id')->nullable();
             $table->uuid('community_id');
             $table->string('source_platform'); // day_news | goeventcity | downtownguide | golocalvoices
             $table->string('source_url');
