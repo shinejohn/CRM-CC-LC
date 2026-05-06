@@ -12,8 +12,8 @@ return new class extends Migration
     {
         Schema::create('sarah_messages', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('business_id')->nullable()->constrained('smbs')->nullOnDelete();
-            $table->foreignUuid('advertiser_session_id')->nullable()->constrained()->nullOnDelete();
+            $table->uuid('business_id')->nullable();
+            $table->uuid('advertiser_session_id')->nullable();
             $table->string('campaign_id', 50)->nullable();
             $table->string('type'); // intake | proposal | pushback | confirmation | performance | renewal | upsell | follow_up
             $table->string('direction')->default('outbound'); // outbound (Sarah→user) | inbound (user→Sarah)

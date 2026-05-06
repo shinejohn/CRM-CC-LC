@@ -12,9 +12,9 @@ return new class extends Migration
     {
         Schema::create('advertiser_sessions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('business_id')->nullable()->constrained('smbs')->nullOnDelete();
+            $table->uuid('business_id')->nullable();
             $table->foreignUuid('user_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignUuid('community_id')->constrained()->cascadeOnDelete();
+            $table->uuid('community_id');
             $table->string('source_platform'); // day_news | goeventcity | downtownguide | golocalvoices
             $table->string('source_url');
             $table->uuid('source_article_id')->nullable();
