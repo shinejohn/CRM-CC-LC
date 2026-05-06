@@ -202,7 +202,10 @@ final class PublishingPlatformService
     {
         $result = $this->bridgeRequest('GET', '/api/v1/bridge/export/communities');
 
-        return $result['data'] ?? [];
+        // PP wraps responses: {"success":true,"data":{"data":[...]}}
+        $data = $result['data'] ?? [];
+
+        return $data['data'] ?? $data;
     }
 
     /**
@@ -219,9 +222,12 @@ final class PublishingPlatformService
 
         $result = $this->bridgeRequest('GET', '/api/v1/bridge/export/businesses', $params);
 
+        // PP wraps responses: {"success":true,"data":{"data":[...],"meta":{...}}}
+        $inner = $result['data'] ?? $result;
+
         return [
-            'data' => $result['data'] ?? [],
-            'meta' => $result['meta'] ?? ['current_page' => 1, 'last_page' => 1, 'total' => 0],
+            'data' => $inner['data'] ?? [],
+            'meta' => $inner['meta'] ?? ['current_page' => 1, 'last_page' => 1, 'total' => 0],
         ];
     }
 
@@ -239,7 +245,10 @@ final class PublishingPlatformService
 
         $result = $this->bridgeRequest('GET', '/api/v1/bridge/export/business-subscriptions', $params);
 
-        return $result['data'] ?? [];
+        // PP wraps responses: {"success":true,"data":{"data":[...]}}
+        $data = $result['data'] ?? [];
+
+        return $data['data'] ?? $data;
     }
 
     // ─── WS-1: Readership Pull ─────────────────────────────────────────

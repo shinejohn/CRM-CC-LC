@@ -232,7 +232,7 @@ final class SyncFromPublishingPlatform extends Command
                 'city' => $biz['city'] ?? null,
                 'state' => $biz['state'] ?? null,
                 'zip' => $biz['postal_code'] ?? null,
-                'coordinates' => ($biz['latitude'] && $biz['longitude'])
+                'coordinates' => (($biz['latitude'] ?? null) && ($biz['longitude'] ?? null))
                     ? ['lat' => (float) $biz['latitude'], 'lng' => (float) $biz['longitude']]
                     : null,
                 'metadata' => [
@@ -281,7 +281,7 @@ final class SyncFromPublishingPlatform extends Command
                 'city' => $biz['city'] ?? null,
                 'state' => $biz['state'] ?? null,
                 'zip' => $biz['postal_code'] ?? null,
-                'coordinates' => ($biz['latitude'] && $biz['longitude'])
+                'coordinates' => (($biz['latitude'] ?? null) && ($biz['longitude'] ?? null))
                     ? ['lat' => (float) $biz['latitude'], 'lng' => (float) $biz['longitude']]
                     : null,
                 'google_rating' => $biz['rating'] ?? null,
