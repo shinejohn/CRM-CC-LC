@@ -102,6 +102,9 @@ export function AppRouter() {
                         />
                     ) : null}
 
+                    {/* Public landing pages — no auth required */}
+                    <Route path="/learn/:campaignSlug" element={React.createElement(CampaignLandingPage)} />
+
                     <Route
                         path="/"
                         element={
@@ -130,10 +133,7 @@ export function AppRouter() {
                             <Route path="orders" element={React.createElement(OrderHistoryPage)} />
                         </Route>
 
-                        <Route path="learn">
-                            <Route index element={React.createElement(LearningCenterHub)} />
-                            <Route path=":campaignSlug" element={React.createElement(CampaignLandingPage)} />
-                        </Route>
+                        <Route path="learn" element={React.createElement(LearningCenterHub)} />
 
                         <Route path="reports">
                             <Route path="marketing" element={React.createElement(MarketingReportPage)} />
