@@ -22,7 +22,11 @@ apiClient.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       useAuthStore.getState().logout();
-      window.location.href = "/login";
+      const path = window.location.pathname;
+      const isPublicRoute = path.startsWith("/learn/") || path.startsWith("/advertise/") || path === "/login";
+      if (!isPublicRoute) {
+        window.location.href = "/login";
+      }
     }
     const data = error.response?.data as Record<string, unknown> | undefined;
     const messageFromBody =
