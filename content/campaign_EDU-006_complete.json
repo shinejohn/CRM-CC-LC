@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "Your AI Employee",
     "subject": "The employee you couldn't afford just became free",
-    "landing_page": "ai-employee",
+    "landing_page": "community-marketing",
     "template": "educational",
     "description": "Introduce AI as business automation - handle volume, focus on relationships"
   },
   "landing_page": {
     "campaign_id": "EDU-006",
-    "landing_page_slug": "ai-employee",
-    "url": "/learn/ai-employee",
+    "landing_page_slug": "community-marketing",
+    "url": "/learn/community-marketing",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
@@ -54,10 +54,22 @@
       "content": {
         "headline": "Big Companies Have Been Using AI for Years",
         "examples": [
-          {"company": "Amazon", "use": "Personalized recommendations"},
-          {"company": "Netflix", "use": "Content suggestions"},
-          {"company": "Banks", "use": "Fraud detection"},
-          {"company": "Airlines", "use": "Dynamic pricing"}
+          {
+            "company": "Amazon",
+            "use": "Personalized recommendations"
+          },
+          {
+            "company": "Netflix",
+            "use": "Content suggestions"
+          },
+          {
+            "company": "Banks",
+            "use": "Fraud detection"
+          },
+          {
+            "company": "Airlines",
+            "use": "Dynamic pricing"
+          }
         ],
         "problem": "Small businesses couldn't afford AI. Until now.",
         "shift": "The same technology is now accessible to everyone."
@@ -73,12 +85,30 @@
       "content": {
         "headline": "Your AI Employee Can Handle:",
         "capabilities": [
-          {"task": "Customer Inquiries", "detail": "Answer questions 24/7, route complex ones to you"},
-          {"task": "Content Creation", "detail": "Write posts, emails, descriptions in your voice"},
-          {"task": "Scheduling", "detail": "Book appointments, send reminders automatically"},
-          {"task": "Follow-ups", "detail": "Never let a lead go cold"},
-          {"task": "Data Entry", "detail": "Update records, sync platforms automatically"},
-          {"task": "Social Media", "detail": "Schedule posts, respond to comments"}
+          {
+            "task": "Customer Inquiries",
+            "detail": "Answer questions 24/7, route complex ones to you"
+          },
+          {
+            "task": "Content Creation",
+            "detail": "Write posts, emails, descriptions in your voice"
+          },
+          {
+            "task": "Scheduling",
+            "detail": "Book appointments, send reminders automatically"
+          },
+          {
+            "task": "Follow-ups",
+            "detail": "Never let a lead go cold"
+          },
+          {
+            "task": "Data Entry",
+            "detail": "Update records, sync platforms automatically"
+          },
+          {
+            "task": "Social Media",
+            "detail": "Schedule posts, respond to comments"
+          }
         ],
         "key_point": "AI handles the volume. You handle the relationships."
       },
@@ -93,8 +123,20 @@
       "content": {
         "headline": "You're Not Being Replaced. You're Being Amplified.",
         "equation": {
-          "ai_does": ["Speed", "Consistency", "Volume", "24/7 availability", "Memory"],
-          "you_do": ["Judgment", "Creativity", "Relationships", "Complex decisions", "Care"],
+          "ai_does": [
+            "Speed",
+            "Consistency",
+            "Volume",
+            "24/7 availability",
+            "Memory"
+          ],
+          "you_do": [
+            "Judgment",
+            "Creativity",
+            "Relationships",
+            "Complex decisions",
+            "Care"
+          ],
           "together": "10x what either could do alone"
         },
         "visual": "Human and AI as collaborative partners"
@@ -110,10 +152,26 @@
       "content": {
         "headline": "What AI Saves You",
         "calculations": [
-          {"task": "Answering routine inquiries", "hours": "5 hrs/week", "value": "$200/week"},
-          {"task": "Writing content", "hours": "3 hrs/week", "value": "$120/week"},
-          {"task": "Scheduling/follow-ups", "hours": "2 hrs/week", "value": "$80/week"},
-          {"task": "Data entry/admin", "hours": "2 hrs/week", "value": "$80/week"}
+          {
+            "task": "Answering routine inquiries",
+            "hours": "5 hrs/week",
+            "value": "$200/week"
+          },
+          {
+            "task": "Writing content",
+            "hours": "3 hrs/week",
+            "value": "$120/week"
+          },
+          {
+            "task": "Scheduling/follow-ups",
+            "hours": "2 hrs/week",
+            "value": "$80/week"
+          },
+          {
+            "task": "Data entry/admin",
+            "hours": "2 hrs/week",
+            "value": "$80/week"
+          }
         ],
         "total": {
           "hours_saved": "12 hrs/week",
@@ -196,8 +254,15 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-008", "HOWTO-010", "HOWTO-011"],
+    "leads_to": [
+      "HOWTO-008",
+      "HOWTO-010",
+      "HOWTO-011"
+    ],
     "follows": "EDU-005",
-    "related": ["EDU-013", "HOOK-007"]
+    "related": [
+      "EDU-013",
+      "HOOK-007"
+    ]
   }
 }

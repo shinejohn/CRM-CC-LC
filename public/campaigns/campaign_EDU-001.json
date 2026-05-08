@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "The New Day",
     "subject": "Something is happening in local marketing",
-    "landing_page": "the-new-day",
+    "landing_page": "seo-reality-check",
     "template": "educational",
     "description": "Introduce the renaissance of community marketing - hope, opportunity, invitation"
   },
   "landing_page": {
     "campaign_id": "EDU-001",
-    "landing_page_slug": "the-new-day",
-    "url": "/learn/the-new-day",
+    "landing_page_slug": "seo-reality-check",
+    "url": "/learn/seo-reality-check",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,

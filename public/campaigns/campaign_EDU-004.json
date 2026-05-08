@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "Community Marketing",
     "subject": "Why 'community marketing' beats 'digital marketing'",
-    "landing_page": "community-marketing",
+    "landing_page": "ai-operations-guide",
     "template": "educational",
     "description": "Explain why being part of community beats shouting at community"
   },
   "landing_page": {
     "campaign_id": "EDU-004",
-    "landing_page_slug": "community-marketing",
-    "url": "/learn/community-marketing",
+    "landing_page_slug": "ai-operations-guide",
+    "url": "/learn/ai-operations-guide",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,

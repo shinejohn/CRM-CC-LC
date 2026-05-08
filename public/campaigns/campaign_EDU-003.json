@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "The Publishing Network",
     "subject": "One listing. Found everywhere. Here's how.",
-    "landing_page": "publishing-network",
+    "landing_page": "ai-marketing-assistant",
     "template": "educational",
     "description": "Explain how DN, DTG, GEC, Alphasite work together for maximum visibility"
   },
   "landing_page": {
     "campaign_id": "EDU-003",
-    "landing_page_slug": "publishing-network",
-    "url": "/learn/publishing-network",
+    "landing_page_slug": "ai-marketing-assistant",
+    "url": "/learn/ai-marketing-assistant",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,

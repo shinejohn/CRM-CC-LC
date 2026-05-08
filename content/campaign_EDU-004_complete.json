@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "Community Marketing",
     "subject": "Why 'community marketing' beats 'digital marketing'",
-    "landing_page": "community-marketing",
+    "landing_page": "ai-operations-guide",
     "template": "educational",
     "description": "Explain why being part of community beats shouting at community"
   },
   "landing_page": {
     "campaign_id": "EDU-004",
-    "landing_page_slug": "community-marketing",
-    "url": "/learn/community-marketing",
+    "landing_page_slug": "ai-operations-guide",
+    "url": "/learn/ai-operations-guide",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
@@ -56,10 +56,22 @@
       "content": {
         "headline": "Digital Marketing = Shouting at Strangers",
         "problems": [
-          {"stat": "0.1%", "meaning": "Average ad click-through rate"},
-          {"stat": "86%", "meaning": "People skip or block ads"},
-          {"stat": "↓42%", "meaning": "Trust in advertising since 2020"},
-          {"stat": "$0", "meaning": "What most ad spend returns"}
+          {
+            "stat": "0.1%",
+            "meaning": "Average ad click-through rate"
+          },
+          {
+            "stat": "86%",
+            "meaning": "People skip or block ads"
+          },
+          {
+            "stat": "↓42%",
+            "meaning": "Trust in advertising since 2020"
+          },
+          {
+            "stat": "$0",
+            "meaning": "What most ad spend returns"
+          }
         ],
         "key_insight": "People don't trust ads. They trust people."
       },
@@ -78,10 +90,22 @@
           "community": "Be present where people already are"
         },
         "elements": [
-          {"icon": "handshake", "label": "Trust built through presence"},
-          {"icon": "repeat", "label": "Relationships that compound"},
-          {"icon": "users", "label": "Word-of-mouth that scales"},
-          {"icon": "heart", "label": "Loyalty that lasts"}
+          {
+            "icon": "handshake",
+            "label": "Trust built through presence"
+          },
+          {
+            "icon": "repeat",
+            "label": "Relationships that compound"
+          },
+          {
+            "icon": "users",
+            "label": "Word-of-mouth that scales"
+          },
+          {
+            "icon": "heart",
+            "label": "Loyalty that lasts"
+          }
         ]
       },
       "narration": "Community marketing is different. Instead of interrupting people with your message, you become part of where they already are. You're in the local directory they check. You're sponsoring the event they attend. You're mentioned in the news they read. Trust builds through presence, not persuasion. Relationships compound over time. Word-of-mouth scales. Loyalty lasts.",
@@ -95,11 +119,31 @@
       "content": {
         "headline": "Who People Trust (In Order)",
         "hierarchy": [
-          {"rank": 1, "source": "People they know personally", "trust": "92%"},
-          {"rank": 2, "source": "Online reviews from strangers", "trust": "70%"},
-          {"rank": 3, "source": "Editorial content / News", "trust": "58%"},
-          {"rank": 4, "source": "Brand websites", "trust": "33%"},
-          {"rank": 5, "source": "Advertising", "trust": "14%"}
+          {
+            "rank": 1,
+            "source": "People they know personally",
+            "trust": "92%"
+          },
+          {
+            "rank": 2,
+            "source": "Online reviews from strangers",
+            "trust": "70%"
+          },
+          {
+            "rank": 3,
+            "source": "Editorial content / News",
+            "trust": "58%"
+          },
+          {
+            "rank": 4,
+            "source": "Brand websites",
+            "trust": "33%"
+          },
+          {
+            "rank": 5,
+            "source": "Advertising",
+            "trust": "14%"
+          }
         ],
         "insight": "Community marketing operates in the top 3. Digital marketing operates in the bottom 2."
       },
@@ -204,8 +248,14 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-008", "HOWTO-009"],
+    "leads_to": [
+      "HOWTO-008",
+      "HOWTO-009"
+    ],
     "follows": "EDU-003",
-    "related": ["EDU-005", "HOOK-006"]
+    "related": [
+      "EDU-005",
+      "HOOK-006"
+    ]
   }
 }

@@ -6,7 +6,7 @@
     "type": "Educational",
     "title": "AI Content Guide",
     "subject": "AI can write your marketing. Here's how to make it actually good.",
-    "landing_page": "ai-content-guide",
+    "landing_page": "local-seo-guide",
     "template": "educational",
     "description": "How to use AI for content creation without sounding generic"
   },
@@ -30,10 +30,22 @@
       "content": {
         "headline": "Why Most AI Content Sounds the Same",
         "problems": [
-          {"issue": "No context", "result": "Generic, could-be-anyone content"},
-          {"issue": "No voice guidance", "result": "Corporate-speak instead of your personality"},
-          {"issue": "No specifics", "result": "Vague claims instead of real details"},
-          {"issue": "No editing", "result": "First draft published as final"}
+          {
+            "issue": "No context",
+            "result": "Generic, could-be-anyone content"
+          },
+          {
+            "issue": "No voice guidance",
+            "result": "Corporate-speak instead of your personality"
+          },
+          {
+            "issue": "No specifics",
+            "result": "Vague claims instead of real details"
+          },
+          {
+            "issue": "No editing",
+            "result": "First draft published as final"
+          }
         ],
         "example_bad": "We are committed to providing excellent service to our valued customers...",
         "example_good": "We've been fixing cars in Springfield since 1987. My dad started this shop, and we still treat every customer like family."
@@ -49,10 +61,22 @@
       "content": {
         "headline": "How to Get AI Content That Sounds Like You",
         "method": [
-          {"step": "Train it on your business", "how": "Feed it your best content, FAQs, story"},
-          {"step": "Give it your voice", "how": "Examples of how you talk, words you use"},
-          {"step": "Provide specifics", "how": "Real names, real numbers, real stories"},
-          {"step": "Review and refine", "how": "2-5 minutes to add your touch"}
+          {
+            "step": "Train it on your business",
+            "how": "Feed it your best content, FAQs, story"
+          },
+          {
+            "step": "Give it your voice",
+            "how": "Examples of how you talk, words you use"
+          },
+          {
+            "step": "Provide specifics",
+            "how": "Real names, real numbers, real stories"
+          },
+          {
+            "step": "Review and refine",
+            "how": "2-5 minutes to add your touch"
+          }
         ]
       },
       "narration": "Here's the right way. Train it on your business—feed it your best existing content, your FAQs, your story. Give it your voice—examples of how you actually talk, words you use, words you don't. Provide specifics—real customer names with permission, real numbers, real stories. Review and refine—spend two to five minutes adding your personal touch. AI writes the draft, you make it yours.",
@@ -66,8 +90,19 @@
       "content": {
         "headline": "AI Does 80%, You Do 20%",
         "breakdown": {
-          "ai_does": ["Research and outline", "First draft", "Multiple variations", "Formatting", "SEO optimization"],
-          "you_do": ["Add personal stories", "Include specific details", "Adjust tone", "Final approval"]
+          "ai_does": [
+            "Research and outline",
+            "First draft",
+            "Multiple variations",
+            "Formatting",
+            "SEO optimization"
+          ],
+          "you_do": [
+            "Add personal stories",
+            "Include specific details",
+            "Adjust tone",
+            "Final approval"
+          ]
         },
         "time_comparison": {
           "without_ai": "2-4 hours per blog post",
@@ -85,12 +120,36 @@
       "content": {
         "headline": "What AI Can Write for Your Business",
         "content_types": [
-          {"type": "Social media posts", "frequency": "Daily", "time": "5 min review"},
-          {"type": "Blog articles", "frequency": "Weekly", "time": "15-20 min review"},
-          {"type": "Email newsletters", "frequency": "Weekly/monthly", "time": "10 min review"},
-          {"type": "Service descriptions", "frequency": "Once, then update", "time": "10 min review"},
-          {"type": "FAQ answers", "frequency": "Build library", "time": "5 min each"},
-          {"type": "Review responses", "frequency": "As needed", "time": "2 min each"}
+          {
+            "type": "Social media posts",
+            "frequency": "Daily",
+            "time": "5 min review"
+          },
+          {
+            "type": "Blog articles",
+            "frequency": "Weekly",
+            "time": "15-20 min review"
+          },
+          {
+            "type": "Email newsletters",
+            "frequency": "Weekly/monthly",
+            "time": "10 min review"
+          },
+          {
+            "type": "Service descriptions",
+            "frequency": "Once, then update",
+            "time": "10 min review"
+          },
+          {
+            "type": "FAQ answers",
+            "frequency": "Build library",
+            "time": "5 min each"
+          },
+          {
+            "type": "Review responses",
+            "frequency": "As needed",
+            "time": "2 min each"
+          }
         ]
       },
       "narration": "What can AI write for your business? Social media posts—daily content, five minutes to review. Blog articles—weekly content, fifteen to twenty minutes to review. Email newsletters—weekly or monthly, ten minutes. Service descriptions—write once, update occasionally. FAQ answers—build a library, five minutes each. Review responses—as needed, two minutes each. Your entire content operation, streamlined.",
@@ -143,8 +202,13 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-013"],
+    "leads_to": [
+      "HOWTO-013"
+    ],
     "follows": "EDU-009",
-    "related": ["EDU-006", "EDU-007"]
+    "related": [
+      "EDU-006",
+      "EDU-007"
+    ]
   }
 }

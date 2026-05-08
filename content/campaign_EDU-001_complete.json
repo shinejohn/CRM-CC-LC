@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "The New Day",
     "subject": "Something is happening in local marketing",
-    "landing_page": "the-new-day",
+    "landing_page": "seo-reality-check",
     "template": "educational",
     "description": "Introduce the renaissance of community marketing - hope, opportunity, invitation"
   },
   "landing_page": {
     "campaign_id": "EDU-001",
-    "landing_page_slug": "the-new-day",
-    "url": "/learn/the-new-day",
+    "landing_page_slug": "seo-reality-check",
+    "url": "/learn/seo-reality-check",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
@@ -61,9 +61,18 @@
       "content": {
         "headline": "Local Is Winning Again",
         "stats": [
-          {"value": "82%", "label": "of consumers want to support local"},
-          {"value": "70%", "label": "trust local businesses more than chains"},
-          {"value": "88%", "label": "of local searches lead to action within 24 hours"}
+          {
+            "value": "82%",
+            "label": "of consumers want to support local"
+          },
+          {
+            "value": "70%",
+            "label": "trust local businesses more than chains"
+          },
+          {
+            "value": "88%",
+            "label": "of local searches lead to action within 24 hours"
+          }
         ],
         "visual": "Upward trending graphs, community imagery"
       },
@@ -113,10 +122,26 @@
       "content": {
         "headline": "Community Infrastructure, Rebuilt",
         "elements": [
-          {"icon": "newspaper", "label": "Local News", "desc": "People actually read"},
-          {"icon": "directory", "label": "Business Directory", "desc": "People actually use"},
-          {"icon": "calendar", "label": "Events Calendar", "desc": "People actually check"},
-          {"icon": "home", "label": "Your Home Base", "desc": "AI actually understands"}
+          {
+            "icon": "newspaper",
+            "label": "Local News",
+            "desc": "People actually read"
+          },
+          {
+            "icon": "directory",
+            "label": "Business Directory",
+            "desc": "People actually use"
+          },
+          {
+            "icon": "calendar",
+            "label": "Events Calendar",
+            "desc": "People actually check"
+          },
+          {
+            "icon": "home",
+            "label": "Your Home Base",
+            "desc": "AI actually understands"
+          }
         ],
         "visual": "Four connected platforms flowing into unified presence"
       },
@@ -126,14 +151,23 @@
     },
     {
       "slide_num": 6,
-      "component": "ConceptSlide", 
+      "component": "ConceptSlide",
       "title": "For Everyone",
       "content": {
         "headline": "For the People. For the Businesses. For the Future.",
         "three_pillars": [
-          {"title": "For the People", "desc": "Communities where local businesses thrive are better places to live"},
-          {"title": "For the Businesses", "desc": "Focus on your craft—infrastructure handles being found"},
-          {"title": "For the Future", "desc": "Building something that lasts for generations"}
+          {
+            "title": "For the People",
+            "desc": "Communities where local businesses thrive are better places to live"
+          },
+          {
+            "title": "For the Businesses",
+            "desc": "Focus on your craft—infrastructure handles being found"
+          },
+          {
+            "title": "For the Future",
+            "desc": "Building something that lasts for generations"
+          }
         ],
         "visual": "Community scene with thriving main street"
       },
@@ -189,8 +223,14 @@
     }
   },
   "connections": {
-    "leads_to": ["HOOK-001", "HOWTO-001"],
+    "leads_to": [
+      "HOOK-001",
+      "HOWTO-001"
+    ],
     "follows": null,
-    "related": ["EDU-002", "EDU-003"]
+    "related": [
+      "EDU-002",
+      "EDU-003"
+    ]
   }
 }

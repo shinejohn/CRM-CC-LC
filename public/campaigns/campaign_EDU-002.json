@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "AI Discovery",
     "subject": "Google is dying. Here's how people find businesses now.",
-    "landing_page": "ai-discovery",
+    "landing_page": "ai-marketing-101",
     "template": "educational",
     "description": "Explain how AI search is replacing traditional SEO and what SMBs should do"
   },
   "landing_page": {
     "campaign_id": "EDU-002",
-    "landing_page_slug": "ai-discovery",
-    "url": "/learn/ai-discovery",
+    "landing_page_slug": "ai-marketing-101",
+    "url": "/learn/ai-marketing-101",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,

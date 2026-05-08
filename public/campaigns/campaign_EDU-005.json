@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "Reputation in the AI Age",
     "subject": "Your reputation is now your algorithm",
-    "landing_page": "reputation-ai-age",
+    "landing_page": "ai-search-visibility",
     "template": "educational",
     "description": "How AI weighs reputation signals and why trust compounds"
   },
   "landing_page": {
     "campaign_id": "EDU-005",
-    "landing_page_slug": "reputation-ai-age",
-    "url": "/learn/reputation-ai-age",
+    "landing_page_slug": "ai-search-visibility",
+    "url": "/learn/ai-search-visibility",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,

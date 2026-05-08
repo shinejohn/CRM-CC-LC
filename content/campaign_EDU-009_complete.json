@@ -6,7 +6,7 @@
     "type": "Educational",
     "title": "Local SEO in 2025",
     "subject": "Local SEO isn't dead—it evolved. Here's what works now.",
-    "landing_page": "local-seo-guide",
+    "landing_page": "voice-ai-guide",
     "template": "educational",
     "description": "What still works in local SEO and what's changed"
   },
@@ -29,8 +29,18 @@
       "title": "What Changed",
       "content": {
         "headline": "The Old Rules vs. The New Rules",
-        "old_rules": ["Keyword stuffing", "Link building schemes", "Gaming the algorithm", "Website-centric strategy"],
-        "new_rules": ["Natural language content", "Genuine reputation signals", "Multi-platform presence", "Entity-based optimization"]
+        "old_rules": [
+          "Keyword stuffing",
+          "Link building schemes",
+          "Gaming the algorithm",
+          "Website-centric strategy"
+        ],
+        "new_rules": [
+          "Natural language content",
+          "Genuine reputation signals",
+          "Multi-platform presence",
+          "Entity-based optimization"
+        ]
       },
       "narration": "What changed? Old rules: keyword stuffing, link building schemes, gaming the algorithm, everything focused on your website. New rules: natural language content, genuine reputation signals from real customers, presence across multiple platforms, and entity-based optimization where Google understands your business as a real thing, not just a website.",
       "duration_seconds": 30,
@@ -43,11 +53,31 @@
       "content": {
         "headline": "Local SEO Fundamentals That Still Matter",
         "fundamentals": [
-          {"tactic": "Google Business Profile", "status": "More important than ever", "action": "Complete, accurate, active"},
-          {"tactic": "NAP consistency", "status": "Still crucial", "action": "Same name/address/phone everywhere"},
-          {"tactic": "Reviews", "status": "Weighted heavily", "action": "Volume + velocity + quality"},
-          {"tactic": "Local content", "status": "Signals relevance", "action": "Content about your area"},
-          {"tactic": "Mobile experience", "status": "Non-negotiable", "action": "Fast, easy to use on phones"}
+          {
+            "tactic": "Google Business Profile",
+            "status": "More important than ever",
+            "action": "Complete, accurate, active"
+          },
+          {
+            "tactic": "NAP consistency",
+            "status": "Still crucial",
+            "action": "Same name/address/phone everywhere"
+          },
+          {
+            "tactic": "Reviews",
+            "status": "Weighted heavily",
+            "action": "Volume + velocity + quality"
+          },
+          {
+            "tactic": "Local content",
+            "status": "Signals relevance",
+            "action": "Content about your area"
+          },
+          {
+            "tactic": "Mobile experience",
+            "status": "Non-negotiable",
+            "action": "Fast, easy to use on phones"
+          }
         ]
       },
       "narration": "What still works? Google Business Profile—more important than ever. Complete it, keep it accurate, stay active. NAP consistency—your name, address, and phone should be identical everywhere. Reviews—Google weighs them heavily. Volume, velocity, and quality all matter. Local content—content about your area signals relevance. Mobile experience—non-negotiable. If your site is slow or hard to use on phones, you lose.",
@@ -61,10 +91,22 @@
       "content": {
         "headline": "Google Wants to Know You're Real",
         "entity_signals": [
-          {"signal": "Consistent business info across platforms", "why": "Proves you exist"},
-          {"signal": "Mentions in authoritative sources", "why": "News, directories, citations"},
-          {"signal": "Social proof", "why": "Reviews, engagement, followers"},
-          {"signal": "Activity signals", "why": "Recent posts, events, updates"}
+          {
+            "signal": "Consistent business info across platforms",
+            "why": "Proves you exist"
+          },
+          {
+            "signal": "Mentions in authoritative sources",
+            "why": "News, directories, citations"
+          },
+          {
+            "signal": "Social proof",
+            "why": "Reviews, engagement, followers"
+          },
+          {
+            "signal": "Activity signals",
+            "why": "Recent posts, events, updates"
+          }
         ],
         "key_point": "Google builds a 'knowledge graph' about your business"
       },
@@ -80,10 +122,22 @@
         "headline": "Local SEO + AI Discovery = Maximum Visibility",
         "connection": "The same signals that help Google also help AI assistants",
         "overlap": [
-          {"signal": "Multi-platform presence", "helps": "Both Google and AI"},
-          {"signal": "Reviews and reputation", "helps": "Both Google and AI"},
-          {"signal": "Authoritative mentions", "helps": "Both Google and AI"},
-          {"signal": "Fresh activity", "helps": "Both Google and AI"}
+          {
+            "signal": "Multi-platform presence",
+            "helps": "Both Google and AI"
+          },
+          {
+            "signal": "Reviews and reputation",
+            "helps": "Both Google and AI"
+          },
+          {
+            "signal": "Authoritative mentions",
+            "helps": "Both Google and AI"
+          },
+          {
+            "signal": "Fresh activity",
+            "helps": "Both Google and AI"
+          }
         ],
         "insight": "One strategy, two discovery channels"
       },
@@ -98,12 +152,30 @@
       "content": {
         "headline": "Priority Actions for Local SEO Today",
         "checklist": [
-          {"priority": 1, "action": "Claim and complete Google Business Profile"},
-          {"priority": 2, "action": "Get listed in authoritative directories"},
-          {"priority": 3, "action": "Build review velocity (ask every customer)"},
-          {"priority": 4, "action": "Ensure NAP consistency everywhere"},
-          {"priority": 5, "action": "Post regularly (events, updates, content)"},
-          {"priority": 6, "action": "Pursue local news mentions"}
+          {
+            "priority": 1,
+            "action": "Claim and complete Google Business Profile"
+          },
+          {
+            "priority": 2,
+            "action": "Get listed in authoritative directories"
+          },
+          {
+            "priority": 3,
+            "action": "Build review velocity (ask every customer)"
+          },
+          {
+            "priority": 4,
+            "action": "Ensure NAP consistency everywhere"
+          },
+          {
+            "priority": 5,
+            "action": "Post regularly (events, updates, content)"
+          },
+          {
+            "priority": 6,
+            "action": "Pursue local news mentions"
+          }
         ]
       },
       "narration": "Here's your priority checklist for local SEO today. One: Claim and complete your Google Business Profile if you haven't. Two: Get listed in authoritative directories—real ones, not spam. Three: Build review velocity—ask every customer. Four: Ensure your name, address, phone is consistent everywhere. Five: Post regularly—events, updates, content. Six: Pursue local news mentions when you can. Do these six things and you're ahead of ninety percent of local businesses.",
@@ -138,8 +210,13 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-021"],
+    "leads_to": [
+      "HOWTO-021"
+    ],
     "follows": "EDU-008",
-    "related": ["EDU-002", "EDU-005"]
+    "related": [
+      "EDU-002",
+      "EDU-005"
+    ]
   }
 }

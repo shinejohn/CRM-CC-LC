@@ -59,7 +59,8 @@ function campaignToPresentation(campaign: Campaign): Presentation {
 }
 
 export default function CampaignLandingPage() {
-    const { slug } = useParams();
+    const params = useParams();
+    const slug = params.slug ?? params.campaignSlug;
     const navigate = useNavigate();
 
     if (!slug) return <div className="p-8 text-center text-[var(--nexus-text-secondary)]">Invalid campaign specified.</div>;

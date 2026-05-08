@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "Reputation in the AI Age",
     "subject": "Your reputation is now your algorithm",
-    "landing_page": "reputation-ai-age",
+    "landing_page": "ai-search-visibility",
     "template": "educational",
     "description": "How AI weighs reputation signals and why trust compounds"
   },
   "landing_page": {
     "campaign_id": "EDU-005",
-    "landing_page_slug": "reputation-ai-age",
-    "url": "/learn/reputation-ai-age",
+    "landing_page_slug": "ai-search-visibility",
+    "url": "/learn/ai-search-visibility",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
@@ -47,11 +47,26 @@
       "content": {
         "headline": "AI Doesn't Search. AI Evaluates.",
         "signals": [
-          {"signal": "Review Volume", "weight": "How many people are talking about you"},
-          {"signal": "Review Quality", "weight": "What they're actually saying"},
-          {"signal": "Review Recency", "weight": "Are people still talking about you"},
-          {"signal": "Source Authority", "weight": "Where are these reviews coming from"},
-          {"signal": "Consistency", "weight": "Do all signals tell the same story"}
+          {
+            "signal": "Review Volume",
+            "weight": "How many people are talking about you"
+          },
+          {
+            "signal": "Review Quality",
+            "weight": "What they're actually saying"
+          },
+          {
+            "signal": "Review Recency",
+            "weight": "Are people still talking about you"
+          },
+          {
+            "signal": "Source Authority",
+            "weight": "Where are these reviews coming from"
+          },
+          {
+            "signal": "Consistency",
+            "weight": "Do all signals tell the same story"
+          }
         ],
         "key_point": "AI builds a 'trust score' from multiple signals"
       },
@@ -66,11 +81,31 @@
       "content": {
         "headline": "Reputation Compounds",
         "flywheel": [
-          {"step": 1, "action": "Good service", "result": "Happy customer"},
-          {"step": 2, "action": "Happy customer", "result": "Positive review"},
-          {"step": 3, "action": "Positive review", "result": "AI recommends you"},
-          {"step": 4, "action": "AI recommendation", "result": "New customer"},
-          {"step": 5, "action": "Repeat", "result": "Flywheel accelerates"}
+          {
+            "step": 1,
+            "action": "Good service",
+            "result": "Happy customer"
+          },
+          {
+            "step": 2,
+            "action": "Happy customer",
+            "result": "Positive review"
+          },
+          {
+            "step": 3,
+            "action": "Positive review",
+            "result": "AI recommends you"
+          },
+          {
+            "step": 4,
+            "action": "AI recommendation",
+            "result": "New customer"
+          },
+          {
+            "step": 5,
+            "action": "Repeat",
+            "result": "Flywheel accelerates"
+          }
         ],
         "insight": "The businesses with the best reputations get MORE opportunities to build reputation"
       },
@@ -85,8 +120,16 @@
       "content": {
         "headline": "It's Not Just Stars. It's Speed.",
         "comparison": {
-          "business_a": {"rating": "4.8 stars", "reviews_per_month": 1, "trend": "Stagnant"},
-          "business_b": {"rating": "4.5 stars", "reviews_per_month": 8, "trend": "Growing"}
+          "business_a": {
+            "rating": "4.8 stars",
+            "reviews_per_month": 1,
+            "trend": "Stagnant"
+          },
+          "business_b": {
+            "rating": "4.5 stars",
+            "reviews_per_month": 8,
+            "trend": "Growing"
+          }
         },
         "question": "Which one does AI trust more?",
         "answer": "Business B. Velocity signals a living, thriving business.",
@@ -181,8 +224,14 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-012", "HOWTO-014"],
+    "leads_to": [
+      "HOWTO-012",
+      "HOWTO-014"
+    ],
     "follows": "EDU-004",
-    "related": ["EDU-002", "HOOK-007"]
+    "related": [
+      "EDU-002",
+      "HOOK-007"
+    ]
   }
 }

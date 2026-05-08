@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "The Publishing Network",
     "subject": "One listing. Found everywhere. Here's how.",
-    "landing_page": "publishing-network",
+    "landing_page": "ai-marketing-assistant",
     "template": "educational",
     "description": "Explain how DN, DTG, GEC, Alphasite work together for maximum visibility"
   },
   "landing_page": {
     "campaign_id": "EDU-003",
-    "landing_page_slug": "publishing-network",
-    "url": "/learn/publishing-network",
+    "landing_page_slug": "ai-marketing-assistant",
+    "url": "/learn/ai-marketing-assistant",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
@@ -53,10 +53,22 @@
       "content": {
         "headline": "The Exhausting Old Way",
         "problems": [
-          {"icon": "tired", "text": "Maintain profiles on 10+ platforms"},
-          {"icon": "clock", "text": "Post constantly or disappear"},
-          {"icon": "dollar", "text": "Pay each platform to be seen"},
-          {"icon": "broken", "text": "Nothing connects to anything"}
+          {
+            "icon": "tired",
+            "text": "Maintain profiles on 10+ platforms"
+          },
+          {
+            "icon": "clock",
+            "text": "Post constantly or disappear"
+          },
+          {
+            "icon": "dollar",
+            "text": "Pay each platform to be seen"
+          },
+          {
+            "icon": "broken",
+            "text": "Nothing connects to anything"
+          }
         ],
         "result": "Burnout, inconsistency, invisibility"
       },
@@ -71,10 +83,26 @@
       "content": {
         "headline": "One Presence. Multiple Touchpoints.",
         "network": [
-          {"name": "Daily News", "type": "Local journalism", "icon": "newspaper"},
-          {"name": "Directory", "type": "Business listings", "icon": "building"},
-          {"name": "Events Calendar", "type": "Community events", "icon": "calendar"},
-          {"name": "Alphasite", "type": "Your home base", "icon": "home"}
+          {
+            "name": "Daily News",
+            "type": "Local journalism",
+            "icon": "newspaper"
+          },
+          {
+            "name": "Directory",
+            "type": "Business listings",
+            "icon": "building"
+          },
+          {
+            "name": "Events Calendar",
+            "type": "Community events",
+            "icon": "calendar"
+          },
+          {
+            "name": "Alphasite",
+            "type": "Your home base",
+            "icon": "home"
+          }
         ],
         "connection": "All connected. All feeding each other. All feeding AI.",
         "visual": "Four platforms with visible connections between them"
@@ -90,10 +118,22 @@
       "content": {
         "headline": "Post Once, Appear Everywhere",
         "example_flow": [
-          {"action": "You post an event", "result": "Appears on Events Calendar"},
-          {"action": "Calendar syncs", "result": "Event shows on your Directory listing"},
-          {"action": "News picks up", "result": "Event mentioned in community roundup"},
-          {"action": "AI learns", "result": "All touchpoints confirm you're active"}
+          {
+            "action": "You post an event",
+            "result": "Appears on Events Calendar"
+          },
+          {
+            "action": "Calendar syncs",
+            "result": "Event shows on your Directory listing"
+          },
+          {
+            "action": "News picks up",
+            "result": "Event mentioned in community roundup"
+          },
+          {
+            "action": "AI learns",
+            "result": "All touchpoints confirm you're active"
+          }
         ],
         "key_point": "One action. Four signals. AI sees a business worth recommending."
       },
@@ -195,8 +235,14 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-006", "HOWTO-007"],
+    "leads_to": [
+      "HOWTO-006",
+      "HOWTO-007"
+    ],
     "follows": "EDU-002",
-    "related": ["EDU-001", "HOOK-004"]
+    "related": [
+      "EDU-001",
+      "HOOK-004"
+    ]
   }
 }

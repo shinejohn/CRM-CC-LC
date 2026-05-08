@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "Voice AI for Business",
     "subject": "Your phone can answer itself now",
-    "landing_page": "voice-ai",
+    "landing_page": "ai-customer-service",
     "template": "educational",
     "description": "AI phone answering - never miss a call, always professional"
   },
   "landing_page": {
     "campaign_id": "EDU-008",
-    "landing_page_slug": "voice-ai",
-    "url": "/learn/voice-ai",
+    "landing_page_slug": "ai-customer-service",
+    "url": "/learn/ai-customer-service",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
@@ -45,12 +45,30 @@
       "content": {
         "headline": "AI Answers Your Phone. Professionally.",
         "capabilities": [
-          {"capability": "Answers every call", "detail": "24/7, no hold times"},
-          {"capability": "Sounds natural", "detail": "Not robotic, conversational"},
-          {"capability": "Handles common questions", "detail": "Hours, location, services, pricing"},
-          {"capability": "Takes messages", "detail": "Accurate transcription sent to you"},
-          {"capability": "Books appointments", "detail": "Connected to your calendar"},
-          {"capability": "Transfers when needed", "detail": "Routes urgent calls to you"}
+          {
+            "capability": "Answers every call",
+            "detail": "24/7, no hold times"
+          },
+          {
+            "capability": "Sounds natural",
+            "detail": "Not robotic, conversational"
+          },
+          {
+            "capability": "Handles common questions",
+            "detail": "Hours, location, services, pricing"
+          },
+          {
+            "capability": "Takes messages",
+            "detail": "Accurate transcription sent to you"
+          },
+          {
+            "capability": "Books appointments",
+            "detail": "Connected to your calendar"
+          },
+          {
+            "capability": "Transfers when needed",
+            "detail": "Routes urgent calls to you"
+          }
         ]
       },
       "narration": "Voice AI is your always-on receptionist. It answers every call, twenty-four seven, no hold times. It sounds natural—conversational, not robotic. It handles common questions: hours, location, services, pricing. It takes messages with accurate transcription sent to you. It books appointments directly on your calendar. And it transfers when needed—urgent calls get routed to you immediately.",
@@ -64,8 +82,6 @@
       "content": {
         "headline": "Natural, Professional, On-Brand",
         "sample_conversation": {
-          "caller": "Hi, I'm looking for information about your services",
-          "ai": "Hi! Thanks for calling [Business]. I'd be happy to help. Are you interested in [Service A] or [Service B]?",
           "caller": "Service A. What are your prices?",
           "ai": "Great choice. [Service A] starts at [price]. Would you like to schedule a consultation, or do you have other questions I can help with?"
         },
@@ -82,11 +98,26 @@
       "content": {
         "headline": "AI Knows When to Transfer",
         "handoff_triggers": [
-          {"trigger": "Caller requests human", "action": "Immediate transfer"},
-          {"trigger": "Complex question AI can't answer", "action": "Takes message + alerts you"},
-          {"trigger": "High-value opportunity", "action": "Priority notification"},
-          {"trigger": "Emergency/urgent", "action": "Direct transfer"},
-          {"trigger": "VIP caller recognized", "action": "Custom handling"}
+          {
+            "trigger": "Caller requests human",
+            "action": "Immediate transfer"
+          },
+          {
+            "trigger": "Complex question AI can't answer",
+            "action": "Takes message + alerts you"
+          },
+          {
+            "trigger": "High-value opportunity",
+            "action": "Priority notification"
+          },
+          {
+            "trigger": "Emergency/urgent",
+            "action": "Direct transfer"
+          },
+          {
+            "trigger": "VIP caller recognized",
+            "action": "Custom handling"
+          }
         ],
         "control": "You set the rules. AI follows them."
       },
@@ -178,8 +209,13 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-017"],
+    "leads_to": [
+      "HOWTO-017"
+    ],
     "follows": "EDU-007",
-    "related": ["EDU-006", "HOOK-007"]
+    "related": [
+      "EDU-006",
+      "HOOK-007"
+    ]
   }
 }

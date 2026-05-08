@@ -6,7 +6,7 @@
     "type": "Educational",
     "title": "AI Customer Service",
     "subject": "Your customers expect instant responses. Here's how to deliver.",
-    "landing_page": "ai-customer-service",
+    "landing_page": "competitive-intelligence",
     "template": "educational",
     "description": "Using AI to provide 24/7 customer service without hiring more staff"
   },
@@ -35,11 +35,26 @@
       "content": {
         "headline": "AI Can Handle Customer Service 24/7",
         "capabilities": [
-          {"capability": "Instant responses", "detail": "Under 30 seconds, any time"},
-          {"capability": "Answer common questions", "detail": "Hours, pricing, services, policies"},
-          {"capability": "Book appointments", "detail": "Check availability, schedule, confirm"},
-          {"capability": "Handle complaints", "detail": "Initial response, escalation when needed"},
-          {"capability": "Follow up", "detail": "Post-service check-ins, review requests"}
+          {
+            "capability": "Instant responses",
+            "detail": "Under 30 seconds, any time"
+          },
+          {
+            "capability": "Answer common questions",
+            "detail": "Hours, pricing, services, policies"
+          },
+          {
+            "capability": "Book appointments",
+            "detail": "Check availability, schedule, confirm"
+          },
+          {
+            "capability": "Handle complaints",
+            "detail": "Initial response, escalation when needed"
+          },
+          {
+            "capability": "Follow up",
+            "detail": "Post-service check-ins, review requests"
+          }
         ]
       },
       "narration": "AI can handle customer service twenty-four seven. Instant responses—under thirty seconds, any time of day or night. Answer common questions about hours, pricing, services, policies. Book appointments—check availability, schedule, send confirmations. Handle initial complaint responses, escalate when needed. Follow up automatically—post-service check-ins, review requests. All without adding staff.",
@@ -53,11 +68,26 @@
       "content": {
         "headline": "What Customers Actually Experience",
         "experience": [
-          {"touchpoint": "Website chat", "experience": "Instant answers, not 'someone will get back to you'"},
-          {"touchpoint": "Facebook message", "experience": "Same AI, consistent answers"},
-          {"touchpoint": "Text inquiry", "experience": "Real conversation, not canned responses"},
-          {"touchpoint": "After-hours call", "experience": "Voicemail? No—answered and helped"},
-          {"touchpoint": "Email question", "experience": "Response in minutes, not days"}
+          {
+            "touchpoint": "Website chat",
+            "experience": "Instant answers, not 'someone will get back to you'"
+          },
+          {
+            "touchpoint": "Facebook message",
+            "experience": "Same AI, consistent answers"
+          },
+          {
+            "touchpoint": "Text inquiry",
+            "experience": "Real conversation, not canned responses"
+          },
+          {
+            "touchpoint": "After-hours call",
+            "experience": "Voicemail? No—answered and helped"
+          },
+          {
+            "touchpoint": "Email question",
+            "experience": "Response in minutes, not days"
+          }
         ]
       },
       "narration": "What do customers actually experience? Website chat—instant answers, not 'someone will get back to you.' Facebook message—same AI, consistent answers across channels. Text inquiry—a real conversation, not canned responses. After-hours call—not voicemail, actually answered and helped. Email question—response in minutes, not days. Every touchpoint covered, every time.",
@@ -71,8 +101,20 @@
       "content": {
         "headline": "AI Handles Routine, Humans Handle Important",
         "division": {
-          "ai_handles": ["Standard questions (70-80% of inquiries)", "Appointment scheduling", "Basic info requests", "Initial complaint acknowledgment", "Routine follow-ups"],
-          "humans_handle": ["Complex problems", "Angry or upset customers", "High-value opportunities", "Unique situations", "Relationship building"]
+          "ai_handles": [
+            "Standard questions (70-80% of inquiries)",
+            "Appointment scheduling",
+            "Basic info requests",
+            "Initial complaint acknowledgment",
+            "Routine follow-ups"
+          ],
+          "humans_handle": [
+            "Complex problems",
+            "Angry or upset customers",
+            "High-value opportunities",
+            "Unique situations",
+            "Relationship building"
+          ]
         },
         "result": "Your team has time for what matters"
       },
@@ -109,11 +151,26 @@
       "content": {
         "headline": "Start with Your Highest-Volume Questions",
         "steps": [
-          {"step": 1, "action": "List your 10 most common questions"},
-          {"step": 2, "action": "Create answers for each"},
-          {"step": 3, "action": "Set up AI on your highest-traffic channel"},
-          {"step": 4, "action": "Monitor and refine for 2 weeks"},
-          {"step": 5, "action": "Expand to other channels"}
+          {
+            "step": 1,
+            "action": "List your 10 most common questions"
+          },
+          {
+            "step": 2,
+            "action": "Create answers for each"
+          },
+          {
+            "step": 3,
+            "action": "Set up AI on your highest-traffic channel"
+          },
+          {
+            "step": 4,
+            "action": "Monitor and refine for 2 weeks"
+          },
+          {
+            "step": 5,
+            "action": "Expand to other channels"
+          }
         ]
       },
       "narration": "Start with your highest-volume questions. Step one: list your ten most common questions. Step two: create clear answers for each. Step three: set up AI on your highest-traffic channel—probably website or Facebook. Step four: monitor and refine for two weeks. Step five: expand to other channels. Start simple, prove it works, then scale.",
@@ -148,8 +205,13 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-008"],
+    "leads_to": [
+      "HOWTO-008"
+    ],
     "follows": "EDU-013",
-    "related": ["EDU-006", "EDU-008"]
+    "related": [
+      "EDU-006",
+      "EDU-008"
+    ]
   }
 }

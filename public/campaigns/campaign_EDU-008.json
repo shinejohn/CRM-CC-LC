@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "Voice AI for Business",
     "subject": "Your phone can answer itself now",
-    "landing_page": "voice-ai",
+    "landing_page": "ai-customer-service",
     "template": "educational",
     "description": "AI phone answering - never miss a call, always professional"
   },
   "landing_page": {
     "campaign_id": "EDU-008",
-    "landing_page_slug": "voice-ai",
-    "url": "/learn/voice-ai",
+    "landing_page_slug": "ai-customer-service",
+    "url": "/learn/ai-customer-service",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,

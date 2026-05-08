@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "AI Content Creation",
     "subject": "AI writes. You approve. Content happens.",
-    "landing_page": "ai-content",
+    "landing_page": "reputation-ai-age",
     "template": "educational",
     "description": "How AI content creation works - consistency beats perfection"
   },
   "landing_page": {
     "campaign_id": "EDU-007",
-    "landing_page_slug": "ai-content",
-    "url": "/learn/ai-content",
+    "landing_page_slug": "reputation-ai-age",
+    "url": "/learn/reputation-ai-age",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
@@ -44,10 +44,26 @@
       "content": {
         "headline": "The New Content Model",
         "flow": [
-          {"step": 1, "action": "AI drafts content based on your business", "you": "Nothing"},
-          {"step": 2, "action": "You review in 2 minutes", "you": "Quick review"},
-          {"step": 3, "action": "Click approve (or edit)", "you": "One click"},
-          {"step": 4, "action": "Content publishes automatically", "you": "Nothing"}
+          {
+            "step": 1,
+            "action": "AI drafts content based on your business",
+            "you": "Nothing"
+          },
+          {
+            "step": 2,
+            "action": "You review in 2 minutes",
+            "you": "Quick review"
+          },
+          {
+            "step": 3,
+            "action": "Click approve (or edit)",
+            "you": "One click"
+          },
+          {
+            "step": 4,
+            "action": "Content publishes automatically",
+            "you": "Nothing"
+          }
         ],
         "result": "Consistent content without the time drain"
       },
@@ -62,12 +78,36 @@
       "content": {
         "headline": "AI Creates All Types of Content",
         "content_types": [
-          {"type": "Social posts", "frequency": "Daily", "time": "2 min review"},
-          {"type": "Blog articles", "frequency": "Weekly", "time": "5 min review"},
-          {"type": "Email newsletters", "frequency": "Weekly/Monthly", "time": "5 min review"},
-          {"type": "Announcements", "frequency": "As needed", "time": "2 min review"},
-          {"type": "Event descriptions", "frequency": "As needed", "time": "3 min review"},
-          {"type": "Service descriptions", "frequency": "Once", "time": "10 min review"}
+          {
+            "type": "Social posts",
+            "frequency": "Daily",
+            "time": "2 min review"
+          },
+          {
+            "type": "Blog articles",
+            "frequency": "Weekly",
+            "time": "5 min review"
+          },
+          {
+            "type": "Email newsletters",
+            "frequency": "Weekly/Monthly",
+            "time": "5 min review"
+          },
+          {
+            "type": "Announcements",
+            "frequency": "As needed",
+            "time": "2 min review"
+          },
+          {
+            "type": "Event descriptions",
+            "frequency": "As needed",
+            "time": "3 min review"
+          },
+          {
+            "type": "Service descriptions",
+            "frequency": "Once",
+            "time": "10 min review"
+          }
         ]
       },
       "narration": "AI can create all types of content. Social posts—daily, two-minute review. Blog articles—weekly, five minutes to review. Email newsletters—weekly or monthly, five minutes. Announcements, event descriptions, service descriptions—as needed, quick review. The AI adapts to your voice, your business, your audience. You just approve or adjust.",
@@ -105,10 +145,22 @@
       "content": {
         "headline": "AI Sounds Like You (Not a Robot)",
         "training": [
-          {"source": "Your website", "learns": "Your terminology, services, approach"},
-          {"source": "Past content", "learns": "Your tone and style"},
-          {"source": "Your feedback", "learns": "What you like and don't like"},
-          {"source": "Industry context", "learns": "What resonates in your field"}
+          {
+            "source": "Your website",
+            "learns": "Your terminology, services, approach"
+          },
+          {
+            "source": "Past content",
+            "learns": "Your tone and style"
+          },
+          {
+            "source": "Your feedback",
+            "learns": "What you like and don't like"
+          },
+          {
+            "source": "Industry context",
+            "learns": "What resonates in your field"
+          }
         ],
         "result": "Content that sounds authentically like your business"
       },
@@ -178,8 +230,13 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-013"],
+    "leads_to": [
+      "HOWTO-013"
+    ],
     "follows": "EDU-006",
-    "related": ["HOOK-008", "HOWTO-028"]
+    "related": [
+      "HOOK-008",
+      "HOWTO-028"
+    ]
   }
 }

@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "AI Content Creation",
     "subject": "AI writes. You approve. Content happens.",
-    "landing_page": "ai-content",
+    "landing_page": "reputation-ai-age",
     "template": "educational",
     "description": "How AI content creation works - consistency beats perfection"
   },
   "landing_page": {
     "campaign_id": "EDU-007",
-    "landing_page_slug": "ai-content",
-    "url": "/learn/ai-content",
+    "landing_page_slug": "reputation-ai-age",
+    "url": "/learn/reputation-ai-age",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,

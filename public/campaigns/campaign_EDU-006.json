@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "Your AI Employee",
     "subject": "The employee you couldn't afford just became free",
-    "landing_page": "ai-employee",
+    "landing_page": "community-marketing",
     "template": "educational",
     "description": "Introduce AI as business automation - handle volume, focus on relationships"
   },
   "landing_page": {
     "campaign_id": "EDU-006",
-    "landing_page_slug": "ai-employee",
-    "url": "/learn/ai-employee",
+    "landing_page_slug": "community-marketing",
+    "url": "/learn/community-marketing",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,

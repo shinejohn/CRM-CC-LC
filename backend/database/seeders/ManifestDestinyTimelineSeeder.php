@@ -107,7 +107,7 @@ final class ManifestDestinyTimelineSeeder extends Seeder
             [
                 'name' => 'Manifest Destiny ��� Education Stage',
                 'description' => '60-day education sequence: thought leadership that builds trust and demonstrates platform value',
-                'pipeline_stage' => PipelineStage::NURTURE,
+                'pipeline_stage' => PipelineStage::ENGAGEMENT,
                 'duration_days' => 60,
                 'is_active' => true,
             ]
@@ -151,7 +151,7 @@ final class ManifestDestinyTimelineSeeder extends Seeder
             [
                 'name' => 'Manifest Destiny — How-To Stage',
                 'description' => '90-day feature adoption sequence for active subscribers: platform mastery → retention → upsell',
-                'pipeline_stage' => PipelineStage::ACTIVE,
+                'pipeline_stage' => PipelineStage::SALES,
                 'duration_days' => 90,
                 'is_active' => true,
             ]
@@ -200,7 +200,7 @@ final class ManifestDestinyTimelineSeeder extends Seeder
     /**
      * Persist timeline action rows with sensible defaults.
      */
-    private function createActions(int $timelineId, array $actions): void
+    private function createActions(string $timelineId, array $actions): void
     {
         foreach ($actions as $idx => $row) {
             CampaignTimelineAction::create([

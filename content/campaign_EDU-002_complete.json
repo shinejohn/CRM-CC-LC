@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "AI Discovery",
     "subject": "Google is dying. Here's how people find businesses now.",
-    "landing_page": "ai-discovery",
+    "landing_page": "ai-marketing-101",
     "template": "educational",
     "description": "Explain how AI search is replacing traditional SEO and what SMBs should do"
   },
   "landing_page": {
     "campaign_id": "EDU-002",
-    "landing_page_slug": "ai-discovery",
-    "url": "/learn/ai-discovery",
+    "landing_page_slug": "ai-marketing-101",
+    "url": "/learn/ai-marketing-101",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
@@ -53,9 +53,18 @@
       "content": {
         "headline": "The Shift Is Already Here",
         "stats": [
-          {"value": "40%", "label": "of Gen Z uses TikTok or AI for search, not Google"},
-          {"value": "8B", "label": "AI assistant queries processed last month"},
-          {"value": "2x", "label": "AI search growing every year"}
+          {
+            "value": "40%",
+            "label": "of Gen Z uses TikTok or AI for search, not Google"
+          },
+          {
+            "value": "8B",
+            "label": "AI assistant queries processed last month"
+          },
+          {
+            "value": "2x",
+            "label": "AI search growing every year"
+          }
         ],
         "trend_line": "Google search declining, AI search exponential",
         "visual": "Graph showing crossover point"
@@ -72,10 +81,22 @@
         "headline": "AI Doesn't Search. AI Knows.",
         "key_insight": "AI has already learned from trusted sources. When someone asks, AI already has an answer.",
         "sources_ai_trusts": [
-          {"icon": "newspaper", "source": "News publications"},
-          {"icon": "directory", "source": "Business directories"},
-          {"icon": "star", "source": "Reviews & reputation"},
-          {"icon": "calendar", "source": "Events & activity"}
+          {
+            "icon": "newspaper",
+            "source": "News publications"
+          },
+          {
+            "icon": "directory",
+            "source": "Business directories"
+          },
+          {
+            "icon": "star",
+            "source": "Reviews & reputation"
+          },
+          {
+            "icon": "calendar",
+            "source": "Events & activity"
+          }
         ],
         "visual": "AI brain with input sources flowing in"
       },
@@ -108,10 +129,22 @@
         "headline": "The Opportunity",
         "solution": "Be present in the sources AI trusts",
         "touchpoints": [
-          {"platform": "Local News", "why": "Authoritative content source"},
-          {"platform": "Business Directory", "why": "Structured data AI understands"},
-          {"platform": "Events Calendar", "why": "Activity and freshness signals"},
-          {"platform": "Community Platform", "why": "Engagement and reputation"}
+          {
+            "platform": "Local News",
+            "why": "Authoritative content source"
+          },
+          {
+            "platform": "Business Directory",
+            "why": "Structured data AI understands"
+          },
+          {
+            "platform": "Events Calendar",
+            "why": "Activity and freshness signals"
+          },
+          {
+            "platform": "Community Platform",
+            "why": "Engagement and reputation"
+          }
         ],
         "result": "One presence → Multiple touchpoints → AI-discoverable",
         "visual": "Business connected to multiple sources, all feeding AI"
@@ -187,8 +220,14 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-003", "HOWTO-004"],
+    "leads_to": [
+      "HOWTO-003",
+      "HOWTO-004"
+    ],
     "follows": "EDU-001",
-    "related": ["EDU-003", "EDU-008"]
+    "related": [
+      "EDU-003",
+      "EDU-008"
+    ]
   }
 }
