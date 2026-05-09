@@ -16,3 +16,6 @@ coverage/
 
 # Vitest
 .vitest/
+
+# Build output (Vite)
+dist/

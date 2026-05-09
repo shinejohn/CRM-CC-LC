@@ -1,1 +1,0 @@
-import{p as o,q as a,j as l,c as m}from"./index-W8oXqo-b.js";const c={sm:"w-8 h-8 text-xs",md:"w-10 h-10 text-sm",lg:"w-12 h-12 text-base"};function d({name:t,size:s="md",color:e,className:i}){const n=e||o(t),r=a(t);return l.jsx("div",{className:m("flex items-center justify-center rounded-full text-white font-medium shrink-0",c[s],n,i),children:r})}export{d as A};
