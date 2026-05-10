@@ -220,7 +220,7 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
   return (
     <div
       ref={containerRef}
-      className="w-full h-screen bg-gray-900 flex flex-col relative"
+      className={`w-full bg-gray-900 flex flex-col relative ${hideOverlayUI ? 'h-full' : 'h-screen'}`}
     >
       {/* Slide Area */}
       <div className="flex-1 relative overflow-hidden">
