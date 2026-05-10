@@ -149,6 +149,7 @@ export default function RoomWithSarah({ campaign, onClose, onNavigateCampaign }:
   return (
     <PitchShell
       variant="learn"
+      embed
       onClose={onClose}
       showProgress={progressSteps.length > 1}
       currentStep={1}

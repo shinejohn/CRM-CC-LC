@@ -1,10 +1,11 @@
 import { useState, lazy, Suspense } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { getCampaignBySlug } from "@/data/campaigns";
 import { Button } from "@/components/ui/button";
 
 const RoomWithSarah = lazy(() => import("./RoomWithSarah"));
 import {
+    ArrowLeft,
     ArrowRight,
     CheckCircle2,
     Clock,
@@ -644,21 +645,53 @@ export default function CampaignLandingPage() {
         setShowPresentation(true);
     };
 
-    // Immersive presentation mode — Room with Sarah
+    // Presentation mode — Room with Sarah, embedded with navigation header
     if (showPresentation) {
         return (
-            <Suspense
-                fallback={
-                    <div className="flex items-center justify-center h-screen bg-[#0d1229]">
-                        <p className="text-white/60">Loading presentation...</p>
+            <div className="h-screen flex flex-col bg-[#0d1229]">
+                {/* Navigation header — keeps user oriented */}
+                <header className="flex items-center gap-3 px-4 py-2 bg-gray-900 border-b border-white/10 shrink-0">
+                    <button
+                        type="button"
+                        onClick={() => setShowPresentation(false)}
+                        className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors"
+                        aria-label="Back to lesson overview"
+                    >
+                        <ArrowLeft className="w-4 h-4" />
+                        Back
+                    </button>
+                    <span className="text-white/30">|</span>
+                    <span className="text-sm text-white/60 truncate">{campaign.title}</span>
+                    <div className="ml-auto flex items-center gap-3">
+                        <Link
+                            to="/command-center/learn"
+                            className="text-xs text-white/50 hover:text-white/80 transition-colors"
+                        >
+                            All Lessons
+                        </Link>
+                        <Link
+                            to="/command-center/dashboard"
+                            className="text-xs text-white/50 hover:text-white/80 transition-colors"
+                        >
+                            Command Center
+                        </Link>
                     </div>
-                }
-            >
-                <RoomWithSarah
-                    campaign={campaign}
-                    onClose={() => setShowPresentation(false)}
-                />
-            </Suspense>
+                </header>
+                <div className="flex-1 min-h-0">
+                    <Suspense
+                        fallback={
+                            <div className="flex items-center justify-center h-full">
+                                <p className="text-white/60">Loading presentation...</p>
+                            </div>
+                        }
+                    >
+                        <RoomWithSarah
+                            campaign={campaign}
+                            onClose={() => setShowPresentation(false)}
+                        />
+                    </Suspense>
+                </div>
+            </div>
         );
     }
 
