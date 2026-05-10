@@ -278,94 +278,130 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
         </div>
       )}
 
-      {/* Controls — normal flow when embedded (hideOverlayUI), absolute overlay when standalone */}
-      <div className={
-        hideOverlayUI
-          ? "shrink-0 bg-gray-900 border-t border-white/10 z-30"
-          : "absolute bottom-0 left-0 right-0 bg-gray-900/90 backdrop-blur-sm z-30"
-      }>
-        {/* Progress Bar */}
-        <div className="h-1 bg-gray-700">
-          <div
-            className="h-full bg-indigo-600 transition-all"
-            style={{
-              width: `${(audioProgress / audioDuration) * 100}%`,
-            }}
-          />
-        </div>
+      {/* Controls */}
+      {hideOverlayUI ? (
+        /* Embedded controls — clean, prominent, no audio clutter */
+        <div className="shrink-0 bg-gray-800 border-t border-white/10 px-4 py-3">
+          <div className="flex items-center justify-between">
+            <button
+              type="button"
+              onClick={handlePrevSlide}
+              disabled={currentSlide === 0}
+              className="flex items-center gap-1 px-3 py-2 text-sm text-white bg-white/10 hover:bg-white/20 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft size={18} />
+              <span className="hidden sm:inline">Prev</span>
+            </button>
 
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between max-w-6xl mx-auto">
-            {/* Left: Navigation */}
-            <div className="flex items-center gap-4">
-              <button
-                onClick={handlePrevSlide}
-                disabled={currentSlide === 0}
-                className="p-2 text-white hover:bg-white/10 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                <ChevronLeft size={20} />
-              </button>
-              <button
-                onClick={handlePlayPause}
-                className="p-2 text-white hover:bg-white/10 rounded transition-colors"
-              >
-                {isPlaying ? <Pause size={24} /> : <Play size={24} />}
-              </button>
-              <button
-                onClick={handleNextSlide}
-                disabled={currentSlide === slides.length - 1}
-                className="p-2 text-white hover:bg-white/10 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                <ChevronRight size={20} />
-              </button>
-
-              {/* Volume */}
-              <div className="flex items-center gap-2 ml-4">
-                <button
-                  onClick={handleMute}
-                  className="p-2 text-white hover:bg-white/10 rounded transition-colors"
-                >
-                  {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-                </button>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value={volume}
-                  onChange={handleVolumeChange}
-                  className="w-24"
-                />
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5">
+                {slides.map((_, index) => (
+                  <button
+                    type="button"
+                    key={index}
+                    onClick={() => handleSlideClick(index)}
+                    className={`rounded-full transition-all ${
+                      index === currentSlide
+                        ? 'bg-indigo-500 w-6 h-2.5'
+                        : index < currentSlide
+                          ? 'bg-indigo-400/50 w-2.5 h-2.5 hover:bg-indigo-400'
+                          : 'bg-white/25 w-2.5 h-2.5 hover:bg-white/50'
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
               </div>
+              <span className="text-sm font-medium text-white/60 tabular-nums">
+                {currentSlide + 1}/{slides.length}
+              </span>
             </div>
 
-            {/* Center: Slide Dots */}
-            <div className="flex items-center gap-2">
-              {slides.map((_, index) => (
+            <button
+              type="button"
+              onClick={handleNextSlide}
+              disabled={currentSlide === slides.length - 1}
+              className="flex items-center gap-1 px-3 py-2 text-sm text-white bg-indigo-600 hover:bg-indigo-500 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              aria-label="Next slide"
+            >
+              <span className="hidden sm:inline">Next</span>
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </div>
+      ) : (
+        /* Standalone controls — full audio/video player bar */
+        <div className="absolute bottom-0 left-0 right-0 bg-gray-900/90 backdrop-blur-sm z-30">
+          <div className="h-1 bg-gray-700">
+            <div
+              className="h-full bg-indigo-600 transition-all"
+              style={{
+                width: `${(audioProgress / audioDuration) * 100}%`,
+              }}
+            />
+          </div>
+
+          <div className="px-6 py-4">
+            <div className="flex items-center justify-between max-w-6xl mx-auto">
+              <div className="flex items-center gap-4">
                 <button
-                  key={index}
-                  onClick={() => handleSlideClick(index)}
-                  className={`
-                    w-2 h-2 rounded-full transition-all
-                    ${
+                  onClick={handlePrevSlide}
+                  disabled={currentSlide === 0}
+                  className="p-2 text-white hover:bg-white/10 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  onClick={handlePlayPause}
+                  className="p-2 text-white hover:bg-white/10 rounded transition-colors"
+                >
+                  {isPlaying ? <Pause size={24} /> : <Play size={24} />}
+                </button>
+                <button
+                  onClick={handleNextSlide}
+                  disabled={currentSlide === slides.length - 1}
+                  className="p-2 text-white hover:bg-white/10 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  <ChevronRight size={20} />
+                </button>
+                <div className="flex items-center gap-2 ml-4">
+                  <button
+                    onClick={handleMute}
+                    className="p-2 text-white hover:bg-white/10 rounded transition-colors"
+                  >
+                    {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                  </button>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={volume}
+                    onChange={handleVolumeChange}
+                    className="w-24"
+                  />
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                {slides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleSlideClick(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
                       index === currentSlide
                         ? 'bg-indigo-600 w-8'
                         : 'bg-white/30 hover:bg-white/50'
-                    }
-                  `}
-                />
-              ))}
-            </div>
-
-            {/* Right: Chat & Fullscreen */}
-            <div className="flex items-center gap-2">
-              {!hideOverlayUI && (
+                    }`}
+                  />
+                ))}
+              </div>
+              <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={() => {
                     setShowChat(!showChat);
                     if (!showChat && isPlaying) {
-                      handlePlayPause(); // Pause when opening chat
+                      handlePlayPause();
                     }
                   }}
                   className={`p-2 rounded transition-colors ${
@@ -377,21 +413,21 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
                 >
                   <MessageCircle size={20} />
                 </button>
-              )}
-              <span className="text-sm text-white/70">
-                {currentSlide + 1} / {slides.length}
-              </span>
-              <button
-                type="button"
-                onClick={handleFullscreen}
-                className="p-2 text-white hover:bg-white/10 rounded transition-colors"
-              >
-                <Maximize2 size={20} />
-              </button>
+                <span className="text-sm text-white/70">
+                  {currentSlide + 1} / {slides.length}
+                </span>
+                <button
+                  type="button"
+                  onClick={handleFullscreen}
+                  className="p-2 text-white hover:bg-white/10 rounded transition-colors"
+                >
+                  <Maximize2 size={20} />
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* AI Chat Panel (hidden when Sarah sidebar handles chat) */}
       {!hideOverlayUI && (
