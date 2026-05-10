@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
-import { PitchShell } from "@/pitch/shell/PitchShell";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { MessageCircle } from "lucide-react";
 import { SarahPanel } from "@/pitch/shell/SarahPanel";
 import { FibonaccoPlayer } from "@/components/LearningCenter/Presentation/FibonaccoPlayer";
 import { useSarahNarration } from "./useSarahNarration";
 import type { Campaign } from "@/services/types/learning.types";
 import type { Presentation, Slide } from "@/types/learning";
+import "@/pitch/tokens.css";
 
 interface LandingPageData {
   ai_persona?: string;
@@ -83,6 +85,7 @@ export default function RoomWithSarah({ campaign, onClose, onNavigateCampaign }:
   const lp = getLandingPage(campaign);
   const rawSlides = getSlides(campaign);
   const greetedRef = useRef(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const presentation = useMemo(
     () => campaignToPresentation(campaign, lp),
@@ -119,7 +122,6 @@ export default function RoomWithSarah({ campaign, onClose, onNavigateCampaign }:
   const handleComplete = useCallback(() => {
     complete(campaign);
 
-    // Surface related campaigns if available
     const raw = campaign as Record<string, unknown>;
     const connections = (raw.connections ?? {}) as Record<string, unknown>;
     const leadsTo = connections.leads_to as string[] | undefined;
@@ -136,39 +138,74 @@ export default function RoomWithSarah({ campaign, onClose, onNavigateCampaign }:
     }
   }, [campaign, complete, appendSarah, onNavigateCampaign]);
 
-  // Build slide-based progress steps
-  const progressSteps = useMemo(
-    () =>
-      rawSlides.map((s, i) => ({
-        key: `slide-${i}`,
-        label: s.title ?? `Slide ${i + 1}`,
-      })),
-    [rawSlides]
-  );
-
   return (
-    <PitchShell
-      variant="learn"
-      embed
-      onClose={onClose}
-      showProgress={progressSteps.length > 1}
-      currentStep={1}
-      steps={progressSteps}
-      completedSteps={[]}
-      rightPanel={
+    <div className="pitch-root flex flex-1 min-h-0">
+      {/* Left: Slide player — fills available width */}
+      <div className="flex-1 flex flex-col min-w-0 bg-gray-900">
+        <FibonaccoPlayer
+          presentation={presentation}
+          hideOverlayUI
+          onSlideChange={handleSlideChange}
+          onComplete={handleComplete}
+        />
+      </div>
+
+      {/* Right: Sarah panel — desktop only */}
+      <aside
+        className="hidden md:flex md:w-[380px] md:flex-none md:flex-col min-h-0 border-l"
+        style={{
+          backgroundColor: "var(--p-panel)",
+          borderColor: "var(--p-border)",
+        }}
+      >
         <SarahPanel
           messages={messages}
           isTyping={isTyping}
           onSend={handleUserMessage}
         />
-      }
-    >
-      <FibonaccoPlayer
-        presentation={presentation}
-        hideOverlayUI
-        onSlideChange={handleSlideChange}
-        onComplete={handleComplete}
-      />
-    </PitchShell>
+      </aside>
+
+      {/* Mobile: Sarah drawer toggle + drawer */}
+      <div className="md:hidden">
+        <button
+          type="button"
+          onClick={() => setDrawerOpen((o) => !o)}
+          className="fixed bottom-4 right-4 z-[60] rounded-full px-4 py-2.5 text-sm font-semibold shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+          style={{ backgroundColor: "var(--p-amber)", color: "var(--p-bg)" }}
+          aria-expanded={drawerOpen}
+          aria-controls="sarah-mobile-drawer"
+        >
+          <MessageCircle className="w-4 h-4 inline-block mr-1.5 -mt-0.5" />
+          {drawerOpen ? "Close" : "Ask Sarah"}
+        </button>
+
+        <AnimatePresence>
+          {drawerOpen && (
+            <motion.aside
+              id="sarah-mobile-drawer"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", stiffness: 320, damping: 32 }}
+              className="fixed inset-x-0 bottom-0 z-[55] flex flex-col rounded-t-2xl border-t shadow-2xl overflow-hidden"
+              style={{
+                maxHeight: "min(70vh, 520px)",
+                backgroundColor: "var(--p-panel)",
+                borderColor: "var(--p-border)",
+              }}
+              aria-label="Sarah conversation"
+            >
+              <div className="flex-1 min-h-0 overflow-hidden flex flex-col">
+                <SarahPanel
+                  messages={messages}
+                  isTyping={isTyping}
+                  onSend={handleUserMessage}
+                />
+              </div>
+            </motion.aside>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
   );
 }

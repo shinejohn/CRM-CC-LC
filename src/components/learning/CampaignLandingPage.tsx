@@ -677,7 +677,7 @@ export default function CampaignLandingPage() {
                         </Link>
                     </div>
                 </header>
-                <div className="flex-1 min-h-0">
+                <div className="flex-1 min-h-0 flex flex-col">
                     <Suspense
                         fallback={
                             <div className="flex items-center justify-center h-full">
