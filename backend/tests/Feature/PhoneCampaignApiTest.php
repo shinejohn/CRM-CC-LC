@@ -25,8 +25,8 @@ class PhoneCampaignApiTest extends TestCase
     {
         $data = [
             'name' => 'Test Phone Campaign',
-            'script_id' => 'test-script-id',
-            'recipients' => ['+1234567890'],
+            'type' => 'phone',
+            'message' => 'Test phone campaign message',
             'tenant_id' => '00000000-0000-0000-0000-000000000000',
         ];
 
@@ -52,7 +52,7 @@ class PhoneCampaignApiTest extends TestCase
     {
         $data = [
             'name' => 'Test Phone Script',
-            'content' => 'Test script content',
+            'script' => 'Test script content',
             'tenant_id' => '00000000-0000-0000-0000-000000000000',
         ];
 
@@ -67,14 +67,14 @@ class PhoneCampaignApiTest extends TestCase
         $campaignId = 'test-campaign-id';
 
         $data = [
-            'call_id' => 'test-call-id',
-            'status' => 'completed',
-            'duration' => 120,
+            'CallSid' => 'test-call-sid',
+            'CallStatus' => 'completed',
+            'CallDuration' => 120,
         ];
 
         $response = $this->postJson("/api/v1/outbound/phone/campaigns/{$campaignId}/call-status", $data);
 
         $response->assertStatus(200)
-            ->assertJsonStructure(['data', 'message']);
+            ->assertJsonStructure(['status']);
     }
 }

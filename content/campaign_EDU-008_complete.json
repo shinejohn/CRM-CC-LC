@@ -19,7 +19,18 @@
     "slide_count": 7,
     "duration_seconds": 180,
     "primary_cta": "setup_voice_ai",
-    "secondary_cta": "hear_demo"
+    "secondary_cta": "hear_demo",
+    "ai_tone": "Practical, encouraging, solution-focused",
+    "ai_goal": "Show how AI can transform customer service for small businesses",
+    "ai_persona": "Sarah",
+    "conversion_goal": "education",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week6-educational",
+    "utm_content": "EDU-008",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-customer-service/audio/"
   },
   "slides": [
     {
@@ -217,5 +228,13 @@
       "EDU-006",
       "HOOK-007"
     ]
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 200,
+    "purpose": "education",
+    "audio_required": true
   }
 }

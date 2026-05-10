@@ -74,10 +74,22 @@
       "content": {
         "headline": "What Coupons Actually Do",
         "results": [
-          {"metric": "{{avg_redemptions}}", "label": "average redemptions per coupon"},
-          {"metric": "{{avg_new_customers}}", "label": "become repeat customers"},
-          {"metric": "{{avg_spend_increase}}", "label": "spend more than coupon value"},
-          {"metric": "Free", "label": "to publish, always"}
+          {
+            "metric": "{{avg_redemptions}}",
+            "label": "average redemptions per coupon"
+          },
+          {
+            "metric": "{{avg_new_customers}}",
+            "label": "become repeat customers"
+          },
+          {
+            "metric": "{{avg_spend_increase}}",
+            "label": "spend more than coupon value"
+          },
+          {
+            "metric": "Free",
+            "label": "to publish, always"
+          }
         ],
         "insight": "Coupons don't just discount—they introduce. Most redeemers become regulars."
       },
@@ -92,10 +104,22 @@
       "content": {
         "headline": "Maximum Visibility, Zero Extra Work",
         "distribution": [
-          {"channel": "Coupon Directory", "reach": "{{directory_reach}} monthly visitors"},
-          {"channel": "Community Newsletter", "reach": "{{newsletter_reach}} subscribers"},
-          {"channel": "Your Business Listing", "reach": "Featured prominently"},
-          {"channel": "AI Discovery", "reach": "Recommended to searchers"}
+          {
+            "channel": "Coupon Directory",
+            "reach": "{{directory_reach}} monthly visitors"
+          },
+          {
+            "channel": "Community Newsletter",
+            "reach": "{{newsletter_reach}} subscribers"
+          },
+          {
+            "channel": "Your Business Listing",
+            "reach": "Featured prominently"
+          },
+          {
+            "channel": "AI Discovery",
+            "reach": "Recommended to searchers"
+          }
         ],
         "note": "One publish → everywhere that matters"
       },
@@ -135,12 +159,17 @@
     }
   },
   "personalization": {
-    "required_fields": ["first_name", "business_name", "business_slug", "business_category"],
+    "required_fields": [
+      "first_name",
+      "business_name",
+      "business_slug",
+      "business_category"
+    ],
     "generated_fields": {
       "suggested_offer": {
         "restaurant": "First Visit Special",
         "retail": "New Customer Discount",
-        "service": "First Service Special", 
+        "service": "First Service Special",
         "fitness": "First Month Free",
         "salon": "New Client Welcome",
         "default": "New Customer Special"
@@ -164,8 +193,21 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-006"],
+    "leads_to": [
+      "HOWTO-006"
+    ],
     "follows": "HOOK-002",
-    "related": ["HOOK-004", "HOOK-007"]
+    "related": [
+      "HOOK-004",
+      "HOOK-007"
+    ]
+  },
+  "template": {
+    "template_id": "coupon-creator",
+    "name": "Quick Action",
+    "slides": 5,
+    "duration": 95,
+    "purpose": "hook",
+    "audio_required": true
   }
 }

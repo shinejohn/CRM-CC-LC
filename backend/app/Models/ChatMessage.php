@@ -12,7 +12,14 @@ final class ChatMessage extends Model
 {
     use HasUuids, HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'session_id',
+        'smb_id',
+        'role',
+        'content',
+        'intent',
+        'actions_taken',
+    ];
 
     protected $casts = [
         'actions_taken' => 'array',

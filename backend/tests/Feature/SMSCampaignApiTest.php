@@ -25,8 +25,8 @@ class SMSCampaignApiTest extends TestCase
     {
         $data = [
             'name' => 'Test SMS Campaign',
+            'type' => 'sms',
             'message' => 'Test SMS message',
-            'recipients' => ['+1234567890'],
             'tenant_id' => '00000000-0000-0000-0000-000000000000',
         ];
 
@@ -67,13 +67,13 @@ class SMSCampaignApiTest extends TestCase
         $campaignId = 'test-campaign-id';
 
         $data = [
-            'sms_id' => 'test-sms-id',
-            'status' => 'delivered',
+            'MessageSid' => 'test-message-sid',
+            'MessageStatus' => 'delivered',
         ];
 
         $response = $this->postJson("/api/v1/outbound/sms/campaigns/{$campaignId}/sms-status", $data);
 
         $response->assertStatus(200)
-            ->assertJsonStructure(['data', 'message']);
+            ->assertJsonStructure(['status']);
     }
 }

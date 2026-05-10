@@ -13,7 +13,7 @@ return new class extends Migration
             return;
         }
         Schema::create('analytics_events', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('smb_id')->nullable();
             $table->unsignedBigInteger('community_id')->nullable();
 

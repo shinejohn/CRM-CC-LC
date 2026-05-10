@@ -12,7 +12,16 @@ final class EmailEvent extends Model
 {
     use HasUuids, HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'campaign_send_id',
+        'event_type',
+        'event_at',
+        'link_clicked',
+        'bounce_type',
+        'ip_address',
+        'user_agent',
+        'raw_event',
+    ];
 
     protected $casts = [
         'event_at' => 'datetime',

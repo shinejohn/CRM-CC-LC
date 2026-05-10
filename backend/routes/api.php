@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\ConversationController;
 use App\Http\Controllers\Api\CssnSubscriptionController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\CustomerIntelligenceController;
+use App\Http\Controllers\Api\ManifestDestinySimulationController;
 use App\Http\Controllers\Api\EmergencyBroadcastController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\KnowledgeController;
@@ -69,11 +70,13 @@ Route::prefix('v1')->group(function () {
         Route::get('/unsubscribe/{token}', [SubscriptionController::class, 'unsubscribe']);
     });
 
-    // Knowledge/FAQ API
+    // Knowledge/FAQ API — public reads, authenticated writes
     Route::prefix('knowledge')->group(function () {
         Route::get('/', [KnowledgeController::class, 'index']);
-        Route::post('/', [KnowledgeController::class, 'store']);
         Route::get('/{id}', [KnowledgeController::class, 'show']);
+    });
+    Route::prefix('knowledge')->middleware('auth:sanctum')->group(function () {
+        Route::post('/', [KnowledgeController::class, 'store']);
         Route::put('/{id}', [KnowledgeController::class, 'update']);
         Route::delete('/{id}', [KnowledgeController::class, 'destroy']);
         Route::post('/{id}/generate-embedding', [KnowledgeController::class, 'generateEmbedding']);
@@ -82,39 +85,47 @@ Route::prefix('v1')->group(function () {
 
     Route::prefix('faq-categories')->group(function () {
         Route::get('/', [KnowledgeController::class, 'categories']);
-        Route::post('/', [KnowledgeController::class, 'storeCategory']);
         Route::get('/{id}', [KnowledgeController::class, 'showCategory']);
+    });
+    Route::prefix('faq-categories')->middleware('auth:sanctum')->group(function () {
+        Route::post('/', [KnowledgeController::class, 'storeCategory']);
         Route::put('/{id}', [KnowledgeController::class, 'updateCategory']);
         Route::delete('/{id}', [KnowledgeController::class, 'destroyCategory']);
     });
 
-    // Survey API
+    // Survey API — public reads, authenticated writes
     Route::prefix('survey')->group(function () {
         Route::get('/sections', [SurveyController::class, 'sections']);
-        Route::post('/sections', [SurveyController::class, 'storeSection']);
         Route::get('/sections/{id}', [SurveyController::class, 'showSection']);
+        Route::get('/sections/{id}/questions', [SurveyController::class, 'questions']);
+    });
+    Route::prefix('survey')->middleware('auth:sanctum')->group(function () {
+        Route::post('/sections', [SurveyController::class, 'storeSection']);
         Route::put('/sections/{id}', [SurveyController::class, 'updateSection']);
         Route::delete('/sections/{id}', [SurveyController::class, 'destroySection']);
-        Route::get('/sections/{id}/questions', [SurveyController::class, 'questions']);
         Route::post('/questions', [SurveyController::class, 'storeQuestion']);
         Route::put('/questions/{id}', [SurveyController::class, 'updateQuestion']);
         Route::delete('/questions/{id}', [SurveyController::class, 'destroyQuestion']);
     });
 
-    // Articles API
+    // Articles API — public reads, authenticated writes
     Route::prefix('articles')->group(function () {
         Route::get('/', [ArticleController::class, 'index']);
-        Route::post('/', [ArticleController::class, 'store']);
         Route::get('/{id}', [ArticleController::class, 'show']);
+    });
+    Route::prefix('articles')->middleware('auth:sanctum')->group(function () {
+        Route::post('/', [ArticleController::class, 'store']);
         Route::put('/{id}', [ArticleController::class, 'update']);
         Route::delete('/{id}', [ArticleController::class, 'destroy']);
     });
 
-    // Events API
+    // Events API — public reads, authenticated writes
     Route::prefix('events')->group(function () {
         Route::get('/', [EventController::class, 'index']);
-        Route::post('/', [EventController::class, 'store']);
         Route::get('/{id}', [EventController::class, 'show']);
+    });
+    Route::prefix('events')->middleware('auth:sanctum')->group(function () {
+        Route::post('/', [EventController::class, 'store']);
         Route::put('/{id}', [EventController::class, 'update']);
         Route::delete('/{id}', [EventController::class, 'destroy']);
     });
@@ -138,19 +149,21 @@ Route::prefix('v1')->group(function () {
         });
     });
 
-    // Search API
-    Route::prefix('search')->group(function () {
+    // Search API — authenticated (resource-intensive operations)
+    Route::prefix('search')->middleware('auth:sanctum')->group(function () {
         Route::post('/', [SearchController::class, 'search']); // Semantic/vector search
         Route::post('/fulltext', [SearchController::class, 'fullTextSearch']); // Full-text search
         Route::post('/hybrid', [SearchController::class, 'hybridSearch']); // Hybrid search
         Route::get('/status', [SearchController::class, 'embeddingStatus']);
     });
 
-    // Presentation API
+    // Presentation API — public reads, authenticated writes
     Route::prefix('presentations')->group(function () {
         Route::get('/templates', [PresentationController::class, 'templates']);
         Route::get('/templates/{id}', [PresentationController::class, 'showTemplate']);
         Route::get('/{id}', [PresentationController::class, 'show']);
+    });
+    Route::prefix('presentations')->middleware('auth:sanctum')->group(function () {
         Route::post('/generate', [PresentationController::class, 'generate']);
         Route::post('/{id}/audio', [PresentationController::class, 'generateAudio']);
     });
@@ -158,6 +171,7 @@ Route::prefix('v1')->group(function () {
     // Campaign API
     Route::prefix('campaigns')->group(function () {
         Route::get('/', [CampaignController::class, 'index']);
+        Route::get('/templates', [\App\Http\Controllers\Api\CampaignGenerationController::class, 'templates'])->middleware('auth:sanctum');
         Route::get('/{slug}', [CampaignController::class, 'show']);
     });
 
@@ -175,7 +189,6 @@ Route::prefix('v1')->group(function () {
         // Campaign Generation API
         Route::prefix('campaigns')->group(function () {
             Route::post('/generate', [\App\Http\Controllers\Api\CampaignGenerationController::class, 'generate']);
-            Route::get('/templates', [\App\Http\Controllers\Api\CampaignGenerationController::class, 'templates']);
             Route::post('/suggestions', [\App\Http\Controllers\Api\CampaignGenerationController::class, 'suggestions']);
         });
 
@@ -380,6 +393,7 @@ Route::prefix('v1')->group(function () {
         // TTS API
         Route::prefix('tts')->group(function () {
             Route::post('/generate', [TTSController::class, 'generate']);
+            Route::get('/status/{jobId}', [TTSController::class, 'status']);
             Route::post('/batch', [TTSController::class, 'batchGenerate']);
             Route::get('/voices', [TTSController::class, 'voices']);
         });
@@ -400,7 +414,11 @@ Route::prefix('v1')->group(function () {
 
         Route::prefix('service-categories')->group(function () {
             Route::get('/', [\App\Http\Controllers\Api\ServiceCategoryController::class, 'index']);
+            Route::post('/', [\App\Http\Controllers\Api\ServiceCategoryController::class, 'store']);
             Route::get('/{id}', [\App\Http\Controllers\Api\ServiceCategoryController::class, 'show']);
+            Route::get('/{id}/services', [\App\Http\Controllers\Api\ServiceCategoryController::class, 'services']);
+            Route::put('/{id}', [\App\Http\Controllers\Api\ServiceCategoryController::class, 'update']);
+            Route::delete('/{id}', [\App\Http\Controllers\Api\ServiceCategoryController::class, 'destroy']);
         });
 
         // Orders API
@@ -547,6 +565,44 @@ Route::prefix('v1')->group(function () {
             Route::get('/slot-availability/{communityId}', [CommunitySubscriptionController::class, 'slotAvailability']);
             Route::get('/{id}', [CommunitySubscriptionController::class, 'show']);
             Route::delete('/{id}', [CommunitySubscriptionController::class, 'destroy']);
+        });
+
+        // Marketing Kit API
+        Route::prefix('marketing-kit')->group(function () {
+            Route::get('/profile', [\App\Http\Controllers\Api\MarketingKitController::class, 'profile'])->name('api.marketing-kit.profile');
+            Route::post('/assets', [\App\Http\Controllers\Api\MarketingKitController::class, 'storeAsset'])->name('api.marketing-kit.assets.store');
+            Route::get('/assets', [\App\Http\Controllers\Api\MarketingKitController::class, 'listAssets'])->name('api.marketing-kit.assets.index');
+            Route::get('/assets/{id}', [\App\Http\Controllers\Api\MarketingKitController::class, 'showAsset'])->name('api.marketing-kit.assets.show');
+            Route::delete('/assets/{id}', [\App\Http\Controllers\Api\MarketingKitController::class, 'destroyAsset'])->name('api.marketing-kit.assets.destroy');
+            Route::get('/embed/{id}', [\App\Http\Controllers\Api\MarketingKitController::class, 'embedCode'])->name('api.marketing-kit.embed');
+            Route::post('/email-signature', [\App\Http\Controllers\Api\MarketingKitController::class, 'emailSignature'])->name('api.marketing-kit.email-signature');
+        });
+
+        // Content Cards API
+        Route::prefix('content-cards')->group(function () {
+            Route::get('/today', [\App\Http\Controllers\Api\ContentCardController::class, 'today'])->name('api.content-cards.today');
+            Route::get('/preview/{type}', [\App\Http\Controllers\Api\ContentCardController::class, 'preview'])->name('api.content-cards.preview');
+            Route::get('/history', [\App\Http\Controllers\Api\ContentCardController::class, 'history'])->name('api.content-cards.history');
+        });
+
+        // Manifest Destiny Simulation API
+        Route::prefix('manifest-destiny')->group(function () {
+            Route::get('/timelines', [ManifestDestinySimulationController::class, 'timelines'])->name('api.manifest-destiny.timelines');
+            Route::get('/simulate', [ManifestDestinySimulationController::class, 'simulate'])->name('api.manifest-destiny.simulate');
+        });
+
+        // Syndication Partner API
+        Route::prefix('syndication')->group(function () {
+            Route::post('/register', [\App\Http\Controllers\Api\SyndicationController::class, 'register'])->name('api.syndication.register');
+            Route::get('/dashboard', [\App\Http\Controllers\Api\SyndicationController::class, 'dashboard'])->name('api.syndication.dashboard');
+            Route::get('/queue', [\App\Http\Controllers\Api\SyndicationController::class, 'queue'])->name('api.syndication.queue');
+            Route::post('/communities', [\App\Http\Controllers\Api\SyndicationController::class, 'addCommunity'])->name('api.syndication.communities.store');
+            Route::get('/communities', [\App\Http\Controllers\Api\SyndicationController::class, 'listCommunities'])->name('api.syndication.communities.index');
+            Route::delete('/communities/{id}', [\App\Http\Controllers\Api\SyndicationController::class, 'removeCommunity'])->name('api.syndication.communities.destroy');
+            Route::get('/sponsors', [\App\Http\Controllers\Api\SyndicationController::class, 'sponsors'])->name('api.syndication.sponsors');
+            Route::get('/earnings', [\App\Http\Controllers\Api\SyndicationController::class, 'earnings'])->name('api.syndication.earnings');
+            Route::get('/earnings/current', [\App\Http\Controllers\Api\SyndicationController::class, 'currentEarnings'])->name('api.syndication.earnings.current');
+            Route::post('/posted/{cardId}', [\App\Http\Controllers\Api\SyndicationController::class, 'markPosted'])->name('api.syndication.posted');
         });
     });
 
@@ -774,8 +830,21 @@ Route::prefix('v1')->group(function () {
         Route::patch('/business-ingest/{externalId}/enrichment', [BusinessIngestController::class, 'enrichmentUpdate']);
     });
 
+    // Public embed endpoints (no auth — served to external websites)
+    Route::get('/embed/widget/{assetId}.js', [\App\Http\Controllers\Api\WidgetEmbedController::class, 'widgetJs'])->name('api.embed.widget.js');
+    Route::get('/embed/data/{assetId}', [\App\Http\Controllers\Api\WidgetEmbedController::class, 'widgetData'])->name('api.embed.widget.data');
+
+    // Public click tracking redirect (no auth)
+    Route::get('/t/{code}', [\App\Http\Controllers\Api\TrackingController::class, 'redirect'])->name('api.tracking.redirect');
+
     require __DIR__.'/pitch.php';
     require __DIR__.'/sarah.php';
+
+    // Twilio SMS webhooks (mirrored inside v1 for API consistency)
+    Route::prefix('webhooks')->group(function () {
+        Route::post('twilio/sms', [\App\Http\Controllers\Api\TwilioSMSWebhookController::class, 'handleIncomingSMS']);
+        Route::post('twilio/sms/status', [\App\Http\Controllers\Api\TwilioSMSWebhookController::class, 'handleStatusCallback']);
+    });
 });
 
 // Public tracking endpoints (no auth)

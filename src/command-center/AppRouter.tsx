@@ -22,6 +22,16 @@ const ArticlesPage = lazy(() => import('@/pages/Action/ArticlePage').then(m => (
 const EventsPage = lazy(() => import('@/pages/Action/EventsPage').then(m => ({ default: m.EventsPage })).catch(() => ({ default: () => <div>Events - Coming Soon</div> })));
 const DiagnosticPage = lazy(() => import('./pages/DiagnosticPage').then(m => ({ default: m.DiagnosticPage })));
 
+// ── ATTRACT verb (marketing kit + content cards) ──
+const MarketingKitPage = lazy(() => import('./modules/marketing-kit/MarketingKitPage').then(m => ({ default: m.MarketingKitPage })));
+const ContentCardsPage = lazy(() => import('./modules/marketing-kit').then(m => ({ default: m.ContentCardsPage })));
+
+// ── Syndication ──
+const SyndicationDashboardPage = lazy(() => import('./modules/syndication/SyndicationDashboardPage').then(m => ({ default: m.SyndicationDashboardPage })));
+
+// ── Simulation: Manifest Destiny Journey Simulator ──
+const JourneySimulatorPage = lazy(() => import('./modules/simulation/JourneySimulatorPage').then(m => ({ default: m.JourneySimulatorPage })));
+
 // ── SELL verb ──
 const SellIndex = lazy(() => import('./pages/SellIndex').then(m => ({ default: m.SellIndex })));
 const PipelinePage = lazy(() => import('@/components/CRM/PipelineDashboard').catch(() => ({ default: () => <div>Pipeline - Coming Soon</div> })));
@@ -123,6 +133,9 @@ export function getCommandCenterRoutes() {
       <Route path="attract/events" element={<Suspense fallback={<LoadingScreen />}><EventsPage /></Suspense>} />
       <Route path="attract/diagnostic" element={<Suspense fallback={<LoadingScreen />}><DiagnosticPage /></Suspense>} />
       <Route path="attract/inbox" element={<Suspense fallback={<LoadingScreen />}><InboundInboxPage /></Suspense>} />
+      <Route path="attract/marketing-kit" element={<Suspense fallback={<LoadingScreen />}><MarketingKitPage /></Suspense>} />
+      <Route path="attract/marketing-kit/:tool" element={<Suspense fallback={<LoadingScreen />}><MarketingKitPage /></Suspense>} />
+      <Route path="attract/content-cards" element={<Suspense fallback={<LoadingScreen />}><ContentCardsPage /></Suspense>} />
 
       {/* ── SELL: CRM, pipeline & customer management ── */}
       <Route path="sell" element={<Suspense fallback={<LoadingScreen />}><SellIndex /></Suspense>} />
@@ -145,6 +158,14 @@ export function getCommandCenterRoutes() {
       <Route path="sarah/sessions/:id" element={<Suspense fallback={<LoadingScreen />}><SarahSessionDetailPage /></Suspense>} />
       <Route path="sarah/campaigns" element={<Suspense fallback={<LoadingScreen />}><SarahCampaignsPage /></Suspense>} />
       <Route path="sarah/campaigns/:id" element={<Suspense fallback={<LoadingScreen />}><SarahCampaignDetailPage /></Suspense>} />
+
+      {/* ── SYNDICATION: Partner dashboard ── */}
+      <Route path="syndication" element={<Suspense fallback={<LoadingScreen />}><SyndicationDashboardPage /></Suspense>} />
+      <Route path="syndication/:section" element={<Suspense fallback={<LoadingScreen />}><SyndicationDashboardPage /></Suspense>} />
+
+      {/* ── SIMULATION: Manifest Destiny Journey Simulator ── */}
+      <Route path="simulation" element={<Suspense fallback={<LoadingScreen />}><JourneySimulatorPage /></Suspense>} />
+      <Route path="simulation/:timeline" element={<Suspense fallback={<LoadingScreen />}><JourneySimulatorPage /></Suspense>} />
 
       {/* ── DELIVER: Services, billing & fulfillment ── */}
       <Route path="deliver" element={<Suspense fallback={<LoadingScreen />}><DeliverIndex /></Suspense>} />

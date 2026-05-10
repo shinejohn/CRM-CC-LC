@@ -18,6 +18,8 @@ final class ConversationMessage extends Model
 
     public $incrementing = false;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'conversation_id',
         'role',

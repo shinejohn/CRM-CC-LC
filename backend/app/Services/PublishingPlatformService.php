@@ -198,14 +198,29 @@ final class PublishingPlatformService
      *
      * @return array<int, array<string, mixed>>
      */
+    /**
+     * Pull all communities from the Publishing Platform, paginating through all pages.
+     *
+     * @return array<int, array<string, mixed>>
+     */
     public function exportCommunities(): array
     {
-        $result = $this->bridgeRequest('GET', '/api/v1/bridge/export/communities');
+        $all = [];
+        $page = 1;
 
-        // PP wraps responses: {"success":true,"data":{"data":[...]}}
-        $data = $result['data'] ?? [];
+        do {
+            $result = $this->bridgeRequest('GET', '/api/v1/bridge/export/communities', ['page' => $page]);
 
-        return $data['data'] ?? $data;
+            // PP wraps responses: {"success":true,"data":{"data":[...],"meta":{...}}}
+            $inner = $result['data'] ?? $result;
+            $rows = $inner['data'] ?? [];
+            $meta = $inner['meta'] ?? ['current_page' => 1, 'last_page' => 1];
+
+            $all = array_merge($all, $rows);
+            $page++;
+        } while ($page <= ($meta['last_page'] ?? 1));
+
+        return $all;
     }
 
     /**
@@ -249,6 +264,50 @@ final class PublishingPlatformService
         $data = $result['data'] ?? [];
 
         return $data['data'] ?? $data;
+    }
+
+    /**
+     * Pull civic entities from the Publishing Platform, optionally filtered by community.
+     *
+     * @return array{data: array<int, array<string, mixed>>, meta: array<string, int>}
+     */
+    public function exportCivicEntities(?string $communityId = null, int $page = 1): array
+    {
+        $params = ['page' => $page];
+        if ($communityId !== null) {
+            $params['community_id'] = $communityId;
+        }
+
+        $result = $this->bridgeRequest('GET', '/api/v1/bridge/export/civic-entities', $params);
+
+        $inner = $result['data'] ?? $result;
+
+        return [
+            'data' => $inner['data'] ?? [],
+            'meta' => $inner['meta'] ?? ['current_page' => 1, 'last_page' => 1, 'total' => 0],
+        ];
+    }
+
+    /**
+     * Pull nonprofit organizations from the Publishing Platform, optionally filtered by community.
+     *
+     * @return array{data: array<int, array<string, mixed>>, meta: array<string, int>}
+     */
+    public function exportNonprofits(?string $communityId = null, int $page = 1): array
+    {
+        $params = ['page' => $page];
+        if ($communityId !== null) {
+            $params['community_id'] = $communityId;
+        }
+
+        $result = $this->bridgeRequest('GET', '/api/v1/bridge/export/nonprofits', $params);
+
+        $inner = $result['data'] ?? $result;
+
+        return [
+            'data' => $inner['data'] ?? [],
+            'meta' => $inner['meta'] ?? ['current_page' => 1, 'last_page' => 1, 'total' => 0],
+        ];
     }
 
     // ─── WS-1: Readership Pull ─────────────────────────────────────────

@@ -192,8 +192,8 @@ final class CustomerController extends Controller
         $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
         
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
-        $customer->delete();
-        
+        $customer->forceDelete();
+
         return response()->json([
             'message' => 'Customer deleted successfully'
         ]);

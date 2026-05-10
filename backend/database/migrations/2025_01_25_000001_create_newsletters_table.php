@@ -11,12 +11,12 @@ return new class extends Migration
     {
         Schema::dropIfExists('newsletters');
         Schema::create('newsletters', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('uuid')->unique()->default(DB::getDriverName() === 'pgsql' ? DB::raw('gen_random_uuid()') : null);
             if (Schema::hasTable('communities')) {
-                $table->foreignId('community_id')->constrained('communities')->onDelete('cascade');
+                $table->foreignUuid('community_id')->constrained('communities')->onDelete('cascade');
             } else {
-                $table->foreignId('community_id');
+                $table->foreignUuid('community_id');
             }
             
             // Type and scheduling

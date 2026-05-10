@@ -24,7 +24,13 @@
     "ai_tone": "Exciting, practical, empowering",
     "ai_goal": "Show AI as accessible competitive advantage",
     "data_capture_fields": "name, email, business_name, industry, current_pain_points",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-employee/audio/"
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-employee/audio/",
+    "conversion_goal": "education",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week5-educational",
+    "utm_content": "EDU-006"
   },
   "slides": [
     {
@@ -264,5 +270,13 @@
       "EDU-013",
       "HOOK-007"
     ]
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 210,
+    "purpose": "education",
+    "audio_required": true
   }
 }

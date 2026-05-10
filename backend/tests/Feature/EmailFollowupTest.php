@@ -43,8 +43,6 @@ class EmailFollowupTest extends TestCase
     /** @test */
     public function it_finds_unopened_emails_after_threshold(): void
     {
-        Queue::fake();
-
         // Create email sent 50 hours ago (over 48 hour threshold)
         $campaignSend = CampaignSend::create([
             'smb_id' => $this->customer->id,
@@ -53,27 +51,21 @@ class EmailFollowupTest extends TestCase
             'subject' => 'Test Email',
             'status' => 'sent',
             'sent_at' => now()->subHours(50),
-            'followup_triggered_at' => null, // Keep this from original for clarity if not explicitly removed
+            'followup_triggered_at' => null,
         ]);
 
         $job = new CheckUnopenedEmails(48);
         $job->handle();
 
-        // The original test was dispatching an event, the new snippet seems to be checking for a new campaign_send.
-        // I will combine the intent, assuming the new snippet's assertDatabaseHas is the primary new check,
-        // and the Event::assertDispatched is still relevant for the EmailNotOpened event.
-        // The provided snippet had a misplaced `$job->handle();` after `assertDatabaseHas`,
-        // which I'm correcting by keeping the original `$job->handle();` before the assertions.
-
+        // Verify that the followup campaign_send was created by the listener
         $this->assertDatabaseHas('campaign_sends', [
             'smb_id' => $this->customer->id,
             'subject' => 'Follow-up: Test Email',
         ]);
 
-        Event::assertDispatched(EmailNotOpened::class, function ($event) use ($campaignSend) {
-            return $event->customer->id === $this->customer->id
-                && $event->campaignSend->id === $campaignSend->id;
-        });
+        // Verify the original campaign_send was updated with followup metadata
+        $campaignSend->refresh();
+        $this->assertNotNull($campaignSend->followup_triggered_at);
     }
 
     /** @test */

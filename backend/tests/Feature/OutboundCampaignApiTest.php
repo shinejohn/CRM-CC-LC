@@ -3,11 +3,25 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\OutboundCampaign;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Queue;
 
 class OutboundCampaignApiTest extends TestCase
 {
-    use RefreshDatabase; protected function setUp(): void { parent::setUp(); $this->createAndAuthenticateUser(); }
+    use RefreshDatabase; protected function setUp(): void { parent::setUp(); $this->createAndAuthenticateUser(); Queue::fake(); }
+
+    private function createCampaign(array $overrides = []): OutboundCampaign
+    {
+        return OutboundCampaign::create(array_merge([
+            'tenant_id' => '00000000-0000-0000-0000-000000000000',
+            'name' => 'Test Campaign',
+            'type' => 'email',
+            'status' => 'draft',
+            'message' => 'Test message body',
+            'subject' => 'Test subject',
+        ], $overrides));
+    }
 
     public function test_can_list_outbound_campaigns(): void
     {
@@ -26,7 +40,8 @@ class OutboundCampaignApiTest extends TestCase
         $data = [
             'name' => 'Test Campaign',
             'type' => 'email',
-            'template_id' => 'test-template-id',
+            'message' => 'Hello, this is a test campaign message.',
+            'subject' => 'Test Subject',
             'tenant_id' => '00000000-0000-0000-0000-000000000000',
         ];
 
@@ -38,9 +53,9 @@ class OutboundCampaignApiTest extends TestCase
 
     public function test_can_show_outbound_campaign(): void
     {
-        $campaignId = 'test-campaign-id';
+        $campaign = $this->createCampaign();
 
-        $response = $this->getJson("/api/v1/outbound/campaigns/{$campaignId}");
+        $response = $this->getJson("/api/v1/outbound/campaigns/{$campaign->id}");
 
         $response->assertStatus(200)
             ->assertJsonStructure(['data']);
@@ -48,14 +63,14 @@ class OutboundCampaignApiTest extends TestCase
 
     public function test_can_update_outbound_campaign(): void
     {
-        $campaignId = 'test-campaign-id';
+        $campaign = $this->createCampaign();
 
         $data = [
             'name' => 'Updated Campaign Name',
-            'status' => 'active',
+            'status' => 'scheduled',
         ];
 
-        $response = $this->putJson("/api/v1/outbound/campaigns/{$campaignId}", $data);
+        $response = $this->putJson("/api/v1/outbound/campaigns/{$campaign->id}", $data);
 
         $response->assertStatus(200)
             ->assertJsonStructure(['data', 'message']);
@@ -63,23 +78,24 @@ class OutboundCampaignApiTest extends TestCase
 
     public function test_can_get_campaign_recipients(): void
     {
-        $campaignId = 'test-campaign-id';
+        $campaign = $this->createCampaign();
 
-        $response = $this->getJson("/api/v1/outbound/campaigns/{$campaignId}/recipients");
+        $response = $this->getJson("/api/v1/outbound/campaigns/{$campaign->id}/recipients");
 
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    '*' => ['id', 'email', 'status']
+                    'total',
+                    'recipients',
                 ]
             ]);
     }
 
     public function test_can_start_campaign(): void
     {
-        $campaignId = 'test-campaign-id';
+        $campaign = $this->createCampaign();
 
-        $response = $this->postJson("/api/v1/outbound/campaigns/{$campaignId}/start", []);
+        $response = $this->postJson("/api/v1/outbound/campaigns/{$campaign->id}/start", []);
 
         $response->assertStatus(200)
             ->assertJsonStructure(['data', 'message']);
@@ -87,18 +103,19 @@ class OutboundCampaignApiTest extends TestCase
 
     public function test_can_get_campaign_analytics(): void
     {
-        $campaignId = 'test-campaign-id';
+        $campaign = $this->createCampaign();
 
-        $response = $this->getJson("/api/v1/outbound/campaigns/{$campaignId}/analytics");
+        $response = $this->getJson("/api/v1/outbound/campaigns/{$campaign->id}/analytics");
 
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'sent',
-                    'delivered',
-                    'opened',
-                    'clicked',
-                    'bounced',
+                    'campaign_id',
+                    'total_recipients',
+                    'sent_count',
+                    'delivered_count',
+                    'opened_count',
+                    'clicked_count',
                 ]
             ]);
     }

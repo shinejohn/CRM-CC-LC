@@ -82,7 +82,7 @@ class SearchApiTest extends TestCase
             ->assertJsonStructure([
                 'data' => [
                     'total',
-                    'embedded',
+                    'completed',
                     'pending',
                 ]
             ]);

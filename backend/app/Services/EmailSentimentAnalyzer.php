@@ -7,7 +7,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-final class EmailSentimentAnalyzer
+class EmailSentimentAnalyzer
 {
     protected array $positiveWords = [
         'thanks', 'thank you', 'great', 'awesome', 'love', 'excellent', 'perfect', 

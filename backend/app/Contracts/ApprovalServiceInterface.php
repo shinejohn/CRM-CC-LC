@@ -10,14 +10,14 @@ interface ApprovalServiceInterface
     public function generateToken(string $customerId, string $serviceType, string $sourceId): string;
 
     public function create(array $data): Approval;
-    public function process(int $approvalId): void;
+    public function process(string $approvalId): void;
 
     public function getUpsellOffers(string $serviceType): array;
-    public function recordUpsellOffer(int $approvalId, string $upsellType): void;
-    public function acceptUpsell(int $approvalId, string $upsellType): Approval;
+    public function recordUpsellOffer(string $approvalId, string $upsellType): void;
+    public function acceptUpsell(string $approvalId, string $upsellType): Approval;
 
-    public function startProvisioning(int $approvalId): void;
-    public function completeProvisioning(int $approvalId, array $resultData): void;
-    public function failProvisioning(int $approvalId, string $reason): void;
+    public function startProvisioning(string $approvalId): void;
+    public function completeProvisioning(string $approvalId, array $resultData): void;
+    public function failProvisioning(string $approvalId, string $reason): void;
 }
 

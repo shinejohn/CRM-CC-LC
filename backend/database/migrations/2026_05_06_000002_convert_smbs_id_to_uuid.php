@@ -47,6 +47,11 @@ return new class extends Migration
 
     public function up(): void
     {
+        // This migration uses PostgreSQL-specific DDL; skip on other drivers (e.g. SQLite tests).
+        if (DB::getDriverName() !== 'pgsql') {
+            return;
+        }
+
         // Step 1: Drop FK constraints
         foreach ($this->fkTables() as [$table, $column, $hasFk]) {
             if (! Schema::hasTable($table) || ! Schema::hasColumn($table, $column)) {

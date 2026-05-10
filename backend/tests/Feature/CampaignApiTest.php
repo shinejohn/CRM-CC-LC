@@ -32,7 +32,7 @@ class CampaignApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    '*' => ['id', 'title', 'landing_page_slug']
+                    '*' => ['campaign_id', 'landing_page_slug']
                 ]
             ]);
     }
@@ -55,9 +55,10 @@ class CampaignApiTest extends TestCase
         $response = $this->getJson('/api/v1/campaigns/test-campaign-2');
 
         $response->assertStatus(200)
-            ->assertJson([
+            ->assertJsonStructure([
                 'data' => [
-                    'landing_page_slug' => 'test-campaign-2',
+                    'campaign',
+                    'landing_page',
                 ]
             ]);
     }

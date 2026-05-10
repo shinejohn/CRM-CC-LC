@@ -9,7 +9,7 @@ class ApprovalProvisioned
 {
     use Dispatchable, SerializesModels;
 
-    public function __construct(public int $approvalId, public string $customerId)
+    public function __construct(public string $approvalId, public string $customerId)
     {
     }
 }

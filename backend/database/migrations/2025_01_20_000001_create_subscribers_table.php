@@ -17,7 +17,7 @@ return new class extends Migration {
         }
         Schema::dropIfExists('subscribers');
         Schema::create('subscribers', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             
             // Generate UUID if using PostgreSQL (requires pgcrypto or gen_random_uuid support)
             if (DB::getDriverName() === 'pgsql') {

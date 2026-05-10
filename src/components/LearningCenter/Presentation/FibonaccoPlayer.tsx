@@ -53,6 +53,8 @@ interface FibonaccoPlayerProps {
   autoPlay?: boolean;
   onSlideChange?: (slideId: number) => void;
   onComplete?: () => void;
+  /** When true, suppress the built-in narration bar and AI chat toggle (for use inside RoomWithSarah). */
+  hideOverlayUI?: boolean;
 }
 
 const slideComponents = {
@@ -97,6 +99,7 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
   autoPlay = false,
   onSlideChange,
   onComplete,
+  hideOverlayUI = false,
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
@@ -230,8 +233,8 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
         )}
       </div>
 
-      {/* AI Presenter Panel - Always show if presenter exists */}
-      {presentation.presenter && (
+      {/* AI Presenter Panel - Always show if presenter exists (hidden when Sarah sidebar handles narration) */}
+      {!hideOverlayUI && presentation.presenter && (
         <div className="absolute bottom-24 left-0 right-0 px-6 z-20">
           <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg">
             <div className="flex items-center gap-3">
@@ -352,26 +355,30 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
 
             {/* Right: Chat & Fullscreen */}
             <div className="flex items-center gap-2">
-              <button
-                onClick={() => {
-                  setShowChat(!showChat);
-                  if (!showChat && isPlaying) {
-                    handlePlayPause(); // Pause when opening chat
-                  }
-                }}
-                className={`p-2 rounded transition-colors ${
-                  showChat
-                    ? 'bg-indigo-600 text-white'
-                    : 'text-white hover:bg-white/10'
-                }`}
-                title="Ask a question"
-              >
-                <MessageCircle size={20} />
-              </button>
+              {!hideOverlayUI && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowChat(!showChat);
+                    if (!showChat && isPlaying) {
+                      handlePlayPause(); // Pause when opening chat
+                    }
+                  }}
+                  className={`p-2 rounded transition-colors ${
+                    showChat
+                      ? 'bg-indigo-600 text-white'
+                      : 'text-white hover:bg-white/10'
+                  }`}
+                  title="Ask a question"
+                >
+                  <MessageCircle size={20} />
+                </button>
+              )}
               <span className="text-sm text-white/70">
                 {currentSlide + 1} / {slides.length}
               </span>
               <button
+                type="button"
                 onClick={handleFullscreen}
                 className="p-2 text-white hover:bg-white/10 rounded transition-colors"
               >
@@ -382,25 +389,27 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
         </div>
       </div>
 
-      {/* AI Chat Panel */}
-      <AIChatPanel
-        isOpen={showChat}
-        onClose={() => {
-          setShowChat(false);
-          if (!isPlaying) {
-            handlePlayPause(); // Resume if paused
-          }
-        }}
-        presenterName={presentation.presenter?.name}
-        customerId={undefined}
-        presentationId={presentation.id}
-        conversationId={conversationId}
-        onResume={() => {
-          setShowChat(false);
-          handlePlayPause();
-        }}
-        isPaused={!isPlaying}
-      />
+      {/* AI Chat Panel (hidden when Sarah sidebar handles chat) */}
+      {!hideOverlayUI && (
+        <AIChatPanel
+          isOpen={showChat}
+          onClose={() => {
+            setShowChat(false);
+            if (!isPlaying) {
+              handlePlayPause(); // Resume if paused
+            }
+          }}
+          presenterName={presentation.presenter?.name}
+          customerId={undefined}
+          presentationId={presentation.id}
+          conversationId={conversationId}
+          onResume={() => {
+            setShowChat(false);
+            handlePlayPause();
+          }}
+          isPaused={!isPlaying}
+        />
+      )}
     </div>
   );
 };

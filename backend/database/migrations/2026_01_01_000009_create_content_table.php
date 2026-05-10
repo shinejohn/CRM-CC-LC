@@ -13,7 +13,7 @@ return new class extends Migration
             return;
         }
         Schema::create('content', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('type', 50);
             $table->string('title');

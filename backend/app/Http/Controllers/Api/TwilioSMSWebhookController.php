@@ -32,7 +32,7 @@ final class TwilioSMSWebhookController extends Controller
                 'From' => 'required|string',
                 'To' => 'required|string',
                 'Body' => 'required|string',
-                'MessageSid' => 'required|string',
+                'MessageSid' => 'nullable|string',
             ]);
 
             if ($validator->fails()) {
@@ -47,7 +47,7 @@ final class TwilioSMSWebhookController extends Controller
             $fromNumber = $request->input('From');
             $toNumber = $request->input('To');
             $messageBody = $request->input('Body');
-            $messageSid = $request->input('MessageSid');
+            $messageSid = $request->input('MessageSid', 'unknown');
 
             Log::info('Received SMS webhook from Twilio', [
                 'from' => $fromNumber,
@@ -169,29 +169,29 @@ final class TwilioSMSWebhookController extends Controller
      */
     protected function normalizePhoneNumber(string $phone): string
     {
+        // If already in E.164 format (+digits), return as is
+        if (preg_match('/^\+\d{10,15}$/', $phone)) {
+            return $phone;
+        }
+
         // Remove all non-digit characters
         $digits = preg_replace('/\D/', '', $phone);
-        
+
         // If starts with 1 and has 11 digits, it's US/Canada
         if (strlen($digits) === 11 && $digits[0] === '1') {
             return '+' . $digits;
         }
-        
+
         // If 10 digits, assume US and add +1
         if (strlen($digits) === 10) {
             return '+1' . $digits;
         }
-        
-        // If already starts with +, return as is
-        if (str_starts_with($phone, '+')) {
-            return $phone;
-        }
-        
+
         // Otherwise, try to add + if it looks like an international number
         if (strlen($digits) > 10) {
             return '+' . $digits;
         }
-        
+
         // Fallback: return original
         return $phone;
     }

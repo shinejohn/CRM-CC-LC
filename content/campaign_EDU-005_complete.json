@@ -24,7 +24,13 @@
     "ai_tone": "Knowledgeable, strategic, empowering",
     "ai_goal": "Show reputation as competitive advantage",
     "data_capture_fields": "name, email, business_name, industry",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/reputation-ai-age/audio/"
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/reputation-ai-age/audio/",
+    "conversion_goal": "education",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week4-educational",
+    "utm_content": "EDU-005"
   },
   "slides": [
     {
@@ -233,5 +239,13 @@
       "EDU-002",
       "HOOK-007"
     ]
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 200,
+    "purpose": "education",
+    "audio_required": true
   }
 }

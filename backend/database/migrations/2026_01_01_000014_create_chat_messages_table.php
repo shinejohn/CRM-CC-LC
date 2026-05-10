@@ -13,7 +13,7 @@ return new class extends Migration
             return;
         }
         Schema::create('chat_messages', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('session_id');
             $table->unsignedBigInteger('smb_id')->nullable();
 

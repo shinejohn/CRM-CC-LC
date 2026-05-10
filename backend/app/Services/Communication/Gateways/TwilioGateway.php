@@ -48,7 +48,7 @@ final class TwilioGateway implements GatewayInterface
             $twilioMessage = $this->client->messages->create(
                 $message->to,
                 [
-                    'from' => config('services.twilio.from_number'),
+                    'from' => config('services.twilio.from_phone'),
                     'body' => $message->body ?? '',
                 ]
             );

@@ -58,11 +58,26 @@
       "content": {
         "headline": "What Actually Gets Published",
         "news_types": [
-          {"type": "Business Milestones", "examples": "Anniversary, expansion, award, new location"},
-          {"type": "Community Involvement", "examples": "Charity work, sponsorship, local partnership"},
-          {"type": "Expert Insights", "examples": "Tips, how-tos, industry knowledge"},
-          {"type": "Human Interest", "examples": "Your story, why you started, customer stories"},
-          {"type": "Announcements", "examples": "New products, services, team members, changes"}
+          {
+            "type": "Business Milestones",
+            "examples": "Anniversary, expansion, award, new location"
+          },
+          {
+            "type": "Community Involvement",
+            "examples": "Charity work, sponsorship, local partnership"
+          },
+          {
+            "type": "Expert Insights",
+            "examples": "Tips, how-tos, industry knowledge"
+          },
+          {
+            "type": "Human Interest",
+            "examples": "Your story, why you started, customer stories"
+          },
+          {
+            "type": "Announcements",
+            "examples": "New products, services, team members, changes"
+          }
         ],
         "insight": "Local news needs local content. You ARE the content they're looking for."
       },
@@ -164,10 +179,22 @@
       "content": {
         "headline": "Step 4: Submit and We Handle the Rest",
         "process": [
-          {"step": "Submit", "desc": "Click submit when you're ready"},
-          {"step": "Review", "desc": "Our editors check for typos and clarity"},
-          {"step": "Publish", "desc": "Goes live within 24-48 hours"},
-          {"step": "Promote", "desc": "Featured in newsletter and social"}
+          {
+            "step": "Submit",
+            "desc": "Click submit when you're ready"
+          },
+          {
+            "step": "Review",
+            "desc": "Our editors check for typos and clarity"
+          },
+          {
+            "step": "Publish",
+            "desc": "Goes live within 24-48 hours"
+          },
+          {
+            "step": "Promote",
+            "desc": "Featured in newsletter and social"
+          }
         ],
         "guarantee": "We'll work with you to make it publish-ready. No rejections, just collaboration.",
         "cost": "Free to submit. Free to publish."
@@ -233,8 +260,21 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-006"],
+    "leads_to": [
+      "HOWTO-006"
+    ],
     "follows": "HOWTO-001",
-    "related": ["EDU-007", "HOWTO-013"]
+    "related": [
+      "EDU-007",
+      "HOWTO-013"
+    ]
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 275,
+    "purpose": "tutorial",
+    "audio_required": true
   }
 }

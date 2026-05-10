@@ -11,18 +11,17 @@ use Stripe\PaymentIntent;
 use Stripe\Stripe;
 use Stripe\StripeClient;
 
-final class StripeService
+class StripeService
 {
-    private StripeClient $stripe;
+    private ?StripeClient $stripe = null;
 
     public function __construct()
     {
         $apiKey = config('services.stripe.secret');
-        if (!$apiKey) {
-            throw new Exception('Stripe API key not configured');
+        if ($apiKey) {
+            Stripe::setApiKey($apiKey);
+            $this->stripe = new StripeClient($apiKey);
         }
-        Stripe::setApiKey($apiKey);
-        $this->stripe = new StripeClient($apiKey);
     }
 
     /**

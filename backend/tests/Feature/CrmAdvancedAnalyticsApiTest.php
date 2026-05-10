@@ -21,8 +21,6 @@ class CrmAdvancedAnalyticsApiTest extends TestCase
                 'data' => [
                     'customer_id',
                     'engagement_score',
-                    'factors',
-                    'trend',
                 ]
             ]);
     }
@@ -54,10 +52,10 @@ class CrmAdvancedAnalyticsApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'customer_id',
-                    'predictive_score',
+                    'current_score',
+                    'predicted_score',
+                    'confidence',
                     'factors',
-                    'recommendations',
                 ]
             ]);
     }

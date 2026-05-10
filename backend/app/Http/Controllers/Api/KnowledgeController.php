@@ -153,9 +153,7 @@ final class KnowledgeController extends Controller
         $knowledge = Knowledge::findOrFail($id);
         $knowledge->delete();
 
-        return response()->json([
-            'message' => 'Knowledge item deleted successfully'
-        ]);
+        return response()->json(null, 204);
     }
 
     /**

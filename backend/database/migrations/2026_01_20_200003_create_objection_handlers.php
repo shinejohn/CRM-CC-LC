@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('objection_handlers', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('objection_type'); // price, time, not_interested, need_to_think, competitor, etc.
             $table->string('trigger_phrase'); // What customer says
             $table->json('trigger_keywords')->nullable(); // Keywords to match
@@ -30,9 +30,9 @@ return new class extends Migration
         
         // Track objection handling outcomes
         Schema::create('objection_encounters', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('customer_id');
-            $table->foreignId('objection_handler_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('objection_handler_id')->constrained()->onDelete('cascade');
             $table->string('channel'); // phone, email, sms, chat
             $table->text('customer_statement'); // What they actually said
             $table->text('am_response'); // What AM responded

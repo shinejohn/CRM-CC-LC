@@ -30,11 +30,31 @@
       "content": {
         "headline": "Holiday Visibility Options",
         "options": [
-          {"option": "Holiday Gift Guide", "what": "Featured in our curated local gift guide", "reach": "Sent to all subscribers + promoted socially"},
-          {"option": "Holiday Event Listing", "what": "Free event posting for holiday events", "reach": "Events calendar + newsletter feature"},
-          {"option": "Small Business Saturday", "what": "Featured participant listing", "reach": "Special feature package"},
-          {"option": "Holiday Deals Section", "what": "Your holiday offer prominently displayed", "reach": "Dedicated deals email + website section"},
-          {"option": "Last-Minute Guide", "what": "Featured in last-minute shopping guide", "reach": "High-intent shoppers"}
+          {
+            "option": "Holiday Gift Guide",
+            "what": "Featured in our curated local gift guide",
+            "reach": "Sent to all subscribers + promoted socially"
+          },
+          {
+            "option": "Holiday Event Listing",
+            "what": "Free event posting for holiday events",
+            "reach": "Events calendar + newsletter feature"
+          },
+          {
+            "option": "Small Business Saturday",
+            "what": "Featured participant listing",
+            "reach": "Special feature package"
+          },
+          {
+            "option": "Holiday Deals Section",
+            "what": "Your holiday offer prominently displayed",
+            "reach": "Dedicated deals email + website section"
+          },
+          {
+            "option": "Last-Minute Guide",
+            "what": "Featured in last-minute shopping guide",
+            "reach": "High-intent shoppers"
+          }
         ]
       },
       "narration": "Here are your holiday visibility options. Holiday Gift Guide: featured in our curated local gift guide sent to all subscribers. Holiday Event Listing: free posting for your holiday events with newsletter features. Small Business Saturday: featured participant listing with special coverage. Holiday Deals Section: your holiday offer prominently displayed in dedicated communications. Last-Minute Guide: featured in our last-minute shopping guide reaching high-intent shoppers.",
@@ -48,11 +68,26 @@
       "content": {
         "headline": "Key Holiday Dates",
         "timeline": [
-          {"date": "November 1", "event": "Holiday Gift Guide submissions open"},
-          {"date": "November 15", "event": "Gift Guide published"},
-          {"date": "November 28", "event": "Small Business Saturday (special feature)"},
-          {"date": "December 1-15", "event": "Holiday Deals promotion period"},
-          {"date": "December 16-23", "event": "Last-Minute Guide published"}
+          {
+            "date": "November 1",
+            "event": "Holiday Gift Guide submissions open"
+          },
+          {
+            "date": "November 15",
+            "event": "Gift Guide published"
+          },
+          {
+            "date": "November 28",
+            "event": "Small Business Saturday (special feature)"
+          },
+          {
+            "date": "December 1-15",
+            "event": "Holiday Deals promotion period"
+          },
+          {
+            "date": "December 16-23",
+            "event": "Last-Minute Guide published"
+          }
         ],
         "note": "Submit early for best placement"
       },
@@ -67,9 +102,21 @@
       "content": {
         "headline": "What Participants Experienced Last Year",
         "results": [
-          {"business": "Gift shop", "participation": "Gift Guide + Deals", "result": "Best December in 7 years—up 43%"},
-          {"business": "Restaurant", "participation": "Holiday Events", "result": "Sold out 4 holiday dinner events"},
-          {"business": "Spa", "participation": "Gift Guide", "result": "Gift card sales up 67% over previous year"}
+          {
+            "business": "Gift shop",
+            "participation": "Gift Guide + Deals",
+            "result": "Best December in 7 years—up 43%"
+          },
+          {
+            "business": "Restaurant",
+            "participation": "Holiday Events",
+            "result": "Sold out 4 holiday dinner events"
+          },
+          {
+            "business": "Spa",
+            "participation": "Gift Guide",
+            "result": "Gift card sales up 67% over previous year"
+          }
         ]
       },
       "narration": "What did participants experience last year? A gift shop in our Gift Guide and Deals section had their best December in seven years—up forty-three percent. A restaurant listing holiday events sold out four holiday dinner events. A spa in our Gift Guide saw gift card sales up sixty-seven percent over the previous year. This season brings customers looking to spend—make sure they find you.",
@@ -106,6 +153,39 @@
   },
   "connections": {
     "follows": "HOOK-013",
-    "related": ["HOOK-003", "HOOK-002"]
+    "related": [
+      "HOOK-003",
+      "HOOK-002"
+    ]
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-014",
+    "landing_page_slug": "holiday-events",
+    "url": "/learn/holiday-events",
+    "template_id": "seasonal-promotion",
+    "template_name": "Quick Action",
+    "slide_count": 5,
+    "duration_seconds": 135,
+    "primary_cta": "get_started",
+    "secondary_cta": "learn_more",
+    "ai_persona": "Sarah",
+    "ai_tone": "Energetic, encouraging, action-oriented",
+    "ai_goal": "Get user to take the first free action immediately",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/holiday-events/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week10-hook",
+    "utm_content": "HOOK-014"
+  },
+  "template": {
+    "template_id": "seasonal-promotion",
+    "name": "Quick Action",
+    "slides": 5,
+    "duration": 135,
+    "purpose": "hook",
+    "audio_required": true
   }
 }

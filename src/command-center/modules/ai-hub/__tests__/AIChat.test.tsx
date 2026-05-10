@@ -9,6 +9,16 @@ vi.mock('../../../hooks/useAI', () => ({
   useAI: vi.fn(),
 }));
 
+// Mock useBusinessIntelligenceContext to avoid QueryClientProvider requirement
+vi.mock('../../../hooks/useBusinessIntelligenceContext', () => ({
+  useBusinessIntelligenceContext: () => ({
+    enrichedContext: {},
+    profile: null,
+    isLoading: false,
+    mergeContext: (extra: Record<string, unknown>) => extra,
+  }),
+}));
+
 // Mock AIMessage component
 vi.mock('../AIMessage', () => ({
   AIMessage: ({ message }: { message: { id: string; role: string; content: string } }) => (

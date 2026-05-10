@@ -12,6 +12,16 @@ vi.mock('./api-client', () => ({
   },
 }));
 
+// Mock the search-api (used by getCategories -> getCategoryTree)
+vi.mock('./search-api', () => ({
+  searchApi: {
+    fullText: vi.fn(),
+    hybrid: vi.fn(),
+    semantic: vi.fn(),
+    getEmbeddingStatus: vi.fn(),
+  },
+}));
+
 import { apiClient } from './api-client';
 
 describe('knowledge-api', () => {
@@ -27,7 +37,7 @@ describe('knowledge-api', () => {
 
       const result = await knowledgeApi.getKnowledge('1');
 
-      expect(apiClient.get).toHaveBeenCalledWith('/learning/knowledge/1');
+      expect(apiClient.get).toHaveBeenCalledWith('/v1/knowledge/1');
       expect(result).toEqual(mockData);
     });
 
@@ -46,14 +56,23 @@ describe('knowledge-api', () => {
         category_id: 'cat-1',
       };
 
-      const mockResponse = { id: '1', ...newItem };
+      // createKnowledge maps fields and posts to /v1/knowledge, then returns res.data
+      const mockResponse = { data: { id: '1', title: 'New Item', content: 'New Content' } };
 
       vi.mocked(apiClient.post).mockResolvedValue(mockResponse);
 
       const result = await knowledgeApi.createKnowledge(newItem);
 
-      expect(apiClient.post).toHaveBeenCalledWith('/learning/knowledge', newItem);
-      expect(result).toEqual(mockResponse);
+      expect(apiClient.post).toHaveBeenCalledWith('/v1/knowledge', {
+        title: 'New Item',
+        content: 'New Content',
+        category: undefined,
+        subcategory: undefined,
+        industry_codes: undefined,
+        source: undefined,
+        source_url: undefined,
+      });
+      expect(result).toEqual(mockResponse.data);
     });
   });
 
@@ -64,14 +83,15 @@ describe('knowledge-api', () => {
         content: 'Updated Content',
       };
 
-      const mockResponse = { id: '1', ...updates };
+      // updateKnowledge returns res.data
+      const mockResponse = { data: { id: '1', ...updates } };
 
       vi.mocked(apiClient.put).mockResolvedValue(mockResponse);
 
       const result = await knowledgeApi.updateKnowledge('1', updates);
 
-      expect(apiClient.put).toHaveBeenCalledWith('/learning/knowledge/1', updates);
-      expect(result).toEqual(mockResponse);
+      expect(apiClient.put).toHaveBeenCalledWith('/v1/knowledge/1', updates);
+      expect(result).toEqual(mockResponse.data);
     });
   });
 
@@ -81,32 +101,40 @@ describe('knowledge-api', () => {
 
       await knowledgeApi.deleteKnowledge('1');
 
-      expect(apiClient.delete).toHaveBeenCalledWith('/learning/knowledge/1');
+      expect(apiClient.delete).toHaveBeenCalledWith('/v1/knowledge/1');
     });
   });
 
   describe('getCategories', () => {
     it('should fetch FAQ categories', async () => {
-      const mockData = [
-        { id: '1', name: 'Category 1' },
-        { id: '2', name: 'Category 2' },
-      ];
+      // getCategories delegates to getCategoryTree which calls /v1/faq-categories
+      // and expects { data: [...] } shape
+      const mockApiResponse = {
+        data: [
+          { id: '1', name: 'Category 1', slug: 'cat-1' },
+          { id: '2', name: 'Category 2', slug: 'cat-2' },
+        ],
+      };
 
-      vi.mocked(apiClient.get).mockResolvedValue(mockData);
+      vi.mocked(apiClient.get).mockResolvedValue(mockApiResponse);
 
       const result = await knowledgeApi.getCategories();
 
-      expect(apiClient.get).toHaveBeenCalledWith('/learning/categories');
-      expect(result).toEqual(mockData);
+      expect(apiClient.get).toHaveBeenCalledWith('/v1/faq-categories');
+      expect(result).toEqual([
+        { id: '1', name: 'Category 1', slug: 'cat-1', description: undefined, parent_id: undefined, icon: undefined, color: undefined, faq_count: 0, children: [], order: 0 },
+        { id: '2', name: 'Category 2', slug: 'cat-2', description: undefined, parent_id: undefined, icon: undefined, color: undefined, faq_count: 0, children: [], order: 0 },
+      ]);
     });
   });
 
   describe('getFAQs', () => {
     it('should fetch FAQs with filters', async () => {
-      const mockData = {
+      // getFAQs calls /v1/knowledge?... and maps data through mapKnowledgeToFAQItem
+      const mockApiResponse = {
         data: [
-          { id: '1', question: 'Test 1', answer: 'Answer 1' },
-          { id: '2', question: 'Test 2', answer: 'Answer 2' },
+          { id: '1', title: 'Test 1', content: 'Answer 1' },
+          { id: '2', title: 'Test 2', content: 'Answer 2' },
         ],
         meta: {
           current_page: 1,
@@ -116,12 +144,18 @@ describe('knowledge-api', () => {
         },
       };
 
-      vi.mocked(apiClient.get).mockResolvedValue(mockData);
+      vi.mocked(apiClient.get).mockResolvedValue(mockApiResponse);
 
-      const result = await knowledgeApi.getFAQs({ category: 'cat-1' } as any, 1, 25);
+      const result = await knowledgeApi.getFAQs({ categories: ['cat-1'] } as any, 1, 25);
 
       expect(apiClient.get).toHaveBeenCalled();
-      expect(result).toEqual(mockData);
+      // Result data is transformed through mapKnowledgeToFAQItem
+      expect(result.data).toHaveLength(2);
+      expect(result.data[0].question).toBe('Test 1');
+      expect(result.data[0].answer).toBe('Answer 1');
+      expect(result.data[1].question).toBe('Test 2');
+      expect(result.data[1].answer).toBe('Answer 2');
+      expect(result.meta).toEqual(mockApiResponse.meta);
     });
   });
 
@@ -131,7 +165,7 @@ describe('knowledge-api', () => {
 
       await knowledgeApi.markHelpful('1');
 
-      expect(apiClient.post).toHaveBeenCalledWith('/learning/faqs/1/helpful');
+      expect(apiClient.post).toHaveBeenCalledWith('/v1/knowledge/1/vote', { vote: 'helpful' });
     });
   });
 });

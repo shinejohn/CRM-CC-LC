@@ -15,7 +15,7 @@ class ServiceCategoryApiTest extends TestCase
     {
         ServiceCategory::factory()->count(5)->create();
 
-        $response = $this->getJson('/api/v1/services/categories');
+        $response = $this->getJson('/api/v1/service-categories');
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -29,7 +29,7 @@ class ServiceCategoryApiTest extends TestCase
     {
         $category = ServiceCategory::factory()->create();
 
-        $response = $this->getJson("/api/v1/services/categories/{$category->id}");
+        $response = $this->getJson("/api/v1/service-categories/{$category->id}");
 
         $response->assertStatus(200)
             ->assertJson([
@@ -46,7 +46,7 @@ class ServiceCategoryApiTest extends TestCase
         Service::factory()->count(3)->create(['service_category_id' => $category->id]);
         Service::factory()->count(2)->create(); // Other category
 
-        $response = $this->getJson("/api/v1/services/categories/{$category->id}/services");
+        $response = $this->getJson("/api/v1/service-categories/{$category->id}/services");
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -68,7 +68,7 @@ class ServiceCategoryApiTest extends TestCase
             'tenant_id' => '00000000-0000-0000-0000-000000000000',
         ];
 
-        $response = $this->postJson('/api/v1/services/categories', $data);
+        $response = $this->postJson('/api/v1/service-categories', $data);
 
         $response->assertStatus(201)
             ->assertJsonStructure(['data' => ['id', 'name', 'slug']]);
@@ -88,7 +88,7 @@ class ServiceCategoryApiTest extends TestCase
             'description' => 'Updated description',
         ];
 
-        $response = $this->putJson("/api/v1/services/categories/{$category->id}", $data);
+        $response = $this->putJson("/api/v1/service-categories/{$category->id}", $data);
 
         $response->assertStatus(200)
             ->assertJson([
@@ -107,11 +107,11 @@ class ServiceCategoryApiTest extends TestCase
     {
         $category = ServiceCategory::factory()->create();
 
-        $response = $this->deleteJson("/api/v1/services/categories/{$category->id}");
+        $response = $this->deleteJson("/api/v1/service-categories/{$category->id}");
 
         $response->assertStatus(204);
 
-        $this->assertDatabaseMissing('service_categories', [
+        $this->assertSoftDeleted('service_categories', [
             'id' => $category->id,
         ]);
     }

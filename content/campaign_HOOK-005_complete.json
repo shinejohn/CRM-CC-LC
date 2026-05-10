@@ -19,7 +19,18 @@
     "slide_count": 5,
     "duration_seconds": 90,
     "primary_cta": "post_classified",
-    "secondary_cta": "customize_first"
+    "secondary_cta": "customize_first",
+    "ai_tone": "Friendly, straightforward, helpful",
+    "ai_goal": "Get user to post their first classified listing",
+    "ai_persona": "Sarah",
+    "conversion_goal": "signup",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week3-hook",
+    "utm_content": "HOOK-005",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/post-classified/audio/"
   },
   "slides": [
     {
@@ -62,10 +73,26 @@
       "content": {
         "headline": "Local Classifieds Reach Buyers Ready to Act",
         "benefits": [
-          {"icon": "target", "benefit": "Local audience", "detail": "People in your area"},
-          {"icon": "clock", "benefit": "High intent", "detail": "They're actively looking"},
-          {"icon": "dollar", "benefit": "Free to post", "detail": "No listing fees"},
-          {"icon": "eye", "benefit": "Syndicated", "detail": "Appears across network"}
+          {
+            "icon": "target",
+            "benefit": "Local audience",
+            "detail": "People in your area"
+          },
+          {
+            "icon": "clock",
+            "benefit": "High intent",
+            "detail": "They're actively looking"
+          },
+          {
+            "icon": "dollar",
+            "benefit": "Free to post",
+            "detail": "No listing fees"
+          },
+          {
+            "icon": "eye",
+            "benefit": "Syndicated",
+            "detail": "Appears across network"
+          }
         ],
         "stat": "Classifieds get 40% response rate vs. 2% for social posts"
       },
@@ -80,11 +107,31 @@
       "content": {
         "headline": "What Are You Posting?",
         "categories": [
-          {"icon": "briefcase", "category": "Now Hiring", "desc": "Find local talent"},
-          {"icon": "tag", "category": "For Sale", "desc": "Equipment, inventory, supplies"},
-          {"icon": "home", "category": "Commercial Space", "desc": "Office, retail, warehouse"},
-          {"icon": "wrench", "category": "Services Offered", "desc": "B2B services"},
-          {"icon": "megaphone", "category": "Announcements", "desc": "Business updates"}
+          {
+            "icon": "briefcase",
+            "category": "Now Hiring",
+            "desc": "Find local talent"
+          },
+          {
+            "icon": "tag",
+            "category": "For Sale",
+            "desc": "Equipment, inventory, supplies"
+          },
+          {
+            "icon": "home",
+            "category": "Commercial Space",
+            "desc": "Office, retail, warehouse"
+          },
+          {
+            "icon": "wrench",
+            "category": "Services Offered",
+            "desc": "B2B services"
+          },
+          {
+            "icon": "megaphone",
+            "category": "Announcements",
+            "desc": "Business updates"
+          }
         ],
         "note": "Select category when posting"
       },
@@ -123,6 +170,17 @@
   "connections": {
     "leads_to": [],
     "follows": "HOOK-004",
-    "related": ["HOOK-002", "HOOK-003"]
+    "related": [
+      "HOOK-002",
+      "HOOK-003"
+    ]
+  },
+  "template": {
+    "template_id": "classified-posting",
+    "name": "Quick Action",
+    "slides": 5,
+    "duration": 110,
+    "purpose": "hook",
+    "audio_required": true
   }
 }

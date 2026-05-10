@@ -24,16 +24,17 @@ class EmailCampaignApiTest extends TestCase
     public function test_can_create_email_campaign(): void
     {
         $data = [
-            'subject' => 'Test Email Campaign',
-            'body' => 'Test email body',
-            'recipients' => ['test@example.com'],
+            'name' => 'Test Email Campaign',
+            'type' => 'email',
+            'subject' => 'Test Email Subject',
+            'message' => 'Test email body',
             'tenant_id' => '00000000-0000-0000-0000-000000000000',
         ];
 
         $response = $this->postJson('/api/v1/outbound/email/campaigns', $data);
 
         $response->assertStatus(201)
-            ->assertJsonStructure(['data' => ['id', 'subject']]);
+            ->assertJsonStructure(['data' => ['id', 'name']]);
     }
 
     public function test_can_list_email_templates(): void
@@ -53,7 +54,7 @@ class EmailCampaignApiTest extends TestCase
         $data = [
             'name' => 'Test Email Template',
             'subject' => 'Test Subject',
-            'body' => 'Test body',
+            'html_content' => '<p>Test body</p>',
             'tenant_id' => '00000000-0000-0000-0000-000000000000',
         ];
 

@@ -20,7 +20,7 @@ class SurveyApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    '*' => ['id', 'title', 'description', 'order']
+                    '*' => ['id', 'name', 'description', 'display_order']
                 ]
             ]);
     }
@@ -28,19 +28,19 @@ class SurveyApiTest extends TestCase
     public function test_can_create_survey_section(): void
     {
         $data = [
-            'title' => 'Test Section',
+            'name' => 'Test Section',
             'description' => 'Test description',
-            'order' => 1,
+            'display_order' => 1,
             'tenant_id' => '00000000-0000-0000-0000-000000000000',
         ];
 
         $response = $this->postJson('/api/v1/survey/sections', $data);
 
         $response->assertStatus(201)
-            ->assertJsonStructure(['data' => ['id', 'title', 'description']]);
+            ->assertJsonStructure(['data' => ['id', 'name', 'description']]);
 
         $this->assertDatabaseHas('survey_sections', [
-            'title' => 'Test Section',
+            'name' => 'Test Section',
         ]);
     }
 
@@ -49,7 +49,7 @@ class SurveyApiTest extends TestCase
         $section = SurveySection::factory()->create();
 
         $data = [
-            'title' => 'Updated Section',
+            'name' => 'Updated Section',
             'description' => 'Updated description',
         ];
 
@@ -59,7 +59,7 @@ class SurveyApiTest extends TestCase
 
         $this->assertDatabaseHas('survey_sections', [
             'id' => $section->id,
-            'title' => 'Updated Section',
+            'name' => 'Updated Section',
         ]);
     }
 

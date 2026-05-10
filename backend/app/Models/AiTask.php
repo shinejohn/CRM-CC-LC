@@ -12,7 +12,17 @@ final class AiTask extends Model
 {
     use HasUuids, HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'smb_id',
+        'task_type',
+        'status',
+        'input_data',
+        'output_data',
+        'suggested_at',
+        'approved_at',
+        'executed_at',
+        'completed_at',
+    ];
 
     protected $casts = [
         'input_data' => 'array',

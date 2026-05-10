@@ -13,14 +13,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('emergency_audit_log', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('broadcast_id')->constrained('emergency_broadcasts')->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('broadcast_id')->constrained('emergency_broadcasts')->onDelete('cascade');
             
             // Action
             $table->string('action', 50); // created, authorized, send_started, send_completed, cancelled
             
             // Actor
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignUuid('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->string('user_name', 255)->nullable();
             $table->string('user_ip', 50)->nullable();
             $table->text('user_agent')->nullable();

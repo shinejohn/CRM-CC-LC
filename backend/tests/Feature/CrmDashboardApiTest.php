@@ -16,10 +16,11 @@ class CrmDashboardApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'total_customers',
-                    'active_campaigns',
-                    'revenue',
-                    'engagement_metrics',
+                    'customers',
+                    'conversations',
+                    'orders',
+                    'subscriptions',
+                    'conversion',
                 ]
             ]);
     }

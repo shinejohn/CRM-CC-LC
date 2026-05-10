@@ -22,7 +22,15 @@
     "secondary_cta": "schedule_photoshoot",
     "ai_persona": "Emma",
     "ai_tone": "Professional, detailed",
-    "ai_goal": "Complete venue profile optimization"
+    "ai_goal": "Complete venue profile optimization",
+    "conversion_goal": "activation",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week2-how-to",
+    "utm_content": "HOWTO-004",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/premium-venue-setup/audio/"
   },
   "slides": [
     {
@@ -49,11 +57,26 @@
       "content": {
         "headline": "The Venue Profile That Wins",
         "key_elements": [
-          {"element": "Professional Photos", "impact": "10x more engagement than phone photos"},
-          {"element": "Complete Amenities", "impact": "Answer every question before they ask"},
-          {"element": "Virtual Tour", "impact": "3x longer time on page"},
-          {"element": "Clear Capacity/Pricing", "impact": "Qualified leads only"},
-          {"element": "Social Proof", "impact": "Reviews and past events build trust"}
+          {
+            "element": "Professional Photos",
+            "impact": "10x more engagement than phone photos"
+          },
+          {
+            "element": "Complete Amenities",
+            "impact": "Answer every question before they ask"
+          },
+          {
+            "element": "Virtual Tour",
+            "impact": "3x longer time on page"
+          },
+          {
+            "element": "Clear Capacity/Pricing",
+            "impact": "Qualified leads only"
+          },
+          {
+            "element": "Social Proof",
+            "impact": "Reviews and past events build trust"
+          }
         ],
         "truth": "People book venues they can visualize themselves in."
       },
@@ -68,11 +91,26 @@
       "content": {
         "headline": "Step 1: Build Your Photo Gallery",
         "photo_types": [
-          {"type": "Hero Shot", "desc": "Your best, most impressive angle"},
-          {"type": "Space Shots", "desc": "Different areas, different setups"},
-          {"type": "Detail Shots", "desc": "Features that make you special"},
-          {"type": "In-Use Shots", "desc": "Events happening, people enjoying"},
-          {"type": "Exterior", "desc": "Finding you, parking, entrance"}
+          {
+            "type": "Hero Shot",
+            "desc": "Your best, most impressive angle"
+          },
+          {
+            "type": "Space Shots",
+            "desc": "Different areas, different setups"
+          },
+          {
+            "type": "Detail Shots",
+            "desc": "Features that make you special"
+          },
+          {
+            "type": "In-Use Shots",
+            "desc": "Events happening, people enjoying"
+          },
+          {
+            "type": "Exterior",
+            "desc": "Finding you, parking, entrance"
+          }
         ],
         "minimum": "8 photos minimum, 15-20 ideal",
         "pro_tip": "Hire a photographer. $200-400 investment pays off forever."
@@ -88,11 +126,26 @@
       "content": {
         "headline": "Step 2: List Every Amenity",
         "amenity_categories": [
-          {"category": "Space Details", "examples": "Capacity, square footage, room types"},
-          {"category": "Technical", "examples": "AV equipment, WiFi, power outlets"},
-          {"category": "Comfort", "examples": "A/C, heating, seating, accessibility"},
-          {"category": "Services", "examples": "Catering, setup, cleanup, coordination"},
-          {"category": "Policies", "examples": "Noise limits, hours, parking, outside vendors"}
+          {
+            "category": "Space Details",
+            "examples": "Capacity, square footage, room types"
+          },
+          {
+            "category": "Technical",
+            "examples": "AV equipment, WiFi, power outlets"
+          },
+          {
+            "category": "Comfort",
+            "examples": "A/C, heating, seating, accessibility"
+          },
+          {
+            "category": "Services",
+            "examples": "Catering, setup, cleanup, coordination"
+          },
+          {
+            "category": "Policies",
+            "examples": "Noise limits, hours, parking, outside vendors"
+          }
         ],
         "tip": "Every amenity you add is a search term you can be found by."
       },
@@ -114,9 +167,18 @@
           "Add 'Request Quote' for complex pricing"
         ],
         "example_packages": [
-          {"name": "Basic", "includes": "Space only, bring your own everything"},
-          {"name": "Standard", "includes": "Space + tables/chairs + AV"},
-          {"name": "Full Service", "includes": "Everything including coordination"}
+          {
+            "name": "Basic",
+            "includes": "Space only, bring your own everything"
+          },
+          {
+            "name": "Standard",
+            "includes": "Space + tables/chairs + AV"
+          },
+          {
+            "name": "Full Service",
+            "includes": "Everything including coordination"
+          }
         ]
       },
       "narration": "Step three: be clear on pricing. I know it's tempting to hide prices and force inquiries, but that just annoys people. Show starting prices even if you customize. Create two to three packages for different needs and budgets. List what's included versus what costs extra. Be upfront about deposits and minimums. For complex pricing, add a 'Request Quote' option. Transparency builds trust and saves you time with unqualified leads.",
@@ -130,11 +192,26 @@
       "content": {
         "headline": "Step 4: Show That Others Trust You",
         "proof_types": [
-          {"type": "Reviews", "how": "Request after every event"},
-          {"type": "Past Events", "how": "Photo gallery with permission"},
-          {"type": "Client Logos", "how": "Companies/organizations you've hosted"},
-          {"type": "Media Mentions", "how": "Press, blogs, features"},
-          {"type": "Certifications", "how": "Any relevant credentials"}
+          {
+            "type": "Reviews",
+            "how": "Request after every event"
+          },
+          {
+            "type": "Past Events",
+            "how": "Photo gallery with permission"
+          },
+          {
+            "type": "Client Logos",
+            "how": "Companies/organizations you've hosted"
+          },
+          {
+            "type": "Media Mentions",
+            "how": "Press, blogs, features"
+          },
+          {
+            "type": "Certifications",
+            "how": "Any relevant credentials"
+          }
         ],
         "request_script": "Would you mind sharing your experience? It helps other event planners find us."
       },
@@ -149,11 +226,26 @@
       "content": {
         "headline": "Step 5: Make Booking Frictionless",
         "booking_features": [
-          {"feature": "Availability Calendar", "benefit": "People see open dates instantly"},
-          {"feature": "Instant Quote", "benefit": "Get estimate without waiting"},
-          {"feature": "Tour Scheduling", "benefit": "One-click to book a walkthrough"},
-          {"feature": "Inquiry Form", "benefit": "Capture all info you need upfront"},
-          {"feature": "Response Time", "benefit": "Show your average response time"}
+          {
+            "feature": "Availability Calendar",
+            "benefit": "People see open dates instantly"
+          },
+          {
+            "feature": "Instant Quote",
+            "benefit": "Get estimate without waiting"
+          },
+          {
+            "feature": "Tour Scheduling",
+            "benefit": "One-click to book a walkthrough"
+          },
+          {
+            "feature": "Inquiry Form",
+            "benefit": "Capture all info you need upfront"
+          },
+          {
+            "feature": "Response Time",
+            "benefit": "Show your average response time"
+          }
         ],
         "warning": "Every day you take to respond, you lose 30% of leads."
       },
@@ -196,8 +288,21 @@
     }
   },
   "connections": {
-    "leads_to": ["HOOK-004"],
+    "leads_to": [
+      "HOOK-004"
+    ],
     "follows": "HOWTO-003",
-    "related": ["HOWTO-005", "HOWTO-017"]
+    "related": [
+      "HOWTO-005",
+      "HOWTO-017"
+    ]
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 305,
+    "purpose": "tutorial",
+    "audio_required": true
   }
 }

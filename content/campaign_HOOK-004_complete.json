@@ -22,7 +22,15 @@
     "secondary_cta": "learn_more",
     "ai_persona": "Sarah",
     "ai_tone": "Exciting, exclusive, opportunity-focused",
-    "ai_goal": "Get application submission"
+    "ai_goal": "Get application submission",
+    "conversion_goal": "signup",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week3-hook",
+    "utm_content": "HOOK-004",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/get-featured/audio/"
   },
   "slides": [
     {
@@ -46,11 +54,31 @@
       "content": {
         "headline": "Featured Businesses Get:",
         "benefits": [
-          {"icon": "star", "benefit": "Top placement in directory", "detail": "First thing people see"},
-          {"icon": "newspaper", "benefit": "Feature in local news", "detail": "Story about your business"},
-          {"icon": "megaphone", "benefit": "Social media spotlight", "detail": "Shared to our audience"},
-          {"icon": "chart", "benefit": "5x average visibility", "detail": "Vs. standard listings"},
-          {"icon": "badge", "benefit": "Featured badge", "detail": "Permanent trust signal"}
+          {
+            "icon": "star",
+            "benefit": "Top placement in directory",
+            "detail": "First thing people see"
+          },
+          {
+            "icon": "newspaper",
+            "benefit": "Feature in local news",
+            "detail": "Story about your business"
+          },
+          {
+            "icon": "megaphone",
+            "benefit": "Social media spotlight",
+            "detail": "Shared to our audience"
+          },
+          {
+            "icon": "chart",
+            "benefit": "5x average visibility",
+            "detail": "Vs. standard listings"
+          },
+          {
+            "icon": "badge",
+            "benefit": "Featured badge",
+            "detail": "Permanent trust signal"
+          }
         ]
       },
       "narration": "Featured businesses get serious benefits. Top placement in the directory—the first thing people see. A feature story in local news. Spotlight on our social media to our entire audience. Five times the average visibility of standard listings. And a permanent 'Featured' badge on your profile—a trust signal that lasts.",
@@ -64,9 +92,21 @@
       "content": {
         "headline": "What Our Featured Businesses See",
         "stats": [
-          {"metric": "Average view increase", "value": "487%", "timeframe": "during feature week"},
-          {"metric": "Inquiry increase", "value": "312%", "timeframe": "during feature week"},
-          {"metric": "Lasting visibility boost", "value": "+45%", "timeframe": "ongoing after feature"}
+          {
+            "metric": "Average view increase",
+            "value": "487%",
+            "timeframe": "during feature week"
+          },
+          {
+            "metric": "Inquiry increase",
+            "value": "312%",
+            "timeframe": "during feature week"
+          },
+          {
+            "metric": "Lasting visibility boost",
+            "value": "+45%",
+            "timeframe": "ongoing after feature"
+          }
         ],
         "testimonial": {
           "quote": "Our feature week brought more new customers than the previous 3 months combined.",
@@ -84,10 +124,26 @@
       "content": {
         "headline": "The Feature Process",
         "steps": [
-          {"num": 1, "step": "Submit application", "time": "5 minutes"},
-          {"num": 2, "step": "Our team reviews", "time": "24-48 hours"},
-          {"num": 3, "step": "If selected, we contact you", "time": "For brief interview"},
-          {"num": 4, "step": "Feature goes live", "time": "Within 1 week"}
+          {
+            "num": 1,
+            "step": "Submit application",
+            "time": "5 minutes"
+          },
+          {
+            "num": 2,
+            "step": "Our team reviews",
+            "time": "24-48 hours"
+          },
+          {
+            "num": 3,
+            "step": "If selected, we contact you",
+            "time": "For brief interview"
+          },
+          {
+            "num": 4,
+            "step": "Feature goes live",
+            "time": "Within 1 week"
+          }
         ],
         "note": "Not everyone is selected—we feature businesses that serve the community well"
       },
@@ -102,10 +158,22 @@
       "content": {
         "headline": "We Just Need a Few Things",
         "fields": [
-          {"field": "What makes your business special?", "type": "Short answer"},
-          {"field": "How do you serve the community?", "type": "Short answer"},
-          {"field": "Recent photo of business/team", "type": "Upload"},
-          {"field": "Best time to contact you", "type": "Dropdown"}
+          {
+            "field": "What makes your business special?",
+            "type": "Short answer"
+          },
+          {
+            "field": "How do you serve the community?",
+            "type": "Short answer"
+          },
+          {
+            "field": "Recent photo of business/team",
+            "type": "Upload"
+          },
+          {
+            "field": "Best time to contact you",
+            "type": "Dropdown"
+          }
         ],
         "time_estimate": "5 minutes to complete"
       },
@@ -148,8 +216,21 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-006"],
+    "leads_to": [
+      "HOWTO-006"
+    ],
     "follows": "EDU-003",
-    "related": ["HOOK-007", "HOOK-009"]
+    "related": [
+      "HOOK-007",
+      "HOOK-009"
+    ]
+  },
+  "template": {
+    "template_id": "feature-application",
+    "name": "Quick Action",
+    "slides": 6,
+    "duration": 150,
+    "purpose": "hook",
+    "audio_required": true
   }
 }

@@ -57,11 +57,26 @@
       "content": {
         "headline": "What Makes Events Work",
         "elements": [
-          {"element": "Compelling Title", "impact": "3x more clicks"},
-          {"element": "Clear Value", "impact": "Why should I care?"},
-          {"element": "Specific Details", "impact": "Reduces friction"},
-          {"element": "Great Image", "impact": "2x more engagement"},
-          {"element": "Easy Action", "impact": "One-click RSVP"}
+          {
+            "element": "Compelling Title",
+            "impact": "3x more clicks"
+          },
+          {
+            "element": "Clear Value",
+            "impact": "Why should I care?"
+          },
+          {
+            "element": "Specific Details",
+            "impact": "Reduces friction"
+          },
+          {
+            "element": "Great Image",
+            "impact": "2x more engagement"
+          },
+          {
+            "element": "Easy Action",
+            "impact": "One-click RSVP"
+          }
         ],
         "insight": "Most events fail because they're vague. Specificity wins."
       },
@@ -104,9 +119,18 @@
           "What's in it for me specifically?"
         ],
         "value_examples": [
-          {"event": "Workshop", "value": "Leave with 3 skills you can use immediately"},
-          {"event": "Sale", "value": "Save $50-200 on items you're already buying"},
-          {"event": "Open House", "value": "Free food, live music, 20% off your first visit"}
+          {
+            "event": "Workshop",
+            "value": "Leave with 3 skills you can use immediately"
+          },
+          {
+            "event": "Sale",
+            "value": "Save $50-200 on items you're already buying"
+          },
+          {
+            "event": "Open House",
+            "value": "Free food, live music, 20% off your first visit"
+          }
         ],
         "tip": "Lead with the benefit, not the logistics."
       },
@@ -121,11 +145,26 @@
       "content": {
         "headline": "Step 3: Remove Every Barrier",
         "required_details": [
-          {"detail": "Date & Time", "format": "Day, Date at Time (include timezone)"},
-          {"detail": "Location", "format": "Full address + parking/access notes"},
-          {"detail": "Cost", "format": "Free, $X, or 'included with purchase'"},
-          {"detail": "What to Bring/Expect", "format": "Reduce anxiety about showing up"},
-          {"detail": "RSVP/Capacity", "format": "Limited spots create urgency"}
+          {
+            "detail": "Date & Time",
+            "format": "Day, Date at Time (include timezone)"
+          },
+          {
+            "detail": "Location",
+            "format": "Full address + parking/access notes"
+          },
+          {
+            "detail": "Cost",
+            "format": "Free, $X, or 'included with purchase'"
+          },
+          {
+            "detail": "What to Bring/Expect",
+            "format": "Reduce anxiety about showing up"
+          },
+          {
+            "detail": "RSVP/Capacity",
+            "format": "Limited spots create urgency"
+          }
         ],
         "checklist": "If someone has to ask a question before attending, you forgot something."
       },
@@ -213,8 +252,21 @@
     }
   },
   "connections": {
-    "leads_to": ["HOOK-002"],
+    "leads_to": [
+      "HOOK-002"
+    ],
     "follows": "EDU-002",
-    "related": ["HOWTO-004", "HOWTO-005"]
+    "related": [
+      "HOWTO-004",
+      "HOWTO-005"
+    ]
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 265,
+    "purpose": "tutorial",
+    "audio_required": true
   }
 }

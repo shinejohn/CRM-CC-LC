@@ -48,12 +48,30 @@
       "content": {
         "headline": "What Recognized Businesses Receive",
         "benefits": [
-          {"benefit": "Winner announcement", "where": "Newsletter to 10,000+ subscribers"},
-          {"benefit": "News article feature", "where": "Full article about your business"},
-          {"benefit": "Award badge", "where": "Display on website and marketing"},
-          {"benefit": "Social spotlight", "where": "Featured across all social channels"},
-          {"benefit": "Certificate", "where": "Physical certificate for your wall"},
-          {"benefit": "Directory highlight", "where": "Featured placement in directory"}
+          {
+            "benefit": "Winner announcement",
+            "where": "Newsletter to 10,000+ subscribers"
+          },
+          {
+            "benefit": "News article feature",
+            "where": "Full article about your business"
+          },
+          {
+            "benefit": "Award badge",
+            "where": "Display on website and marketing"
+          },
+          {
+            "benefit": "Social spotlight",
+            "where": "Featured across all social channels"
+          },
+          {
+            "benefit": "Certificate",
+            "where": "Physical certificate for your wall"
+          },
+          {
+            "benefit": "Directory highlight",
+            "where": "Featured placement in directory"
+          }
         ]
       },
       "narration": "What do recognized businesses receive? Winner announcement in our newsletter to over ten thousand subscribers. A full news article feature about your business. An award badge to display on your website and marketing materials. Social media spotlight across all channels. A physical certificate for your wall. And featured placement in our directory. Recognition that works for your business.",
@@ -67,10 +85,22 @@
       "content": {
         "headline": "Claiming Is Simple",
         "steps": [
-          {"step": 1, "action": "Click 'Claim Nomination'"},
-          {"step": 2, "action": "Verify your business info"},
-          {"step": 3, "action": "Add a brief statement (optional)"},
-          {"step": 4, "action": "Submit for consideration"}
+          {
+            "step": 1,
+            "action": "Click 'Claim Nomination'"
+          },
+          {
+            "step": 2,
+            "action": "Verify your business info"
+          },
+          {
+            "step": 3,
+            "action": "Add a brief statement (optional)"
+          },
+          {
+            "step": 4,
+            "action": "Submit for consideration"
+          }
         ],
         "timing": "Takes under 3 minutes"
       },
@@ -113,6 +143,39 @@
   },
   "connections": {
     "follows": "HOOK-014",
-    "related": ["HOOK-004", "HOOK-011"]
+    "related": [
+      "HOOK-004",
+      "HOOK-011"
+    ]
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-015",
+    "landing_page_slug": "business-nomination",
+    "url": "/learn/business-nomination",
+    "template_id": "nomination",
+    "template_name": "Quick Action",
+    "slide_count": 5,
+    "duration_seconds": 120,
+    "primary_cta": "get_started",
+    "secondary_cta": "learn_more",
+    "ai_persona": "Sarah",
+    "ai_tone": "Energetic, encouraging, action-oriented",
+    "ai_goal": "Get user to take the first free action immediately",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/business-nomination/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week11-hook",
+    "utm_content": "HOOK-015"
+  },
+  "template": {
+    "template_id": "nomination",
+    "name": "Quick Action",
+    "slides": 5,
+    "duration": 120,
+    "purpose": "hook",
+    "audio_required": true
   }
 }

@@ -19,7 +19,18 @@
     "slide_count": 8,
     "duration_seconds": 300,
     "primary_cta": "create_announcement",
-    "secondary_cta": "see_examples"
+    "secondary_cta": "see_examples",
+    "ai_tone": "Supportive, clear, step-by-step",
+    "ai_goal": "Guide user through posting their first community announcement",
+    "ai_persona": "Sarah",
+    "conversion_goal": "activation",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week3-how-to",
+    "utm_content": "HOWTO-006",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/post-announcement/audio/"
   },
   "slides": [
     {
@@ -46,12 +57,30 @@
       "content": {
         "headline": "You Have News. You Just Don't Know It.",
         "newsworthy": [
-          {"type": "Business milestones", "examples": "Anniversary, expansion, new location"},
-          {"type": "New offerings", "examples": "Products, services, menu items"},
-          {"type": "Achievements", "examples": "Awards, certifications, recognition"},
-          {"type": "Community involvement", "examples": "Sponsorships, charity, events"},
-          {"type": "Team updates", "examples": "New hires, promotions, expertise"},
-          {"type": "Special offers", "examples": "Limited time, seasonal, exclusive"}
+          {
+            "type": "Business milestones",
+            "examples": "Anniversary, expansion, new location"
+          },
+          {
+            "type": "New offerings",
+            "examples": "Products, services, menu items"
+          },
+          {
+            "type": "Achievements",
+            "examples": "Awards, certifications, recognition"
+          },
+          {
+            "type": "Community involvement",
+            "examples": "Sponsorships, charity, events"
+          },
+          {
+            "type": "Team updates",
+            "examples": "New hires, promotions, expertise"
+          },
+          {
+            "type": "Special offers",
+            "examples": "Limited time, seasonal, exclusive"
+          }
         ],
         "key_point": "If you'd tell a customer about it, it's announcement-worthy"
       },
@@ -85,9 +114,18 @@
       "content": {
         "headline": "Step 2: Write Clear, Concise Body",
         "structure": [
-          {"paragraph": 1, "content": "The news (who, what, when, where)"},
-          {"paragraph": 2, "content": "Why it matters (to the reader)"},
-          {"paragraph": 3, "content": "What to do next (call to action)"}
+          {
+            "paragraph": 1,
+            "content": "The news (who, what, when, where)"
+          },
+          {
+            "paragraph": 2,
+            "content": "Why it matters (to the reader)"
+          },
+          {
+            "paragraph": 3,
+            "content": "What to do next (call to action)"
+          }
         ],
         "length": "150-300 words ideal",
         "example": {
@@ -129,10 +167,26 @@
       "content": {
         "headline": "Step 4: Choose Where It Goes",
         "distribution_options": [
-          {"channel": "Your profile", "default": true, "reach": "Your followers"},
-          {"channel": "Community feed", "default": true, "reach": "Local community"},
-          {"channel": "News consideration", "default": false, "reach": "Possible news pickup"},
-          {"channel": "Social syndication", "default": false, "reach": "Your connected accounts"}
+          {
+            "channel": "Your profile",
+            "default": true,
+            "reach": "Your followers"
+          },
+          {
+            "channel": "Community feed",
+            "default": true,
+            "reach": "Local community"
+          },
+          {
+            "channel": "News consideration",
+            "default": false,
+            "reach": "Possible news pickup"
+          },
+          {
+            "channel": "Social syndication",
+            "default": false,
+            "reach": "Your connected accounts"
+          }
         ],
         "tip": "Enable news consideration for major announcements"
       },
@@ -192,8 +246,24 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-007"],
-    "follows": ["EDU-003", "HOOK-004"],
-    "related": ["HOWTO-002", "HOWTO-013"]
+    "leads_to": [
+      "HOWTO-007"
+    ],
+    "follows": [
+      "EDU-003",
+      "HOOK-004"
+    ],
+    "related": [
+      "HOWTO-002",
+      "HOWTO-013"
+    ]
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 245,
+    "purpose": "tutorial",
+    "audio_required": true
   }
 }

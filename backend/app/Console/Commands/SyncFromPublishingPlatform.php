@@ -36,6 +36,10 @@ final class SyncFromPublishingPlatform extends Command
 
     private int $smbsUpdated = 0;
 
+    private int $civicEntitiesSynced = 0;
+
+    private int $nonprofitsSynced = 0;
+
     private int $subscriptionsSynced = 0;
 
     public function handle(PublishingPlatformService $ppService): int
@@ -64,9 +68,21 @@ final class SyncFromPublishingPlatform extends Command
             $this->syncBusinessesForCommunity($ppService, $community, $dryRun);
         }
 
-        // Phase 3: Sync subscriptions
+        // Phase 3: Sync civic entities per community
+        $this->info('Phase 3: Syncing civic entities (governments, schools, churches)...');
+        foreach ($communities as $community) {
+            $this->syncCivicEntitiesForCommunity($ppService, $community, $dryRun);
+        }
+
+        // Phase 4: Sync nonprofits per community
+        $this->info('Phase 4: Syncing nonprofit organizations...');
+        foreach ($communities as $community) {
+            $this->syncNonprofitsForCommunity($ppService, $community, $dryRun);
+        }
+
+        // Phase 5: Sync subscriptions
         if (! $this->option('skip-subscriptions')) {
-            $this->info('Phase 3: Syncing subscriptions...');
+            $this->info('Phase 5: Syncing subscriptions...');
             foreach ($communities as $community) {
                 $this->syncSubscriptionsForCommunity($ppService, $community, $dryRun);
             }
@@ -83,6 +99,8 @@ final class SyncFromPublishingPlatform extends Command
                 ['Customers updated', $this->customersUpdated],
                 ['SMBs created', $this->smbsCreated],
                 ['SMBs updated', $this->smbsUpdated],
+                ['Civic entities synced', $this->civicEntitiesSynced],
+                ['Nonprofits synced', $this->nonprofitsSynced],
                 ['Subscriptions synced', $this->subscriptionsSynced],
             ]
         );
@@ -94,6 +112,8 @@ final class SyncFromPublishingPlatform extends Command
             'customers_updated' => $this->customersUpdated,
             'smbs_created' => $this->smbsCreated,
             'smbs_updated' => $this->smbsUpdated,
+            'civic_entities_synced' => $this->civicEntitiesSynced,
+            'nonprofits_synced' => $this->nonprofitsSynced,
             'subscriptions_synced' => $this->subscriptionsSynced,
         ]);
 
@@ -190,8 +210,18 @@ final class SyncFromPublishingPlatform extends Command
                     continue;
                 }
 
-                $this->upsertBusinessAsCustomerAndSmb($biz, $ccCommunityId);
-                $totalSynced++;
+                try {
+                    $this->upsertBusinessAsCustomerAndSmb($biz, $ccCommunityId);
+                    $totalSynced++;
+                } catch (\Throwable $e) {
+                    $bizName = $biz['name'] ?? $biz['id'] ?? 'unknown';
+                    $this->warn("    Skipped business '{$bizName}': {$e->getMessage()}");
+                    Log::warning('SyncFromPublishingPlatform: skipped business', [
+                        'business_id' => $biz['id'] ?? null,
+                        'business_name' => $biz['name'] ?? null,
+                        'error' => $e->getMessage(),
+                    ]);
+                }
             }
 
             $page++;
@@ -318,6 +348,367 @@ final class SyncFromPublishingPlatform extends Command
                 $this->customersCreated++;
             }
         });
+    }
+
+    /**
+     * @param  array{id: string, cc_id: string, slug: string}  $community
+     */
+    private function syncCivicEntitiesForCommunity(PublishingPlatformService $ppService, array $community, bool $dryRun): void
+    {
+        $ppCommunityId = $community['id'];
+        $ccCommunityId = $this->resolveCcCommunityId($community, $dryRun);
+        $page = 1;
+        $totalSynced = 0;
+
+        do {
+            $result = $ppService->exportCivicEntities($ppCommunityId, $page);
+            $entities = $result['data'] ?? [];
+            $meta = $result['meta'] ?? ['current_page' => 1, 'last_page' => 1];
+
+            foreach ($entities as $entity) {
+                if ($dryRun) {
+                    $totalSynced++;
+
+                    continue;
+                }
+
+                try {
+                    $this->upsertCivicEntityAsCustomerAndSmb($entity, $ccCommunityId);
+                    $totalSynced++;
+                } catch (\Throwable $e) {
+                    $name = $entity['legal_name'] ?? $entity['display_name'] ?? $entity['id'] ?? 'unknown';
+                    $this->warn("    Skipped civic entity '{$name}': {$e->getMessage()}");
+                    Log::warning('SyncFromPublishingPlatform: skipped civic entity', [
+                        'entity_id' => $entity['id'] ?? null,
+                        'entity_name' => $entity['legal_name'] ?? null,
+                        'error' => $e->getMessage(),
+                    ]);
+                }
+            }
+
+            $page++;
+        } while ($page <= ($meta['last_page'] ?? 1));
+
+        $this->civicEntitiesSynced += $totalSynced;
+
+        if ($totalSynced > 0) {
+            $this->line("  {$community['slug']}: {$totalSynced} civic entities synced");
+        }
+    }
+
+    /**
+     * @param  array<string, mixed>  $entity
+     */
+    private function upsertCivicEntityAsCustomerAndSmb(array $entity, string $ccCommunityId): void
+    {
+        $externalId = $entity['id'] ?? '';
+        if ($externalId === '') {
+            return;
+        }
+
+        $entityType = $entity['entity_type'] ?? 'government';
+        $entitySubtype = $entity['entity_subtype'] ?? null;
+        $category = match ($entityType) {
+            'school' => 'Education - ' . ucfirst($entitySubtype ?? 'School'),
+            'school_district' => 'Education - School District',
+            'church' => 'Religious Organization',
+            'nonprofit' => 'Nonprofit',
+            default => 'Government - ' . ucfirst($entitySubtype ?? 'Municipal'),
+        };
+
+        $name = $entity['display_name'] ?? $entity['legal_name'] ?? 'Unknown';
+
+        DB::transaction(function () use ($entity, $externalId, $ccCommunityId, $category, $name, $entityType): void {
+            $smb = SMB::where('community_id', $ccCommunityId)
+                ->where(function ($q) use ($externalId, $name): void {
+                    $q->whereJsonContains('metadata->pp_civic_entity_id', $externalId)
+                        ->orWhere('business_name', $name);
+                })
+                ->first();
+
+            $smbData = [
+                'community_id' => $ccCommunityId,
+                'business_name' => $name,
+                'category' => $category,
+                'primary_email' => $entity['email'] ?? null,
+                'primary_phone' => $entity['phone'] ?? null,
+                'address' => $entity['address'] ?? null,
+                'city' => $entity['city'] ?? null,
+                'state' => $entity['state_abbr'] ?? null,
+                'zip' => $entity['zip'] ?? null,
+                'coordinates' => (($entity['lat'] ?? null) && ($entity['lng'] ?? null))
+                    ? ['lat' => (float) $entity['lat'], 'lng' => (float) $entity['lng']]
+                    : null,
+                'metadata' => [
+                    'pp_civic_entity_id' => $externalId,
+                    'pp_entity_type' => $entityType,
+                    'pp_entity_subtype' => $entity['entity_subtype'] ?? null,
+                    'pp_fips_code' => $entity['fips_code'] ?? null,
+                    'pp_nces_id' => $entity['nces_id'] ?? null,
+                    'pp_synced_at' => now()->toISOString(),
+                ],
+                'email_opted_in' => true,
+                'sms_opted_in' => false,
+                'rvm_opted_in' => false,
+                'phone_opted_in' => false,
+                'do_not_contact' => false,
+            ];
+
+            if ($smb) {
+                $smb->update($smbData);
+                $this->smbsUpdated++;
+            } else {
+                $smb = SMB::create($smbData);
+                $this->smbsCreated++;
+            }
+
+            $customer = Customer::withoutGlobalScopes()
+                ->where('external_id', 'civic:' . $externalId)
+                ->first();
+
+            if (! $customer) {
+                $customer = Customer::withoutGlobalScopes()
+                    ->where('smb_id', $smb->id)
+                    ->first();
+            }
+
+            $customerData = [
+                'community_id' => $ccCommunityId,
+                'smb_id' => $smb->id,
+                'external_id' => 'civic:' . $externalId,
+                'business_name' => $name,
+                'category' => $category,
+                'email' => $entity['email'] ?? null,
+                'phone' => $entity['phone'] ?? null,
+                'website' => $entity['website'] ?? null,
+                'address' => $entity['address'] ?? null,
+                'city' => $entity['city'] ?? null,
+                'state' => $entity['state_abbr'] ?? null,
+                'zip' => $entity['zip'] ?? null,
+                'coordinates' => (($entity['lat'] ?? null) && ($entity['lng'] ?? null))
+                    ? ['lat' => (float) $entity['lat'], 'lng' => (float) $entity['lng']]
+                    : null,
+                'business_description' => $entity['mission_statement'] ?? null,
+                'email_opted_in' => true,
+                'sms_opted_in' => false,
+                'rvm_opted_in' => false,
+                'phone_opted_in' => false,
+                'do_not_contact' => false,
+                'data_sources' => ['publishing_platform', 'civic_entities'],
+                'metadata' => [
+                    'pp_civic_entity_id' => $externalId,
+                    'pp_entity_type' => $entityType,
+                    'pp_entity_subtype' => $entity['entity_subtype'] ?? null,
+                    'pp_synced_at' => now()->toISOString(),
+                ],
+            ];
+
+            if ($customer) {
+                unset($customerData['email_opted_in'], $customerData['sms_opted_in']);
+                unset($customerData['rvm_opted_in'], $customerData['phone_opted_in']);
+                unset($customerData['do_not_contact']);
+                $customer->update($customerData);
+                $this->customersUpdated++;
+            } else {
+                $customerData['pipeline_stage'] = PipelineStage::HOOK;
+                $customerData['stage_entered_at'] = now();
+                $customerData['lead_source'] = 'civic_entity_sync';
+                Customer::create($customerData);
+                $this->customersCreated++;
+            }
+        });
+    }
+
+    /**
+     * @param  array{id: string, cc_id: string, slug: string}  $community
+     */
+    private function syncNonprofitsForCommunity(PublishingPlatformService $ppService, array $community, bool $dryRun): void
+    {
+        $ppCommunityId = $community['id'];
+        $ccCommunityId = $this->resolveCcCommunityId($community, $dryRun);
+        $page = 1;
+        $totalSynced = 0;
+
+        do {
+            $result = $ppService->exportNonprofits($ppCommunityId, $page);
+            $nonprofits = $result['data'] ?? [];
+            $meta = $result['meta'] ?? ['current_page' => 1, 'last_page' => 1];
+
+            foreach ($nonprofits as $np) {
+                if ($dryRun) {
+                    $totalSynced++;
+
+                    continue;
+                }
+
+                try {
+                    $this->upsertNonprofitAsCustomerAndSmb($np, $ccCommunityId);
+                    $totalSynced++;
+                } catch (\Throwable $e) {
+                    $name = $np['legal_name'] ?? $np['id'] ?? 'unknown';
+                    $this->warn("    Skipped nonprofit '{$name}': {$e->getMessage()}");
+                    Log::warning('SyncFromPublishingPlatform: skipped nonprofit', [
+                        'nonprofit_id' => $np['id'] ?? null,
+                        'nonprofit_name' => $np['legal_name'] ?? null,
+                        'error' => $e->getMessage(),
+                    ]);
+                }
+            }
+
+            $page++;
+        } while ($page <= ($meta['last_page'] ?? 1));
+
+        $this->nonprofitsSynced += $totalSynced;
+
+        if ($totalSynced > 0) {
+            $this->line("  {$community['slug']}: {$totalSynced} nonprofits synced");
+        }
+    }
+
+    /**
+     * @param  array<string, mixed>  $np
+     */
+    private function upsertNonprofitAsCustomerAndSmb(array $np, string $ccCommunityId): void
+    {
+        $externalId = $np['id'] ?? '';
+        if ($externalId === '') {
+            return;
+        }
+
+        $name = $np['legal_name'] ?? 'Unknown Nonprofit';
+        $ntee = $np['ntee_code'] ?? '';
+        $category = $this->mapNteeToCategory($ntee);
+
+        DB::transaction(function () use ($np, $externalId, $ccCommunityId, $category, $name): void {
+            $smb = SMB::where('community_id', $ccCommunityId)
+                ->where(function ($q) use ($externalId, $name): void {
+                    $q->whereJsonContains('metadata->pp_nonprofit_id', $externalId)
+                        ->orWhere('business_name', $name);
+                })
+                ->first();
+
+            $smbData = [
+                'community_id' => $ccCommunityId,
+                'business_name' => $name,
+                'category' => $category,
+                'primary_email' => $np['email'] ?? null,
+                'primary_phone' => $np['phone'] ?? null,
+                'address' => $np['street'] ?? null,
+                'city' => $np['city'] ?? null,
+                'state' => $np['state_abbr'] ?? null,
+                'zip' => $np['zip'] ?? null,
+                'coordinates' => (($np['lat'] ?? null) && ($np['lng'] ?? null))
+                    ? ['lat' => (float) $np['lat'], 'lng' => (float) $np['lng']]
+                    : null,
+                'metadata' => [
+                    'pp_nonprofit_id' => $externalId,
+                    'pp_ein' => $np['ein'] ?? null,
+                    'pp_ntee_code' => $np['ntee_code'] ?? null,
+                    'pp_subsection_code' => $np['subsection_code'] ?? null,
+                    'pp_annual_revenue' => $np['income_amount'] ?? null,
+                    'pp_synced_at' => now()->toISOString(),
+                ],
+                'email_opted_in' => true,
+                'sms_opted_in' => false,
+                'rvm_opted_in' => false,
+                'phone_opted_in' => false,
+                'do_not_contact' => false,
+            ];
+
+            if ($smb) {
+                $smb->update($smbData);
+                $this->smbsUpdated++;
+            } else {
+                $smb = SMB::create($smbData);
+                $this->smbsCreated++;
+            }
+
+            $customer = Customer::withoutGlobalScopes()
+                ->where('external_id', 'np:' . $externalId)
+                ->first();
+
+            if (! $customer) {
+                $customer = Customer::withoutGlobalScopes()
+                    ->where('smb_id', $smb->id)
+                    ->first();
+            }
+
+            $customerData = [
+                'community_id' => $ccCommunityId,
+                'smb_id' => $smb->id,
+                'external_id' => 'np:' . $externalId,
+                'business_name' => $name,
+                'category' => $category,
+                'email' => $np['email'] ?? null,
+                'phone' => $np['phone'] ?? null,
+                'website' => $np['website'] ?? null,
+                'address' => $np['street'] ?? null,
+                'city' => $np['city'] ?? null,
+                'state' => $np['state_abbr'] ?? null,
+                'zip' => $np['zip'] ?? null,
+                'coordinates' => (($np['lat'] ?? null) && ($np['lng'] ?? null))
+                    ? ['lat' => (float) $np['lat'], 'lng' => (float) $np['lng']]
+                    : null,
+                'business_description' => $np['mission_statement'] ?? null,
+                'email_opted_in' => true,
+                'sms_opted_in' => false,
+                'rvm_opted_in' => false,
+                'phone_opted_in' => false,
+                'do_not_contact' => false,
+                'data_sources' => ['publishing_platform', 'nonprofit_organizations'],
+                'metadata' => [
+                    'pp_nonprofit_id' => $externalId,
+                    'pp_ein' => $np['ein'] ?? null,
+                    'pp_ntee_code' => $np['ntee_code'] ?? null,
+                    'pp_synced_at' => now()->toISOString(),
+                ],
+            ];
+
+            if ($customer) {
+                unset($customerData['email_opted_in'], $customerData['sms_opted_in']);
+                unset($customerData['rvm_opted_in'], $customerData['phone_opted_in']);
+                unset($customerData['do_not_contact']);
+                $customer->update($customerData);
+                $this->customersUpdated++;
+            } else {
+                $customerData['pipeline_stage'] = PipelineStage::HOOK;
+                $customerData['stage_entered_at'] = now();
+                $customerData['lead_source'] = 'nonprofit_sync';
+                Customer::create($customerData);
+                $this->customersCreated++;
+            }
+        });
+    }
+
+    private function resolveCcCommunityId(array $community, bool $dryRun): string
+    {
+        $ccCommunityId = $community['cc_id'];
+
+        if (! $ccCommunityId && ! $dryRun) {
+            $ccCommunity = Community::where('slug', $community['slug'])->first();
+            $ccCommunityId = $ccCommunity?->id ?? '';
+        }
+
+        return $ccCommunityId;
+    }
+
+    private function mapNteeToCategory(string $nteeCode): string
+    {
+        $major = strtoupper(substr($nteeCode, 0, 1));
+
+        return match ($major) {
+            'A' => 'Nonprofit - Arts & Culture',
+            'B' => 'Nonprofit - Education',
+            'C', 'D' => 'Nonprofit - Environment & Animals',
+            'E', 'F', 'G', 'H' => 'Nonprofit - Health',
+            'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P' => 'Nonprofit - Human Services',
+            'Q' => 'Nonprofit - International',
+            'R', 'S', 'T', 'U', 'V', 'W' => 'Nonprofit - Public Benefit',
+            'X' => 'Religious Organization',
+            'Y' => 'Nonprofit - Mutual Benefit',
+            'Z' => 'Nonprofit - Unknown',
+            default => 'Nonprofit',
+        };
     }
 
     /**

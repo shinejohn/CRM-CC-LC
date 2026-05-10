@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::dropIfExists('alert_sends');
         Schema::create('alert_sends', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignUuid('alert_id')->constrained('alerts')->onDelete('cascade');
-            $table->foreignId('subscriber_id')->constrained('subscribers')->onDelete('cascade');
+            $table->foreignUuid('subscriber_id')->constrained('subscribers')->onDelete('cascade');
             
             // Channels used
             $table->boolean('email_sent')->default(false);

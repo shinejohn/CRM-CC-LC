@@ -6,7 +6,7 @@ describe('CategorySidebar', () => {
   it('renders category sidebar', () => {
     render(<CategorySidebar />);
 
-    expect(screen.getByText(/email campaigns/i)).toBeInTheDocument();
+    expect(screen.getByText(/landing pages/i)).toBeInTheDocument();
   });
 
   it('renders main navigation sections', () => {

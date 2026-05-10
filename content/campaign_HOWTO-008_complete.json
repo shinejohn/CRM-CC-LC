@@ -19,7 +19,18 @@
     "slide_count": 8,
     "duration_seconds": 360,
     "primary_cta": "setup_ai_sales",
-    "secondary_cta": "watch_demo"
+    "secondary_cta": "watch_demo",
+    "ai_tone": "Technical yet approachable, confident",
+    "ai_goal": "Walk user through AI sales assistant configuration",
+    "ai_persona": "Sarah",
+    "conversion_goal": "activation",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week4-how-to",
+    "utm_content": "HOWTO-008",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-sales-setup/audio/"
   },
   "slides": [
     {
@@ -46,11 +57,26 @@
       "content": {
         "headline": "Your AI Sales Assistant Handles:",
         "capabilities": [
-          {"task": "Answer common questions", "example": "Hours, pricing, availability"},
-          {"task": "Qualify leads", "example": "Budget, timeline, needs"},
-          {"task": "Schedule appointments", "example": "Connect to your calendar"},
-          {"task": "Provide information", "example": "Services, products, process"},
-          {"task": "Hand off to humans", "example": "Complex questions, ready-to-buy"}
+          {
+            "task": "Answer common questions",
+            "example": "Hours, pricing, availability"
+          },
+          {
+            "task": "Qualify leads",
+            "example": "Budget, timeline, needs"
+          },
+          {
+            "task": "Schedule appointments",
+            "example": "Connect to your calendar"
+          },
+          {
+            "task": "Provide information",
+            "example": "Services, products, process"
+          },
+          {
+            "task": "Hand off to humans",
+            "example": "Complex questions, ready-to-buy"
+          }
         ],
         "what_you_handle": "Complex decisions, negotiations, relationship building"
       },
@@ -83,10 +109,26 @@
       "content": {
         "headline": "Step 2: Teach AI About Your Business",
         "training_sources": [
-          {"source": "Your website", "how": "AI scans and learns", "time": "Automatic"},
-          {"source": "FAQ document", "how": "Upload your common Q&As", "time": "5 min"},
-          {"source": "Service descriptions", "how": "Add manually or import", "time": "5 min"},
-          {"source": "Pricing information", "how": "Add pricing rules/ranges", "time": "3 min"}
+          {
+            "source": "Your website",
+            "how": "AI scans and learns",
+            "time": "Automatic"
+          },
+          {
+            "source": "FAQ document",
+            "how": "Upload your common Q&As",
+            "time": "5 min"
+          },
+          {
+            "source": "Service descriptions",
+            "how": "Add manually or import",
+            "time": "5 min"
+          },
+          {
+            "source": "Pricing information",
+            "how": "Add pricing rules/ranges",
+            "time": "3 min"
+          }
         ],
         "tip": "The more you teach it, the better it performs"
       },
@@ -101,10 +143,22 @@
       "content": {
         "headline": "Step 3: Define Lead Qualification",
         "qualification_questions": [
-          {"question": "What service are you interested in?", "purpose": "Routing"},
-          {"question": "What's your timeline?", "purpose": "Urgency"},
-          {"question": "What's your approximate budget?", "purpose": "Qualification"},
-          {"question": "What's the best way to reach you?", "purpose": "Contact capture"}
+          {
+            "question": "What service are you interested in?",
+            "purpose": "Routing"
+          },
+          {
+            "question": "What's your timeline?",
+            "purpose": "Urgency"
+          },
+          {
+            "question": "What's your approximate budget?",
+            "purpose": "Qualification"
+          },
+          {
+            "question": "What's the best way to reach you?",
+            "purpose": "Contact capture"
+          }
         ],
         "customization": "Add questions specific to your business",
         "scoring": "Optionally set up lead scoring based on answers"
@@ -120,10 +174,22 @@
       "content": {
         "headline": "Step 4: When Does AI Hand Off to You?",
         "handoff_triggers": [
-          {"trigger": "Ready to buy signals", "action": "Immediate notification + handoff"},
-          {"trigger": "Complex questions AI can't answer", "action": "Escalate to human"},
-          {"trigger": "Customer requests human", "action": "Instant transfer"},
-          {"trigger": "High-value lead detected", "action": "Priority notification"}
+          {
+            "trigger": "Ready to buy signals",
+            "action": "Immediate notification + handoff"
+          },
+          {
+            "trigger": "Complex questions AI can't answer",
+            "action": "Escalate to human"
+          },
+          {
+            "trigger": "Customer requests human",
+            "action": "Instant transfer"
+          },
+          {
+            "trigger": "High-value lead detected",
+            "action": "Priority notification"
+          }
         ],
         "notification_options": "Email, SMS, App notification, or all three"
       },
@@ -138,10 +204,22 @@
       "content": {
         "headline": "Step 5: Test Your AI Assistant",
         "testing": [
-          {"test": "Ask common questions", "check": "Answers correctly?"},
-          {"test": "Ask edge cases", "check": "Handles gracefully or escalates?"},
-          {"test": "Request human", "check": "Hands off properly?"},
-          {"test": "Complete qualification flow", "check": "Captures info correctly?"}
+          {
+            "test": "Ask common questions",
+            "check": "Answers correctly?"
+          },
+          {
+            "test": "Ask edge cases",
+            "check": "Handles gracefully or escalates?"
+          },
+          {
+            "test": "Request human",
+            "check": "Hands off properly?"
+          },
+          {
+            "test": "Complete qualification flow",
+            "check": "Captures info correctly?"
+          }
         ],
         "refinement": "Review conversations weekly; add training as needed",
         "tip": "AI improves over time as it learns from real conversations"
@@ -180,8 +258,25 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-010", "HOWTO-011"],
-    "follows": ["EDU-006", "EDU-004"],
-    "related": ["HOWTO-017", "HOOK-007"]
+    "leads_to": [
+      "HOWTO-010",
+      "HOWTO-011"
+    ],
+    "follows": [
+      "EDU-006",
+      "EDU-004"
+    ],
+    "related": [
+      "HOWTO-017",
+      "HOOK-007"
+    ]
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 265,
+    "purpose": "tutorial",
+    "audio_required": true
   }
 }

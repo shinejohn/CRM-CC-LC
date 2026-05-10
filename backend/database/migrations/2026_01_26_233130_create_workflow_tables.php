@@ -23,7 +23,7 @@ return new class extends Migration {
         });
 
         Schema::create('workflow_steps', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('workflow_execution_id');
             $table->string('step_name');
             $table->string('status'); // 'completed', 'failed'

@@ -13,7 +13,15 @@ final class ApprovalUpsell extends Model
 {
     use HasUuids, HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'approval_id',
+        'upsell_service_type',
+        'offered_at',
+        'accepted',
+        'accepted_at',
+        'declined_at',
+        'resulting_approval_id',
+    ];
 
     protected $casts = [
         'offered_at' => 'datetime',

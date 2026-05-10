@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('unsubscribe_tokens', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('subscriber_id')->constrained('subscribers')->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('subscriber_id')->constrained('subscribers')->onDelete('cascade');
             
             $table->string('token', 100)->unique();
             

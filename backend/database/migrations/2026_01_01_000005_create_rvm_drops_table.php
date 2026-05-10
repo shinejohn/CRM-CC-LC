@@ -12,10 +12,10 @@ return new class extends Migration
             return;
         }
         Schema::create('rvm_drops', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('uuid')->unique();
             $table->foreignUuid('smb_id')->constrained('customers');
-            $table->foreignId('campaign_send_id')->nullable()->constrained();
+            $table->foreignUuid('campaign_send_id')->nullable()->constrained();
 
             $table->string('phone', 50);
             $table->text('script')->nullable();
@@ -33,7 +33,7 @@ return new class extends Migration
 
             $table->boolean('callback_received')->default(false);
             $table->timestamp('callback_at')->nullable();
-            $table->foreignId('callback_id')->nullable();
+            $table->foreignUuid('callback_id')->nullable();
 
             $table->timestamps();
 

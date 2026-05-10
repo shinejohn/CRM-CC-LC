@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 return new class extends Migration
 {
@@ -20,7 +21,7 @@ return new class extends Migration
         // For MySQL/MariaDB, we'll use regular tables with indexes
         
         Schema::create('message_queue', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('uuid')->unique();
             
             // Priority (P0 always processed first)
@@ -80,7 +81,7 @@ return new class extends Migration
         // ═══════════════════════════════════════════════════════════════════════════════
         
         Schema::create('delivery_events', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('message_queue_id')->index();
             
             // Event details
@@ -103,7 +104,7 @@ return new class extends Migration
         // ═══════════════════════════════════════════════════════════════════════════════
         
         Schema::create('channel_health', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('channel', 20); // email, sms, push
             $table->string('gateway', 50); // postal, ses, twilio
             
@@ -133,7 +134,7 @@ return new class extends Migration
         // ═══════════════════════════════════════════════════════════════════════════════
         
         Schema::create('rate_limits', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             
             // What's being limited
             $table->string('limit_type', 50)->index(); // domain, ip_pool, gateway, recipient
@@ -162,11 +163,11 @@ return new class extends Migration
         
         // Default rate limits for major ISPs
         DB::table('rate_limits')->insert([
-            ['limit_type' => 'domain', 'limit_key' => 'gmail.com', 'max_per_hour' => 10000, 'notes' => 'Google rate limits', 'created_at' => now(), 'updated_at' => now()],
-            ['limit_type' => 'domain', 'limit_key' => 'yahoo.com', 'max_per_hour' => 5000, 'notes' => 'Yahoo rate limits', 'created_at' => now(), 'updated_at' => now()],
-            ['limit_type' => 'domain', 'limit_key' => 'hotmail.com', 'max_per_hour' => 5000, 'notes' => 'Microsoft rate limits', 'created_at' => now(), 'updated_at' => now()],
-            ['limit_type' => 'domain', 'limit_key' => 'outlook.com', 'max_per_hour' => 5000, 'notes' => 'Microsoft rate limits', 'created_at' => now(), 'updated_at' => now()],
-            ['limit_type' => 'domain', 'limit_key' => 'aol.com', 'max_per_hour' => 3000, 'notes' => 'AOL rate limits', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => Str::uuid()->toString(), 'limit_type' => 'domain', 'limit_key' => 'gmail.com', 'max_per_hour' => 10000, 'notes' => 'Google rate limits', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => Str::uuid()->toString(), 'limit_type' => 'domain', 'limit_key' => 'yahoo.com', 'max_per_hour' => 5000, 'notes' => 'Yahoo rate limits', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => Str::uuid()->toString(), 'limit_type' => 'domain', 'limit_key' => 'hotmail.com', 'max_per_hour' => 5000, 'notes' => 'Microsoft rate limits', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => Str::uuid()->toString(), 'limit_type' => 'domain', 'limit_key' => 'outlook.com', 'max_per_hour' => 5000, 'notes' => 'Microsoft rate limits', 'created_at' => now(), 'updated_at' => now()],
+            ['id' => Str::uuid()->toString(), 'limit_type' => 'domain', 'limit_key' => 'aol.com', 'max_per_hour' => 3000, 'notes' => 'AOL rate limits', 'created_at' => now(), 'updated_at' => now()],
         ]);
         
         // ═══════════════════════════════════════════════════════════════════════════════
@@ -174,7 +175,7 @@ return new class extends Migration
         // ═══════════════════════════════════════════════════════════════════════════════
         
         Schema::create('suppression_list', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             
             // What's suppressed
             $table->string('channel', 20)->index(); // email, sms, push, all
@@ -198,7 +199,7 @@ return new class extends Migration
         // ═══════════════════════════════════════════════════════════════════════════════
         
         Schema::create('message_templates', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             
             // Identification
             $table->string('slug', 100)->unique();

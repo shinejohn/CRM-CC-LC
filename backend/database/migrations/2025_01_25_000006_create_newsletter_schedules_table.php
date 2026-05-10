@@ -11,11 +11,11 @@ return new class extends Migration
     {
         Schema::dropIfExists('newsletter_schedules');
         Schema::create('newsletter_schedules', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             if (Schema::hasTable('communities')) {
-                $table->foreignId('community_id')->unique()->constrained('communities')->onDelete('cascade');
+                $table->foreignUuid('community_id')->unique()->constrained('communities')->onDelete('cascade');
             } else {
-                $table->foreignId('community_id')->unique();
+                $table->foreignUuid('community_id')->unique();
             }
             
             // Scheduling config

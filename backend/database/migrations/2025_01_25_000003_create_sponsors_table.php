@@ -10,7 +10,7 @@ return new class extends Migration {
     {
         Schema::dropIfExists('sponsors');
         Schema::create('sponsors', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('uuid')->unique()->default(DB::getDriverName() === 'pgsql' ? DB::raw('gen_random_uuid()') : null);
 
             // Identity

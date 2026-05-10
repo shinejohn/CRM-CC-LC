@@ -18,6 +18,8 @@ export interface PitchShellProps {
   progressSubLabel?: string;
   /** Use inside scrollable pages (e.g. DevPreview). Default is full-viewport overlay. */
   embed?: boolean;
+  /** "pitch" (default) uses standard layout; "learn" uses wider left panel for slides */
+  variant?: "pitch" | "learn";
   className?: string;
 }
 
@@ -31,8 +33,10 @@ export function PitchShell({
   completedSteps = [],
   progressSubLabel,
   embed = false,
+  variant = "pitch",
   className,
 }: PitchShellProps) {
+  const isLearn = variant === "learn";
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
@@ -80,11 +84,16 @@ export function PitchShell({
       )}
 
       <div className={cn("flex flex-1 min-h-0", !embed && "pt-16")}>
-        {/* Left ~62% desktop */}
+        {/* Left panel — wider in learn variant for slide content */}
         <section
-          className="min-w-0 overflow-y-auto w-full md:w-[62%] md:flex-[0_0_62%]"
+          className={cn(
+            "min-w-0 overflow-y-auto w-full",
+            isLearn
+              ? "md:flex-[1_1_0%]"
+              : "md:w-[62%] md:flex-[0_0_62%]"
+          )}
           style={{
-            padding: "var(--p-space-12) var(--p-space-16)",
+            padding: isLearn ? 0 : "var(--p-space-12) var(--p-space-16)",
           }}
         >
           {children}

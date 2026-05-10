@@ -15,7 +15,7 @@ return new class extends Migration
             return;
         }
         Schema::create('communities', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('state', 2);

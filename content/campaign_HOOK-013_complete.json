@@ -30,11 +30,26 @@
       "content": {
         "headline": "Your Free Trial Includes",
         "included": [
-          {"item": "5 posts created", "detail": "Custom content for your business"},
-          {"item": "Posted to your channels", "detail": "Facebook, Instagram, or both"},
-          {"item": "Your voice and brand", "detail": "Trained on your business"},
-          {"item": "Optimal timing", "detail": "Posted when your audience is active"},
-          {"item": "Performance report", "detail": "See how posts performed at week's end"}
+          {
+            "item": "5 posts created",
+            "detail": "Custom content for your business"
+          },
+          {
+            "item": "Posted to your channels",
+            "detail": "Facebook, Instagram, or both"
+          },
+          {
+            "item": "Your voice and brand",
+            "detail": "Trained on your business"
+          },
+          {
+            "item": "Optimal timing",
+            "detail": "Posted when your audience is active"
+          },
+          {
+            "item": "Performance report",
+            "detail": "See how posts performed at week's end"
+          }
         ],
         "value": "Worth $150+ if you hired someone"
       },
@@ -49,11 +64,31 @@
       "content": {
         "headline": "Here's What We'd Post for {{business_name}}",
         "samples": [
-          {"day": "Monday", "type": "Behind-the-scenes", "example": "Meet the team / See how we work"},
-          {"day": "Wednesday", "type": "Tip or value", "example": "Quick tip related to your expertise"},
-          {"day": "Friday", "type": "Customer spotlight", "example": "Success story or testimonial"},
-          {"day": "Saturday", "type": "Community", "example": "Weekend plans / Local connection"},
-          {"day": "Sunday", "type": "Soft sell", "example": "Reminder of services / Special offer"}
+          {
+            "day": "Monday",
+            "type": "Behind-the-scenes",
+            "example": "Meet the team / See how we work"
+          },
+          {
+            "day": "Wednesday",
+            "type": "Tip or value",
+            "example": "Quick tip related to your expertise"
+          },
+          {
+            "day": "Friday",
+            "type": "Customer spotlight",
+            "example": "Success story or testimonial"
+          },
+          {
+            "day": "Saturday",
+            "type": "Community",
+            "example": "Weekend plans / Local connection"
+          },
+          {
+            "day": "Sunday",
+            "type": "Soft sell",
+            "example": "Reminder of services / Special offer"
+          }
         ]
       },
       "narration": "Here's what we'd post for your business. Monday: behind-the-scenes content—meet the team, see how you work. Wednesday: a tip or value post related to your expertise. Friday: customer spotlight—a success story or testimonial. Saturday: community connection—weekend plans, local tie-in. Sunday: soft sell—reminder of services or a special offer. Variety that keeps your audience engaged.",
@@ -67,11 +102,31 @@
       "content": {
         "headline": "Simple Setup Process",
         "steps": [
-          {"step": 1, "action": "Sign up (2 minutes)", "detail": "Basic info about your business"},
-          {"step": 2, "action": "Connect accounts", "detail": "Secure connection to your social profiles"},
-          {"step": 3, "action": "Review first posts", "detail": "Approve before they go live"},
-          {"step": 4, "action": "We post all week", "detail": "You focus on your business"},
-          {"step": 5, "action": "Get your report", "detail": "See the results, decide if you want to continue"}
+          {
+            "step": 1,
+            "action": "Sign up (2 minutes)",
+            "detail": "Basic info about your business"
+          },
+          {
+            "step": 2,
+            "action": "Connect accounts",
+            "detail": "Secure connection to your social profiles"
+          },
+          {
+            "step": 3,
+            "action": "Review first posts",
+            "detail": "Approve before they go live"
+          },
+          {
+            "step": 4,
+            "action": "We post all week",
+            "detail": "You focus on your business"
+          },
+          {
+            "step": 5,
+            "action": "Get your report",
+            "detail": "See the results, decide if you want to continue"
+          }
         ]
       },
       "narration": "Here's how it works. Sign up in two minutes—just basic info about your business. Connect your accounts—secure connection to your social profiles. Review the first posts—you approve before anything goes live. We post all week while you focus on your business. Get your performance report at the end and decide if you want to continue. Zero risk, all upside.",
@@ -113,6 +168,39 @@
   },
   "connections": {
     "follows": "HOOK-012",
-    "related": ["EDU-007", "HOWTO-010"]
+    "related": [
+      "EDU-007",
+      "HOWTO-010"
+    ]
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-013",
+    "landing_page_slug": "social-posting-trial",
+    "url": "/learn/social-posting-trial",
+    "template_id": "trial-offer",
+    "template_name": "Quick Action",
+    "slide_count": 5,
+    "duration_seconds": 130,
+    "primary_cta": "get_started",
+    "secondary_cta": "learn_more",
+    "ai_persona": "Sarah",
+    "ai_tone": "Energetic, encouraging, action-oriented",
+    "ai_goal": "Get user to take the first free action immediately",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/social-posting-trial/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week10-hook",
+    "utm_content": "HOOK-013"
+  },
+  "template": {
+    "template_id": "trial-offer",
+    "name": "Quick Action",
+    "slides": 5,
+    "duration": 130,
+    "purpose": "hook",
+    "audio_required": true
   }
 }

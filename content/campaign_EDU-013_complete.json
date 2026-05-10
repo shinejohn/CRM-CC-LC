@@ -230,5 +230,35 @@
       "EDU-005",
       "EDU-011"
     ]
+  },
+  "landing_page": {
+    "campaign_id": "EDU-013",
+    "landing_page_slug": "data-privacy-guide",
+    "url": "/learn/data-privacy-guide",
+    "template_id": "educational",
+    "template_name": "Educational Content",
+    "slide_count": 7,
+    "duration_seconds": 200,
+    "primary_cta": "explore_more",
+    "secondary_cta": "download_article",
+    "ai_persona": "Sarah",
+    "ai_tone": "Warm, informative, empowering",
+    "ai_goal": "Educate and build understanding of the concept",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/data-privacy-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "education",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week10-educational",
+    "utm_content": "EDU-013"
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 200,
+    "purpose": "education",
+    "audio_required": true
   }
 }

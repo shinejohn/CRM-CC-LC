@@ -82,4 +82,14 @@ final class Community extends Model
     {
         return $this->hasMany(RevenueRecord::class, 'community_id');
     }
+
+    public function contentCards(): HasMany
+    {
+        return $this->hasMany(ContentCard::class, 'community_id');
+    }
+
+    public function partnerCommunities(): HasMany
+    {
+        return $this->hasMany(PartnerCommunity::class, 'community_id');
+    }
 }

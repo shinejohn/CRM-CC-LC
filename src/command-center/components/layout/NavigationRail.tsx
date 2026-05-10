@@ -10,6 +10,7 @@ import {
   Kanban, FileCheck, Users, Activity, ChartLine,
   Briefcase, ShoppingCart, CreditCard, Gauge,
   Cpu, Workflow, Cog, Mail, Inbox, ShieldCheck,
+  Gift, LayoutTemplate,
 } from 'lucide-react';
 import { useBusinessMode } from '@/hooks/useBusinessMode';
 import { useAuthStore } from '@/stores/authStore';
@@ -56,6 +57,8 @@ const useNavSections = (): VerbSection[] => {
         { label: 'Inbox', href: '/command-center/attract/inbox', icon: Inbox, resource: 'campaigns' },
         { label: 'Articles', href: '/command-center/attract/articles', icon: FileText, resource: 'content' },
         { label: 'Events', href: '/command-center/attract/events', icon: Calendar, resource: 'content' },
+        { label: 'Marketing Kit', href: '/command-center/attract/marketing-kit', icon: Gift, resource: 'content' },
+        { label: 'Content Cards', href: '/command-center/attract/content-cards', icon: LayoutTemplate, resource: 'content' },
       ],
     },
     {

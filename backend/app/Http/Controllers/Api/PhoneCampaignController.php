@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOutboundCampaignRequest;
 use App\Models\PhoneScript;
 use App\Models\OutboundCampaign;
 use App\Models\CampaignRecipient;
@@ -24,7 +25,7 @@ final class PhoneCampaignController extends Controller
     /**
      * Create phone campaign
      */
-    public function store(Request $request): JsonResponse
+    public function store(StoreOutboundCampaignRequest $request): JsonResponse
     {
         $request->merge(['type' => 'phone']);
         return app(OutboundCampaignController::class)->store($request);

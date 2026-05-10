@@ -48,7 +48,7 @@ final class CustomerTimelineProgress extends Model
         return $this->belongsTo(CampaignTimeline::class, 'campaign_timeline_id');
     }
     
-    public function markActionCompleted(int $actionId): void
+    public function markActionCompleted(string $actionId): void
     {
         $completed = $this->completed_actions ?? [];
         if (!in_array($actionId, $completed)) {
@@ -60,7 +60,7 @@ final class CustomerTimelineProgress extends Model
         }
     }
     
-    public function markActionSkipped(int $actionId): void
+    public function markActionSkipped(string $actionId): void
     {
         $skipped = $this->skipped_actions ?? [];
         if (!in_array($actionId, $skipped)) {
@@ -88,9 +88,14 @@ final class CustomerTimelineProgress extends Model
         }
     }
     
-    public function isActionCompleted(int $actionId): bool
+    public function isActionCompleted(string $actionId): bool
     {
         return in_array($actionId, $this->completed_actions ?? []);
+    }
+
+    public function isActionSkipped(string $actionId): bool
+    {
+        return in_array($actionId, $this->skipped_actions ?? []);
     }
 }
 

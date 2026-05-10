@@ -16,9 +16,11 @@ class CrmAnalyticsApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'total_interests',
-                    'top_interests',
-                    'trends',
+                    'interest_by_topic',
+                    'questions_by_type',
+                    'customer_engagement',
+                    'interest_over_time',
+                    'date_range',
                 ]
             ]);
     }
@@ -30,10 +32,12 @@ class CrmAnalyticsApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'total_purchases',
-                    'revenue',
-                    'average_order_value',
-                    'top_products',
+                    'summary',
+                    'purchases_by_service',
+                    'customer_purchases',
+                    'purchase_timeline',
+                    'conversion_funnel',
+                    'date_range',
                 ]
             ]);
     }
@@ -45,9 +49,12 @@ class CrmAnalyticsApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'total_learning_activities',
-                    'completion_rate',
-                    'popular_content',
+                    'knowledge_base',
+                    'presentations',
+                    'engagement',
+                    'customer_learning',
+                    'learning_over_time',
+                    'date_range',
                 ]
             ]);
     }
@@ -59,9 +66,8 @@ class CrmAnalyticsApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'total_campaigns',
-                    'performance_metrics',
-                    'top_campaigns',
+                    'campaign_performance',
+                    'date_range',
                 ]
             ]);
     }

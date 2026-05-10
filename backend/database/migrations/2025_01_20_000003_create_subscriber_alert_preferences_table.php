@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('subscriber_alert_preferences', function (Blueprint $table) {
-            $table->foreignId('subscriber_id')->constrained('subscribers')->onDelete('cascade');
+            $table->foreignUuid('subscriber_id')->constrained('subscribers')->onDelete('cascade');
             $table->string('category_slug', 50); // breaking, weather, traffic, etc.
             
             // Channel preferences for this category

@@ -10,7 +10,7 @@ return new class extends Migration
     {
         // Campaign Timeline definitions
         Schema::create('campaign_timelines', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
@@ -26,8 +26,8 @@ return new class extends Migration
         
         // Individual actions within a timeline
         Schema::create('campaign_timeline_actions', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('campaign_timeline_id')->constrained()->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('campaign_timeline_id')->constrained()->onDelete('cascade');
             $table->integer('day_number'); // Day 1, 2, 3, etc.
             $table->string('channel'); // email, sms, phone, wait
             $table->string('action_type'); // send_email, send_sms, make_call, check_condition
@@ -40,16 +40,16 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->timestamps();
             
-            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('set null');
+            // campaign_id is a string identifier, not a strict FK to campaigns table
             $table->index(['campaign_timeline_id', 'day_number']);
             $table->index('channel');
         });
         
         // Track customer progress through timelines
         Schema::create('customer_timeline_progress', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('customer_id');
-            $table->foreignId('campaign_timeline_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('campaign_timeline_id')->constrained()->onDelete('cascade');
             $table->integer('current_day')->default(1);
             $table->timestamp('started_at');
             $table->timestamp('last_action_at')->nullable();

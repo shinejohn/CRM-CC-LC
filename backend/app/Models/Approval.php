@@ -17,7 +17,25 @@ final class Approval extends Model
 {
     use HasUuids, HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'uuid',
+        'customer_id',
+        'service_type',
+        'task_id',
+        'approver_name',
+        'approver_email',
+        'approver_phone',
+        'approver_role',
+        'source_type',
+        'source_id',
+        'source_url',
+        'contact_consent',
+        'status',
+        'approved_at',
+        'provisioning_started_at',
+        'provisioned_at',
+        'metadata',
+    ];
 
     protected $casts = [
         'contact_consent' => 'boolean',

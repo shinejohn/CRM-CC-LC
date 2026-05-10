@@ -16,9 +16,8 @@ class PublishingApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'stats',
+                    'content_stats',
                     'recent_content',
-                    'scheduled_content',
                 ]
             ]);
     }
@@ -30,7 +29,8 @@ class PublishingApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    '*' => ['date', 'content', 'status']
+                    'content',
+                    'ads',
                 ]
             ]);
     }
@@ -42,23 +42,21 @@ class PublishingApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'total_published',
-                    'engagement_metrics',
-                    'platform_breakdown',
+                    'content_over_time',
+                    'ad_performance',
                 ]
             ]);
     }
 
     public function test_can_publish_content(): void
     {
-        $contentId = 'test-content-id';
+        $content = \App\Models\GeneratedContent::factory()->create();
 
         $data = [
-            'platforms' => ['facebook', 'twitter'],
-            'scheduled_at' => now()->addHour()->toDateTimeString(),
+            'channels' => ['facebook', 'twitter'],
         ];
 
-        $response = $this->postJson("/api/v1/publishing/content/{$contentId}/publish", $data);
+        $response = $this->postJson("/api/v1/publishing/content/{$content->id}/publish", $data);
 
         $response->assertStatus(200)
             ->assertJsonStructure(['data', 'message']);

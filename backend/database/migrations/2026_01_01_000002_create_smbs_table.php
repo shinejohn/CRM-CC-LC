@@ -11,7 +11,7 @@ return new class extends Migration
     {
         if (! Schema::hasTable('smbs')) {
             Schema::create('smbs', function (Blueprint $table) {
-                $table->id();
+                $table->uuid('id')->primary();
                 $table->uuid('uuid')->unique();
                 $table->bigInteger('community_id');
 

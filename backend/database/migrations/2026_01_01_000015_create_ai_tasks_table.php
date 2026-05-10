@@ -13,7 +13,7 @@ return new class extends Migration
             return;
         }
         Schema::create('ai_tasks', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignUuid('smb_id')->constrained('customers');
 
             $table->string('task_type', 100);

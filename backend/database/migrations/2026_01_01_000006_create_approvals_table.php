@@ -13,13 +13,13 @@ return new class extends Migration
             return;
         }
         Schema::create('approvals', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('uuid')->unique();
             $table->uuid('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers');
 
             $table->string('service_type', 100);
-            $table->foreignId('task_id')->nullable();
+            $table->foreignUuid('task_id')->nullable();
 
             $table->string('approver_name');
             $table->string('approver_email');

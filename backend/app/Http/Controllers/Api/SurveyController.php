@@ -120,10 +120,8 @@ final class SurveyController extends Controller
     {
         $question = SurveyQuestion::findOrFail($id);
         $question->delete();
-        
-        return response()->json([
-            'message' => 'Survey question deleted successfully'
-        ]);
+
+        return response()->json(null, 204);
     }
     
     /**
@@ -199,9 +197,7 @@ final class SurveyController extends Controller
     {
         $section = SurveySection::findOrFail($id);
         $section->delete();
-        
-        return response()->json([
-            'message' => 'Survey section deleted successfully'
-        ]);
+
+        return response()->json(null, 204);
     }
 }

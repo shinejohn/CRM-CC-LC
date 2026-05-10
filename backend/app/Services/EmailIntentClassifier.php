@@ -7,7 +7,7 @@ namespace App\Services;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-final class EmailIntentClassifier
+class EmailIntentClassifier
 {
     protected array $intentPatterns = [
         'question' => ['?', 'what', 'how', 'when', 'where', 'why', 'can you', 'could you', 'explain', 'help'],

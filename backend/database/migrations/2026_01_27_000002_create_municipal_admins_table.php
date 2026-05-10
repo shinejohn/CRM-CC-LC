@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::dropIfExists('municipal_admins');
         Schema::create('municipal_admins', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
             
             if (Schema::hasTable('communities')) {
-                $table->foreignId('community_id')->constrained('communities')->onDelete('cascade');
+                $table->foreignUuid('community_id')->constrained('communities')->onDelete('cascade');
             } else {
-                $table->foreignId('community_id');
+                $table->foreignUuid('community_id');
             }
 
             // Expanded fields from both migrations

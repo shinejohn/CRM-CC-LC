@@ -229,5 +229,13 @@
       "EDU-003",
       "EDU-008"
     ]
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 215,
+    "purpose": "education",
+    "audio_required": true
   }
 }

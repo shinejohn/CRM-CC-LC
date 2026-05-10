@@ -65,7 +65,7 @@ final class CheckUnopenedEmails implements ShouldQueue
                     continue;
                 }
 
-                $hoursSinceSent = $campaignSend->sent_at->diffInHours(now());
+                $hoursSinceSent = (int) $campaignSend->sent_at->diffInHours(now());
 
                 // Fire event
                 event(new EmailNotOpened(

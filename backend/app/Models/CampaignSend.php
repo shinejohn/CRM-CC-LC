@@ -12,17 +12,36 @@ final class CampaignSend extends Model
 {
     use HasUuids, HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'uuid',
+        'smb_id',
+        'campaign_id',
+        'email',
+        'subject',
+        'scheduled_for',
+        'sent_at',
+        'message_id',
+        'status',
+        'delivered_at',
+        'opened_at',
+        'clicked_at',
+        'bounced_at',
+        'complained_at',
+        'followup_triggered_at',
+        'followup_count',
+        'followup_strategy',
+        'rvm_triggered',
+        'rvm_drop_id',
+    ];
 
-    protected static function boot()
+    /**
+     * Get the columns that should receive a unique identifier.
+     *
+     * @return array<int, string>
+     */
+    public function uniqueIds(): array
     {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (empty($model->uuid)) {
-                $model->uuid = (string) \Illuminate\Support\Str::uuid();
-            }
-        });
+        return ['id', 'uuid'];
     }
 
     protected $casts = [
@@ -42,13 +61,7 @@ final class CampaignSend extends Model
      */
     public function customer()
     {
-        // Try to get customer via smb_id
-        // If smb_id points to customers table, use direct relationship
-        if ($this->smb_id) {
-            return $this->belongsTo(Customer::class, 'smb_id');
-        }
-
-        return null;
+        return $this->belongsTo(Customer::class, 'smb_id');
     }
 
     /**

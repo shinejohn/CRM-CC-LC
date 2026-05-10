@@ -1,0 +1,1 @@
+export { SyndicationDashboardPage } from './SyndicationDashboardPage';

@@ -6,6 +6,7 @@ use Tests\TestCase;
 use App\Models\Knowledge;
 use App\Models\FaqCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Queue;
 
 class KnowledgeApiTest extends TestCase
 {
@@ -15,7 +16,7 @@ class KnowledgeApiTest extends TestCase
     {
         parent::setUp();
         $this->createAndAuthenticateUser();
-        // Set up any required test data
+        Queue::fake();
     }
 
     public function test_can_list_knowledge_items(): void
@@ -27,19 +28,17 @@ class KnowledgeApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    '*' => ['id', 'title', 'content', 'category_id', 'created_at']
+                    '*' => ['id', 'title', 'content', 'category', 'created_at']
                 ]
             ]);
     }
 
     public function test_can_create_knowledge_item(): void
     {
-        $category = FaqCategory::factory()->create();
-
         $data = [
             'title' => 'Test Knowledge',
             'content' => 'Test content',
-            'category_id' => $category->id,
+            'category' => 'general',
             'tenant_id' => '00000000-0000-0000-0000-000000000000',
         ];
 
@@ -112,11 +111,10 @@ class KnowledgeApiTest extends TestCase
         $knowledge = Knowledge::factory()->create();
 
         $response = $this->postJson("/api/v1/knowledge/{$knowledge->id}/vote", [
-            'helpful' => true,
+            'vote' => 'helpful',
         ]);
 
         $response->assertStatus(200);
-        // Add assertions based on your vote implementation
     }
 
     public function test_can_list_faq_categories(): void
@@ -137,6 +135,7 @@ class KnowledgeApiTest extends TestCase
     {
         $data = [
             'name' => 'Test Category',
+            'slug' => 'test-category',
             'description' => 'Test description',
             'tenant_id' => '00000000-0000-0000-0000-000000000000',
         ];

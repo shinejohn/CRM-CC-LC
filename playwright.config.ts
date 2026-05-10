@@ -1,15 +1,16 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
 
 export default defineConfig({
-  testDir: './scripts',
-  testMatch: /.*\.(test|spec)\.ts/,
+  testDir: './tests/e2e',
+  testMatch: /.*\.spec\.ts/,
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : 1,
   reporter: 'html',
   use: {
-    baseURL: process.env.BASE_URL || 'http://localhost:5173',
+    baseURL: process.env.BASE_URL || 'http://localhost:5174',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
@@ -20,10 +21,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:5173',
+    command: 'npx vite tests/e2e --port 5174',
+    url: 'http://localhost:5174',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
   },
 });
-

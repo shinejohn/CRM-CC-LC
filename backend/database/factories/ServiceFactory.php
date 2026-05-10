@@ -45,8 +45,8 @@ class ServiceFactory extends Factory
             'sku' => fake()->optional()->bothify('SKU-####'),
             'is_active' => true,
             'is_featured' => false,
-            'stripe_price_id' => fake()->optional()->string(),
-            'stripe_product_id' => fake()->optional()->string(),
+            'stripe_price_id' => fake()->optional()->sha256(),
+            'stripe_product_id' => fake()->optional()->sha256(),
             'metadata' => null,
         ];
     }

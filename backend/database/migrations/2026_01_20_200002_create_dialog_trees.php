@@ -10,7 +10,7 @@ return new class extends Migration
     {
         // Dialog tree definitions
         Schema::create('dialog_trees', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
@@ -26,8 +26,8 @@ return new class extends Migration
         
         // Individual nodes in dialog tree
         Schema::create('dialog_tree_nodes', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('dialog_tree_id')->constrained()->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('dialog_tree_id')->constrained()->onDelete('cascade');
             $table->string('node_key')->index(); // Unique within tree
             $table->string('node_type'); // say, ask, listen, branch, action, end
             $table->text('content')->nullable(); // What to say
@@ -45,9 +45,9 @@ return new class extends Migration
         
         // Track dialog execution per customer
         Schema::create('dialog_executions', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('customer_id');
-            $table->foreignId('dialog_tree_id')->constrained()->onDelete('cascade');
+            $table->foreignUuid('dialog_tree_id')->constrained()->onDelete('cascade');
             $table->uuid('ai_personality_id')->nullable();
             $table->string('current_node')->nullable();
             $table->string('status')->default('in_progress'); // in_progress, completed, abandoned, escalated

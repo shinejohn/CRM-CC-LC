@@ -244,5 +244,13 @@
       "EDU-001",
       "HOOK-004"
     ]
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 205,
+    "purpose": "education",
+    "audio_required": true
   }
 }

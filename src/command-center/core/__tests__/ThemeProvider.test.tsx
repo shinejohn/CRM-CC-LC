@@ -86,7 +86,7 @@ describe('ThemeProvider', () => {
     );
     fireEvent.click(screen.getByText('Set Dark'));
     await waitFor(() => {
-      expect(localStorage.getItem('cc-theme')).toBe('"dark"');
+      expect(localStorage.getItem('cc-theme')).toBe('dark');
     });
   });
 });

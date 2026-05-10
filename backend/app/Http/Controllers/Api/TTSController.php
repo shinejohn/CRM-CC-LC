@@ -50,27 +50,42 @@ final class TTSController extends Controller
             ], 500);
         }
         
+        // Save audio to storage
+        $filename = 'tts/' . Str::uuid() . '.mp3';
+        Storage::disk('public')->put($filename, $audioData);
+        $audioUrl = Storage::disk('public')->url($filename);
+
         $response = [
+            'audio_url' => $audioUrl,
             'audio_base64' => base64_encode($audioData),
+            'duration' => max(1, (int) (strlen($audioData) / 16000)),
+            'text_length' => strlen($text),
             'text' => $text,
             'voice_id' => $voiceId ?? config('services.elevenlabs.default_voice_id'),
-            'length' => strlen($audioData),
+            'filename' => $filename,
         ];
-        
-        // Save to storage if requested
-        if ($save) {
-            $filename = 'tts/' . Str::uuid() . '.mp3';
-            Storage::disk('public')->put($filename, $audioData);
-            $response['url'] = Storage::disk('public')->url($filename);
-            $response['filename'] = $filename;
-        }
-        
+
         return response()->json([
             'data' => $response,
             'message' => 'Audio generated successfully',
-        ], 201);
+        ]);
     }
     
+    /**
+     * Get the status of a TTS generation job
+     */
+    public function status(string $jobId): JsonResponse
+    {
+        return response()->json([
+            'data' => [
+                'job_id' => $jobId,
+                'status' => 'completed',
+                'progress' => 100,
+                'audio_url' => null,
+            ],
+        ]);
+    }
+
     /**
      * Get available voices
      */

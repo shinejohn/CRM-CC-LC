@@ -13,8 +13,8 @@ return new class extends Migration
             return;
         }
         Schema::create('provisioning_tasks', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('approval_id')->constrained();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('approval_id')->constrained();
             $table->uuid('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers');
 

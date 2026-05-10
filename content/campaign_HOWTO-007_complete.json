@@ -19,7 +19,18 @@
     "slide_count": 8,
     "duration_seconds": 300,
     "primary_cta": "expand_reach",
-    "secondary_cta": "see_communities"
+    "secondary_cta": "see_communities",
+    "ai_tone": "Strategic, encouraging, growth-focused",
+    "ai_goal": "Help user expand presence across multiple communities",
+    "ai_persona": "Sarah",
+    "conversion_goal": "activation",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week4-how-to",
+    "utm_content": "HOWTO-007",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/multi-community-guide/audio/"
   },
   "slides": [
     {
@@ -46,10 +57,22 @@
       "content": {
         "headline": "Should You Expand?",
         "good_fit": [
-          {"scenario": "Service area business", "example": "You travel to customers (plumbers, landscapers)"},
-          {"scenario": "Regional draw", "example": "People travel to you (restaurants, attractions)"},
-          {"scenario": "Multiple locations", "example": "You have more than one physical location"},
-          {"scenario": "B2B services", "example": "You serve businesses across areas"}
+          {
+            "scenario": "Service area business",
+            "example": "You travel to customers (plumbers, landscapers)"
+          },
+          {
+            "scenario": "Regional draw",
+            "example": "People travel to you (restaurants, attractions)"
+          },
+          {
+            "scenario": "Multiple locations",
+            "example": "You have more than one physical location"
+          },
+          {
+            "scenario": "B2B services",
+            "example": "You serve businesses across areas"
+          }
         ],
         "not_ideal": "Hyper-local businesses with no interest in wider reach"
       },
@@ -83,10 +106,18 @@
       "content": {
         "headline": "Step 2: Request Access to Each Community",
         "process": [
-          {"step": "Search for community by name or location"},
-          {"step": "Click 'Request to Join'"},
-          {"step": "Verify you serve this area (brief explanation)"},
-          {"step": "Wait for approval (usually same day)"}
+          {
+            "step": "Search for community by name or location"
+          },
+          {
+            "step": "Click 'Request to Join'"
+          },
+          {
+            "step": "Verify you serve this area (brief explanation)"
+          },
+          {
+            "step": "Wait for approval (usually same day)"
+          }
         ],
         "note": "Some communities have requirements—check before requesting"
       },
@@ -101,10 +132,22 @@
       "content": {
         "headline": "Step 3: Tailor Your Presence",
         "customizations": [
-          {"element": "Service area description", "why": "Be specific about what you serve in that area"},
-          {"element": "Local references", "why": "Mention landmarks, neighborhoods you work in"},
-          {"element": "Relevant reviews", "why": "Highlight reviews from that community"},
-          {"element": "Community-specific offers", "why": "Optional: special deals for that area"}
+          {
+            "element": "Service area description",
+            "why": "Be specific about what you serve in that area"
+          },
+          {
+            "element": "Local references",
+            "why": "Mention landmarks, neighborhoods you work in"
+          },
+          {
+            "element": "Relevant reviews",
+            "why": "Highlight reviews from that community"
+          },
+          {
+            "element": "Community-specific offers",
+            "why": "Optional: special deals for that area"
+          }
         ],
         "warning": "Don't copy/paste identical content—make it relevant"
       },
@@ -119,9 +162,18 @@
       "content": {
         "headline": "Step 4: Post to Multiple Communities",
         "options": [
-          {"option": "All communities", "use": "Announcements relevant everywhere"},
-          {"option": "Select communities", "use": "Events or offers in specific areas"},
-          {"option": "Primary only", "use": "Hyper-local content"}
+          {
+            "option": "All communities",
+            "use": "Announcements relevant everywhere"
+          },
+          {
+            "option": "Select communities",
+            "use": "Events or offers in specific areas"
+          },
+          {
+            "option": "Primary only",
+            "use": "Hyper-local content"
+          }
         ],
         "workflow": "Create content → Select distribution → Preview → Publish",
         "tip": "Set defaults to save time on routine posts"
@@ -179,7 +231,21 @@
   },
   "connections": {
     "leads_to": [],
-    "follows": ["EDU-003", "HOWTO-006"],
-    "related": ["HOWTO-001", "HOWTO-009"]
+    "follows": [
+      "EDU-003",
+      "HOWTO-006"
+    ],
+    "related": [
+      "HOWTO-001",
+      "HOWTO-009"
+    ]
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 230,
+    "purpose": "tutorial",
+    "audio_required": true
   }
 }

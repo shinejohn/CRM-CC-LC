@@ -13,6 +13,8 @@ final class GeneratedPresentation extends Model
 {
     use \App\Traits\HasTenantScope, HasFactory, HasUuids;
 
+    public const UPDATED_AT = null;
+
     protected $fillable = [
         'tenant_id',
         'customer_id',

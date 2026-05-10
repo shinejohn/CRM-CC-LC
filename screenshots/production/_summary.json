@@ -1,0 +1,491 @@
+{
+  "total": 60,
+  "ok": 60,
+  "ok_with_vars": 0,
+  "not_found": 0,
+  "page_404": 0,
+  "http_error": 0,
+  "errors": 0,
+  "results": [
+    {
+      "cid": "HOOK-001",
+      "slug": "claim-your-listing",
+      "filename": "HOOK-001_claim-your-listing.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOOK-002",
+      "slug": "post-your-event",
+      "filename": "HOOK-002_post-your-event.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOOK-003",
+      "slug": "create-coupon",
+      "filename": "HOOK-003_create-coupon.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOOK-004",
+      "slug": "get-featured",
+      "filename": "HOOK-004_get-featured.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOOK-005",
+      "slug": "post-classified",
+      "filename": "HOOK-005_post-classified.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOOK-006",
+      "slug": "crm-integration",
+      "filename": "HOOK-006_crm-integration.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOOK-007",
+      "slug": "featured-listing",
+      "filename": "HOOK-007_featured-listing.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOOK-008",
+      "slug": "newsletter-advertising",
+      "filename": "HOOK-008_newsletter-advertising.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOOK-009",
+      "slug": "become-sponsor",
+      "filename": "HOOK-009_become-sponsor.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOOK-010",
+      "slug": "article-advertising",
+      "filename": "HOOK-010_article-advertising.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOOK-011",
+      "slug": "expert-registration",
+      "filename": "HOOK-011_expert-registration.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOOK-012",
+      "slug": "influencer-program",
+      "filename": "HOOK-012_influencer-program.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOOK-013",
+      "slug": "social-posting-trial",
+      "filename": "HOOK-013_social-posting-trial.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOOK-014",
+      "slug": "holiday-events",
+      "filename": "HOOK-014_holiday-events.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOOK-015",
+      "slug": "business-nomination",
+      "filename": "HOOK-015_business-nomination.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-001",
+      "slug": "seo-reality-check",
+      "filename": "EDU-001_seo-reality-check.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-002",
+      "slug": "ai-marketing-101",
+      "filename": "EDU-002_ai-marketing-101.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-003",
+      "slug": "ai-marketing-assistant",
+      "filename": "EDU-003_ai-marketing-assistant.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-004",
+      "slug": "ai-operations-guide",
+      "filename": "EDU-004_ai-operations-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-005",
+      "slug": "ai-search-visibility",
+      "filename": "EDU-005_ai-search-visibility.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-006",
+      "slug": "community-marketing",
+      "filename": "EDU-006_community-marketing.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-007",
+      "slug": "reputation-ai-age",
+      "filename": "EDU-007_reputation-ai-age.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-008",
+      "slug": "ai-customer-service",
+      "filename": "EDU-008_ai-customer-service.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-009",
+      "slug": "voice-ai-guide",
+      "filename": "EDU-009_voice-ai-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-010",
+      "slug": "local-seo-guide",
+      "filename": "EDU-010_local-seo-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-011",
+      "slug": "ai-content-guide",
+      "filename": "EDU-011_ai-content-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-012",
+      "slug": "future-proof-guide",
+      "filename": "EDU-012_future-proof-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-013",
+      "slug": "data-privacy-guide",
+      "filename": "EDU-013_data-privacy-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-014",
+      "slug": "competitive-intelligence",
+      "filename": "EDU-014_competitive-intelligence.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "EDU-015",
+      "slug": "ai-employees-explained",
+      "filename": "EDU-015_ai-employees-explained.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-001",
+      "slug": "command-center-basics",
+      "filename": "HOWTO-001_command-center-basics.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-002",
+      "slug": "create-article",
+      "filename": "HOWTO-002_create-article.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-003",
+      "slug": "event-creation-guide",
+      "filename": "HOWTO-003_event-creation-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-004",
+      "slug": "premium-venue-setup",
+      "filename": "HOWTO-004_premium-venue-setup.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-005",
+      "slug": "performer-registration",
+      "filename": "HOWTO-005_performer-registration.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-006",
+      "slug": "post-announcement",
+      "filename": "HOWTO-006_post-announcement.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-007",
+      "slug": "multi-community-guide",
+      "filename": "HOWTO-007_multi-community-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-008",
+      "slug": "ai-sales-setup",
+      "filename": "HOWTO-008_ai-sales-setup.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-009",
+      "slug": "dashboard-tour",
+      "filename": "HOWTO-009_dashboard-tour.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-010",
+      "slug": "social-connection-guide",
+      "filename": "HOWTO-010_social-connection-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-011",
+      "slug": "email-marketing-setup",
+      "filename": "HOWTO-011_email-marketing-setup.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-012",
+      "slug": "review-response-guide",
+      "filename": "HOWTO-012_review-response-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-013",
+      "slug": "automated-posting-guide",
+      "filename": "HOWTO-013_automated-posting-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-014",
+      "slug": "customer-survey-setup",
+      "filename": "HOWTO-014_customer-survey-setup.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-015",
+      "slug": "analytics-guide",
+      "filename": "HOWTO-015_analytics-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-016",
+      "slug": "lead-capture-guide",
+      "filename": "HOWTO-016_lead-capture-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-017",
+      "slug": "appointment-booking-setup",
+      "filename": "HOWTO-017_appointment-booking-setup.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-018",
+      "slug": "invoice-automation-guide",
+      "filename": "HOWTO-018_invoice-automation-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-019",
+      "slug": "sms-marketing-guide",
+      "filename": "HOWTO-019_sms-marketing-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-020",
+      "slug": "faq-builder-guide",
+      "filename": "HOWTO-020_faq-builder-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-021",
+      "slug": "google-integration-guide",
+      "filename": "HOWTO-021_google-integration-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-022",
+      "slug": "workflow-automation-guide",
+      "filename": "HOWTO-022_workflow-automation-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-023",
+      "slug": "report-generation-guide",
+      "filename": "HOWTO-023_report-generation-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-024",
+      "slug": "customer-segmentation-guide",
+      "filename": "HOWTO-024_customer-segmentation-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-025",
+      "slug": "ai-training-guide",
+      "filename": "HOWTO-025_ai-training-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-026",
+      "slug": "integration-marketplace",
+      "filename": "HOWTO-026_integration-marketplace.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-027",
+      "slug": "team-collaboration-guide",
+      "filename": "HOWTO-027_team-collaboration-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-028",
+      "slug": "content-calendar-guide",
+      "filename": "HOWTO-028_content-calendar-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-029",
+      "slug": "roi-tracking-guide",
+      "filename": "HOWTO-029_roi-tracking-guide.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    },
+    {
+      "cid": "HOWTO-030",
+      "slug": "success-playbook",
+      "filename": "HOWTO-030_success-playbook.png",
+      "status": "OK",
+      "httpStatus": 200,
+      "hasPlaceholders": false
+    }
+  ]
+}

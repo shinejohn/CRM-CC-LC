@@ -78,10 +78,22 @@
       "content": {
         "headline": "Events Get Results",
         "benefits": [
-          {"stat": "{{avg_event_views}}", "label": "average views per event"},
-          {"stat": "{{avg_event_saves}}", "label": "people save events to attend"},
-          {"stat": "{{avg_event_shares}}", "label": "shares to friends and family"},
-          {"stat": "Free", "label": "to post, always"}
+          {
+            "stat": "{{avg_event_views}}",
+            "label": "average views per event"
+          },
+          {
+            "stat": "{{avg_event_saves}}",
+            "label": "people save events to attend"
+          },
+          {
+            "stat": "{{avg_event_shares}}",
+            "label": "shares to friends and family"
+          },
+          {
+            "stat": "Free",
+            "label": "to post, always"
+          }
         ],
         "testimonial": {
           "quote": "Posted a workshop, got 40 RSVPs. Best marketing I've ever done.",
@@ -100,10 +112,22 @@
       "content": {
         "headline": "Event Ideas for {{business_category}} Businesses",
         "ideas": [
-          {"idea": "{{event_idea_1}}", "example": "{{event_example_1}}"},
-          {"idea": "{{event_idea_2}}", "example": "{{event_example_2}}"},
-          {"idea": "{{event_idea_3}}", "example": "{{event_example_3}}"},
-          {"idea": "{{event_idea_4}}", "example": "{{event_example_4}}"}
+          {
+            "idea": "{{event_idea_1}}",
+            "example": "{{event_example_1}}"
+          },
+          {
+            "idea": "{{event_idea_2}}",
+            "example": "{{event_example_2}}"
+          },
+          {
+            "idea": "{{event_idea_3}}",
+            "example": "{{event_example_3}}"
+          },
+          {
+            "idea": "{{event_idea_4}}",
+            "example": "{{event_example_4}}"
+          }
         ],
         "note": "Don't overthink it. Even 'Now Booking Appointments' counts as news."
       },
@@ -148,7 +172,13 @@
     }
   },
   "personalization": {
-    "required_fields": ["first_name", "business_name", "business_slug", "business_category", "city"],
+    "required_fields": [
+      "first_name",
+      "business_name",
+      "business_slug",
+      "business_category",
+      "city"
+    ],
     "generated_fields": {
       "suggested_event_title": {
         "restaurant": "Special Tasting Night at {{business_name}}",
@@ -159,17 +189,55 @@
         "default": "Special Event at {{business_name}}"
       },
       "event_ideas": {
-        "restaurant": ["Wine tasting night", "Chef's table experience", "Happy hour special", "Live music night"],
-        "retail": ["Flash sale", "New arrival showcase", "Customer appreciation day", "Holiday shopping event"],
-        "service": ["Free consultation day", "Workshop", "Q&A session", "Open house"],
-        "fitness": ["Free class week", "Challenge kickoff", "Member appreciation", "New program launch"],
-        "default": ["Open house", "Customer appreciation day", "Special promotion", "Workshop or demo"]
+        "restaurant": [
+          "Wine tasting night",
+          "Chef's table experience",
+          "Happy hour special",
+          "Live music night"
+        ],
+        "retail": [
+          "Flash sale",
+          "New arrival showcase",
+          "Customer appreciation day",
+          "Holiday shopping event"
+        ],
+        "service": [
+          "Free consultation day",
+          "Workshop",
+          "Q&A session",
+          "Open house"
+        ],
+        "fitness": [
+          "Free class week",
+          "Challenge kickoff",
+          "Member appreciation",
+          "New program launch"
+        ],
+        "default": [
+          "Open house",
+          "Customer appreciation day",
+          "Special promotion",
+          "Workshop or demo"
+        ]
       }
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-003"],
+    "leads_to": [
+      "HOWTO-003"
+    ],
     "follows": "HOOK-001",
-    "related": ["HOOK-003", "HOOK-004"]
+    "related": [
+      "HOOK-003",
+      "HOOK-004"
+    ]
+  },
+  "template": {
+    "template_id": "event-posting",
+    "name": "Quick Action",
+    "slides": 5,
+    "duration": 115,
+    "purpose": "hook",
+    "audio_required": true
   }
 }

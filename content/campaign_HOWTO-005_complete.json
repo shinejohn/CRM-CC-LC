@@ -22,7 +22,15 @@
     "secondary_cta": "view_performer_examples",
     "ai_persona": "Emma",
     "ai_tone": "Creative, supportive",
-    "ai_goal": "Complete performer profile creation"
+    "ai_goal": "Complete performer profile creation",
+    "conversion_goal": "activation",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week2-how-to",
+    "utm_content": "HOWTO-005",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/performer-registration/audio/"
   },
   "slides": [
     {
@@ -50,12 +58,30 @@
       "content": {
         "headline": "What Event Planners Actually Want to See",
         "must_haves": [
-          {"item": "Clear Description", "why": "What do you do? Who are you for?"},
-          {"item": "Media Samples", "why": "Video > audio > photos > nothing"},
-          {"item": "Past Performances", "why": "Social proof you've done this"},
-          {"item": "Availability", "why": "Can I book you when I need you?"},
-          {"item": "Pricing Guidance", "why": "Are you in my budget?"},
-          {"item": "Easy Contact", "why": "How do I reach you quickly?"}
+          {
+            "item": "Clear Description",
+            "why": "What do you do? Who are you for?"
+          },
+          {
+            "item": "Media Samples",
+            "why": "Video > audio > photos > nothing"
+          },
+          {
+            "item": "Past Performances",
+            "why": "Social proof you've done this"
+          },
+          {
+            "item": "Availability",
+            "why": "Can I book you when I need you?"
+          },
+          {
+            "item": "Pricing Guidance",
+            "why": "Are you in my budget?"
+          },
+          {
+            "item": "Easy Contact",
+            "why": "How do I reach you quickly?"
+          }
         ],
         "truth": "Event planners make decisions in 60 seconds. Make those seconds count."
       },
@@ -70,10 +96,22 @@
       "content": {
         "headline": "Step 1: Write a Bio That Books",
         "bio_structure": [
-          {"part": "Hook", "content": "One sentence that captures your unique value"},
-          {"part": "Style", "content": "What kind of performer are you? What's your vibe?"},
-          {"part": "Experience", "content": "Key highlights, not a resume"},
-          {"part": "Perfect For", "content": "What events are you ideal for?"}
+          {
+            "part": "Hook",
+            "content": "One sentence that captures your unique value"
+          },
+          {
+            "part": "Style",
+            "content": "What kind of performer are you? What's your vibe?"
+          },
+          {
+            "part": "Experience",
+            "content": "Key highlights, not a resume"
+          },
+          {
+            "part": "Perfect For",
+            "content": "What events are you ideal for?"
+          }
         ],
         "length": "100-200 words. Short enough to read, long enough to convince.",
         "example": "Maria Gonzalez brings Latin jazz to life. With 10+ years performing at weddings, festivals, and corporate events, she creates the perfect atmosphere for any celebration. Perfect for cocktail hours, dinner music, or dancing."
@@ -89,10 +127,26 @@
       "content": {
         "headline": "Step 2: Upload Media That Convinces",
         "media_priority": [
-          {"type": "Video", "importance": "Essential", "tip": "Even phone quality beats no video"},
-          {"type": "Audio", "importance": "If applicable", "tip": "Clean recordings, not live phone clips"},
-          {"type": "Photos", "importance": "Required", "tip": "Action shots > posed shots"},
-          {"type": "Press", "importance": "Nice to have", "tip": "Reviews, features, mentions"}
+          {
+            "type": "Video",
+            "importance": "Essential",
+            "tip": "Even phone quality beats no video"
+          },
+          {
+            "type": "Audio",
+            "importance": "If applicable",
+            "tip": "Clean recordings, not live phone clips"
+          },
+          {
+            "type": "Photos",
+            "importance": "Required",
+            "tip": "Action shots > posed shots"
+          },
+          {
+            "type": "Press",
+            "importance": "Nice to have",
+            "tip": "Reviews, features, mentions"
+          }
         ],
         "video_tips": [
           "30-60 seconds is ideal",
@@ -112,10 +166,22 @@
       "content": {
         "headline": "Step 3: Get Found in Searches",
         "categorization": [
-          {"field": "Primary Category", "example": "Musician, DJ, Speaker, Magician, etc."},
-          {"field": "Genres/Styles", "example": "Jazz, Rock, Acoustic, Comedy, etc."},
-          {"field": "Event Types", "example": "Weddings, Corporate, Private, Festivals"},
-          {"field": "Performance Style", "example": "Solo, Band, Interactive, Background"}
+          {
+            "field": "Primary Category",
+            "example": "Musician, DJ, Speaker, Magician, etc."
+          },
+          {
+            "field": "Genres/Styles",
+            "example": "Jazz, Rock, Acoustic, Comedy, etc."
+          },
+          {
+            "field": "Event Types",
+            "example": "Weddings, Corporate, Private, Festivals"
+          },
+          {
+            "field": "Performance Style",
+            "example": "Solo, Band, Interactive, Background"
+          }
         ],
         "tip": "The more specific your tags, the more qualified your leads.",
         "example_tags": "Jazz Trio | Wedding Ceremony | Cocktail Hour | Background Music"
@@ -131,14 +197,32 @@
       "content": {
         "headline": "Step 4: Show You're Bookable",
         "availability_options": [
-          {"option": "Calendar Integration", "desc": "Sync with Google/iCal to show open dates"},
-          {"option": "General Availability", "desc": "Weekends only, weekday evenings, etc."},
-          {"option": "Lead Time", "desc": "How far in advance do you need?"}
+          {
+            "option": "Calendar Integration",
+            "desc": "Sync with Google/iCal to show open dates"
+          },
+          {
+            "option": "General Availability",
+            "desc": "Weekends only, weekday evenings, etc."
+          },
+          {
+            "option": "Lead Time",
+            "desc": "How far in advance do you need?"
+          }
         ],
         "pricing_options": [
-          {"approach": "Starting at $X", "best_for": "Variable pricing based on event"},
-          {"approach": "Fixed packages", "best_for": "Clear, predictable offerings"},
-          {"approach": "Request quote", "best_for": "Custom/high-end work"}
+          {
+            "approach": "Starting at $X",
+            "best_for": "Variable pricing based on event"
+          },
+          {
+            "approach": "Fixed packages",
+            "best_for": "Clear, predictable offerings"
+          },
+          {
+            "approach": "Request quote",
+            "best_for": "Custom/high-end work"
+          }
         ],
         "warning": "No pricing info = fewer quality leads. At least give a range."
       },
@@ -153,11 +237,26 @@
       "content": {
         "headline": "Step 5: Build Credibility",
         "proof_elements": [
-          {"element": "Past Events", "action": "List notable performances with permission"},
-          {"element": "Testimonials", "action": "Request after every gig"},
-          {"element": "Client Names", "action": "Venues, companies, organizations"},
-          {"element": "Repeat Bookings", "action": "'Booked 5x at XYZ Venue'"},
-          {"element": "Credentials", "action": "Training, certifications, awards"}
+          {
+            "element": "Past Events",
+            "action": "List notable performances with permission"
+          },
+          {
+            "element": "Testimonials",
+            "action": "Request after every gig"
+          },
+          {
+            "element": "Client Names",
+            "action": "Venues, companies, organizations"
+          },
+          {
+            "element": "Repeat Bookings",
+            "action": "'Booked 5x at XYZ Venue'"
+          },
+          {
+            "element": "Credentials",
+            "action": "Training, certifications, awards"
+          }
         ],
         "ask_script": "I'd love to include a testimonial from you—would you mind sharing a sentence or two about our performance at your event?"
       },
@@ -200,8 +299,21 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-006"],
+    "leads_to": [
+      "HOWTO-006"
+    ],
     "follows": "HOWTO-004",
-    "related": ["HOOK-011", "HOWTO-017"]
+    "related": [
+      "HOOK-011",
+      "HOWTO-017"
+    ]
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 295,
+    "purpose": "tutorial",
+    "audio_required": true
   }
 }

@@ -13,11 +13,11 @@ describe('AICapabilities', () => {
   it('displays capabilities grouped by category', () => {
     render(<AICapabilities />);
     
-    // Check for category headers
-    expect(screen.getByText('COMMUNICATION')).toBeInTheDocument();
-    expect(screen.getByText('CONTENT')).toBeInTheDocument();
-    expect(screen.getByText('ANALYTICS')).toBeInTheDocument();
-    expect(screen.getByText('AUTOMATION')).toBeInTheDocument();
+    // Check for category headers (rendered in title case, CSS makes them uppercase visually)
+    expect(screen.getByText('Communication')).toBeInTheDocument();
+    expect(screen.getByText('Content')).toBeInTheDocument();
+    expect(screen.getByText('Analytics')).toBeInTheDocument();
+    expect(screen.getByText('Automation')).toBeInTheDocument();
   });
 
   it('displays all capability names', () => {

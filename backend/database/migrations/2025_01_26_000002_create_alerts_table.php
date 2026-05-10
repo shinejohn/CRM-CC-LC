@@ -49,13 +49,13 @@ return new class extends Migration
             $table->boolean('send_push')->default(false);
             
             // Relationships
-            $table->foreignId('sponsor_id')->nullable()->constrained('sponsors')->onDelete('set null');
-            $table->foreignId('sponsorship_id')->nullable()->constrained('sponsorships')->onDelete('set null');
+            $table->foreignUuid('sponsor_id')->nullable()->constrained('sponsors')->onDelete('set null');
+            $table->foreignUuid('sponsorship_id')->nullable()->constrained('sponsorships')->onDelete('set null');
             
             // Status & Approval
             $table->string('status', 20)->default('draft');
-            $table->foreignId('created_by')->nullable()->constrained('users');
-            $table->foreignId('approved_by')->nullable()->constrained('users');
+            $table->foreignUuid('created_by')->nullable()->constrained('users');
+            $table->foreignUuid('approved_by')->nullable()->constrained('users');
             $table->timestamp('approved_at')->nullable();
             
             // Scheduling

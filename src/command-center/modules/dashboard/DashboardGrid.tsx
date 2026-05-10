@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router';
 import {
   Mail, MessageSquare, CheckSquare, Calendar, FileText,
   Share2, Voicemail, BookOpen, PenTool, Megaphone,
-  Maximize2, ChevronDown, ChevronUp
+  Maximize2, ChevronDown, ChevronUp,
+  Newspaper, PartyPopper, CloudSun, Building, Mic2, ArrowRight,
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '../../core/ThemeProvider';
 import { ColorPicker } from '../../components/ui/ColorPicker';
 import { DashboardCard, Activity } from '@/types/command-center';
+import { useQuery } from '@tanstack/react-query';
+import { apiClient } from '@/services/api';
 
 interface DashboardCardItem {
   id: string;
@@ -64,6 +68,7 @@ export function DashboardGrid({ widgets = defaultCards, activities }: DashboardG
       transition={{ delay: 0.25 }}
       className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
     >
+      <TodaysPostCard isDarkMode={isDarkMode} />
       {widgets.map((card, index) => {
         const Icon = cardIcons[card.type] || FileText;
         const scheme = getColorScheme(card.id, card.defaultColor);
@@ -132,6 +137,74 @@ export function DashboardGrid({ widgets = defaultCards, activities }: DashboardG
           </motion.div>
         );
       })}
+    </motion.div>
+  );
+}
+
+const contentTypeConfig: Record<string, { icon: React.ComponentType<{ className?: string }>; label: string; dayLabel: string }> = {
+  news: { icon: Newspaper, label: 'Community News', dayLabel: 'Mon' },
+  events: { icon: PartyPopper, label: 'Upcoming Events', dayLabel: 'Tue' },
+  weather: { icon: CloudSun, label: 'Weather Update', dayLabel: 'Wed' },
+  downtown: { icon: Building, label: 'Downtown Highlights', dayLabel: 'Thu' },
+  spotlight: { icon: Mic2, label: 'Business Spotlight', dayLabel: 'Fri' },
+};
+
+function TodaysPostCard({ isDarkMode }: { isDarkMode: boolean }) {
+  const { data, isLoading } = useQuery({
+    queryKey: ['content-cards', 'today'],
+    queryFn: () => apiClient.get('/content-cards/today').then(r => r.data),
+    staleTime: 5 * 60 * 1000,
+    retry: false,
+  });
+
+  const card = data?.card;
+  const contentType = card?.content_type ?? data?.content_type ?? 'news';
+  const config = contentTypeConfig[contentType] ?? contentTypeConfig.news;
+  const TypeIcon = config.icon;
+
+  return (
+    <motion.div
+      initial={{ y: 20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 0.55 }}
+    >
+      <Card className={`border-2 border-indigo-200 dark:border-indigo-800/50 overflow-hidden shadow-lg hover:shadow-xl transition-all rounded-xl ${isDarkMode ? 'bg-gradient-to-br from-indigo-950/40 to-violet-950/40' : 'bg-gradient-to-br from-indigo-50 to-violet-50'}`}>
+        <div className={`p-4 flex items-center justify-between border-b ${isDarkMode ? 'border-white/10 bg-black/20' : 'border-white/50 bg-white/30'} backdrop-blur-sm`}>
+          <div className="flex items-center gap-3">
+            <div className={`p-2 rounded-lg ${isDarkMode ? 'bg-indigo-900/50' : 'bg-indigo-100'}`}>
+              <TypeIcon className={`w-5 h-5 ${isDarkMode ? 'text-indigo-300' : 'text-indigo-600'}`} />
+            </div>
+            <h3 className={`font-semibold ${isDarkMode ? 'text-indigo-200' : 'text-indigo-900'}`}>Today's Post</h3>
+          </div>
+          <span className={`text-xs font-medium px-2 py-1 rounded-full ${isDarkMode ? 'bg-indigo-900/50 text-indigo-300' : 'bg-indigo-100 text-indigo-700'}`}>
+            {config.dayLabel}
+          </span>
+        </div>
+        <CardContent className={`p-4 ${isDarkMode ? 'bg-black/20' : 'bg-white/60'}`}>
+          {isLoading ? (
+            <div className="animate-pulse space-y-2">
+              <div className={`h-4 rounded ${isDarkMode ? 'bg-white/10' : 'bg-gray-200'}`} />
+              <div className={`h-3 w-3/4 rounded ${isDarkMode ? 'bg-white/10' : 'bg-gray-200'}`} />
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <p className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                {config.label}
+              </p>
+              <p className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-gray-500'} line-clamp-2`}>
+                {card?.caption_text ?? 'Content will be generated for your community today.'}
+              </p>
+              <Link
+                to="/command-center/attract/content-cards"
+                className={`inline-flex items-center gap-1.5 text-xs font-medium ${isDarkMode ? 'text-indigo-400 hover:text-indigo-300' : 'text-indigo-600 hover:text-indigo-700'} transition-colors`}
+              >
+                View & Post
+                <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </motion.div>
   );
 }

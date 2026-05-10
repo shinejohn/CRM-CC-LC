@@ -13,8 +13,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('subscriber_events', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('subscriber_id')->constrained('subscribers')->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('subscriber_id')->constrained('subscribers')->onDelete('cascade');
             
             $table->string('event_type', 50); // signup, verify, login, open, click, unsubscribe
             

@@ -19,9 +19,9 @@ final class PostalGateway implements GatewayInterface
 
     public function __construct()
     {
-        $this->apiKey = config('services.postal.api_key');
-        $this->apiUrl = config('services.postal.api_url');
-        $this->serverKey = config('services.postal.server_key');
+        $this->apiKey = config('services.postal.server_key', '');
+        $this->apiUrl = config('services.postal.api_url', '');
+        $this->serverKey = config('services.postal.server_key', '');
     }
     
     public function getName(): string

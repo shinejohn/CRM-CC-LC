@@ -12,7 +12,14 @@ final class AnalyticsEvent extends Model
 {
     use HasUuids, HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'smb_id',
+        'community_id',
+        'event_type',
+        'event_category',
+        'properties',
+        'occurred_at',
+    ];
 
     protected $casts = [
         'properties' => 'array',

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOutboundCampaignRequest;
 use App\Models\EmailTemplate;
 use App\Models\OutboundCampaign;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ final class EmailCampaignController extends Controller
     /**
      * Create email campaign
      */
-    public function store(Request $request): JsonResponse
+    public function store(StoreOutboundCampaignRequest $request): JsonResponse
     {
         $request->merge(['type' => 'email']);
         return app(OutboundCampaignController::class)->store($request);

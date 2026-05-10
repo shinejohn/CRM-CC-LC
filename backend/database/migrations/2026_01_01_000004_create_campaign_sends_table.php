@@ -12,7 +12,7 @@ return new class extends Migration
             return;
         }
         Schema::create('campaign_sends', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('uuid')->unique();
             $table->foreignUuid('smb_id')->constrained('customers');
             $table->string('campaign_id', 50);
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->timestamp('complained_at')->nullable();
 
             $table->boolean('rvm_triggered')->default(false);
-            $table->foreignId('rvm_drop_id')->nullable();
+            $table->foreignUuid('rvm_drop_id')->nullable();
 
             $table->timestamps();
 
@@ -42,7 +42,7 @@ return new class extends Migration
             $table->index(['status', 'scheduled_for']);
             $table->index(['status', 'sent_at', 'opened_at']);
 
-            $table->foreign('campaign_id')->references('id')->on('campaigns');
+            // campaign_id is a string identifier, not a strict FK to campaigns table
         });
     }
 

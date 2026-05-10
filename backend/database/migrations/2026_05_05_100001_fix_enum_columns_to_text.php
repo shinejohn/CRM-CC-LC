@@ -51,6 +51,11 @@ return new class extends Migration
             ['customers', 'campaign_status'],
         ];
 
+        // This migration uses PostgreSQL-specific DDL; skip on other drivers (e.g. SQLite tests).
+        if (DB::getDriverName() !== 'pgsql') {
+            return;
+        }
+
         foreach ($enumColumns as [$table, $column]) {
             if (Schema::hasTable($table) && Schema::hasColumn($table, $column)) {
                 DB::statement("ALTER TABLE \"{$table}\" ALTER COLUMN \"{$column}\" TYPE text");

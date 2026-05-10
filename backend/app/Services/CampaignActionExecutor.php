@@ -15,7 +15,7 @@ use App\Models\PhoneScript;
 use App\Models\SmsTemplate;
 use Illuminate\Support\Facades\Log;
 
-final class CampaignActionExecutor
+class CampaignActionExecutor
 {
     public function __construct(
         protected SMSService $smsService,

@@ -30,12 +30,30 @@
       "content": {
         "headline": "Expert Directory Benefits",
         "benefits": [
-          {"benefit": "Listed as local expert", "detail": "In your specialty area"},
-          {"benefit": "Journalist access", "detail": "Writers contact you for quotes and stories"},
-          {"benefit": "Q&A features", "detail": "Answer community questions in your area"},
-          {"benefit": "Expert badge", "detail": "Verified expert status on your profile"},
-          {"benefit": "Article opportunities", "detail": "First access to write guest content"},
-          {"benefit": "Speaking invitations", "detail": "Events looking for local experts"}
+          {
+            "benefit": "Listed as local expert",
+            "detail": "In your specialty area"
+          },
+          {
+            "benefit": "Journalist access",
+            "detail": "Writers contact you for quotes and stories"
+          },
+          {
+            "benefit": "Q&A features",
+            "detail": "Answer community questions in your area"
+          },
+          {
+            "benefit": "Expert badge",
+            "detail": "Verified expert status on your profile"
+          },
+          {
+            "benefit": "Article opportunities",
+            "detail": "First access to write guest content"
+          },
+          {
+            "benefit": "Speaking invitations",
+            "detail": "Events looking for local experts"
+          }
         ]
       },
       "narration": "Here's how the expert directory works. You're listed as the local expert in your specialty area. Journalists contact you when they need quotes or stories on your topic. You answer community questions in your area of expertise. You get a verified expert badge on your profile. First access to write guest content and articles. And speaking invitations when events need local experts. You're already the expert—this makes it official.",
@@ -49,12 +67,30 @@
       "content": {
         "headline": "Areas We Need Experts In",
         "categories": [
-          {"category": "Home & Property", "examples": "Real estate, renovation, landscaping, cleaning"},
-          {"category": "Health & Wellness", "examples": "Fitness, nutrition, mental health, medical"},
-          {"category": "Finance & Business", "examples": "Accounting, investing, insurance, legal"},
-          {"category": "Food & Hospitality", "examples": "Restaurants, catering, events, wine/spirits"},
-          {"category": "Technology", "examples": "IT, cybersecurity, software, digital marketing"},
-          {"category": "Personal Services", "examples": "Beauty, auto, childcare, pets"}
+          {
+            "category": "Home & Property",
+            "examples": "Real estate, renovation, landscaping, cleaning"
+          },
+          {
+            "category": "Health & Wellness",
+            "examples": "Fitness, nutrition, mental health, medical"
+          },
+          {
+            "category": "Finance & Business",
+            "examples": "Accounting, investing, insurance, legal"
+          },
+          {
+            "category": "Food & Hospitality",
+            "examples": "Restaurants, catering, events, wine/spirits"
+          },
+          {
+            "category": "Technology",
+            "examples": "IT, cybersecurity, software, digital marketing"
+          },
+          {
+            "category": "Personal Services",
+            "examples": "Beauty, auto, childcare, pets"
+          }
         ]
       },
       "narration": "We need experts in many areas. Home and property: real estate, renovation, landscaping. Health and wellness: fitness, nutrition, mental health. Finance and business: accounting, investing, legal. Food and hospitality: restaurants, catering, events. Technology: IT, cybersecurity, digital marketing. Personal services: beauty, auto, childcare, pets. Whatever your specialty, there's likely a spot for you.",
@@ -68,11 +104,26 @@
       "content": {
         "headline": "Expert Qualifications",
         "qualifications": [
-          {"qual": "Experience", "requirement": "3+ years in your field"},
-          {"qual": "Local presence", "requirement": "Active business in our community"},
-          {"qual": "Good standing", "requirement": "Positive reputation, no major complaints"},
-          {"qual": "Availability", "requirement": "Willing to respond to media inquiries"},
-          {"qual": "Knowledge sharing", "requirement": "Interested in educating the community"}
+          {
+            "qual": "Experience",
+            "requirement": "3+ years in your field"
+          },
+          {
+            "qual": "Local presence",
+            "requirement": "Active business in our community"
+          },
+          {
+            "qual": "Good standing",
+            "requirement": "Positive reputation, no major complaints"
+          },
+          {
+            "qual": "Availability",
+            "requirement": "Willing to respond to media inquiries"
+          },
+          {
+            "qual": "Knowledge sharing",
+            "requirement": "Interested in educating the community"
+          }
         ],
         "note": "We verify credentials before adding experts"
       },
@@ -87,9 +138,21 @@
       "content": {
         "headline": "What Experts Experience",
         "examples": [
-          {"expert": "Financial planner", "result": "Quoted in 4 articles in 6 months", "impact": "Established as the go-to financial voice locally"},
-          {"expert": "Personal trainer", "result": "Monthly Q&A column", "impact": "Gym membership inquiries up 34%"},
-          {"expert": "Real estate agent", "result": "Invited to speak at 3 community events", "impact": "Name recognition throughout the community"}
+          {
+            "expert": "Financial planner",
+            "result": "Quoted in 4 articles in 6 months",
+            "impact": "Established as the go-to financial voice locally"
+          },
+          {
+            "expert": "Personal trainer",
+            "result": "Monthly Q&A column",
+            "impact": "Gym membership inquiries up 34%"
+          },
+          {
+            "expert": "Real estate agent",
+            "result": "Invited to speak at 3 community events",
+            "impact": "Name recognition throughout the community"
+          }
         ]
       },
       "narration": "What do experts experience? A financial planner was quoted in four articles in six months—now established as the go-to financial voice locally. A personal trainer got a monthly Q&A column—gym membership inquiries up thirty-four percent. A real estate agent was invited to speak at three community events—name recognition throughout the community. Expert status opens doors.",
@@ -131,6 +194,39 @@
   },
   "connections": {
     "follows": "HOOK-010",
-    "related": ["HOOK-010", "HOOK-012"]
+    "related": [
+      "HOOK-010",
+      "HOOK-012"
+    ]
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-011",
+    "landing_page_slug": "expert-registration",
+    "url": "/learn/expert-registration",
+    "template_id": "expert-application",
+    "template_name": "Quick Action",
+    "slide_count": 6,
+    "duration_seconds": 163,
+    "primary_cta": "get_started",
+    "secondary_cta": "learn_more",
+    "ai_persona": "Sarah",
+    "ai_tone": "Energetic, encouraging, action-oriented",
+    "ai_goal": "Get user to take the first free action immediately",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/expert-registration/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week8-hook",
+    "utm_content": "HOOK-011"
+  },
+  "template": {
+    "template_id": "expert-application",
+    "name": "Quick Action",
+    "slides": 6,
+    "duration": 163,
+    "purpose": "hook",
+    "audio_required": true
   }
 }

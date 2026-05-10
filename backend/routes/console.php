@@ -38,3 +38,9 @@ Schedule::job(new \App\Jobs\ReScrubStaleContactsJob)->weeklyOn(0, '02:00');
 Illuminate\Support\Facades\Schedule::job(new \App\Jobs\ProcessCampaignTimelines)->hourly();
 Illuminate\Support\Facades\Schedule::job(new \App\Jobs\CheckUnopenedEmails)->dailyAt('08:00');
 Illuminate\Support\Facades\Schedule::job(new \App\Jobs\ProcessBounces)->everyTenMinutes();
+
+// Marketing Kit — Daily content card generation
+Schedule::job(new \App\Jobs\GenerateDailyContentCards)->dailyAt('05:00');
+
+// Syndication — Weekly earnings recalculation and tier updates
+Schedule::job(new \App\Jobs\RecalculateSyndicationEarnings)->weeklyOn(1, '06:00');

@@ -13,7 +13,20 @@ final class ContentView extends Model
 {
     use HasUuids, HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'smb_id',
+        'content_slug',
+        'started_at',
+        'completed_at',
+        'completion_percentage',
+        'source_campaign_id',
+        'source_url',
+        'time_on_page_seconds',
+        'slides_viewed',
+        'approval_clicked',
+        'downloaded_pdf',
+        'shared',
+    ];
 
     protected $casts = [
         'started_at' => 'datetime',

@@ -61,6 +61,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (DB::getDriverName() !== 'pgsql') {
+            return;
+        }
+
         DB::statement('DROP TABLE IF EXISTS ops.queue_metrics CASCADE');
     }
 };

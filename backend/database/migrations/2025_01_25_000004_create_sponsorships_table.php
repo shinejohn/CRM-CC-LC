@@ -11,12 +11,12 @@ return new class extends Migration
     {
         Schema::dropIfExists('sponsorships');
         Schema::create('sponsorships', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('uuid')->unique()->default(DB::getDriverName() === 'pgsql' ? DB::raw('gen_random_uuid()') : null);
             if (Schema::hasTable('communities')) {
-                $table->foreignId('community_id')->nullable()->constrained('communities')->onDelete('cascade')->comment('NULL = all communities');
+                $table->foreignUuid('community_id')->nullable()->constrained('communities')->onDelete('cascade')->comment('NULL = all communities');
             } else {
-                $table->foreignId('community_id')->nullable();
+                $table->foreignUuid('community_id')->nullable();
             }
             
             // Client/Advertiser

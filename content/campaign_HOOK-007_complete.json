@@ -19,7 +19,18 @@
     "slide_count": 7,
     "duration_seconds": 150,
     "primary_cta": "upgrade_now",
-    "secondary_cta": "compare_plans"
+    "secondary_cta": "compare_plans",
+    "ai_tone": "Confident, results-driven, persuasive",
+    "ai_goal": "Upgrade user to a featured listing for maximum visibility",
+    "ai_persona": "Sarah",
+    "conversion_goal": "signup",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week5-hook",
+    "utm_content": "HOOK-007",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/featured-listing/audio/"
   },
   "slides": [
     {
@@ -46,12 +57,36 @@
       "content": {
         "headline": "Featured Listing Benefits",
         "benefits": [
-          {"icon": "star", "benefit": "Priority placement", "detail": "Top of search results and category"},
-          {"icon": "badge", "benefit": "Featured badge", "detail": "Instant trust signal"},
-          {"icon": "newspaper", "benefit": "News eligibility", "detail": "Considered for feature stories"},
-          {"icon": "chart", "benefit": "Enhanced analytics", "detail": "See who's viewing and why"},
-          {"icon": "megaphone", "benefit": "Social amplification", "detail": "Promoted to our audience"},
-          {"icon": "robot", "benefit": "AI priority", "detail": "Weighted higher in AI recommendations"}
+          {
+            "icon": "star",
+            "benefit": "Priority placement",
+            "detail": "Top of search results and category"
+          },
+          {
+            "icon": "badge",
+            "benefit": "Featured badge",
+            "detail": "Instant trust signal"
+          },
+          {
+            "icon": "newspaper",
+            "benefit": "News eligibility",
+            "detail": "Considered for feature stories"
+          },
+          {
+            "icon": "chart",
+            "benefit": "Enhanced analytics",
+            "detail": "See who's viewing and why"
+          },
+          {
+            "icon": "megaphone",
+            "benefit": "Social amplification",
+            "detail": "Promoted to our audience"
+          },
+          {
+            "icon": "robot",
+            "benefit": "AI priority",
+            "detail": "Weighted higher in AI recommendations"
+          }
         ]
       },
       "narration": "What does Featured get you? Priority placement—top of search results and your category. A Featured badge—an instant trust signal. News eligibility—you're considered for feature stories. Enhanced analytics—see who's viewing and why. Social amplification—promoted to our entire audience. And AI priority—weighted higher when AI makes recommendations.",
@@ -65,10 +100,26 @@
       "content": {
         "headline": "What Featured Businesses See",
         "metrics": [
-          {"metric": "View increase", "average": "+487%", "range": "3x-8x typical"},
-          {"metric": "Inquiry increase", "average": "+312%", "range": "Varies by category"},
-          {"metric": "AI recommendations", "average": "+5x", "note": "More AI mentions"},
-          {"metric": "ROI", "average": "12:1", "note": "Average return on upgrade cost"}
+          {
+            "metric": "View increase",
+            "average": "+487%",
+            "range": "3x-8x typical"
+          },
+          {
+            "metric": "Inquiry increase",
+            "average": "+312%",
+            "range": "Varies by category"
+          },
+          {
+            "metric": "AI recommendations",
+            "average": "+5x",
+            "note": "More AI mentions"
+          },
+          {
+            "metric": "ROI",
+            "average": "12:1",
+            "note": "Average return on upgrade cost"
+          }
         ]
       },
       "narration": "The results speak for themselves. Featured businesses see an average four hundred eighty-seven percent increase in views—three to eight times typical. Inquiries increase by three hundred twelve percent on average. AI recommendations increase by five times. And the ROI? Twelve to one on average. For every dollar spent on Featured, businesses see twelve back.",
@@ -101,8 +152,17 @@
       "content": {
         "headline": "Featured Pricing",
         "options": [
-          {"plan": "Monthly", "price": "${{monthly_price}}/mo", "commitment": "Cancel anytime"},
-          {"plan": "Annual", "price": "${{annual_price}}/mo", "savings": "Save {{annual_savings}}%", "commitment": "Billed annually"}
+          {
+            "plan": "Monthly",
+            "price": "${{monthly_price}}/mo",
+            "commitment": "Cancel anytime"
+          },
+          {
+            "plan": "Annual",
+            "price": "${{annual_price}}/mo",
+            "savings": "Save {{annual_savings}}%",
+            "commitment": "Billed annually"
+          }
         ],
         "includes": "All Featured benefits included in both plans",
         "guarantee": "30-day satisfaction guarantee"
@@ -157,7 +217,21 @@
   },
   "connections": {
     "leads_to": [],
-    "follows": ["EDU-005", "HOWTO-012"],
-    "related": ["HOOK-004", "HOOK-009"]
+    "follows": [
+      "EDU-005",
+      "HOWTO-012"
+    ],
+    "related": [
+      "HOOK-004",
+      "HOOK-009"
+    ]
+  },
+  "template": {
+    "template_id": "upgrade-offer",
+    "name": "Quick Action",
+    "slides": 7,
+    "duration": 180,
+    "purpose": "hook",
+    "audio_required": true
   }
 }

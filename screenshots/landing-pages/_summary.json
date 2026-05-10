@@ -1,0 +1,488 @@
+{
+  "total": 60,
+  "ok": 60,
+  "not_found": 0,
+  "errors": 0,
+  "results": [
+    {
+      "cid": "EDU-001",
+      "slug": "the-new-day",
+      "filename": "EDU-001_the-new-day.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "The New Day"
+    },
+    {
+      "cid": "EDU-002",
+      "slug": "ai-discovery",
+      "filename": "EDU-002_ai-discovery.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "AI Discovery"
+    },
+    {
+      "cid": "EDU-003",
+      "slug": "publishing-network",
+      "filename": "EDU-003_publishing-network.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "The Publishing Network"
+    },
+    {
+      "cid": "EDU-004",
+      "slug": "community-marketing",
+      "filename": "EDU-004_community-marketing.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Community Marketing"
+    },
+    {
+      "cid": "EDU-005",
+      "slug": "reputation-ai-age",
+      "filename": "EDU-005_reputation-ai-age.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Reputation in the AI Age"
+    },
+    {
+      "cid": "EDU-006",
+      "slug": "ai-employee",
+      "filename": "EDU-006_ai-employee.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Your AI Employee"
+    },
+    {
+      "cid": "EDU-007",
+      "slug": "ai-content",
+      "filename": "EDU-007_ai-content.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "AI Content Creation"
+    },
+    {
+      "cid": "EDU-008",
+      "slug": "voice-ai",
+      "filename": "EDU-008_voice-ai.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Voice AI for Business"
+    },
+    {
+      "cid": "EDU-009",
+      "slug": "local-seo-guide",
+      "filename": "EDU-009_local-seo-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Local SEO in 2025"
+    },
+    {
+      "cid": "EDU-010",
+      "slug": "ai-content-guide",
+      "filename": "EDU-010_ai-content-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "AI Content Guide"
+    },
+    {
+      "cid": "EDU-011",
+      "slug": "future-proof-guide",
+      "filename": "EDU-011_future-proof-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Future-Proof Your Business"
+    },
+    {
+      "cid": "EDU-012",
+      "slug": "data-privacy-guide",
+      "filename": "EDU-012_data-privacy-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Data Privacy for Small Business"
+    },
+    {
+      "cid": "EDU-013",
+      "slug": "competitive-intelligence",
+      "filename": "EDU-013_competitive-intelligence.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Competitive Intelligence"
+    },
+    {
+      "cid": "EDU-014",
+      "slug": "ai-customer-service",
+      "filename": "EDU-014_ai-customer-service.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "AI Customer Service"
+    },
+    {
+      "cid": "EDU-015",
+      "slug": "ai-employees-explained",
+      "filename": "EDU-015_ai-employees-explained.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "AI Employees Explained"
+    },
+    {
+      "cid": "HOOK-001",
+      "slug": "claim-your-listing",
+      "filename": "HOOK-001_claim-your-listing.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Claim Your Listing"
+    },
+    {
+      "cid": "HOOK-002",
+      "slug": "post-your-event",
+      "filename": "HOOK-002_post-your-event.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Post Your Event"
+    },
+    {
+      "cid": "HOOK-003",
+      "slug": "create-coupon",
+      "filename": "HOOK-003_create-coupon.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Create a Coupon"
+    },
+    {
+      "cid": "HOOK-004",
+      "slug": "get-featured",
+      "filename": "HOOK-004_get-featured.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Get Featured"
+    },
+    {
+      "cid": "HOOK-005",
+      "slug": "post-classified",
+      "filename": "HOOK-005_post-classified.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Post Classified"
+    },
+    {
+      "cid": "HOOK-006",
+      "slug": "crm-integration",
+      "filename": "HOOK-006_crm-integration.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "CRM Integration"
+    },
+    {
+      "cid": "HOOK-007",
+      "slug": "featured-listing",
+      "filename": "HOOK-007_featured-listing.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Featured Listing Upgrade"
+    },
+    {
+      "cid": "HOOK-008",
+      "slug": "newsletter-advertising",
+      "filename": "HOOK-008_newsletter-advertising.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Newsletter Advertising"
+    },
+    {
+      "cid": "HOOK-009",
+      "slug": "become-sponsor",
+      "filename": "HOOK-009_become-sponsor.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Sponsor Application"
+    },
+    {
+      "cid": "HOOK-010",
+      "slug": "article-advertising",
+      "filename": "HOOK-010_article-advertising.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Article Advertising"
+    },
+    {
+      "cid": "HOOK-011",
+      "slug": "expert-registration",
+      "filename": "HOOK-011_expert-registration.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Expert Registration"
+    },
+    {
+      "cid": "HOOK-012",
+      "slug": "influencer-program",
+      "filename": "HOOK-012_influencer-program.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Influencer Program"
+    },
+    {
+      "cid": "HOOK-013",
+      "slug": "social-posting-trial",
+      "filename": "HOOK-013_social-posting-trial.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Free Social Posting Trial"
+    },
+    {
+      "cid": "HOOK-014",
+      "slug": "holiday-events",
+      "filename": "HOOK-014_holiday-events.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Seasonal Promotion"
+    },
+    {
+      "cid": "HOOK-015",
+      "slug": "business-nomination",
+      "filename": "HOOK-015_business-nomination.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Business Nomination"
+    },
+    {
+      "cid": "HOWTO-001",
+      "slug": "command-center-basics",
+      "filename": "HOWTO-001_command-center-basics.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Command Center Basics"
+    },
+    {
+      "cid": "HOWTO-002",
+      "slug": "create-article",
+      "filename": "HOWTO-002_create-article.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Create Your First Article"
+    },
+    {
+      "cid": "HOWTO-003",
+      "slug": "event-creation-guide",
+      "filename": "HOWTO-003_event-creation-guide.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Event Creation Guide"
+    },
+    {
+      "cid": "HOWTO-004",
+      "slug": "premium-venue-setup",
+      "filename": "HOWTO-004_premium-venue-setup.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Premium Venue Setup"
+    },
+    {
+      "cid": "HOWTO-005",
+      "slug": "performer-registration",
+      "filename": "HOWTO-005_performer-registration.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Performer Registration"
+    },
+    {
+      "cid": "HOWTO-006",
+      "slug": "post-announcement",
+      "filename": "HOWTO-006_post-announcement.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Post Announcement"
+    },
+    {
+      "cid": "HOWTO-007",
+      "slug": "multi-community-guide",
+      "filename": "HOWTO-007_multi-community-guide.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "Multi-Community Guide"
+    },
+    {
+      "cid": "HOWTO-008",
+      "slug": "ai-sales-setup",
+      "filename": "HOWTO-008_ai-sales-setup.png",
+      "status": "OK",
+      "hasLandingPage": true,
+      "title": "AI Sales Setup"
+    },
+    {
+      "cid": "HOWTO-009",
+      "slug": "dashboard-tour",
+      "filename": "HOWTO-009_dashboard-tour.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Dashboard Tour"
+    },
+    {
+      "cid": "HOWTO-010",
+      "slug": "social-connection-guide",
+      "filename": "HOWTO-010_social-connection-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Social Connection Guide"
+    },
+    {
+      "cid": "HOWTO-011",
+      "slug": "email-marketing-setup",
+      "filename": "HOWTO-011_email-marketing-setup.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Email Marketing Setup"
+    },
+    {
+      "cid": "HOWTO-012",
+      "slug": "review-response-guide",
+      "filename": "HOWTO-012_review-response-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Review Response Guide"
+    },
+    {
+      "cid": "HOWTO-013",
+      "slug": "automated-posting-guide",
+      "filename": "HOWTO-013_automated-posting-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Automated Posting Guide"
+    },
+    {
+      "cid": "HOWTO-014",
+      "slug": "customer-survey-setup",
+      "filename": "HOWTO-014_customer-survey-setup.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Customer Survey Setup"
+    },
+    {
+      "cid": "HOWTO-015",
+      "slug": "analytics-guide",
+      "filename": "HOWTO-015_analytics-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Analytics Guide"
+    },
+    {
+      "cid": "HOWTO-016",
+      "slug": "lead-capture-guide",
+      "filename": "HOWTO-016_lead-capture-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Lead Capture Guide"
+    },
+    {
+      "cid": "HOWTO-017",
+      "slug": "appointment-booking-setup",
+      "filename": "HOWTO-017_appointment-booking-setup.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Appointment Booking Setup"
+    },
+    {
+      "cid": "HOWTO-018",
+      "slug": "invoice-automation-guide",
+      "filename": "HOWTO-018_invoice-automation-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Invoice Automation Guide"
+    },
+    {
+      "cid": "HOWTO-019",
+      "slug": "sms-marketing-guide",
+      "filename": "HOWTO-019_sms-marketing-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "SMS Marketing Guide"
+    },
+    {
+      "cid": "HOWTO-020",
+      "slug": "faq-builder-guide",
+      "filename": "HOWTO-020_faq-builder-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "FAQ Builder Guide"
+    },
+    {
+      "cid": "HOWTO-021",
+      "slug": "google-integration-guide",
+      "filename": "HOWTO-021_google-integration-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Google Integration Guide"
+    },
+    {
+      "cid": "HOWTO-022",
+      "slug": "workflow-automation-guide",
+      "filename": "HOWTO-022_workflow-automation-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Workflow Automation Guide"
+    },
+    {
+      "cid": "HOWTO-023",
+      "slug": "report-generation-guide",
+      "filename": "HOWTO-023_report-generation-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Report Generation Guide"
+    },
+    {
+      "cid": "HOWTO-024",
+      "slug": "customer-segmentation-guide",
+      "filename": "HOWTO-024_customer-segmentation-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Customer Segmentation Guide"
+    },
+    {
+      "cid": "HOWTO-025",
+      "slug": "ai-training-guide",
+      "filename": "HOWTO-025_ai-training-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "AI Training Guide"
+    },
+    {
+      "cid": "HOWTO-026",
+      "slug": "integration-marketplace",
+      "filename": "HOWTO-026_integration-marketplace.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Integration Marketplace"
+    },
+    {
+      "cid": "HOWTO-027",
+      "slug": "team-collaboration-guide",
+      "filename": "HOWTO-027_team-collaboration-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Team Collaboration Guide"
+    },
+    {
+      "cid": "HOWTO-028",
+      "slug": "content-calendar-guide",
+      "filename": "HOWTO-028_content-calendar-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Content Calendar Guide"
+    },
+    {
+      "cid": "HOWTO-029",
+      "slug": "roi-tracking-guide",
+      "filename": "HOWTO-029_roi-tracking-guide.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "ROI Tracking Guide"
+    },
+    {
+      "cid": "HOWTO-030",
+      "slug": "success-playbook",
+      "filename": "HOWTO-030_success-playbook.png",
+      "status": "OK",
+      "hasLandingPage": false,
+      "title": "Success Playbook"
+    }
+  ]
+}

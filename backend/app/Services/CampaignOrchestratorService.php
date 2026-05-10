@@ -70,30 +70,30 @@ final class CampaignOrchestratorService implements CampaignOrchestratorInterface
     public function executeActionsForCustomer(Customer $customer): array
     {
         $results = [];
-        
+
         // Get all active timeline progress for this customer
         $progressRecords = CustomerTimelineProgress::where('customer_id', $customer->id)
             ->where('status', 'active')
             ->get();
-            
+
         foreach ($progressRecords as $progress) {
-            $dayResults = $this->executeActionsForDay($progress);
+            $dayResults = $this->executeActionsForDay($progress, $customer);
             $results = array_merge($results, $dayResults);
-            
+
             // Check if we should advance to next day
             $this->checkAndAdvanceDay($progress);
         }
-        
+
         return $results;
     }
     
     /**
      * Execute actions for a specific day in the timeline.
      */
-    protected function executeActionsForDay(CustomerTimelineProgress $progress): array
+    protected function executeActionsForDay(CustomerTimelineProgress $progress, ?Customer $customer = null): array
     {
         $results = [];
-        $customer = $progress->customer;
+        $customer = $customer ?? $progress->customer;
         $timeline = $progress->timeline;
         
         // Get actions for current day

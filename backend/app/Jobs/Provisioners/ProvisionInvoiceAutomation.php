@@ -20,7 +20,7 @@ final class ProvisionInvoiceAutomation implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public function __construct(
-        public int $taskId
+        public string $taskId
     ) {
     }
 

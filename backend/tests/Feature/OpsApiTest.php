@@ -25,6 +25,7 @@ class OpsApiTest extends TestCase
 
         // Create municipal admin record
         DB::table('municipal_admins')->insert([
+            'id' => (string) \Illuminate\Support\Str::uuid(),
             'user_id' => $admin->id,
             'community_id' => $community->id,
             'is_active' => true,

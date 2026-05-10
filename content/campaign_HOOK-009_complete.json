@@ -30,12 +30,30 @@
       "content": {
         "headline": "What Sponsors Receive",
         "benefits": [
-          {"benefit": "Logo on all event marketing", "reach": "Emails, flyers, social posts"},
-          {"benefit": "Verbal recognition at events", "reach": "MC shoutouts, signage"},
-          {"benefit": "Featured in newsletter", "reach": "10,000+ subscribers"},
-          {"benefit": "News article mention", "reach": "Event coverage includes sponsors"},
-          {"benefit": "Social media features", "reach": "Dedicated sponsor posts"},
-          {"benefit": "Community goodwill", "reach": "Associated with events people love"}
+          {
+            "benefit": "Logo on all event marketing",
+            "reach": "Emails, flyers, social posts"
+          },
+          {
+            "benefit": "Verbal recognition at events",
+            "reach": "MC shoutouts, signage"
+          },
+          {
+            "benefit": "Featured in newsletter",
+            "reach": "10,000+ subscribers"
+          },
+          {
+            "benefit": "News article mention",
+            "reach": "Event coverage includes sponsors"
+          },
+          {
+            "benefit": "Social media features",
+            "reach": "Dedicated sponsor posts"
+          },
+          {
+            "benefit": "Community goodwill",
+            "reach": "Associated with events people love"
+          }
         ]
       },
       "narration": "What do sponsors receive? Logo on all event marketing—emails, flyers, social posts. Verbal recognition at events with MC shoutouts and signage. Featured in our newsletter reaching ten thousand plus subscribers. Mention in news article coverage. Dedicated social media features. And most importantly: community goodwill. You're associated with events people love.",
@@ -49,9 +67,24 @@
       "content": {
         "headline": "Choose Your Level",
         "levels": [
-          {"level": "Community Partner", "commitment": "Event-specific", "investment": "$$", "benefits": "Event recognition + newsletter mention"},
-          {"level": "Season Sponsor", "commitment": "3 months", "investment": "$$$", "benefits": "All events + ongoing features"},
-          {"level": "Premier Sponsor", "commitment": "Annual", "investment": "$$$$", "benefits": "Maximum visibility + exclusivity options"}
+          {
+            "level": "Community Partner",
+            "commitment": "Event-specific",
+            "investment": "$$",
+            "benefits": "Event recognition + newsletter mention"
+          },
+          {
+            "level": "Season Sponsor",
+            "commitment": "3 months",
+            "investment": "$$$",
+            "benefits": "All events + ongoing features"
+          },
+          {
+            "level": "Premier Sponsor",
+            "commitment": "Annual",
+            "investment": "$$$$",
+            "benefits": "Maximum visibility + exclusivity options"
+          }
         ]
       },
       "narration": "Choose your sponsorship level. Community Partner: event-specific sponsorship, recognition at that event plus newsletter mention. Season Sponsor: three-month commitment, recognition at all events plus ongoing features. Premier Sponsor: annual commitment with maximum visibility and exclusivity options in your category. We'll work with your budget.",
@@ -65,10 +98,26 @@
       "content": {
         "headline": "Sponsorship Opportunities Coming Up",
         "events": [
-          {"event": "Monthly Community Market", "attendance": "500-800 attendees", "available": "2 sponsor slots"},
-          {"event": "Summer Concert Series", "attendance": "1,000+ per event", "available": "Title sponsor available"},
-          {"event": "Business Awards Gala", "attendance": "300 business leaders", "available": "Category sponsors needed"},
-          {"event": "Community 5K", "attendance": "400 runners + spectators", "available": "Multiple levels available"}
+          {
+            "event": "Monthly Community Market",
+            "attendance": "500-800 attendees",
+            "available": "2 sponsor slots"
+          },
+          {
+            "event": "Summer Concert Series",
+            "attendance": "1,000+ per event",
+            "available": "Title sponsor available"
+          },
+          {
+            "event": "Business Awards Gala",
+            "attendance": "300 business leaders",
+            "available": "Category sponsors needed"
+          },
+          {
+            "event": "Community 5K",
+            "attendance": "400 runners + spectators",
+            "available": "Multiple levels available"
+          }
         ]
       },
       "narration": "Here are sponsorship opportunities coming up. Monthly Community Market: five hundred to eight hundred attendees, two sponsor slots available. Summer Concert Series: over a thousand per event, title sponsorship available. Business Awards Gala: three hundred business leaders, category sponsors needed. Community 5K: four hundred runners plus spectators, multiple levels available. Pick the events that fit your brand.",
@@ -82,8 +131,16 @@
       "content": {
         "headline": "What Sponsors Experience",
         "testimonials": [
-          {"sponsor": "Local bank", "quote": "Best marketing spend we make. The goodwill is worth more than any ad.", "result": "3-year continuous sponsor"},
-          {"sponsor": "Restaurant owner", "quote": "People come in saying 'I saw you at the market.' That never happens with online ads.", "result": "47% increase in foot traffic during sponsorship months"}
+          {
+            "sponsor": "Local bank",
+            "quote": "Best marketing spend we make. The goodwill is worth more than any ad.",
+            "result": "3-year continuous sponsor"
+          },
+          {
+            "sponsor": "Restaurant owner",
+            "quote": "People come in saying 'I saw you at the market.' That never happens with online ads.",
+            "result": "47% increase in foot traffic during sponsorship months"
+          }
         ]
       },
       "narration": "What do sponsors experience? A local bank told us: 'Best marketing spend we make. The goodwill is worth more than any ad.' They've been a continuous sponsor for three years. A restaurant owner said: 'People come in saying I saw you at the market. That never happens with online ads.' They saw a forty-seven percent increase in foot traffic during sponsorship months. This is marketing that builds real community connection.",
@@ -97,11 +154,26 @@
       "content": {
         "headline": "How to Become a Sponsor",
         "steps": [
-          {"step": 1, "action": "Submit application (2 minutes)"},
-          {"step": 2, "action": "We'll review and contact you within 48 hours"},
-          {"step": 3, "action": "Choose events and finalize level"},
-          {"step": 4, "action": "Provide logo and messaging"},
-          {"step": 5, "action": "Start appearing at events and in marketing"}
+          {
+            "step": 1,
+            "action": "Submit application (2 minutes)"
+          },
+          {
+            "step": 2,
+            "action": "We'll review and contact you within 48 hours"
+          },
+          {
+            "step": 3,
+            "action": "Choose events and finalize level"
+          },
+          {
+            "step": 4,
+            "action": "Provide logo and messaging"
+          },
+          {
+            "step": 5,
+            "action": "Start appearing at events and in marketing"
+          }
         ]
       },
       "narration": "How to become a sponsor. Step one: submit the application—takes two minutes. Step two: we'll review and contact you within forty-eight hours. Step three: choose your events and finalize your level. Step four: provide your logo and key messaging. Step five: start appearing at events and in all related marketing. Simple process, significant impact.",
@@ -142,6 +214,39 @@
   },
   "connections": {
     "follows": "HOOK-008",
-    "related": ["HOOK-008", "HOOK-010"]
+    "related": [
+      "HOOK-008",
+      "HOOK-010"
+    ]
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-009",
+    "landing_page_slug": "become-sponsor",
+    "url": "/learn/become-sponsor",
+    "template_id": "sponsor-application",
+    "template_name": "Quick Action",
+    "slide_count": 7,
+    "duration_seconds": 185,
+    "primary_cta": "get_started",
+    "secondary_cta": "learn_more",
+    "ai_persona": "Sarah",
+    "ai_tone": "Energetic, encouraging, action-oriented",
+    "ai_goal": "Get user to take the first free action immediately",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/become-sponsor/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week7-hook",
+    "utm_content": "HOOK-009"
+  },
+  "template": {
+    "template_id": "sponsor-application",
+    "name": "Quick Action",
+    "slides": 7,
+    "duration": 185,
+    "purpose": "hook",
+    "audio_required": true
   }
 }

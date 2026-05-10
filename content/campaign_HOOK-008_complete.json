@@ -48,10 +48,26 @@
       "content": {
         "headline": "Choose Your Visibility",
         "options": [
-          {"option": "Featured Sponsor", "placement": "Top of newsletter", "visibility": "100% of opens see it first"},
-          {"option": "Section Sponsor", "placement": "Top of specific section", "visibility": "Contextual relevance"},
-          {"option": "Display Ad", "placement": "In-content placement", "visibility": "Natural integration"},
-          {"option": "Event Highlight", "placement": "Events section", "visibility": "Perfect for promotions"}
+          {
+            "option": "Featured Sponsor",
+            "placement": "Top of newsletter",
+            "visibility": "100% of opens see it first"
+          },
+          {
+            "option": "Section Sponsor",
+            "placement": "Top of specific section",
+            "visibility": "Contextual relevance"
+          },
+          {
+            "option": "Display Ad",
+            "placement": "In-content placement",
+            "visibility": "Natural integration"
+          },
+          {
+            "option": "Event Highlight",
+            "placement": "Events section",
+            "visibility": "Perfect for promotions"
+          }
         ]
       },
       "narration": "Choose your visibility level. Featured Sponsor: top of the entire newsletter, one hundred percent of opens see it first. Section Sponsor: top of a specific section like events or business news—contextual relevance. Display Ad: in-content placement with natural integration. Event Highlight: perfect if you're promoting an event or time-limited offer.",
@@ -84,9 +100,18 @@
       "content": {
         "headline": "What Other Advertisers See",
         "results": [
-          {"business": "Local restaurant", "result": "147 clicks, 23 reservations from one ad"},
-          {"business": "Home services", "result": "89 clicks, 12 quote requests"},
-          {"business": "Retail shop", "result": "234 clicks, coupon redeemed 41 times"}
+          {
+            "business": "Local restaurant",
+            "result": "147 clicks, 23 reservations from one ad"
+          },
+          {
+            "business": "Home services",
+            "result": "89 clicks, 12 quote requests"
+          },
+          {
+            "business": "Retail shop",
+            "result": "234 clicks, coupon redeemed 41 times"
+          }
         ],
         "average_cpc": "Average cost per click: $0.47 (Google Ads local avg: $2-5)"
       },
@@ -129,6 +154,39 @@
   },
   "connections": {
     "follows": "HOOK-007",
-    "related": ["HOOK-009", "HOOK-010"]
+    "related": [
+      "HOOK-009",
+      "HOOK-010"
+    ]
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-008",
+    "landing_page_slug": "newsletter-advertising",
+    "url": "/learn/newsletter-advertising",
+    "template_id": "advertising-offer",
+    "template_name": "Quick Action",
+    "slide_count": 6,
+    "duration_seconds": 155,
+    "primary_cta": "get_started",
+    "secondary_cta": "learn_more",
+    "ai_persona": "Sarah",
+    "ai_tone": "Energetic, encouraging, action-oriented",
+    "ai_goal": "Get user to take the first free action immediately",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/newsletter-advertising/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week7-hook",
+    "utm_content": "HOOK-008"
+  },
+  "template": {
+    "template_id": "advertising-offer",
+    "name": "Quick Action",
+    "slides": 6,
+    "duration": 155,
+    "purpose": "hook",
+    "audio_required": true
   }
 }

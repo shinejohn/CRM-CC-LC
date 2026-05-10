@@ -218,5 +218,35 @@
       "EDU-002",
       "EDU-005"
     ]
+  },
+  "landing_page": {
+    "campaign_id": "EDU-009",
+    "landing_page_slug": "voice-ai-guide",
+    "url": "/learn/voice-ai-guide",
+    "template_id": "educational",
+    "template_name": "Educational Content",
+    "slide_count": 7,
+    "duration_seconds": 205,
+    "primary_cta": "explore_more",
+    "secondary_cta": "download_article",
+    "ai_persona": "Sarah",
+    "ai_tone": "Warm, informative, empowering",
+    "ai_goal": "Educate and build understanding of the concept",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/voice-ai-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "education",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week7-educational",
+    "utm_content": "EDU-009"
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 205,
+    "purpose": "education",
+    "audio_required": true
   }
 }

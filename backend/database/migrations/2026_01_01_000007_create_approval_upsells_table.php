@@ -12,8 +12,8 @@ return new class extends Migration
             return;
         }
         Schema::create('approval_upsells', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('approval_id')->constrained();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('approval_id')->constrained();
             $table->string('upsell_service_type', 100);
 
             $table->timestamp('offered_at');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('accepted_at')->nullable();
             $table->timestamp('declined_at')->nullable();
 
-            $table->foreignId('resulting_approval_id')->nullable()->constrained('approvals');
+            $table->foreignUuid('resulting_approval_id')->nullable()->constrained('approvals');
 
             $table->index('approval_id');
         });

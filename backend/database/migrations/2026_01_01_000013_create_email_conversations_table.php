@@ -12,7 +12,7 @@ return new class extends Migration
             return;
         }
         Schema::create('email_conversations', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('smb_id')->nullable();
 
             $table->string('direction', 10);
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text('body_html')->nullable();
 
             $table->string('in_reply_to')->nullable();
-            $table->foreignId('campaign_send_id')->nullable()->constrained();
+            $table->foreignUuid('campaign_send_id')->nullable()->constrained();
 
             $table->string('intent', 100)->nullable();
             $table->string('sentiment', 50)->nullable();

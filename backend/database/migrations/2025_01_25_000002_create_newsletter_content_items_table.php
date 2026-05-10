@@ -9,8 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('newsletter_content_items', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('newsletter_id')->constrained('newsletters')->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('newsletter_id')->constrained('newsletters')->onDelete('cascade');
             
             // Content reference
             $table->string('content_type', 50)->comment('article, event, sponsor, announcement');

@@ -14,7 +14,7 @@ return new class extends Migration
     {
         if (!Schema::hasTable('emergency_broadcasts')) {
             Schema::create('emergency_broadcasts', function (Blueprint $table) {
-                $table->id();
+                $table->uuid('id')->primary();
                 $table->uuid('uuid')->unique()->default(DB::getDriverName() === 'pgsql' ? DB::raw('gen_random_uuid()') : null);
                 
                 // Content
@@ -38,7 +38,7 @@ return new class extends Migration
                 $table->boolean('send_push')->default(true);
                 $table->boolean('send_voice')->default(false);
                 
-                $table->foreignId('authorized_by')->constrained('users')->onDelete('restrict');
+                $table->foreignUuid('authorized_by')->constrained('users')->onDelete('restrict');
                 $table->string('authorizer_name', 255);
                 $table->string('authorizer_title', 255);
                 $table->string('authorization_code', 100);

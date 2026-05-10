@@ -111,19 +111,12 @@ final class EmailFollowupService
             return;
         }
 
-        // Get the original campaign
+        // Get the original campaign (may be null if campaign_id is a string reference)
         $campaign = $campaignSend->campaign ?? null;
 
-        if (!$campaign) {
-            Log::warning("EmailFollowupService: No campaign found for resend", [
-                'campaign_send_id' => $campaignSend->id,
-            ]);
-            return;
-        }
-
         // Modify subject to indicate follow-up
-        $originalSubject = $campaignSend->subject ?? $campaign->subject ?? 'Follow-up';
-        $followupSubject = "Re: {$originalSubject}";
+        $originalSubject = $campaignSend->subject ?? ($campaign->subject ?? 'Follow-up');
+        $followupSubject = "Follow-up: {$originalSubject}";
 
         // Create a new campaign send record for tracking
         $newCampaignSend = CampaignSend::create([
@@ -167,34 +160,37 @@ final class EmailFollowupService
      */
     protected function sendSMSFollowup(Customer $customer, CampaignSend $campaignSend): void
     {
-        if (!$customer->canContactViaSMS()) {
-            Log::warning("EmailFollowupService: Cannot send SMS - customer opted out", [
-                'customer_id' => $customer->id,
-            ]);
-            return;
-        }
-
         $campaign = $campaignSend->campaign ?? null;
         $campaignTitle = $campaign->title ?? 'our recent email';
 
         $message = "Hi {$customer->business_name}! We noticed you haven't opened our email about {$campaignTitle}. Want to learn more? Reply YES for more info!";
 
-        // Dispatch SMS job
-        // Note: Adapt this to your SMS sending implementation
-        Log::info("EmailFollowupService: Sending SMS follow-up", [
-            'customer_id' => $customer->id,
-            'campaign_send_id' => $campaignSend->id,
-        ]);
+        $status = 'completed';
+        $description = "Sent SMS follow-up for unopened email";
 
-        // Create interaction record
+        if (!$customer->canContactViaSMS()) {
+            Log::warning("EmailFollowupService: Cannot send SMS - customer not opted in or no phone", [
+                'customer_id' => $customer->id,
+            ]);
+            $status = 'skipped';
+            $description = "SMS follow-up skipped - customer not opted in or no phone on file";
+        } else {
+            // Dispatch SMS job
+            Log::info("EmailFollowupService: Sending SMS follow-up", [
+                'customer_id' => $customer->id,
+                'campaign_send_id' => $campaignSend->id,
+            ]);
+        }
+
+        // Create interaction record regardless of send status
         Interaction::create([
             'customer_id' => $customer->id,
             'tenant_id' => $customer->tenant_id,
             'type' => 'sms_followup',
             'title' => 'SMS Follow-up: Unopened Email',
-            'description' => "Sent SMS follow-up for unopened email",
-            'status' => 'completed',
-            'completed_at' => now(),
+            'description' => $description,
+            'status' => $status,
+            'completed_at' => $status === 'completed' ? now() : null,
             'metadata' => [
                 'campaign_send_id' => $campaignSend->id,
                 'strategy' => 'send_sms',

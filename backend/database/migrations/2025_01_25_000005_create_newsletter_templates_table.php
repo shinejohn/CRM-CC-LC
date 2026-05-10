@@ -10,7 +10,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('newsletter_templates', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             
             // Identity
             $table->string('slug', 100)->unique();

@@ -92,15 +92,15 @@ final class SMSIntentClassifier
             foreach ($config['patterns'] as $pattern) {
                 if (str_contains($message, $pattern)) {
                     $matches++;
-                    // Longer patterns get higher weight
-                    $score += (strlen($pattern) / 10) + 0.1;
+                    // Longer patterns get higher weight, with a floor so short patterns still score well
+                    $score += min(strlen($pattern) / 10, 0.5) + 0.5;
                 }
             }
             
             if ($matches > 0) {
                 // Base confidence from config, adjusted by match quality
                 $baseConfidence = $config['confidence'];
-                $matchQuality = min($score / max($matches, 1), 1.0);
+                $matchQuality = min($score, 1.0);
                 $scores[$intent] = $baseConfidence * $matchQuality;
             }
         }

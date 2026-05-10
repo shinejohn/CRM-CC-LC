@@ -3,12 +3,30 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\AiPersonality;
 use App\Models\Customer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 
 class PersonalityApiTest extends TestCase
 {
     use RefreshDatabase; protected function setUp(): void { parent::setUp(); $this->createAndAuthenticateUser(); }
+
+    private function createPersonality(array $overrides = []): AiPersonality
+    {
+        return AiPersonality::create(array_merge([
+            'tenant_id' => '00000000-0000-0000-0000-000000000000',
+            'name' => 'Test Personality',
+            'slug' => 'test-personality-' . Str::random(6),
+            'identity' => 'Test Identity',
+            'persona_description' => 'A helpful assistant',
+            'communication_style' => 'professional',
+            'system_prompt' => 'You are a helpful assistant.',
+            'description' => 'Test description',
+            'is_active' => true,
+            'priority' => 0,
+        ], $overrides));
+    }
 
     public function test_can_list_personalities(): void
     {
@@ -27,6 +45,10 @@ class PersonalityApiTest extends TestCase
         $data = [
             'name' => 'Test Personality',
             'description' => 'Test description',
+            'identity' => 'Test Identity',
+            'persona_description' => 'A helpful assistant',
+            'communication_style' => 'professional',
+            'system_prompt' => 'You are a helpful assistant.',
             'tenant_id' => '00000000-0000-0000-0000-000000000000',
         ];
 
@@ -38,28 +60,27 @@ class PersonalityApiTest extends TestCase
 
     public function test_can_show_personality(): void
     {
-        // Assuming personality ID exists or can be created
-        $personalityId = 'test-personality-id';
+        $personality = $this->createPersonality();
 
-        $response = $this->getJson("/api/v1/personalities/{$personalityId}");
+        $response = $this->getJson("/api/v1/personalities/{$personality->id}");
 
-        // Adjust based on actual implementation
         $response->assertStatus(200);
     }
 
     public function test_can_assign_personality_to_customer(): void
     {
+        $personality = $this->createPersonality();
         $customer = Customer::factory()->create();
 
         $data = [
             'customer_id' => $customer->id,
-            'personality_id' => 'test-personality-id',
+            'personality_id' => $personality->id,
             'tenant_id' => '00000000-0000-0000-0000-000000000000',
         ];
 
         $response = $this->postJson('/api/v1/personalities/assign', $data);
 
-        $response->assertStatus(200)
+        $response->assertStatus(201)
             ->assertJsonStructure(['data', 'message']);
     }
 
@@ -75,13 +96,15 @@ class PersonalityApiTest extends TestCase
 
     public function test_can_generate_personality_response(): void
     {
+        $personality = $this->createPersonality();
+
         $data = [
-            'personality_id' => 'test-personality-id',
+            'personality_id' => $personality->id,
             'message' => 'Test message',
             'context' => [],
         ];
 
-        $response = $this->postJson('/api/v1/personalities/test-personality-id/generate-response', $data);
+        $response = $this->postJson("/api/v1/personalities/{$personality->id}/generate-response", $data);
 
         // May return 200 or 500 depending on AI service availability
         $this->assertContains($response->status(), [200, 500]);

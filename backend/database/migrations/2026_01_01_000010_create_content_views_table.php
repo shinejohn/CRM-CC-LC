@@ -13,7 +13,7 @@ return new class extends Migration
             return;
         }
         Schema::create('content_views', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('smb_id')->nullable();
             $table->string('content_slug');
 

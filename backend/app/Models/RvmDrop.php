@@ -12,7 +12,24 @@ final class RvmDrop extends Model
 {
     use HasUuids, HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'uuid',
+        'smb_id',
+        'campaign_send_id',
+        'phone',
+        'script',
+        'voice_persona',
+        'scheduled_for',
+        'sent_at',
+        'provider',
+        'provider_message_id',
+        'status',
+        'delivered_at',
+        'delivery_status',
+        'callback_received',
+        'callback_at',
+        'callback_id',
+    ];
 
     protected $casts = [
         'scheduled_for' => 'datetime',

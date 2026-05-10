@@ -163,6 +163,56 @@ final class AccountManagerService
     }
     
     /**
+     * Get marketing kit drip touchpoints for the Manifest Destiny sequence.
+     *
+     * @return array<int, array{type: string, day: int, subject: string, tool_slug: string, description: string}>
+     */
+    public function getMarketingKitTouchpoints(): array
+    {
+        return [
+            ['type' => 'marketing_kit_branded_image', 'day' => 3, 'subject' => 'I created a professional branded image for {business_name}', 'tool_slug' => 'branded-image', 'description' => 'A custom branded image featuring your business name, community, and website — ready to share anywhere.'],
+            ['type' => 'marketing_kit_email_signature', 'day' => 5, 'subject' => 'Here is a professional email signature for your team', 'tool_slug' => 'email-signature', 'description' => 'A polished email signature with your business info, links, and branding. Copy it into any email client.'],
+            ['type' => 'marketing_kit_social_headers', 'day' => 8, 'subject' => 'I made social media headers for all your platforms', 'tool_slug' => 'social-headers', 'description' => 'Custom header images sized for Facebook, X, Instagram, and TikTok — download and upload in seconds.'],
+            ['type' => 'marketing_kit_social_posts', 'day' => 12, 'subject' => 'Here are ready-to-post social graphics for this week', 'tool_slug' => 'social-posts', 'description' => 'Eye-catching 1080x1080 social post graphics with captions and hashtags. Just download and share.'],
+            ['type' => 'marketing_kit_content_cards', 'day' => 15, 'subject' => 'Here is today\'s community content — share it with your followers', 'tool_slug' => 'content-cards', 'description' => 'Fresh community content ready to post. News, events, and more — with your brand attached.'],
+            ['type' => 'marketing_kit_website_widget', 'day' => 20, 'subject' => 'Add this community widget to your website', 'tool_slug' => 'website-widget', 'description' => 'An embeddable widget showing community news, events, and weather. One line of code to install.'],
+            ['type' => 'marketing_kit_syndication_invite', 'day' => 25, 'subject' => 'You could earn money sharing community content', 'tool_slug' => 'syndication', 'description' => 'If you manage a Facebook group or community page, become a syndication partner and earn revenue by sharing sponsored content.'],
+        ];
+    }
+
+    /**
+     * Get the marketing kit touchpoint for a given Manifest Destiny day.
+     */
+    public function getMarketingKitTouchpointForDay(int $day): ?array
+    {
+        foreach ($this->getMarketingKitTouchpoints() as $touchpoint) {
+            if ($touchpoint['day'] === $day) {
+                return $touchpoint;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Build the marketing kit email link for a touchpoint.
+     */
+    public function buildMarketingKitLink(array $touchpoint): string
+    {
+        $slug = $touchpoint['tool_slug'];
+
+        if ($slug === 'content-cards') {
+            return config('app.frontend_url', config('app.url')) . '/command-center/attract/content-cards';
+        }
+
+        if ($slug === 'syndication') {
+            return config('app.frontend_url', config('app.url')) . '/command-center/syndication';
+        }
+
+        return config('app.frontend_url', config('app.url')) . '/command-center/attract/marketing-kit/' . $slug;
+    }
+
+    /**
      * Generate AI response as AM.
      */
     public function generateResponse(Customer $customer, string $message, array $context = []): string

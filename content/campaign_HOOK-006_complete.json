@@ -19,7 +19,18 @@
     "slide_count": 6,
     "duration_seconds": 120,
     "primary_cta": "connect_crm",
-    "secondary_cta": "see_integrations"
+    "secondary_cta": "see_integrations",
+    "ai_tone": "Professional, efficient, tech-savvy",
+    "ai_goal": "Get user to connect their CRM for seamless data flow",
+    "ai_persona": "Sarah",
+    "conversion_goal": "signup",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week4-hook",
+    "utm_content": "HOOK-006",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/crm-integration/audio/"
   },
   "slides": [
     {
@@ -42,14 +53,46 @@
       "content": {
         "headline": "Integrations Ready to Go",
         "integrations": [
-          {"name": "Salesforce", "icon": "salesforce", "status": "Available"},
-          {"name": "HubSpot", "icon": "hubspot", "status": "Available"},
-          {"name": "Zoho", "icon": "zoho", "status": "Available"},
-          {"name": "Pipedrive", "icon": "pipedrive", "status": "Available"},
-          {"name": "Monday.com", "icon": "monday", "status": "Available"},
-          {"name": "Airtable", "icon": "airtable", "status": "Available"},
-          {"name": "Google Sheets", "icon": "google", "status": "Available"},
-          {"name": "Custom API", "icon": "api", "status": "Available"}
+          {
+            "name": "Salesforce",
+            "icon": "salesforce",
+            "status": "Available"
+          },
+          {
+            "name": "HubSpot",
+            "icon": "hubspot",
+            "status": "Available"
+          },
+          {
+            "name": "Zoho",
+            "icon": "zoho",
+            "status": "Available"
+          },
+          {
+            "name": "Pipedrive",
+            "icon": "pipedrive",
+            "status": "Available"
+          },
+          {
+            "name": "Monday.com",
+            "icon": "monday",
+            "status": "Available"
+          },
+          {
+            "name": "Airtable",
+            "icon": "airtable",
+            "status": "Available"
+          },
+          {
+            "name": "Google Sheets",
+            "icon": "google",
+            "status": "Available"
+          },
+          {
+            "name": "Custom API",
+            "icon": "api",
+            "status": "Available"
+          }
         ],
         "note": "Don't see yours? We probably support it."
       },
@@ -64,11 +107,26 @@
       "content": {
         "headline": "Automatic Sync, Both Ways",
         "sync_items": [
-          {"item": "New inquiries", "direction": "Fibonacco → Your CRM"},
-          {"item": "Contact updates", "direction": "Both ways"},
-          {"item": "Lead status", "direction": "Both ways"},
-          {"item": "Conversation history", "direction": "Fibonacco → Your CRM"},
-          {"item": "Activity timeline", "direction": "Fibonacco → Your CRM"}
+          {
+            "item": "New inquiries",
+            "direction": "Fibonacco → Your CRM"
+          },
+          {
+            "item": "Contact updates",
+            "direction": "Both ways"
+          },
+          {
+            "item": "Lead status",
+            "direction": "Both ways"
+          },
+          {
+            "item": "Conversation history",
+            "direction": "Fibonacco → Your CRM"
+          },
+          {
+            "item": "Activity timeline",
+            "direction": "Fibonacco → Your CRM"
+          }
         ],
         "benefit": "Your CRM becomes the single source of truth"
       },
@@ -83,11 +141,26 @@
       "content": {
         "headline": "Stop Copying and Pasting",
         "benefits": [
-          {"pain": "Manual data entry", "solution": "Automatic sync"},
-          {"pain": "Lost leads", "solution": "Every inquiry captured"},
-          {"pain": "Duplicate records", "solution": "Smart deduplication"},
-          {"pain": "Outdated info", "solution": "Real-time updates"},
-          {"pain": "Scattered conversations", "solution": "Everything in one place"}
+          {
+            "pain": "Manual data entry",
+            "solution": "Automatic sync"
+          },
+          {
+            "pain": "Lost leads",
+            "solution": "Every inquiry captured"
+          },
+          {
+            "pain": "Duplicate records",
+            "solution": "Smart deduplication"
+          },
+          {
+            "pain": "Outdated info",
+            "solution": "Real-time updates"
+          },
+          {
+            "pain": "Scattered conversations",
+            "solution": "Everything in one place"
+          }
         ]
       },
       "narration": "Stop copying and pasting. Manual data entry becomes automatic sync. Lost leads become every inquiry captured. Duplicate records become smart deduplication. Outdated info becomes real-time updates. Scattered conversations become everything in one place. One connection solves all of it.",
@@ -101,9 +174,21 @@
       "content": {
         "headline": "Connect in 3 Steps",
         "steps": [
-          {"num": 1, "step": "Select your CRM", "time": "30 seconds"},
-          {"num": 2, "step": "Authorize connection", "time": "1 minute"},
-          {"num": 3, "step": "Map fields (or use defaults)", "time": "30 seconds"}
+          {
+            "num": 1,
+            "step": "Select your CRM",
+            "time": "30 seconds"
+          },
+          {
+            "num": 2,
+            "step": "Authorize connection",
+            "time": "1 minute"
+          },
+          {
+            "num": 3,
+            "step": "Map fields (or use defaults)",
+            "time": "30 seconds"
+          }
         ],
         "result": "Syncing starts immediately"
       },
@@ -140,8 +225,21 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-009"],
+    "leads_to": [
+      "HOWTO-009"
+    ],
     "follows": "EDU-004",
-    "related": ["HOWTO-026", "EDU-006"]
+    "related": [
+      "HOWTO-026",
+      "EDU-006"
+    ]
+  },
+  "template": {
+    "template_id": "integration",
+    "name": "Quick Action",
+    "slides": 6,
+    "duration": 130,
+    "purpose": "hook",
+    "audio_required": true
   }
 }

@@ -21,7 +21,16 @@
     "primary_cta": "activate_ai_content",
     "secondary_cta": "download_article",
     "ai_persona": "Sarah",
-    "ai_tone": "Practical, encouraging, demystifying"
+    "ai_tone": "Practical, encouraging, demystifying",
+    "ai_goal": "Help businesses understand how reputation works in the AI era",
+    "conversion_goal": "education",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week6-educational",
+    "utm_content": "EDU-007",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/reputation-ai-age/audio/"
   },
   "slides": [
     {
@@ -238,5 +247,13 @@
       "HOOK-008",
       "HOWTO-028"
     ]
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 195,
+    "purpose": "education",
+    "audio_required": true
   }
 }

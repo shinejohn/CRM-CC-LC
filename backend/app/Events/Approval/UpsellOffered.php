@@ -9,7 +9,7 @@ class UpsellOffered
 {
     use Dispatchable, SerializesModels;
 
-    public function __construct(public int $approvalId, public string $upsellServiceType)
+    public function __construct(public string $approvalId, public string $upsellServiceType)
     {
     }
 }

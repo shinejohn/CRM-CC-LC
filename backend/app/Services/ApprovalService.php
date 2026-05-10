@@ -47,7 +47,7 @@ final class ApprovalService implements ApprovalServiceInterface
         return $approval;
     }
 
-    public function process(int $approvalId): void
+    public function process(string $approvalId): void
     {
         $approval = Approval::with('customer')->findOrFail($approvalId);
 
@@ -74,7 +74,7 @@ final class ApprovalService implements ApprovalServiceInterface
             ->toArray();
     }
 
-    public function recordUpsellOffer(int $approvalId, string $upsellType): void
+    public function recordUpsellOffer(string $approvalId, string $upsellType): void
     {
         $existing = ApprovalUpsell::where('approval_id', $approvalId)
             ->where('upsell_service_type', $upsellType)
@@ -93,7 +93,7 @@ final class ApprovalService implements ApprovalServiceInterface
         event(new UpsellOffered($approvalId, $upsellType));
     }
 
-    public function acceptUpsell(int $approvalId, string $upsellType): Approval
+    public function acceptUpsell(string $approvalId, string $upsellType): Approval
     {
         $originalApproval = Approval::with('customer')->findOrFail($approvalId);
 
@@ -130,7 +130,7 @@ final class ApprovalService implements ApprovalServiceInterface
         return $newApproval;
     }
 
-    public function startProvisioning(int $approvalId): void
+    public function startProvisioning(string $approvalId): void
     {
         $approval = Approval::with('customer')->findOrFail($approvalId);
 
@@ -155,7 +155,7 @@ final class ApprovalService implements ApprovalServiceInterface
         $provisionerClass::dispatch($task->id);
     }
 
-    public function completeProvisioning(int $approvalId, array $resultData): void
+    public function completeProvisioning(string $approvalId, array $resultData): void
     {
         $approval = Approval::with('customer')->findOrFail($approvalId);
 
@@ -185,7 +185,7 @@ final class ApprovalService implements ApprovalServiceInterface
         event(new ApprovalProvisioned($approval->id, $approval->customer_id));
     }
 
-    public function failProvisioning(int $approvalId, string $reason): void
+    public function failProvisioning(string $approvalId, string $reason): void
     {
         $approval = Approval::findOrFail($approvalId);
         $approval->update(['status' => 'failed']);

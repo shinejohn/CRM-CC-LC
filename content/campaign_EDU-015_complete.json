@@ -32,10 +32,22 @@
         "definition": "AI employees are specialized AI systems trained to handle specific roles in your business",
         "not_chatbots": "These aren't simple chatbots—they're sophisticated systems that learn your business, your voice, and your preferences",
         "examples": [
-          {"role": "AI Receptionist", "handles": "Calls, scheduling, inquiries"},
-          {"role": "AI Marketing Assistant", "handles": "Content, social, campaigns"},
-          {"role": "AI Customer Service Rep", "handles": "Support, follow-ups, reviews"},
-          {"role": "AI Sales Assistant", "handles": "Lead qualification, follow-ups, proposals"}
+          {
+            "role": "AI Receptionist",
+            "handles": "Calls, scheduling, inquiries"
+          },
+          {
+            "role": "AI Marketing Assistant",
+            "handles": "Content, social, campaigns"
+          },
+          {
+            "role": "AI Customer Service Rep",
+            "handles": "Support, follow-ups, reviews"
+          },
+          {
+            "role": "AI Sales Assistant",
+            "handles": "Lead qualification, follow-ups, proposals"
+          }
         ]
       },
       "narration": "What are AI employees? They're specialized AI systems trained to handle specific roles in your business. These aren't simple chatbots—they're sophisticated systems that learn your business, your voice, and your preferences. You might have an AI Receptionist handling calls and scheduling. An AI Marketing Assistant creating content and managing campaigns. An AI Customer Service Rep handling support and reviews. An AI Sales Assistant qualifying leads and following up. Each one specialized, each one trained for their role.",
@@ -49,11 +61,26 @@
       "content": {
         "headline": "AI Employees Learn and Improve",
         "process": [
-          {"stage": "Training", "what": "You provide your business info, preferences, examples"},
-          {"stage": "Launch", "what": "AI starts handling tasks with supervision"},
-          {"stage": "Learning", "what": "AI improves from every interaction"},
-          {"stage": "Autonomy", "what": "AI handles routine independently, escalates exceptions"},
-          {"stage": "Evolution", "what": "AI adapts as your business grows"}
+          {
+            "stage": "Training",
+            "what": "You provide your business info, preferences, examples"
+          },
+          {
+            "stage": "Launch",
+            "what": "AI starts handling tasks with supervision"
+          },
+          {
+            "stage": "Learning",
+            "what": "AI improves from every interaction"
+          },
+          {
+            "stage": "Autonomy",
+            "what": "AI handles routine independently, escalates exceptions"
+          },
+          {
+            "stage": "Evolution",
+            "what": "AI adapts as your business grows"
+          }
         ],
         "key_point": "They get better over time—unlike human employees who need constant retraining"
       },
@@ -68,11 +95,26 @@
       "content": {
         "headline": "AI + Human = Best Results",
         "collaboration": [
-          {"ai_does": "Handle volume", "human_does": "Handle complexity"},
-          {"ai_does": "Instant responses", "human_does": "Nuanced decisions"},
-          {"ai_does": "Consistent execution", "human_does": "Creative strategy"},
-          {"ai_does": "Data analysis", "human_does": "Interpretation and action"},
-          {"ai_does": "24/7 availability", "human_does": "High-touch relationships"}
+          {
+            "ai_does": "Handle volume",
+            "human_does": "Handle complexity"
+          },
+          {
+            "ai_does": "Instant responses",
+            "human_does": "Nuanced decisions"
+          },
+          {
+            "ai_does": "Consistent execution",
+            "human_does": "Creative strategy"
+          },
+          {
+            "ai_does": "Data analysis",
+            "human_does": "Interpretation and action"
+          },
+          {
+            "ai_does": "24/7 availability",
+            "human_does": "High-touch relationships"
+          }
         ],
         "result": "Each does what they do best"
       },
@@ -87,11 +129,26 @@
       "content": {
         "headline": "What AI Employees Deliver",
         "metrics": [
-          {"metric": "Time saved", "typical": "10-20 hours/week"},
-          {"metric": "Response time", "typical": "From hours to seconds"},
-          {"metric": "Availability", "typical": "24/7/365"},
-          {"metric": "Consistency", "typical": "100% on-brand, every time"},
-          {"metric": "Cost vs. hiring", "typical": "10-20% of human employee"}
+          {
+            "metric": "Time saved",
+            "typical": "10-20 hours/week"
+          },
+          {
+            "metric": "Response time",
+            "typical": "From hours to seconds"
+          },
+          {
+            "metric": "Availability",
+            "typical": "24/7/365"
+          },
+          {
+            "metric": "Consistency",
+            "typical": "100% on-brand, every time"
+          },
+          {
+            "metric": "Cost vs. hiring",
+            "typical": "10-20% of human employee"
+          }
         ],
         "roi_example": "One AI employee at $200/month replacing 15 hours/week of work = $3/hour vs. $15-20/hour for human"
       },
@@ -106,10 +163,26 @@
       "content": {
         "headline": "Start with Your Biggest Time Drain",
         "recommendation": [
-          {"priority": 1, "if": "Drowning in calls/messages", "start": "AI Receptionist"},
-          {"priority": 2, "if": "Can't keep up with content", "start": "AI Marketing Assistant"},
-          {"priority": 3, "if": "Slow customer response", "start": "AI Customer Service Rep"},
-          {"priority": 4, "if": "Leads falling through cracks", "start": "AI Sales Assistant"}
+          {
+            "priority": 1,
+            "if": "Drowning in calls/messages",
+            "start": "AI Receptionist"
+          },
+          {
+            "priority": 2,
+            "if": "Can't keep up with content",
+            "start": "AI Marketing Assistant"
+          },
+          {
+            "priority": 3,
+            "if": "Slow customer response",
+            "start": "AI Customer Service Rep"
+          },
+          {
+            "priority": 4,
+            "if": "Leads falling through cracks",
+            "start": "AI Sales Assistant"
+          }
         ],
         "advice": "Start with ONE role. Master it. Then expand."
       },
@@ -124,10 +197,22 @@
       "content": {
         "headline": "Questions You Might Have",
         "qa": [
-          {"q": "Will customers know it's AI?", "a": "Many won't. But transparency is fine too—people accept AI help."},
-          {"q": "What about mistakes?", "a": "AI is trained on your info and improves. Mistakes decrease over time."},
-          {"q": "Is my data safe?", "a": "Yes—encrypted, private, not used to train other AIs."},
-          {"q": "What if I need to change something?", "a": "You're always in control. Change settings, update training anytime."}
+          {
+            "q": "Will customers know it's AI?",
+            "a": "Many won't. But transparency is fine too—people accept AI help."
+          },
+          {
+            "q": "What about mistakes?",
+            "a": "AI is trained on your info and improves. Mistakes decrease over time."
+          },
+          {
+            "q": "Is my data safe?",
+            "a": "Yes—encrypted, private, not used to train other AIs."
+          },
+          {
+            "q": "What if I need to change something?",
+            "a": "You're always in control. Change settings, update training anytime."
+          }
         ]
       },
       "narration": "Questions you might have. Will customers know it's AI? Many won't notice. But transparency is fine too—people increasingly accept AI assistance. What about mistakes? AI is trained on your info and improves with every interaction. Mistakes decrease over time. Is my data safe? Yes—encrypted, private, not used to train other people's AI. What if I need to change something? You're always in control. Change settings, update training anytime.",
@@ -190,8 +275,44 @@
     }
   },
   "connections": {
-    "leads_to": ["HOWTO-025"],
+    "leads_to": [
+      "HOWTO-025"
+    ],
     "follows": "EDU-014",
-    "related": ["EDU-006", "EDU-007", "EDU-008"]
+    "related": [
+      "EDU-006",
+      "EDU-007",
+      "EDU-008"
+    ]
+  },
+  "landing_page": {
+    "campaign_id": "EDU-015",
+    "landing_page_slug": "ai-employees-explained",
+    "url": "/learn/ai-employees-explained",
+    "template_id": "ai-intro",
+    "template_name": "Educational Content",
+    "slide_count": 9,
+    "duration_seconds": 290,
+    "primary_cta": "explore_more",
+    "secondary_cta": "download_article",
+    "ai_persona": "Sarah",
+    "ai_tone": "Warm, informative, empowering",
+    "ai_goal": "Educate and build understanding of the concept",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-employees-explained/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "education",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week11-educational",
+    "utm_content": "EDU-015"
+  },
+  "template": {
+    "template_id": "ai-intro",
+    "name": "Educational Content",
+    "slides": 9,
+    "duration": 290,
+    "purpose": "education",
+    "audio_required": true
   }
 }

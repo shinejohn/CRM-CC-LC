@@ -13,8 +13,8 @@ return new class extends Migration
             return;
         }
         Schema::create('email_events', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('campaign_send_id')->constrained();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('campaign_send_id')->constrained();
 
             $table->string('event_type', 50);
             $table->timestamp('event_at');

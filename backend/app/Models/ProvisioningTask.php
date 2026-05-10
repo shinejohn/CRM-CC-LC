@@ -14,7 +14,18 @@ final class ProvisioningTask extends Model
 {
     use HasUuids, HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'approval_id',
+        'customer_id',
+        'service_type',
+        'status',
+        'priority',
+        'started_at',
+        'completed_at',
+        'failed_at',
+        'failure_reason',
+        'result_data',
+    ];
 
     protected $casts = [
         'started_at' => 'datetime',

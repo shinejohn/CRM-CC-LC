@@ -111,17 +111,24 @@ describe('ApiService', () => {
   });
 
   it('handles timeout', async () => {
-    (global.fetch as any).mockImplementation(() => 
-      new Promise((resolve) => {
-        setTimeout(() => resolve({
+    (global.fetch as any).mockImplementation((_url: string, init?: RequestInit) =>
+      new Promise((resolve, reject) => {
+        const timer = setTimeout(() => resolve({
           ok: true,
           json: () => Promise.resolve({}),
-        }), 100);
+        }), 5000);
+        // Listen for abort signal to simulate real browser behavior
+        if (init?.signal) {
+          init.signal.addEventListener('abort', () => {
+            clearTimeout(timer);
+            reject(new DOMException('The operation was aborted.', 'AbortError'));
+          });
+        }
       })
     );
 
     const response = await apiService.get('/test', { timeout: 50 });
-    
+
     expect(response.success).toBe(false);
     expect(response.error?.code).toBe('TIMEOUT');
   });

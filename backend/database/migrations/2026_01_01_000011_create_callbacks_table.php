@@ -13,10 +13,10 @@ return new class extends Migration
             return;
         }
         Schema::create('callbacks', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('smb_id')->nullable();
-            $table->foreignId('rvm_drop_id')->nullable()->constrained();
+            $table->foreignUuid('rvm_drop_id')->nullable()->constrained();
 
             $table->string('caller_phone', 50);
             $table->string('called_number', 50);

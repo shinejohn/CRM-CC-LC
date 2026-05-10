@@ -59,39 +59,41 @@ return new class extends Migration
             $table->index('source');
         });
         
-        // Create indexes in separate transactions to avoid transaction abort
-        try {
-            // Add vector index separately (pgvector) - only if extension is available
-            DB::statement('CREATE INDEX IF NOT EXISTS idx_knowledge_base_embedding ON knowledge_base USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100)');
-        } catch (\Exception $e) {
-            // Vector extension not available - skip vector index
-            Log::warning('Vector index creation skipped: ' . $e->getMessage());
-        }
-        
-        // Full-text search indexes
-        try {
-            DB::statement("CREATE INDEX IF NOT EXISTS idx_knowledge_base_title_search ON knowledge_base USING GIN(to_tsvector('english', title))");
-        } catch (\Exception $e) {
-            Log::warning('Title search index creation failed: ' . $e->getMessage());
-        }
-        
-        try {
-            DB::statement("CREATE INDEX IF NOT EXISTS idx_knowledge_base_content_search ON knowledge_base USING GIN(to_tsvector('english', content))");
-        } catch (\Exception $e) {
-            Log::warning('Content search index creation failed: ' . $e->getMessage());
-        }
-        
-        // GIN indexes for JSONB/arrays
-        try {
-            DB::statement('CREATE INDEX IF NOT EXISTS idx_knowledge_base_tags ON knowledge_base USING GIN(tags)');
-        } catch (\Exception $e) {
-            Log::warning('Tags index creation failed: ' . $e->getMessage());
-        }
-        
-        try {
-            DB::statement('CREATE INDEX IF NOT EXISTS idx_knowledge_base_metadata ON knowledge_base USING GIN(metadata)');
-        } catch (\Exception $e) {
-            Log::warning('Metadata index creation failed: ' . $e->getMessage());
+        if (DB::getDriverName() === 'pgsql') {
+            // Create indexes in separate transactions to avoid transaction abort
+            try {
+                // Add vector index separately (pgvector) - only if extension is available
+                DB::statement('CREATE INDEX IF NOT EXISTS idx_knowledge_base_embedding ON knowledge_base USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100)');
+            } catch (\Exception $e) {
+                // Vector extension not available - skip vector index
+                Log::warning('Vector index creation skipped: ' . $e->getMessage());
+            }
+
+            // Full-text search indexes
+            try {
+                DB::statement("CREATE INDEX IF NOT EXISTS idx_knowledge_base_title_search ON knowledge_base USING GIN(to_tsvector('english', title))");
+            } catch (\Exception $e) {
+                Log::warning('Title search index creation failed: ' . $e->getMessage());
+            }
+
+            try {
+                DB::statement("CREATE INDEX IF NOT EXISTS idx_knowledge_base_content_search ON knowledge_base USING GIN(to_tsvector('english', content))");
+            } catch (\Exception $e) {
+                Log::warning('Content search index creation failed: ' . $e->getMessage());
+            }
+
+            // GIN indexes for JSONB/arrays
+            try {
+                DB::statement('CREATE INDEX IF NOT EXISTS idx_knowledge_base_tags ON knowledge_base USING GIN(tags)');
+            } catch (\Exception $e) {
+                Log::warning('Tags index creation failed: ' . $e->getMessage());
+            }
+
+            try {
+                DB::statement('CREATE INDEX IF NOT EXISTS idx_knowledge_base_metadata ON knowledge_base USING GIN(metadata)');
+            } catch (\Exception $e) {
+                Log::warning('Metadata index creation failed: ' . $e->getMessage());
+            }
         }
     }
 

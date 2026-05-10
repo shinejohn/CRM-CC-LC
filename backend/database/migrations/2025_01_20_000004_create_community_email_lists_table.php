@@ -14,9 +14,9 @@ return new class extends Migration
     {
         Schema::create('community_email_lists', function (Blueprint $table) {
             if (Schema::hasTable('communities')) {
-                $table->foreignId('community_id')->primary()->constrained('communities');
+                $table->foreignUuid('community_id')->primary()->constrained('communities');
             } else {
-                $table->foreignId('community_id')->primary();
+                $table->foreignUuid('community_id')->primary();
             }
             
             // Pre-compiled email arrays (rebuilt nightly or on significant changes)

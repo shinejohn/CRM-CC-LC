@@ -128,4 +128,19 @@ final class SMB extends Model
     {
         return $this->hasMany(Customer::class, 'smb_id');
     }
+
+    public function marketingKitAssets(): HasMany
+    {
+        return $this->hasMany(MarketingKitAsset::class, 'smb_id');
+    }
+
+    public function contentCards(): HasMany
+    {
+        return $this->hasMany(ContentCard::class, 'smb_id');
+    }
+
+    public function sponsorPlacements(): HasMany
+    {
+        return $this->hasMany(SponsorPlacement::class, 'smb_id');
+    }
 }
