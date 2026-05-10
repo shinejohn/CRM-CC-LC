@@ -278,8 +278,12 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
         </div>
       )}
 
-      {/* Controls */}
-      <div className="absolute bottom-0 left-0 right-0 bg-gray-900/90 backdrop-blur-sm z-30">
+      {/* Controls — normal flow when embedded (hideOverlayUI), absolute overlay when standalone */}
+      <div className={
+        hideOverlayUI
+          ? "shrink-0 bg-gray-900 border-t border-white/10 z-30"
+          : "absolute bottom-0 left-0 right-0 bg-gray-900/90 backdrop-blur-sm z-30"
+      }>
         {/* Progress Bar */}
         <div className="h-1 bg-gray-700">
           <div
