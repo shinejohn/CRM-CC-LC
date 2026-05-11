@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Share2, UserPlus, X } from "lucide-react";
 import { SarahPanel } from "@/pitch/shell/SarahPanel";
 import { FibonaccoPlayer } from "@/components/LearningCenter/Presentation/FibonaccoPlayer";
 import { useSarahNarration } from "./useSarahNarration";
@@ -42,7 +42,10 @@ function getSlides(campaign: Campaign): SlideData[] {
   return (raw.slides ?? []) as SlideData[];
 }
 
-function campaignToPresentation(campaign: Campaign, lp: LandingPageData): Presentation {
+function campaignToPresentation(
+  campaign: Campaign,
+  lp: LandingPageData
+): Presentation {
   const rawSlides = getSlides(campaign);
   const audioBaseUrl = lp.audio_base_url ?? "";
 
@@ -81,11 +84,117 @@ function campaignToPresentation(campaign: Campaign, lp: LandingPageData): Presen
   };
 }
 
-export default function RoomWithSarah({ campaign, onClose, onNavigateCampaign }: RoomWithSarahProps) {
+/* ------------------------------------------------------------------ */
+/*  Share overlay                                                      */
+/* ------------------------------------------------------------------ */
+
+function ShareOverlay({
+  url,
+  title,
+  onClose,
+}: {
+  url: string;
+  title: string;
+  onClose: () => void;
+}) {
+  const [copied, setCopied] = useState(false);
+
+  function copyLink() {
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }
+
+  function shareEmail() {
+    const subject = encodeURIComponent(`Check out: ${title}`);
+    const body = encodeURIComponent(
+      `I thought you'd find this useful:\n\n${title}\n${url}`
+    );
+    window.open(`mailto:?subject=${subject}&body=${body}`, "_blank");
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.95 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0.95 }}
+        className="relative w-full max-w-md mx-4 rounded-xl bg-[#1a2040] border border-white/10 p-6 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute top-3 right-3 p-1.5 text-white/50 hover:text-white rounded-md"
+          aria-label="Close share dialog"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        <h3 className="text-lg font-bold text-white mb-1">
+          Share this presentation
+        </h3>
+        <p className="text-sm text-white/50 mb-5">{title}</p>
+
+        <div className="flex items-center gap-2 mb-4">
+          <input
+            readOnly
+            value={url}
+            className="flex-1 min-w-0 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/80"
+            onClick={(e) => (e.target as HTMLInputElement).select()}
+          />
+          <button
+            type="button"
+            onClick={copyLink}
+            className="shrink-0 rounded-md bg-indigo-600 hover:bg-indigo-500 px-4 py-2 text-sm font-medium text-white transition-colors"
+          >
+            {copied ? "Copied!" : "Copy"}
+          </button>
+        </div>
+
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={shareEmail}
+            className="flex-1 rounded-md border border-white/10 px-4 py-2.5 text-sm text-white/80 hover:bg-white/5 transition-colors"
+          >
+            Share via Email
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex-1 rounded-md border border-white/10 px-4 py-2.5 text-sm text-white/80 hover:bg-white/5 transition-colors"
+          >
+            <UserPlus className="w-4 h-4 inline mr-1.5 -mt-0.5" />
+            Invite Colleague
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Main component                                                     */
+/* ------------------------------------------------------------------ */
+
+export default function RoomWithSarah({
+  campaign,
+  onClose,
+  onNavigateCampaign,
+}: RoomWithSarahProps) {
   const lp = getLandingPage(campaign);
   const rawSlides = getSlides(campaign);
   const greetedRef = useRef(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [showShare, setShowShare] = useState(false);
 
   const presentation = useMemo(
     () => campaignToPresentation(campaign, lp),
@@ -131,17 +240,49 @@ export default function RoomWithSarah({ campaign, onClose, onNavigateCampaign }:
     if (nextSlugs.length > 0 && onNavigateCampaign) {
       setTimeout(() => {
         appendSarah(
-          `If you'd like to explore further, I have ${nextSlugs.length === 1 ? "another topic" : "some related topics"} that might interest you.`,
+          `If you'd like to explore further, I have ${
+            nextSlugs.length === 1
+              ? "another topic"
+              : "some related topics"
+          } that might interest you.`,
           2000
         );
       }, 0);
     }
   }, [campaign, complete, appendSarah, onNavigateCampaign]);
 
+  const shareUrl =
+    typeof window !== "undefined"
+      ? window.location.href
+      : "";
+
   return (
     <div className="pitch-root flex flex-1 min-h-0">
-      {/* Left: Slide player — fills available width */}
+      {/* Left: Slide player */}
       <div className="flex-1 flex flex-col min-w-0 bg-gray-900">
+        {/* Slide toolbar — share + invite */}
+        <div className="shrink-0 flex items-center justify-end gap-2 px-3 py-1.5 bg-gray-900/80 border-b border-white/5">
+          <button
+            type="button"
+            onClick={() => setShowShare(true)}
+            className="flex items-center gap-1.5 px-2.5 py-1 text-xs text-white/50 hover:text-white hover:bg-white/10 rounded-md transition-colors"
+            aria-label="Share this presentation"
+          >
+            <Share2 className="w-3.5 h-3.5" />
+            Share
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowShare(true)}
+            className="flex items-center gap-1.5 px-2.5 py-1 text-xs text-white/50 hover:text-white hover:bg-white/10 rounded-md transition-colors"
+            aria-label="Invite a colleague"
+          >
+            <UserPlus className="w-3.5 h-3.5" />
+            Invite
+          </button>
+        </div>
+
+        {/* Player */}
         <FibonaccoPlayer
           presentation={presentation}
           hideOverlayUI
@@ -150,7 +291,7 @@ export default function RoomWithSarah({ campaign, onClose, onNavigateCampaign }:
         />
       </div>
 
-      {/* Right: Sarah panel — desktop only */}
+      {/* Right: Sarah panel — desktop */}
       <aside
         className="hidden md:flex md:w-[380px] md:flex-none md:flex-col min-h-0 border-l"
         style={{
@@ -162,16 +303,20 @@ export default function RoomWithSarah({ campaign, onClose, onNavigateCampaign }:
           messages={messages}
           isTyping={isTyping}
           onSend={handleUserMessage}
+          onEndSession={onClose}
         />
       </aside>
 
-      {/* Mobile: Sarah drawer toggle + drawer */}
+      {/* Mobile: Sarah drawer */}
       <div className="md:hidden">
         <button
           type="button"
           onClick={() => setDrawerOpen((o) => !o)}
           className="fixed bottom-4 right-4 z-[60] rounded-full px-4 py-2.5 text-sm font-semibold shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
-          style={{ backgroundColor: "var(--p-amber)", color: "var(--p-bg)" }}
+          style={{
+            backgroundColor: "var(--p-amber)",
+            color: "var(--p-bg)",
+          }}
           aria-expanded={drawerOpen}
           aria-controls="sarah-mobile-drawer"
         >
@@ -200,12 +345,24 @@ export default function RoomWithSarah({ campaign, onClose, onNavigateCampaign }:
                   messages={messages}
                   isTyping={isTyping}
                   onSend={handleUserMessage}
+                  onEndSession={onClose}
                 />
               </div>
             </motion.aside>
           )}
         </AnimatePresence>
       </div>
+
+      {/* Share overlay */}
+      <AnimatePresence>
+        {showShare && (
+          <ShareOverlay
+            url={shareUrl}
+            title={campaign.title}
+            onClose={() => setShowShare(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
