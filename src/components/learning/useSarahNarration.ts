@@ -138,7 +138,7 @@ export function useSarahNarration(): UseSarahNarrationReturn {
     (text: string) => {
       setMessages((prev) => [
         ...prev,
-        { id: makeId(), text, timestamp: timestamp() },
+        { id: makeId(), text, timestamp: timestamp(), type: "user" },
       ]);
       // Phase 3 will wire this to the backend chat API.
       // For now, acknowledge the message.

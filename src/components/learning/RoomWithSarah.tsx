@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ComponentProps } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MessageCircle, Share2, UserPlus, X } from "lucide-react";
 import { SarahPanel } from "@/pitch/shell/SarahPanel";
@@ -195,6 +195,8 @@ export default function RoomWithSarah({
   const greetedRef = useRef(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [showShare, setShowShare] = useState(false);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
 
   const presentation = useMemo(
     () => campaignToPresentation(campaign, lp),
@@ -220,6 +222,7 @@ export default function RoomWithSarah({
 
   const handleSlideChange = useCallback(
     (slideIndex: number) => {
+      setCurrentSlideIndex(slideIndex);
       const slide = rawSlides[slideIndex];
       if (slide) {
         onSlideChange(slideIndex, slide);
@@ -229,6 +232,7 @@ export default function RoomWithSarah({
   );
 
   const handleComplete = useCallback(() => {
+    setIsComplete(true);
     complete(campaign);
 
     const raw = campaign as Record<string, unknown>;
@@ -250,6 +254,36 @@ export default function RoomWithSarah({
       }, 0);
     }
   }, [campaign, complete, appendSarah, onNavigateCampaign]);
+
+  // Contextual suggested actions based on where the user is
+  type SuggestedAction = ComponentProps<typeof SarahPanel>["suggestedActions"];
+  const suggestedActions = useMemo((): SuggestedAction => {
+    // Don't show suggestions while Sarah is typing or if user has sent messages
+    const userSent = messages.some((m) => m.type === "user");
+    if (userSent) return [];
+
+    if (isComplete) {
+      return [
+        { label: "Set this up for me", value: "I'd like you to set this up for my business." },
+        { label: "What does it cost?", value: "How much does this cost?" },
+        { label: "Show me something else", value: "Can you show me other services?" },
+      ];
+    }
+
+    if (currentSlideIndex === 0) {
+      return [
+        { label: "Tell me more", value: "Tell me more about this." },
+        { label: "How long is this?", value: "How long will this presentation take?" },
+        { label: "Skip to pricing", value: "Can you skip to the pricing information?" },
+      ];
+    }
+
+    // Mid-presentation — fewer, contextual
+    return [
+      { label: "Explain this slide", value: "Can you explain this slide in more detail?" },
+      { label: "I have a question", value: "I have a question about this." },
+    ];
+  }, [currentSlideIndex, isComplete, messages]);
 
   const shareUrl =
     typeof window !== "undefined"
@@ -304,6 +338,7 @@ export default function RoomWithSarah({
           isTyping={isTyping}
           onSend={handleUserMessage}
           onEndSession={onClose}
+          suggestedActions={suggestedActions}
         />
       </aside>
 
@@ -346,6 +381,7 @@ export default function RoomWithSarah({
                   isTyping={isTyping}
                   onSend={handleUserMessage}
                   onEndSession={onClose}
+                  suggestedActions={suggestedActions}
                 />
               </div>
             </motion.aside>

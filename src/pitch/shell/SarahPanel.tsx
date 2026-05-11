@@ -12,11 +12,17 @@ import {
 import type { SarahMessage } from "../types";
 import { cn } from "@/lib/utils";
 
+export interface SuggestedAction {
+  label: string;
+  value: string;
+}
+
 export interface SarahPanelProps {
   messages: SarahMessage[];
   onSend?: (text: string) => void;
   isTyping?: boolean;
   onEndSession?: () => void;
+  suggestedActions?: SuggestedAction[];
   className?: string;
 }
 
@@ -25,6 +31,7 @@ export function SarahPanel({
   onSend,
   isTyping,
   onEndSession,
+  suggestedActions,
   className,
 }: SarahPanelProps) {
   const listRef = useRef<HTMLDivElement>(null);
@@ -159,35 +166,79 @@ export function SarahPanel({
         aria-relevant="additions"
       >
         <AnimatePresence initial={false}>
-          {messages.map((m) => (
-            <motion.article
-              key={m.id}
-              layout
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="rounded-[var(--p-radius-md)] px-4 py-3 pl-[13px] border-l-[3px]"
-              style={{
-                borderLeftColor: "var(--p-amber)",
-                backgroundColor: "var(--p-message-bg)",
-              }}
-            >
-              <p
-                className="text-sm leading-snug"
-                style={{ color: "var(--p-text)" }}
+          {messages.map((m) => {
+            const isUser = m.type === "user";
+            return (
+              <motion.article
+                key={m.id}
+                layout
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className={cn(
+                  "rounded-[var(--p-radius-md)] px-4 py-3 max-w-[85%]",
+                  isUser
+                    ? "ml-auto bg-indigo-600/20 border border-indigo-500/30"
+                    : "pl-[13px] border-l-[3px]"
+                )}
+                style={
+                  isUser
+                    ? undefined
+                    : {
+                        borderLeftColor: "var(--p-amber)",
+                        backgroundColor: "var(--p-message-bg)",
+                      }
+                }
               >
-                {m.text}
-              </p>
-              <p
-                className="mt-2 text-[11px]"
-                style={{ color: "var(--p-muted)" }}
-              >
-                {m.timestamp}
-              </p>
-            </motion.article>
-          ))}
+                {isUser && (
+                  <p
+                    className="text-[11px] font-medium mb-1"
+                    style={{ color: "var(--p-teal)" }}
+                  >
+                    You
+                  </p>
+                )}
+                <p
+                  className="text-sm leading-snug"
+                  style={{ color: "var(--p-text)" }}
+                >
+                  {m.text}
+                </p>
+                <p
+                  className="mt-2 text-[11px]"
+                  style={{ color: "var(--p-muted)" }}
+                >
+                  {m.timestamp}
+                </p>
+              </motion.article>
+            );
+          })}
         </AnimatePresence>
+
+        {/* Suggested quick-reply actions */}
+        {suggestedActions && suggestedActions.length > 0 && !isTyping && onSend && (
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-wrap gap-2 pt-1"
+          >
+            {suggestedActions.map((action) => (
+              <button
+                key={action.value}
+                type="button"
+                onClick={() => onSend(action.value)}
+                className="rounded-full border px-3 py-1.5 text-xs font-medium transition-colors hover:bg-indigo-600/20"
+                style={{
+                  borderColor: "var(--p-border)",
+                  color: "var(--p-teal)",
+                }}
+              >
+                {action.label}
+              </button>
+            ))}
+          </motion.div>
+        )}
 
         {isTyping ? (
           <motion.div

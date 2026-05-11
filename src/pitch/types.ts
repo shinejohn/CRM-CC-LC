@@ -112,7 +112,7 @@ export interface SarahMessage {
   id: string;
   text: string;
   timestamp: string;
-  type?: "sarah" | "system";
+  type?: "sarah" | "system" | "user";
 }
 
 export interface FallbackProduct {
