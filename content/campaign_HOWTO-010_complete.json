@@ -147,7 +147,7 @@
     "email_1_educational": {
       "subject": "Connect your social accounts in 5 minutes",
       "preview_text": "Post everywhere from one place",
-      "body": "Hey {{first_name}},\n\nOnce your social accounts are connected:\n✓ Post to all platforms from one place\n✓ Track engagement across channels\n✓ Never miss a message\n\n[CONNECT YOUR ACCOUNTS →]\n\nSupported: Facebook, Instagram, Google Business, LinkedIn\n\nTakes about 5 minutes.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nOnce your social accounts are connected:\n✓ Post to all platforms from one place\n✓ Track engagement across channels\n✓ Never miss a message\n\n[CONNECT YOUR ACCOUNTS →]\n\nSupported: Facebook, Instagram, Google Business, LinkedIn\n\nTakes about 5 minutes.\n\nSarah"
     }
   },
   "connections": {

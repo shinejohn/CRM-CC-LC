@@ -254,7 +254,7 @@
     "email_tutorial": {
       "subject": "Let AI handle your initial customer conversations",
       "preview_text": "20 minutes to 24/7 sales coverage",
-      "body": "Hey {{first_name}},\n\nHow many inquiries have you missed because you couldn't respond fast enough?\n\nWhat if every inquiry got an instant, intelligent response—24/7?\n\nYour AI Sales Assistant can:\n• Answer common questions instantly\n• Qualify leads (budget, timeline, needs)\n• Schedule appointments automatically\n• Hand off to you when a human is needed\n\n[SET UP AI SALES →]\n\n20-minute setup. Then it works while you sleep.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nHow many inquiries have you missed because you couldn't respond fast enough?\n\nWhat if every inquiry got an instant, intelligent response—24/7?\n\nYour AI Sales Assistant can:\n• Answer common questions instantly\n• Qualify leads (budget, timeline, needs)\n• Schedule appointments automatically\n• Hand off to you when a human is needed\n\n[SET UP AI SALES →]\n\n20-minute setup. Then it works while you sleep.\n\nSarah\nFibonacco"
     }
   },
   "connections": {

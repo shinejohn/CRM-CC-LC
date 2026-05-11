@@ -62,7 +62,7 @@
       "component": "ConceptSlide",
       "title": "Sample Posts",
       "content": {
-        "headline": "Here's What We'd Post for {{business_name}}",
+        "headline": "Here's What We'd Post for your business",
         "samples": [
           {
             "day": "Monday",
@@ -158,12 +158,12 @@
     "email_1_hook": {
       "subject": "We'll post to your social media for free this week—see how it works",
       "preview_text": "No credit card, no commitment",
-      "body": "Hey {{first_name}},\n\nWhat if someone handled {{business_name}}'s social media for a week—for free?\n\nNo credit card. No commitment.\n\nYour free trial includes:\n✓ 5 posts created for your business\n✓ Posted to Facebook, Instagram, or both\n✓ Trained on your voice and brand\n✓ Performance report at the end\n\n[START YOUR FREE TRIAL →]\n\nWorth $150+ if you hired someone. Free to try.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nWhat if someone handled your business's social media for a week—for free?\n\nNo credit card. No commitment.\n\nYour free trial includes:\n✓ 5 posts created for your business\n✓ Posted to Facebook, Instagram, or both\n✓ Trained on your voice and brand\n✓ Performance report at the end\n\n[START YOUR FREE TRIAL →]\n\nWorth $150+ if you hired someone. Free to try.\n\nSarah\nFibonacco"
     },
     "email_3_hook": {
       "subject": "Your first social post is drafted—take a look",
-      "preview_text": "Preview what we'd post for {{business_name}}",
-      "body": "Hey {{first_name}},\n\nWe drafted what your first social post would look like:\n\n[SEE YOUR POST PREVIEW →]\n\nThis is the style and quality we'd bring to {{business_name}}'s social media all week.\n\nApprove to start your free trial, or tell us what you'd change.\n\n{{sender_name}}"
+      "preview_text": "Preview what we'd post for your business",
+      "body": "Hey there,\n\nWe drafted what your first social post would look like:\n\n[SEE YOUR POST PREVIEW →]\n\nThis is the style and quality we'd bring to your business's social media all week.\n\nApprove to start your free trial, or tell us what you'd change.\n\nSarah"
     }
   },
   "connections": {

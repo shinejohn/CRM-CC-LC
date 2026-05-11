@@ -148,7 +148,7 @@
     "email_1_educational": {
       "subject": "Capture leads from your website (finally)",
       "preview_text": "Stop losing potential customers",
-      "body": "Hey {{first_name}},\n\nMost website visitors leave without contacting you.\n\nHere's how to capture them:\n✓ Optimized contact form (4 fields max)\n✓ Chat widget for immediate questions\n✓ Lead magnet offering real value\n✓ Exit popup as last chance\n\n[SET UP LEAD CAPTURE →]\n\nPro tip: Respond within 5 minutes for best conversion.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nMost website visitors leave without contacting you.\n\nHere's how to capture them:\n✓ Optimized contact form (4 fields max)\n✓ Chat widget for immediate questions\n✓ Lead magnet offering real value\n✓ Exit popup as last chance\n\n[SET UP LEAD CAPTURE →]\n\nPro tip: Respond within 5 minutes for best conversion.\n\nSarah"
     }
   },
   "connections": {

@@ -162,7 +162,7 @@
     "email_1_educational": {
       "subject": "Automate repetitive tasks and save 10+ hours weekly",
       "preview_text": "Stop doing tasks manually",
-      "body": "Hey {{first_name}},\n\nEvery repetitive task is time stolen from growth.\n\nAutomate:\n✓ New inquiry → Welcome email\n✓ Booking → Confirmation + reminders\n✓ Payment → Thank you + review request\n✓ Service complete → Follow-up sequence\n\n[BUILD YOUR FIRST WORKFLOW →]\n\nMost businesses save 10-15 hours/week with 5-7 automations.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nEvery repetitive task is time stolen from growth.\n\nAutomate:\n✓ New inquiry → Welcome email\n✓ Booking → Confirmation + reminders\n✓ Payment → Thank you + review request\n✓ Service complete → Follow-up sequence\n\n[BUILD YOUR FIRST WORKFLOW →]\n\nMost businesses save 10-15 hours/week with 5-7 automations.\n\nSarah"
     }
   },
   "connections": {

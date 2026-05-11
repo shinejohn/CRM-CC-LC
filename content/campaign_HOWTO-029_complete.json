@@ -157,7 +157,7 @@
     "email_1_educational": {
       "subject": "Know exactly what's working (and what's not)",
       "preview_text": "Stop guessing, start knowing",
-      "body": "Hey {{first_name}},\n\nHalf your marketing works. Which half?\n\nROI tracking shows you:\n✓ Where customers actually come from\n✓ What each channel costs\n✓ What each channel earns\n✓ Where to spend more (or less)\n\n[SET UP ROI TRACKING →]\n\nFormula: (Revenue - Cost) / Cost × 100\n\n{{sender_name}}"
+      "body": "Hey there,\n\nHalf your marketing works. Which half?\n\nROI tracking shows you:\n✓ Where customers actually come from\n✓ What each channel costs\n✓ What each channel earns\n✓ Where to spend more (or less)\n\n[SET UP ROI TRACKING →]\n\nFormula: (Revenue - Cost) / Cost × 100\n\nSarah"
     }
   },
   "connections": {

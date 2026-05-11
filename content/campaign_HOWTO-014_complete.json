@@ -167,7 +167,7 @@
     "email_1_educational": {
       "subject": "Create customer surveys that actually get responses",
       "preview_text": "Get real feedback that matters",
-      "body": "Hey {{first_name}},\n\nMost surveys get ignored. Here's how to build ones that get responses:\n\n✓ Keep it under 3 minutes\n✓ Ask one thing per question\n✓ Time it right (24-48 hrs after purchase)\n✓ Tell them why it matters\n\n[CREATE YOUR SURVEY →]\n\nPro tip: Always respond personally to negative feedback.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nMost surveys get ignored. Here's how to build ones that get responses:\n\n✓ Keep it under 3 minutes\n✓ Ask one thing per question\n✓ Time it right (24-48 hrs after purchase)\n✓ Tell them why it matters\n\n[CREATE YOUR SURVEY →]\n\nPro tip: Always respond personally to negative feedback.\n\nSarah"
     }
   },
   "connections": {

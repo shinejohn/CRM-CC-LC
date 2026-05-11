@@ -38,12 +38,12 @@
       "component": "HeroSlide",
       "title": "You've Been Nominated",
       "content": {
-        "headline": "{{business_name}} Has Been Nominated",
+        "headline": "your business Has Been Nominated",
         "subhead": "For this week's Featured Business Spotlight",
         "visual": "Spotlight/stage imagery with business name",
         "badge": "NOMINATED"
       },
-      "narration": "Great news—{{business_name}} has been nominated for this week's Featured Business Spotlight. This is a real opportunity. Let me show you what featured businesses get.",
+      "narration": "Great news—your business has been nominated for this week's Featured Business Spotlight. This is a real opportunity. Let me show you what featured businesses get.",
       "duration_seconds": 15,
       "audio_file": "slide-01-nominated.mp3"
     },
@@ -147,7 +147,7 @@
         ],
         "note": "Not everyone is selected—we feature businesses that serve the community well"
       },
-      "narration": "Here's how it works. Submit your application—takes about five minutes. Our team reviews within twenty-four to forty-eight hours. If you're selected, we'll contact you for a brief interview. Then your feature goes live within a week. I'll be honest: not everyone is selected. We feature businesses that genuinely serve the community well. But you've been nominated, which means someone thought {{business_name}} qualifies.",
+      "narration": "Here's how it works. Submit your application—takes about five minutes. Our team reviews within twenty-four to forty-eight hours. If you're selected, we'll contact you for a brief interview. Then your feature goes live within a week. I'll be honest: not everyone is selected. We feature businesses that genuinely serve the community well. But you've been nominated, which means someone thought your business qualifies.",
       "duration_seconds": 30,
       "audio_file": "slide-04-process.mp3"
     },
@@ -198,7 +198,7 @@
         },
         "reassurance": "Free to apply • No commitment • We'll follow up within 48 hours"
       },
-      "narration": "Your nomination is open now. Featured spots fill quickly, so I'd recommend applying this week. Click 'Apply for Feature' to submit your application. It's free, there's no commitment, and we'll follow up within forty-eight hours. {{business_name}} has been nominated. The only question is whether you'll accept.",
+      "narration": "Your nomination is open now. Featured spots fill quickly, so I'd recommend applying this week. Click 'Apply for Feature' to submit your application. It's free, there's no commitment, and we'll follow up within forty-eight hours. your business has been nominated. The only question is whether you'll accept.",
       "duration_seconds": 20,
       "audio_file": "slide-06-cta.mp3"
     }
@@ -206,13 +206,13 @@
   "emails": {
     "email_hook": {
       "subject": "Apply to be featured in this week's spotlight",
-      "preview_text": "{{business_name}} has been nominated",
-      "body": "Hey {{first_name}},\n\n{{business_name}} has been nominated for our Featured Business Spotlight.\n\nThis isn't spam. Someone thought your business deserves to be highlighted.\n\nFeatured businesses get:\n✓ Top placement in directory\n✓ Feature story in local news\n✓ Social media spotlight\n✓ 5x average visibility\n✓ Permanent 'Featured' badge\n\nThe numbers: Featured businesses see 487% more views and 312% more inquiries during their feature week.\n\n[APPLY FOR FEATURE →]\n\nApplication takes 5 minutes. We review within 48 hours.\n\nNot everyone is selected—but you've been nominated.\n\n{{sender_name}}\nFibonacco"
+      "preview_text": "your business has been nominated",
+      "body": "Hey there,\n\nyour business has been nominated for our Featured Business Spotlight.\n\nThis isn't spam. Someone thought your business deserves to be highlighted.\n\nFeatured businesses get:\n✓ Top placement in directory\n✓ Feature story in local news\n✓ Social media spotlight\n✓ 5x average visibility\n✓ Permanent 'Featured' badge\n\nThe numbers: Featured businesses see 487% more views and 312% more inquiries during their feature week.\n\n[APPLY FOR FEATURE →]\n\nApplication takes 5 minutes. We review within 48 hours.\n\nNot everyone is selected—but you've been nominated.\n\nSarah\nFibonacco"
     },
     "email_reminder": {
       "subject": "Your feature nomination expires soon",
       "preview_text": "5 minutes to apply",
-      "body": "Hey {{first_name}},\n\nQuick reminder: {{business_name}}'s nomination for our Featured Business Spotlight is still open.\n\nFeatured spots fill quickly, and nominations don't last forever.\n\nIf you want:\n→ 5x visibility\n→ News feature about your business\n→ Social media spotlight\n→ Permanent 'Featured' badge\n\n...the application takes 5 minutes:\n\n[APPLY NOW →]\n\nWe review within 48 hours.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nQuick reminder: your business's nomination for our Featured Business Spotlight is still open.\n\nFeatured spots fill quickly, and nominations don't last forever.\n\nIf you want:\n→ 5x visibility\n→ News feature about your business\n→ Social media spotlight\n→ Permanent 'Featured' badge\n\n...the application takes 5 minutes:\n\n[APPLY NOW →]\n\nWe review within 48 hours.\n\nSarah"
     }
   },
   "connections": {

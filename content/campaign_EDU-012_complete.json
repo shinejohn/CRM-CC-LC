@@ -217,7 +217,7 @@
     "email_1_educational": {
       "subject": "Your customers care about privacy. Here's what you need to know.",
       "preview_text": "Privacy is now a competitive advantage",
-      "body": "Hey {{first_name}},\n\nPrivacy isn't just for big tech.\n\n• 79% of consumers worry about how businesses use their data\n• 81% would stop doing business after a breach\n• 73% prefer businesses with clear privacy practices\n\nYou probably collect more data than you realize:\n→ Contact info\n→ Transaction history\n→ Communication records\n→ Website visitor data\n\nAll of this is data you're responsible for.\n\n[WATCH THE 3-MINUTE GUIDE →]\n\nGood news: Privacy done right is actually a marketing advantage.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nPrivacy isn't just for big tech.\n\n• 79% of consumers worry about how businesses use their data\n• 81% would stop doing business after a breach\n• 73% prefer businesses with clear privacy practices\n\nYou probably collect more data than you realize:\n→ Contact info\n→ Transaction history\n→ Communication records\n→ Website visitor data\n\nAll of this is data you're responsible for.\n\n[WATCH THE 3-MINUTE GUIDE →]\n\nGood news: Privacy done right is actually a marketing advantage.\n\nSarah\nFibonacco"
     }
   },
   "connections": {

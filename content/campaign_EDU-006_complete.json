@@ -246,17 +246,17 @@
     "email_1_educational": {
       "subject": "The employee you couldn't afford just became free",
       "preview_text": "Your AI employee is ready",
-      "body": "Hey {{first_name}},\n\nWhat if you had an employee who:\n\n• Worked 24/7 without breaks\n• Answered every inquiry within seconds\n• Never forgot a follow-up\n• Handled repetitive tasks flawlessly\n• Cost almost nothing\n\nThat employee exists now. It's AI.\n\nAnd it's no longer just for big corporations.\n\nI put together a 3-minute presentation on what AI can actually do for a business like {{business_name}}.\n\n[WATCH THE PRESENTATION →]\n\nOne business owner went from 70-hour weeks to 45—and took his first vacation in 8 years.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nWhat if you had an employee who:\n\n• Worked 24/7 without breaks\n• Answered every inquiry within seconds\n• Never forgot a follow-up\n• Handled repetitive tasks flawlessly\n• Cost almost nothing\n\nThat employee exists now. It's AI.\n\nAnd it's no longer just for big corporations.\n\nI put together a 3-minute presentation on what AI can actually do for a business like your business.\n\n[WATCH THE PRESENTATION →]\n\nOne business owner went from 70-hour weeks to 45—and took his first vacation in 8 years.\n\nSarah\nFibonacco"
     },
     "email_2a_engaged": {
       "subject": "Ready to activate your AI employee?",
       "preview_text": "Start free, see results in days",
-      "body": "Hey {{first_name}},\n\nYou watched the AI employee presentation. Key takeaways:\n\n• AI can handle inquiries, content, scheduling, follow-ups, admin\n• You're not replaced—you're amplified\n• The math: 12 hours/week saved = $25K/year value\n• Your competitors are already figuring this out\n\nReady to activate AI for {{business_name}}?\n\n[ACTIVATE YOUR AI EMPLOYEE →]\n\nStart free. See results in days. Scale when ready.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nYou watched the AI employee presentation. Key takeaways:\n\n• AI can handle inquiries, content, scheduling, follow-ups, admin\n• You're not replaced—you're amplified\n• The math: 12 hours/week saved = $25K/year value\n• Your competitors are already figuring this out\n\nReady to activate AI for your business?\n\n[ACTIVATE YOUR AI EMPLOYEE →]\n\nStart free. See results in days. Scale when ready.\n\nSarah"
     },
     "email_2b_reengage": {
       "subject": "Still doing everything manually?",
       "preview_text": "Your AI employee is waiting",
-      "body": "Hey {{first_name}},\n\nHow many hours did you spend this week on:\n\n→ Answering routine questions\n→ Writing posts and emails\n→ Scheduling and follow-ups\n→ Data entry and admin\n\nAI can handle all of that. While you sleep.\n\n3 minutes to see what's possible:\n\n[WATCH THE PRESENTATION →]\n\nOne owner saved 25 hours/week. What would you do with that time?\n\n{{sender_name}}"
+      "body": "Hey there,\n\nHow many hours did you spend this week on:\n\n→ Answering routine questions\n→ Writing posts and emails\n→ Scheduling and follow-ups\n→ Data entry and admin\n\nAI can handle all of that. While you sleep.\n\n3 minutes to see what's possible:\n\n[WATCH THE PRESENTATION →]\n\nOne owner saved 25 hours/week. What would you do with that time?\n\nSarah"
     }
   },
   "connections": {

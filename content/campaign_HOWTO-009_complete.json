@@ -147,7 +147,7 @@
     "email_1_educational": {
       "subject": "Your dashboard explained: find everything in 5 minutes",
       "preview_text": "Quick tour of your command center",
-      "body": "Hey {{first_name}},\n\nYour dashboard has everything you need in one place.\n\n5-minute tour:\n→ Quick stats at a glance\n→ Action items that need attention\n→ Navigation to all features\n→ Analytics and insights\n\n[TAKE THE DASHBOARD TOUR →]\n\nPro tip: Check it daily (takes 2 minutes) to stay on top of everything.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nYour dashboard has everything you need in one place.\n\n5-minute tour:\n→ Quick stats at a glance\n→ Action items that need attention\n→ Navigation to all features\n→ Analytics and insights\n\n[TAKE THE DASHBOARD TOUR →]\n\nPro tip: Check it daily (takes 2 minutes) to stay on top of everything.\n\nSarah"
     }
   },
   "connections": {

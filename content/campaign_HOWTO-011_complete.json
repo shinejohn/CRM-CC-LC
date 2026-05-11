@@ -148,7 +148,7 @@
     "email_1_educational": {
       "subject": "Set up email marketing in 10 minutes",
       "preview_text": "Reach customers directly",
-      "body": "Hey {{first_name}},\n\nEmail marketing has the highest ROI of any channel.\n\n10-minute setup:\n1. Create sender profile\n2. Import contacts (legally)\n3. Design your email\n4. Test and send\n\n[START YOUR FIRST EMAIL →]\n\nPro tip: Tuesday-Thursday, 10am or 2pm are best send times.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nEmail marketing has the highest ROI of any channel.\n\n10-minute setup:\n1. Create sender profile\n2. Import contacts (legally)\n3. Design your email\n4. Test and send\n\n[START YOUR FIRST EMAIL →]\n\nPro tip: Tuesday-Thursday, 10am or 2pm are best send times.\n\nSarah"
     }
   },
   "connections": {

@@ -184,12 +184,12 @@
     "email_1_hook": {
       "subject": "You're an expert. Let's make sure people know it.",
       "preview_text": "Join our local expert directory",
-      "body": "Hey {{first_name}},\n\nYou're an expert in what you do.\n\nBut when journalists need a quote, when community members have questions—are they calling you?\n\nOur expert directory makes sure they are.\n\nExpert benefits:\n✓ Listed as local expert in your field\n✓ Journalists contact you for quotes\n✓ Answer community Q&As\n✓ Verified expert badge\n✓ Speaking invitations\n\n[APPLY FOR EXPERT STATUS →]\n\nOne financial planner was quoted in 4 articles in 6 months. Now he's THE local financial voice.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nYou're an expert in what you do.\n\nBut when journalists need a quote, when community members have questions—are they calling you?\n\nOur expert directory makes sure they are.\n\nExpert benefits:\n✓ Listed as local expert in your field\n✓ Journalists contact you for quotes\n✓ Answer community Q&As\n✓ Verified expert badge\n✓ Speaking invitations\n\n[APPLY FOR EXPERT STATUS →]\n\nOne financial planner was quoted in 4 articles in 6 months. Now he's THE local financial voice.\n\nSarah\nFibonacco"
     },
     "email_3_hook": {
       "subject": "Your expert profile is drafted—take a look",
       "preview_text": "See how you'd be listed",
-      "body": "Hey {{first_name}},\n\nWe drafted an expert profile for you:\n\n[SEE YOUR EXPERT PROFILE →]\n\nThis is how you'd appear in our expert directory when journalists and community members are looking for expertise in your field.\n\nApprove it to go live, or suggest changes.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nWe drafted an expert profile for you:\n\n[SEE YOUR EXPERT PROFILE →]\n\nThis is how you'd appear in our expert directory when journalists and community members are looking for expertise in your field.\n\nApprove it to go live, or suggest changes.\n\nSarah"
     }
   },
   "connections": {

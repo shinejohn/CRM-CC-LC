@@ -5,7 +5,7 @@
     "day": 10,
     "type": "Hook",
     "title": "Create a Coupon",
-    "subject": "We drafted a coupon for {{business_name}} - publish it?",
+    "subject": "We drafted a coupon for your business - publish it?",
     "landing_page": "create-coupon",
     "template": "coupon-creator",
     "description": "Show SMB a pre-made coupon based on their business type and invite them to publish"
@@ -13,7 +13,7 @@
   "landing_page": {
     "campaign_id": "HOOK-003",
     "landing_page_slug": "create-coupon",
-    "url": "/coupons/new/{{business_slug}}",
+    "url": "/coupons/new/your-business",
     "template_id": "coupon-creator",
     "template_name": "Coupon Creator",
     "slide_count": 5,
@@ -38,12 +38,12 @@
       "component": "PersonalizedHeroSlide",
       "title": "Your Coupon Is Ready",
       "content": {
-        "headline": "We Created a Coupon for {{business_name}}",
+        "headline": "We Created a Coupon for your business",
         "subhead": "Ready to drive new customers through your door",
         "visual": "Coupon mockup with their business name",
-        "stat_highlight": "Coupons get {{avg_redemptions}} redemptions on average"
+        "stat_highlight": "Coupons get 85 redemptions on average"
       },
-      "narration": "Hey {{first_name}}, we did something for you. We created a coupon for {{business_name}}. It's ready to publish and start driving new customers through your door. Coupons on our platform get {{avg_redemptions}} redemptions on average. Want to see what we made?",
+      "narration": "Hey there, we did something for you. We created a coupon for your business. It's ready to publish and start driving new customers through your door. Coupons on our platform get 85 redemptions on average. Want to see what we made?",
       "duration_seconds": 15,
       "audio_file": "slide-01-hero.mp3"
     },
@@ -54,16 +54,16 @@
       "content": {
         "headline": "Here's What We Created",
         "coupon_preview": {
-          "offer": "{{suggested_offer}}",
-          "value": "{{suggested_value}}",
-          "terms": "{{suggested_terms}}",
+          "offer": "15% off for new customers",
+          "value": "15%",
+          "terms": "Valid for 30 days, new customers only",
           "expiry": "Valid for 30 days",
           "redemption": "Show this coupon",
           "status": "Draft - Ready to Publish"
         },
         "note": "Edit any of this. Change the offer, the terms, the expiration—whatever you want."
       },
-      "narration": "Here's what we created: {{suggested_offer}}. {{suggested_value}} off for new customers. Valid for thirty days. Of course, you can edit any of this—change the offer amount, the terms, the expiration. This is just a starting point based on what works well for {{business_category}} businesses.",
+      "narration": "Here's what we created: 15% off for new customers. 15% off for new customers. Valid for thirty days. Of course, you can edit any of this—change the offer amount, the terms, the expiration. This is just a starting point based on what works well for local businesses.",
       "duration_seconds": 20,
       "audio_file": "slide-02-preview.mp3"
     },
@@ -75,15 +75,15 @@
         "headline": "What Coupons Actually Do",
         "results": [
           {
-            "metric": "{{avg_redemptions}}",
+            "metric": "85",
             "label": "average redemptions per coupon"
           },
           {
-            "metric": "{{avg_new_customers}}",
+            "metric": "40",
             "label": "become repeat customers"
           },
           {
-            "metric": "{{avg_spend_increase}}",
+            "metric": "30%",
             "label": "spend more than coupon value"
           },
           {
@@ -93,7 +93,7 @@
         ],
         "insight": "Coupons don't just discount—they introduce. Most redeemers become regulars."
       },
-      "narration": "Here's what coupons actually do. On average, {{avg_redemptions}} people redeem each coupon. Of those, {{avg_new_customers}} percent become repeat customers. And here's the best part: people who use coupons typically spend {{avg_spend_increase}} more than the coupon value. You're not losing money—you're gaining customers. And publishing is completely free.",
+      "narration": "Here's what coupons actually do. On average, 85 people redeem each coupon. Of those, 40 percent become repeat customers. And here's the best part: people who use coupons typically spend 30% more than the coupon value. You're not losing money—you're gaining customers. And publishing is completely free.",
       "duration_seconds": 25,
       "audio_file": "slide-03-results.mp3"
     },
@@ -106,11 +106,11 @@
         "distribution": [
           {
             "channel": "Coupon Directory",
-            "reach": "{{directory_reach}} monthly visitors"
+            "reach": "15,000 monthly visitors"
           },
           {
             "channel": "Community Newsletter",
-            "reach": "{{newsletter_reach}} subscribers"
+            "reach": "10,000 subscribers"
           },
           {
             "channel": "Your Business Listing",
@@ -123,7 +123,7 @@
         ],
         "note": "One publish → everywhere that matters"
       },
-      "narration": "When you publish your coupon, it doesn't just sit somewhere hoping to be found. It goes to our coupon directory—{{directory_reach}} people check it monthly. It gets featured in our community newsletter—{{newsletter_reach}} subscribers. It shows up prominently on your business listing. And it becomes part of what AI knows about you. One publish, maximum visibility.",
+      "narration": "When you publish your coupon, it doesn't just sit somewhere hoping to be found. It goes to our coupon directory—15,000 people check it monthly. It gets featured in our community newsletter—10,000 subscribers. It shows up prominently on your business listing. And it becomes part of what AI knows about you. One publish, maximum visibility.",
       "duration_seconds": 20,
       "audio_file": "slide-04-distribution.mp3"
     },
@@ -153,9 +153,9 @@
   ],
   "emails": {
     "email_hook": {
-      "subject": "We drafted a coupon for {{business_name}} - publish it?",
-      "preview_text": "{{suggested_value}} off to drive new customers",
-      "body": "Hey {{first_name}},\n\nWe created something for {{business_name}}:\n\n🎟️ {{suggested_offer}}\n{{suggested_value}} off for new customers\n\nThis is ready to publish and start driving people through your door.\n\n[SEE YOUR COUPON →]\n\nHere's what happens when you publish:\n\n✓ Featured in our coupon directory ({{directory_reach}} monthly visitors)\n✓ Included in our community newsletter ({{newsletter_reach}} subscribers)\n✓ Displayed on your business listing\n✓ Found by AI when people search for deals\n\nCoupons on our platform get {{avg_redemptions}} redemptions on average.\n\nPublishing is free. Edit anytime. Pause anytime.\n\n[PUBLISH YOUR COUPON →]\n\n{{sender_name}}\nFibonacco\n\nP.S. Coupons published today go live in tonight's newsletter."
+      "subject": "We drafted a coupon for your business - publish it?",
+      "preview_text": "15% off to drive new customers",
+      "body": "Hey there,\n\nWe created something for your business:\n\n🎟️ 15% off for new customers\n15% off for new customers\n\nThis is ready to publish and start driving people through your door.\n\n[SEE YOUR COUPON →]\n\nHere's what happens when you publish:\n\n✓ Featured in our coupon directory (15,000 monthly visitors)\n✓ Included in our community newsletter (10,000 subscribers)\n✓ Displayed on your business listing\n✓ Found by AI when people search for deals\n\nCoupons on our platform get 85 redemptions on average.\n\nPublishing is free. Edit anytime. Pause anytime.\n\n[PUBLISH YOUR COUPON →]\n\nSarah\nFibonacco\n\nP.S. Coupons published today go live in tonight's newsletter."
     }
   },
   "personalization": {

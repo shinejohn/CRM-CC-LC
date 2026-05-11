@@ -145,7 +145,7 @@
     "email_1_educational": {
       "subject": "Understand your analytics in 10 minutes",
       "preview_text": "Only a few metrics actually matter",
-      "body": "Hey {{first_name}},\n\nAnalytics can feel overwhelming. But only 4 categories matter:\n\n→ Visibility (are people seeing you?)\n→ Engagement (are they interested?)\n→ Conversion (are they taking action?)\n→ Retention (are they coming back?)\n\n[UNDERSTAND YOUR ANALYTICS →]\n\nPro tip: Check weekly, not daily. Daily is noise, weekly shows trends.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nAnalytics can feel overwhelming. But only 4 categories matter:\n\n→ Visibility (are people seeing you?)\n→ Engagement (are they interested?)\n→ Conversion (are they taking action?)\n→ Retention (are they coming back?)\n\n[UNDERSTAND YOUR ANALYTICS →]\n\nPro tip: Check weekly, not daily. Daily is noise, weekly shows trends.\n\nSarah"
     }
   },
   "connections": {

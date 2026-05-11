@@ -242,7 +242,7 @@
     "email_tutorial": {
       "subject": "Make news: How to post announcements that get seen",
       "preview_text": "10 minutes to being newsworthy",
-      "body": "Hey {{first_name}},\n\nYou have news. You just don't realize it.\n\n• Business milestone? News.\n• New offering? News.\n• Team update? News.\n• Community involvement? News.\n\nThe question is whether anyone sees it.\n\nI put together a 10-minute guide on creating announcements that actually get distributed—across the community, potentially to local news, and to all your connected accounts.\n\n[CREATE YOUR ANNOUNCEMENT →]\n\nIf you'd tell a customer about it in person, it's worth announcing.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nYou have news. You just don't realize it.\n\n• Business milestone? News.\n• New offering? News.\n• Team update? News.\n• Community involvement? News.\n\nThe question is whether anyone sees it.\n\nI put together a 10-minute guide on creating announcements that actually get distributed—across the community, potentially to local news, and to all your connected accounts.\n\n[CREATE YOUR ANNOUNCEMENT →]\n\nIf you'd tell a customer about it in person, it's worth announcing.\n\nSarah\nFibonacco"
     }
   },
   "connections": {

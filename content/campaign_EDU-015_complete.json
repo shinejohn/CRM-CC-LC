@@ -271,7 +271,7 @@
     "email_1_educational": {
       "subject": "Meet your new AI employees (they don't need coffee breaks)",
       "preview_text": "24/7, never sick, constantly improving",
-      "body": "Hey {{first_name}},\n\nYour new team members:\n✓ Don't need coffee breaks\n✓ Never call in sick\n✓ Available 24/7\n✓ Get better over time\n✓ Cost 10-20% of human employees\n\nAI employees aren't chatbots. They're specialized systems trained for specific roles:\n\n→ AI Receptionist (calls, scheduling)\n→ AI Marketing Assistant (content, social)\n→ AI Customer Service Rep (support, reviews)\n→ AI Sales Assistant (leads, follow-ups)\n\n[WATCH THE 5-MINUTE INTRODUCTION →]\n\nOne AI employee = 10-20 hours/week saved.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nYour new team members:\n✓ Don't need coffee breaks\n✓ Never call in sick\n✓ Available 24/7\n✓ Get better over time\n✓ Cost 10-20% of human employees\n\nAI employees aren't chatbots. They're specialized systems trained for specific roles:\n\n→ AI Receptionist (calls, scheduling)\n→ AI Marketing Assistant (content, social)\n→ AI Customer Service Rep (support, reviews)\n→ AI Sales Assistant (leads, follow-ups)\n\n[WATCH THE 5-MINUTE INTRODUCTION →]\n\nOne AI employee = 10-20 hours/week saved.\n\nSarah\nFibonacco"
     }
   },
   "connections": {

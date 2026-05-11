@@ -160,7 +160,7 @@
     "email_1_educational": {
       "subject": "Train AI to sound like your business",
       "preview_text": "Make AI sound like you",
-      "body": "Hey {{first_name}},\n\nGeneric AI sounds like... generic AI.\n\nTrained AI sounds like YOUR business.\n\nTrain on:\n✓ Your services and pricing\n✓ Your voice and tone\n✓ Common scenarios\n✓ When to escalate to human\n\n[TRAIN YOUR AI →]\n\nTip: Provide real examples of responses you've written.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nGeneric AI sounds like... generic AI.\n\nTrained AI sounds like YOUR business.\n\nTrain on:\n✓ Your services and pricing\n✓ Your voice and tone\n✓ Common scenarios\n✓ When to escalate to human\n\n[TRAIN YOUR AI →]\n\nTip: Provide real examples of responses you've written.\n\nSarah"
     }
   },
   "connections": {

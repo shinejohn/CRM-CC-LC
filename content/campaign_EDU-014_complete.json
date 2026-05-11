@@ -201,7 +201,7 @@
     "email_1_educational": {
       "subject": "Your customers expect instant responses. Here's how to deliver.",
       "preview_text": "24/7 customer service without adding staff",
-      "body": "Hey {{first_name}},\n\n90% of customers expect 'immediate' responses.\n\nImmediate = 10 minutes or less.\n\nAverage small business response time? 12+ hours.\n\n59% will try a competitor if you're slow.\n\nAI can close this gap:\n✓ Instant responses, 24/7\n✓ Answer common questions\n✓ Book appointments\n✓ Handle initial complaints\n✓ Follow up automatically\n\n[WATCH THE 3-MINUTE GUIDE →]\n\nOne medical spa went from 3-4 hour response time to under 2 minutes—and bookings jumped 31%.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\n90% of customers expect 'immediate' responses.\n\nImmediate = 10 minutes or less.\n\nAverage small business response time? 12+ hours.\n\n59% will try a competitor if you're slow.\n\nAI can close this gap:\n✓ Instant responses, 24/7\n✓ Answer common questions\n✓ Book appointments\n✓ Handle initial complaints\n✓ Follow up automatically\n\n[WATCH THE 3-MINUTE GUIDE →]\n\nOne medical spa went from 3-4 hour response time to under 2 minutes—and bookings jumped 31%.\n\nSarah\nFibonacco"
     }
   },
   "connections": {

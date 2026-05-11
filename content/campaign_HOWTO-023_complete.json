@@ -158,7 +158,7 @@
     "email_1_educational": {
       "subject": "Generate business reports automatically",
       "preview_text": "Know your numbers without the work",
-      "body": "Hey {{first_name}},\n\nHow's your business really doing?\n\nAutomated reports deliver:\n✓ Weekly snapshot (Monday inbox)\n✓ Monthly deep dive (trends + recommendations)\n✓ Alert reports (when something important happens)\n\n[SET UP AUTOMATIC REPORTS →]\n\nTip: Focus on 5-7 key metrics. Less is more.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nHow's your business really doing?\n\nAutomated reports deliver:\n✓ Weekly snapshot (Monday inbox)\n✓ Monthly deep dive (trends + recommendations)\n✓ Alert reports (when something important happens)\n\n[SET UP AUTOMATIC REPORTS →]\n\nTip: Focus on 5-7 key metrics. Less is more.\n\nSarah"
     }
   },
   "connections": {

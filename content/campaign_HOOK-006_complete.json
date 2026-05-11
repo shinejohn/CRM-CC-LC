@@ -221,7 +221,7 @@
     "email_hook": {
       "subject": "Connect your CRM and never lose a lead again",
       "preview_text": "2-minute setup, automatic sync",
-      "body": "Hey {{first_name}},\n\nHow many leads have you lost to manual data entry?\n\nInquiry comes in here. You copy it to your CRM. Maybe. If you remember. If you have time.\n\nWhat if every inquiry automatically synced to your CRM? Zero manual entry. Zero lost leads.\n\n[CONNECT YOUR CRM →]\n\nWe integrate with:\n• Salesforce\n• HubSpot\n• Zoho\n• Pipedrive\n• And 20+ more\n\n2-minute setup. Free. Syncing starts immediately.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nHow many leads have you lost to manual data entry?\n\nInquiry comes in here. You copy it to your CRM. Maybe. If you remember. If you have time.\n\nWhat if every inquiry automatically synced to your CRM? Zero manual entry. Zero lost leads.\n\n[CONNECT YOUR CRM →]\n\nWe integrate with:\n• Salesforce\n• HubSpot\n• Zoho\n• Pipedrive\n• And 20+ more\n\n2-minute setup. Free. Syncing starts immediately.\n\nSarah\nFibonacco"
     }
   },
   "connections": {

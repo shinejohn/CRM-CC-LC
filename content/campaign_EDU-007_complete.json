@@ -225,17 +225,17 @@
     "email_1_educational": {
       "subject": "AI writes. You approve. Content happens.",
       "preview_text": "Finally, consistent content without the work",
-      "body": "Hey {{first_name}},\n\nYou know you should post more.\n\nBut who has time to:\n• Write social posts daily\n• Create blog articles weekly\n• Send email newsletters regularly\n• Keep up with all the platforms\n\nWhat if AI did the writing, and you just approved?\n\n[WATCH THE 3-MINUTE PRESENTATION →]\n\nOne fitness studio went from 2 posts/month to daily posts—spending only 10 minutes/week on content.\n\nTheir following grew 340%.\n\nConsistency beats perfection. AI makes consistency possible.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nYou know you should post more.\n\nBut who has time to:\n• Write social posts daily\n• Create blog articles weekly\n• Send email newsletters regularly\n• Keep up with all the platforms\n\nWhat if AI did the writing, and you just approved?\n\n[WATCH THE 3-MINUTE PRESENTATION →]\n\nOne fitness studio went from 2 posts/month to daily posts—spending only 10 minutes/week on content.\n\nTheir following grew 340%.\n\nConsistency beats perfection. AI makes consistency possible.\n\nSarah\nFibonacco"
     },
     "email_2a_engaged": {
       "subject": "Ready to activate AI content?",
       "preview_text": "Your first AI-drafted post is waiting",
-      "body": "Hey {{first_name}},\n\nYou watched the AI content presentation. Key takeaways:\n\n• AI drafts, you approve (2-5 min reviews)\n• Consistency beats perfection (10x reach difference)\n• AI learns your voice over time\n• Works for social, blogs, emails, announcements\n\nReady to activate for {{business_name}}?\n\n[ACTIVATE AI CONTENT →]\n\nYour first AI-drafted post is waiting.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nYou watched the AI content presentation. Key takeaways:\n\n• AI drafts, you approve (2-5 min reviews)\n• Consistency beats perfection (10x reach difference)\n• AI learns your voice over time\n• Works for social, blogs, emails, announcements\n\nReady to activate for your business?\n\n[ACTIVATE AI CONTENT →]\n\nYour first AI-drafted post is waiting.\n\nSarah"
     },
     "email_2b_reengage": {
       "subject": "Still writing all your own content?",
       "preview_text": "There's an easier way",
-      "body": "Hey {{first_name}},\n\nQuick reality check:\n\nHow many hours did you spend on content this month?\n\nHow many posts actually went out?\n\nAI content creation:\n→ AI writes based on your business\n→ You review in 2-5 minutes\n→ Publish with one click\n→ Stay consistent without the time drain\n\n3 minutes to see how:\n\n[WATCH THE PRESENTATION →]\n\n{{sender_name}}"
+      "body": "Hey there,\n\nQuick reality check:\n\nHow many hours did you spend on content this month?\n\nHow many posts actually went out?\n\nAI content creation:\n→ AI writes based on your business\n→ You review in 2-5 minutes\n→ Publish with one click\n→ Stay consistent without the time drain\n\n3 minutes to see how:\n\n[WATCH THE PRESENTATION →]\n\nSarah"
     }
   },
   "connections": {

@@ -149,7 +149,7 @@
     "email_1_educational": {
       "subject": "Connect Google Business Profile for maximum visibility",
       "preview_text": "One source of truth, everywhere",
-      "body": "Hey {{first_name}},\n\nYour Google Business Profile is how most people find you.\n\nConnect it to:\n✓ Auto-sync hours, services, photos\n✓ Get instant review notifications\n✓ Publish posts to Google from one place\n✓ Track what search terms find you\n\n[CONNECT GOOGLE NOW →]\n\nBusinesses with photos get 42% more direction requests.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nYour Google Business Profile is how most people find you.\n\nConnect it to:\n✓ Auto-sync hours, services, photos\n✓ Get instant review notifications\n✓ Publish posts to Google from one place\n✓ Track what search terms find you\n\n[CONNECT GOOGLE NOW →]\n\nBusinesses with photos get 42% more direction requests.\n\nSarah"
     }
   },
   "connections": {

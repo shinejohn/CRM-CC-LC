@@ -166,7 +166,7 @@
     "email_1_educational": {
       "subject": "Set up your team for seamless collaboration",
       "preview_text": "Get everyone working together",
-      "body": "Hey {{first_name}},\n\nAs you grow, your team needs to work in the same system.\n\nSet up:\n✓ Team members with right access\n✓ Auto-assignment of tasks\n✓ Notifications that keep everyone informed\n✓ Permission levels that keep data secure\n\n[ADD YOUR TEAM →]\n\nTip: Start with fewer permissions, expand as needed.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nAs you grow, your team needs to work in the same system.\n\nSet up:\n✓ Team members with right access\n✓ Auto-assignment of tasks\n✓ Notifications that keep everyone informed\n✓ Permission levels that keep data secure\n\n[ADD YOUR TEAM →]\n\nTip: Start with fewer permissions, expand as needed.\n\nSarah"
     }
   },
   "connections": {

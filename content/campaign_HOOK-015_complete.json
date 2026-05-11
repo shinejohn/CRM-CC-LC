@@ -5,7 +5,7 @@
     "day": 72,
     "type": "Hook",
     "title": "Business Nomination",
-    "subject": "Someone nominated {{business_name}} for recognition",
+    "subject": "Someone nominated your business for recognition",
     "landing_page": "business-nomination",
     "template": "nomination",
     "description": "Business award/recognition nomination notification and claim"
@@ -30,8 +30,8 @@
       "content": {
         "headline": "Nomination Details",
         "nomination": {
-          "business": "{{business_name}}",
-          "category": "{{nomination_category}}",
+          "business": "your business",
+          "category": "Community Excellence",
           "nominated_by": "A community member",
           "reason": "For outstanding service and community contribution"
         },
@@ -131,14 +131,14 @@
   ],
   "emails": {
     "email_1_hook": {
-      "subject": "Someone nominated {{business_name}} for recognition",
+      "subject": "Someone nominated your business for recognition",
       "preview_text": "Claim your nomination in 3 minutes",
-      "body": "Hey {{first_name}},\n\nGreat news: someone nominated {{business_name}} for community recognition.\n\nThey believe you're doing something special and deserve to be highlighted.\n\nIf selected, you'll receive:\n✓ Winner announcement to 10,000+ subscribers\n✓ News article feature\n✓ Award badge for marketing\n✓ Social media spotlight\n✓ Physical certificate\n\n[CLAIM YOUR NOMINATION →]\n\nClaiming takes under 3 minutes.\n\nNomination expires in 7 days.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nGreat news: someone nominated your business for community recognition.\n\nThey believe you're doing something special and deserve to be highlighted.\n\nIf selected, you'll receive:\n✓ Winner announcement to 10,000+ subscribers\n✓ News article feature\n✓ Award badge for marketing\n✓ Social media spotlight\n✓ Physical certificate\n\n[CLAIM YOUR NOMINATION →]\n\nClaiming takes under 3 minutes.\n\nNomination expires in 7 days.\n\nSarah\nFibonacco"
     },
     "email_2_reminder": {
       "subject": "Your nomination expires in 3 days",
       "preview_text": "Don't let this opportunity pass",
-      "body": "Hey {{first_name}},\n\n{{business_name}}'s community nomination expires in 3 days.\n\nSomeone believed enough in your business to nominate you. Don't let it go unclaimed.\n\n[CLAIM IN 3 MINUTES →]\n\n{{sender_name}}"
+      "body": "Hey there,\n\nyour business's community nomination expires in 3 days.\n\nSomeone believed enough in your business to nominate you. Don't let it go unclaimed.\n\n[CLAIM IN 3 MINUTES →]\n\nSarah"
     }
   },
   "connections": {

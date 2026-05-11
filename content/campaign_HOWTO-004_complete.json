@@ -284,7 +284,7 @@
     "email_tutorial": {
       "subject": "Turn your location into a destination (venue profile guide)",
       "preview_text": "20 minutes to a profile that converts",
-      "body": "Hey {{first_name}},\n\nIf {{business_name}} has a physical location where people come to you—a restaurant, event space, studio, store, anything—this guide is for you.\n\nI put together a 20-minute walkthrough for creating a venue profile that actually converts lookers into bookers:\n\n✓ Building a photo gallery that wows\n✓ Listing amenities so you're found by every search\n✓ Pricing strategies that work\n✓ Social proof that builds trust\n✓ Enabling frictionless booking\n\n[START THE VENUE GUIDE →]\n\nPeople book venues they can visualize themselves in. Let's make {{business_name}} impossible to resist.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nIf your business has a physical location where people come to you—a restaurant, event space, studio, store, anything—this guide is for you.\n\nI put together a 20-minute walkthrough for creating a venue profile that actually converts lookers into bookers:\n\n✓ Building a photo gallery that wows\n✓ Listing amenities so you're found by every search\n✓ Pricing strategies that work\n✓ Social proof that builds trust\n✓ Enabling frictionless booking\n\n[START THE VENUE GUIDE →]\n\nPeople book venues they can visualize themselves in. Let's make your business impossible to resist.\n\nSarah\nFibonacco"
     }
   },
   "connections": {

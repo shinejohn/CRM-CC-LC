@@ -158,7 +158,7 @@
     "email_1_educational": {
       "subject": "Text your customers (the right way)",
       "preview_text": "98% open rate—not a typo",
-      "body": "Hey {{first_name}},\n\nEmail: 20% open rate.\nSMS: 98% open rate.\n\nBut there are rules.\n\n[LEARN COMPLIANT SMS MARKETING →]\n\nWhat works:\n✓ Appointment reminders\n✓ Flash sales\n✓ Order updates\n✓ Exclusive deals\n\nWhat doesn't:\n✗ Daily messages\n✗ Generic content\n✗ Texting without consent\n\n{{sender_name}}"
+      "body": "Hey there,\n\nEmail: 20% open rate.\nSMS: 98% open rate.\n\nBut there are rules.\n\n[LEARN COMPLIANT SMS MARKETING →]\n\nWhat works:\n✓ Appointment reminders\n✓ Flash sales\n✓ Order updates\n✓ Exclusive deals\n\nWhat doesn't:\n✗ Daily messages\n✗ Generic content\n✗ Texting without consent\n\nSarah"
     }
   },
   "connections": {

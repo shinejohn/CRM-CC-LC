@@ -204,12 +204,12 @@
     "email_1_hook": {
       "subject": "Sponsor our community events—your brand everywhere locals gather",
       "preview_text": "Sponsorship opportunities available",
-      "body": "Hey {{first_name}},\n\nThere's a way to be everywhere locals gather.\n\nNot with ads they ignore—as a community partner they appreciate.\n\nSponsors receive:\n✓ Logo on all event marketing\n✓ Verbal recognition at events\n✓ Featured in 10,000+ subscriber newsletter\n✓ News article mentions\n✓ Community goodwill\n\n[SEE SPONSORSHIP OPPORTUNITIES →]\n\nOne sponsor told us: 'People come in saying I saw you at the market. That never happens with online ads.'\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nThere's a way to be everywhere locals gather.\n\nNot with ads they ignore—as a community partner they appreciate.\n\nSponsors receive:\n✓ Logo on all event marketing\n✓ Verbal recognition at events\n✓ Featured in 10,000+ subscriber newsletter\n✓ News article mentions\n✓ Community goodwill\n\n[SEE SPONSORSHIP OPPORTUNITIES →]\n\nOne sponsor told us: 'People come in saying I saw you at the market. That never happens with online ads.'\n\nSarah\nFibonacco"
     },
     "email_3_hook": {
-      "subject": "We matched {{business_name}} with the perfect event",
+      "subject": "We matched your business with the perfect event",
       "preview_text": "Sponsorship opportunity specifically for you",
-      "body": "Hey {{first_name}},\n\nBased on {{business_name}}'s profile, we found a perfect sponsorship match:\n\n[SEE YOUR RECOMMENDED EVENT →]\n\nThis event reaches your exact customer base. Sponsor slots are limited.\n\nWant to discuss? Reply to this email.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nBased on your business's profile, we found a perfect sponsorship match:\n\n[SEE YOUR RECOMMENDED EVENT →]\n\nThis event reaches your exact customer base. Sponsor slots are limited.\n\nWant to discuss? Reply to this email.\n\nSarah"
     }
   },
   "connections": {

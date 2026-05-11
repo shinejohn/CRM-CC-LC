@@ -172,7 +172,7 @@
     "email_1_educational": {
       "subject": "Segment customers for targeted marketing",
       "preview_text": "Stop treating all customers the same",
-      "body": "Hey {{first_name}},\n\nA first-time visitor ≠ loyal regular.\nBig spender ≠ bargain hunter.\n\nSegmentation ideas:\n• Lapsed (90+ days) → \"We miss you\" offer\n• VIPs → Exclusive early access\n• New customers → Welcome sequence\n• Service A buyers → Intro Service B\n\n[CREATE YOUR SEGMENTS →]\n\nRight message + right audience = results.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nA first-time visitor ≠ loyal regular.\nBig spender ≠ bargain hunter.\n\nSegmentation ideas:\n• Lapsed (90+ days) → \"We miss you\" offer\n• VIPs → Exclusive early access\n• New customers → Welcome sequence\n• Service A buyers → Intro Service B\n\n[CREATE YOUR SEGMENTS →]\n\nRight message + right audience = results.\n\nSarah"
     }
   },
   "connections": {

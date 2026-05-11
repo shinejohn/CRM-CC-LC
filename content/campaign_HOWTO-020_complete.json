@@ -153,7 +153,7 @@
     "email_1_educational": {
       "subject": "Build an FAQ that answers questions before they're asked",
       "preview_text": "Save hours answering the same questions",
-      "body": "Hey {{first_name}},\n\nHow many times do you answer the same questions?\n\nA good FAQ:\n✓ Answers before customers ask\n✓ Saves you hours every week\n✓ Builds trust with transparency\n✓ Helps AI understand your business\n\n[BUILD YOUR FAQ →]\n\nTip: Lead with direct answer, keep under 100 words.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nHow many times do you answer the same questions?\n\nA good FAQ:\n✓ Answers before customers ask\n✓ Saves you hours every week\n✓ Builds trust with transparency\n✓ Helps AI understand your business\n\n[BUILD YOUR FAQ →]\n\nTip: Lead with direct answer, keep under 100 words.\n\nSarah"
     }
   },
   "connections": {

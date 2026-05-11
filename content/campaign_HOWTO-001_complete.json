@@ -211,7 +211,7 @@
     "email_tutorial": {
       "subject": "Your Command Center is ready - here's how to use it",
       "preview_text": "10 minutes to master your dashboard",
-      "body": "Hey {{first_name}},\n\nYou claimed your listing (nice work!).\n\nNow let's make sure you actually know how to use it.\n\nI put together a quick 10-minute guide that walks you through your Command Center:\n\n✓ The 5 areas you need to know\n✓ How to complete your profile for maximum visibility\n✓ Creating your first content\n✓ Understanding your insights\n✓ Setting up messages so you don't miss inquiries\n\n[START THE TUTORIAL →]\n\nIt's step-by-step, screenshot by screenshot. No tech skills required.\n\nOnce you're done, you'll feel confident navigating everything.\n\n{{sender_name}}\nFibonacco\n\nP.S. The tutorial includes a checklist at the end. Complete it and you'll be ahead of 90% of businesses on the platform."
+      "body": "Hey there,\n\nYou claimed your listing (nice work!).\n\nNow let's make sure you actually know how to use it.\n\nI put together a quick 10-minute guide that walks you through your Command Center:\n\n✓ The 5 areas you need to know\n✓ How to complete your profile for maximum visibility\n✓ Creating your first content\n✓ Understanding your insights\n✓ Setting up messages so you don't miss inquiries\n\n[START THE TUTORIAL →]\n\nIt's step-by-step, screenshot by screenshot. No tech skills required.\n\nOnce you're done, you'll feel confident navigating everything.\n\nSarah\nFibonacco\n\nP.S. The tutorial includes a checklist at the end. Complete it and you'll be ahead of 90% of businesses on the platform."
     }
   },
   "resources": {

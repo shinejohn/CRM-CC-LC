@@ -234,17 +234,17 @@
     "email_1_educational": {
       "subject": "Why 'community marketing' beats 'digital marketing'",
       "preview_text": "The coffee shop that stopped advertising",
-      "body": "Hey {{first_name}},\n\nQuick question: Which would you trust more—\n\nA) A Facebook ad for a restaurant\nB) Your neighbor recommending a restaurant\n\nYou already know the answer.\n\nSo why are we all still spending money on ads that 86% of people ignore?\n\nI put together a 3-minute presentation on why community marketing beats digital marketing—with real numbers and a real story about a business that stopped advertising entirely.\n\n[WATCH THE PRESENTATION →]\n\nSpoiler: Their sales went UP.\n\n{{sender_name}}\nFibonacco\n\nP.S. The full article is called \"The Coffee Shop That Stopped Advertising and Doubled Sales.\" Download at the end."
+      "body": "Hey there,\n\nQuick question: Which would you trust more—\n\nA) A Facebook ad for a restaurant\nB) Your neighbor recommending a restaurant\n\nYou already know the answer.\n\nSo why are we all still spending money on ads that 86% of people ignore?\n\nI put together a 3-minute presentation on why community marketing beats digital marketing—with real numbers and a real story about a business that stopped advertising entirely.\n\n[WATCH THE PRESENTATION →]\n\nSpoiler: Their sales went UP.\n\nSarah\nFibonacco\n\nP.S. The full article is called \"The Coffee Shop That Stopped Advertising and Doubled Sales.\" Download at the end."
     },
     "email_2a_engaged": {
       "subject": "Ready to stop advertising and start belonging?",
       "preview_text": "Join your community",
-      "body": "Hey {{first_name}},\n\nYou watched the presentation on community marketing. Quick recap:\n\n• 86% of people ignore or block ads\n• Only 14% trust advertising (vs 92% for personal recommendations)\n• Community presence compounds; ads stop working when you stop paying\n• Real businesses are cutting ads and seeing sales go UP\n\nReady to shift from shouting to belonging?\n\nThe community platform is where {{city}} locals connect:\n\n[JOIN THE COMMUNITY →]\n\nYour neighbors are already there.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nYou watched the presentation on community marketing. Quick recap:\n\n• 86% of people ignore or block ads\n• Only 14% trust advertising (vs 92% for personal recommendations)\n• Community presence compounds; ads stop working when you stop paying\n• Real businesses are cutting ads and seeing sales go UP\n\nReady to shift from shouting to belonging?\n\nThe community platform is where your city locals connect:\n\n[JOIN THE COMMUNITY →]\n\nYour neighbors are already there.\n\nSarah"
     },
     "email_2b_reengage": {
       "subject": "86% of people ignore your ads",
       "preview_text": "There's a better way",
-      "body": "Hey {{first_name}},\n\nStill running ads that 86% of people ignore?\n\nThere's a different approach. It's called community marketing.\n\nInstead of interrupting strangers with ads, you become part of the community they already belong to.\n\n• They see you in the local directory\n• They see you at community events\n• They hear about you from neighbors\n\nSame budget. 10x the trust. Results that compound.\n\n3 minutes to understand why:\n\n[WATCH THE PRESENTATION →]\n\n{{sender_name}}"
+      "body": "Hey there,\n\nStill running ads that 86% of people ignore?\n\nThere's a different approach. It's called community marketing.\n\nInstead of interrupting strangers with ads, you become part of the community they already belong to.\n\n• They see you in the local directory\n• They see you at community events\n• They hear about you from neighbors\n\nSame budget. 10x the trust. Results that compound.\n\n3 minutes to understand why:\n\n[WATCH THE PRESENTATION →]\n\nSarah"
     }
   },
   "connections": {

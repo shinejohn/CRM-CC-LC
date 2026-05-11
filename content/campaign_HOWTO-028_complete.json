@@ -152,7 +152,7 @@
     "email_1_educational": {
       "subject": "Plan your content like a pro",
       "preview_text": "Never wonder 'What should I post?' again",
-      "body": "Hey {{first_name}},\n\nStaring at a blank screen wondering what to post?\n\nA content calendar fixes that.\n\nPillars to rotate:\n✓ Educational (tips)\n✓ Behind-the-scenes\n✓ Customer spotlights\n✓ Promotions (20% max)\n✓ Community content\n\n[BUILD YOUR CONTENT CALENDAR →]\n\nTip: Batch create similar content together.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nStaring at a blank screen wondering what to post?\n\nA content calendar fixes that.\n\nPillars to rotate:\n✓ Educational (tips)\n✓ Behind-the-scenes\n✓ Customer spotlights\n✓ Promotions (20% max)\n✓ Community content\n\n[BUILD YOUR CONTENT CALENDAR →]\n\nTip: Batch create similar content together.\n\nSarah"
     }
   },
   "connections": {

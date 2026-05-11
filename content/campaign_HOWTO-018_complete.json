@@ -148,7 +148,7 @@
     "email_1_educational": {
       "subject": "Automate invoicing and get paid faster",
       "preview_text": "Stop chasing payments",
-      "body": "Hey {{first_name}},\n\nChasing payments is exhausting.\n\nAutomated invoicing:\n✓ Sends invoices immediately after service\n✓ Accepts online payments (2x faster)\n✓ Follows up automatically on overdue\n✓ No awkward reminder calls\n\n[SET UP INVOICE AUTOMATION →]\n\nPro tip: Net 15 terms get paid faster than Net 30.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nChasing payments is exhausting.\n\nAutomated invoicing:\n✓ Sends invoices immediately after service\n✓ Accepts online payments (2x faster)\n✓ Follows up automatically on overdue\n✓ No awkward reminder calls\n\n[SET UP INVOICE AUTOMATION →]\n\nPro tip: Net 15 terms get paid faster than Net 30.\n\nSarah"
     }
   },
   "connections": {

@@ -216,17 +216,17 @@
     "email_1_educational": {
       "subject": "Your reputation is now your algorithm",
       "preview_text": "How AI decides who to trust",
-      "body": "Hey {{first_name}},\n\nDid you know AI assistants are building a 'trust score' for your business right now?\n\nEvery review. Every mention. Every signal.\n\nAI doesn't search randomly. AI evaluates who to trust—and recommends them.\n\nI put together a 3-minute presentation on how this works, and what it means for {{business_name}}.\n\n[WATCH THE PRESENTATION →]\n\nThe businesses figuring this out are getting recommended. The ones who aren't... aren't.\n\n{{sender_name}}\nFibonacco\n\nP.S. One bakery got a single review that changed everything. Full story in the article."
+      "body": "Hey there,\n\nDid you know AI assistants are building a 'trust score' for your business right now?\n\nEvery review. Every mention. Every signal.\n\nAI doesn't search randomly. AI evaluates who to trust—and recommends them.\n\nI put together a 3-minute presentation on how this works, and what it means for your business.\n\n[WATCH THE PRESENTATION →]\n\nThe businesses figuring this out are getting recommended. The ones who aren't... aren't.\n\nSarah\nFibonacco\n\nP.S. One bakery got a single review that changed everything. Full story in the article."
     },
     "email_2a_engaged": {
       "subject": "Ready to build your reputation flywheel?",
       "preview_text": "Reputation compounds",
-      "body": "Hey {{first_name}},\n\nYou watched the reputation presentation. Key takeaways:\n\n• AI evaluates trust from multiple signals\n• Reputation compounds (the flywheel effect)\n• Velocity matters as much as stars\n• Multi-platform presence beats single-platform perfection\n\nReady to build {{business_name}}'s reputation systematically?\n\n[GET THE REPUTATION GUIDE →]\n\nStep by step. What to do this week, this month, ongoing.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nYou watched the reputation presentation. Key takeaways:\n\n• AI evaluates trust from multiple signals\n• Reputation compounds (the flywheel effect)\n• Velocity matters as much as stars\n• Multi-platform presence beats single-platform perfection\n\nReady to build your business's reputation systematically?\n\n[GET THE REPUTATION GUIDE →]\n\nStep by step. What to do this week, this month, ongoing.\n\nSarah"
     },
     "email_2b_reengage": {
       "subject": "Is AI recommending your competitors instead of you?",
       "preview_text": "It might be your reputation signals",
-      "body": "Hey {{first_name}},\n\nQuick thought experiment:\n\nIf someone asks ChatGPT for a {{business_category}} in {{city}}, do you come up?\n\nIf not, it might be your reputation signals.\n\nAI looks at:\n→ Review volume (are people talking about you?)\n→ Review velocity (are they still talking?)\n→ Multi-platform presence (are signals consistent?)\n\n3 minutes to understand how AI evaluates trust:\n\n[WATCH THE PRESENTATION →]\n\n{{sender_name}}"
+      "body": "Hey there,\n\nQuick thought experiment:\n\nIf someone asks ChatGPT for a local in your city, do you come up?\n\nIf not, it might be your reputation signals.\n\nAI looks at:\n→ Review volume (are people talking about you?)\n→ Review velocity (are they still talking?)\n→ Multi-platform presence (are signals consistent?)\n\n3 minutes to understand how AI evaluates trust:\n\n[WATCH THE PRESENTATION →]\n\nSarah"
     }
   },
   "connections": {

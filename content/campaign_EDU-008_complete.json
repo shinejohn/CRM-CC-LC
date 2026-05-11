@@ -211,12 +211,12 @@
     "email_1_educational": {
       "subject": "Your phone can answer itself now",
       "preview_text": "Stop missing calls (and revenue)",
-      "body": "Hey {{first_name}},\n\nQuick question: How many calls did you miss this week?\n\nHere's what's happening to those missed calls:\n• 62% of calls to small businesses go unanswered\n• 85% of those callers won't call back\n• They call your competitor instead\n\nWhat if your phone answered itself?\n\n[WATCH THE 3-MINUTE PRESENTATION →]\n\nVoice AI answers every call, 24/7. Books appointments. Takes messages. Sounds natural.\n\nOne contractor stopped missing 40% of his calls. Revenue up 35%.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nQuick question: How many calls did you miss this week?\n\nHere's what's happening to those missed calls:\n• 62% of calls to small businesses go unanswered\n• 85% of those callers won't call back\n• They call your competitor instead\n\nWhat if your phone answered itself?\n\n[WATCH THE 3-MINUTE PRESENTATION →]\n\nVoice AI answers every call, 24/7. Books appointments. Takes messages. Sounds natural.\n\nOne contractor stopped missing 40% of his calls. Revenue up 35%.\n\nSarah\nFibonacco"
     },
     "email_2a_engaged": {
       "subject": "Ready to set up Voice AI?",
       "preview_text": "15 minutes to never missing a call",
-      "body": "Hey {{first_name}},\n\nYou watched the Voice AI presentation. Quick recap:\n\n• Answers every call 24/7\n• Sounds natural, not robotic\n• Books appointments automatically\n• Takes messages with transcription\n• Transfers to you when needed\n• Costs less than missing calls\n\nReady to set up for {{business_name}}?\n\n[SET UP VOICE AI →]\n\n15-minute setup. 14-day free trial.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nYou watched the Voice AI presentation. Quick recap:\n\n• Answers every call 24/7\n• Sounds natural, not robotic\n• Books appointments automatically\n• Takes messages with transcription\n• Transfers to you when needed\n• Costs less than missing calls\n\nReady to set up for your business?\n\n[SET UP VOICE AI →]\n\n15-minute setup. 14-day free trial.\n\nSarah"
     }
   },
   "connections": {

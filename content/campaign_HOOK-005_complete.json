@@ -38,11 +38,11 @@
       "component": "HeroSlide",
       "title": "Your Classified Is Ready",
       "content": {
-        "headline": "We Created a Classified for {{business_name}}",
+        "headline": "We Created a Classified for your business",
         "subhead": "Hiring, selling, or announcing—reach local buyers instantly",
         "visual": "Classified ad preview mockup"
       },
-      "narration": "We went ahead and created a classified ad for {{business_name}}. Whether you're hiring, selling equipment, or have something to announce—this is ready to reach local buyers instantly.",
+      "narration": "We went ahead and created a classified ad for your business. Whether you're hiring, selling equipment, or have something to announce—this is ready to reach local buyers instantly.",
       "duration_seconds": 15,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -53,11 +53,11 @@
       "content": {
         "headline": "Here's How Your Ad Looks",
         "classified_preview": {
-          "business_name": "{{business_name}}",
-          "category": "{{classified_category}}",
-          "headline": "{{auto_generated_headline}}",
-          "body": "{{auto_generated_body}}",
-          "contact": "{{contact_method}}",
+          "business_name": "your business",
+          "category": "Services",
+          "headline": "Quality Local Services Available Now",
+          "body": "Professional services from a trusted local business",
+          "contact": "email or phone",
           "status": "Ready to Post"
         },
         "note": "Edit any of this before posting"
@@ -164,7 +164,7 @@
     "email_hook": {
       "subject": "Hiring? Selling? Your classified is ready",
       "preview_text": "Post free to local buyers",
-      "body": "Hey {{first_name}},\n\nNeed to reach local buyers quickly?\n\nWe created a classified ad template for {{business_name}}—ready to post.\n\nUse it for:\n• Now Hiring posts\n• Equipment/inventory for sale\n• Services you offer\n• Business announcements\n\n[SEE YOUR CLASSIFIED →]\n\nFree to post. Goes live immediately. Reaches local buyers with high intent.\n\nClassifieds get 40% response rate vs. 2% for social posts.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nNeed to reach local buyers quickly?\n\nWe created a classified ad template for your business—ready to post.\n\nUse it for:\n• Now Hiring posts\n• Equipment/inventory for sale\n• Services you offer\n• Business announcements\n\n[SEE YOUR CLASSIFIED →]\n\nFree to post. Goes live immediately. Reaches local buyers with high intent.\n\nClassifieds get 40% response rate vs. 2% for social posts.\n\nSarah\nFibonacco"
     }
   },
   "connections": {

@@ -147,7 +147,7 @@
     "email_1_educational": {
       "subject": "Let customers book appointments 24/7",
       "preview_text": "Stop playing phone tag",
-      "body": "Hey {{first_name}},\n\nWhat if customers could book while you're busy with other clients?\n\nOnline booking:\n✓ Available 24/7\n✓ Automatic confirmations\n✓ Reminders reduce no-shows 40%\n✓ Syncs with your calendar\n\n[SET UP ONLINE BOOKING →]\n\nPro tip: Add booking link to your email signature.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nWhat if customers could book while you're busy with other clients?\n\nOnline booking:\n✓ Available 24/7\n✓ Automatic confirmations\n✓ Reminders reduce no-shows 40%\n✓ Syncs with your calendar\n\n[SET UP ONLINE BOOKING →]\n\nPro tip: Add booking link to your email signature.\n\nSarah"
     }
   },
   "connections": {

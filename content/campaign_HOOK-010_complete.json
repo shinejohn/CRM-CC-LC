@@ -5,7 +5,7 @@
     "day": 51,
     "type": "Hook",
     "title": "Article Advertising",
-    "subject": "Get a feature article written about {{business_name}}",
+    "subject": "Get a feature article written about your business",
     "landing_page": "article-advertising",
     "template": "advertising-offer",
     "description": "Sponsored article/advertorial opportunity"
@@ -185,14 +185,14 @@
   ],
   "emails": {
     "email_1_hook": {
-      "subject": "Get a feature article written about {{business_name}}",
+      "subject": "Get a feature article written about your business",
       "preview_text": "Your story, professionally told",
-      "body": "Hey {{first_name}},\n\nImagine a feature article about {{business_name}}.\n\nNot an ad—a real story about your journey, expertise, and what makes you different.\n\nPackage includes:\n✓ Professional interview\n✓ 800-1200 word article\n✓ Professional photography\n✓ Homepage feature\n✓ Newsletter to 10,000+\n✓ Social promotion\n✓ Permanent placement\n\n[LEARN MORE →]\n\nOne financial advisor got 14 consultation requests from a single article—still generating leads 8 months later.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nImagine a feature article about your business.\n\nNot an ad—a real story about your journey, expertise, and what makes you different.\n\nPackage includes:\n✓ Professional interview\n✓ 800-1200 word article\n✓ Professional photography\n✓ Homepage feature\n✓ Newsletter to 10,000+\n✓ Social promotion\n✓ Permanent placement\n\n[LEARN MORE →]\n\nOne financial advisor got 14 consultation requests from a single article—still generating leads 8 months later.\n\nSarah\nFibonacco"
     },
     "email_3_hook": {
-      "subject": "Here's how your {{business_name}} article could look",
+      "subject": "Here's how your your business article could look",
       "preview_text": "Article concept ready for you",
-      "body": "Hey {{first_name}},\n\nWe drafted a concept for your {{business_name}} feature article:\n\n[SEE YOUR ARTICLE CONCEPT →]\n\nThis is the angle we'd take based on what makes your business unique.\n\nLimited to 4 articles/month. Ready to book?\n\n{{sender_name}}"
+      "body": "Hey there,\n\nWe drafted a concept for your your business feature article:\n\n[SEE YOUR ARTICLE CONCEPT →]\n\nThis is the angle we'd take based on what makes your business unique.\n\nLimited to 4 articles/month. Ready to book?\n\nSarah"
     }
   },
   "connections": {

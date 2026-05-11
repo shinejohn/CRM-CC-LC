@@ -148,7 +148,7 @@
     "email_1_hook": {
       "subject": "Holiday event season is here—don't miss your chance to participate",
       "preview_text": "Gift guides, events, deals—get visible",
-      "body": "Hey {{first_name}},\n\nHoliday season is almost here.\n\nCustomers are looking for local businesses to support. Will they find {{business_name}}?\n\nHoliday visibility options:\n✓ Holiday Gift Guide feature\n✓ Free holiday event listing\n✓ Small Business Saturday spotlight\n✓ Holiday Deals section\n✓ Last-Minute Shopping Guide\n\n[SUBMIT FOR HOLIDAY FEATURES →]\n\nOne gift shop had their best December in 7 years after participating.\n\nGift Guide deadline: November 10th.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\nHoliday season is almost here.\n\nCustomers are looking for local businesses to support. Will they find your business?\n\nHoliday visibility options:\n✓ Holiday Gift Guide feature\n✓ Free holiday event listing\n✓ Small Business Saturday spotlight\n✓ Holiday Deals section\n✓ Last-Minute Shopping Guide\n\n[SUBMIT FOR HOLIDAY FEATURES →]\n\nOne gift shop had their best December in 7 years after participating.\n\nGift Guide deadline: November 10th.\n\nSarah\nFibonacco"
     }
   },
   "connections": {

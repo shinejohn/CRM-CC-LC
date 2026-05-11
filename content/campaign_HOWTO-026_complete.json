@@ -150,7 +150,7 @@
     "email_1_educational": {
       "subject": "Connect your favorite tools in minutes",
       "preview_text": "Your tools should talk to each other",
-      "body": "Hey {{first_name}},\n\nYour business uses multiple tools. They should talk to each other.\n\nPopular integrations:\n✓ CRM (HubSpot, Salesforce)\n✓ Email (Mailchimp, Constant Contact)\n✓ Scheduling (Calendly, Acuity)\n✓ Payments (Stripe, Square)\n\n[BROWSE INTEGRATIONS →]\n\nMost take under 2 minutes to connect.\n\n{{sender_name}}"
+      "body": "Hey there,\n\nYour business uses multiple tools. They should talk to each other.\n\nPopular integrations:\n✓ CRM (HubSpot, Salesforce)\n✓ Email (Mailchimp, Constant Contact)\n✓ Scheduling (Calendly, Acuity)\n✓ Payments (Stripe, Square)\n\n[BROWSE INTEGRATIONS →]\n\nMost take under 2 minutes to connect.\n\nSarah"
     }
   },
   "connections": {

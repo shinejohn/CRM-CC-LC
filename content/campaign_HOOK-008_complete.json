@@ -81,7 +81,7 @@
       "content": {
         "headline": "Here's What Your Ad Could Look Like",
         "preview": {
-          "business_name": "{{business_name}}",
+          "business_name": "your business",
           "headline": "Sample headline for your business",
           "description": "Sample description highlighting your key offering",
           "cta": "Learn More →",
@@ -144,12 +144,12 @@
     "email_1_hook": {
       "subject": "Get in front of 10,000+ local subscribers this week",
       "preview_text": "Newsletter ad spots open now",
-      "body": "Hey {{first_name}},\n\n10,847 local subscribers open our community newsletter every week.\n\n47% open rate (industry avg: 21%)\n82% homeowners\n100% within 15 miles\n\nYour business could be in front of them this Thursday.\n\n[SEE YOUR AD OPTIONS →]\n\nAverage cost per click: $0.47\n(Compare to $2-5 for Google Ads)\n\nOne restaurant got 23 reservations from a single ad.\n\nBook by Tuesday to be in this week's edition.\n\n{{sender_name}}\nFibonacco"
+      "body": "Hey there,\n\n10,847 local subscribers open our community newsletter every week.\n\n47% open rate (industry avg: 21%)\n82% homeowners\n100% within 15 miles\n\nYour business could be in front of them this Thursday.\n\n[SEE YOUR AD OPTIONS →]\n\nAverage cost per click: $0.47\n(Compare to $2-5 for Google Ads)\n\nOne restaurant got 23 reservations from a single ad.\n\nBook by Tuesday to be in this week's edition.\n\nSarah\nFibonacco"
     },
     "email_3_hook": {
       "subject": "Your newsletter ad mockup is ready",
-      "preview_text": "See how {{business_name}} would look",
-      "body": "Hey {{first_name}},\n\nWe created a mockup of what {{business_name}}'s newsletter ad could look like:\n\n[SEE YOUR AD MOCKUP →]\n\nThis is ready to run in this week's edition if you approve by Tuesday.\n\n10,000+ local subscribers. 47% open rate. Your exact audience.\n\n{{sender_name}}"
+      "preview_text": "See how your business would look",
+      "body": "Hey there,\n\nWe created a mockup of what your business's newsletter ad could look like:\n\n[SEE YOUR AD MOCKUP →]\n\nThis is ready to run in this week's edition if you approve by Tuesday.\n\n10,000+ local subscribers. 47% open rate. Your exact audience.\n\nSarah"
     }
   },
   "connections": {
