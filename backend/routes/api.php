@@ -550,6 +550,15 @@ Route::prefix('v1')->group(function () {
             });
         });
 
+        // Campaign Timeline Management (CC Dashboard)
+        Route::prefix('campaigns/timeline')->group(function () {
+            Route::get('/progress', [\App\Http\Controllers\Api\CampaignTimelineController::class, 'progress'])->name('api.campaigns.timeline.progress');
+            Route::get('/available', [\App\Http\Controllers\Api\CampaignTimelineController::class, 'available'])->name('api.campaigns.timeline.available');
+            Route::post('/{customer}/enroll', [\App\Http\Controllers\Api\CampaignTimelineController::class, 'enroll'])->name('api.campaigns.timeline.enroll');
+            Route::post('/{customer}/pause', [\App\Http\Controllers\Api\CampaignTimelineController::class, 'pause'])->name('api.campaigns.timeline.pause');
+            Route::post('/{customer}/resume', [\App\Http\Controllers\Api\CampaignTimelineController::class, 'resume'])->name('api.campaigns.timeline.resume');
+        });
+
         // Product Catalog API
         Route::prefix('products')->group(function () {
             Route::get('/', [ProductCatalogController::class, 'index']);

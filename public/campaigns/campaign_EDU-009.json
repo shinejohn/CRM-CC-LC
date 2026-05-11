@@ -4,11 +4,41 @@
     "week": 7,
     "day": 43,
     "type": "Educational",
-    "title": "Local SEO in 2025",
-    "subject": "Local SEO isn't dead—it evolved. Here's what works now.",
-    "landing_page": "voice-ai-guide",
+    "title": "Getting Found in Your Community",
+    "subject": "Local SEO isn't dead\u2014it evolved. Here's what works now.",
+    "landing_page": "voice-modern tools-guide",
     "template": "educational",
-    "description": "What still works in local SEO and what's changed"
+    "description": "What determines local visibility and how to maximize it"
+  },
+  "landing_page": {
+    "campaign_id": "EDU-009",
+    "landing_page_slug": "voice-modern tools-guide",
+    "url": "/learn/voice-modern tools-guide",
+    "template_id": "educational",
+    "template_name": "Educational Content",
+    "slide_count": 7,
+    "duration_seconds": 205,
+    "primary_cta": "explore_more",
+    "secondary_cta": "download_article",
+    "ai_persona": "Sarah",
+    "ai_tone": "Practical, factual, actionable",
+    "ai_goal": "Show what drives local visibility and how to improve it",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/voice-modern tools-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "education",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week7-educational",
+    "utm_content": "EDU-009"
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 205,
+    "purpose": "education",
+    "audio_required": true
   },
   "slides": [
     {
@@ -16,10 +46,10 @@
       "component": "HeroSlide",
       "title": "SEO Evolved",
       "content": {
-        "headline": "Local SEO Isn't Dead—It Evolved",
+        "headline": "Local SEO Isn't Dead\u2014It Evolved",
         "subhead": "What works now is different from what worked before"
       },
-      "narration": "You've heard the rumors: SEO is dead. Google doesn't matter anymore. Here's the truth: local SEO isn't dead—it evolved. What works now is different from what worked five years ago. Let me show you what actually matters today.",
+      "narration": "You've heard the rumors: SEO is dead. Google doesn't matter anymore. Here's the truth: local SEO isn't dead\u2014it evolved. What works now is different from what worked five years ago. Let me show you what actually matters today.",
       "duration_seconds": 15,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -32,7 +62,7 @@
         "old_rules": [
           "Keyword stuffing",
           "Link building schemes",
-          "Gaming the algorithm",
+          "Gaming the systems",
           "Website-centric strategy"
         ],
         "new_rules": [
@@ -42,7 +72,7 @@
           "Entity-based optimization"
         ]
       },
-      "narration": "What changed? Old rules: keyword stuffing, link building schemes, gaming the algorithm, everything focused on your website. New rules: natural language content, genuine reputation signals from real customers, presence across multiple platforms, and entity-based optimization where Google understands your business as a real thing, not just a website.",
+      "narration": "What changed? Old rules: keyword stuffing, link building schemes, gaming the systems, everything focused on your website. New rules: natural language content, genuine reputation signals from real customers, presence across multiple platforms, and entity-based optimization where Google understands your business as a real thing, not just a website.",
       "duration_seconds": 30,
       "audio_file": "slide-02-changes.mp3"
     },
@@ -80,7 +110,7 @@
           }
         ]
       },
-      "narration": "What still works? Google Business Profile—more important than ever. Complete it, keep it accurate, stay active. NAP consistency—your name, address, and phone should be identical everywhere. Reviews—Google weighs them heavily. Volume, velocity, and quality all matter. Local content—content about your area signals relevance. Mobile experience—non-negotiable. If your site is slow or hard to use on phones, you lose.",
+      "narration": "What still works? Google Business Profile\u2014more important than ever. Complete it, keep it accurate, stay active. NAP consistency\u2014your name, address, and phone should be identical everywhere. Reviews\u2014Google weighs them heavily. Volume, velocity, and quality all matter. Local content\u2014content about your area signals relevance. Mobile experience\u2014non-negotiable. If your site is slow or hard to use on phones, you lose.",
       "duration_seconds": 40,
       "audio_file": "slide-03-works.mp3"
     },
@@ -110,40 +140,40 @@
         ],
         "key_point": "Google builds a 'knowledge graph' about your business"
       },
-      "narration": "Here's what most people miss: Google now thinks in entities, not just keywords. Google wants to know you're a real, legitimate business. It looks for consistent info across platforms—proving you exist. Mentions in authoritative sources—news, directories, citations. Social proof—reviews, engagement, followers. Activity signals—recent posts, events, updates. Google builds a knowledge graph about your business. The more signals, the more confident Google is in recommending you.",
+      "narration": "Here's what most people miss: Google now thinks in entities, not just keywords. Google wants to know you're a real, legitimate business. It looks for consistent info across platforms\u2014proving you exist. Mentions in authoritative sources\u2014news, directories, citations. Social proof\u2014reviews, engagement, followers. Activity signals\u2014recent posts, events, updates. Google builds a knowledge graph about your business. The more signals, the more confident Google is in recommending you.",
       "duration_seconds": 35,
       "audio_file": "slide-04-entity.mp3"
     },
     {
       "slide_num": 5,
       "component": "ConceptSlide",
-      "title": "The AI Connection",
+      "title": "The modern tools Connection",
       "content": {
-        "headline": "Local SEO + AI Discovery = Maximum Visibility",
-        "connection": "The same signals that help Google also help AI assistants",
+        "headline": "Local SEO + digital discovery = Maximum Visibility",
+        "connection": "The same signals that help Google also help search tools",
         "overlap": [
           {
             "signal": "Multi-platform presence",
-            "helps": "Both Google and AI"
+            "helps": "Both Google and modern tools"
           },
           {
             "signal": "Reviews and reputation",
-            "helps": "Both Google and AI"
+            "helps": "Both Google and modern tools"
           },
           {
             "signal": "Authoritative mentions",
-            "helps": "Both Google and AI"
+            "helps": "Both Google and modern tools"
           },
           {
             "signal": "Fresh activity",
-            "helps": "Both Google and AI"
+            "helps": "Both Google and modern tools"
           }
         ],
         "insight": "One strategy, two discovery channels"
       },
-      "narration": "Here's the connection most people miss: local SEO and AI discovery aren't separate strategies. They're the same strategy. Multi-platform presence helps both Google and AI. Reviews and reputation matter to both. Authoritative mentions matter to both. Fresh activity matters to both. One strategy, two discovery channels. Get your presence right, and you're visible everywhere.",
+      "narration": "Here's the connection most people miss: local SEO and digital discovery aren't separate strategies. They're the same strategy. Multi-platform presence helps both Google and modern tools. Reviews and reputation matter to both. Authoritative mentions matter to both. Fresh activity matters to both. One strategy, two discovery channels. Get your presence right, and you're visible everywhere.",
       "duration_seconds": 30,
-      "audio_file": "slide-05-ai.mp3"
+      "audio_file": "slide-05-modern tools.mp3"
     },
     {
       "slide_num": 6,
@@ -178,7 +208,7 @@
           }
         ]
       },
-      "narration": "Here's your priority checklist for local SEO today. One: Claim and complete your Google Business Profile if you haven't. Two: Get listed in authoritative directories—real ones, not spam. Three: Build review velocity—ask every customer. Four: Ensure your name, address, phone is consistent everywhere. Five: Post regularly—events, updates, content. Six: Pursue local news mentions when you can. Do these six things and you're ahead of ninety percent of local businesses.",
+      "narration": "Here's your priority checklist for local SEO today. One: Claim and complete your Google Business Profile if you haven't. Two: Get listed in authoritative directories\u2014real ones, not spam. Three: Build review velocity\u2014ask every customer. Four: Ensure your name, address, phone is consistent everywhere. Five: Post regularly\u2014events, updates, content. Six: Pursue local news mentions when you can. Do these six things and you're ahead of ninety percent of local businesses.",
       "duration_seconds": 35,
       "audio_file": "slide-06-checklist.mp3"
     },
@@ -197,18 +227,11 @@
           "action": "start_audit"
         }
       },
-      "narration": "Ready to get found locally? Download the complete SEO checklist—printable, actionable, everything you need. Or run a free SEO audit to see where you stand right now. Local SEO evolved, but it didn't die. The businesses that adapt are the ones getting found.",
+      "narration": "Ready to get found locally? Download the complete SEO checklist\u2014printable, actionable, everything you need. Or run a free SEO audit to see where you stand right now. Local SEO evolved, but it didn't die. The businesses that adapt are the ones getting found.",
       "duration_seconds": 20,
       "audio_file": "slide-07-cta.mp3"
     }
   ],
-  "emails": {
-    "email_1_educational": {
-      "subject": "Local SEO isn't dead—it evolved. Here's what works now.",
-      "preview_text": "The new rules of getting found",
-      "body": "Hey {{first_name}},\n\nYou've probably heard: 'SEO is dead.'\n\nHere's the truth: Local SEO evolved. What works now is different.\n\nOld rules (don't work):\n❌ Keyword stuffing\n❌ Link schemes\n❌ Gaming the algorithm\n\nNew rules (do work):\n✓ Multi-platform presence\n✓ Real reputation signals\n✓ Entity-based optimization\n✓ Activity across channels\n\n[WATCH THE 3-MINUTE GUIDE →]\n\nBonus: The same strategy that helps Google also helps AI assistants recommend you.\n\n{{sender_name}}\nFibonacco"
-    }
-  },
   "connections": {
     "leads_to": [
       "HOWTO-021"

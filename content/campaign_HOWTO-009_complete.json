@@ -10,6 +10,36 @@
     "template": "tutorial",
     "description": "Complete walkthrough of the command center dashboard"
   },
+  "landing_page": {
+    "campaign_id": "HOWTO-009",
+    "landing_page_slug": "dashboard-tour",
+    "url": "/learn/dashboard-tour",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 205,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Clear, patient, hands-on",
+    "ai_goal": "Walk user through setup and configuration",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/dashboard-tour/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week5-how-to",
+    "utm_content": "HOWTO-009"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 205,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -19,7 +49,7 @@
         "headline": "Everything You Need, One Place",
         "subhead": "5-minute dashboard walkthrough"
       },
-      "narration": "Welcome to your dashboard tour. In the next five minutes, you'll know exactly where everything is and how to use it. Your entire business presence—managed from one place.",
+      "narration": "Welcome to your dashboard tour. In the next five minutes, you'll know exactly where everything is and how to use it. Your entire business presence\u2014managed from one place.",
       "duration_seconds": 15,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -35,7 +65,7 @@
           "Navigation Menu"
         ]
       },
-      "narration": "Here's your dashboard layout. At the top: quick stats showing your key metrics at a glance. Below that: action items—things that need your attention. Recent activity showing what's happened. And your navigation menu to access everything else.",
+      "narration": "Here's your dashboard layout. At the top: quick stats showing your key metrics at a glance. Below that: action items\u2014things that need your attention. Recent activity showing what's happened. And your navigation menu to access everything else.",
       "duration_seconds": 25,
       "audio_file": "slide-02-overview.mp3"
     },
@@ -120,7 +150,7 @@
           "Use keyboard shortcuts for speed"
         ]
       },
-      "narration": "Pro tips for your dashboard. Check it daily—takes two minutes. Clear action items weekly so nothing falls through cracks. Review analytics monthly to spot trends. And learn the keyboard shortcuts for speed—press question mark to see them all.",
+      "narration": "Pro tips for your dashboard. Check it daily\u2014takes two minutes. Clear action items weekly so nothing falls through cracks. Review analytics monthly to spot trends. And learn the keyboard shortcuts for speed\u2014press question mark to see them all.",
       "duration_seconds": 25,
       "audio_file": "slide-07-tips.mp3"
     },
@@ -138,16 +168,16 @@
           "action": "watch_video"
         }
       },
-      "narration": "Ready to explore? Go to your dashboard now and try navigating to each section. Or watch the full video tour for a detailed walkthrough. Your command center is ready—time to take control.",
+      "narration": "Ready to explore? Go to your dashboard now and try navigating to each section. Or watch the full video tour for a detailed walkthrough. Your command center is ready\u2014time to take control.",
       "duration_seconds": 20,
       "audio_file": "slide-08-cta.mp3"
     }
   ],
   "emails": {
-    "email_1_educational": {
-      "subject": "Your dashboard explained: find everything in 5 minutes",
-      "preview_text": "Quick tour of your command center",
-      "body": "Hey there,\n\nYour dashboard has everything you need in one place.\n\n5-minute tour:\n→ Quick stats at a glance\n→ Action items that need attention\n→ Navigation to all features\n→ Analytics and insights\n\n[TAKE THE DASHBOARD TOUR →]\n\nPro tip: Check it daily (takes 2 minutes) to stay on top of everything.\n\nSarah"
+    "email_tutorial": {
+      "subject": "Your dashboard walkthrough \u2014 5 minutes",
+      "preview_text": "Find everything you need in one place",
+      "body": "Hi [First Name],\n\nQuick 5-minute tour of your dashboard:\n\n\u2192 Your stats at a glance\n\u2192 Action items that need attention\n\u2192 Where to find every feature\n\u2192 Your performance numbers\n\n[TAKE THE TOUR \u2192]\n\nPro tip: Check it daily. Takes 2 minutes and keeps you on top of everything.\n\n[AM Name]"
     }
   },
   "connections": {
@@ -156,35 +186,5 @@
       "HOWTO-015"
     ],
     "follows": "HOWTO-008"
-  },
-  "landing_page": {
-    "campaign_id": "HOWTO-009",
-    "landing_page_slug": "dashboard-tour",
-    "url": "/learn/dashboard-tour",
-    "template_id": "tutorial",
-    "template_name": "Step-by-Step Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 205,
-    "primary_cta": "start_setup",
-    "secondary_cta": "watch_demo",
-    "ai_persona": "Sarah",
-    "ai_tone": "Clear, patient, hands-on",
-    "ai_goal": "Walk user through setup and configuration",
-    "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/dashboard-tour/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "activation",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week5-how-to",
-    "utm_content": "HOWTO-009"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "Step-by-Step Tutorial",
-    "slides": 8,
-    "duration": 205,
-    "purpose": "tutorial",
-    "audio_required": true
   }
 }

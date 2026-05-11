@@ -1,0 +1,225 @@
+{
+  "campaign": {
+    "id": "CONV-002",
+    "week": 8,
+    "day": 52,
+    "type": "Conversion",
+    "title": "Your Membership Proposal",
+    "subject": "[First Name] \u2014 your Community Influencer proposal is ready",
+    "landing_page": "your-proposal",
+    "template": "conversion-proposal",
+    "description": "Full proposal with pricing, package details, and checkout"
+  },
+  "landing_page": {
+    "campaign_id": "CONV-002",
+    "landing_page_slug": "your-proposal",
+    "url": "/membership/proposal",
+    "template_id": "conversion-proposal",
+    "template_name": "Conversion Proposal",
+    "slide_count": 8,
+    "duration_seconds": 240,
+    "primary_cta": "lock_in_position",
+    "secondary_cta": "schedule_call",
+    "ai_persona": "Marcus",
+    "ai_tone": "Professional, specific, direct",
+    "ai_goal": "Present the full proposal and get commitment",
+    "data_capture_fields": "name, email, business_name, category, community, payment",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/your-proposal/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "subscription",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week8-conversion",
+    "utm_content": "CONV-002"
+  },
+  "template": {
+    "template_id": "conversion-proposal",
+    "name": "Conversion Proposal",
+    "slides": 8,
+    "duration": 240,
+    "purpose": "conversion",
+    "audio_required": true
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Your Proposal",
+      "content": {
+        "headline": "[Business Name]'s Community Influencer Membership",
+        "subhead": "Prepared by [AM Name] | [Date]",
+        "visual": "Professional proposal header"
+      },
+      "narration": "This is your Community Influencer proposal for your community. Everything that's included, what it costs, and what happens when you say yes.",
+      "duration_seconds": 10,
+      "audio_file": "slide-01-hero.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "Your Presence",
+      "content": {
+        "headline": "Where You'll Show Up",
+        "points": [
+          "Premium listing in Day.News \u2014 community newspaper",
+          "Premium listing in Downtown Guide \u2014 business directory",
+          "Premium listing in GoEventCity \u2014 event calendar",
+          "Professional web presence at [business].alphasite.com",
+          "Featured in community newsletter \u2014 [X] subscribers"
+        ]
+      },
+      "narration": "Here's where your business will show up. Premium listings across all three publications \u2014 Day.News, Downtown Guide, and GoEventCity. A professional web presence at your own AlphaSite URL. And regular features in the community newsletter reaching thousands of local subscribers.",
+      "duration_seconds": 25,
+      "audio_file": "slide-02-presence.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "Your Marketing",
+      "content": {
+        "headline": "What You Get Every Month",
+        "points": [
+          "15-20 news mentions across community coverage",
+          "2 featured events with promotion",
+          "3 coupons with distribution and tracking",
+          "2 ads in rotation across all publications",
+          "Monthly performance report"
+        ]
+      },
+      "narration": "Every month, your business gets fifteen to twenty mentions in community news coverage. Two featured events with full promotion. Three coupons distributed to subscribers with tracking. Two ads in rotation. And a monthly performance report showing your results.",
+      "duration_seconds": 25,
+      "audio_file": "slide-03-marketing.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "Your Competitive Advantage",
+      "content": {
+        "headline": "What You Lock In",
+        "points": [
+          "Priority placement over every non-member business",
+          "Verified Community Influencer badge",
+          "Your [Category] slot \u2014 competitors cannot take it",
+          "180-day trial of all advanced tools"
+        ]
+      },
+      "narration": "This is the competitive advantage. You get priority placement over every business that isn't a member. A verified badge on all your listings. And your category slot is locked \u2014 once you have it, your competitors can't take it. That's the part that matters most.",
+      "duration_seconds": 20,
+      "audio_file": "slide-04-advantage.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "ComparisonSlide",
+      "title": "The Value",
+      "content": {
+        "headline": "What This Would Cost Individually",
+        "comparison": {
+          "individual": {
+            "items": [
+              {
+                "label": "Premium listings (3 directories)",
+                "value": "$300/mo"
+              },
+              {
+                "label": "Professional website",
+                "value": "$30/mo"
+              },
+              {
+                "label": "Monthly advertising",
+                "value": "$200+/mo"
+              },
+              {
+                "label": "Content creation & distribution",
+                "value": "$500+/mo"
+              },
+              {
+                "label": "Total \u00e0 la carte",
+                "value": "$1,000+/mo"
+              }
+            ]
+          },
+          "membership": {
+            "items": [
+              {
+                "label": "Community Influencer membership",
+                "value": "$300/mo"
+              },
+              {
+                "label": "Everything included",
+                "value": ""
+              },
+              {
+                "label": "Effective rate with bonus months",
+                "value": "$240/mo"
+              }
+            ]
+          }
+        }
+      },
+      "narration": "Let me do the math. Premium listings across three directories would cost about three hundred a month individually. A professional website, thirty a month. Advertising, two hundred plus. Content creation and distribution, five hundred plus. Total: over a thousand a month. Your Influencer membership: three hundred. You do the math.",
+      "duration_seconds": 25,
+      "audio_file": "slide-05-value.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "ConceptSlide",
+      "title": "What Happens Next",
+      "content": {
+        "headline": "When You Say Yes",
+        "points": [
+          "Day 1: Premium listings go live across all directories",
+          "Day 2-3: Your AlphaSite is built and published",
+          "Week 1: First business mention in Day.News",
+          "Week 2: First newsletter feature",
+          "Month 1: First performance report"
+        ]
+      },
+      "narration": "Here's the timeline. Day one, your premium listings go live. Within a few days, your AlphaSite is built. First week, your first mention in Day.News. Second week, newsletter feature. End of month one, your first performance report. Everything moves fast once you're in.",
+      "duration_seconds": 20,
+      "audio_file": "slide-06-timeline.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "CTASlide",
+      "title": "Lock In Your Position",
+      "content": {
+        "headline": "$300/month \u2014 Lock In Your Position",
+        "body": "12-month commitment. 3 bonus months free. Founder rate locked for 3 years.",
+        "cta_primary": {
+          "label": "Lock In My Position",
+          "action": "checkout"
+        },
+        "cta_secondary": {
+          "label": "Schedule a Call",
+          "action": "schedule_call"
+        },
+        "urgency": "[Category]: [X] of [Y] slots remaining. First-come, first-served."
+      },
+      "narration": "Your proposal is ready. Three hundred dollars a month, twelve-month commitment, three bonus months free. If you want to move forward, click below and we'll have everything live within forty-eight hours. If you want to talk first, schedule a call. I want to be transparent \u2014 your category has limited slots and I've been hearing from other businesses. I can't hold your position.",
+      "duration_seconds": 15,
+      "audio_file": "slide-07-cta.mp3"
+    },
+    {
+      "slide_num": 8,
+      "component": "SummarySlide",
+      "title": "From Your Account Manager",
+      "content": {
+        "headline": "[AM Name]",
+        "body": "I think you should lock this in. Here's why: [Category] slots are filling and Founder pricing won't last. But it's your decision and I respect whatever you choose.",
+        "contact": "[email] | [phone]"
+      },
+      "narration": "One more thing. I think you should lock this in. Your category is filling and Founder pricing has a deadline. But this is your money and your decision. I'm here to answer questions and help you through the process. That's my job.",
+      "duration_seconds": 10,
+      "audio_file": "slide-08-am.mp3"
+    }
+  ],
+  "connections": {
+    "leads_to": [
+      "CONV-003"
+    ],
+    "follows": "CONV-001",
+    "related": [
+      "HOOK-012"
+    ]
+  }
+}

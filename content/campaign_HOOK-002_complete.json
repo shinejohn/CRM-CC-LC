@@ -32,6 +32,14 @@
     "utm_campaign": "90day-week1-hook",
     "utm_content": "HOOK-002"
   },
+  "template": {
+    "template_id": "event-posting",
+    "name": "Quick Action",
+    "slides": 5,
+    "duration": 115,
+    "purpose": "hook",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -47,7 +55,7 @@
           "engagement": "high"
         }
       },
-      "narration": "Hey there, quick question: do you have any events coming up at your business? A sale, a workshop, a special, an open house—anything? Because our events calendar reaches over 10,000 people in your city. And posting is completely free.",
+      "narration": "Hey there, quick question: do you have any events coming up at your business? A sale, a workshop, a special, an open house\u2014anything? Because our events calendar reaches over 10,000 people in your city. And posting is completely free.",
       "duration_seconds": 20,
       "audio_file": "slide-01-hero.mp3"
     },
@@ -67,7 +75,7 @@
         },
         "note": "This is just a suggestion based on your business type. Edit it however you want."
       },
-      "narration": "We actually went ahead and drafted a sample event for you. Based on what local businesses typically do, we suggested: Community Open House. This is just a starting point—you can edit the title, date, description, everything. Or create something completely different.",
+      "narration": "We actually went ahead and drafted a sample event for you. Based on what local businesses typically do, we suggested: Community Open House. This is just a starting point\u2014you can edit the title, date, description, everything. Or create something completely different.",
       "duration_seconds": 25,
       "audio_file": "slide-02-preview.mp3"
     },
@@ -101,7 +109,7 @@
           "business_type": "Local Business"
         }
       },
-      "narration": "Here's why events work so well. On average, events on our calendar get 800 views. 45 people typically save an event to attend later. And events get shared—25 shares on average to friends and family. One business owner told us: 'Posted a workshop, got 40 RSVPs. Best marketing I've ever done.' And it's completely free to post.",
+      "narration": "Here's why events work so well. On average, events on our calendar get 800 views. 45 people typically save an event to attend later. And events get shared\u201425 shares on average to friends and family. One business owner told us: 'Posted a workshop, got 40 RSVPs. Best marketing I've ever done.' And it's completely free to post.",
       "duration_seconds": 25,
       "audio_file": "slide-03-benefits.mp3"
     },
@@ -131,7 +139,7 @@
         ],
         "note": "Don't overthink it. Even 'Now Booking Appointments' counts as news."
       },
-      "narration": "Not sure what to post? Here are ideas that work great for local businesses. Customer Appreciation Day—like a thank-you event with refreshments and special offers. Workshop or Demo. Seasonal Sale Event. Or Community Partnership Event. Don't overthink it. Even something simple like 'Now Booking Appointments for Spring' gives people a reason to engage.",
+      "narration": "Not sure what to post? Here are ideas that work great for local businesses. Customer Appreciation Day\u2014like a thank-you event with refreshments and special offers. Workshop or Demo. Seasonal Sale Event. Or Community Partnership Event. Don't overthink it. Even something simple like 'Now Booking Appointments for Spring' gives people a reason to engage.",
       "duration_seconds": 25,
       "audio_file": "slide-04-ideas.mp3"
     },
@@ -151,75 +159,24 @@
           "action": "create_custom_event",
           "description": "Start fresh with your own idea"
         },
-        "trust": "Free forever • Edit anytime • Cancel anytime",
+        "trust": "Free forever \u2022 Edit anytime \u2022 Cancel anytime",
         "urgency": "Events posted this week get featured in our newsletter"
       },
-      "narration": "Ready to reach 10,000 people in your city? Click 'Post This Event' to use the one we drafted—you can edit it anytime. Or click 'Create My Own' to start fresh with your own idea. Either way, it's free, you can edit anytime, and events posted this week get featured in our newsletter. Let's get people to your next event.",
+      "narration": "Ready to reach 10,000 people in your city? Click 'Post This Event' to use the one we drafted\u2014you can edit it anytime. Or click 'Create My Own' to start fresh with your own idea. Either way, it's free, you can edit anytime, and events posted this week get featured in our newsletter. Let's get people to your next event.",
       "duration_seconds": 20,
       "audio_file": "slide-05-cta.mp3"
     }
   ],
   "emails": {
     "email_hook": {
-      "subject": "Got an event coming up? Post it free to 10,000+ locals",
-      "preview_text": "We drafted one for your business",
-      "body": "Hey there,\n\nQuick question: Does your business have any events coming up?\n\nA sale. A workshop. A special. An open house. Anything.\n\nBecause our community events calendar reaches over 10,000 people in your city. And posting is completely free.\n\nWe actually drafted a sample event for you based on what local businesses typically do:\n\n📅 Community Open House\n\n[SEE YOUR SAMPLE EVENT →]\n\nYou can use it as-is, edit it, or create something completely different.\n\nEvents posted this week get featured in our newsletter (10,000 subscribers).\n\nSarah\nFibonacco\n\nP.S. One business owner told us: 'Posted a workshop, got 40 RSVPs. Best marketing I've ever done.' Just saying."
+      "subject": "Post your next event free to [X] local residents",
+      "preview_text": "We drafted one for you",
+      "body": "Hi [First Name],\n\nDoes your business have anything coming up? A sale, workshop, open house, special \u2014 anything.\n\n[Community Name]'s event calendar reaches [X] local residents. Posting is free.\n\nWe drafted a sample event for you based on what works for [Category] businesses:\n\n[SEE YOUR SAMPLE EVENT \u2192]\n\nUse it as-is, edit it, or create something different. Takes 3 minutes.\n\nEvents posted this week get featured in our newsletter ([Y] subscribers).\n\n[POST YOUR EVENT \u2192]\n\n[AM Name]\n[Community Name] Day.News"
     },
     "email_reminder": {
-      "subject": "Your event is still waiting to be posted",
-      "preview_text": "Takes 3 minutes",
-      "body": "Hey there,\n\nThat sample event we created for your business? Still sitting there, ready to go.\n\n10,000 people could see it. But only if you post it.\n\nTakes about 3 minutes:\n\n[POST YOUR EVENT NOW →]\n\nFree. Editable. Reaches your whole community.\n\nSarah"
-    }
-  },
-  "personalization": {
-    "required_fields": [
-      "first_name",
-      "business_name",
-      "business_slug",
-      "business_category",
-      "city"
-    ],
-    "generated_fields": {
-      "suggested_event_title": {
-        "restaurant": "Special Tasting Night at your business",
-        "retail": "Exclusive Sale Event at your business",
-        "service": "Free Consultation Day at your business",
-        "fitness": "Free Class Week at your business",
-        "salon": "VIP Pampering Event at your business",
-        "default": "Special Event at your business"
-      },
-      "event_ideas": {
-        "restaurant": [
-          "Wine tasting night",
-          "Chef's table experience",
-          "Happy hour special",
-          "Live music night"
-        ],
-        "retail": [
-          "Flash sale",
-          "New arrival showcase",
-          "Customer appreciation day",
-          "Holiday shopping event"
-        ],
-        "service": [
-          "Free consultation day",
-          "Workshop",
-          "Q&A session",
-          "Open house"
-        ],
-        "fitness": [
-          "Free class week",
-          "Challenge kickoff",
-          "Member appreciation",
-          "New program launch"
-        ],
-        "default": [
-          "Open house",
-          "Customer appreciation day",
-          "Special promotion",
-          "Workshop or demo"
-        ]
-      }
+      "subject": "Your event could be in front of [X] people this week",
+      "preview_text": "3 minutes to post",
+      "body": "Hi [First Name],\n\nThat sample event we created for your business is still ready to go.\n\n[X] local residents could see it this week. 3 minutes to post.\n\n[POST YOUR EVENT NOW \u2192]\n\nFree. Editable. Reaches your whole community.\n\n[AM Name]"
     }
   },
   "connections": {
@@ -231,13 +188,5 @@
       "HOOK-003",
       "HOOK-004"
     ]
-  },
-  "template": {
-    "template_id": "event-posting",
-    "name": "Quick Action",
-    "slides": 5,
-    "duration": 115,
-    "purpose": "hook",
-    "audio_required": true
   }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\SarahChatController;
 use App\Http\Controllers\Sarah\SarahCampaignController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('sarah')->name('api.sarah.')->group(function (): void {
+
+    // ── AI Chat endpoint (public, rate-limited per IP) ──
+    Route::post('/chat', [SarahChatController::class, 'chat'])
+        ->middleware('throttle:10,1')
+        ->name('chat');
 
     // ── Public endpoints (guest-accessible from Advertise CTAs) ──
     Route::post('/sessions', [SarahCampaignController::class, 'createSession'])->name('sessions.create');

@@ -32,6 +32,14 @@
     "utm_content": "HOWTO-006",
     "audio_base_url": "https://cdn.fibonacco.com/presentations/post-announcement/audio/"
   },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 245,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -84,7 +92,7 @@
         ],
         "key_point": "If you'd tell a customer about it, it's announcement-worthy"
       },
-      "narration": "First, let's get clear on what's announcement-worthy. You have news—you just don't realize it. Business milestones like anniversaries or expansions. New offerings—products, services, menu items. Achievements—awards, certifications. Community involvement—sponsorships, charity work. Team updates—new hires, promotions. Special offers. Here's the test: if you'd tell a customer about it in person, it's announcement-worthy.",
+      "narration": "First, let's get clear on what's announcement-worthy. You have news\u2014you just don't realize it. Business milestones like anniversaries or expansions. New offerings\u2014products, services, menu items. Achievements\u2014awards, certifications. Community involvement\u2014sponsorships, charity work. Team updates\u2014new hires, promotions. Special offers. Here's the test: if you'd tell a customer about it in person, it's announcement-worthy.",
       "duration_seconds": 40,
       "audio_file": "slide-02-newsworthy.mp3"
     },
@@ -94,7 +102,7 @@
       "title": "Step 1: Start Your Announcement",
       "content": {
         "headline": "Step 1: Create New Announcement",
-        "location": "Dashboard → Content → Create → Announcement",
+        "location": "Dashboard \u2192 Content \u2192 Create \u2192 Announcement",
         "fields": {
           "headline": "The hook (what's the news?)",
           "category": "Select the type of announcement",
@@ -103,7 +111,7 @@
         "tip": "Your headline should answer: 'What's new?'",
         "screenshot": "announcement-create-screen.png"
       },
-      "narration": "Step one: Create a new announcement. Go to Dashboard, click Content, then Create, then Announcement. You'll see three key fields. Headline—this is your hook, what's the actual news. Category—select the type of announcement. Date—when is this happening or when is it relevant. Pro tip: your headline should answer one question: 'What's new?'",
+      "narration": "Step one: Create a new announcement. Go to Dashboard, click Content, then Create, then Announcement. You'll see three key fields. Headline\u2014this is your hook, what's the actual news. Category\u2014select the type of announcement. Date\u2014when is this happening or when is it relevant. Pro tip: your headline should answer one question: 'What's new?'",
       "duration_seconds": 35,
       "audio_file": "slide-03-step1.mp3"
     },
@@ -133,7 +141,7 @@
           "good": "Starting June 1st, [Business] is now offering [service]..."
         }
       },
-      "narration": "Step two: Write the body. Keep it clear and concise. Paragraph one: the news itself—who, what, when, where. Paragraph two: why it matters to the reader—not why it matters to you. Paragraph three: what to do next—your call to action. Aim for 150 to 300 words. Skip the 'we're excited to announce' opening. Just tell us what's new.",
+      "narration": "Step two: Write the body. Keep it clear and concise. Paragraph one: the news itself\u2014who, what, when, where. Paragraph two: why it matters to the reader\u2014not why it matters to you. Paragraph three: what to do next\u2014your call to action. Aim for 150 to 300 words. Skip the 'we're excited to announce' opening. Just tell us what's new.",
       "duration_seconds": 40,
       "audio_file": "slide-04-step2.mp3"
     },
@@ -154,9 +162,9 @@
           "Event images",
           "Your storefront/location"
         ],
-        "avoid": "Stock photos when possible—authentic is better"
+        "avoid": "Stock photos when possible\u2014authentic is better"
       },
-      "narration": "Step three: Add an image. Announcements with images get three times more engagement. Use at least 1200 by 630 pixels, JPG or PNG. Good options: product photos, team photos, event images, your storefront. Avoid stock photos when possible—authentic images perform better. This image will appear when your announcement is shared.",
+      "narration": "Step three: Add an image. Announcements with images get three times more engagement. Use at least 1200 by 630 pixels, JPG or PNG. Good options: product photos, team photos, event images, your storefront. Avoid stock photos when possible\u2014authentic images perform better. This image will appear when your announcement is shared.",
       "duration_seconds": 30,
       "audio_file": "slide-05-step3.mp3"
     },
@@ -190,7 +198,7 @@
         ],
         "tip": "Enable news consideration for major announcements"
       },
-      "narration": "Step four: Set your distribution. By default, your announcement goes to your profile and the community feed. For major announcements, enable 'News consideration'—our editorial team reviews these for potential news coverage. If you've connected social accounts, you can also enable social syndication to post automatically. More distribution means more reach.",
+      "narration": "Step four: Set your distribution. By default, your announcement goes to your profile and the community feed. For major announcements, enable 'News consideration'\u2014our editorial team reviews these for potential news coverage. If you've connected social accounts, you can also enable social syndication to post automatically. More distribution means more reach.",
       "duration_seconds": 30,
       "audio_file": "slide-06-step4.mp3"
     },
@@ -240,9 +248,9 @@
   ],
   "emails": {
     "email_tutorial": {
-      "subject": "Make news: How to post announcements that get seen",
-      "preview_text": "10 minutes to being newsworthy",
-      "body": "Hey there,\n\nYou have news. You just don't realize it.\n\n• Business milestone? News.\n• New offering? News.\n• Team update? News.\n• Community involvement? News.\n\nThe question is whether anyone sees it.\n\nI put together a 10-minute guide on creating announcements that actually get distributed—across the community, potentially to local news, and to all your connected accounts.\n\n[CREATE YOUR ANNOUNCEMENT →]\n\nIf you'd tell a customer about it in person, it's worth announcing.\n\nSarah\nFibonacco"
+      "subject": "Share your business news with [Community Name]",
+      "preview_text": "10 minutes to be newsworthy",
+      "body": "Hi [First Name],\n\nYou have news. You just might not realize it.\n\n\u2192 Business milestone? News.\n\u2192 New product or service? News.\n\u2192 Hiring? News.\n\u2192 Community involvement? News.\n\nHere's how to post an announcement that gets distributed across [Community Name]'s network:\n\n[POST YOUR ANNOUNCEMENT \u2192]\n\n10-minute guide. If you'd tell a customer about it in person, it's worth announcing.\n\n[AM Name]\n[Community Name] Day.News"
     }
   },
   "connections": {
@@ -257,13 +265,5 @@
       "HOWTO-002",
       "HOWTO-013"
     ]
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "Step-by-Step Tutorial",
-    "slides": 8,
-    "duration": 245,
-    "purpose": "tutorial",
-    "audio_required": true
   }
 }

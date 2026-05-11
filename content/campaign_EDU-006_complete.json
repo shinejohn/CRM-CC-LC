@@ -4,11 +4,11 @@
     "week": 5,
     "day": 29,
     "type": "Educational",
-    "title": "Your AI Employee",
+    "title": "Your Account Team \u2014 How We Work For You",
     "subject": "The employee you couldn't afford just became free",
     "landing_page": "community-marketing",
     "template": "educational",
-    "description": "Introduce AI as business automation - handle volume, focus on relationships"
+    "description": "Overview of the team and systems that work on behalf of participating businesses"
   },
   "landing_page": {
     "campaign_id": "EDU-006",
@@ -18,19 +18,27 @@
     "template_name": "Educational Content",
     "slide_count": 7,
     "duration_seconds": 180,
-    "primary_cta": "activate_ai",
+    "primary_cta": "activate_modern tools",
     "secondary_cta": "download_article",
     "ai_persona": "Sarah",
-    "ai_tone": "Exciting, practical, empowering",
-    "ai_goal": "Show AI as accessible competitive advantage",
+    "ai_tone": "Professional, reassuring, specific",
+    "ai_goal": "Show the business owner they have people and systems working for them",
     "data_capture_fields": "name, email, business_name, industry, current_pain_points",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-employee/audio/",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/modern tools-employee/audio/",
     "conversion_goal": "education",
     "crm_tracking": true,
     "utm_source": "email",
     "utm_medium": "outbound",
     "utm_campaign": "90day-week5-educational",
     "utm_content": "EDU-006"
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 210,
+    "purpose": "education",
+    "audio_required": true
   },
   "slides": [
     {
@@ -46,19 +54,19 @@
           "Handled repetitive tasks flawlessly",
           "Cost almost nothing"
         ],
-        "punchline": "That employee exists now. It's AI.",
-        "visual": "Friendly AI assistant helping business owner"
+        "punchline": "That employee exists now. It's modern tools.",
+        "visual": "Friendly search tools helping business owner"
       },
-      "narration": "What if you had an employee who worked twenty-four seven without breaks? Who answered every inquiry within seconds? Who never forgot a follow-up? Who handled all the repetitive tasks flawlessly? And who cost you almost nothing? That employee exists now. It's called AI. And it's no longer just for big corporations. Let me show you.",
+      "narration": "What if you had an employee who worked twenty-four seven without breaks? Who answered every inquiry within seconds? Who never forgot a follow-up? Who handled all the repetitive tasks flawlessly? And who cost you almost nothing? That employee exists now. It's called modern tools. And it's no longer just for big corporations. Let me show you.",
       "duration_seconds": 25,
       "audio_file": "slide-01-intro.mp3"
     },
     {
       "slide_num": 2,
       "component": "ConceptSlide",
-      "title": "The Small Business AI Gap",
+      "title": "The Small Business modern tools Gap",
       "content": {
-        "headline": "Big Companies Have Been Using AI for Years",
+        "headline": "Big Companies Have Been Using modern tools for Years",
         "examples": [
           {
             "company": "Amazon",
@@ -77,19 +85,19 @@
             "use": "Dynamic pricing"
           }
         ],
-        "problem": "Small businesses couldn't afford AI. Until now.",
+        "problem": "Small businesses couldn't afford modern tools. Until now.",
         "shift": "The same technology is now accessible to everyone."
       },
-      "narration": "Big companies have been using AI for years. Amazon's personalized recommendations? AI. Netflix suggesting what to watch? AI. Banks catching fraud? AI. Airlines pricing flights? AI. Small businesses couldn't afford this technology. It required massive budgets, technical teams, custom development. Until now. The same technology that powers billion-dollar companies is now accessible to you.",
+      "narration": "Big companies have been using modern tools for years. Amazon's personalized recommendations? modern tools. Netflix suggesting what to watch? modern tools. Banks catching fraud? modern tools. Airlines pricing flights? modern tools. Small businesses couldn't afford this technology. It required massive budgets, technical teams, custom development. Until now. The same technology that powers billion-dollar companies is now accessible to you.",
       "duration_seconds": 30,
       "audio_file": "slide-02-gap.mp3"
     },
     {
       "slide_num": 3,
       "component": "ConceptSlide",
-      "title": "What AI Can Do For You",
+      "title": "What your account team can Do For You",
       "content": {
-        "headline": "Your AI Employee Can Handle:",
+        "headline": "Your your account team Can Handle:",
         "capabilities": [
           {
             "task": "Customer Inquiries",
@@ -116,16 +124,16 @@
             "detail": "Schedule posts, respond to comments"
           }
         ],
-        "key_point": "AI handles the volume. You handle the relationships."
+        "key_point": "modern tools handles the volume. You handle the relationships."
       },
-      "narration": "What can your AI employee actually do? Customer inquiries—answer questions twenty-four seven, route the complex ones to you. Content creation—write posts, emails, descriptions that sound like you. Scheduling—book appointments and send reminders automatically. Follow-ups—never let a lead go cold again. Data entry—update records and sync platforms without you touching it. Social media—schedule posts and respond to comments. AI handles the volume. You handle the relationships.",
+      "narration": "What can your your account team actually do? Customer inquiries\u2014answer questions twenty-four seven, route the complex ones to you. Content creation\u2014write posts, emails, descriptions that sound like you. Scheduling\u2014book appointments and send reminders automatically. Follow-ups\u2014never let a lead go cold again. Data entry\u2014update records and sync platforms without you touching it. Social media\u2014schedule posts and respond to comments. modern tools handles the volume. You handle the relationships.",
       "duration_seconds": 35,
       "audio_file": "slide-03-capabilities.mp3"
     },
     {
       "slide_num": 4,
       "component": "ConceptSlide",
-      "title": "AI + Human = Superpower",
+      "title": "modern tools + Human = Superpower",
       "content": {
         "headline": "You're Not Being Replaced. You're Being Amplified.",
         "equation": {
@@ -145,9 +153,9 @@
           ],
           "together": "10x what either could do alone"
         },
-        "visual": "Human and AI as collaborative partners"
+        "visual": "Human and modern tools as collaborative partners"
       },
-      "narration": "Let me be clear: you're not being replaced. You're being amplified. AI brings speed, consistency, volume, availability, perfect memory. You bring judgment, creativity, real relationships, complex decision-making, genuine care. Together, you're ten times what either could be alone. The business owner who resists AI will be outcompeted. The one who partners with AI becomes unstoppable.",
+      "narration": "Let me be clear: you're not being replaced. You're being amplified. modern tools brings speed, consistency, volume, availability, perfect memory. You bring judgment, creativity, real relationships, complex decision-making, genuine care. Together, you're ten times what either could be alone. The business owner who resists modern tools will be outcompeted. The one who partners with modern tools becomes unstoppable.",
       "duration_seconds": 30,
       "audio_file": "slide-04-superpower.mp3"
     },
@@ -156,7 +164,7 @@
       "component": "ConceptSlide",
       "title": "The Math",
       "content": {
-        "headline": "What AI Saves You",
+        "headline": "What modern tools Saves You",
         "calculations": [
           {
             "task": "Answering routine inquiries",
@@ -185,7 +193,7 @@
           "cost": "Fraction of one employee"
         }
       },
-      "narration": "Let's do the math. Answering routine inquiries—five hours a week saved, two hundred dollars in value. Writing content—three hours, a hundred twenty dollars. Scheduling and follow-ups—two hours, eighty dollars. Data entry and admin—two hours, eighty dollars. Total: twelve hours a week saved. Four hundred eighty dollars in value. That's twenty-five thousand dollars a year. For a fraction of the cost of one employee.",
+      "narration": "Let's do the math. Answering routine inquiries\u2014five hours a week saved, two hundred dollars in value. Writing content\u2014three hours, a hundred twenty dollars. Scheduling and follow-ups\u2014two hours, eighty dollars. Data entry and admin\u2014two hours, eighty dollars. Total: twelve hours a week saved. Four hundred eighty dollars in value. That's twenty-five thousand dollars a year. For a fraction of the cost of one employee.",
       "duration_seconds": 30,
       "audio_file": "slide-05-math.mp3"
     },
@@ -196,34 +204,34 @@
       "content": {
         "case_study": {
           "business": "Landscaping company, owner worked 70 hours/week",
-          "problem": "Couldn't step away—everything depended on him",
+          "problem": "Couldn't step away\u2014everything depended on him",
           "ai_implementation": [
-            "AI handles initial customer inquiries",
-            "AI schedules estimates automatically",
-            "AI sends follow-ups and reminders",
-            "AI creates weekly social content"
+            "modern tools handles initial customer inquiries",
+            "modern tools schedules estimates automatically",
+            "modern tools sends follow-ups and reminders",
+            "modern tools creates weekly social content"
           ],
           "result": {
-            "hours": "70/week → 45/week",
+            "hours": "70/week \u2192 45/week",
             "revenue": "Up 15% (more capacity)",
             "vacation": "First real vacation in 8 years"
           }
         }
       },
-      "narration": "Real story. Landscaping company owner. Worked seventy hours a week. Couldn't step away because everything depended on him. He implemented AI: handling initial inquiries, scheduling estimates, sending follow-ups, creating social content. Result: seventy hours down to forty-five. Revenue up fifteen percent because he had capacity for more jobs. And this year? He took his first real vacation in eight years. His AI employee kept things running while he was gone.",
+      "narration": "Real story. Landscaping company owner. Worked seventy hours a week. Couldn't step away because everything depended on him. He implemented modern tools: handling initial inquiries, scheduling estimates, sending follow-ups, creating social content. Result: seventy hours down to forty-five. Revenue up fifteen percent because he had capacity for more jobs. And this year? He took his first real vacation in eight years. His your account team kept things running while he was gone.",
       "duration_seconds": 35,
       "audio_file": "slide-06-proof.mp3"
     },
     {
       "slide_num": 7,
       "component": "CTASlide",
-      "title": "Activate Your AI",
+      "title": "Activate Your modern tools",
       "content": {
-        "headline": "Your AI Employee Is Ready",
-        "subhead": "The question isn't whether to use AI. It's how soon.",
+        "headline": "Your your account team Is Ready",
+        "subhead": "The question isn't whether to use modern tools. It's how soon.",
         "cta_primary": {
-          "label": "Activate Your AI Employee",
-          "action": "ai_setup"
+          "label": "Activate Your your account team",
+          "action": "modern tools_setup"
         },
         "cta_secondary": {
           "label": "Download: The Owner Who Finally Took a Vacation",
@@ -231,32 +239,32 @@
         },
         "assurance": "Start free. See results in days. Scale when ready."
       },
-      "narration": "Your AI employee is ready. The question isn't whether to use AI—that's already decided. The question is how soon you'll start. Activate your AI employee now. Start free, see results in days, scale when you're ready. Or download the full article about the owner who finally took a vacation. Your competitors are figuring this out. Don't be the last one still doing everything manually.",
+      "narration": "Your your account team is ready. The question isn't whether to use modern tools\u2014that's already decided. The question is how soon you'll start. Activate your your account team now. Start free, see results in days, scale when you're ready. Or download the full article about the owner who finally took a vacation. Your competitors are figuring this out. Don't be the last one still doing everything manually.",
       "duration_seconds": 25,
       "audio_file": "slide-07-cta.mp3"
     }
   ],
   "article": {
     "title": "The Owner Who Finally Took a Vacation",
-    "subtitle": "How AI gave a small business owner his life back—and grew his revenue",
+    "subtitle": "How AI gave a small business owner his life back\u2014and grew his revenue",
     "word_count": 2300,
     "file_path": "/content/articles/EDU-006-ai-employee.md"
   },
   "emails": {
     "email_1_educational": {
-      "subject": "The employee you couldn't afford just became free",
-      "preview_text": "Your AI employee is ready",
-      "body": "Hey there,\n\nWhat if you had an employee who:\n\n• Worked 24/7 without breaks\n• Answered every inquiry within seconds\n• Never forgot a follow-up\n• Handled repetitive tasks flawlessly\n• Cost almost nothing\n\nThat employee exists now. It's AI.\n\nAnd it's no longer just for big corporations.\n\nI put together a 3-minute presentation on what AI can actually do for a business like your business.\n\n[WATCH THE PRESENTATION →]\n\nOne business owner went from 70-hour weeks to 45—and took his first vacation in 8 years.\n\nSarah\nFibonacco"
+      "subject": "Meet your account team at [Community Name] Day.News",
+      "preview_text": "Here's who does what for your business",
+      "body": "Hi [First Name],\n\nQuick overview of who works on your business at [Community Name] Day.News and what they handle.\n\nYour account team manages:\n\n\u2192 Your listings across the network \u2014 keeping them current and optimized\n\u2192 Content about your business \u2014 articles, mentions, features\n\u2192 Your events \u2014 promotion and distribution\n\u2192 Customer inquiries \u2014 routing and response\n\u2192 Performance reporting \u2014 monthly results\n\nThis isn't a software tool you have to figure out. There are people (and systems) working on your behalf.\n\n[SEE HOW YOUR TEAM WORKS \u2192]\n\nThe businesses getting the most out of this are the ones who use their account team. That's what we're here for.\n\n[AM Name]\n[Community Name] Day.News"
     },
     "email_2a_engaged": {
-      "subject": "Ready to activate your AI employee?",
-      "preview_text": "Start free, see results in days",
-      "body": "Hey there,\n\nYou watched the AI employee presentation. Key takeaways:\n\n• AI can handle inquiries, content, scheduling, follow-ups, admin\n• You're not replaced—you're amplified\n• The math: 12 hours/week saved = $25K/year value\n• Your competitors are already figuring this out\n\nReady to activate AI for your business?\n\n[ACTIVATE YOUR AI EMPLOYEE →]\n\nStart free. See results in days. Scale when ready.\n\nSarah"
+      "subject": "Ready to put your account team to work?",
+      "preview_text": "They're already assigned to your business",
+      "body": "Hi [First Name],\n\nYou saw how your account team works. Ready to activate everything?\n\n\u2192 Get your listing fully optimized\n\u2192 Start getting featured in [Community Name] news\n\u2192 Set up event promotion\n\u2192 Turn on customer inquiry routing\n\n[ACTIVATE YOUR ACCOUNT TEAM \u2192]\n\nThey're already assigned to your business. Just say the word.\n\n[AM Name]"
     },
     "email_2b_reengage": {
-      "subject": "Still doing everything manually?",
-      "preview_text": "Your AI employee is waiting",
-      "body": "Hey there,\n\nHow many hours did you spend this week on:\n\n→ Answering routine questions\n→ Writing posts and emails\n→ Scheduling and follow-ups\n→ Data entry and admin\n\nAI can handle all of that. While you sleep.\n\n3 minutes to see what's possible:\n\n[WATCH THE PRESENTATION →]\n\nOne owner saved 25 hours/week. What would you do with that time?\n\nSarah"
+      "subject": "You have a team working for you \u2014 did you know?",
+      "preview_text": "Your account team at Day.News",
+      "body": "Hi [First Name],\n\nYour business has an account team at [Community Name] Day.News handling listings, content, events, and customer inquiries.\n\n3 minutes to see how they work:\n\n[SEE HOW IT WORKS \u2192]\n\nMost businesses don't realize how much we do behind the scenes.\n\n[AM Name]"
     }
   },
   "connections": {
@@ -270,13 +278,5 @@
       "EDU-013",
       "HOOK-007"
     ]
-  },
-  "template": {
-    "template_id": "educational",
-    "name": "Educational Content",
-    "slides": 7,
-    "duration": 210,
-    "purpose": "education",
-    "audio_required": true
   }
 }

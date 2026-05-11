@@ -19,7 +19,26 @@
     "slide_count": 8,
     "duration_seconds": 300,
     "primary_cta": "expand_reach",
-    "secondary_cta": "see_communities"
+    "secondary_cta": "see_communities",
+    "ai_tone": "Strategic, encouraging, growth-focused",
+    "ai_goal": "Help user expand presence across multiple communities",
+    "ai_persona": "Sarah",
+    "conversion_goal": "activation",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week4-how-to",
+    "utm_content": "HOWTO-007",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/multi-community-guide/audio/"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 230,
+    "purpose": "tutorial",
+    "audio_required": true
   },
   "slides": [
     {
@@ -35,7 +54,7 @@
           "outcome": "Presence in multiple communities"
         }
       },
-      "narration": "Ready to expand beyond your immediate area? In the next fifteen minutes, you'll learn how to establish presence in multiple communities—reaching customers in neighboring towns, surrounding areas, or anywhere you serve.",
+      "narration": "Ready to expand beyond your immediate area? In the next fifteen minutes, you'll learn how to establish presence in multiple communities\u2014reaching customers in neighboring towns, surrounding areas, or anywhere you serve.",
       "duration_seconds": 15,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -65,7 +84,7 @@
         ],
         "not_ideal": "Hyper-local businesses with no interest in wider reach"
       },
-      "narration": "First, let's make sure multi-community presence makes sense for you. Good fit: You're a service-area business like a plumber or landscaper who travels to customers. You have regional draw—people travel to you, like a restaurant or attraction. You have multiple physical locations. Or you offer B2B services across areas. If you're hyper-local with no interest in wider reach, focus on one community first.",
+      "narration": "First, let's make sure multi-community presence makes sense for you. Good fit: You're a service-area business like a plumber or landscaper who travels to customers. You have regional draw\u2014people travel to you, like a restaurant or attraction. You have multiple physical locations. Or you offer B2B services across areas. If you're hyper-local with no interest in wider reach, focus on one community first.",
       "duration_seconds": 35,
       "audio_file": "slide-02-when.mp3"
     },
@@ -75,7 +94,7 @@
       "title": "Step 1: Identify Your Communities",
       "content": {
         "headline": "Step 1: Choose Your Communities",
-        "location": "Dashboard → Profile → Communities",
+        "location": "Dashboard \u2192 Profile \u2192 Communities",
         "considerations": [
           "Where do your current customers come from?",
           "What areas do you actually serve well?",
@@ -108,9 +127,9 @@
             "step": "Wait for approval (usually same day)"
           }
         ],
-        "note": "Some communities have requirements—check before requesting"
+        "note": "Some communities have requirements\u2014check before requesting"
       },
-      "narration": "Step two: Request access to each community. Search for the community by name or location. Click 'Request to Join.' You'll need to briefly verify that you actually serve this area—just a sentence or two. Approval usually happens the same day. Some communities have specific requirements, so check before requesting.",
+      "narration": "Step two: Request access to each community. Search for the community by name or location. Click 'Request to Join.' You'll need to briefly verify that you actually serve this area\u2014just a sentence or two. Approval usually happens the same day. Some communities have specific requirements, so check before requesting.",
       "duration_seconds": 30,
       "audio_file": "slide-04-step2.mp3"
     },
@@ -138,9 +157,9 @@
             "why": "Optional: special deals for that area"
           }
         ],
-        "warning": "Don't copy/paste identical content—make it relevant"
+        "warning": "Don't copy/paste identical content\u2014make it relevant"
       },
-      "narration": "Step three: Customize your presence for each community. Don't just copy and paste. Tailor your service area description—be specific about what you serve in that area. Add local references—mention neighborhoods and landmarks. Highlight reviews from customers in that community. Consider community-specific offers if relevant. Generic content looks spammy. Relevant content builds trust.",
+      "narration": "Step three: Customize your presence for each community. Don't just copy and paste. Tailor your service area description\u2014be specific about what you serve in that area. Add local references\u2014mention neighborhoods and landmarks. Highlight reviews from customers in that community. Consider community-specific offers if relevant. Generic content looks spammy. Relevant content builds trust.",
       "duration_seconds": 35,
       "audio_file": "slide-05-step3.mp3"
     },
@@ -164,10 +183,10 @@
             "use": "Hyper-local content"
           }
         ],
-        "workflow": "Create content → Select distribution → Preview → Publish",
+        "workflow": "Create content \u2192 Select distribution \u2192 Preview \u2192 Publish",
         "tip": "Set defaults to save time on routine posts"
       },
-      "narration": "Step four: Manage content across communities. When you create content, you choose where it goes. All communities—for announcements relevant everywhere. Select communities—for events or offers in specific areas. Primary only—for hyper-local content. Create, select distribution, preview, publish. Set your defaults to save time on routine posts.",
+      "narration": "Step four: Manage content across communities. When you create content, you choose where it goes. All communities\u2014for announcements relevant everywhere. Select communities\u2014for events or offers in specific areas. Primary only\u2014for hyper-local content. Create, select distribution, preview, publish. Set your defaults to save time on routine posts.",
       "duration_seconds": 30,
       "audio_file": "slide-06-step4.mp3"
     },
@@ -177,7 +196,7 @@
       "title": "Step 5: Track Performance by Community",
       "content": {
         "headline": "Step 5: See What's Working Where",
-        "location": "Dashboard → Insights → By Community",
+        "location": "Dashboard \u2192 Insights \u2192 By Community",
         "metrics": [
           "Views per community",
           "Inquiries by source community",
@@ -186,7 +205,7 @@
         ],
         "action": "Double down on communities that perform; reconsider those that don't"
       },
-      "narration": "Step five: Track performance by community. Go to Dashboard, Insights, and select 'By Community.' You'll see views, inquiries, engagement, and conversions broken down by each community. This tells you where to double down and where to reconsider. Some communities will outperform others—that's valuable information.",
+      "narration": "Step five: Track performance by community. Go to Dashboard, Insights, and select 'By Community.' You'll see views, inquiries, engagement, and conversions broken down by each community. This tells you where to double down and where to reconsider. Some communities will outperform others\u2014that's valuable information.",
       "duration_seconds": 30,
       "audio_file": "slide-07-step5.mp3"
     },
@@ -211,13 +230,6 @@
       "audio_file": "slide-08-cta.mp3"
     }
   ],
-  "emails": {
-    "email_tutorial": {
-      "subject": "Expand your reach to multiple communities",
-      "preview_text": "Reach customers beyond your immediate area",
-      "body": "Hey {{first_name}},\n\nDo your customers come from more than one area?\n\nIf you:\n• Travel to customers (service business)\n• Draw from multiple towns (destination business)\n• Have more than one location\n• Serve businesses across areas\n\n...then multi-community presence can significantly expand your reach.\n\n[EXPAND YOUR REACH →]\n\n15-minute guide to listing in multiple communities without managing multiple accounts.\n\n{{sender_name}}\nFibonacco"
-    }
-  },
   "connections": {
     "leads_to": [],
     "follows": [

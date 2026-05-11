@@ -9,6 +9,36 @@
     "landing_page": "lead-capture-guide",
     "template": "tutorial"
   },
+  "landing_page": {
+    "campaign_id": "HOWTO-016",
+    "landing_page_slug": "lead-capture-guide",
+    "url": "/learn/lead-capture-guide",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 225,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Clear, patient, hands-on",
+    "ai_goal": "Walk user through setup and configuration",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/lead-capture-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week8-how-to",
+    "utm_content": "HOWTO-016"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 225,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -18,7 +48,7 @@
         "headline": "Turn Website Visitors into Leads",
         "subhead": "Stop losing potential customers"
       },
-      "narration": "Most website visitors leave without contacting you. They were interested enough to visit, but something stopped them from reaching out. Lead capture fixes that—give them easy ways to connect before they leave.",
+      "narration": "Most website visitors leave without contacting you. They were interested enough to visit, but something stopped them from reaching out. Lead capture fixes that\u2014give them easy ways to connect before they leave.",
       "duration_seconds": 15,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -53,7 +83,7 @@
         ],
         "ideal": "Name, email, phone, message = 4 fields max"
       },
-      "narration": "Start with your contact form. Fewer fields equals more submissions—every field reduces completion rates. Ask only what you actually need. Make the submit button compelling—not 'Submit' but 'Get Your Quote' or 'Start the Conversation.' Confirm submission clearly so they know it worked.",
+      "narration": "Start with your contact form. Fewer fields equals more submissions\u2014every field reduces completion rates. Ask only what you actually need. Make the submit button compelling\u2014not 'Submit' but 'Get Your Quote' or 'Start the Conversation.' Confirm submission clearly so they know it worked.",
       "duration_seconds": 35,
       "audio_file": "slide-03-form.mp3"
     },
@@ -67,11 +97,11 @@
           "Immediate answers to questions",
           "Lower barrier than forms",
           "Captures leads who won't fill forms",
-          "AI can handle after-hours"
+          "your account team can handle after-hours"
         ],
         "placement": "Bottom right corner, all pages"
       },
-      "narration": "Add a chat widget. It provides immediate answers to questions—lower barrier than filling out forms. Captures leads who wouldn't complete a form. AI can handle inquiries after hours so you never miss an opportunity. Place it bottom right corner on all pages.",
+      "narration": "Add a chat widget. It provides immediate answers to questions\u2014lower barrier than filling out forms. Captures leads who wouldn't complete a form. your account team can handle inquiries after hours so you never miss an opportunity. Place it bottom right corner on all pages.",
       "duration_seconds": 35,
       "audio_file": "slide-04-chat.mp3"
     },
@@ -89,7 +119,7 @@
         ],
         "formula": "Value offered > perceived effort to get it"
       },
-      "narration": "Create a lead magnet—something valuable in exchange for their email. Free guides or checklists. Discount codes. Free consultations. Helpful resources they'd actually use. The value offered must exceed the perceived effort to get it. Make it irresistible.",
+      "narration": "Create a lead magnet\u2014something valuable in exchange for their email. Free guides or checklists. Discount codes. Free consultations. Helpful resources they'd actually use. The value offered must exceed the perceived effort to get it. Make it irresistible.",
       "duration_seconds": 35,
       "audio_file": "slide-05-magnet.mp3"
     },
@@ -102,10 +132,10 @@
         "popup": {
           "trigger": "Mouse moves toward close button",
           "offer": "Last chance valuable offer",
-          "example": "Before you go—get 10% off your first visit"
+          "example": "Before you go\u2014get 10% off your first visit"
         }
       },
-      "narration": "Exit intent popups catch visitors as they're leaving. When their mouse moves toward the close button, show a compelling offer. Last chance to capture them. 'Before you go—get ten percent off your first visit.' Makes them pause and reconsider.",
+      "narration": "Exit intent popups catch visitors as they're leaving. When their mouse moves toward the close button, show a compelling offer. Last chance to capture them. 'Before you go\u2014get ten percent off your first visit.' Makes them pause and reconsider.",
       "duration_seconds": 30,
       "audio_file": "slide-06-exit.mp3"
     },
@@ -121,7 +151,7 @@
           "A/B test your forms and popups"
         ]
       },
-      "narration": "Lead capture pro tips. Respond within five minutes for best conversion—speed matters enormously. Set up auto-responses so they know you received their inquiry. Track which sources bring your best leads. A/B test your forms and popups to optimize over time.",
+      "narration": "Lead capture pro tips. Respond within five minutes for best conversion\u2014speed matters enormously. Set up auto-responses so they know you received their inquiry. Track which sources bring your best leads. A/B test your forms and popups to optimize over time.",
       "duration_seconds": 30,
       "audio_file": "slide-07-tips.mp3"
     },
@@ -139,16 +169,16 @@
           "action": "view_ideas"
         }
       },
-      "narration": "Ready to capture more leads? Set up your lead capture tools now. Or get lead magnet ideas if you need inspiration for what to offer. Every visitor is a potential customer—start capturing them.",
+      "narration": "Ready to capture more leads? Set up your lead capture tools now. Or get lead magnet ideas if you need inspiration for what to offer. Every visitor is a potential customer\u2014start capturing them.",
       "duration_seconds": 20,
       "audio_file": "slide-08-cta.mp3"
     }
   ],
   "emails": {
-    "email_1_educational": {
-      "subject": "Capture leads from your website (finally)",
-      "preview_text": "Stop losing potential customers",
-      "body": "Hey there,\n\nMost website visitors leave without contacting you.\n\nHere's how to capture them:\n✓ Optimized contact form (4 fields max)\n✓ Chat widget for immediate questions\n✓ Lead magnet offering real value\n✓ Exit popup as last chance\n\n[SET UP LEAD CAPTURE →]\n\nPro tip: Respond within 5 minutes for best conversion.\n\nSarah"
+    "email_tutorial": {
+      "subject": "Capture leads from your web presence \u2014 stop losing visitors",
+      "preview_text": "4 changes that make a measurable difference",
+      "body": "Hi [First Name],\n\nMost visitors to your web presence leave without contacting you. Here's how to capture them:\n\n\u2192 Optimized contact form (4 fields max)\n\u2192 Chat for immediate questions\n\u2192 Clear call-to-action on every page\n\u2192 Fast follow-up (respond within 5 minutes for best conversion)\n\n[SET UP LEAD CAPTURE \u2192]\n\n[AM Name]"
     }
   },
   "connections": {
@@ -156,35 +186,5 @@
       "HOWTO-017"
     ],
     "follows": "HOWTO-015"
-  },
-  "landing_page": {
-    "campaign_id": "HOWTO-016",
-    "landing_page_slug": "lead-capture-guide",
-    "url": "/learn/lead-capture-guide",
-    "template_id": "tutorial",
-    "template_name": "Step-by-Step Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 225,
-    "primary_cta": "start_setup",
-    "secondary_cta": "watch_demo",
-    "ai_persona": "Sarah",
-    "ai_tone": "Clear, patient, hands-on",
-    "ai_goal": "Walk user through setup and configuration",
-    "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/lead-capture-guide/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "activation",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week8-how-to",
-    "utm_content": "HOWTO-016"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "Step-by-Step Tutorial",
-    "slides": 8,
-    "duration": 225,
-    "purpose": "tutorial",
-    "audio_required": true
   }
 }

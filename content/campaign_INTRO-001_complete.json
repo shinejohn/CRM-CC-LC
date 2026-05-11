@@ -1,0 +1,194 @@
+{
+  "campaign": {
+    "id": "INTRO-001",
+    "week": 1,
+    "day": 0,
+    "type": "Introduction",
+    "title": "Welcome to Your Community Media Network",
+    "subject": "[Community Name] has a local media network \u2014 here's what that means for your business",
+    "landing_page": "welcome-to-community",
+    "template": "introduction",
+    "description": "First contact \u2014 introduce what Fibonacco is in concrete terms"
+  },
+  "landing_page": {
+    "campaign_id": "INTRO-001",
+    "landing_page_slug": "welcome-to-community",
+    "url": "/welcome/your-community",
+    "template_id": "introduction",
+    "template_name": "Community Introduction",
+    "slide_count": 6,
+    "duration_seconds": 180,
+    "primary_cta": "claim_listing",
+    "secondary_cta": "see_community_status",
+    "ai_persona": "Sarah",
+    "ai_tone": "Direct, confident, welcoming",
+    "ai_goal": "Make the business owner understand what we are and claim their listing",
+    "data_capture_fields": "name, email, phone, business_name, role",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/welcome-to-community/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week1-intro",
+    "utm_content": "INTRO-001"
+  },
+  "template": {
+    "template_id": "introduction",
+    "name": "Community Introduction",
+    "slides": 6,
+    "duration": 180,
+    "purpose": "introduction",
+    "audio_required": true
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Your Community's Media Network",
+      "content": {
+        "headline": "[Community Name] Has a Local Media Network",
+        "subhead": "We are your community's newspaper, event calendar, business directory, website network, and newsletter.",
+        "visual": "Network diagram showing all 5 properties connected"
+      },
+      "narration": "Your community has a local media network. We are your newspaper, your event calendar, your downtown guide, your website network, and your community newsletter. No other organization does all of this for your community. Let me show you what that means for your business.",
+      "duration_seconds": 20,
+      "audio_file": "slide-01-hero.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "ConceptSlide",
+      "title": "What We Are",
+      "content": {
+        "headline": "Five Things. One Network. Your Community.",
+        "elements": [
+          {
+            "icon": "newspaper",
+            "label": "Day.News",
+            "desc": "Daily local news \u2014 [X] readers"
+          },
+          {
+            "icon": "calendar",
+            "label": "GoEventCity",
+            "desc": "Every local event \u2014 [Y] event seekers"
+          },
+          {
+            "icon": "map-pin",
+            "label": "Downtown Guide",
+            "desc": "The local business directory"
+          },
+          {
+            "icon": "globe",
+            "label": "AlphaSite",
+            "desc": "Professional web presence for businesses"
+          },
+          {
+            "icon": "mail",
+            "label": "Newsletter",
+            "desc": "Weekly to [Z] local subscribers"
+          }
+        ]
+      },
+      "narration": "Here's what we are. Day.News publishes daily community news. GoEventCity is the event calendar. Downtown Guide is the business directory. AlphaSite gives businesses a professional web presence. And our newsletter reaches thousands of local subscribers every week. Everything is connected.",
+      "duration_seconds": 30,
+      "audio_file": "slide-02-five-things.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "Nobody Else Does This",
+      "content": {
+        "headline": "Not Facebook. Not Google. Not Yelp.",
+        "key_point": "No other organization provides a complete local media network for [Community Name]. We help local businesses reach their local customers through real community media.",
+        "visual": "Comparison showing fragmented vs. connected presence"
+      },
+      "narration": "Nobody else does this. Facebook is social media, not local news. Google is a search engine, not a community directory. Yelp is reviews, not community media. We do all of it \u2014 news, events, directory, web presence, newsletter \u2014 connected and built specifically for your community.",
+      "duration_seconds": 20,
+      "audio_file": "slide-03-nobody-else.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "StatsSlide",
+      "title": "Your Community Now",
+      "content": {
+        "headline": "[Community Name] by the Numbers",
+        "stats": [
+          {
+            "value": "[X]",
+            "label": "daily readers"
+          },
+          {
+            "value": "[Y]",
+            "label": "newsletter subscribers"
+          },
+          {
+            "value": "[Z]",
+            "label": "businesses listed"
+          },
+          {
+            "value": "37",
+            "label": "premium positions available"
+          }
+        ]
+      },
+      "narration": "Here are your community's numbers right now. Real numbers, not projections. This is how many people are reading, how many subscribers get the newsletter, how many businesses are listed, and how many premium positions are available.",
+      "duration_seconds": 15,
+      "audio_file": "slide-04-numbers.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "CTASlide",
+      "title": "Claim Your Listing",
+      "content": {
+        "headline": "Your Listing Is Ready",
+        "body": "We already created your business listing from public information. Claim it to verify, edit, and go live.",
+        "cta_primary": {
+          "label": "Claim Your Listing \u2014 Free",
+          "action": "claim_listing"
+        },
+        "cta_secondary": {
+          "label": "See Your Community's Status",
+          "action": "view_community"
+        },
+        "trust": "Free. No credit card. Takes 5 minutes."
+      },
+      "narration": "Your business listing already exists in our directory. We created it from public information. Claim it to verify your details, add photos, and go live. Free. No credit card. Takes five minutes.",
+      "duration_seconds": 15,
+      "audio_file": "slide-05-cta.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "SummarySlide",
+      "title": "Your Account Manager",
+      "content": {
+        "headline": "I'm [AM Name] \u2014 Your Account Manager",
+        "body": "I'll keep you updated on [Community Name] and make sure your business has the best position available.",
+        "contact": "[email] | [phone]",
+        "slot_status": "[Category]: [X] of [Y] premium slots remaining"
+      },
+      "narration": "I'm your account manager. I'll be in touch this week with more details about how your business can participate. In the meantime, claim your listing. It's the first step.",
+      "duration_seconds": 10,
+      "audio_file": "slide-06-am.mp3"
+    }
+  ],
+  "emails": {
+    "email_intro": {
+      "subject": "[Community Name] has a local media network. Here's what that means for your business.",
+      "preview_text": "Your community's newspaper event calendar and business directory",
+      "body": "Hi [First Name],\n\nI'm [AM Name], your account manager at [Community Name] Day.News.\n\nI'm reaching out because we are your community's local media network. Specifically, we are:\n\n\u2192 [Community Name]'s local newspaper \u2014 we publish daily community news read by [X] residents\n\u2192 [Community Name]'s event calendar \u2014 GoEventCity promotes every local event to [Y] event seekers\n\u2192 [Community Name]'s downtown guide \u2014 the definitive local business directory\n\u2192 [Community Name]'s website network \u2014 AlphaSite gives participating businesses a professional web presence\n\u2192 [Community Name]'s community newsletter \u2014 [Z] subscribers get weekly updates featuring local businesses\n\nNo other organization does all of this for [Community Name]. Not Facebook. Not Google. Not Yelp. Us.\n\nWe have 37 positions for businesses who want premium placement across the entire network. For [Category], there are [X] slots. [Y] are already taken.\n\nI'd like to get your business set up. The first step is claiming your listing \u2014 it's free and takes 5 minutes.\n\n[CLAIM YOUR LISTING \u2192]\n\nI'll be in touch with more details this week. If you have questions, reply to this email or call me at [phone].\n\n[AM Name]\n[Community Name] Day.News"
+    },
+    "email_intro_reminder": {
+      "subject": "Did you see my note about [Community Name]'s media network?",
+      "preview_text": "Your community has a local newspaper and business directory",
+      "body": "Hi [First Name],\n\nQuick follow-up. I reached out a few days ago about [Community Name] Day.News \u2014 your community's local newspaper, event calendar, business directory, and website network.\n\nYour business listing is ready to claim. Free. Takes 5 minutes.\n\n[CLAIM YOUR LISTING \u2192]\n\n[X] businesses in [Community Name] have already claimed theirs. Your [Category] has [Y] of [Z] premium slots remaining.\n\nIf you want to know more about what we do before you claim anything:\n\n[SEE WHAT WE DO \u2192]\n\n[AM Name]\n[Community Name] Day.News"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "HOOK-001"
+    ],
+    "follows": null,
+    "related": [
+      "EDU-001"
+    ]
+  }
+}

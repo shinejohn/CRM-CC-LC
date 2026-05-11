@@ -4,11 +4,41 @@
     "week": 9,
     "day": 58,
     "type": "Educational",
-    "title": "Data Privacy for Small Business",
+    "title": "How We Protect Your Business Information",
     "subject": "Your customers care about privacy. Here's what you need to know.",
     "landing_page": "future-proof-guide",
     "template": "educational",
-    "description": "Understanding data privacy obligations and best practices for SMBs"
+    "description": "Data privacy and how we handle business and customer data"
+  },
+  "landing_page": {
+    "campaign_id": "EDU-012",
+    "landing_page_slug": "future-proof-guide",
+    "url": "/learn/future-proof-guide",
+    "template_id": "educational",
+    "template_name": "Educational Content",
+    "slide_count": 7,
+    "duration_seconds": 200,
+    "primary_cta": "explore_more",
+    "secondary_cta": "download_article",
+    "ai_persona": "Sarah",
+    "ai_tone": "Professional, transparent, reassuring",
+    "ai_goal": "Build trust by showing our privacy practices",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/future-proof-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "education",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week9-educational",
+    "utm_content": "EDU-012"
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 200,
+    "purpose": "education",
+    "audio_required": true
   },
   "slides": [
     {
@@ -23,7 +53,7 @@
           "preference": "73% prefer businesses with clear privacy practices"
         }
       },
-      "narration": "Privacy isn't just for big tech companies. Your customers care—a lot. Seventy-nine percent are concerned about how businesses use their data. Eighty-one percent would stop doing business with you after a data breach. Seventy-three percent prefer businesses with clear privacy practices. Privacy is a competitive advantage now.",
+      "narration": "Privacy isn't just for big tech companies. Your customers care\u2014a lot. Seventy-nine percent are concerned about how businesses use their data. Eighty-one percent would stop doing business with you after a data breach. Seventy-three percent prefer businesses with clear privacy practices. Privacy is a competitive advantage now.",
       "duration_seconds": 25,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -88,9 +118,9 @@
             "how": "Notify affected customers if breach occurs"
           }
         ],
-        "note": "Requirements vary by state/country—some are stricter than others"
+        "note": "Requirements vary by state/country\u2014some are stricter than others"
       },
-      "narration": "What does the law require? You must tell people what you collect—that means a privacy policy on your website. Protect data from breaches—secure storage, access controls. Allow deletion requests—process them within required timeframes. Get consent for marketing—real opt-in for emails and texts. Report breaches if they happen—notify affected customers. Requirements vary by location, but these basics apply almost everywhere.",
+      "narration": "What does the law require? You must tell people what you collect\u2014that means a privacy policy on your website. Protect data from breaches\u2014secure storage, access controls. Allow deletion requests\u2014process them within required timeframes. Get consent for marketing\u2014real opt-in for emails and texts. Report breaches if they happen\u2014notify affected customers. Requirements vary by location, but these basics apply almost everywhere.",
       "duration_seconds": 35,
       "audio_file": "slide-03-obligations.mp3"
     },
@@ -123,7 +153,7 @@
           }
         ]
       },
-      "narration": "Best practices for small business. Collect only what you need—less data means less risk. Use secure tools—encrypted, reputable platforms. Limit access—only people who need data should have it. Keep it updated—delete old data you don't need anymore. Be transparent—tell customers what you do with their information. These practices protect you and build trust.",
+      "narration": "Best practices for small business. Collect only what you need\u2014less data means less risk. Use secure tools\u2014encrypted, reputable platforms. Limit access\u2014only people who need data should have it. Keep it updated\u2014delete old data you don't need anymore. Be transparent\u2014tell customers what you do with their information. These practices protect you and build trust.",
       "duration_seconds": 30,
       "audio_file": "slide-04-practices.mp3"
     },
@@ -156,7 +186,7 @@
           }
         ]
       },
-      "narration": "Here's the flip side: privacy is actually a marketing advantage. Differentiation—'We respect your privacy' is a real selling point now. Customer trust—people share more when they trust you. Better data quality—consent-based data is more accurate and useful. Reduced risk—fewer breaches, fewer legal headaches. Future-proof—regulations are only getting stricter, so get ahead now.",
+      "narration": "Here's the flip side: privacy is actually a marketing advantage. Differentiation\u2014'We respect your privacy' is a real selling point now. Customer trust\u2014people share more when they trust you. Better data quality\u2014consent-based data is more accurate and useful. Reduced risk\u2014fewer breaches, fewer legal headaches. Future-proof\u2014regulations are only getting stricter, so get ahead now.",
       "duration_seconds": 30,
       "audio_file": "slide-05-advantage.mp3"
     },
@@ -189,7 +219,7 @@
           }
         ]
       },
-      "narration": "Quick privacy wins you can do today. Add a privacy policy to your website—thirty minutes. Review what data you actually collect—fifteen minutes. Check your email opt-in process is compliant—ten minutes. Secure your customer database with proper access controls—time varies. Create a simple process for deletion requests—thirty minutes. Small investments, big protection.",
+      "narration": "Quick privacy wins you can do today. Add a privacy policy to your website\u2014thirty minutes. Review what data you actually collect\u2014fifteen minutes. Check your email opt-in process is compliant\u2014ten minutes. Secure your customer database with proper access controls\u2014time varies. Create a simple process for deletion requests\u2014thirty minutes. Small investments, big protection.",
       "duration_seconds": 30,
       "audio_file": "slide-06-checklist.mp3"
     },
@@ -208,16 +238,16 @@
           "action": "view_privacy"
         }
       },
-      "narration": "Ready to build customer trust through privacy? Download the complete privacy checklist—everything you need to get compliant and build trust. Or review our privacy practices to see how we handle your data. Privacy isn't a burden—it's an opportunity to stand out.",
+      "narration": "Ready to build customer trust through privacy? Download the complete privacy checklist\u2014everything you need to get compliant and build trust. Or review our privacy practices to see how we handle your data. Privacy isn't a burden\u2014it's an opportunity to stand out.",
       "duration_seconds": 20,
       "audio_file": "slide-07-cta.mp3"
     }
   ],
   "emails": {
     "email_1_educational": {
-      "subject": "Your customers care about privacy. Here's what you need to know.",
-      "preview_text": "Privacy is now a competitive advantage",
-      "body": "Hey there,\n\nPrivacy isn't just for big tech.\n\n• 79% of consumers worry about how businesses use their data\n• 81% would stop doing business after a breach\n• 73% prefer businesses with clear privacy practices\n\nYou probably collect more data than you realize:\n→ Contact info\n→ Transaction history\n→ Communication records\n→ Website visitor data\n\nAll of this is data you're responsible for.\n\n[WATCH THE 3-MINUTE GUIDE →]\n\nGood news: Privacy done right is actually a marketing advantage.\n\nSarah\nFibonacco"
+      "subject": "Your customers care about data privacy. So do we.",
+      "preview_text": "Privacy is handled \u2014 here's how",
+      "body": "Hi [First Name],\n\nQuick note on how we handle your business data and your customers' data at [Community Name] Day.News.\n\n\u2192 We never sell business or customer data\n\u2192 Your information is used only to operate your listings and content\n\u2192 Customer inquiries are routed to you \u2014 we don't retain them\n\u2192 You control what's public and what isn't\n\n[SEE OUR FULL PRIVACY APPROACH \u2192]\n\nCustomers prefer businesses that take privacy seriously. We make that easy.\n\n[AM Name]\n[Community Name] Day.News"
     }
   },
   "connections": {
@@ -229,35 +259,5 @@
       "EDU-006",
       "EDU-011"
     ]
-  },
-  "landing_page": {
-    "campaign_id": "EDU-012",
-    "landing_page_slug": "future-proof-guide",
-    "url": "/learn/future-proof-guide",
-    "template_id": "educational",
-    "template_name": "Educational Content",
-    "slide_count": 7,
-    "duration_seconds": 200,
-    "primary_cta": "explore_more",
-    "secondary_cta": "download_article",
-    "ai_persona": "Sarah",
-    "ai_tone": "Warm, informative, empowering",
-    "ai_goal": "Educate and build understanding of the concept",
-    "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/future-proof-guide/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "education",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week9-educational",
-    "utm_content": "EDU-012"
-  },
-  "template": {
-    "template_id": "educational",
-    "name": "Educational Content",
-    "slides": 7,
-    "duration": 200,
-    "purpose": "education",
-    "audio_required": true
   }
 }

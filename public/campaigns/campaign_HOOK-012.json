@@ -5,10 +5,40 @@
     "day": 58,
     "type": "Hook",
     "title": "Influencer Program",
-    "subject": "Local influencer opportunity—get paid to share what you love",
+    "subject": "Local influencer opportunity\u2014get paid to share what you love",
     "landing_page": "influencer-program",
     "template": "influencer-application",
     "description": "Local business influencer/ambassador program application"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-012",
+    "landing_page_slug": "influencer-program",
+    "url": "/learn/influencer-program",
+    "template_id": "influencer-application",
+    "template_name": "Quick Action",
+    "slide_count": 6,
+    "duration_seconds": 170,
+    "primary_cta": "get_started",
+    "secondary_cta": "learn_more",
+    "ai_persona": "Sarah",
+    "ai_tone": "Energetic, encouraging, action-oriented",
+    "ai_goal": "Get user to take the first free action immediately",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/influencer-program/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week9-hook",
+    "utm_content": "HOOK-012"
+  },
+  "template": {
+    "template_id": "influencer-application",
+    "name": "Quick Action",
+    "slides": 6,
+    "duration": 170,
+    "purpose": "hook",
+    "audio_required": true
   },
   "slides": [
     {
@@ -56,7 +86,7 @@
           }
         ]
       },
-      "narration": "What do local influencers receive? Paid partnerships—compensation for posts featuring local businesses. Exclusive access—first to know about new businesses and events. Free experiences—comped meals, services, and products to review. Platform growth—we feature you in our channels for cross-promotion. Community connection—events with other influencers and businesses. And a flexible schedule—accept only the partnerships that fit your interests and brand.",
+      "narration": "What do local influencers receive? Paid partnerships\u2014compensation for posts featuring local businesses. Exclusive access\u2014first to know about new businesses and events. Free experiences\u2014comped meals, services, and products to review. Platform growth\u2014we feature you in our channels for cross-promotion. Community connection\u2014events with other influencers and businesses. And a flexible schedule\u2014accept only the partnerships that fit your interests and brand.",
       "duration_seconds": 35,
       "audio_file": "slide-02-benefits.mp3"
     },
@@ -88,9 +118,9 @@
             "requirement": "Delivers on commitments, communicates well"
           }
         ],
-        "note": "Micro-influencers welcome—engagement matters more than follower count"
+        "note": "Micro-influencers welcome\u2014engagement matters more than follower count"
       },
-      "narration": "Who are we looking for? Local presence—you live and are active in our community. Engaged following—at least five hundred followers with genuine engagement. Quality content—good photos and an authentic voice. Positive vibe—uplifting content that's supportive of local businesses. Reliable—delivers on commitments, communicates well. Note: micro-influencers are absolutely welcome. Engagement matters more than follower count.",
+      "narration": "Who are we looking for? Local presence\u2014you live and are active in our community. Engaged following\u2014at least five hundred followers with genuine engagement. Quality content\u2014good photos and an authentic voice. Positive vibe\u2014uplifting content that's supportive of local businesses. Reliable\u2014delivers on commitments, communicates well. Note: micro-influencers are absolutely welcome. Engagement matters more than follower count.",
       "duration_seconds": 35,
       "audio_file": "slide-03-criteria.mp3"
     },
@@ -127,7 +157,7 @@
           }
         ]
       },
-      "narration": "Here's how it works. Apply and get accepted into the program. Browse available partnership opportunities—restaurants, shops, services, events. Accept the ones that fit your brand and interests. Experience the business—enjoy a meal, try a service, attend an event. Create and post authentic content about your experience. Get paid within seven days of posting. Simple, flexible, genuine.",
+      "narration": "Here's how it works. Apply and get accepted into the program. Browse available partnership opportunities\u2014restaurants, shops, services, events. Accept the ones that fit your brand and interests. Experience the business\u2014enjoy a meal, try a service, attend an event. Create and post authentic content about your experience. Get paid within seven days of posting. Simple, flexible, genuine.",
       "duration_seconds": 30,
       "audio_file": "slide-04-process.mp3"
     },
@@ -155,7 +185,7 @@
           }
         ]
       },
-      "narration": "What do our influencers experience? A food blogger with twenty-one hundred followers completed eight paid partnerships in three months—twelve hundred dollars plus in compensation plus all the experiences. A lifestyle creator with eight hundred fifty followers grew to twenty-four hundred through our cross-promotion—the program tripled her following. A mom blogger with thirty-five hundred followers does regular family-friendly business features. She told us: 'My audience loves discovering new local spots through me.'",
+      "narration": "What do our influencers experience? A food blogger with twenty-one hundred followers completed eight paid partnerships in three months\u2014twelve hundred dollars plus in compensation plus all the experiences. A lifestyle creator with eight hundred fifty followers grew to twenty-four hundred through our cross-promotion\u2014the program tripled her following. A mom blogger with thirty-five hundred followers does regular family-friendly business features. She told us: 'My audience loves discovering new local spots through me.'",
       "duration_seconds": 35,
       "audio_file": "slide-05-success.mp3"
     },
@@ -175,18 +205,11 @@
         },
         "note": "Applications reviewed weekly. Acceptance based on fit, not follower count."
       },
-      "narration": "Ready to become a local influencer? Apply to the program now. Applications are reviewed weekly, and acceptance is based on fit, not follower count. Or see our current influencers to see who you'd be joining. Get paid to share what you already love—local businesses that deserve attention.",
+      "narration": "Ready to become a local influencer? Apply to the program now. Applications are reviewed weekly, and acceptance is based on fit, not follower count. Or see our current influencers to see who you'd be joining. Get paid to share what you already love\u2014local businesses that deserve attention.",
       "duration_seconds": 20,
       "audio_file": "slide-06-cta.mp3"
     }
   ],
-  "emails": {
-    "email_1_hook": {
-      "subject": "Local influencer opportunity—get paid to share what you love",
-      "preview_text": "Turn your local love into income",
-      "body": "Hey {{first_name}},\n\nLove sharing local discoveries with your audience?\n\nOur local influencer program lets you get paid to do exactly that.\n\nInfluencers receive:\n✓ Paid partnerships with local businesses\n✓ Free experiences to review\n✓ Exclusive access to new spots\n✓ Cross-promotion on our channels\n✓ Flexible schedule—accept what fits you\n\n[APPLY TO THE PROGRAM →]\n\nMicro-influencers welcome. Engagement matters more than follower count.\n\n{{sender_name}}\nFibonacco"
-    }
-  },
   "connections": {
     "follows": "HOOK-011",
     "related": [

@@ -9,6 +9,36 @@
     "landing_page": "analytics-guide",
     "template": "tutorial"
   },
+  "landing_page": {
+    "campaign_id": "HOWTO-015",
+    "landing_page_slug": "analytics-guide",
+    "url": "/learn/analytics-guide",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 210,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Clear, patient, hands-on",
+    "ai_goal": "Walk user through setup and configuration",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/analytics-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week7-how-to",
+    "utm_content": "HOWTO-015"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 210,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -34,7 +64,7 @@
           "Retention (are they coming back?)"
         ]
       },
-      "narration": "Four categories that matter. Visibility: are people seeing you? Engagement: are they interested enough to interact? Conversion: are they taking action—calling, booking, buying? Retention: are they coming back? Master these four and you understand your business.",
+      "narration": "Four categories that matter. Visibility: are people seeing you? Engagement: are they interested enough to interact? Conversion: are they taking action\u2014calling, booking, buying? Retention: are they coming back? Master these four and you understand your business.",
       "duration_seconds": 25,
       "audio_file": "slide-02-metrics.mp3"
     },
@@ -85,7 +115,7 @@
         ],
         "benchmark": "Track cost per conversion to measure ROI"
       },
-      "narration": "Conversion metrics are the bottom line. Calls and messages received. Bookings and appointments made. Quote requests submitted. Purchases completed. Track cost per conversion to measure your ROI—how much does it cost to get each customer action?",
+      "narration": "Conversion metrics are the bottom line. Calls and messages received. Bookings and appointments made. Quote requests submitted. Purchases completed. Track cost per conversion to measure your ROI\u2014how much does it cost to get each customer action?",
       "duration_seconds": 30,
       "audio_file": "slide-05-conversion.mp3"
     },
@@ -102,7 +132,7 @@
           "Identify what to test"
         ]
       },
-      "narration": "Your weekly analytics check. Compare this week to last week—are you up or down? Look for patterns—which days perform best? Note what changed—did you do something different? Identify what to test—based on patterns, what could improve results?",
+      "narration": "Your weekly analytics check. Compare this week to last week\u2014are you up or down? Look for patterns\u2014which days perform best? Note what changed\u2014did you do something different? Identify what to test\u2014based on patterns, what could improve results?",
       "duration_seconds": 30,
       "audio_file": "slide-06-reading.mp3"
     },
@@ -118,7 +148,7 @@
           "Export monthly reports for records"
         ]
       },
-      "narration": "Analytics pro tips. Check weekly, not daily—daily is noise, weekly shows trends. Focus on three to five key metrics, not everything available. Set specific goals for each metric. Export monthly reports for your records and to spot long-term trends.",
+      "narration": "Analytics pro tips. Check weekly, not daily\u2014daily is noise, weekly shows trends. Focus on three to five key metrics, not everything available. Set specific goals for each metric. Export monthly reports for your records and to spot long-term trends.",
       "duration_seconds": 30,
       "audio_file": "slide-07-tips.mp3"
     },
@@ -142,10 +172,10 @@
     }
   ],
   "emails": {
-    "email_1_educational": {
-      "subject": "Understand your analytics in 10 minutes",
-      "preview_text": "Only a few metrics actually matter",
-      "body": "Hey there,\n\nAnalytics can feel overwhelming. But only 4 categories matter:\n\n→ Visibility (are people seeing you?)\n→ Engagement (are they interested?)\n→ Conversion (are they taking action?)\n→ Retention (are they coming back?)\n\n[UNDERSTAND YOUR ANALYTICS →]\n\nPro tip: Check weekly, not daily. Daily is noise, weekly shows trends.\n\nSarah"
+    "email_tutorial": {
+      "subject": "Understand your performance numbers in 10 minutes",
+      "preview_text": "Only 4 categories of metrics actually matter",
+      "body": "Hi [First Name],\n\nAnalytics can feel overwhelming. Only 4 categories matter:\n\n\u2192 Visibility (are people seeing you?)\n\u2192 Engagement (are they interested?)\n\u2192 Conversion (are they taking action?)\n\u2192 Retention (are they coming back?)\n\n[UNDERSTAND YOUR ANALYTICS \u2192]\n\nCheck weekly, not daily. Daily is noise. Weekly shows trends.\n\n[AM Name]"
     }
   },
   "connections": {
@@ -153,35 +183,5 @@
       "HOWTO-029"
     ],
     "follows": "HOWTO-014"
-  },
-  "landing_page": {
-    "campaign_id": "HOWTO-015",
-    "landing_page_slug": "analytics-guide",
-    "url": "/learn/analytics-guide",
-    "template_id": "tutorial",
-    "template_name": "Step-by-Step Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 210,
-    "primary_cta": "start_setup",
-    "secondary_cta": "watch_demo",
-    "ai_persona": "Sarah",
-    "ai_tone": "Clear, patient, hands-on",
-    "ai_goal": "Walk user through setup and configuration",
-    "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/analytics-guide/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "activation",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week7-how-to",
-    "utm_content": "HOWTO-015"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "Step-by-Step Tutorial",
-    "slides": 8,
-    "duration": 210,
-    "purpose": "tutorial",
-    "audio_required": true
   }
 }

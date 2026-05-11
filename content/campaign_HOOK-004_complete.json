@@ -32,6 +32,14 @@
     "utm_content": "HOOK-004",
     "audio_base_url": "https://cdn.fibonacco.com/presentations/get-featured/audio/"
   },
+  "template": {
+    "template_id": "feature-application",
+    "name": "Quick Action",
+    "slides": 6,
+    "duration": 150,
+    "purpose": "hook",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -43,7 +51,7 @@
         "visual": "Spotlight/stage imagery with business name",
         "badge": "NOMINATED"
       },
-      "narration": "Great news—your business has been nominated for this week's Featured Business Spotlight. This is a real opportunity. Let me show you what featured businesses get.",
+      "narration": "Great news\u2014your business has been nominated for this week's Featured Business Spotlight. This is a real opportunity. Let me show you what featured businesses get.",
       "duration_seconds": 15,
       "audio_file": "slide-01-nominated.mp3"
     },
@@ -81,7 +89,7 @@
           }
         ]
       },
-      "narration": "Featured businesses get serious benefits. Top placement in the directory—the first thing people see. A feature story in local news. Spotlight on our social media to our entire audience. Five times the average visibility of standard listings. And a permanent 'Featured' badge on your profile—a trust signal that lasts.",
+      "narration": "Featured businesses get serious benefits. Top placement in the directory\u2014the first thing people see. A feature story in local news. Spotlight on our social media to our entire audience. Five times the average visibility of standard listings. And a permanent 'Featured' badge on your profile\u2014a trust signal that lasts.",
       "duration_seconds": 30,
       "audio_file": "slide-02-benefits.mp3"
     },
@@ -145,9 +153,9 @@
             "time": "Within 1 week"
           }
         ],
-        "note": "Not everyone is selected—we feature businesses that serve the community well"
+        "note": "Not everyone is selected\u2014we feature businesses that serve the community well"
       },
-      "narration": "Here's how it works. Submit your application—takes about five minutes. Our team reviews within twenty-four to forty-eight hours. If you're selected, we'll contact you for a brief interview. Then your feature goes live within a week. I'll be honest: not everyone is selected. We feature businesses that genuinely serve the community well. But you've been nominated, which means someone thought your business qualifies.",
+      "narration": "Here's how it works. Submit your application\u2014takes about five minutes. Our team reviews within twenty-four to forty-eight hours. If you're selected, we'll contact you for a brief interview. Then your feature goes live within a week. I'll be honest: not everyone is selected. We feature businesses that genuinely serve the community well. But you've been nominated, which means someone thought your business qualifies.",
       "duration_seconds": 30,
       "audio_file": "slide-04-process.mp3"
     },
@@ -177,7 +185,7 @@
         ],
         "time_estimate": "5 minutes to complete"
       },
-      "narration": "The application is simple. Tell us what makes your business special. How you serve the community. Upload a recent photo of your business or team. And let us know the best time to contact you. Five minutes total. We're not looking for perfect answers—we're looking for authentic businesses worth featuring.",
+      "narration": "The application is simple. Tell us what makes your business special. How you serve the community. Upload a recent photo of your business or team. And let us know the best time to contact you. Five minutes total. We're not looking for perfect answers\u2014we're looking for authentic businesses worth featuring.",
       "duration_seconds": 25,
       "audio_file": "slide-05-application.mp3"
     },
@@ -187,7 +195,7 @@
       "title": "Apply Now",
       "content": {
         "headline": "Your Nomination Is Open",
-        "urgency": "Featured spots fill quickly—apply this week",
+        "urgency": "Featured spots fill quickly\u2014apply this week",
         "cta_primary": {
           "label": "Apply for Feature",
           "action": "submit_application"
@@ -196,7 +204,7 @@
           "label": "Maybe Later",
           "action": "save_nomination"
         },
-        "reassurance": "Free to apply • No commitment • We'll follow up within 48 hours"
+        "reassurance": "Free to apply \u2022 No commitment \u2022 We'll follow up within 48 hours"
       },
       "narration": "Your nomination is open now. Featured spots fill quickly, so I'd recommend applying this week. Click 'Apply for Feature' to submit your application. It's free, there's no commitment, and we'll follow up within forty-eight hours. your business has been nominated. The only question is whether you'll accept.",
       "duration_seconds": 20,
@@ -205,14 +213,14 @@
   ],
   "emails": {
     "email_hook": {
-      "subject": "Apply to be featured in this week's spotlight",
-      "preview_text": "your business has been nominated",
-      "body": "Hey there,\n\nyour business has been nominated for our Featured Business Spotlight.\n\nThis isn't spam. Someone thought your business deserves to be highlighted.\n\nFeatured businesses get:\n✓ Top placement in directory\n✓ Feature story in local news\n✓ Social media spotlight\n✓ 5x average visibility\n✓ Permanent 'Featured' badge\n\nThe numbers: Featured businesses see 487% more views and 312% more inquiries during their feature week.\n\n[APPLY FOR FEATURE →]\n\nApplication takes 5 minutes. We review within 48 hours.\n\nNot everyone is selected—but you've been nominated.\n\nSarah\nFibonacco"
+      "subject": "Apply for [Community Name]'s Featured Business Spotlight",
+      "preview_text": "Your business has been flagged for consideration",
+      "body": "Hi [First Name],\n\nYour business has been flagged for our Featured Business Spotlight in [Community Name] Day.News.\n\nFeatured businesses get:\n\n\u2192 Feature story in [Community Name] Day.News\n\u2192 Top placement in the directory\n\u2192 Newsletter feature to [X] subscribers\n\u2192 Social media spotlight\n\n[APPLY FOR FEATURE \u2192]\n\nApplication takes 5 minutes. We review within 48 hours.\n\n[AM Name]\n[Community Name] Day.News"
     },
     "email_reminder": {
-      "subject": "Your feature nomination expires soon",
+      "subject": "Your feature application is still open",
       "preview_text": "5 minutes to apply",
-      "body": "Hey there,\n\nQuick reminder: your business's nomination for our Featured Business Spotlight is still open.\n\nFeatured spots fill quickly, and nominations don't last forever.\n\nIf you want:\n→ 5x visibility\n→ News feature about your business\n→ Social media spotlight\n→ Permanent 'Featured' badge\n\n...the application takes 5 minutes:\n\n[APPLY NOW →]\n\nWe review within 48 hours.\n\nSarah"
+      "body": "Hi [First Name],\n\nYour nomination for [Community Name]'s Featured Business Spotlight is still open.\n\n\u2192 Feature story in Day.News\n\u2192 Newsletter feature to [X] subscribers\n\u2192 Directory top placement\n\n5 minutes to apply:\n\n[APPLY NOW \u2192]\n\n[AM Name]"
     }
   },
   "connections": {
@@ -224,13 +232,5 @@
       "HOOK-007",
       "HOOK-009"
     ]
-  },
-  "template": {
-    "template_id": "feature-application",
-    "name": "Quick Action",
-    "slides": 6,
-    "duration": 150,
-    "purpose": "hook",
-    "audio_required": true
   }
 }

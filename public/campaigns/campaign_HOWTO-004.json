@@ -22,7 +22,23 @@
     "secondary_cta": "schedule_photoshoot",
     "ai_persona": "Emma",
     "ai_tone": "Professional, detailed",
-    "ai_goal": "Complete venue profile optimization"
+    "ai_goal": "Complete venue profile optimization",
+    "conversion_goal": "activation",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week2-how-to",
+    "utm_content": "HOWTO-004",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/premium-venue-setup/audio/"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 305,
+    "purpose": "tutorial",
+    "audio_required": true
   },
   "slides": [
     {
@@ -38,7 +54,7 @@
           "outcome": "A venue profile that converts lookers into bookers"
         }
       },
-      "narration": "If you have a physical location—a restaurant, event space, retail store, fitness studio, anything—this guide is for you. In twenty minutes, you'll have a venue profile that doesn't just show up in searches, but actually gets people through your door. Let's turn your location into a destination.",
+      "narration": "If you have a physical location\u2014a restaurant, event space, retail store, fitness studio, anything\u2014this guide is for you. In twenty minutes, you'll have a venue profile that doesn't just show up in searches, but actually gets people through your door. Let's turn your location into a destination.",
       "duration_seconds": 25,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -72,7 +88,7 @@
         ],
         "truth": "People book venues they can visualize themselves in."
       },
-      "narration": "Here's what makes venues stand out. Professional photos get ten times more engagement than phone snapshots. Complete amenities answer every question before they ask. A virtual tour keeps people on your page three times longer. Clear capacity and pricing means you only get qualified leads. And social proof—reviews and past events—builds trust. The truth is: people book venues they can visualize themselves in.",
+      "narration": "Here's what makes venues stand out. Professional photos get ten times more engagement than phone snapshots. Complete amenities answer every question before they ask. A virtual tour keeps people on your page three times longer. Clear capacity and pricing means you only get qualified leads. And social proof\u2014reviews and past events\u2014builds trust. The truth is: people book venues they can visualize themselves in.",
       "duration_seconds": 40,
       "audio_file": "slide-02-standout.mp3"
     },
@@ -107,7 +123,7 @@
         "minimum": "8 photos minimum, 15-20 ideal",
         "pro_tip": "Hire a photographer. $200-400 investment pays off forever."
       },
-      "narration": "Step one: build your photo gallery. You need several types. A hero shot—your best, most impressive angle. Space shots showing different areas and setups. Detail shots of features that make you special. In-use shots of events happening and people enjoying. And exterior shots for finding you. Aim for eight photos minimum, fifteen to twenty is ideal. Pro tip: hire a photographer. Two to four hundred dollars is an investment that pays off forever.",
+      "narration": "Step one: build your photo gallery. You need several types. A hero shot\u2014your best, most impressive angle. Space shots showing different areas and setups. Detail shots of features that make you special. In-use shots of events happening and people enjoying. And exterior shots for finding you. Aim for eight photos minimum, fifteen to twenty is ideal. Pro tip: hire a photographer. Two to four hundred dollars is an investment that pays off forever.",
       "duration_seconds": 45,
       "audio_file": "slide-03-photos.mp3"
     },
@@ -141,7 +157,7 @@
         ],
         "tip": "Every amenity you add is a search term you can be found by."
       },
-      "narration": "Step two: list every amenity. And I mean every one. Space details—capacity, square footage, room types. Technical features—AV equipment, WiFi, power. Comfort—AC, heating, seating, accessibility. Services you offer—catering, setup, cleanup. And policies—noise limits, hours, parking. Here's why this matters: every amenity you add is a search term you can be found by. 'Venue with projector.' 'Space with wheelchair access.' Be findable.",
+      "narration": "Step two: list every amenity. And I mean every one. Space details\u2014capacity, square footage, room types. Technical features\u2014AV equipment, WiFi, power. Comfort\u2014AC, heating, seating, accessibility. Services you offer\u2014catering, setup, cleanup. And policies\u2014noise limits, hours, parking. Here's why this matters: every amenity you add is a search term you can be found by. 'Venue with projector.' 'Space with wheelchair access.' Be findable.",
       "duration_seconds": 45,
       "audio_file": "slide-04-amenities.mp3"
     },
@@ -207,7 +223,7 @@
         ],
         "request_script": "Would you mind sharing your experience? It helps other event planners find us."
       },
-      "narration": "Step four: show that others trust you. Collect reviews—request them after every event with a simple message: 'Would you mind sharing your experience? It helps other event planners find us.' Create a past events gallery with photos from previous bookings, with permission. Display client logos if you've hosted companies or organizations. Add any media mentions. Show certifications. Every piece of proof reduces someone's hesitation to book.",
+      "narration": "Step four: show that others trust you. Collect reviews\u2014request them after every event with a simple message: 'Would you mind sharing your experience? It helps other event planners find us.' Create a past events gallery with photos from previous bookings, with permission. Display client logos if you've hosted companies or organizations. Add any media mentions. Show certifications. Every piece of proof reduces someone's hesitation to book.",
       "duration_seconds": 40,
       "audio_file": "slide-06-proof.mp3"
     },
@@ -272,13 +288,6 @@
       "audio_file": "slide-08-cta.mp3"
     }
   ],
-  "emails": {
-    "email_tutorial": {
-      "subject": "Turn your location into a destination (venue profile guide)",
-      "preview_text": "20 minutes to a profile that converts",
-      "body": "Hey {{first_name}},\n\nIf {{business_name}} has a physical location where people come to you—a restaurant, event space, studio, store, anything—this guide is for you.\n\nI put together a 20-minute walkthrough for creating a venue profile that actually converts lookers into bookers:\n\n✓ Building a photo gallery that wows\n✓ Listing amenities so you're found by every search\n✓ Pricing strategies that work\n✓ Social proof that builds trust\n✓ Enabling frictionless booking\n\n[START THE VENUE GUIDE →]\n\nPeople book venues they can visualize themselves in. Let's make {{business_name}} impossible to resist.\n\n{{sender_name}}\nFibonacco"
-    }
-  },
   "connections": {
     "leads_to": [
       "HOOK-004"

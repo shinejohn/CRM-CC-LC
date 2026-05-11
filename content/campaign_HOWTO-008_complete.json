@@ -4,24 +4,24 @@
     "week": 4,
     "day": 23,
     "type": "How-To",
-    "title": "AI Sales Setup",
-    "subject": "Let AI handle your initial customer conversations",
-    "landing_page": "ai-sales-setup",
+    "title": "Set Up Your Lead Tracking",
+    "subject": "Let modern tools handle your initial customer conversations",
+    "landing_page": "modern tools-sales-setup",
     "template": "tutorial",
-    "description": "Setting up AI sales assistant, training, and handoffs"
+    "description": "Configure lead tracking so every inquiry is captured and tracked"
   },
   "landing_page": {
     "campaign_id": "HOWTO-008",
-    "landing_page_slug": "ai-sales-setup",
-    "url": "/learn/ai-sales-setup",
+    "landing_page_slug": "modern tools-sales-setup",
+    "url": "/learn/modern tools-sales-setup",
     "template_id": "tutorial",
     "template_name": "How-To Tutorial",
     "slide_count": 8,
     "duration_seconds": 360,
-    "primary_cta": "setup_ai_sales",
+    "primary_cta": "setup_modern tools_sales",
     "secondary_cta": "watch_demo",
-    "ai_tone": "Technical yet approachable, confident",
-    "ai_goal": "Walk user through AI sales assistant configuration",
+    "ai_tone": "Helpful, step-by-step, practical",
+    "ai_goal": "Guide user through lead tracking setup",
     "ai_persona": "Sarah",
     "conversion_goal": "activation",
     "data_capture_fields": "name, email, business_name",
@@ -30,32 +30,40 @@
     "utm_medium": "outbound",
     "utm_campaign": "90day-week4-how-to",
     "utm_content": "HOWTO-008",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-sales-setup/audio/"
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/modern tools-sales-setup/audio/"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 265,
+    "purpose": "tutorial",
+    "audio_required": true
   },
   "slides": [
     {
       "slide_num": 1,
       "component": "TutorialIntroSlide",
-      "title": "AI Sales Setup",
+      "title": "lead management Setup",
       "content": {
-        "headline": "Let AI Handle Initial Customer Conversations",
+        "headline": "Let modern tools Handle Initial Customer Conversations",
         "subhead": "20 minutes to 24/7 sales coverage",
         "expectations": {
           "time": "20 minutes",
           "difficulty": "Intermediate",
-          "outcome": "AI answering inquiries within seconds, 24/7"
+          "outcome": "modern tools answering inquiries within seconds, 24/7"
         }
       },
-      "narration": "In the next twenty minutes, you'll set up an AI assistant that handles initial customer conversations twenty-four seven. It answers instantly, qualifies leads, and hands off to you when a human is needed. Let's build your always-on sales team.",
+      "narration": "In the next twenty minutes, you'll set up an search tools that handles initial customer conversations twenty-four seven. It answers instantly, qualifies leads, and hands off to you when a human is needed. Let's build your always-on sales team.",
       "duration_seconds": 20,
       "audio_file": "slide-01-intro.mp3"
     },
     {
       "slide_num": 2,
       "component": "ConceptSlide",
-      "title": "What AI Sales Can Do",
+      "title": "What lead management Can Do",
       "content": {
-        "headline": "Your AI Sales Assistant Handles:",
+        "headline": "Your lead management Assistant Handles:",
         "capabilities": [
           {
             "task": "Answer common questions",
@@ -80,25 +88,25 @@
         ],
         "what_you_handle": "Complex decisions, negotiations, relationship building"
       },
-      "narration": "Here's what your AI sales assistant can handle. Answer common questions—hours, pricing, availability. Qualify leads—understand their budget, timeline, and needs. Schedule appointments—directly connecting to your calendar. Provide information—about your services, products, and process. And hand off to humans—when questions get complex or someone's ready to buy. You handle the relationships. AI handles the volume.",
+      "narration": "Here's what your lead management assistant can handle. Answer common questions\u2014hours, pricing, availability. Qualify leads\u2014understand their budget, timeline, and needs. Schedule appointments\u2014directly connecting to your calendar. Provide information\u2014about your services, products, and process. And hand off to humans\u2014when questions get complex or someone's ready to buy. You handle the relationships. modern tools handles the volume.",
       "duration_seconds": 40,
       "audio_file": "slide-02-capabilities.mp3"
     },
     {
       "slide_num": 3,
       "component": "StepSlide",
-      "title": "Step 1: Enable AI Sales",
+      "title": "Step 1: Enable lead management",
       "content": {
-        "headline": "Step 1: Turn On AI Sales Assistant",
-        "location": "Dashboard → AI → Sales Assistant → Enable",
+        "headline": "Step 1: Turn On lead management Assistant",
+        "location": "Dashboard \u2192 modern tools \u2192 Sales Assistant \u2192 Enable",
         "initial_setup": [
-          "Toggle 'AI Sales Assistant' to ON",
+          "Toggle 'lead management Assistant' to ON",
           "Select response speed (Instant recommended)",
-          "Choose your AI personality (Professional, Friendly, or Custom)"
+          "Choose your modern tools personality (Professional, Friendly, or Custom)"
         ],
-        "note": "AI starts with basic capabilities; we'll customize next"
+        "note": "modern tools starts with basic capabilities; we'll customize next"
       },
-      "narration": "Step one: Enable your AI Sales Assistant. Go to Dashboard, AI, Sales Assistant, and click Enable. Toggle the assistant to on. Select response speed—instant is recommended, but you can add a delay if preferred. Choose your AI personality—professional, friendly, or custom. The AI starts with basic capabilities. We'll customize it for your business next.",
+      "narration": "Step one: Enable your lead management Assistant. Go to Dashboard, modern tools, Sales Assistant, and click Enable. Toggle the assistant to on. Select response speed\u2014instant is recommended, but you can add a delay if preferred. Choose your modern tools personality\u2014professional, friendly, or custom. The modern tools starts with basic capabilities. We'll customize it for your business next.",
       "duration_seconds": 35,
       "audio_file": "slide-03-step1.mp3"
     },
@@ -107,11 +115,11 @@
       "component": "StepSlide",
       "title": "Step 2: Train on Your Business",
       "content": {
-        "headline": "Step 2: Teach AI About Your Business",
+        "headline": "Step 2: Teach modern tools About Your Business",
         "training_sources": [
           {
             "source": "Your website",
-            "how": "AI scans and learns",
+            "how": "modern tools scans and learns",
             "time": "Automatic"
           },
           {
@@ -132,7 +140,7 @@
         ],
         "tip": "The more you teach it, the better it performs"
       },
-      "narration": "Step two: Train the AI on your business. It needs to know what you know. First, let it scan your website—this happens automatically. Then upload your FAQ document if you have one. Add your service descriptions—import or add manually. Include pricing information—at least ranges if not exact prices. The more you teach it, the better it performs. Don't worry about perfection—you can refine later.",
+      "narration": "Step two: Train the modern tools on your business. It needs to know what you know. First, let it scan your website\u2014this happens automatically. Then upload your FAQ document if you have one. Add your service descriptions\u2014import or add manually. Include pricing information\u2014at least ranges if not exact prices. The more you teach it, the better it performs. Don't worry about perfection\u2014you can refine later.",
       "duration_seconds": 40,
       "audio_file": "slide-04-step2.mp3"
     },
@@ -163,7 +171,7 @@
         "customization": "Add questions specific to your business",
         "scoring": "Optionally set up lead scoring based on answers"
       },
-      "narration": "Step three: Set your qualification questions. These help AI understand who's a good fit. Basic questions: What service are they interested in? What's their timeline? What's their approximate budget? Best way to reach them? Add questions specific to your business. You can also set up lead scoring—automatically ranking leads based on their answers so you prioritize the best ones.",
+      "narration": "Step three: Set your qualification questions. These help modern tools understand who's a good fit. Basic questions: What service are they interested in? What's their timeline? What's their approximate budget? Best way to reach them? Add questions specific to your business. You can also set up lead scoring\u2014automatically ranking leads based on their answers so you prioritize the best ones.",
       "duration_seconds": 35,
       "audio_file": "slide-05-step3.mp3"
     },
@@ -172,14 +180,14 @@
       "component": "StepSlide",
       "title": "Step 4: Configure Handoffs",
       "content": {
-        "headline": "Step 4: When Does AI Hand Off to You?",
+        "headline": "Step 4: When Does modern tools Hand Off to You?",
         "handoff_triggers": [
           {
             "trigger": "Ready to buy signals",
             "action": "Immediate notification + handoff"
           },
           {
-            "trigger": "Complex questions AI can't answer",
+            "trigger": "Complex questions your account team can't answer",
             "action": "Escalate to human"
           },
           {
@@ -193,7 +201,7 @@
         ],
         "notification_options": "Email, SMS, App notification, or all three"
       },
-      "narration": "Step four: Configure when AI hands off to you. Ready-to-buy signals—AI recognizes these and notifies you immediately. Complex questions AI can't answer—it escalates instead of guessing. Customer requests human—instant transfer, no questions asked. High-value lead detected—priority notification. Choose how you want to be notified: email, SMS, app notification, or all three. You stay in control of what matters.",
+      "narration": "Step four: Configure when modern tools hands off to you. Ready-to-buy signals\u2014modern tools recognizes these and notifies you immediately. Complex questions your account team can't answer\u2014it escalates instead of guessing. Customer requests human\u2014instant transfer, no questions asked. High-value lead detected\u2014priority notification. Choose how you want to be notified: email, SMS, app notification, or all three. You stay in control of what matters.",
       "duration_seconds": 35,
       "audio_file": "slide-06-step4.mp3"
     },
@@ -202,7 +210,7 @@
       "component": "StepSlide",
       "title": "Step 5: Test and Refine",
       "content": {
-        "headline": "Step 5: Test Your AI Assistant",
+        "headline": "Step 5: Test Your search tools",
         "testing": [
           {
             "test": "Ask common questions",
@@ -222,22 +230,22 @@
           }
         ],
         "refinement": "Review conversations weekly; add training as needed",
-        "tip": "AI improves over time as it learns from real conversations"
+        "tip": "modern tools improves over time as it learns from real conversations"
       },
-      "narration": "Step five: Test and refine. Before going live, test your AI. Ask common questions—does it answer correctly? Ask edge cases—does it handle gracefully or escalate? Request a human—does it hand off properly? Complete a full qualification flow—does it capture information correctly? After launch, review conversations weekly. Add training as needed. AI improves over time as it learns from real conversations.",
+      "narration": "Step five: Test and refine. Before going live, test your modern tools. Ask common questions\u2014does it answer correctly? Ask edge cases\u2014does it handle gracefully or escalate? Request a human\u2014does it hand off properly? Complete a full qualification flow\u2014does it capture information correctly? After launch, review conversations weekly. Add training as needed. modern tools improves over time as it learns from real conversations.",
       "duration_seconds": 35,
       "audio_file": "slide-07-step5.mp3"
     },
     {
       "slide_num": 8,
       "component": "CTASlide",
-      "title": "Activate AI Sales",
+      "title": "Activate lead management",
       "content": {
         "headline": "Ready for 24/7 Sales Coverage?",
-        "summary": "Enable → Train → Qualify → Handoff → Go Live",
+        "summary": "Enable \u2192 Train \u2192 Qualify \u2192 Handoff \u2192 Go Live",
         "cta_primary": {
-          "label": "Set Up AI Sales",
-          "action": "start_ai_setup"
+          "label": "Set Up lead management",
+          "action": "start_modern tools_setup"
         },
         "cta_secondary": {
           "label": "Watch Demo First",
@@ -245,16 +253,16 @@
         },
         "result": "Never miss another inquiry. Even at 3am."
       },
-      "narration": "Ready for twenty-four seven sales coverage? Enable, train, set qualification, configure handoffs, go live. Click 'Set Up AI Sales' to start now, or watch a demo first if you want to see it in action. The result: you'll never miss another inquiry, even at three in the morning. Your AI sales assistant is ready.",
+      "narration": "Ready for twenty-four seven sales coverage? Enable, train, set qualification, configure handoffs, go live. Click 'Set Up lead management' to start now, or watch a demo first if you want to see it in action. The result: you'll never miss another inquiry, even at three in the morning. Your lead management assistant is ready.",
       "duration_seconds": 25,
       "audio_file": "slide-08-cta.mp3"
     }
   ],
   "emails": {
     "email_tutorial": {
-      "subject": "Let AI handle your initial customer conversations",
-      "preview_text": "20 minutes to 24/7 sales coverage",
-      "body": "Hey there,\n\nHow many inquiries have you missed because you couldn't respond fast enough?\n\nWhat if every inquiry got an instant, intelligent response—24/7?\n\nYour AI Sales Assistant can:\n• Answer common questions instantly\n• Qualify leads (budget, timeline, needs)\n• Schedule appointments automatically\n• Hand off to you when a human is needed\n\n[SET UP AI SALES →]\n\n20-minute setup. Then it works while you sleep.\n\nSarah\nFibonacco"
+      "subject": "Track every inquiry your business gets \u2014 20-minute setup",
+      "preview_text": "Never lose a lead again",
+      "body": "Hi [First Name],\n\nHow many inquiries have you missed because there was no system to track them?\n\n20-minute setup:\n\n\u2192 See every inquiry in one place\n\u2192 Get instant notifications\n\u2192 Track which ones convert\n\u2192 Know which sources send you the best leads\n\n[SET UP LEAD TRACKING \u2192]\n\nOnce it's running, you'll wonder how you managed without it.\n\n[AM Name]\n[Community Name] Day.News"
     }
   },
   "connections": {
@@ -270,13 +278,5 @@
       "HOWTO-017",
       "HOOK-007"
     ]
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "Step-by-Step Tutorial",
-    "slides": 8,
-    "duration": 265,
-    "purpose": "tutorial",
-    "audio_required": true
   }
 }

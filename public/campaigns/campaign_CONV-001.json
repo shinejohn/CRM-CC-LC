@@ -1,0 +1,222 @@
+{
+  "campaign": {
+    "id": "CONV-001",
+    "week": 5,
+    "day": 29,
+    "type": "Conversion",
+    "title": "Your Community Position",
+    "subject": "I wanted to update you on [Category] availability in [Community Name]",
+    "landing_page": "your-community-position",
+    "template": "conversion-briefing",
+    "description": "AM status update on category availability \u2014 first conversion touchpoint"
+  },
+  "landing_page": {
+    "campaign_id": "CONV-001",
+    "landing_page_slug": "your-community-position",
+    "url": "/membership/briefing",
+    "template_id": "conversion-briefing",
+    "template_name": "Conversion Briefing",
+    "slide_count": 7,
+    "duration_seconds": 240,
+    "primary_cta": "see_proposal",
+    "secondary_cta": "see_whats_included",
+    "ai_persona": "Sarah",
+    "ai_tone": "Direct, confident, project manager",
+    "ai_goal": "Present the opportunity and offer the proposal",
+    "data_capture_fields": "name, email, business_name, category, community",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/community-position/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "proposal_view",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week5-conversion",
+    "utm_content": "CONV-001"
+  },
+  "template": {
+    "template_id": "conversion-briefing",
+    "name": "Conversion Briefing",
+    "slides": 7,
+    "duration": 240,
+    "purpose": "conversion",
+    "audio_required": true
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Your Community Status",
+      "content": {
+        "headline": "[Category] in [Community Name]",
+        "subhead": "Status update from your account manager",
+        "visual": "Community dashboard showing slot availability"
+      },
+      "narration": "Hi, this is your account manager. I want to update you on the situation in your community and your category. Here's where things stand right now.",
+      "duration_seconds": 10,
+      "audio_file": "slide-01-hero.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "StatsSlide",
+      "title": "Community Scorecard",
+      "content": {
+        "headline": "[Community Name] \u2014 Current Status",
+        "stats": [
+          {
+            "value": "[X]/37",
+            "label": "total positions filled"
+          },
+          {
+            "value": "[Y]/[Z]",
+            "label": "[Category] slots taken"
+          },
+          {
+            "value": "[W]",
+            "label": "days of Founder pricing remaining"
+          },
+          {
+            "value": "[V]",
+            "label": "businesses active this month"
+          }
+        ]
+      },
+      "narration": "Here's your community scorecard. Out of 37 total positions, this many are filled. In your category, this many of the available slots are taken. And if you're interested in Founder pricing \u2014 locked at three hundred dollars a month for three years \u2014 you have this many days left in that window.",
+      "duration_seconds": 25,
+      "audio_file": "slide-02-scorecard.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "What You've Done So Far",
+      "content": {
+        "headline": "Your Activity in [Community Name]",
+        "points": [
+          "Listing claimed and live",
+          "[X] listing views to date",
+          "[Y] events posted",
+          "[Z] content pieces published",
+          "Connected to the [Community Name] network"
+        ]
+      },
+      "narration": "Here's what you've done so far in the network. Your listing is live. You've had views. You've posted events and content. You're connected. The Community Influencer membership takes all of this and amplifies it with premium placement, news coverage, and priority across everything.",
+      "duration_seconds": 20,
+      "audio_file": "slide-03-activity.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "ConceptSlide",
+      "title": "Community Influencer Membership",
+      "content": {
+        "headline": "What the Full Membership Includes",
+        "elements": [
+          {
+            "icon": "star",
+            "label": "Premium Placement",
+            "desc": "Priority over every non-member business"
+          },
+          {
+            "icon": "newspaper",
+            "label": "News Coverage",
+            "desc": "15-20 mentions per month in community news"
+          },
+          {
+            "icon": "calendar",
+            "label": "Featured Events",
+            "desc": "2 featured events per month"
+          },
+          {
+            "icon": "tag",
+            "label": "Coupons & Ads",
+            "desc": "3 coupons + 2 ads per month"
+          },
+          {
+            "icon": "globe",
+            "label": "AlphaSite",
+            "desc": "Professional web presence"
+          },
+          {
+            "icon": "lock",
+            "label": "Category Lock",
+            "desc": "Your slot \u2014 competitors can't take it"
+          }
+        ]
+      },
+      "narration": "The Community Influencer membership gives you premium placement across the entire network, news coverage with fifteen to twenty mentions per month, featured events, coupons, ads, a professional web presence, and \u2014 this is important \u2014 your category slot is locked. Once you have it, your competitors can't take it.",
+      "duration_seconds": 30,
+      "audio_file": "slide-04-membership.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "StatsSlide",
+      "title": "Pricing",
+      "content": {
+        "headline": "$300/month",
+        "stats": [
+          {
+            "value": "$300",
+            "label": "per month"
+          },
+          {
+            "value": "12",
+            "label": "month commitment"
+          },
+          {
+            "value": "3",
+            "label": "FREE bonus months (13-15)"
+          },
+          {
+            "value": "$240",
+            "label": "effective monthly rate"
+          }
+        ],
+        "note": "Founder pricing: $300/month locked for 3 years if signed within the launch window."
+      },
+      "narration": "The membership is three hundred dollars a month with a twelve-month commitment. At the end of your first year, you get three bonus months free \u2014 months thirteen through fifteen. That brings your effective rate to two-forty a month. And if you sign during the Founder window, three hundred is locked for three years.",
+      "duration_seconds": 20,
+      "audio_file": "slide-05-pricing.mp3"
+    },
+    {
+      "slide_num": 6,
+      "component": "CTASlide",
+      "title": "Your Proposal",
+      "content": {
+        "headline": "Your Proposal Is Ready",
+        "body": "I've put together a proposal for your business. Review it and let me know what questions you have.",
+        "cta_primary": {
+          "label": "See My Proposal",
+          "action": "view_proposal"
+        },
+        "cta_secondary": {
+          "label": "Schedule a Call",
+          "action": "schedule_call"
+        },
+        "urgency": "[Category] has [X] slots remaining. First-come, first-served."
+      },
+      "narration": "I've put together a proposal specifically for your business. You can review it right now, or schedule a call with me to walk through it. I want to be upfront about timing \u2014 your category has limited slots remaining and they're first-come, first-served. I can't hold them.",
+      "duration_seconds": 15,
+      "audio_file": "slide-06-cta.mp3"
+    },
+    {
+      "slide_num": 7,
+      "component": "SummarySlide",
+      "title": "Your Account Manager",
+      "content": {
+        "headline": "[AM Name] \u2014 Your Account Manager",
+        "body": "I've been watching your category in [Community Name]. I want to make sure you have the best position available.",
+        "contact": "[email] | [phone]",
+        "slot_status": "Other [Category] businesses have been inquiring. Just keeping you informed."
+      },
+      "narration": "I'm your account manager and I've been monitoring your category in your community. Other businesses have been inquiring. I'm not trying to rush you \u2014 I'm trying to make sure you have the information you need to decide. Call me, email me, or click through to your proposal anytime.",
+      "duration_seconds": 10,
+      "audio_file": "slide-07-am.mp3"
+    }
+  ],
+  "connections": {
+    "leads_to": [
+      "CONV-002"
+    ],
+    "follows": "EDU-006",
+    "related": [
+      "HOOK-012"
+    ]
+  }
+}

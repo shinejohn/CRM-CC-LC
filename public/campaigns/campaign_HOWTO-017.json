@@ -9,6 +9,36 @@
     "landing_page": "appointment-booking-setup",
     "template": "tutorial"
   },
+  "landing_page": {
+    "campaign_id": "HOWTO-017",
+    "landing_page_slug": "appointment-booking-setup",
+    "url": "/learn/appointment-booking-setup",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 205,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Clear, patient, hands-on",
+    "ai_goal": "Walk user through setup and configuration",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/appointment-booking-setup/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week8-how-to",
+    "utm_content": "HOWTO-017"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 205,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -18,7 +48,7 @@
         "headline": "Customers Book While You Sleep",
         "subhead": "Set up 24/7 appointment booking"
       },
-      "narration": "What if customers could book appointments anytime—while you're with other clients, after hours, on weekends? Online booking makes that possible. Let's set it up.",
+      "narration": "What if customers could book appointments anytime\u2014while you're with other clients, after hours, on weekends? Online booking makes that possible. Let's set it up.",
       "duration_seconds": 15,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -51,7 +81,7 @@
           "Vacation/blackout dates"
         ]
       },
-      "narration": "First, set your availability. Define working hours for each day—they don't have to be the same. Mark days you're available. Block out lunch and break times. Add vacation or blackout dates. The system only shows times you're actually free.",
+      "narration": "First, set your availability. Define working hours for each day\u2014they don't have to be the same. Mark days you're available. Block out lunch and break times. Add vacation or blackout dates. The system only shows times you're actually free.",
       "duration_seconds": 30,
       "audio_file": "slide-03-availability.mp3"
     },
@@ -87,7 +117,7 @@
           "Require payment or deposit (optional)"
         ]
       },
-      "narration": "Set booking rules. Minimum advance notice—how much warning you need. Maximum advance booking—how far ahead people can book. Buffer time between appointments for prep or travel. Your cancellation policy. And whether to require payment or deposit upfront.",
+      "narration": "Set booking rules. Minimum advance notice\u2014how much warning you need. Maximum advance booking\u2014how far ahead people can book. Buffer time between appointments for prep or travel. Your cancellation policy. And whether to require payment or deposit upfront.",
       "duration_seconds": 35,
       "audio_file": "slide-05-rules.mp3"
     },
@@ -120,7 +150,7 @@
           "Sync with Google/Outlook calendar"
         ]
       },
-      "narration": "Booking pro tips. Add your booking link to your email signature—every email becomes a booking opportunity. Share on social media profiles. That twenty-four hour reminder reduces no-shows by about forty percent. And sync with your Google or Outlook calendar so everything stays in one place.",
+      "narration": "Booking pro tips. Add your booking link to your email signature\u2014every email becomes a booking opportunity. Share on social media profiles. That twenty-four hour reminder reduces no-shows by about forty percent. And sync with your Google or Outlook calendar so everything stays in one place.",
       "duration_seconds": 25,
       "audio_file": "slide-07-tips.mp3"
     },
@@ -138,18 +168,11 @@
           "action": "preview_booking"
         }
       },
-      "narration": "Ready to take bookings twenty-four seven? Set up your booking system now. Or preview how it looks to customers first. Stop playing phone tag—let customers book when it's convenient for them.",
+      "narration": "Ready to take bookings twenty-four seven? Set up your booking system now. Or preview how it looks to customers first. Stop playing phone tag\u2014let customers book when it's convenient for them.",
       "duration_seconds": 20,
       "audio_file": "slide-08-cta.mp3"
     }
   ],
-  "emails": {
-    "email_1_educational": {
-      "subject": "Let customers book appointments 24/7",
-      "preview_text": "Stop playing phone tag",
-      "body": "Hey {{first_name}},\n\nWhat if customers could book while you're busy with other clients?\n\nOnline booking:\n✓ Available 24/7\n✓ Automatic confirmations\n✓ Reminders reduce no-shows 40%\n✓ Syncs with your calendar\n\n[SET UP ONLINE BOOKING →]\n\nPro tip: Add booking link to your email signature.\n\n{{sender_name}}"
-    }
-  },
   "connections": {
     "leads_to": [
       "HOWTO-022"

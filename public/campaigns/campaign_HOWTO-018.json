@@ -9,6 +9,36 @@
     "landing_page": "invoice-automation-guide",
     "template": "tutorial"
   },
+  "landing_page": {
+    "campaign_id": "HOWTO-018",
+    "landing_page_slug": "invoice-automation-guide",
+    "url": "/learn/invoice-automation-guide",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 215,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Clear, patient, hands-on",
+    "ai_goal": "Walk user through setup and configuration",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/invoice-automation-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week9-how-to",
+    "utm_content": "HOWTO-018"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 215,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -52,7 +82,7 @@
           "Late fee policy (optional)"
         ]
       },
-      "narration": "Create your invoice template. Add your logo and branding for professionalism. Include all business details—name, address, tax ID if needed. Set payment terms like net thirty. List accepted payment methods. Optionally include your late fee policy.",
+      "narration": "Create your invoice template. Add your logo and branding for professionalism. Include all business details\u2014name, address, tax ID if needed. Set payment terms like net thirty. List accepted payment methods. Optionally include your late fee policy.",
       "duration_seconds": 30,
       "audio_file": "slide-03-template.mp3"
     },
@@ -69,7 +99,7 @@
           "Manual send with one click"
         ]
       },
-      "narration": "Configure when invoices send automatically. After service completed—invoice goes out immediately. On recurring schedule for subscription clients. When project milestones are hit. Or manual send with one click when you need control. Mix and match for different client types.",
+      "narration": "Configure when invoices send automatically. After service completed\u2014invoice goes out immediately. On recurring schedule for subscription clients. When project milestones are hit. Or manual send with one click when you need control. Mix and match for different client types.",
       "duration_seconds": 30,
       "audio_file": "slide-04-triggers.mp3"
     },
@@ -87,7 +117,7 @@
         ],
         "benefit": "Online payment = paid 2x faster"
       },
-      "narration": "Enable online payments—this is crucial. Accept credit and debit cards. Add ACH bank transfer for lower fees. Offer payment plans for larger invoices. Set up auto-pay for recurring clients. Invoices with online payment links get paid twice as fast on average.",
+      "narration": "Enable online payments\u2014this is crucial. Accept credit and debit cards. Add ACH bank transfer for lower fees. Offer payment plans for larger invoices. Set up auto-pay for recurring clients. Invoices with online payment links get paid twice as fast on average.",
       "duration_seconds": 35,
       "audio_file": "slide-05-payments.mp3"
     },
@@ -105,7 +135,7 @@
           "Final notice (14 days after)"
         ]
       },
-      "narration": "Set up automatic follow-ups. Reminder three days before due date. Another on the due date. Overdue notice three days after. Second reminder at seven days. Final notice at fourteen days. All automatic—no awkward chasing required.",
+      "narration": "Set up automatic follow-ups. Reminder three days before due date. Another on the due date. Overdue notice three days after. Second reminder at seven days. Final notice at fourteen days. All automatic\u2014no awkward chasing required.",
       "duration_seconds": 35,
       "audio_file": "slide-06-followup.mp3"
     },
@@ -121,7 +151,7 @@
           "Review aging report weekly"
         ]
       },
-      "narration": "Invoice pro tips. Shorter payment terms mean faster payment—try net fifteen instead of net thirty. Offer a small discount for early payment—two percent off if paid within seven days works well. Send invoices the same day as service while value is fresh. Review your aging report weekly to catch problems early.",
+      "narration": "Invoice pro tips. Shorter payment terms mean faster payment\u2014try net fifteen instead of net thirty. Offer a small discount for early payment\u2014two percent off if paid within seven days works well. Send invoices the same day as service while value is fresh. Review your aging report weekly to catch problems early.",
       "duration_seconds": 30,
       "audio_file": "slide-07-tips.mp3"
     },
@@ -139,18 +169,11 @@
           "action": "view_templates"
         }
       },
-      "narration": "Ready to get paid faster? Set up automated invoicing now. Or browse invoice templates first to find a professional look that fits your brand. Stop chasing payments—let automation handle it.",
+      "narration": "Ready to get paid faster? Set up automated invoicing now. Or browse invoice templates first to find a professional look that fits your brand. Stop chasing payments\u2014let automation handle it.",
       "duration_seconds": 20,
       "audio_file": "slide-08-cta.mp3"
     }
   ],
-  "emails": {
-    "email_1_educational": {
-      "subject": "Automate invoicing and get paid faster",
-      "preview_text": "Stop chasing payments",
-      "body": "Hey {{first_name}},\n\nChasing payments is exhausting.\n\nAutomated invoicing:\n✓ Sends invoices immediately after service\n✓ Accepts online payments (2x faster)\n✓ Follows up automatically on overdue\n✓ No awkward reminder calls\n\n[SET UP INVOICE AUTOMATION →]\n\nPro tip: Net 15 terms get paid faster than Net 30.\n\n{{sender_name}}"
-    }
-  },
   "connections": {
     "leads_to": [
       "HOWTO-029"

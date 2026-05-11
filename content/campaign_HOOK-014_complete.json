@@ -5,10 +5,40 @@
     "day": 68,
     "type": "Hook",
     "title": "Seasonal Promotion",
-    "subject": "Holiday event season is here—don't miss your chance to participate",
+    "subject": "Holiday event season is here\u2014don't miss your chance to participate",
     "landing_page": "holiday-events",
     "template": "seasonal-promotion",
     "description": "Seasonal promotion for holiday event participation and advertising"
+  },
+  "landing_page": {
+    "campaign_id": "HOOK-014",
+    "landing_page_slug": "holiday-events",
+    "url": "/learn/holiday-events",
+    "template_id": "seasonal-promotion",
+    "template_name": "Quick Action",
+    "slide_count": 5,
+    "duration_seconds": 135,
+    "primary_cta": "get_started",
+    "secondary_cta": "learn_more",
+    "ai_persona": "Sarah",
+    "ai_tone": "Energetic, encouraging, action-oriented",
+    "ai_goal": "Get user to take the first free action immediately",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/holiday-events/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week10-hook",
+    "utm_content": "HOOK-014"
+  },
+  "template": {
+    "template_id": "seasonal-promotion",
+    "name": "Quick Action",
+    "slides": 5,
+    "duration": 135,
+    "purpose": "hook",
+    "audio_required": true
   },
   "slides": [
     {
@@ -19,7 +49,7 @@
         "headline": "The Busiest Shopping Season Is Almost Here",
         "subhead": "Make sure customers find YOU this holiday"
       },
-      "narration": "Holiday season is almost here—the busiest shopping time of the year. Customers are actively looking for local businesses to support. The question is: will they find you? We've got special holiday opportunities to make sure they do.",
+      "narration": "Holiday season is almost here\u2014the busiest shopping time of the year. Customers are actively looking for local businesses to support. The question is: will they find you? We've got special holiday opportunities to make sure they do.",
       "duration_seconds": 15,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -91,7 +121,7 @@
         ],
         "note": "Submit early for best placement"
       },
-      "narration": "Key dates to know. November first: Holiday Gift Guide submissions open. November fifteenth: Gift Guide is published. November twenty-eighth: Small Business Saturday with special features. December first through fifteenth: Holiday Deals promotion period. December sixteenth through twenty-third: Last-Minute Guide for procrastinators. Submit early for best placement—first submissions get priority positioning.",
+      "narration": "Key dates to know. November first: Holiday Gift Guide submissions open. November fifteenth: Gift Guide is published. November twenty-eighth: Small Business Saturday with special features. December first through fifteenth: Holiday Deals promotion period. December sixteenth through twenty-third: Last-Minute Guide for procrastinators. Submit early for best placement\u2014first submissions get priority positioning.",
       "duration_seconds": 30,
       "audio_file": "slide-03-timeline.mp3"
     },
@@ -105,7 +135,7 @@
           {
             "business": "Gift shop",
             "participation": "Gift Guide + Deals",
-            "result": "Best December in 7 years—up 43%"
+            "result": "Best December in 7 years\u2014up 43%"
           },
           {
             "business": "Restaurant",
@@ -119,7 +149,7 @@
           }
         ]
       },
-      "narration": "What did participants experience last year? A gift shop in our Gift Guide and Deals section had their best December in seven years—up forty-three percent. A restaurant listing holiday events sold out four holiday dinner events. A spa in our Gift Guide saw gift card sales up sixty-seven percent over the previous year. This season brings customers looking to spend—make sure they find you.",
+      "narration": "What did participants experience last year? A gift shop in our Gift Guide and Deals section had their best December in seven years\u2014up forty-three percent. A restaurant listing holiday events sold out four holiday dinner events. A spa in our Gift Guide saw gift card sales up sixty-seven percent over the previous year. This season brings customers looking to spend\u2014make sure they find you.",
       "duration_seconds": 30,
       "audio_file": "slide-04-results.mp3"
     },
@@ -139,16 +169,16 @@
         },
         "urgency": "Gift Guide deadline: November 10th"
       },
-      "narration": "Ready for the holidays? Submit for holiday features now—Gift Guide deadline is November tenth. Or see last year's guide to see what participants looked like. The holiday shopping season waits for no one. Get visible before customers start looking.",
+      "narration": "Ready for the holidays? Submit for holiday features now\u2014Gift Guide deadline is November tenth. Or see last year's guide to see what participants looked like. The holiday shopping season waits for no one. Get visible before customers start looking.",
       "duration_seconds": 20,
       "audio_file": "slide-05-cta.mp3"
     }
   ],
   "emails": {
-    "email_1_hook": {
-      "subject": "Holiday event season is here—don't miss your chance to participate",
-      "preview_text": "Gift guides, events, deals—get visible",
-      "body": "Hey there,\n\nHoliday season is almost here.\n\nCustomers are looking for local businesses to support. Will they find your business?\n\nHoliday visibility options:\n✓ Holiday Gift Guide feature\n✓ Free holiday event listing\n✓ Small Business Saturday spotlight\n✓ Holiday Deals section\n✓ Last-Minute Shopping Guide\n\n[SUBMIT FOR HOLIDAY FEATURES →]\n\nOne gift shop had their best December in 7 years after participating.\n\nGift Guide deadline: November 10th.\n\nSarah\nFibonacco"
+    "email_hook": {
+      "subject": "Holiday season in [Community Name] \u2014 get your business visible",
+      "preview_text": "Gift guides events and deals",
+      "body": "Hi [First Name],\n\nHoliday season is coming. Customers in [Community Name] are looking for local businesses to support.\n\nHoliday visibility options:\n\n\u2192 Holiday Gift Guide feature\n\u2192 Free holiday event listing\n\u2192 Small Business Saturday spotlight\n\u2192 Holiday Deals section in the newsletter\n\n[SUBMIT FOR HOLIDAY FEATURES \u2192]\n\nGift Guide deadline: [date].\n\n[AM Name]\n[Community Name] Day.News"
     }
   },
   "connections": {
@@ -157,35 +187,5 @@
       "HOOK-003",
       "HOOK-002"
     ]
-  },
-  "landing_page": {
-    "campaign_id": "HOOK-014",
-    "landing_page_slug": "holiday-events",
-    "url": "/learn/holiday-events",
-    "template_id": "seasonal-promotion",
-    "template_name": "Quick Action",
-    "slide_count": 5,
-    "duration_seconds": 135,
-    "primary_cta": "get_started",
-    "secondary_cta": "learn_more",
-    "ai_persona": "Sarah",
-    "ai_tone": "Energetic, encouraging, action-oriented",
-    "ai_goal": "Get user to take the first free action immediately",
-    "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/holiday-events/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "signup",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week10-hook",
-    "utm_content": "HOOK-014"
-  },
-  "template": {
-    "template_id": "seasonal-promotion",
-    "name": "Quick Action",
-    "slides": 5,
-    "duration": 135,
-    "purpose": "hook",
-    "audio_required": true
   }
 }

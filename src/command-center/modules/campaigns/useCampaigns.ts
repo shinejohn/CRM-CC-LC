@@ -14,6 +14,8 @@ import type {
   CampaignTemplate,
   CampaignStatus,
   CampaignChannel,
+  TimelineProgress,
+  AvailableTimeline,
 } from './campaign.types';
 
 interface CampaignEventPayload {
@@ -37,7 +39,7 @@ interface UseCampaignsReturn {
   stats: CampaignStats;
   isLoading: boolean;
   error: string | null;
-  
+
   // Actions
   createCampaign: (data: CampaignCreateData) => Promise<Campaign>;
   updateCampaign: (id: string, data: CampaignUpdateData) => Promise<Campaign>;
@@ -48,6 +50,15 @@ interface UseCampaignsReturn {
   testCampaign: (id: string, recipients: string[]) => Promise<void>;
   getCampaignStats: (id: string) => Promise<CampaignStats>;
   refreshCampaigns: () => Promise<void>;
+
+  // Timeline management
+  timelineProgress: TimelineProgress[];
+  availableTimelines: AvailableTimeline[];
+  timelineLoading: boolean;
+  fetchTimelineProgress: () => Promise<void>;
+  enrollCustomer: (customerId: string, timelineId?: string) => Promise<void>;
+  pauseTimeline: (customerId: string) => Promise<void>;
+  resumeTimeline: (customerId: string) => Promise<void>;
 }
 
 export function useCampaigns(filters: UseCampaignsFilters = {}): UseCampaignsReturn {
@@ -63,6 +74,9 @@ export function useCampaigns(filters: UseCampaignsFilters = {}): UseCampaignsRet
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [timelineProgress, setTimelineProgress] = useState<TimelineProgress[]>([]);
+  const [availableTimelines, setAvailableTimelines] = useState<AvailableTimeline[]>([]);
+  const [timelineLoading, setTimelineLoading] = useState(false);
 
   // WebSocket for real-time updates
   const { subscribe, unsubscribe } = useWebSocket();
@@ -234,6 +248,54 @@ export function useCampaigns(filters: UseCampaignsFilters = {}): UseCampaignsRet
     throw new Error(response.error?.message || 'Failed to load campaign stats');
   }, []);
 
+  // ── Timeline Management ──
+
+  const fetchTimelineProgress = useCallback(async () => {
+    setTimelineLoading(true);
+    try {
+      const [progressRes, timelinesRes] = await Promise.all([
+        apiService.get<{ data: TimelineProgress[] }>('/v1/campaigns/timeline/progress'),
+        apiService.get<{ data: AvailableTimeline[] }>('/v1/campaigns/timeline/available'),
+      ]);
+      if (progressRes.success && progressRes.data) {
+        const raw = progressRes.data as unknown;
+        const items = Array.isArray(raw) ? raw as TimelineProgress[] : (raw as { data: TimelineProgress[] }).data ?? [];
+        setTimelineProgress(items);
+      }
+      if (timelinesRes.success && timelinesRes.data) {
+        const raw = timelinesRes.data as unknown;
+        const items = Array.isArray(raw) ? raw as AvailableTimeline[] : (raw as { data: AvailableTimeline[] }).data ?? [];
+        setAvailableTimelines(items);
+      }
+    } catch {
+      // Silently handle — timeline data is supplementary
+    } finally {
+      setTimelineLoading(false);
+    }
+  }, []);
+
+  const enrollCustomer = useCallback(async (customerId: string, timelineId?: string) => {
+    const body: Record<string, string> = {};
+    if (timelineId) body.timeline_id = timelineId;
+    await apiService.post(`/v1/campaigns/timeline/${customerId}/enroll`, body);
+    await fetchTimelineProgress();
+  }, [fetchTimelineProgress]);
+
+  const pauseTimelineFn = useCallback(async (customerId: string) => {
+    await apiService.post(`/v1/campaigns/timeline/${customerId}/pause`);
+    await fetchTimelineProgress();
+  }, [fetchTimelineProgress]);
+
+  const resumeTimelineFn = useCallback(async (customerId: string) => {
+    await apiService.post(`/v1/campaigns/timeline/${customerId}/resume`);
+    await fetchTimelineProgress();
+  }, [fetchTimelineProgress]);
+
+  // Fetch timeline data alongside campaigns
+  useEffect(() => {
+    fetchTimelineProgress();
+  }, [fetchTimelineProgress]);
+
   return {
     campaigns,
     templates,
@@ -249,6 +311,15 @@ export function useCampaigns(filters: UseCampaignsFilters = {}): UseCampaignsRet
     testCampaign,
     getCampaignStats,
     refreshCampaigns: fetchCampaigns,
+
+    // Timeline
+    timelineProgress,
+    availableTimelines,
+    timelineLoading,
+    fetchTimelineProgress,
+    enrollCustomer,
+    pauseTimeline: pauseTimelineFn,
+    resumeTimeline: resumeTimelineFn,
   };
 }
 

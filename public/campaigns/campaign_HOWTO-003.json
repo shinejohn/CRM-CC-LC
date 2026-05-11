@@ -32,6 +32,14 @@
     "utm_campaign": "90day-week2-how-to",
     "utm_content": "HOWTO-003"
   },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 265,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -80,7 +88,7 @@
         ],
         "insight": "Most events fail because they're vague. Specificity wins."
       },
-      "narration": "Great events have five things. A compelling title—this alone can triple your clicks. Clear value—people need to know why they should care. Specific details—date, time, location, what to expect. A great image—doubles your engagement. And an easy action—one click to RSVP or save. Most events fail because they're too vague. Specificity wins.",
+      "narration": "Great events have five things. A compelling title\u2014this alone can triple your clicks. Clear value\u2014people need to know why they should care. Specific details\u2014date, time, location, what to expect. A great image\u2014doubles your engagement. And an easy action\u2014one click to RSVP or save. Most events fail because they're too vague. Specificity wins.",
       "duration_seconds": 35,
       "audio_file": "slide-02-anatomy.mp3"
     },
@@ -103,7 +111,7 @@
         ],
         "tip": "Ask yourself: Would I click on this?"
       },
-      "narration": "Step one: write a title that gets clicks. Use this formula: benefit or hook, plus what it is, plus your business name. Bad titles are vague: 'Sale Event,' 'Workshop,' 'Grand Opening.' Good titles are specific: 'Fifty Percent Off Everything: Summer Blowout at Martinez Boutique.' 'Free DIY Home Repair Workshop—Learn to Fix Anything.' Ask yourself: would I click on this? If not, rewrite it.",
+      "narration": "Step one: write a title that gets clicks. Use this formula: benefit or hook, plus what it is, plus your business name. Bad titles are vague: 'Sale Event,' 'Workshop,' 'Grand Opening.' Good titles are specific: 'Fifty Percent Off Everything: Summer Blowout at Martinez Boutique.' 'Free DIY Home Repair Workshop\u2014Learn to Fix Anything.' Ask yourself: would I click on this? If not, rewrite it.",
       "duration_seconds": 40,
       "audio_file": "slide-03-title.mp3"
     },
@@ -168,7 +176,7 @@
         ],
         "checklist": "If someone has to ask a question before attending, you forgot something."
       },
-      "narration": "Step three: include all the details. Every question someone might have, answer it. Date and time—include the day of week and timezone. Location—full address plus parking notes. Cost—say if it's free. What to bring or expect—reduce the anxiety about showing up. And if there's limited capacity, say so—it creates urgency. Here's your test: if someone would have to ask a question before attending, you forgot something.",
+      "narration": "Step three: include all the details. Every question someone might have, answer it. Date and time\u2014include the day of week and timezone. Location\u2014full address plus parking notes. Cost\u2014say if it's free. What to bring or expect\u2014reduce the anxiety about showing up. And if there's limited capacity, say so\u2014it creates urgency. Here's your test: if someone would have to ask a question before attending, you forgot something.",
       "duration_seconds": 40,
       "audio_file": "slide-05-details.mp3"
     },
@@ -179,7 +187,7 @@
       "content": {
         "headline": "Step 4: Use an Image That Pops",
         "image_tips": [
-          "Show the experience—people enjoying, learning, participating",
+          "Show the experience\u2014people enjoying, learning, participating",
           "Bright, well-lit photos outperform dark ones",
           "Faces get more engagement than objects",
           "Horizontal orientation works best",
@@ -188,7 +196,7 @@
         "specs": "Minimum 1200x630 pixels for best display",
         "no_image": "No photo? Use an eye-catching graphic or your best storefront shot."
       },
-      "narration": "Step four: use an image that pops. Show the experience—people enjoying themselves, learning something, participating. Bright, well-lit photos outperform dark ones. Faces get more engagement than objects. Horizontal orientation displays best across platforms. And if you have real photos from past events, use those instead of stock photos. Minimum 1200 by 630 pixels for best display.",
+      "narration": "Step four: use an image that pops. Show the experience\u2014people enjoying themselves, learning something, participating. Bright, well-lit photos outperform dark ones. Faces get more engagement than objects. Horizontal orientation displays best across platforms. And if you have real photos from past events, use those instead of stock photos. Minimum 1200 by 630 pixels for best display.",
       "duration_seconds": 35,
       "audio_file": "slide-06-image.mp3"
     },
@@ -239,18 +247,11 @@
           "One-click RSVP"
         ]
       },
-      "narration": "Ready to fill your next event? Click 'Create Your Event' and use our guided template. It walks you through each step we just covered—title, value, details, image, action. Or click to see top-performing events and get inspired by what's working right now. Your next event could be the one everyone's talking about. Let's make it happen.",
+      "narration": "Ready to fill your next event? Click 'Create Your Event' and use our guided template. It walks you through each step we just covered\u2014title, value, details, image, action. Or click to see top-performing events and get inspired by what's working right now. Your next event could be the one everyone's talking about. Let's make it happen.",
       "duration_seconds": 25,
       "audio_file": "slide-08-cta.mp3"
     }
   ],
-  "emails": {
-    "email_tutorial": {
-      "subject": "Post events that actually get attendance",
-      "preview_text": "The difference between a flop and a full house",
-      "body": "Hey {{first_name}},\n\nThere's a huge difference between posting an event and posting an event people actually attend.\n\nMost events flop because they're vague. Great events are specific.\n\nI put together a 10-minute guide that shows you exactly what works:\n\n✓ How to write titles that get 3x more clicks\n✓ Making your value proposition irresistible\n✓ The details you MUST include (or people won't show)\n✓ Image tips that double engagement\n✓ Creating urgency without being sleazy\n\n[START THE TUTORIAL →]\n\nBy the end, you'll know exactly how to create events that fill up.\n\n{{sender_name}}\nFibonacco\n\nP.S. The tutorial includes examples of top-performing events so you can see what's actually working."
-    }
-  },
   "connections": {
     "leads_to": [
       "HOOK-002"

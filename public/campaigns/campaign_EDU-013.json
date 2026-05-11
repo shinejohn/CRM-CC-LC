@@ -4,11 +4,41 @@
     "week": 10,
     "day": 65,
     "type": "Educational",
-    "title": "Competitive Intelligence",
+    "title": "Know What Your Competitors Are Doing",
     "subject": "What your competitors know about you (and what you should know about them)",
     "landing_page": "data-privacy-guide",
     "template": "educational",
-    "description": "How to track competitors and learn from their strategies"
+    "description": "Competitive awareness \u2014 who in your category is participating and who isn't"
+  },
+  "landing_page": {
+    "campaign_id": "EDU-013",
+    "landing_page_slug": "data-privacy-guide",
+    "url": "/learn/data-privacy-guide",
+    "template_id": "educational",
+    "template_name": "Educational Content",
+    "slide_count": 7,
+    "duration_seconds": 200,
+    "primary_cta": "explore_more",
+    "secondary_cta": "download_article",
+    "ai_persona": "Sarah",
+    "ai_tone": "Direct, factual, competitive",
+    "ai_goal": "Show competitive landscape and motivate participation",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/data-privacy-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "education",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week10-educational",
+    "utm_content": "EDU-013"
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 200,
+    "purpose": "education",
+    "audio_required": true
   },
   "slides": [
     {
@@ -19,7 +49,7 @@
         "headline": "Your Competitors Are Watching You",
         "subhead": "Are you watching them?"
       },
-      "narration": "Your competitors are watching you. They're tracking your pricing, your promotions, your reviews. They're learning from your successes and your mistakes. The question is: are you watching them? Competitive intelligence isn't spying—it's smart business. Let me show you how to do it right.",
+      "narration": "Your competitors are watching you. They're tracking your pricing, your promotions, your reviews. They're learning from your successes and your mistakes. The question is: are you watching them? Competitive intelligence isn't spying\u2014it's smart business. Let me show you how to do it right.",
       "duration_seconds": 20,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -52,7 +82,7 @@
           }
         ]
       },
-      "narration": "What should you track? Pricing—their prices, specials, and discounts. Offerings—new services, products, packages they introduce. Marketing—where they advertise and what messages they use. Reviews—what their customers are saying, good and bad. Presence—where they show up and how active they are. This gives you a complete picture of their strategy.",
+      "narration": "What should you track? Pricing\u2014their prices, specials, and discounts. Offerings\u2014new services, products, packages they introduce. Marketing\u2014where they advertise and what messages they use. Reviews\u2014what their customers are saying, good and bad. Presence\u2014where they show up and how active they are. This gives you a complete picture of their strategy.",
       "duration_seconds": 30,
       "audio_file": "slide-02-track.mp3"
     },
@@ -65,15 +95,15 @@
         "insights": [
           {
             "source": "Their positive reviews",
-            "learn": "What customers value—can you offer it too?"
+            "learn": "What customers value\u2014can you offer it too?"
           },
           {
             "source": "Their negative reviews",
-            "learn": "Where they're weak—can you be strong?"
+            "learn": "Where they're weak\u2014can you be strong?"
           },
           {
             "source": "Review responses",
-            "learn": "How they handle complaints—can you do better?"
+            "learn": "How they handle complaints\u2014can you do better?"
           },
           {
             "source": "Review frequency",
@@ -85,7 +115,7 @@
           }
         ]
       },
-      "narration": "Their reviews are your roadmap. Positive reviews show what customers value—can you offer it too? Negative reviews show where they're weak—can you be strong there? Their responses show how they handle complaints—can you do better? Review frequency tells you if they're growing or stagnant. Common themes reveal what matters most to the customers you're both trying to win.",
+      "narration": "Their reviews are your roadmap. Positive reviews show what customers value\u2014can you offer it too? Negative reviews show where they're weak\u2014can you be strong there? Their responses show how they handle complaints\u2014can you do better? Review frequency tells you if they're growing or stagnant. Common themes reveal what matters most to the customers you're both trying to win.",
       "duration_seconds": 35,
       "audio_file": "slide-03-reviews.mp3"
     },
@@ -118,7 +148,7 @@
           }
         ]
       },
-      "narration": "Competitive intelligence helps you find your differentiation. Where do competitors cluster? Go where they aren't. What do they all say? Say something different. Where are they weak? Make that your strength. What don't they offer? Fill the gap. Who don't they serve? Specialize for that audience. You don't win by copying—you win by differentiating.",
+      "narration": "Competitive intelligence helps you find your differentiation. Where do competitors cluster? Go where they aren't. What do they all say? Say something different. Where are they weak? Make that your strength. What don't they offer? Fill the gap. Who don't they serve? Specialize for that audience. You don't win by copying\u2014you win by differentiating.",
       "duration_seconds": 35,
       "audio_file": "slide-04-positioning.mp3"
     },
@@ -156,7 +186,7 @@
           }
         ]
       },
-      "narration": "Set up ongoing monitoring. Google Alerts for competitor mentions—real-time notifications. Weekly review monitoring across platforms. Follow their social accounts to see their activity. Monthly website checks for pricing and offering changes. Watch the event calendar for their events and promotions. Takes ten minutes a week once it's set up.",
+      "narration": "Set up ongoing monitoring. Google Alerts for competitor mentions\u2014real-time notifications. Weekly review monitoring across platforms. Follow their social accounts to see their activity. Monthly website checks for pricing and offering changes. Watch the event calendar for their events and promotions. Takes ten minutes a week once it's set up.",
       "duration_seconds": 30,
       "audio_file": "slide-05-monitor.mp3"
     },
@@ -190,7 +220,7 @@
         ],
         "time": "About 30 minutes"
       },
-      "narration": "Here's your competitive audit—takes about thirty minutes. Step one: list your top five competitors. Step two: read their last twenty reviews each. Step three: note their current pricing and offers. Step four: check where they're visible—directory, events, news. Step five: identify three differentiation opportunities. Thirty minutes and you'll know more about your market than most of your competitors know.",
+      "narration": "Here's your competitive audit\u2014takes about thirty minutes. Step one: list your top five competitors. Step two: read their last twenty reviews each. Step three: note their current pricing and offers. Step four: check where they're visible\u2014directory, events, news. Step five: identify three differentiation opportunities. Thirty minutes and you'll know more about your market than most of your competitors know.",
       "duration_seconds": 30,
       "audio_file": "slide-06-audit.mp3"
     },
@@ -209,18 +239,11 @@
           "action": "download_template"
         }
       },
-      "narration": "Ready to know your market? Run a competitive analysis—we'll pull data on your competitors automatically. Or download the audit template to do it yourself. Knowledge is power. In business, knowing your competition is half the battle.",
+      "narration": "Ready to know your market? Run a competitive analysis\u2014we'll pull data on your competitors automatically. Or download the audit template to do it yourself. Knowledge is power. In business, knowing your competition is half the battle.",
       "duration_seconds": 20,
       "audio_file": "slide-07-cta.mp3"
     }
   ],
-  "emails": {
-    "email_1_educational": {
-      "subject": "What your competitors know about you (and what you should know about them)",
-      "preview_text": "Competitive intelligence isn't spying—it's smart business",
-      "body": "Hey {{first_name}},\n\nYour competitors are watching {{business_name}}.\n\nThey track your:\n→ Pricing and specials\n→ Customer reviews\n→ Marketing messages\n→ New offerings\n\nAre you watching them?\n\n[WATCH THE 3-MINUTE GUIDE →]\n\nCompetitive intelligence isn't spying—it's smart business.\n\nTheir reviews alone tell you:\n• What customers value (can you offer it?)\n• Where they're weak (can you be strong?)\n• What matters to your shared customers\n\n30 minutes of research = months of strategic advantage.\n\n{{sender_name}}\nFibonacco"
-    }
-  },
   "connections": {
     "leads_to": [
       "HOWTO-023"

@@ -27,7 +27,7 @@ export interface Campaign {
   content: string;
   createdAt: string;
   updatedAt: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface CampaignTemplate {
@@ -58,7 +58,7 @@ export interface CampaignCreateData {
   subject?: string;
   content: string;
   scheduledAt?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface CampaignUpdateData {
@@ -67,6 +67,40 @@ export interface CampaignUpdateData {
   content?: string;
   scheduledAt?: string;
   status?: CampaignStatus;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
+}
+
+// Timeline types for the 90-day drip campaign system
+export interface TimelineProgress {
+  id: string;
+  customer: {
+    id: string;
+    business_name: string;
+    email: string;
+    pipeline_stage: string;
+  };
+  timeline: {
+    id: string;
+    name: string;
+    duration_days: number;
+    pipeline_stage: string;
+  };
+  current_day: number;
+  status: 'active' | 'paused' | 'completed';
+  started_at: string;
+  last_action_at: string | null;
+  completed_at: string | null;
+  paused_at: string | null;
+  completed_actions_count: number;
+  skipped_actions_count: number;
+}
+
+export interface AvailableTimeline {
+  id: string;
+  name: string;
+  slug: string;
+  pipeline_stage: string;
+  duration_days: number;
+  active_enrollments: number;
 }
 

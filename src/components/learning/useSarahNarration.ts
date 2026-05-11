@@ -2,6 +2,12 @@ import { useCallback, useRef, useState } from "react";
 import type { SarahMessage } from "@/pitch/types";
 import type { Campaign } from "@/services/types/learning.types";
 
+interface SarahChatResponse {
+  response: string;
+  suggested_actions: Array<{ label: string; value: string }>;
+  session_id: string | null;
+}
+
 interface SarahContext {
   opening_line?: string;
   closing_line?: string;
@@ -75,6 +81,7 @@ export function getCompletionMessage(campaign: Campaign): string {
 export interface UseSarahNarrationReturn {
   messages: SarahMessage[];
   isTyping: boolean;
+  suggestedActions: Array<{ label: string; value: string }>;
   appendSarah: (text: string, delay?: number) => void;
   onSlideChange: (index: number, slide: SlideData) => void;
   greet: (campaign: Campaign) => void;
@@ -82,11 +89,19 @@ export interface UseSarahNarrationReturn {
   handleUserMessage: (text: string) => void;
 }
 
-export function useSarahNarration(): UseSarahNarrationReturn {
+interface UseSarahNarrationOptions {
+  campaignId?: string;
+  campaign?: Campaign;
+}
+
+export function useSarahNarration(options: UseSarahNarrationOptions = {}): UseSarahNarrationReturn {
   const [messages, setMessages] = useState<SarahMessage[]>([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [suggestedActions, setSuggestedActions] = useState<Array<{ label: string; value: string }>>([]);
   const typingTimerRef = useRef<ReturnType<typeof setTimeout>>();
   const lastNarratedSlideRef = useRef<number>(-1);
+  const sessionIdRef = useRef<string | null>(null);
+  const currentSlideRef = useRef<{ index: number; slide: SlideData | null }>({ index: 0, slide: null });
 
   const appendSarah = useCallback((text: string, delay = 800) => {
     setIsTyping(true);
@@ -117,6 +132,8 @@ export function useSarahNarration(): UseSarahNarrationReturn {
 
   const onSlideChange = useCallback(
     (index: number, slide: SlideData) => {
+      currentSlideRef.current = { index, slide };
+
       if (index === lastNarratedSlideRef.current) return;
       lastNarratedSlideRef.current = index;
 
@@ -140,19 +157,72 @@ export function useSarahNarration(): UseSarahNarrationReturn {
         ...prev,
         { id: makeId(), text, timestamp: timestamp(), type: "user" },
       ]);
-      // Phase 3 will wire this to the backend chat API.
-      // For now, acknowledge the message.
-      appendSarah(
-        "Great question! AI-powered responses are coming soon. For now, keep watching — the presentation covers a lot of common questions.",
-        1000
-      );
+
+      setIsTyping(true);
+
+      const campaign = options.campaign;
+      const lp = campaign ? extractLandingPage(campaign) : {};
+      const currentSlide = currentSlideRef.current;
+      const rawSlides = campaign ? ((campaign as Record<string, unknown>).slides as SlideData[] | undefined) : undefined;
+
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000/api/v1";
+
+      fetch(`${apiUrl}/sarah/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: text,
+          campaign_id: options.campaignId ?? campaign?.id ?? "unknown",
+          slide_index: currentSlide.index,
+          session_id: sessionIdRef.current,
+          context: {
+            title: campaign?.title ?? "",
+            description: campaign?.description ?? "",
+            ai_tone: (lp.ai_tone as string) ?? "",
+            ai_goal: (lp.ai_goal as string) ?? "",
+            current_slide_title: currentSlide.slide?.title ?? "",
+            current_slide_narration: currentSlide.slide?.narration ?? "",
+            total_slides: rawSlides?.length ?? 10,
+          },
+        }),
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.json() as Promise<SarahChatResponse>;
+        })
+        .then((data) => {
+          if (data.session_id) {
+            sessionIdRef.current = data.session_id;
+          }
+          if (data.suggested_actions?.length) {
+            setSuggestedActions(data.suggested_actions);
+          }
+          setMessages((prev) => [
+            ...prev,
+            { id: makeId(), text: data.response, timestamp: timestamp(), type: "sarah" },
+          ]);
+          setIsTyping(false);
+        })
+        .catch(() => {
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: makeId(),
+              text: "I had a brief connection issue. Could you try asking that again?",
+              timestamp: timestamp(),
+              type: "sarah",
+            },
+          ]);
+          setIsTyping(false);
+        });
     },
-    [appendSarah]
+    [options.campaign, options.campaignId]
   );
 
   return {
     messages,
     isTyping,
+    suggestedActions,
     appendSarah,
     onSlideChange,
     greet,

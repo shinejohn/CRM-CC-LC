@@ -4,21 +4,52 @@
     "week": 11,
     "day": 78,
     "type": "How-To",
-    "title": "AI Training Guide",
-    "subject": "Train AI to sound like your business",
-    "landing_page": "ai-training-guide",
-    "template": "tutorial"
+    "title": "Customize Your Account Manager",
+    "subject": "customize your settings to sound like your business",
+    "landing_page": "modern tools-training-guide",
+    "template": "tutorial",
+    "description": "Train your account manager on your business voice, services, and preferences"
+  },
+  "landing_page": {
+    "campaign_id": "HOWTO-025",
+    "landing_page_slug": "modern tools-training-guide",
+    "url": "/learn/modern tools-training-guide",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 230,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Helpful, step-by-step, practical",
+    "ai_goal": "Guide user through customization of their account manager settings",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/modern tools-training-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week11-how-to",
+    "utm_content": "HOWTO-025"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 230,
+    "purpose": "tutorial",
+    "audio_required": true
   },
   "slides": [
     {
       "slide_num": 1,
       "component": "HeroSlide",
-      "title": "AI Training",
+      "title": "customization",
       "content": {
-        "headline": "Make AI Sound Like You",
-        "subhead": "Train your AI assistant in 20 minutes"
+        "headline": "Make modern tools Sound Like You",
+        "subhead": "Train your search tools in 20 minutes"
       },
-      "narration": "Generic AI sounds like... generic AI. But trained AI sounds like your business—your voice, your expertise, your way of helping customers. Let's train yours to be unmistakably you.",
+      "narration": "Generic modern tools sounds like... generic modern tools. But trained modern tools sounds like your business\u2014your voice, your expertise, your way of helping customers. Let's train yours to be unmistakably you.",
       "duration_seconds": 15,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -34,7 +65,7 @@
           "Boundaries and escalation"
         ]
       },
-      "narration": "We'll train your AI on business knowledge—what you do and how you do it. Voice and tone—how you talk to customers. Common scenarios—the situations that come up repeatedly. And boundaries—when AI should escalate to a human.",
+      "narration": "We'll train your modern tools on business knowledge\u2014what you do and how you do it. Voice and tone\u2014how you talk to customers. Common scenarios\u2014the situations that come up repeatedly. And boundaries\u2014when modern tools should escalate to a human.",
       "duration_seconds": 20,
       "audio_file": "slide-02-overview.mp3"
     },
@@ -52,7 +83,7 @@
           "What makes you different"
         ]
       },
-      "narration": "Start with business knowledge. Upload service descriptions and pricing. Add your FAQs—you've already done that work. Include policies on returns, cancellations, guarantees. Hours, location, contact info. And what makes you different from competitors. This becomes AI's knowledge base.",
+      "narration": "Start with business knowledge. Upload service descriptions and pricing. Add your FAQs\u2014you've already done that work. Include policies on returns, cancellations, guarantees. Hours, location, contact info. And what makes you different from competitors. This becomes the system's knowledge base.",
       "duration_seconds": 35,
       "audio_file": "slide-03-knowledge.mp3"
     },
@@ -75,7 +106,7 @@
           "How you handle complaints"
         ]
       },
-      "narration": "Define your voice and tone. Are you formal or casual? Do you use emojis? Technical jargon or plain language? Warm and personal or efficient and direct? The best way: provide example responses you've actually written. Real emails, real messages. AI learns from your examples.",
+      "narration": "Define your voice and tone. Are you formal or casual? Do you use emojis? Technical jargon or plain language? Warm and personal or efficient and direct? The best way: provide example responses you've actually written. Real emails, real messages. the system learns from your examples.",
       "duration_seconds": 40,
       "audio_file": "slide-04-voice.mp3"
     },
@@ -92,9 +123,9 @@
           "Complaints",
           "Special requests"
         ],
-        "format": "For each: Example question → Ideal response"
+        "format": "For each: Example question \u2192 Ideal response"
       },
-      "narration": "Train on common scenarios. Pricing questions. Scheduling requests. Service inquiries. Complaints. Special requests. For each scenario, provide an example question and your ideal response. The more examples, the better AI handles variations.",
+      "narration": "Train on common scenarios. Pricing questions. Scheduling requests. Service inquiries. Complaints. Special requests. For each scenario, provide an example question and your ideal response. The more examples, the better modern tools handles variations.",
       "duration_seconds": 30,
       "audio_file": "slide-05-scenarios.mp3"
     },
@@ -105,9 +136,9 @@
       "content": {
         "action": "Define Limits",
         "boundaries": [
-          "Topics AI shouldn't discuss",
+          "Topics modern tools shouldn't discuss",
           "When to escalate to human",
-          "What AI can and can't promise",
+          "What your account team can and can't promise",
           "Sensitive situations (complaints, refunds)"
         ],
         "escalation_triggers": [
@@ -117,7 +148,7 @@
           "Complex custom requests"
         ]
       },
-      "narration": "Set clear boundaries. Topics AI shouldn't discuss—maybe specific pricing negotiations or competitor comparisons. When to escalate to a human—set clear triggers. What AI can promise versus what needs human approval. How to handle sensitive situations. Escalate when customer asks for manager, mentions legal issues, expresses strong frustration, or has complex custom requests.",
+      "narration": "Set clear boundaries. Topics modern tools shouldn't discuss\u2014maybe specific pricing negotiations or competitor comparisons. When to escalate to a human\u2014set clear triggers. What your account team can promise versus what needs human approval. How to handle sensitive situations. Escalate when customer asks for manager, mentions legal issues, expresses strong frustration, or has complex custom requests.",
       "duration_seconds": 40,
       "audio_file": "slide-06-boundaries.mp3"
     },
@@ -127,42 +158,35 @@
       "title": "Pro Tips",
       "content": {
         "tips": [
-          "Review AI conversations weekly at first",
+          "Review modern tools conversations weekly at first",
           "Update training when you notice gaps",
           "Test by asking tricky questions yourself",
           "Feedback loop: mark good/bad responses"
         ]
       },
-      "narration": "AI training pro tips. Review AI conversations weekly at first—you'll spot gaps quickly. Update training when you notice AI missing something. Test by asking tricky questions yourself before customers do. Use the feedback loop—mark responses as good or bad so AI keeps learning.",
+      "narration": "customization pro tips. Review modern tools conversations weekly at first\u2014you'll spot gaps quickly. Update training when you notice modern tools missing something. Test by asking tricky questions yourself before customers do. Use the feedback loop\u2014mark responses as good or bad so modern tools keeps learning.",
       "duration_seconds": 30,
       "audio_file": "slide-07-tips.mp3"
     },
     {
       "slide_num": 8,
       "component": "CTASlide",
-      "title": "Train Your AI",
+      "title": "Train Your modern tools",
       "content": {
         "cta_primary": {
           "label": "Start Training",
-          "action": "train_ai"
+          "action": "train_modern tools"
         },
         "cta_secondary": {
           "label": "See Training Examples",
           "action": "view_examples"
         }
       },
-      "narration": "Ready to make AI sound like you? Start training now—twenty minutes of setup saves hours of generic responses. Or see training examples from businesses like yours first. Your AI should be unmistakably yours.",
+      "narration": "Ready to make modern tools sound like you? Start training now\u2014twenty minutes of setup saves hours of generic responses. Or see training examples from businesses like yours first. Your modern tools should be unmistakably yours.",
       "duration_seconds": 20,
       "audio_file": "slide-08-cta.mp3"
     }
   ],
-  "emails": {
-    "email_1_educational": {
-      "subject": "Train AI to sound like your business",
-      "preview_text": "Make AI sound like you",
-      "body": "Hey {{first_name}},\n\nGeneric AI sounds like... generic AI.\n\nTrained AI sounds like YOUR business.\n\nTrain on:\n✓ Your services and pricing\n✓ Your voice and tone\n✓ Common scenarios\n✓ When to escalate to human\n\n[TRAIN YOUR AI →]\n\nTip: Provide real examples of responses you've written.\n\n{{sender_name}}"
-    }
-  },
   "connections": {
     "leads_to": [
       "EDU-015"

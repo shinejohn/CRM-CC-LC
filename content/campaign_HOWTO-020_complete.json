@@ -9,6 +9,36 @@
     "landing_page": "faq-builder-guide",
     "template": "tutorial"
   },
+  "landing_page": {
+    "campaign_id": "HOWTO-020",
+    "landing_page_slug": "faq-builder-guide",
+    "url": "/learn/faq-builder-guide",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 215,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Clear, patient, hands-on",
+    "ai_goal": "Walk user through setup and configuration",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/faq-builder-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week9-how-to",
+    "utm_content": "HOWTO-020"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 215,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -18,7 +48,7 @@
         "headline": "Answer Questions Before They're Asked",
         "subhead": "Build a powerful FAQ in 20 minutes"
       },
-      "narration": "How many times do you answer the same questions? A good FAQ answers them before they're asked, saves you time, builds trust, and helps AI understand your business. Let's build one that works.",
+      "narration": "How many times do you answer the same questions? A good FAQ answers them before they're asked, saves you time, builds trust, and helps modern tools understand your business. Let's build one that works.",
       "duration_seconds": 15,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -73,7 +103,7 @@
           "a": "Yes, all estimates are free with no obligation. Schedule online or call us at [number]. Estimates typically take 30 minutes."
         }
       },
-      "narration": "Write clear answers. Lead with the direct answer—no 'great question' preamble. Add brief explanation only if needed. Include next steps or a call to action when relevant. Keep answers under one hundred words. Example: 'Do you offer free estimates?' 'Yes, all estimates are free with no obligation. Schedule online or call. Estimates typically take thirty minutes.' Direct, complete, actionable.",
+      "narration": "Write clear answers. Lead with the direct answer\u2014no 'great question' preamble. Add brief explanation only if needed. Include next steps or a call to action when relevant. Keep answers under one hundred words. Example: 'Do you offer free estimates?' 'Yes, all estimates are free with no obligation. Schedule online or call. Estimates typically take thirty minutes.' Direct, complete, actionable.",
       "duration_seconds": 40,
       "audio_file": "slide-04-answers.mp3"
     },
@@ -106,11 +136,11 @@
           "Website FAQ page",
           "Each service page (relevant FAQs)",
           "Google Business Profile",
-          "AI assistant training",
+          "search tools training",
           "Email auto-responses"
         ]
       },
-      "narration": "Make your FAQ findable. Create a dedicated FAQ page on your website. Add relevant questions to each service page. Include top FAQs in your Google Business Profile. Feed FAQs to your AI assistant for instant answers. Use in email auto-responses. Same content, multiple touchpoints.",
+      "narration": "Make your FAQ findable. Create a dedicated FAQ page on your website. Add relevant questions to each service page. Include top FAQs in your Google Business Profile. Feed FAQs to your search tools for instant answers. Use in email auto-responses. Same content, multiple touchpoints.",
       "duration_seconds": 30,
       "audio_file": "slide-06-findable.mp3"
     },
@@ -126,7 +156,7 @@
           "Track which FAQs get viewed most"
         ]
       },
-      "narration": "FAQ pro tips. Update quarterly based on new questions you're receiving. Add FAQ link to your email signature. Use schema markup so Google can display your FAQs directly in search results. Track which FAQs get viewed most—those might need more detail.",
+      "narration": "FAQ pro tips. Update quarterly based on new questions you're receiving. Add FAQ link to your email signature. Use schema markup so Google can display your FAQs directly in search results. Track which FAQs get viewed most\u2014those might need more detail.",
       "duration_seconds": 25,
       "audio_file": "slide-07-tips.mp3"
     },
@@ -144,16 +174,16 @@
           "action": "view_examples"
         }
       },
-      "narration": "Ready to answer questions before they're asked? Start building your FAQ now—we'll help organize and format it. Or see examples from businesses like yours first. Twenty minutes now saves hours every week.",
+      "narration": "Ready to answer questions before they're asked? Start building your FAQ now\u2014we'll help organize and format it. Or see examples from businesses like yours first. Twenty minutes now saves hours every week.",
       "duration_seconds": 20,
       "audio_file": "slide-08-cta.mp3"
     }
   ],
   "emails": {
-    "email_1_educational": {
-      "subject": "Build an FAQ that answers questions before they're asked",
-      "preview_text": "Save hours answering the same questions",
-      "body": "Hey there,\n\nHow many times do you answer the same questions?\n\nA good FAQ:\n✓ Answers before customers ask\n✓ Saves you hours every week\n✓ Builds trust with transparency\n✓ Helps AI understand your business\n\n[BUILD YOUR FAQ →]\n\nTip: Lead with direct answer, keep under 100 words.\n\nSarah"
+    "email_tutorial": {
+      "subject": "Build your FAQ \u2014 answer common questions automatically",
+      "preview_text": "Save hours of repetitive responses",
+      "body": "Hi [First Name],\n\nHow many times a week do you answer the same questions?\n\nBuild your FAQ and those questions get answered automatically:\n\n\u2192 List your most common questions\n\u2192 Write clear answers\n\u2192 Publish to your listings and web presence\n\u2192 Customer inquiry systems use them to respond instantly\n\n[BUILD YOUR FAQ \u2192]\n\nStart with your top 10 questions. Add more as they come up.\n\n[AM Name]"
     }
   },
   "connections": {
@@ -161,35 +191,5 @@
       "HOWTO-025"
     ],
     "follows": "HOWTO-019"
-  },
-  "landing_page": {
-    "campaign_id": "HOWTO-020",
-    "landing_page_slug": "faq-builder-guide",
-    "url": "/learn/faq-builder-guide",
-    "template_id": "tutorial",
-    "template_name": "Step-by-Step Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 215,
-    "primary_cta": "start_setup",
-    "secondary_cta": "watch_demo",
-    "ai_persona": "Sarah",
-    "ai_tone": "Clear, patient, hands-on",
-    "ai_goal": "Walk user through setup and configuration",
-    "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/faq-builder-guide/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "activation",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week9-how-to",
-    "utm_content": "HOWTO-020"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "Step-by-Step Tutorial",
-    "slides": 8,
-    "duration": 215,
-    "purpose": "tutorial",
-    "audio_required": true
   }
 }

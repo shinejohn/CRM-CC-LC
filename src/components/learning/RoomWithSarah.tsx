@@ -206,12 +206,13 @@ export default function RoomWithSarah({
   const {
     messages,
     isTyping,
+    suggestedActions: apiSuggestedActions,
     appendSarah,
     onSlideChange,
     greet,
     complete,
     handleUserMessage,
-  } = useSarahNarration();
+  } = useSarahNarration({ campaignId: campaign.id, campaign });
 
   // Greet on mount
   useEffect(() => {
@@ -255,11 +256,14 @@ export default function RoomWithSarah({
     }
   }, [campaign, complete, appendSarah, onNavigateCampaign]);
 
-  // Contextual suggested actions based on where the user is
+  // Contextual suggested actions — use API-returned ones if available, else defaults
   type SuggestedAction = ComponentProps<typeof SarahPanel>["suggestedActions"];
   const suggestedActions = useMemo((): SuggestedAction => {
-    // Don't show suggestions while Sarah is typing or if user has sent messages
+    // After user has chatted, use API-returned suggestions
     const userSent = messages.some((m) => m.type === "user");
+    if (userSent && apiSuggestedActions.length > 0) {
+      return apiSuggestedActions;
+    }
     if (userSent) return [];
 
     if (isComplete) {
@@ -283,7 +287,7 @@ export default function RoomWithSarah({
       { label: "Explain this slide", value: "Can you explain this slide in more detail?" },
       { label: "I have a question", value: "I have a question about this." },
     ];
-  }, [currentSlideIndex, isComplete, messages]);
+  }, [currentSlideIndex, isComplete, messages, apiSuggestedActions]);
 
   const shareUrl =
     typeof window !== "undefined"

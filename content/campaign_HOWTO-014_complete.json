@@ -9,6 +9,36 @@
     "landing_page": "customer-survey-setup",
     "template": "tutorial"
   },
+  "landing_page": {
+    "campaign_id": "HOWTO-014",
+    "landing_page_slug": "customer-survey-setup",
+    "url": "/learn/customer-survey-setup",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 230,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Clear, patient, hands-on",
+    "ai_goal": "Walk user through setup and configuration",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/customer-survey-setup/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week7-how-to",
+    "utm_content": "HOWTO-014"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 230,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -18,7 +48,7 @@
         "headline": "Get Real Feedback from Real Customers",
         "subhead": "Surveys that actually get responses"
       },
-      "narration": "Want to know what customers really think? Surveys get you direct feedback—but only if they're designed right. Most surveys get ignored. Let's build ones that get responses.",
+      "narration": "Want to know what customers really think? Surveys get you direct feedback\u2014but only if they're designed right. Most surveys get ignored. Let's build ones that get responses.",
       "duration_seconds": 15,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -34,7 +64,7 @@
           "Acting on results"
         ]
       },
-      "narration": "We'll cover survey types and when to use each, designing questions that get honest answers, timing and delivery for maximum response, and most importantly—acting on results.",
+      "narration": "We'll cover survey types and when to use each, designing questions that get honest answers, timing and delivery for maximum response, and most importantly\u2014acting on results.",
       "duration_seconds": 20,
       "audio_file": "slide-02-overview.mp3"
     },
@@ -61,7 +91,7 @@
           }
         ]
       },
-      "narration": "Choose your survey type. NPS or Net Promoter Score is one question about likelihood to recommend—use after purchases. CSAT measures specific experience satisfaction—use immediately after interactions. Feedback surveys are longer, five to ten questions—use quarterly or after major purchases.",
+      "narration": "Choose your survey type. NPS or Net Promoter Score is one question about likelihood to recommend\u2014use after purchases. CSAT measures specific experience satisfaction\u2014use immediately after interactions. Feedback surveys are longer, five to ten questions\u2014use quarterly or after major purchases.",
       "duration_seconds": 40,
       "audio_file": "slide-03-types.mp3"
     },
@@ -78,7 +108,7 @@
           "Start easy, end with optional"
         ]
       },
-      "narration": "Question design principles. Keep it under three minutes total. Ask only one thing per question. Use scales for easy answering—one to five or one to ten. Include one open-ended question for rich feedback. Start with easy questions, put optional ones at the end.",
+      "narration": "Question design principles. Keep it under three minutes total. Ask only one thing per question. Use scales for easy answering\u2014one to five or one to ten. Include one open-ended question for rich feedback. Start with easy questions, put optional ones at the end.",
       "duration_seconds": 35,
       "audio_file": "slide-04-design.mp3"
     },
@@ -101,9 +131,9 @@
             "send": "1-2 weeks after experience"
           }
         ],
-        "note": "Don't survey too often—once per quarter max per customer"
+        "note": "Don't survey too often\u2014once per quarter max per customer"
       },
-      "narration": "Timing is critical. NPS surveys: twenty-four to forty-eight hours after purchase while memory is fresh. CSAT: within one hour of the interaction—strike while it's immediate. Feedback surveys: one to two weeks after to give perspective. Don't over-survey—once per quarter maximum per customer.",
+      "narration": "Timing is critical. NPS surveys: twenty-four to forty-eight hours after purchase while memory is fresh. CSAT: within one hour of the interaction\u2014strike while it's immediate. Feedback surveys: one to two weeks after to give perspective. Don't over-survey\u2014once per quarter maximum per customer.",
       "duration_seconds": 35,
       "audio_file": "slide-05-timing.mp3"
     },
@@ -137,10 +167,10 @@
           "Respond to every negative survey personally",
           "Share positive feedback with your team",
           "Track trends over time, not just individual scores",
-          "Close the loop—tell customers what you changed"
+          "Close the loop\u2014tell customers what you changed"
         ]
       },
-      "narration": "Pro tips for surveys. Respond personally to every negative survey—this can save the relationship. Share positive feedback with your team—it's great for morale. Track trends over time, not just individual scores. Close the loop—tell customers what you changed based on their feedback.",
+      "narration": "Pro tips for surveys. Respond personally to every negative survey\u2014this can save the relationship. Share positive feedback with your team\u2014it's great for morale. Track trends over time, not just individual scores. Close the loop\u2014tell customers what you changed based on their feedback.",
       "duration_seconds": 30,
       "audio_file": "slide-07-tips.mp3"
     },
@@ -158,16 +188,16 @@
           "action": "view_templates"
         }
       },
-      "narration": "Ready to get feedback? Create your survey now—start with our NPS template for quick setup. Or browse templates to find the right fit. Your customers have opinions—let's hear them.",
+      "narration": "Ready to get feedback? Create your survey now\u2014start with our NPS template for quick setup. Or browse templates to find the right fit. Your customers have opinions\u2014let's hear them.",
       "duration_seconds": 20,
       "audio_file": "slide-08-cta.mp3"
     }
   ],
   "emails": {
-    "email_1_educational": {
-      "subject": "Create customer surveys that actually get responses",
-      "preview_text": "Get real feedback that matters",
-      "body": "Hey there,\n\nMost surveys get ignored. Here's how to build ones that get responses:\n\n✓ Keep it under 3 minutes\n✓ Ask one thing per question\n✓ Time it right (24-48 hrs after purchase)\n✓ Tell them why it matters\n\n[CREATE YOUR SURVEY →]\n\nPro tip: Always respond personally to negative feedback.\n\nSarah"
+    "email_tutorial": {
+      "subject": "Get real customer feedback \u2014 set up a survey in 10 minutes",
+      "preview_text": "Most surveys get ignored. Here's how to build one that works",
+      "body": "Hi [First Name],\n\nMost surveys get ignored. Here's how to build ones that actually get responses:\n\n\u2192 Keep it under 3 minutes\n\u2192 Ask one thing per question\n\u2192 Send it 24-48 hours after their visit\n\u2192 Tell them why their feedback matters\n\n[CREATE YOUR SURVEY \u2192]\n\nPro tip: Always respond personally to negative feedback.\n\n[AM Name]"
     }
   },
   "connections": {
@@ -175,35 +205,5 @@
       "HOWTO-024"
     ],
     "follows": "HOWTO-013"
-  },
-  "landing_page": {
-    "campaign_id": "HOWTO-014",
-    "landing_page_slug": "customer-survey-setup",
-    "url": "/learn/customer-survey-setup",
-    "template_id": "tutorial",
-    "template_name": "Step-by-Step Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 230,
-    "primary_cta": "start_setup",
-    "secondary_cta": "watch_demo",
-    "ai_persona": "Sarah",
-    "ai_tone": "Clear, patient, hands-on",
-    "ai_goal": "Walk user through setup and configuration",
-    "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/customer-survey-setup/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "activation",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week7-how-to",
-    "utm_content": "HOWTO-014"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "Step-by-Step Tutorial",
-    "slides": 8,
-    "duration": 230,
-    "purpose": "tutorial",
-    "audio_required": true
   }
 }

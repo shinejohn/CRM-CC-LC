@@ -1,0 +1,151 @@
+{
+  "campaign": {
+    "id": "CONV-003",
+    "week": 11,
+    "day": 75,
+    "type": "Conversion",
+    "title": "Status Update \u2014 Your Position",
+    "subject": "[First Name] \u2014 update on your [Category] position in [Community Name]",
+    "landing_page": "position-update",
+    "template": "conversion-close",
+    "description": "Decision point \u2014 trial ending, slot status changed, AM recommendation"
+  },
+  "landing_page": {
+    "campaign_id": "CONV-003",
+    "landing_page_slug": "position-update",
+    "url": "/membership/status",
+    "template_id": "conversion-close",
+    "template_name": "Conversion Close",
+    "slide_count": 5,
+    "duration_seconds": 120,
+    "primary_cta": "activate_membership",
+    "secondary_cta": "call_am",
+    "ai_persona": "Marcus",
+    "ai_tone": "Direct, honest, concerned",
+    "ai_goal": "Get the commitment \u2014 trial ending, slots filling",
+    "data_capture_fields": "name, email, business_name, payment",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/position-update/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "subscription",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week11-conversion",
+    "utm_content": "CONV-003"
+  },
+  "template": {
+    "template_id": "conversion-close",
+    "name": "Conversion Close",
+    "slides": 5,
+    "duration": 120,
+    "purpose": "conversion",
+    "audio_required": true
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Status Update",
+      "content": {
+        "headline": "Status Update \u2014 [Business Name]",
+        "subhead": "From [AM Name], your account manager",
+        "visual": "Status update header"
+      },
+      "narration": "This is a status update. Your situation in your community has changed since we last spoke. Here's where things stand.",
+      "duration_seconds": 8,
+      "audio_file": "slide-01-hero.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "StatsSlide",
+      "title": "What Changed",
+      "content": {
+        "headline": "Your [Category] Position",
+        "stats": [
+          {
+            "value": "[X]",
+            "label": "slots when I first contacted you"
+          },
+          {
+            "value": "[Y]",
+            "label": "slots remaining today"
+          },
+          {
+            "value": "[Z]",
+            "label": "positions filled since we spoke"
+          },
+          {
+            "value": "[W]",
+            "label": "days of Founder pricing left"
+          }
+        ]
+      },
+      "narration": "When I first contacted you, your category had this many slots. Today, this many remain. That means this many positions have been filled while you've been deciding. And Founder pricing \u2014 the rate locked for three years \u2014 has this many days left.",
+      "duration_seconds": 20,
+      "audio_file": "slide-02-changes.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "ConceptSlide",
+      "title": "Your Trial Results",
+      "content": {
+        "headline": "What You've Gotten So Far",
+        "points": [
+          "[X] listing views",
+          "[Y] news mentions",
+          "[Z] total reader reach",
+          "All of this stops when your trial ends on [date]"
+        ]
+      },
+      "narration": "During your trial, you've had this many listing views, this many news mentions, and this much total reach. That's real visibility with real local residents. All of it stops on your trial end date unless you activate your membership.",
+      "duration_seconds": 15,
+      "audio_file": "slide-03-results.mp3"
+    },
+    {
+      "slide_num": 4,
+      "component": "CTASlide",
+      "title": "Decision Time",
+      "content": {
+        "headline": "Activate Your Membership \u2014 $300/month",
+        "cta_primary": {
+          "label": "Activate My Membership",
+          "action": "checkout"
+        },
+        "cta_secondary": {
+          "label": "Call Me \u2014 Let's Talk",
+          "action": "call_am"
+        },
+        "am_note": "My honest assessment: lock this in. Your category is filling. Once it's full, the next option is Community Sponsor at a higher rate \u2014 or the waitlist."
+      },
+      "narration": "Here's my honest assessment. I think you should lock this in. Your category is filling and I can't guarantee a slot will be available next week. If you're ready, click below. If you want to talk, call me. But I can't hold slots.",
+      "duration_seconds": 15,
+      "audio_file": "slide-04-cta.mp3"
+    },
+    {
+      "slide_num": 5,
+      "component": "SummarySlide",
+      "title": "If Not Now",
+      "content": {
+        "headline": "If the Timing Isn't Right",
+        "body": "I respect that. I'll keep your proposal on file. But your slot will open to the next [Category] business in [Community Name]. That's just how it works.",
+        "contact": "[email] | [phone]"
+      },
+      "narration": "If the timing isn't right, I respect that. I'll keep your proposal on file and let you know if your category fills or pricing changes. But I want you to hear this directly \u2014 I can't hold slots. If another business in your category signs up, that's one less position available.",
+      "duration_seconds": 12,
+      "audio_file": "slide-05-summary.mp3"
+    }
+  ],
+  "emails": {
+    "email_close": {
+      "subject": "[First Name] \u2014 update on your [Category] position in [Community Name]",
+      "preview_text": "Things have changed since we last spoke",
+      "body": "Hi [First Name],\n\nThis is [AM Name] with a status update on your [Category] position in [Community Name].\n\nHere's where things stand:\n\n\u2192 [Category] slots when I first contacted you: [original count]\n\u2192 [Category] slots remaining today: [current count]\n\u2192 Change: [X] positions filled since [date]\n\u2192 Founder pricing: [days remaining] or expired on [date]\n\u2192 Your proposal: still active at $300/month\n\nYour trial results so far:\n\u2192 [X] listing views\n\u2192 [Y] news mentions\n\u2192 [Z] total reader reach\n\nMy honest assessment: I think you should lock this in. [Category] started with [X] slots and [Y] are gone. When they're full, the next option is Community Sponsor at a higher rate \u2014 or the waitlist.\n\nI'm not pressuring you. I'm telling you what the data shows so you can make an informed decision.\n\n[ACTIVATE MY MEMBERSHIP \u2014 $300/month \u2192]\n\nIf you want to talk it through:\n\n[SCHEDULE A CALL WITH ME \u2192]\n\nIf the timing isn't right, I respect that. I'll keep your proposal on file. But I can't hold slots \u2014 if another [Category] business in [Community Name] signs up, that's one less position available.\n\n[AM Name]\n[Community Name] Day.News\n[phone] | [email]"
+    }
+  },
+  "connections": {
+    "leads_to": [
+      "CONV-004"
+    ],
+    "follows": "CONV-002",
+    "related": []
+  }
+}

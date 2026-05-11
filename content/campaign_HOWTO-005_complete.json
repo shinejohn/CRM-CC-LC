@@ -32,6 +32,14 @@
     "utm_content": "HOWTO-005",
     "audio_base_url": "https://cdn.fibonacco.com/presentations/performer-registration/audio/"
   },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 295,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -47,7 +55,7 @@
         },
         "promise": "Event planners are searching right now. Let's get you found."
       },
-      "narration": "Whether you're a musician, DJ, artist, speaker, or any kind of performer—this guide is for you. In fifteen minutes, you'll have a professional profile that shows up when event planners are looking for talent. They're searching right now. Let's get you found.",
+      "narration": "Whether you're a musician, DJ, artist, speaker, or any kind of performer\u2014this guide is for you. In fifteen minutes, you'll have a professional profile that shows up when event planners are looking for talent. They're searching right now. Let's get you found.",
       "duration_seconds": 20,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -85,7 +93,7 @@
         ],
         "truth": "Event planners make decisions in 60 seconds. Make those seconds count."
       },
-      "narration": "Here's what event planners actually look for. A clear description—what do you do and who is it for? Media samples—video is best, then audio, then photos. Past performances—proof you've done this before. Availability—can I book you when I need you? Pricing guidance—are you in my budget? And easy contact—how do I reach you fast? Event planners make decisions in sixty seconds. Make those seconds count.",
+      "narration": "Here's what event planners actually look for. A clear description\u2014what do you do and who is it for? Media samples\u2014video is best, then audio, then photos. Past performances\u2014proof you've done this before. Availability\u2014can I book you when I need you? Pricing guidance\u2014are you in my budget? And easy contact\u2014how do I reach you fast? Event planners make decisions in sixty seconds. Make those seconds count.",
       "duration_seconds": 40,
       "audio_file": "slide-02-what-bookers-want.mp3"
     },
@@ -116,7 +124,7 @@
         "length": "100-200 words. Short enough to read, long enough to convince.",
         "example": "Maria Gonzalez brings Latin jazz to life. With 10+ years performing at weddings, festivals, and corporate events, she creates the perfect atmosphere for any celebration. Perfect for cocktail hours, dinner music, or dancing."
       },
-      "narration": "Step one: write a bio that books. Start with a hook—one sentence that captures your unique value. Then your style—what kind of performer are you, what's your vibe? Add key experience highlights, not your whole resume. And say what events you're perfect for. Keep it to 100 to 200 words. Here's an example: 'Maria Gonzalez brings Latin jazz to life. With ten-plus years performing at weddings, festivals, and corporate events, she creates the perfect atmosphere for any celebration.'",
+      "narration": "Step one: write a bio that books. Start with a hook\u2014one sentence that captures your unique value. Then your style\u2014what kind of performer are you, what's your vibe? Add key experience highlights, not your whole resume. And say what events you're perfect for. Keep it to 100 to 200 words. Here's an example: 'Maria Gonzalez brings Latin jazz to life. With ten-plus years performing at weddings, festivals, and corporate events, she creates the perfect atmosphere for any celebration.'",
       "duration_seconds": 45,
       "audio_file": "slide-03-bio.mp3"
     },
@@ -155,7 +163,7 @@
           "Multiple clips for range > one long video"
         ]
       },
-      "narration": "Step two: upload media that convinces. Video is essential—even phone quality beats no video. Thirty to sixty seconds is ideal, showing you performing, not just talking. Good audio matters more than fancy visuals. Audio samples work great for musicians—clean recordings, not live phone clips. Photos should be action shots of you performing. And add press mentions if you have them. Multiple short clips showing range is better than one long video.",
+      "narration": "Step two: upload media that convinces. Video is essential\u2014even phone quality beats no video. Thirty to sixty seconds is ideal, showing you performing, not just talking. Good audio matters more than fancy visuals. Audio samples work great for musicians\u2014clean recordings, not live phone clips. Photos should be action shots of you performing. And add press mentions if you have them. Multiple short clips showing range is better than one long video.",
       "duration_seconds": 45,
       "audio_file": "slide-04-media.mp3"
     },
@@ -186,7 +194,7 @@
         "tip": "The more specific your tags, the more qualified your leads.",
         "example_tags": "Jazz Trio | Wedding Ceremony | Cocktail Hour | Background Music"
       },
-      "narration": "Step three: get found in searches. Choose your primary category—musician, DJ, speaker, whatever fits. Add all your genres and styles. List the event types you're perfect for. Describe your performance style—solo, band, interactive, background. The more specific your tags, the more qualified your leads. Someone searching for 'jazz trio for wedding cocktail hour' will find exactly what they need. Be that result.",
+      "narration": "Step three: get found in searches. Choose your primary category\u2014musician, DJ, speaker, whatever fits. Add all your genres and styles. List the event types you're perfect for. Describe your performance style\u2014solo, band, interactive, background. The more specific your tags, the more qualified your leads. Someone searching for 'jazz trio for wedding cocktail hour' will find exactly what they need. Be that result.",
       "duration_seconds": 40,
       "audio_file": "slide-05-tags.mp3"
     },
@@ -226,7 +234,7 @@
         ],
         "warning": "No pricing info = fewer quality leads. At least give a range."
       },
-      "narration": "Step four: show you're bookable. Set up your availability—integrate your calendar to show open dates, or just indicate general availability like weekends only. Include your lead time—how far in advance do you need? For pricing, give at least a starting range. You don't have to commit to exact prices, but 'starting at X' helps filter unqualified leads. No pricing info means fewer quality inquiries.",
+      "narration": "Step four: show you're bookable. Set up your availability\u2014integrate your calendar to show open dates, or just indicate general availability like weekends only. Include your lead time\u2014how far in advance do you need? For pricing, give at least a starting range. You don't have to commit to exact prices, but 'starting at X' helps filter unqualified leads. No pricing info means fewer quality inquiries.",
       "duration_seconds": 40,
       "audio_file": "slide-06-availability.mp3"
     },
@@ -258,9 +266,9 @@
             "action": "Training, certifications, awards"
           }
         ],
-        "ask_script": "I'd love to include a testimonial from you—would you mind sharing a sentence or two about our performance at your event?"
+        "ask_script": "I'd love to include a testimonial from you\u2014would you mind sharing a sentence or two about our performance at your event?"
       },
-      "narration": "Step five: build credibility. List past events and notable performances—with permission. Request testimonials after every gig with a simple ask: 'Would you mind sharing a sentence about our performance?' Display client names—venues, companies you've worked with. Highlight repeat bookings—'Booked five times at this venue' is powerful. And add any credentials, training, or awards. Every piece of proof makes booking you feel safer.",
+      "narration": "Step five: build credibility. List past events and notable performances\u2014with permission. Request testimonials after every gig with a simple ask: 'Would you mind sharing a sentence about our performance?' Display client names\u2014venues, companies you've worked with. Highlight repeat bookings\u2014'Booked five times at this venue' is powerful. And add any credentials, training, or awards. Every piece of proof makes booking you feel safer.",
       "duration_seconds": 40,
       "audio_file": "slide-07-proof.mp3"
     },
@@ -294,8 +302,8 @@
   "emails": {
     "email_tutorial": {
       "subject": "Get booked: Set up your performer profile",
-      "preview_text": "Event planners are searching for talent like you",
-      "body": "Hey there,\n\nEvent planners are searching for performers right now.\n\nWeddings, corporate events, festivals, private parties—they need musicians, DJs, speakers, entertainers.\n\nThe question is: will they find you?\n\nI put together a 15-minute guide to create a performer profile that gets bookings:\n\n✓ Writing a bio that converts\n✓ Media that sells (video tips included)\n✓ Getting found in the right searches\n✓ Pricing strategies that work\n✓ Building credibility with social proof\n\n[CREATE YOUR PERFORMER PROFILE →]\n\nIt's free to create, free to get found. You just need to show up.\n\nSarah\nFibonacco\n\nP.S. The guide includes examples of top-performing profiles so you can see what works."
+      "preview_text": "Event planners are searching now",
+      "body": "Hi [First Name],\n\nEvent planners in [Community Name] are looking for performers \u2014 musicians, DJs, speakers, entertainers.\n\n15-minute guide to creating a profile that gets bookings:\n\n\u2192 Writing a bio that converts\n\u2192 Media that sells (video tips included)\n\u2192 Getting found in the right searches\n\u2192 Building credibility with reviews\n\n[CREATE YOUR PERFORMER PROFILE \u2192]\n\nFree to create. Free to get found.\n\n[AM Name]\n[Community Name] Day.News"
     }
   },
   "connections": {
@@ -307,13 +315,5 @@
       "HOOK-011",
       "HOWTO-017"
     ]
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "Step-by-Step Tutorial",
-    "slides": 8,
-    "duration": 295,
-    "purpose": "tutorial",
-    "audio_required": true
   }
 }

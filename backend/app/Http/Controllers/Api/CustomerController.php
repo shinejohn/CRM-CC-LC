@@ -391,36 +391,54 @@ final class CustomerController extends Controller
     }
 
     /**
-     * Start campaign
+     * Start campaign — enrolls customer into the timeline for their pipeline stage.
      */
     public function startCampaign(Request $request, string $id): JsonResponse
     {
         $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
 
-        $service = app(\App\Services\SMBCampaignService::class);
-        $service->startCampaign($customer);
+        $orchestrator = app(\App\Services\CampaignOrchestratorService::class);
+        $progress = $orchestrator->assignTimelineForStage($customer);
+
+        if (!$progress) {
+            return response()->json([
+                'error' => 'No active timeline found for stage: ' . $customer->pipeline_stage->value,
+            ], 422);
+        }
 
         return response()->json([
             'data' => $customer->fresh(),
-            'message' => 'Campaign started successfully',
+            'timeline_progress' => [
+                'id' => $progress->id,
+                'timeline_id' => $progress->campaign_timeline_id,
+                'current_day' => $progress->current_day,
+                'status' => $progress->status,
+                'started_at' => $progress->started_at,
+            ],
+            'message' => 'Campaign timeline started successfully',
         ]);
     }
 
     /**
-     * Pause campaign
+     * Pause campaign timeline
      */
     public function pauseCampaign(Request $request, string $id): JsonResponse
     {
         $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
 
-        $validated = $request->validate([
-            'reason' => 'required|string|max:255',
-        ]);
+        $orchestrator = app(\App\Services\CampaignOrchestratorService::class);
 
-        $service = app(\App\Services\SMBCampaignService::class);
-        $service->pauseCampaign($customer, $validated['reason']);
+        $progress = \App\Models\CustomerTimelineProgress::where('customer_id', $customer->id)
+            ->where('status', 'active')
+            ->first();
+
+        if (!$progress) {
+            return response()->json(['error' => 'No active timeline to pause'], 422);
+        }
+
+        $orchestrator->pauseTimeline($progress);
 
         return response()->json([
             'data' => $customer->fresh(),
@@ -429,15 +447,24 @@ final class CustomerController extends Controller
     }
 
     /**
-     * Resume campaign
+     * Resume campaign timeline
      */
     public function resumeCampaign(Request $request, string $id): JsonResponse
     {
         $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
 
-        $service = app(\App\Services\SMBCampaignService::class);
-        $service->resumeCampaign($customer);
+        $orchestrator = app(\App\Services\CampaignOrchestratorService::class);
+
+        $progress = \App\Models\CustomerTimelineProgress::where('customer_id', $customer->id)
+            ->where('status', 'paused')
+            ->first();
+
+        if (!$progress) {
+            return response()->json(['error' => 'No paused timeline to resume'], 422);
+        }
+
+        $orchestrator->resumeTimeline($progress);
 
         return response()->json([
             'data' => $customer->fresh(),

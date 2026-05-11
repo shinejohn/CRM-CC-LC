@@ -10,6 +10,36 @@
     "template": "advertising-offer",
     "description": "Sponsored article/advertorial opportunity"
   },
+  "landing_page": {
+    "campaign_id": "HOOK-010",
+    "landing_page_slug": "article-advertising",
+    "url": "/learn/article-advertising",
+    "template_id": "advertising-offer",
+    "template_name": "Quick Action",
+    "slide_count": 6,
+    "duration_seconds": 173,
+    "primary_cta": "get_started",
+    "secondary_cta": "learn_more",
+    "ai_persona": "Sarah",
+    "ai_tone": "Energetic, encouraging, action-oriented",
+    "ai_goal": "Get user to take the first free action immediately",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/article-advertising/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week8-hook",
+    "utm_content": "HOOK-010"
+  },
+  "template": {
+    "template_id": "advertising-offer",
+    "name": "Quick Action",
+    "slides": 6,
+    "duration": 173,
+    "purpose": "hook",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -19,7 +49,7 @@
         "headline": "A Feature Article About Your Business",
         "subhead": "Published on our news platform, promoted everywhere"
       },
-      "narration": "Imagine a feature article about your business. Not an ad—an actual story. Your journey, your expertise, what makes you different. Published on our news platform, promoted across all channels. This is the kind of exposure that builds real credibility.",
+      "narration": "Imagine a feature article about your business. Not an ad\u2014an actual story. Your journey, your expertise, what makes you different. Published on our news platform, promoted across all channels. This is the kind of exposure that builds real credibility.",
       "duration_seconds": 18,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -60,7 +90,7 @@
           }
         ]
       },
-      "narration": "Here's what you get. A professional interview—thirty minutes about your business, your story, your expertise. A written article, eight hundred to twelve hundred words, professionally edited. Professional photography of your business. Publication featured on our news site homepage. Newsletter feature to ten thousand plus subscribers. Social promotion across all channels. And permanent placement—the article stays live indefinitely, building your credibility forever.",
+      "narration": "Here's what you get. A professional interview\u2014thirty minutes about your business, your story, your expertise. A written article, eight hundred to twelve hundred words, professionally edited. Professional photography of your business. Publication featured on our news site homepage. Newsletter feature to ten thousand plus subscribers. Social promotion across all channels. And permanent placement\u2014the article stays live indefinitely, building your credibility forever.",
       "duration_seconds": 40,
       "audio_file": "slide-02-package.mp3"
     },
@@ -73,7 +103,7 @@
         "advantages": [
           {
             "advantage": "Third-party credibility",
-            "why": "Not an ad—an article on a news platform"
+            "why": "Not an ad\u2014an article on a news platform"
           },
           {
             "advantage": "SEO value",
@@ -88,12 +118,12 @@
             "why": "Share with prospects, on social, in proposals"
           },
           {
-            "advantage": "AI discoverable",
-            "why": "News article = trusted source for AI"
+            "advantage": "digital discovery",
+            "why": "News article = trusted source for modern tools"
           }
         ]
       },
-      "narration": "Why does this work so well? Third-party credibility—this isn't an ad, it's an article on a news platform. SEO value—you get an authoritative backlink to your site. Social proof—'As featured in' adds legitimacy. Shareable asset—share with prospects, on social, in proposals. And AI discoverability—remember, news articles are trusted sources that AI recommends from. One article, multiple benefits.",
+      "narration": "Why does this work so well? Third-party credibility\u2014this isn't an ad, it's an article on a news platform. SEO value\u2014you get an authoritative backlink to your site. Social proof\u2014'As featured in' adds legitimacy. Shareable asset\u2014share with prospects, on social, in proposals. And digital discovery\u2014remember, news articles are trusted sources that search tools recommend from. One article, multiple benefits.",
       "duration_seconds": 35,
       "audio_file": "slide-03-why.mp3"
     },
@@ -130,7 +160,7 @@
           }
         ]
       },
-      "narration": "Here's how we structure your article. We start with a hook—a compelling opening about your unique story. Then background—how you got started, your journey. What makes you different—your approach, philosophy, specialization. Customer impact—stories of people you've helped. What's next—your vision and upcoming offerings. And how to connect—clear next steps for interested readers.",
+      "narration": "Here's how we structure your article. We start with a hook\u2014a compelling opening about your unique story. Then background\u2014how you got started, your journey. What makes you different\u2014your approach, philosophy, specialization. Customer impact\u2014stories of people you've helped. What's next\u2014your vision and upcoming offerings. And how to connect\u2014clear next steps for interested readers.",
       "duration_seconds": 30,
       "audio_file": "slide-04-structure.mp3"
     },
@@ -158,7 +188,7 @@
           }
         ]
       },
-      "narration": "What do feature articles deliver? A financial advisor got fourteen consultation requests in the first month—and the article is still generating leads eight months later. A restaurant saw a forty-seven percent traffic spike the week the article published. People came in with the article on their phone. A contractor uses his article in every proposal—his close rate improved twenty-three percent. This is content that keeps working.",
+      "narration": "What do feature articles deliver? A financial advisor got fourteen consultation requests in the first month\u2014and the article is still generating leads eight months later. A restaurant saw a forty-seven percent traffic spike the week the article published. People came in with the article on their phone. A contractor uses his article in every proposal\u2014his close rate improved twenty-three percent. This is content that keeps working.",
       "duration_seconds": 30,
       "audio_file": "slide-05-results.mp3"
     },
@@ -184,15 +214,15 @@
     }
   ],
   "emails": {
-    "email_1_hook": {
-      "subject": "Get a feature article written about your business",
-      "preview_text": "Your story, professionally told",
-      "body": "Hey there,\n\nImagine a feature article about your business.\n\nNot an ad—a real story about your journey, expertise, and what makes you different.\n\nPackage includes:\n✓ Professional interview\n✓ 800-1200 word article\n✓ Professional photography\n✓ Homepage feature\n✓ Newsletter to 10,000+\n✓ Social promotion\n✓ Permanent placement\n\n[LEARN MORE →]\n\nOne financial advisor got 14 consultation requests from a single article—still generating leads 8 months later.\n\nSarah\nFibonacco"
+    "email_hook": {
+      "subject": "Get a feature article about your business in [Community Name] Day.News",
+      "preview_text": "Your story professionally told",
+      "body": "Hi [First Name],\n\nWe publish feature articles about local businesses in [Community Name] Day.News. Here's what that includes:\n\n\u2192 Professional interview about your business\n\u2192 800-1200 word feature article\n\u2192 Homepage placement in Day.News\n\u2192 Newsletter distribution to [X] subscribers\n\u2192 Permanent placement \u2014 keeps driving visibility\n\n[LEARN MORE \u2192]\n\nOne [Category] business got [X] inquiries from a single article \u2014 still generating leads months later.\n\n[AM Name]\n[Community Name] Day.News"
     },
-    "email_3_hook": {
-      "subject": "Here's how your your business article could look",
-      "preview_text": "Article concept ready for you",
-      "body": "Hey there,\n\nWe drafted a concept for your your business feature article:\n\n[SEE YOUR ARTICLE CONCEPT →]\n\nThis is the angle we'd take based on what makes your business unique.\n\nLimited to 4 articles/month. Ready to book?\n\nSarah"
+    "email_reminder": {
+      "subject": "Your article concept is ready \u2014 take a look",
+      "preview_text": "Based on what makes your business unique",
+      "body": "Hi [First Name],\n\nWe drafted a concept for your feature article in [Community Name] Day.News:\n\n[SEE YOUR ARTICLE CONCEPT \u2192]\n\nLimited to [X] articles per month. Ready to book?\n\n[AM Name]"
     }
   },
   "connections": {
@@ -201,35 +231,5 @@
       "HOOK-008",
       "HOOK-011"
     ]
-  },
-  "landing_page": {
-    "campaign_id": "HOOK-010",
-    "landing_page_slug": "article-advertising",
-    "url": "/learn/article-advertising",
-    "template_id": "advertising-offer",
-    "template_name": "Quick Action",
-    "slide_count": 6,
-    "duration_seconds": 173,
-    "primary_cta": "get_started",
-    "secondary_cta": "learn_more",
-    "ai_persona": "Sarah",
-    "ai_tone": "Energetic, encouraging, action-oriented",
-    "ai_goal": "Get user to take the first free action immediately",
-    "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/article-advertising/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "signup",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week8-hook",
-    "utm_content": "HOOK-010"
-  },
-  "template": {
-    "template_id": "advertising-offer",
-    "name": "Quick Action",
-    "slides": 6,
-    "duration": 173,
-    "purpose": "hook",
-    "audio_required": true
   }
 }

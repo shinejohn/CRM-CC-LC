@@ -32,6 +32,14 @@
     "utm_campaign": "90day-week1-how-to",
     "utm_content": "HOWTO-002"
   },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 275,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -47,7 +55,7 @@
         },
         "myth_bust": "You don't need to be 'newsworthy.' You just need a story worth sharing."
       },
-      "narration": "Here's something most business owners don't realize: getting featured in local news isn't hard. You don't need a publicist. You don't need a major announcement. You just need a story worth sharing—and every business has one. In the next fifteen minutes, I'm going to show you exactly how to create news content that gets published.",
+      "narration": "Here's something most business owners don't realize: getting featured in local news isn't hard. You don't need a publicist. You don't need a major announcement. You just need a story worth sharing\u2014and every business has one. In the next fifteen minutes, I'm going to show you exactly how to create news content that gets published.",
       "duration_seconds": 25,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -81,7 +89,7 @@
         ],
         "insight": "Local news needs local content. You ARE the content they're looking for."
       },
-      "narration": "First, let's talk about what actually gets published. Business milestones—your anniversary, an expansion, an award. Community involvement—charity work, sponsorships, partnerships. Expert insights—tips and knowledge from your industry. Human interest—your story, why you started, customer stories. And announcements—new products, services, team members. Local news needs local content. You are exactly what they're looking for.",
+      "narration": "First, let's talk about what actually gets published. Business milestones\u2014your anniversary, an expansion, an award. Community involvement\u2014charity work, sponsorships, partnerships. Expert insights\u2014tips and knowledge from your industry. Human interest\u2014your story, why you started, customer stories. And announcements\u2014new products, services, team members. Local news needs local content. You are exactly what they're looking for.",
       "duration_seconds": 40,
       "audio_file": "slide-02-what-counts.mp3"
     },
@@ -95,7 +103,7 @@
           "What's new at your business right now?",
           "What anniversary or milestone is coming up?",
           "What do you know that would help your community?",
-          "What's your origin story—why did you start?",
+          "What's your origin story\u2014why did you start?",
           "What's a customer success story you could share?"
         ],
         "tip": "Don't overthink it. The first idea that comes to mind is usually good enough.",
@@ -120,7 +128,7 @@
         "length": "300-500 words is plenty",
         "tip": "Write like you're telling a friend. Conversational beats formal."
       },
-      "narration": "Step two: use our template. Start with your headline—what's the one thing you want people to know? Then your lead paragraph—who, what, when, where, why in two to three sentences. Then the body—the details, the story, include a quote if you can. And finally, what should readers do next? Aim for 300 to 500 words. That's plenty. And write like you're telling a friend—conversational beats formal.",
+      "narration": "Step two: use our template. Start with your headline\u2014what's the one thing you want people to know? Then your lead paragraph\u2014who, what, when, where, why in two to three sentences. Then the body\u2014the details, the story, include a quote if you can. And finally, what should readers do next? Aim for 300 to 500 words. That's plenty. And write like you're telling a friend\u2014conversational beats formal.",
       "duration_seconds": 40,
       "audio_file": "slide-04-step2.mp3"
     },
@@ -159,16 +167,16 @@
       "content": {
         "headline": "Step 3: Add One Good Photo",
         "photo_tips": [
-          "Show people—your team, your customers, yourself",
-          "Show action—someone doing something, not just posing",
+          "Show people\u2014your team, your customers, yourself",
+          "Show action\u2014someone doing something, not just posing",
           "Natural light beats flash",
           "Horizontal/landscape orientation works best",
-          "Phone photos are fine—don't overthink it"
+          "Phone photos are fine\u2014don't overthink it"
         ],
         "no_photo": "Don't have a photo? We can use your logo or skip it for now.",
         "caption": "Write a simple caption: who's in it, what's happening"
       },
-      "narration": "Step three: add a photo. Articles with photos get way more engagement. Show people—your team, customers, yourself. Show action if you can—someone doing something beats everyone just posing. Natural light looks better than flash. Horizontal orientation works best for web. And phone photos are totally fine—don't overthink it. Write a simple caption saying who's in it and what's happening.",
+      "narration": "Step three: add a photo. Articles with photos get way more engagement. Show people\u2014your team, customers, yourself. Show action if you can\u2014someone doing something beats everyone just posing. Natural light looks better than flash. Horizontal orientation works best for web. And phone photos are totally fine\u2014don't overthink it. Write a simple caption saying who's in it and what's happening.",
       "duration_seconds": 35,
       "audio_file": "slide-06-step3.mp3"
     },
@@ -199,7 +207,7 @@
         "guarantee": "We'll work with you to make it publish-ready. No rejections, just collaboration.",
         "cost": "Free to submit. Free to publish."
       },
-      "narration": "Step four: submit and we handle the rest. When you're ready, click submit. Our editors review it for typos and clarity—we're not judging, we're polishing. Your article goes live within 24 to 48 hours. Then we promote it through our newsletter and social channels. And here's the key: we don't reject submissions. We work with you to make it publish-ready. It's free to submit, free to publish.",
+      "narration": "Step four: submit and we handle the rest. When you're ready, click submit. Our editors review it for typos and clarity\u2014we're not judging, we're polishing. Your article goes live within 24 to 48 hours. Then we promote it through our newsletter and social channels. And here's the key: we don't reject submissions. We work with you to make it publish-ready. It's free to submit, free to publish.",
       "duration_seconds": 35,
       "audio_file": "slide-07-step4.mp3"
     },
@@ -227,36 +235,16 @@
         ],
         "time": "About 15 minutes to write"
       },
-      "narration": "Ready to get featured in local news? Click 'Start Your Article' and you'll get our guided template—just fill in the blanks. We have templates for anniversaries, expert tips, community stories, and announcements. Pick the one that fits your story. About fifteen minutes to write, and then you're in the news. Your community is waiting to hear from you.",
+      "narration": "Ready to get featured in local news? Click 'Start Your Article' and you'll get our guided template\u2014just fill in the blanks. We have templates for anniversaries, expert tips, community stories, and announcements. Pick the one that fits your story. About fifteen minutes to write, and then you're in the news. Your community is waiting to hear from you.",
       "duration_seconds": 25,
       "audio_file": "slide-08-cta.mp3"
     }
   ],
   "emails": {
     "email_tutorial": {
-      "subject": "How to get featured in local news (easier than you think)",
-      "preview_text": "15 minutes to a publishable story",
-      "body": "Hey there,\n\nHere's something most business owners don't realize:\n\nGetting featured in local news isn't hard.\n\nYou don't need a publicist. You don't need a major announcement. You just need a story worth sharing—and your business has one.\n\nI put together a 15-minute guide that walks you through it:\n\n✓ What actually gets published (spoiler: simpler than you think)\n✓ How to pick your angle\n✓ A fill-in-the-blanks template\n✓ Real examples from businesses like yours\n✓ How to submit (free, and we help you polish it)\n\n[START THE TUTORIAL →]\n\nWe publish articles from local businesses every day. The only thing missing is yours.\n\nSarah\nFibonacco\n\nP.S. We don't reject submissions. We work with you to make it publish-ready. No pressure, just help."
-    }
-  },
-  "resources": {
-    "templates": {
-      "anniversary": {
-        "title": "Anniversary/Milestone Template",
-        "structure": "[Business Name] Celebrates [X] Years in [Location]\n\n[Lead: Brief history and significance]\n\n[Body: The journey, key moments, what's next]\n\n[Quote from owner]\n\n[Call to action: Visit, celebrate with us, etc.]"
-      },
-      "expert_tips": {
-        "title": "Expert Tips Template",
-        "structure": "[Number] [Topic] Tips from [Your City]'s [Your Business Type]\n\n[Lead: Why this matters to readers]\n\n[Tip 1 with brief explanation]\n[Tip 2 with brief explanation]\n[Tip 3 with brief explanation]\n[Tip 4 with brief explanation]\n[Tip 5 with brief explanation]\n\n[Call to action: Contact for help, learn more, etc.]"
-      },
-      "community": {
-        "title": "Community Story Template",
-        "structure": "[Business Name] [Action] for [Cause/Community]\n\n[Lead: What happened and impact]\n\n[Body: Details, who was involved, results]\n\n[Quote from participant or beneficiary]\n\n[Call to action: Join, donate, participate, etc.]"
-      },
-      "announcement": {
-        "title": "Announcement Template",
-        "structure": "[Business Name] Announces [What's New]\n\n[Lead: The news in 2-3 sentences]\n\n[Body: Details, why it matters, what's changing]\n\n[Quote from owner on significance]\n\n[Call to action: Visit, try it, learn more, etc.]"
-      }
+      "subject": "Get your business featured in [Community Name] news",
+      "preview_text": "15 minutes to a published article",
+      "body": "Hi [First Name],\n\nWe publish stories about local businesses every day in [Community Name] Day.News. Here's how to get yours featured.\n\n15-minute guide:\n\n\u2192 What kind of stories we publish (simpler than you think)\n\u2192 How to pick your angle\n\u2192 A fill-in-the-blanks template\n\u2192 Examples from businesses like yours\n\u2192 How to submit (we help you polish it)\n\n[START THE GUIDE \u2192]\n\nWe don't reject submissions. We work with you to get it right.\n\n[AM Name]\n[Community Name] Day.News"
     }
   },
   "connections": {
@@ -268,13 +256,5 @@
       "EDU-007",
       "HOWTO-013"
     ]
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "Step-by-Step Tutorial",
-    "slides": 8,
-    "duration": 275,
-    "purpose": "tutorial",
-    "audio_required": true
   }
 }

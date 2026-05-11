@@ -1,0 +1,110 @@
+{
+  "campaign": {
+    "id": "CONV-004",
+    "week": 12,
+    "day": 85,
+    "type": "Conversion",
+    "title": "Category Update",
+    "subject": "[First Name] \u2014 [Category] update for [Community Name]",
+    "landing_page": "category-update",
+    "template": "conversion-lastcall",
+    "description": "Final notification \u2014 slot status only, no persuasion"
+  },
+  "landing_page": {
+    "campaign_id": "CONV-004",
+    "landing_page_slug": "category-update",
+    "url": "/membership/availability",
+    "template_id": "conversion-lastcall",
+    "template_name": "Category Update",
+    "slide_count": 3,
+    "duration_seconds": 60,
+    "primary_cta": "activate_membership",
+    "secondary_cta": "check_availability",
+    "ai_persona": "Marcus",
+    "ai_tone": "Neutral, factual, brief",
+    "ai_goal": "Inform on slot status \u2014 no persuasion",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/category-update/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "subscription",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week12-conversion",
+    "utm_content": "CONV-004"
+  },
+  "template": {
+    "template_id": "conversion-lastcall",
+    "name": "Category Update",
+    "slides": 3,
+    "duration": 60,
+    "purpose": "conversion",
+    "audio_required": true
+  },
+  "slides": [
+    {
+      "slide_num": 1,
+      "component": "HeroSlide",
+      "title": "Category Update",
+      "content": {
+        "headline": "[Category] Update \u2014 [Community Name]",
+        "subhead": "From [AM Name]"
+      },
+      "narration": "Quick update on your category in your community.",
+      "duration_seconds": 5,
+      "audio_file": "slide-01-hero.mp3"
+    },
+    {
+      "slide_num": 2,
+      "component": "StatsSlide",
+      "title": "Current Availability",
+      "content": {
+        "headline": "[Category] Slots",
+        "stats": [
+          {
+            "value": "[X]",
+            "label": "slots remaining"
+          },
+          {
+            "value": "[Y]",
+            "label": "filled since your proposal"
+          }
+        ],
+        "note": "Your proposal is still active at $300/month."
+      },
+      "narration": "Since your proposal was sent, more positions in your category have been filled. Here's the current count. Your proposal is still active if you want to move forward.",
+      "duration_seconds": 15,
+      "audio_file": "slide-02-availability.mp3"
+    },
+    {
+      "slide_num": 3,
+      "component": "CTASlide",
+      "title": "Your Options",
+      "content": {
+        "cta_primary": {
+          "label": "Activate Now",
+          "action": "checkout"
+        },
+        "cta_secondary": {
+          "label": "Check Full Availability",
+          "action": "view_community"
+        },
+        "note": "If this isn't the right time, no need to respond. I'll reach out if anything changes in your category."
+      },
+      "narration": "If you want to activate, your proposal is ready. If you want to check what's available across all categories, use the link below. If this isn't the right time, no worries. I'll keep you posted.",
+      "duration_seconds": 10,
+      "audio_file": "slide-03-cta.mp3"
+    }
+  ],
+  "emails": {
+    "email_lastcall": {
+      "subject": "[First Name] \u2014 [Category] update for [Community Name]",
+      "preview_text": "Quick status update from your account manager",
+      "body": "Hi [First Name],\n\nQuick update from [AM Name].\n\nSince your proposal was sent, [X] more [Category] position(s) in [Community Name] have been filled. There are now [Y] remaining.\n\nYour proposal is still active at $300/month.\n\n[ACTIVATE MY MEMBERSHIP \u2192]\n\nTo check current availability in your category:\n\n[VIEW [COMMUNITY NAME] STATUS \u2192]\n\nIf this isn't the right time, no need to respond. I'll reach out if anything changes in your category.\n\n[AM Name]\n[Community Name] Day.News"
+    }
+  },
+  "connections": {
+    "leads_to": [],
+    "follows": "CONV-003",
+    "related": []
+  }
+}

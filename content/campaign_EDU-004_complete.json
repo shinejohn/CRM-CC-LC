@@ -4,16 +4,16 @@
     "week": 4,
     "day": 22,
     "type": "Educational",
-    "title": "Community Marketing",
+    "title": "Why Community Media Beats Advertising",
     "subject": "Why 'community marketing' beats 'digital marketing'",
-    "landing_page": "ai-operations-guide",
+    "landing_page": "modern tools-operations-guide",
     "template": "educational",
-    "description": "Explain why being part of community beats shouting at community"
+    "description": "Why being part of the community story beats running ads"
   },
   "landing_page": {
     "campaign_id": "EDU-004",
-    "landing_page_slug": "ai-operations-guide",
-    "url": "/learn/ai-operations-guide",
+    "landing_page_slug": "modern tools-operations-guide",
+    "url": "/learn/modern tools-operations-guide",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
@@ -21,8 +21,8 @@
     "primary_cta": "join_community",
     "secondary_cta": "download_article",
     "ai_persona": "Sarah",
-    "ai_tone": "Warm, insightful, community-focused",
-    "ai_goal": "Shift mindset from advertising to belonging",
+    "ai_tone": "Direct, factual, no-nonsense",
+    "ai_goal": "Shift from advertising mindset to community media participation",
     "data_capture_fields": "name, email, business_name, industry",
     "audio_base_url": "https://cdn.fibonacco.com/presentations/community-marketing/audio/",
     "crm_tracking": true,
@@ -31,6 +31,14 @@
     "utm_medium": "outbound",
     "utm_campaign": "90day-week4-educational",
     "utm_content": "EDU-004"
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 205,
+    "purpose": "education",
+    "audio_required": true
   },
   "slides": [
     {
@@ -45,7 +53,7 @@
         },
         "visual": "Two coffee shops - one with ad banner, one with people chatting outside"
       },
-      "narration": "Quick scenario. You're looking for a new coffee shop. You see an ad on Facebook for one—great photos, compelling copy. Your neighbor mentions another one—says they love it there. Which one do you try first? You already know the answer. Everyone does.",
+      "narration": "Quick scenario. You're looking for a new coffee shop. You see an ad on Facebook for one\u2014great photos, compelling copy. Your neighbor mentions another one\u2014says they love it there. Which one do you try first? You already know the answer. Everyone does.",
       "duration_seconds": 20,
       "audio_file": "slide-01-question.mp3"
     },
@@ -65,7 +73,7 @@
             "meaning": "People skip or block ads"
           },
           {
-            "stat": "↓42%",
+            "stat": "\u219342%",
             "meaning": "Trust in advertising since 2020"
           },
           {
@@ -147,7 +155,7 @@
         ],
         "insight": "Community marketing operates in the top 3. Digital marketing operates in the bottom 2."
       },
-      "narration": "Look at who people trust. Ninety-two percent trust people they know personally. Seventy percent trust online reviews. Fifty-eight percent trust editorial content and news. Only thirty-three percent trust brand websites. And fourteen percent—fourteen—trust advertising. Community marketing operates in the top three. Digital marketing operates in the bottom two. That's the difference.",
+      "narration": "Look at who people trust. Ninety-two percent trust people they know personally. Seventy percent trust online reviews. Fifty-eight percent trust editorial content and news. Only thirty-three percent trust brand websites. And fourteen percent\u2014fourteen\u2014trust advertising. Community marketing operates in the top three. Digital marketing operates in the bottom two. That's the difference.",
       "duration_seconds": 30,
       "audio_file": "slide-04-trust.mp3"
     },
@@ -176,7 +184,7 @@
           }
         }
       },
-      "narration": "Same budget, different approach, different results. Five hundred dollars on Facebook and Google ads gets you five thousand impressions, five clicks, maybe one conversion. And the moment you stop paying, you're invisible. Five hundred dollars on community presence—directory, events, news—gets you three thousand targeted local views, three hundred meaningful engagements, eight to twelve conversions on average. And it compounds. Your presence builds over time.",
+      "narration": "Same budget, different approach, different results. Five hundred dollars on Facebook and Google ads gets you five thousand impressions, five clicks, maybe one conversion. And the moment you stop paying, you're invisible. Five hundred dollars on community presence\u2014directory, events, news\u2014gets you three thousand targeted local views, three hundred meaningful engagements, eight to twelve conversions on average. And it compounds. Your presence builds over time.",
       "duration_seconds": 35,
       "audio_file": "slide-05-comparison.mp3"
     },
@@ -219,7 +227,7 @@
           "action": "download_article"
         }
       },
-      "narration": "Ready to stop shouting and start belonging? The shift is simple: from 'how do I reach more people' to 'how do I become part of what people already care about.' Join the community platform and become part of the conversation. Or download the full article—'The Coffee Shop That Stopped Advertising and Doubled Sales.' Your community is already there. The question is whether you're part of it.",
+      "narration": "Ready to stop shouting and start belonging? The shift is simple: from 'how do I reach more people' to 'how do I become part of what people already care about.' Join the community platform and become part of the conversation. Or download the full article\u2014'The Coffee Shop That Stopped Advertising and Doubled Sales.' Your community is already there. The question is whether you're part of it.",
       "duration_seconds": 25,
       "audio_file": "slide-07-cta.mp3"
     }
@@ -232,19 +240,19 @@
   },
   "emails": {
     "email_1_educational": {
-      "subject": "Why 'community marketing' beats 'digital marketing'",
-      "preview_text": "The coffee shop that stopped advertising",
-      "body": "Hey there,\n\nQuick question: Which would you trust more—\n\nA) A Facebook ad for a restaurant\nB) Your neighbor recommending a restaurant\n\nYou already know the answer.\n\nSo why are we all still spending money on ads that 86% of people ignore?\n\nI put together a 3-minute presentation on why community marketing beats digital marketing—with real numbers and a real story about a business that stopped advertising entirely.\n\n[WATCH THE PRESENTATION →]\n\nSpoiler: Their sales went UP.\n\nSarah\nFibonacco\n\nP.S. The full article is called \"The Coffee Shop That Stopped Advertising and Doubled Sales.\" Download at the end."
+      "subject": "Why the smartest local businesses have stopped advertising",
+      "preview_text": "And their sales went up",
+      "body": "Hi [First Name],\n\nWhich do you trust more?\n\nA) A Facebook ad for a restaurant\nB) Your neighbor recommending a restaurant\n\nYou already know the answer. So does every customer looking for a [Category] business in [Community Name].\n\nI put together a 3-minute overview on why businesses that are part of their community's media network outperform businesses that just run ads.\n\n[WATCH THE 3-MINUTE OVERVIEW \u2192]\n\nThe short version: being part of the community story beats shouting at the community.\n\n[AM Name]\n[Community Name] Day.News"
     },
     "email_2a_engaged": {
-      "subject": "Ready to stop advertising and start belonging?",
-      "preview_text": "Join your community",
-      "body": "Hey there,\n\nYou watched the presentation on community marketing. Quick recap:\n\n• 86% of people ignore or block ads\n• Only 14% trust advertising (vs 92% for personal recommendations)\n• Community presence compounds; ads stop working when you stop paying\n• Real businesses are cutting ads and seeing sales go UP\n\nReady to shift from shouting to belonging?\n\nThe community platform is where your city locals connect:\n\n[JOIN THE COMMUNITY →]\n\nYour neighbors are already there.\n\nSarah"
+      "subject": "Ready to be part of [Community Name]'s story?",
+      "preview_text": "Your community is already reading",
+      "body": "Hi [First Name],\n\nYou watched the overview on community media vs. advertising. The takeaway:\n\n\u2192 People trust businesses they see in their community's media\n\u2192 Being mentioned in local news beats any ad\n\u2192 Community presence compounds \u2014 ads stop when you stop paying\n\u2192 [X] businesses in [Community Name] are already part of the network\n\n[JOIN THE NETWORK \u2192]\n\n[AM Name]"
     },
     "email_2b_reengage": {
-      "subject": "86% of people ignore your ads",
-      "preview_text": "There's a better way",
-      "body": "Hey there,\n\nStill running ads that 86% of people ignore?\n\nThere's a different approach. It's called community marketing.\n\nInstead of interrupting strangers with ads, you become part of the community they already belong to.\n\n• They see you in the local directory\n• They see you at community events\n• They hear about you from neighbors\n\nSame budget. 10x the trust. Results that compound.\n\n3 minutes to understand why:\n\n[WATCH THE PRESENTATION →]\n\nSarah"
+      "subject": "Still spending on ads people scroll past?",
+      "preview_text": "There's a different approach",
+      "body": "Hi [First Name],\n\nThe average person ignores 86% of ads. But they read their local news.\n\n[Community Name] Day.News reaches [X] residents. Your business can be part of what they're already reading.\n\n3 minutes to see why this works better than advertising:\n\n[WATCH THE OVERVIEW \u2192]\n\n[AM Name]"
     }
   },
   "connections": {
@@ -257,13 +265,5 @@
       "EDU-005",
       "HOOK-006"
     ]
-  },
-  "template": {
-    "template_id": "educational",
-    "name": "Educational Content",
-    "slides": 7,
-    "duration": 205,
-    "purpose": "education",
-    "audio_required": true
   }
 }

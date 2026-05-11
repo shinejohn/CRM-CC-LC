@@ -9,6 +9,36 @@
     "landing_page": "google-integration-guide",
     "template": "tutorial"
   },
+  "landing_page": {
+    "campaign_id": "HOWTO-021",
+    "landing_page_slug": "google-integration-guide",
+    "url": "/learn/google-integration-guide",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 195,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Clear, patient, hands-on",
+    "ai_goal": "Walk user through setup and configuration",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/google-integration-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week10-how-to",
+    "utm_content": "HOWTO-021"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 195,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -106,7 +136,7 @@
         ],
         "benefit": "Posts appear in search results and Maps"
       },
-      "narration": "Enable Google Posts publishing. Updates, offers, events, and products can all post to Google directly from our platform. These posts appear in Google search results and Maps—more visibility with no extra work.",
+      "narration": "Enable Google Posts publishing. Updates, offers, events, and products can all post to Google directly from our platform. These posts appear in Google search results and Maps\u2014more visibility with no extra work.",
       "duration_seconds": 25,
       "audio_file": "slide-06-posts.mp3"
     },
@@ -122,7 +152,7 @@
           "Check insights monthly for search term data"
         ]
       },
-      "narration": "Google integration pro tips. Post to Google weekly for best visibility in search. Respond to all reviews within twenty-four hours. Add new photos monthly—businesses with photos get forty-two percent more direction requests. Check Google insights monthly to see what terms people use to find you.",
+      "narration": "Google integration pro tips. Post to Google weekly for best visibility in search. Respond to all reviews within twenty-four hours. Add new photos monthly\u2014businesses with photos get forty-two percent more direction requests. Check Google insights monthly to see what terms people use to find you.",
       "duration_seconds": 30,
       "audio_file": "slide-07-tips.mp3"
     },
@@ -146,10 +176,10 @@
     }
   ],
   "emails": {
-    "email_1_educational": {
-      "subject": "Connect Google Business Profile for maximum visibility",
-      "preview_text": "One source of truth, everywhere",
-      "body": "Hey there,\n\nYour Google Business Profile is how most people find you.\n\nConnect it to:\n✓ Auto-sync hours, services, photos\n✓ Get instant review notifications\n✓ Publish posts to Google from one place\n✓ Track what search terms find you\n\n[CONNECT GOOGLE NOW →]\n\nBusinesses with photos get 42% more direction requests.\n\nSarah"
+    "email_tutorial": {
+      "subject": "Connect your Google Business Profile \u2014 5 minutes",
+      "preview_text": "Sync hours photos and reviews automatically",
+      "body": "Hi [First Name],\n\nConnect your Google Business Profile to your [Community Name] dashboard:\n\n\u2192 Auto-sync hours, services, photos\n\u2192 Get review notifications in one place\n\u2192 Track what search terms find you\n\u2192 Keep everything consistent\n\n[CONNECT GOOGLE NOW \u2192]\n\nTakes 5 minutes. Keeps everything in sync.\n\n[AM Name]"
     }
   },
   "connections": {
@@ -157,35 +187,5 @@
       "EDU-010"
     ],
     "follows": "HOWTO-020"
-  },
-  "landing_page": {
-    "campaign_id": "HOWTO-021",
-    "landing_page_slug": "google-integration-guide",
-    "url": "/learn/google-integration-guide",
-    "template_id": "tutorial",
-    "template_name": "Step-by-Step Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 195,
-    "primary_cta": "start_setup",
-    "secondary_cta": "watch_demo",
-    "ai_persona": "Sarah",
-    "ai_tone": "Clear, patient, hands-on",
-    "ai_goal": "Walk user through setup and configuration",
-    "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/google-integration-guide/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "activation",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week10-how-to",
-    "utm_content": "HOWTO-021"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "Step-by-Step Tutorial",
-    "slides": 8,
-    "duration": 195,
-    "purpose": "tutorial",
-    "audio_required": true
   }
 }

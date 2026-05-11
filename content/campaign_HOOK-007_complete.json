@@ -32,6 +32,14 @@
     "utm_content": "HOOK-007",
     "audio_base_url": "https://cdn.fibonacco.com/presentations/featured-listing/audio/"
   },
+  "template": {
+    "template_id": "upgrade-offer",
+    "name": "Quick Action",
+    "slides": 7,
+    "duration": 180,
+    "purpose": "hook",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -84,12 +92,12 @@
           },
           {
             "icon": "robot",
-            "benefit": "AI priority",
-            "detail": "Weighted higher in AI recommendations"
+            "benefit": "modern tools priority",
+            "detail": "Weighted higher in modern tools recommendations"
           }
         ]
       },
-      "narration": "What does Featured get you? Priority placement—top of search results and your category. A Featured badge—an instant trust signal. News eligibility—you're considered for feature stories. Enhanced analytics—see who's viewing and why. Social amplification—promoted to our entire audience. And AI priority—weighted higher when AI makes recommendations.",
+      "narration": "What does Featured get you? Priority placement\u2014top of search results and your category. A Featured badge\u2014an instant trust signal. News eligibility\u2014you're considered for feature stories. Enhanced analytics\u2014see who's viewing and why. Social amplification\u2014promoted to our entire audience. And modern tools priority\u2014weighted higher when modern tools makes recommendations.",
       "duration_seconds": 35,
       "audio_file": "slide-02-benefits.mp3"
     },
@@ -111,9 +119,9 @@
             "range": "Varies by category"
           },
           {
-            "metric": "AI recommendations",
+            "metric": "modern tools recommendations",
             "average": "+5x",
-            "note": "More AI mentions"
+            "note": "More modern tools mentions"
           },
           {
             "metric": "ROI",
@@ -122,7 +130,7 @@
           }
         ]
       },
-      "narration": "The results speak for themselves. Featured businesses see an average four hundred eighty-seven percent increase in views—three to eight times typical. Inquiries increase by three hundred twelve percent on average. AI recommendations increase by five times. And the ROI? Twelve to one on average. For every dollar spent on Featured, businesses see twelve back.",
+      "narration": "The results speak for themselves. Featured businesses see an average four hundred eighty-seven percent increase in views\u2014three to eight times typical. Inquiries increase by three hundred twelve percent on average. modern tools recommendations increase by five times. And the ROI? Twelve to one on average. For every dollar spent on Featured, businesses see twelve back.",
       "duration_seconds": 30,
       "audio_file": "slide-03-proof.mp3"
     },
@@ -141,7 +149,7 @@
         },
         "note": "This is ready to activate"
       },
-      "narration": "Here's how your business would appear as a Featured listing. Your name with the Featured badge. Top position in local services results. Enhanced profile with all the bells and whistles. Priority in AI recommendations. This preview is ready to activate whenever you say go.",
+      "narration": "Here's how your business would appear as a Featured listing. Your name with the Featured badge. Top position in local services results. Enhanced profile with all the bells and whistles. Priority in modern tools recommendations. This preview is ready to activate whenever you say go.",
       "duration_seconds": 25,
       "audio_file": "slide-04-preview.mp3"
     },
@@ -167,7 +175,7 @@
         "includes": "All Featured benefits included in both plans",
         "guarantee": "30-day satisfaction guarantee"
       },
-      "narration": "Pricing is simple. Monthly: $99 dollars per month, cancel anytime. Or go annual at $999 per month and save $189 percent. Both plans include all Featured benefits. And there's a thirty-day satisfaction guarantee—if you don't see results, we'll make it right.",
+      "narration": "Pricing is simple. Monthly: $99 dollars per month, cancel anytime. Or go annual at $999 per month and save $189 percent. Both plans include all Featured benefits. And there's a thirty-day satisfaction guarantee\u2014if you don't see results, we'll make it right.",
       "duration_seconds": 25,
       "audio_file": "slide-05-pricing.mp3"
     },
@@ -176,13 +184,13 @@
       "component": "TestimonialSlide",
       "title": "Featured Success Story",
       "content": {
-        "quote": "Featured paid for itself in the first week. I was skeptical, but the numbers don't lie—I'm getting calls I never got before.",
+        "quote": "Featured paid for itself in the first week. I was skeptical, but the numbers don't lie\u2014I'm getting calls I never got before.",
         "author": "Local Business Owner",
         "business": "a local business",
         "category": "your category",
         "result": "significant increase in visibility"
       },
-      "narration": "Don't just take our word for it. Local Business Owner from a local business said: 'Featured paid for itself in the first week. I was skeptical, but the numbers don't lie—I'm getting calls I never got before.' They saw significant increase in visibility after upgrading.",
+      "narration": "Don't just take our word for it. Local Business Owner from a local business said: 'Featured paid for itself in the first week. I was skeptical, but the numbers don't lie\u2014I'm getting calls I never got before.' They saw significant increase in visibility after upgrading.",
       "duration_seconds": 25,
       "audio_file": "slide-06-testimonial.mp3"
     },
@@ -203,16 +211,16 @@
         "urgency": "Featured spots in local services are limited",
         "guarantee": "30-day satisfaction guarantee"
       },
-      "narration": "Ready for 20x more visibility? Click 'Upgrade to Featured' to activate now. Or compare all plans if you want to see other options. Featured spots in local services are limited—don't let competitors take yours. Remember: thirty-day satisfaction guarantee. No risk, all upside.",
+      "narration": "Ready for 20x more visibility? Click 'Upgrade to Featured' to activate now. Or compare all plans if you want to see other options. Featured spots in local services are limited\u2014don't let competitors take yours. Remember: thirty-day satisfaction guarantee. No risk, all upside.",
       "duration_seconds": 20,
       "audio_file": "slide-07-cta.mp3"
     }
   ],
   "emails": {
     "email_hook": {
-      "subject": "Your listing could be getting 5x more views",
-      "preview_text": "See the visibility gap",
-      "body": "Hey there,\n\nI looked at your business's listing performance.\n\nYour monthly views: 120\nFeatured average in local services: 2,400\n\nThat's a 20x gap.\n\nFeatured businesses see:\n• +487% more views\n• +312% more inquiries  \n• 5x more AI recommendations\n• 12:1 average ROI\n\n[SEE YOUR FEATURED PREVIEW →]\n\nYour Featured listing is ready to activate. The gap is closable.\n\nSarah\nFibonacco\n\nP.S. 30-day satisfaction guarantee. If it doesn't work, we'll make it right."
+      "subject": "Your listing could reach more people in [Community Name]",
+      "preview_text": "See the visibility difference",
+      "body": "Hi [First Name],\n\nI looked at your listing performance in [Community Name]'s directory.\n\nYour monthly views: [X]\nFeatured businesses average: [Y]\n\nFeatured businesses get priority placement in the directory, inclusion in the newsletter, and mentions in community news.\n\n[SEE YOUR FEATURED PREVIEW \u2192]\n\nI can walk you through the options if you're interested.\n\n[AM Name]\n[Community Name] Day.News"
     }
   },
   "connections": {
@@ -225,13 +233,5 @@
       "HOOK-004",
       "HOOK-009"
     ]
-  },
-  "template": {
-    "template_id": "upgrade-offer",
-    "name": "Quick Action",
-    "slides": 7,
-    "duration": 180,
-    "purpose": "hook",
-    "audio_required": true
   }
 }

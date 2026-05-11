@@ -10,6 +10,36 @@
     "template": "tutorial",
     "description": "How to set up and send email campaigns"
   },
+  "landing_page": {
+    "campaign_id": "HOWTO-011",
+    "landing_page_slug": "email-marketing-setup",
+    "url": "/learn/email-marketing-setup",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 225,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Clear, patient, hands-on",
+    "ai_goal": "Walk user through setup and configuration",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/email-marketing-setup/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week5-how-to",
+    "utm_content": "HOWTO-011"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 225,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -52,7 +82,7 @@
           "Physical address (required by law)"
         ]
       },
-      "narration": "First, set up your sender profile. From name: your business name so people recognize you. From email: needs to be verified—we'll send a confirmation. Reply-to email: where responses go. Physical address: required by law for commercial emails.",
+      "narration": "First, set up your sender profile. From name: your business name so people recognize you. From email: needs to be verified\u2014we'll send a confirmation. Reply-to email: where responses go. Physical address: required by law for commercial emails.",
       "duration_seconds": 35,
       "audio_file": "slide-03-sender.mp3"
     },
@@ -87,7 +117,7 @@
           "Set call-to-action"
         ]
       },
-      "narration": "Create your first email. Choose a template—we have designs for announcements, promotions, newsletters. Add your content—keep it focused on one main message. Include images to catch attention. Set a clear call-to-action—what do you want readers to do?",
+      "narration": "Create your first email. Choose a template\u2014we have designs for announcements, promotions, newsletters. Add your content\u2014keep it focused on one main message. Include images to catch attention. Set a clear call-to-action\u2014what do you want readers to do?",
       "duration_seconds": 35,
       "audio_file": "slide-05-create.mp3"
     },
@@ -105,7 +135,7 @@
           "Schedule or send now"
         ]
       },
-      "narration": "Before sending, always test. Send a test email to yourself. Check how it looks on mobile—most people read on phones. Verify all links work. Review your subject line—this determines if people open. Then schedule for optimal time or send immediately.",
+      "narration": "Before sending, always test. Send a test email to yourself. Check how it looks on mobile\u2014most people read on phones. Verify all links work. Review your subject line\u2014this determines if people open. Then schedule for optimal time or send immediately.",
       "duration_seconds": 35,
       "audio_file": "slide-06-send.mp3"
     },
@@ -121,7 +151,7 @@
           "Clean your list quarterly"
         ]
       },
-      "narration": "Email pro tips. Best send times are typically Tuesday through Thursday, around ten AM or two PM. Keep subject lines under fifty characters so they don't get cut off. Include one clear call-to-action per email. Clean your list quarterly—remove people who never open.",
+      "narration": "Email pro tips. Best send times are typically Tuesday through Thursday, around ten AM or two PM. Keep subject lines under fifty characters so they don't get cut off. Include one clear call-to-action per email. Clean your list quarterly\u2014remove people who never open.",
       "duration_seconds": 30,
       "audio_file": "slide-07-tips.mp3"
     },
@@ -139,16 +169,16 @@
           "action": "view_templates"
         }
       },
-      "narration": "Ready to start? Create your first email now—our templates make it easy. Or browse templates first to find one that fits your message. Your customers are waiting to hear from you.",
+      "narration": "Ready to start? Create your first email now\u2014our templates make it easy. Or browse templates first to find one that fits your message. Your customers are waiting to hear from you.",
       "duration_seconds": 20,
       "audio_file": "slide-08-cta.mp3"
     }
   ],
   "emails": {
-    "email_1_educational": {
-      "subject": "Set up email marketing in 10 minutes",
-      "preview_text": "Reach customers directly",
-      "body": "Hey there,\n\nEmail marketing has the highest ROI of any channel.\n\n10-minute setup:\n1. Create sender profile\n2. Import contacts (legally)\n3. Design your email\n4. Test and send\n\n[START YOUR FIRST EMAIL →]\n\nPro tip: Tuesday-Thursday, 10am or 2pm are best send times.\n\nSarah"
+    "email_tutorial": {
+      "subject": "Set up your email marketing \u2014 10 minutes",
+      "preview_text": "Reach your customers directly",
+      "body": "Hi [First Name],\n\nEmail marketing still has the highest ROI of any channel for local businesses.\n\n10-minute setup:\n\n1. Create your sender profile\n2. Import your contacts\n3. Design your first email\n4. Test and send\n\n[START YOUR FIRST EMAIL \u2192]\n\nBest send times: Tuesday-Thursday, 10am or 2pm.\n\n[AM Name]"
     }
   },
   "connections": {
@@ -156,35 +186,5 @@
       "HOWTO-019"
     ],
     "follows": "HOWTO-010"
-  },
-  "landing_page": {
-    "campaign_id": "HOWTO-011",
-    "landing_page_slug": "email-marketing-setup",
-    "url": "/learn/email-marketing-setup",
-    "template_id": "tutorial",
-    "template_name": "Step-by-Step Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 225,
-    "primary_cta": "start_setup",
-    "secondary_cta": "watch_demo",
-    "ai_persona": "Sarah",
-    "ai_tone": "Clear, patient, hands-on",
-    "ai_goal": "Walk user through setup and configuration",
-    "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/email-marketing-setup/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "activation",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week5-how-to",
-    "utm_content": "HOWTO-011"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "Step-by-Step Tutorial",
-    "slides": 8,
-    "duration": 225,
-    "purpose": "tutorial",
-    "audio_required": true
   }
 }

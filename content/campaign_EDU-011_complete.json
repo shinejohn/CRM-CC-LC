@@ -4,11 +4,41 @@
     "week": 8,
     "day": 51,
     "type": "Educational",
-    "title": "Future-Proof Your Business",
+    "title": "Is Your Business Set Up for the Next 5 Years",
     "subject": "The businesses that survive the next 5 years will have this in common",
-    "landing_page": "ai-content-guide",
+    "landing_page": "modern tools-content-guide",
     "template": "educational",
-    "description": "How to build a business that thrives regardless of technology changes"
+    "description": "What separates businesses that thrive from ones that struggle"
+  },
+  "landing_page": {
+    "campaign_id": "EDU-011",
+    "landing_page_slug": "modern tools-content-guide",
+    "url": "/learn/modern tools-content-guide",
+    "template_id": "educational",
+    "template_name": "Educational Content",
+    "slide_count": 7,
+    "duration_seconds": 210,
+    "primary_cta": "explore_more",
+    "secondary_cta": "download_article",
+    "ai_persona": "Sarah",
+    "ai_tone": "Direct, practical, forward-looking",
+    "ai_goal": "Show the business owner what they need to have in place",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/modern tools-content-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "education",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week8-educational",
+    "utm_content": "EDU-011"
+  },
+  "template": {
+    "template_id": "educational",
+    "name": "Educational Content",
+    "slides": 7,
+    "duration": 210,
+    "purpose": "education",
+    "audio_required": true
   },
   "slides": [
     {
@@ -19,7 +49,7 @@
         "headline": "The Next 5 Years Will Change Everything",
         "subhead": "Some businesses will thrive. Others will disappear."
       },
-      "narration": "The next five years will change everything about how people find and choose local businesses. Some businesses will thrive—more visible, more efficient, more connected than ever. Others will disappear—unable to adapt, invisible to new discovery methods. The difference isn't luck. It's a few key decisions made now.",
+      "narration": "The next five years will change everything about how people find and choose local businesses. Some businesses will thrive\u2014more visible, more efficient, more connected than ever. Others will disappear\u2014unable to adapt, invisible to new discovery methods. The difference isn't luck. It's a few key decisions made now.",
       "duration_seconds": 20,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -31,7 +61,7 @@
         "headline": "The Shifts Already in Motion",
         "shifts": [
           {
-            "shift": "AI-first discovery",
+            "shift": "modern tools-first discovery",
             "timeline": "Now - 2 years",
             "impact": "How people find businesses changes fundamentally"
           },
@@ -48,11 +78,11 @@
           {
             "shift": "Automation standard",
             "timeline": "Now - 2 years",
-            "impact": "Businesses without AI can't compete on service"
+            "impact": "Businesses without your account team can't compete on service"
           }
         ]
       },
-      "narration": "Here's what's coming—and some of it's already here. AI-first discovery: how people find businesses is fundamentally changing. Voice commerce: people making purchases through voice assistants. Hyper-personalization: customers expecting you to know them, remember them, anticipate them. Automation as standard: businesses without AI won't be able to compete on service speed and availability.",
+      "narration": "Here's what's coming\u2014and some of it's already here. modern tools-first discovery: how people find businesses is fundamentally changing. Voice commerce: people making purchases through voice assistants. Hyper-personalization: customers expecting you to know them, remember them, anticipate them. Automation as standard: businesses without modern tools won't be able to compete on service speed and availability.",
       "duration_seconds": 35,
       "audio_file": "slide-02-shifts.mp3"
     },
@@ -69,7 +99,7 @@
           },
           {
             "factor": "Website-only presence",
-            "risk": "Not discoverable by AI or voice"
+            "risk": "Not discoverable by modern tools or voice"
           },
           {
             "factor": "Manual-everything operations",
@@ -85,7 +115,7 @@
           }
         ]
       },
-      "narration": "Which businesses are at risk? Those dependent on a single channel—if that channel changes, you're invisible. Website-only presence—not discoverable by AI or voice. Manual-everything operations—can't scale, can't compete on speed. No data capture—can't personalize, can't improve. Reactive-only mindset—always catching up, never leading. Sound familiar? Don't worry—all of this is fixable.",
+      "narration": "Which businesses are at risk? Those dependent on a single channel\u2014if that channel changes, you're invisible. Website-only presence\u2014not discoverable by modern tools or voice. Manual-everything operations\u2014can't scale, can't compete on speed. No data capture\u2014can't personalize, can't improve. Reactive-only mindset\u2014always catching up, never leading. Sound familiar? Don't worry\u2014all of this is fixable.",
       "duration_seconds": 35,
       "audio_file": "slide-03-vulnerable.mp3"
     },
@@ -101,8 +131,8 @@
             "benefit": "Visible wherever people look"
           },
           {
-            "factor": "AI-discoverable",
-            "benefit": "Found by voice and AI assistants"
+            "factor": "discoverable",
+            "benefit": "Found by voice and search tools"
           },
           {
             "factor": "Automated foundations",
@@ -114,11 +144,11 @@
           },
           {
             "factor": "Community-connected",
-            "benefit": "Trust that survives algorithm changes"
+            "benefit": "Trust that survives systems changes"
           }
         ]
       },
-      "narration": "Which businesses will thrive? Those with multi-platform presence—visible wherever people look. AI-discoverable—found by voice assistants and AI. Automated foundations—available twenty-four seven, responding instantly. Data-informed—constantly learning and improving. Community-connected—trust that survives any algorithm change. This isn't about being a tech company. It's about being visible, available, and efficient.",
+      "narration": "Which businesses will thrive? Those with multi-platform presence\u2014visible wherever people look. discoverable\u2014found by voice assistants and modern tools. Automated foundations\u2014available twenty-four seven, responding instantly. Data-informed\u2014constantly learning and improving. Community-connected\u2014trust that survives any systems change. This isn't about being a tech company. It's about being visible, available, and efficient.",
       "duration_seconds": 35,
       "audio_file": "slide-04-resilient.mp3"
     },
@@ -143,7 +173,7 @@
           },
           {
             "element": "Automation layer",
-            "what": "AI handling routine, humans handling important"
+            "what": "modern tools handling routine, humans handling important"
           },
           {
             "element": "Data foundation",
@@ -151,7 +181,7 @@
           }
         ]
       },
-      "narration": "Future-proofing starts with fundamentals. An authoritative home base—a presence you own, not rented from platforms that can change. Distributed visibility—present in multiple discovery channels. A reputation engine—consistent flow of reviews and trust signals. An automation layer—AI handling the routine so humans handle what matters. A data foundation—capturing and learning from every interaction.",
+      "narration": "Future-proofing starts with fundamentals. An authoritative home base\u2014a presence you own, not rented from platforms that can change. Distributed visibility\u2014present in multiple discovery channels. A reputation engine\u2014consistent flow of reviews and trust signals. An automation layer\u2014modern tools handling the routine so humans handle what matters. A data foundation\u2014capturing and learning from every interaction.",
       "duration_seconds": 35,
       "audio_file": "slide-05-foundation.mp3"
     },
@@ -168,7 +198,7 @@
           },
           {
             "timeframe": "This month",
-            "action": "Set up AI assistant for basic automation"
+            "action": "Set up search tools for basic automation"
           },
           {
             "timeframe": "Next 90 days",
@@ -180,7 +210,7 @@
           }
         ]
       },
-      "narration": "Here's your action plan. This week: claim your authoritative presence—get in the directory, set up your Alphasite. This month: set up an AI assistant for basic automation—responses, scheduling, FAQs. Next ninety days: build review velocity and expand your multi-platform presence. Ongoing: review your data, refine your approach, improve continuously. Small steps, big impact.",
+      "narration": "Here's your action plan. This week: claim your authoritative presence\u2014get in the directory, set up your Alphasite. This month: set up an search tools for basic automation\u2014responses, scheduling, FAQs. Next ninety days: build review velocity and expand your multi-platform presence. Ongoing: review your data, refine your approach, improve continuously. Small steps, big impact.",
       "duration_seconds": 30,
       "audio_file": "slide-06-action.mp3"
     },
@@ -199,16 +229,16 @@
           "action": "take_assessment"
         }
       },
-      "narration": "Ready to build a business that lasts? Get your personalized future-proof plan—specific steps for your business. Or take the readiness assessment to see where you stand today. The next five years will reward the businesses that prepare. Let's make sure that's you.",
+      "narration": "Ready to build a business that lasts? Get your personalized future-proof plan\u2014specific steps for your business. Or take the readiness assessment to see where you stand today. The next five years will reward the businesses that prepare. Let's make sure that's you.",
       "duration_seconds": 20,
       "audio_file": "slide-07-cta.mp3"
     }
   ],
   "emails": {
     "email_1_educational": {
-      "subject": "The businesses that survive the next 5 years will have this in common",
-      "preview_text": "It's not luck—it's preparation",
-      "body": "Hey there,\n\nThe next 5 years will change everything about how people find local businesses.\n\nSome will thrive. Others will disappear.\n\nThe difference?\n\nAt-risk businesses:\n❌ Single-channel dependent\n❌ Website-only presence\n❌ Manual everything\n❌ Reactive mode\n\nFuture-proof businesses:\n✓ Multi-platform presence\n✓ AI-discoverable\n✓ Automated foundations\n✓ Community-connected\n\n[WATCH THE 3-MINUTE GUIDE →]\n\nThis isn't about being a tech company. It's about being visible, available, and efficient.\n\nSarah\nFibonacco"
+      "subject": "What separates businesses that thrive from ones that struggle",
+      "preview_text": "It's not luck \u2014 it's setup",
+      "body": "Hi [First Name],\n\nThe businesses that thrive over the next 5 years will have a few things in common:\n\n\u2192 They show up in multiple places when locals search\n\u2192 They're part of their community's media and events\n\u2192 Their customer response systems run without manual effort\n\u2192 They have a professional web presence that stays current\n\nThe ones that struggle will still be relying on one channel, responding manually to everything, and hoping people find their website.\n\n[WATCH THE 3-MINUTE OVERVIEW \u2192]\n\nThis isn't about technology. It's about being visible, responsive, and connected to your community.\n\n[AM Name]\n[Community Name] Day.News"
     }
   },
   "connections": {
@@ -220,35 +250,5 @@
       "EDU-001",
       "EDU-002"
     ]
-  },
-  "landing_page": {
-    "campaign_id": "EDU-011",
-    "landing_page_slug": "ai-content-guide",
-    "url": "/learn/ai-content-guide",
-    "template_id": "educational",
-    "template_name": "Educational Content",
-    "slide_count": 7,
-    "duration_seconds": 210,
-    "primary_cta": "explore_more",
-    "secondary_cta": "download_article",
-    "ai_persona": "Sarah",
-    "ai_tone": "Warm, informative, empowering",
-    "ai_goal": "Educate and build understanding of the concept",
-    "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-content-guide/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "education",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week8-educational",
-    "utm_content": "EDU-011"
-  },
-  "template": {
-    "template_id": "educational",
-    "name": "Educational Content",
-    "slides": 7,
-    "duration": 210,
-    "purpose": "education",
-    "audio_required": true
   }
 }

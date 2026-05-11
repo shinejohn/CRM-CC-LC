@@ -10,6 +10,36 @@
     "template": "expert-application",
     "description": "Application to join expert directory for quotes and features"
   },
+  "landing_page": {
+    "campaign_id": "HOOK-011",
+    "landing_page_slug": "expert-registration",
+    "url": "/learn/expert-registration",
+    "template_id": "expert-application",
+    "template_name": "Quick Action",
+    "slide_count": 6,
+    "duration_seconds": 163,
+    "primary_cta": "get_started",
+    "secondary_cta": "learn_more",
+    "ai_persona": "Sarah",
+    "ai_tone": "Energetic, encouraging, action-oriented",
+    "ai_goal": "Get user to take the first free action immediately",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/expert-registration/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "signup",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week8-hook",
+    "utm_content": "HOOK-011"
+  },
+  "template": {
+    "template_id": "expert-application",
+    "name": "Quick Action",
+    "slides": 6,
+    "duration": 163,
+    "purpose": "hook",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -19,7 +49,7 @@
         "headline": "When Journalists Need a Quote, They'll Call You",
         "subhead": "Join our local expert directory"
       },
-      "narration": "You're already an expert in what you do. The question is: do people know it? When local journalists need a quote, when community members have questions, when someone needs advice—are they calling you? Our expert directory makes sure they are.",
+      "narration": "You're already an expert in what you do. The question is: do people know it? When local journalists need a quote, when community members have questions, when someone needs advice\u2014are they calling you? Our expert directory makes sure they are.",
       "duration_seconds": 18,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -56,7 +86,7 @@
           }
         ]
       },
-      "narration": "Here's how the expert directory works. You're listed as the local expert in your specialty area. Journalists contact you when they need quotes or stories on your topic. You answer community questions in your area of expertise. You get a verified expert badge on your profile. First access to write guest content and articles. And speaking invitations when events need local experts. You're already the expert—this makes it official.",
+      "narration": "Here's how the expert directory works. You're listed as the local expert in your specialty area. Journalists contact you when they need quotes or stories on your topic. You answer community questions in your area of expertise. You get a verified expert badge on your profile. First access to write guest content and articles. And speaking invitations when events need local experts. You're already the expert\u2014this makes it official.",
       "duration_seconds": 35,
       "audio_file": "slide-02-benefits.mp3"
     },
@@ -155,7 +185,7 @@
           }
         ]
       },
-      "narration": "What do experts experience? A financial planner was quoted in four articles in six months—now established as the go-to financial voice locally. A personal trainer got a monthly Q&A column—gym membership inquiries up thirty-four percent. A real estate agent was invited to speak at three community events—name recognition throughout the community. Expert status opens doors.",
+      "narration": "What do experts experience? A financial planner was quoted in four articles in six months\u2014now established as the go-to financial voice locally. A personal trainer got a monthly Q&A column\u2014gym membership inquiries up thirty-four percent. A real estate agent was invited to speak at three community events\u2014name recognition throughout the community. Expert status opens doors.",
       "duration_seconds": 30,
       "audio_file": "slide-05-success.mp3"
     },
@@ -175,21 +205,21 @@
         },
         "process": "Application takes 5 minutes. Review within 72 hours."
       },
-      "narration": "Ready to be recognized as an expert? Apply now—takes about five minutes. We'll review your application within seventy-two hours. Or see our current experts to see the company you'd be joining. You're already the expert. Let's make it official.",
+      "narration": "Ready to be recognized as an expert? Apply now\u2014takes about five minutes. We'll review your application within seventy-two hours. Or see our current experts to see the company you'd be joining. You're already the expert. Let's make it official.",
       "duration_seconds": 20,
       "audio_file": "slide-06-cta.mp3"
     }
   ],
   "emails": {
-    "email_1_hook": {
-      "subject": "You're an expert. Let's make sure people know it.",
-      "preview_text": "Join our local expert directory",
-      "body": "Hey there,\n\nYou're an expert in what you do.\n\nBut when journalists need a quote, when community members have questions—are they calling you?\n\nOur expert directory makes sure they are.\n\nExpert benefits:\n✓ Listed as local expert in your field\n✓ Journalists contact you for quotes\n✓ Answer community Q&As\n✓ Verified expert badge\n✓ Speaking invitations\n\n[APPLY FOR EXPERT STATUS →]\n\nOne financial planner was quoted in 4 articles in 6 months. Now he's THE local financial voice.\n\nSarah\nFibonacco"
+    "email_hook": {
+      "subject": "You're an expert in [Category]. Let [Community Name] know it.",
+      "preview_text": "Join the local expert directory",
+      "body": "Hi [First Name],\n\nWhen journalists need a quote from a [Category] expert in [Community Name], are they calling you? When community members have questions, are they finding you?\n\nExpert directory benefits:\n\n\u2192 Listed as the go-to [Category] expert in [Community Name]\n\u2192 Media contacts for quotes and commentary\n\u2192 Community Q&A opportunities\n\u2192 Verified expert badge on all your listings\n\n[APPLY FOR EXPERT STATUS \u2192]\n\nThere's one Expert slot per category in each community.\n\n[AM Name]\n[Community Name] Day.News"
     },
-    "email_3_hook": {
-      "subject": "Your expert profile is drafted—take a look",
+    "email_reminder": {
+      "subject": "Your expert profile is drafted \u2014 take a look",
       "preview_text": "See how you'd be listed",
-      "body": "Hey there,\n\nWe drafted an expert profile for you:\n\n[SEE YOUR EXPERT PROFILE →]\n\nThis is how you'd appear in our expert directory when journalists and community members are looking for expertise in your field.\n\nApprove it to go live, or suggest changes.\n\nSarah"
+      "body": "Hi [First Name],\n\nWe drafted an expert profile for you based on your [Category] expertise:\n\n[SEE YOUR EXPERT PROFILE \u2192]\n\nApprove it to go live, or suggest changes.\n\n[AM Name]"
     }
   },
   "connections": {
@@ -198,35 +228,5 @@
       "HOOK-010",
       "HOOK-012"
     ]
-  },
-  "landing_page": {
-    "campaign_id": "HOOK-011",
-    "landing_page_slug": "expert-registration",
-    "url": "/learn/expert-registration",
-    "template_id": "expert-application",
-    "template_name": "Quick Action",
-    "slide_count": 6,
-    "duration_seconds": 163,
-    "primary_cta": "get_started",
-    "secondary_cta": "learn_more",
-    "ai_persona": "Sarah",
-    "ai_tone": "Energetic, encouraging, action-oriented",
-    "ai_goal": "Get user to take the first free action immediately",
-    "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/expert-registration/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "signup",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week8-hook",
-    "utm_content": "HOOK-011"
-  },
-  "template": {
-    "template_id": "expert-application",
-    "name": "Quick Action",
-    "slides": 6,
-    "duration": 163,
-    "purpose": "hook",
-    "audio_required": true
   }
 }

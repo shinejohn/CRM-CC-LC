@@ -4,10 +4,41 @@
     "week": 12,
     "day": 87,
     "type": "How-To",
-    "title": "ROI Tracking Guide",
+    "title": "Track Your Results",
     "subject": "Know exactly what's working (and what's not)",
     "landing_page": "roi-tracking-guide",
-    "template": "tutorial"
+    "template": "tutorial",
+    "description": "Set up results tracking to know what's working and what isn't"
+  },
+  "landing_page": {
+    "campaign_id": "HOWTO-029",
+    "landing_page_slug": "roi-tracking-guide",
+    "url": "/learn/roi-tracking-guide",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 230,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Helpful, step-by-step, practical",
+    "ai_goal": "Guide user through ROI and results tracking setup",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/roi-tracking-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week12-how-to",
+    "utm_content": "HOWTO-029"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 230,
+    "purpose": "tutorial",
+    "audio_required": true
   },
   "slides": [
     {
@@ -53,7 +84,7 @@
         ],
         "key": "Every touchpoint needs tracking"
       },
-      "narration": "Set up attribution—knowing where customers come from. Use UTM parameters on all marketing links. Add 'How did you hear about us?' to your forms. Use unique phone numbers for different channels. Track which landing pages convert. Use specific coupon codes by source. Every touchpoint needs tracking or you're guessing.",
+      "narration": "Set up attribution\u2014knowing where customers come from. Use UTM parameters on all marketing links. Add 'How did you hear about us?' to your forms. Use unique phone numbers for different channels. Track which landing pages convert. Use specific coupon codes by source. Every touchpoint needs tracking or you're guessing.",
       "duration_seconds": 40,
       "audio_file": "slide-03-attribution.mp3"
     },
@@ -72,7 +103,7 @@
         ],
         "organize": "Track monthly by channel"
       },
-      "narration": "Track all your costs. Advertising spend broken down by platform. Software and tool subscriptions. Time invested—assign your hourly value. Content creation costs. Agency or contractor fees. Track monthly by channel so you can compare costs to results for each.",
+      "narration": "Track all your costs. Advertising spend broken down by platform. Software and tool subscriptions. Time invested\u2014assign your hourly value. Content creation costs. Agency or contractor fees. Track monthly by channel so you can compare costs to results for each.",
       "duration_seconds": 30,
       "audio_file": "slide-04-costs.mp3"
     },
@@ -90,7 +121,7 @@
         ],
         "insight": "Some channels have higher LTV than others"
       },
-      "narration": "Connect revenue back to sources. Tag every customer with how they found you. Track customer lifetime value by acquisition source—not just first purchase. Connect invoices to original lead source. Attribute repeat purchases to the original channel. You'll find some channels have much higher lifetime value than others.",
+      "narration": "Connect revenue back to sources. Tag every customer with how they found you. Track customer lifetime value by acquisition source\u2014not just first purchase. Connect invoices to original lead source. Attribute repeat purchases to the original channel. You'll find some channels have much higher lifetime value than others.",
       "duration_seconds": 35,
       "audio_file": "slide-05-revenue.mp3"
     },
@@ -100,7 +131,7 @@
       "title": "Step 4: Calculate ROI",
       "content": {
         "action": "Do the Math",
-        "formula": "ROI = (Revenue - Cost) / Cost × 100",
+        "formula": "ROI = (Revenue - Cost) / Cost \u00d7 100",
         "example": {
           "channel": "Facebook Ads",
           "cost": "$500",
@@ -114,7 +145,7 @@
           "Compare channels monthly"
         ]
       },
-      "narration": "Calculate ROI with a simple formula: Revenue minus Cost, divided by Cost, times one hundred. Example: Facebook Ads cost five hundred dollars and generated two thousand in revenue. ROI is three hundred percent. Below one hundred percent means losing money. One to two hundred is modest. Above two hundred percent—scale that channel. Compare channels monthly and shift budget to winners.",
+      "narration": "Calculate ROI with a simple formula: Revenue minus Cost, divided by Cost, times one hundred. Example: Facebook Ads cost five hundred dollars and generated two thousand in revenue. ROI is three hundred percent. Below one hundred percent means losing money. One to two hundred is modest. Above two hundred percent\u2014scale that channel. Compare channels monthly and shift budget to winners.",
       "duration_seconds": 40,
       "audio_file": "slide-06-calculate.mp3"
     },
@@ -130,7 +161,7 @@
           "Review ROI monthly, adjust quarterly"
         ]
       },
-      "narration": "ROI tracking pro tips. Give channels ninety days before judging—some have longer sales cycles. Include customer lifetime value, not just first purchase—email subscribers might buy repeatedly. Track assisted conversions—channels that help the sale even if they don't close it. Review ROI monthly, adjust spending quarterly.",
+      "narration": "ROI tracking pro tips. Give channels ninety days before judging\u2014some have longer sales cycles. Include customer lifetime value, not just first purchase\u2014email subscribers might buy repeatedly. Track assisted conversions\u2014channels that help the sale even if they don't close it. Review ROI monthly, adjust spending quarterly.",
       "duration_seconds": 30,
       "audio_file": "slide-07-tips.mp3"
     },
@@ -148,18 +179,11 @@
           "action": "view_dashboard"
         }
       },
-      "narration": "Ready to know what's actually working? Set up ROI tracking now. Or see the ROI dashboard first to know what insights you'll get. Stop guessing—start knowing.",
+      "narration": "Ready to know what's actually working? Set up ROI tracking now. Or see the ROI dashboard first to know what insights you'll get. Stop guessing\u2014start knowing.",
       "duration_seconds": 20,
       "audio_file": "slide-08-cta.mp3"
     }
   ],
-  "emails": {
-    "email_1_educational": {
-      "subject": "Know exactly what's working (and what's not)",
-      "preview_text": "Stop guessing, start knowing",
-      "body": "Hey {{first_name}},\n\nHalf your marketing works. Which half?\n\nROI tracking shows you:\n✓ Where customers actually come from\n✓ What each channel costs\n✓ What each channel earns\n✓ Where to spend more (or less)\n\n[SET UP ROI TRACKING →]\n\nFormula: (Revenue - Cost) / Cost × 100\n\n{{sender_name}}"
-    }
-  },
   "connections": {
     "leads_to": [
       "HOWTO-023"

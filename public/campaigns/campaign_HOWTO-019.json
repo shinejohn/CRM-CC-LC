@@ -9,6 +9,36 @@
     "landing_page": "sms-marketing-guide",
     "template": "tutorial"
   },
+  "landing_page": {
+    "campaign_id": "HOWTO-019",
+    "landing_page_slug": "sms-marketing-guide",
+    "url": "/learn/sms-marketing-guide",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 225,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Clear, patient, hands-on",
+    "ai_goal": "Walk user through setup and configuration",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/sms-marketing-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week9-how-to",
+    "utm_content": "HOWTO-019"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 225,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -34,7 +64,7 @@
           "Timing and frequency"
         ]
       },
-      "narration": "We'll cover compliance requirements—critical for SMS. Building your SMS list legally. Message types that actually work. And timing and frequency best practices so you don't annoy people.",
+      "narration": "We'll cover compliance requirements\u2014critical for SMS. Building your SMS list legally. Message types that actually work. And timing and frequency best practices so you don't annoy people.",
       "duration_seconds": 20,
       "audio_file": "slide-02-overview.mp3"
     },
@@ -52,7 +82,7 @@
           "Keep consent records"
         ]
       },
-      "narration": "SMS has strict compliance requirements. You must have written consent before texting—no exceptions. Every message needs an easy opt-out like 'Reply STOP.' Identify your business in messages. Follow TCPA and CTIA guidelines. Keep records of consent. Violations can cost thousands per message.",
+      "narration": "SMS has strict compliance requirements. You must have written consent before texting\u2014no exceptions. Every message needs an easy opt-out like 'Reply STOP.' Identify your business in messages. Follow TCPA and CTIA guidelines. Keep records of consent. Violations can cost thousands per message.",
       "duration_seconds": 40,
       "audio_file": "slide-03-compliance.mp3"
     },
@@ -70,7 +100,7 @@
         ],
         "incentive": "Offer value for signing up"
       },
-      "narration": "Build your list properly. Keyword signup: 'Text JOIN to our number.' Website signup form with clear consent language. Point of sale prompt when customers are engaged. Invite existing customers via email. Always offer value for signing up—exclusive deals, early access, useful updates.",
+      "narration": "Build your list properly. Keyword signup: 'Text JOIN to our number.' Website signup form with clear consent language. Point of sale prompt when customers are engaged. Invite existing customers via email. Always offer value for signing up\u2014exclusive deals, early access, useful updates.",
       "duration_seconds": 35,
       "audio_file": "slide-04-list.mp3"
     },
@@ -93,7 +123,7 @@
           "Long messages"
         ]
       },
-      "narration": "What works in SMS? Appointment reminders—practical value. Flash sales and limited-time offers—urgency. Order and delivery updates—expected information. Event reminders—timely and helpful. Exclusive subscriber deals—reward for opting in. Avoid daily messages, generic content, and long texts that get truncated.",
+      "narration": "What works in SMS? Appointment reminders\u2014practical value. Flash sales and limited-time offers\u2014urgency. Order and delivery updates\u2014expected information. Event reminders\u2014timely and helpful. Exclusive subscriber deals\u2014reward for opting in. Avoid daily messages, generic content, and long texts that get truncated.",
       "duration_seconds": 35,
       "audio_file": "slide-05-messages.mp3"
     },
@@ -115,7 +145,7 @@
           "Holidays (unless relevant)"
         ]
       },
-      "narration": "Timing strategy. Two to four messages per month maximum—more feels spammy. Business hours only, roughly ten AM to eight PM. Avoid Monday mornings when people are overwhelmed. Send time-sensitive offers two to four hours before the deadline. Never text before nine AM, after nine PM, or on holidays unless directly relevant.",
+      "narration": "Timing strategy. Two to four messages per month maximum\u2014more feels spammy. Business hours only, roughly ten AM to eight PM. Avoid Monday mornings when people are overwhelmed. Send time-sensitive offers two to four hours before the deadline. Never text before nine AM, after nine PM, or on holidays unless directly relevant.",
       "duration_seconds": 35,
       "audio_file": "slide-06-timing.mp3"
     },
@@ -131,7 +161,7 @@
           "Track redemption with unique codes"
         ]
       },
-      "narration": "SMS pro tips. Keep messages under one hundred sixty characters to avoid splitting. Include a clear call to action—what should they do? Personalize with name when possible. Track offer redemption with unique codes so you know what works.",
+      "narration": "SMS pro tips. Keep messages under one hundred sixty characters to avoid splitting. Include a clear call to action\u2014what should they do? Personalize with name when possible. Track offer redemption with unique codes so you know what works.",
       "duration_seconds": 25,
       "audio_file": "slide-07-tips.mp3"
     },
@@ -149,18 +179,11 @@
           "action": "view_templates"
         }
       },
-      "narration": "Ready for ninety-eight percent open rates? Set up SMS marketing now—we'll guide you through compliance. Or see message templates first for inspiration. The most direct line to your customers, done right.",
+      "narration": "Ready for ninety-eight percent open rates? Set up SMS marketing now\u2014we'll guide you through compliance. Or see message templates first for inspiration. The most direct line to your customers, done right.",
       "duration_seconds": 20,
       "audio_file": "slide-08-cta.mp3"
     }
   ],
-  "emails": {
-    "email_1_educational": {
-      "subject": "Text your customers (the right way)",
-      "preview_text": "98% open rate—not a typo",
-      "body": "Hey {{first_name}},\n\nEmail: 20% open rate.\nSMS: 98% open rate.\n\nBut there are rules.\n\n[LEARN COMPLIANT SMS MARKETING →]\n\nWhat works:\n✓ Appointment reminders\n✓ Flash sales\n✓ Order updates\n✓ Exclusive deals\n\nWhat doesn't:\n✗ Daily messages\n✗ Generic content\n✗ Texting without consent\n\n{{sender_name}}"
-    }
-  },
   "connections": {
     "leads_to": [
       "HOWTO-011"

@@ -9,6 +9,36 @@
     "landing_page": "integration-marketplace",
     "template": "tutorial"
   },
+  "landing_page": {
+    "campaign_id": "HOWTO-026",
+    "landing_page_slug": "integration-marketplace",
+    "url": "/learn/integration-marketplace",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 210,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Clear, patient, hands-on",
+    "ai_goal": "Walk user through setup and configuration",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/integration-marketplace/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week12-how-to",
+    "utm_content": "HOWTO-026"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 210,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -18,7 +48,7 @@
         "headline": "Connect Everything You Use",
         "subhead": "Browse and install integrations in minutes"
       },
-      "narration": "Your business uses multiple tools—they should talk to each other. Our integration marketplace connects your favorite apps so data flows automatically. No more copying between systems.",
+      "narration": "Your business uses multiple tools\u2014they should talk to each other. Our integration marketplace connects your favorite apps so data flows automatically. No more copying between systems.",
       "duration_seconds": 15,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -71,7 +101,7 @@
           "Configure sync settings"
         ]
       },
-      "narration": "Installing is simple. Click on the integration you want. Review what data will sync between systems. Click Connect. Sign in to the other service to authorize the connection. Configure sync settings—what syncs and how often. Most integrations take under two minutes to set up.",
+      "narration": "Installing is simple. Click on the integration you want. Review what data will sync between systems. Click Connect. Sign in to the other service to authorize the connection. Configure sync settings\u2014what syncs and how often. Most integrations take under two minutes to set up.",
       "duration_seconds": 30,
       "audio_file": "slide-04-install.mp3"
     },
@@ -89,7 +119,7 @@
           "Conflict resolution (which system wins)"
         ]
       },
-      "narration": "Configure how data syncs. One-way or two-way—does data flow both directions? Field mapping—which fields in one system match the other? Sync frequency—real-time or on a schedule? What triggers the sync—new records, updates, or both? Conflict resolution—if both systems have different data, which wins?",
+      "narration": "Configure how data syncs. One-way or two-way\u2014does data flow both directions? Field mapping\u2014which fields in one system match the other? Sync frequency\u2014real-time or on a schedule? What triggers the sync\u2014new records, updates, or both? Conflict resolution\u2014if both systems have different data, which wins?",
       "duration_seconds": 35,
       "audio_file": "slide-05-configure.mp3"
     },
@@ -107,7 +137,7 @@
           "Disconnect unused integrations"
         ]
       },
-      "narration": "Manage your connections. Check sync status in your dashboard—green means healthy. Review error logs periodically for failed syncs. Re-authorize when prompted—tokens expire. Update field mappings if either system adds new fields. Disconnect integrations you're no longer using to keep things clean.",
+      "narration": "Manage your connections. Check sync status in your dashboard\u2014green means healthy. Review error logs periodically for failed syncs. Re-authorize when prompted\u2014tokens expire. Update field mappings if either system adds new fields. Disconnect integrations you're no longer using to keep things clean.",
       "duration_seconds": 30,
       "audio_file": "slide-06-manage.mp3"
     },
@@ -123,7 +153,7 @@
           "Check quarterly for new integrations"
         ]
       },
-      "narration": "Integration pro tips. Test with one record before doing a bulk sync—make sure data maps correctly. Start with your most-used tool for biggest impact. Document your integrations so team members understand the data flow. Check the marketplace quarterly—we add new integrations regularly.",
+      "narration": "Integration pro tips. Test with one record before doing a bulk sync\u2014make sure data maps correctly. Start with your most-used tool for biggest impact. Document your integrations so team members understand the data flow. Check the marketplace quarterly\u2014we add new integrations regularly.",
       "duration_seconds": 25,
       "audio_file": "slide-07-tips.mp3"
     },
@@ -147,10 +177,10 @@
     }
   ],
   "emails": {
-    "email_1_educational": {
-      "subject": "Connect your favorite tools in minutes",
+    "email_tutorial": {
+      "subject": "Connect your existing tools \u2014 everything in one place",
       "preview_text": "Your tools should talk to each other",
-      "body": "Hey there,\n\nYour business uses multiple tools. They should talk to each other.\n\nPopular integrations:\n✓ CRM (HubSpot, Salesforce)\n✓ Email (Mailchimp, Constant Contact)\n✓ Scheduling (Calendly, Acuity)\n✓ Payments (Stripe, Square)\n\n[BROWSE INTEGRATIONS →]\n\nMost take under 2 minutes to connect.\n\nSarah"
+      "body": "Hi [First Name],\n\nConnect the tools you already use to your [Community Name] dashboard:\n\n\u2192 CRM (HubSpot, Salesforce, Zoho)\n\u2192 Email (Mailchimp, Constant Contact)\n\u2192 Scheduling (Calendly, Acuity)\n\u2192 Payments (Stripe, Square)\n\n[BROWSE INTEGRATIONS \u2192]\n\nMost take under 2 minutes to connect.\n\n[AM Name]"
     }
   },
   "connections": {
@@ -158,35 +188,5 @@
       "HOOK-006"
     ],
     "follows": "HOWTO-025"
-  },
-  "landing_page": {
-    "campaign_id": "HOWTO-026",
-    "landing_page_slug": "integration-marketplace",
-    "url": "/learn/integration-marketplace",
-    "template_id": "tutorial",
-    "template_name": "Step-by-Step Tutorial",
-    "slide_count": 8,
-    "duration_seconds": 210,
-    "primary_cta": "start_setup",
-    "secondary_cta": "watch_demo",
-    "ai_persona": "Sarah",
-    "ai_tone": "Clear, patient, hands-on",
-    "ai_goal": "Walk user through setup and configuration",
-    "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/integration-marketplace/audio/",
-    "crm_tracking": true,
-    "conversion_goal": "activation",
-    "utm_source": "email",
-    "utm_medium": "outbound",
-    "utm_campaign": "90day-week12-how-to",
-    "utm_content": "HOWTO-026"
-  },
-  "template": {
-    "template_id": "tutorial",
-    "name": "Step-by-Step Tutorial",
-    "slides": 8,
-    "duration": 210,
-    "purpose": "tutorial",
-    "audio_required": true
   }
 }

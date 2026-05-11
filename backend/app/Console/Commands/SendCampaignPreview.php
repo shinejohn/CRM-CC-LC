@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\Mail;
 final class SendCampaignPreview extends Command
 {
     protected $signature = 'campaign:send-preview
-        {email : Recipient email address}
+        {email? : Recipient email address (not needed with --html)}
         {--delay=3 : Seconds between emails to avoid rate limits}
-        {--dry-run : List emails without sending}';
+        {--dry-run : List emails without sending}
+        {--html : Write all emails as HTML files to storage/app/preview-emails/}';
 
     protected $description = 'Send all 90-day campaign emails to a single address for review';
 
@@ -21,6 +22,7 @@ final class SendCampaignPreview extends Command
         $recipient = $this->argument('email');
         $delay = (int) $this->option('delay');
         $dryRun = (bool) $this->option('dry-run');
+        $htmlMode = (bool) $this->option('html');
 
         $contentPath = base_path('../content');
         if (! is_dir($contentPath)) {
@@ -100,6 +102,16 @@ final class SendCampaignPreview extends Command
             return 0;
         }
 
+        // ── HTML file mode: write all emails as browsable HTML files ──
+        if ($htmlMode) {
+            return $this->writeHtmlFiles($allEmails);
+        }
+
+        if (! $recipient) {
+            $this->error('Email argument is required unless using --html mode.');
+            return 1;
+        }
+
         $count = count($allEmails);
         $sent = 0;
         $failed = 0;
@@ -158,6 +170,128 @@ final class SendCampaignPreview extends Command
         $this->info("Done! Sent: {$sent}, Failed: {$failed}");
 
         return $failed > 0 ? 1 : 0;
+    }
+
+    private function writeHtmlFiles(array $allEmails): int
+    {
+        $outputDir = storage_path('app/preview-emails');
+
+        if (is_dir($outputDir)) {
+            // Clean old previews
+            array_map('unlink', glob($outputDir . '/*.html'));
+        } else {
+            mkdir($outputDir, 0755, true);
+        }
+
+        $bar = $this->output->createProgressBar(count($allEmails));
+        $bar->start();
+
+        $indexRows = [];
+
+        foreach ($allEmails as $i => $emailData) {
+            $filename = sprintf(
+                '%03d_w%02d_d%02d_%s_%s.html',
+                $i + 1,
+                (int) $emailData['week'],
+                (int) $emailData['day'],
+                preg_replace('/[^a-z0-9_-]/', '', strtolower(str_replace(' ', '-', $emailData['campaign_id']))),
+                $emailData['variant']
+            );
+
+            $html = $this->buildHtml($emailData);
+            file_put_contents($outputDir . '/' . $filename, $html);
+
+            $indexRows[] = [
+                'num' => $i + 1,
+                'file' => $filename,
+                'campaign' => $emailData['campaign_id'],
+                'week' => $emailData['week'],
+                'day' => $emailData['day'],
+                'variant' => $emailData['variant'],
+                'subject' => $emailData['subject'],
+                'type' => $emailData['type'],
+            ];
+
+            $bar->advance();
+        }
+
+        // Build index page
+        $this->buildIndexPage($outputDir, $indexRows);
+
+        $bar->finish();
+        $this->newLine(2);
+
+        $indexPath = $outputDir . '/index.html';
+        $this->info("Wrote " . count($allEmails) . " HTML files to:");
+        $this->line("  {$outputDir}/");
+        $this->newLine();
+        $this->info("Open the index in your browser:");
+        $this->line("  open {$indexPath}");
+
+        return 0;
+    }
+
+    private function buildIndexPage(string $dir, array $rows): void
+    {
+        $tableRows = '';
+        foreach ($rows as $r) {
+            $subject = e($r['subject']);
+            $campaign = e($r['campaign']);
+            $type = e($r['type']);
+            $tableRows .= <<<ROW
+            <tr>
+                <td style="padding:6px 12px;border-bottom:1px solid #e5e7eb;text-align:center;color:#6b7280">{$r['num']}</td>
+                <td style="padding:6px 12px;border-bottom:1px solid #e5e7eb"><a href="{$r['file']}" style="color:#4f46e5;text-decoration:none">{$subject}</a></td>
+                <td style="padding:6px 12px;border-bottom:1px solid #e5e7eb;color:#6b7280;font-size:13px">{$campaign}</td>
+                <td style="padding:6px 12px;border-bottom:1px solid #e5e7eb;text-align:center">{$r['week']}</td>
+                <td style="padding:6px 12px;border-bottom:1px solid #e5e7eb;text-align:center">{$r['day']}</td>
+                <td style="padding:6px 12px;border-bottom:1px solid #e5e7eb;text-align:center;font-size:12px;color:#6b7280">{$r['variant']}</td>
+                <td style="padding:6px 12px;border-bottom:1px solid #e5e7eb;font-size:12px"><span style="background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:4px;font-size:11px">{$type}</span></td>
+            </tr>
+            ROW;
+        }
+
+        $count = count($rows);
+        $generated = now()->format('Y-m-d H:i:s');
+
+        $html = <<<HTML
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <title>Fibonacco 90-Day Campaign Emails ({$count})</title>
+            <style>
+                body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 24px; background: #f9fafb; color: #111827; }
+                h1 { font-size: 24px; margin-bottom: 4px; }
+                .subtitle { color: #6b7280; font-size: 14px; margin-bottom: 24px; }
+                table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+                th { background: #1e1b4b; color: white; padding: 10px 12px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+                tr:hover { background: #f3f4f6; }
+                a:hover { text-decoration: underline; }
+            </style>
+        </head>
+        <body>
+            <h1>Fibonacco 90-Day Campaign Emails</h1>
+            <p class="subtitle">{$count} emails &middot; Generated {$generated}</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="text-align:center">#</th>
+                        <th>Subject</th>
+                        <th>Campaign</th>
+                        <th style="text-align:center">Week</th>
+                        <th style="text-align:center">Day</th>
+                        <th style="text-align:center">Variant</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>{$tableRows}</tbody>
+            </table>
+        </body>
+        </html>
+        HTML;
+
+        file_put_contents($dir . '/index.html', $html);
     }
 
     private function buildHtml(array $emailData): string

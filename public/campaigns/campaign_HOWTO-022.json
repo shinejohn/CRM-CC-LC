@@ -9,6 +9,36 @@
     "landing_page": "workflow-automation-guide",
     "template": "tutorial"
   },
+  "landing_page": {
+    "campaign_id": "HOWTO-022",
+    "landing_page_slug": "workflow-automation-guide",
+    "url": "/learn/workflow-automation-guide",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 230,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Clear, patient, hands-on",
+    "ai_goal": "Walk user through setup and configuration",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/workflow-automation-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week10-how-to",
+    "utm_content": "HOWTO-022"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 230,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -51,9 +81,9 @@
           "Data entry between systems"
         ],
         "examples": [
-          "New inquiry → Send welcome email",
-          "Appointment booked → Send confirmation + reminder",
-          "Invoice paid → Send thank you + request review"
+          "New inquiry \u2192 Send welcome email",
+          "Appointment booked \u2192 Send confirmation + reminder",
+          "Invoice paid \u2192 Send thank you + request review"
         ]
       },
       "narration": "Find automation opportunities. Good candidates: same action triggered by same event, multi-step processes you do frequently, tasks following consistent rules, data entry between systems. Examples: new inquiry triggers welcome email, booking triggers confirmation and reminder sequence, payment triggers thank you and review request.",
@@ -82,7 +112,7 @@
           ]
         }
       },
-      "narration": "Build your workflow with three components. Trigger: what starts it—like a form submission. Conditions: optional filters for when it should run—like only for consultation requests. Actions: what happens automatically—send email, create calendar hold, notify team, add to CRM. One trigger can kick off multiple actions.",
+      "narration": "Build your workflow with three components. Trigger: what starts it\u2014like a form submission. Conditions: optional filters for when it should run\u2014like only for consultation requests. Actions: what happens automatically\u2014send email, create calendar hold, notify team, add to CRM. One trigger can kick off multiple actions.",
       "duration_seconds": 40,
       "audio_file": "slide-04-build.mp3"
     },
@@ -100,7 +130,7 @@
           "Monitor first 10 real triggers"
         ]
       },
-      "narration": "Test thoroughly before going live. Run with test data first. Check that each action completed correctly. Verify timing between steps is right. Test edge cases—what if a field is empty? Monitor the first ten real triggers to catch any issues. Better to find problems in testing than with real customers.",
+      "narration": "Test thoroughly before going live. Run with test data first. Check that each action completed correctly. Verify timing between steps is right. Test edge cases\u2014what if a field is empty? Monitor the first ten real triggers to catch any issues. Better to find problems in testing than with real customers.",
       "duration_seconds": 30,
       "audio_file": "slide-05-test.mp3"
     },
@@ -119,7 +149,7 @@
         ],
         "track": "Hours saved per workflow"
       },
-      "narration": "Once your first workflow runs smoothly, expand. Customer onboarding sequences. Follow-up after service completion. Re-engagement campaigns for inactive customers. Optimized review request timing. Recurring appointment reminders. Track hours saved per workflow—most businesses save ten to fifteen hours weekly with five to seven automations.",
+      "narration": "Once your first workflow runs smoothly, expand. Customer onboarding sequences. Follow-up after service completion. Re-engagement campaigns for inactive customers. Optimized review request timing. Recurring appointment reminders. Track hours saved per workflow\u2014most businesses save ten to fifteen hours weekly with five to seven automations.",
       "duration_seconds": 35,
       "audio_file": "slide-06-expand.mp3"
     },
@@ -132,10 +162,10 @@
           "Start with one workflow, master it, then add more",
           "Add delays between actions (feels more human)",
           "Include error notifications so you know if something breaks",
-          "Review automations quarterly—business changes"
+          "Review automations quarterly\u2014business changes"
         ]
       },
-      "narration": "Automation pro tips. Start with one workflow, master it, then add more. Add delays between actions—immediate feels robotic, spaced out feels human. Include error notifications so you know if something breaks. Review automations quarterly as your business evolves.",
+      "narration": "Automation pro tips. Start with one workflow, master it, then add more. Add delays between actions\u2014immediate feels robotic, spaced out feels human. Include error notifications so you know if something breaks. Review automations quarterly as your business evolves.",
       "duration_seconds": 30,
       "audio_file": "slide-07-tips.mp3"
     },
@@ -158,13 +188,6 @@
       "audio_file": "slide-08-cta.mp3"
     }
   ],
-  "emails": {
-    "email_1_educational": {
-      "subject": "Automate repetitive tasks and save 10+ hours weekly",
-      "preview_text": "Stop doing tasks manually",
-      "body": "Hey {{first_name}},\n\nEvery repetitive task is time stolen from growth.\n\nAutomate:\n✓ New inquiry → Welcome email\n✓ Booking → Confirmation + reminders\n✓ Payment → Thank you + review request\n✓ Service complete → Follow-up sequence\n\n[BUILD YOUR FIRST WORKFLOW →]\n\nMost businesses save 10-15 hours/week with 5-7 automations.\n\n{{sender_name}}"
-    }
-  },
   "connections": {
     "leads_to": [
       "HOWTO-025"

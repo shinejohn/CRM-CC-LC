@@ -19,7 +19,26 @@
     "slide_count": 5,
     "duration_seconds": 90,
     "primary_cta": "post_classified",
-    "secondary_cta": "customize_first"
+    "secondary_cta": "customize_first",
+    "ai_tone": "Friendly, straightforward, helpful",
+    "ai_goal": "Get user to post their first classified listing",
+    "ai_persona": "Sarah",
+    "conversion_goal": "signup",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week3-hook",
+    "utm_content": "HOOK-005",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/post-classified/audio/"
+  },
+  "template": {
+    "template_id": "classified-posting",
+    "name": "Quick Action",
+    "slides": 5,
+    "duration": 110,
+    "purpose": "hook",
+    "audio_required": true
   },
   "slides": [
     {
@@ -27,11 +46,11 @@
       "component": "HeroSlide",
       "title": "Your Classified Is Ready",
       "content": {
-        "headline": "We Created a Classified for {{business_name}}",
-        "subhead": "Hiring, selling, or announcing—reach local buyers instantly",
+        "headline": "We Created a Classified for your business",
+        "subhead": "Hiring, selling, or announcing\u2014reach local buyers instantly",
         "visual": "Classified ad preview mockup"
       },
-      "narration": "We went ahead and created a classified ad for {{business_name}}. Whether you're hiring, selling equipment, or have something to announce—this is ready to reach local buyers instantly.",
+      "narration": "We went ahead and created a classified ad for your business. Whether you're hiring, selling equipment, or have something to announce\u2014this is ready to reach local buyers instantly.",
       "duration_seconds": 15,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -42,11 +61,11 @@
       "content": {
         "headline": "Here's How Your Ad Looks",
         "classified_preview": {
-          "business_name": "{{business_name}}",
-          "category": "{{classified_category}}",
-          "headline": "{{auto_generated_headline}}",
-          "body": "{{auto_generated_body}}",
-          "contact": "{{contact_method}}",
+          "business_name": "your business",
+          "category": "Services",
+          "headline": "Quality Local Services Available Now",
+          "body": "Professional services from a trusted local business",
+          "contact": "email or phone",
           "status": "Ready to Post"
         },
         "note": "Edit any of this before posting"
@@ -85,7 +104,7 @@
         ],
         "stat": "Classifieds get 40% response rate vs. 2% for social posts"
       },
-      "narration": "Why do local classifieds work so well? Local audience—people actually in your area. High intent—they're actively looking for what you're offering, not just scrolling. Free to post—no listing fees. And syndicated—your classified appears across our entire network. Classifieds get a forty percent response rate compared to two percent for typical social posts.",
+      "narration": "Why do local classifieds work so well? Local audience\u2014people actually in your area. High intent\u2014they're actively looking for what you're offering, not just scrolling. Free to post\u2014no listing fees. And syndicated\u2014your classified appears across our entire network. Classifieds get a forty percent response rate compared to two percent for typical social posts.",
       "duration_seconds": 30,
       "audio_file": "slide-03-benefits.mp3"
     },
@@ -124,7 +143,7 @@
         ],
         "note": "Select category when posting"
       },
-      "narration": "What are you posting? Now Hiring—find local talent. For Sale—equipment, inventory, supplies. Commercial Space—if you have office, retail, or warehouse available. Services Offered—B2B services you provide. Or Announcements—general business updates. Select your category when you post.",
+      "narration": "What are you posting? Now Hiring\u2014find local talent. For Sale\u2014equipment, inventory, supplies. Commercial Space\u2014if you have office, retail, or warehouse available. Services Offered\u2014B2B services you provide. Or Announcements\u2014general business updates. Select your category when you post.",
       "duration_seconds": 25,
       "audio_file": "slide-04-categories.mp3"
     },
@@ -142,20 +161,13 @@
           "label": "Edit First",
           "action": "edit_classified"
         },
-        "reassurance": "Free • Goes live immediately • Edit or remove anytime"
+        "reassurance": "Free \u2022 Goes live immediately \u2022 Edit or remove anytime"
       },
       "narration": "Ready to reach local buyers? Click 'Post This Classified' and it goes live immediately. Want to make changes first? Click 'Edit First' to customize. It's free, it goes live immediately, and you can edit or remove it anytime. Your local audience is waiting.",
       "duration_seconds": 15,
       "audio_file": "slide-05-cta.mp3"
     }
   ],
-  "emails": {
-    "email_hook": {
-      "subject": "Hiring? Selling? Your classified is ready",
-      "preview_text": "Post free to local buyers",
-      "body": "Hey {{first_name}},\n\nNeed to reach local buyers quickly?\n\nWe created a classified ad template for {{business_name}}—ready to post.\n\nUse it for:\n• Now Hiring posts\n• Equipment/inventory for sale\n• Services you offer\n• Business announcements\n\n[SEE YOUR CLASSIFIED →]\n\nFree to post. Goes live immediately. Reaches local buyers with high intent.\n\nClassifieds get 40% response rate vs. 2% for social posts.\n\n{{sender_name}}\nFibonacco"
-    }
-  },
   "connections": {
     "leads_to": [],
     "follows": "HOOK-004",

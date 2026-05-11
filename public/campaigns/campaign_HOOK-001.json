@@ -13,7 +13,7 @@
   "landing_page": {
     "campaign_id": "HOOK-001",
     "landing_page_slug": "claim-your-listing",
-    "url": "/claim/{{business_slug}}",
+    "url": "/claim/your-business",
     "template_id": "claim-listing",
     "template_name": "Claim Your Listing",
     "slide_count": 6,
@@ -46,7 +46,7 @@
       "component": "PersonalizedHeroSlide",
       "title": "We Built This For You",
       "content": {
-        "headline": "We Built This For {{business_name}}",
+        "headline": "We Built This For your business",
         "subhead": "Your listing is ready. Take a look.",
         "visual": "Preview mockup of their listing",
         "personalization": [
@@ -55,7 +55,7 @@
           "location"
         ]
       },
-      "narration": "Hey {{first_name}}, we did something for {{business_name}}. We went ahead and created your business listing. It's ready to go live—you just need to claim it. Take a look at what we built.",
+      "narration": "Hey there, we did something for your business. We went ahead and created your business listing. It's ready to go live\u2014you just need to claim it. Take a look at what we built.",
       "duration_seconds": 15,
       "audio_file": "slide-01-hero.mp3"
     },
@@ -66,16 +66,16 @@
       "content": {
         "headline": "Here's How You'll Appear",
         "listing_preview": {
-          "business_name": "{{business_name}}",
-          "category": "{{business_category}}",
-          "location": "{{city}}, {{state}}",
-          "description": "{{auto_generated_description}}",
+          "business_name": "your business",
+          "category": "local",
+          "location": "your city, your state",
+          "description": "A trusted local business serving the community",
           "placeholder_image": true,
           "status": "Draft - Ready to Claim"
         },
         "note": "We created this from public information. You can edit everything."
       },
-      "narration": "This is how your business will appear in our directory. We pulled this together from public information—your name, category, location. You can edit any of it once you claim it. Add photos, update your description, make it yours.",
+      "narration": "This is how your business will appear in our directory. We pulled this together from public information\u2014your name, category, location. You can edit any of it once you claim it. Add photos, update your description, make it yours.",
       "duration_seconds": 25,
       "audio_file": "slide-02-preview.mp3"
     },
@@ -93,8 +93,8 @@
           },
           {
             "icon": "robot",
-            "title": "Get Found by AI",
-            "desc": "AI assistants learn you exist"
+            "title": "Get Found by modern tools",
+            "desc": "search tools learn you exist"
           },
           {
             "icon": "megaphone",
@@ -108,7 +108,7 @@
           }
         ]
       },
-      "narration": "When you claim this listing, four things happen. One: you appear in our local directory searches—real people looking for businesses like yours. Two: AI assistants start learning you exist and can recommend you. Three: you get connected to our news, events, and community platforms. Four: you get insights on who's viewing and engaging with your business.",
+      "narration": "When you claim this listing, four things happen. One: you appear in our local directory searches\u2014real people looking for businesses like yours. Two: search tools start learning you exist and can recommend you. Three: you get connected to our news, events, and community platforms. Four: you get insights on who's viewing and engaging with your business.",
       "duration_seconds": 30,
       "audio_file": "slide-03-benefits.mp3"
     },
@@ -117,28 +117,28 @@
       "component": "SocialProofSlide",
       "title": "Join Local Businesses",
       "content": {
-        "headline": "{{count}} Local Businesses Already Claimed",
+        "headline": "500+ Local Businesses Already Claimed",
         "stats": [
           {
-            "value": "{{local_business_count}}",
-            "label": "businesses in {{city}}"
+            "value": "500",
+            "label": "businesses in your city"
           },
           {
-            "value": "{{avg_monthly_views}}",
+            "value": "1,200",
             "label": "average monthly listing views"
           },
           {
-            "value": "{{response_time}}",
+            "value": "under 24 hours",
             "label": "average inquiry response"
           }
         ],
         "testimonial": {
           "quote": "Claimed my listing in 5 minutes. Got my first inquiry that week.",
           "author": "Local Business Owner",
-          "business_type": "{{similar_business_type}}"
+          "business_type": "Local Business"
         }
       },
-      "narration": "You're not the first. {{local_business_count}} businesses in {{city}} have already claimed their listings. On average, listings get {{avg_monthly_views}} views per month. And business owners tell us they get inquiries within the first week. One owner said: 'Claimed my listing in five minutes. Got my first inquiry that week.'",
+      "narration": "You're not the first. 500 businesses in your city have already claimed their listings. On average, listings get 1,200 views per month. And business owners tell us they get inquiries within the first week. One owner said: 'Claimed my listing in five minutes. Got my first inquiry that week.'",
       "duration_seconds": 25,
       "audio_file": "slide-04-social-proof.mp3"
     },
@@ -172,7 +172,7 @@
         ],
         "note": "No credit card. No commitment. Edit anytime."
       },
-      "narration": "Claiming takes five minutes. Step one: verify you're the owner—just confirm your email or phone. Step two: review the information we pulled together. Step three: add a photo if you want—optional but recommended. Step four: hit publish. That's it. No credit card required. No commitment. You can edit anytime.",
+      "narration": "Claiming takes five minutes. Step one: verify you're the owner\u2014just confirm your email or phone. Step two: review the information we pulled together. Step three: add a photo if you want\u2014optional but recommended. Step four: hit publish. That's it. No credit card required. No commitment. You can edit anytime.",
       "duration_seconds": 25,
       "audio_file": "slide-05-process.mp3"
     },
@@ -199,48 +199,13 @@
           "style": "small_text"
         },
         "urgency": "Your competitors may already be listed",
-        "trust": "Free forever • No credit card • Edit anytime"
+        "trust": "Free forever \u2022 No credit card \u2022 Edit anytime"
       },
-      "narration": "Your listing is ready. Click 'Claim This Listing' and you'll be live in five minutes. Want to review and customize first? That's fine too—take your time. Either way, this is yours. Free forever. Your community is already searching. Let's make sure they find you.",
+      "narration": "Your listing is ready. Click 'Claim This Listing' and you'll be live in five minutes. Want to review and customize first? That's fine too\u2014take your time. Either way, this is yours. Free forever. Your community is already searching. Let's make sure they find you.",
       "duration_seconds": 20,
       "audio_file": "slide-06-cta.mp3"
     }
   ],
-  "emails": {
-    "email_hook": {
-      "subject": "Your business is already in our directory - claim it now",
-      "preview_text": "We built this for {{business_name}}",
-      "body": "Hey {{first_name}},\n\nI'm not going to bury the lead:\n\nWe built something for {{business_name}}.\n\nYour business listing is already created and ready to go live in our local directory. We pulled it together from public information—your business name, category, location.\n\nHere's what it looks like:\n\n[SEE YOUR LISTING →]\n\nWhen you claim it (takes 5 minutes):\n\n✓ You appear in local directory searches\n✓ AI assistants start learning you exist\n✓ You connect to our news and events network\n✓ You get insights on who's engaging\n\nThis is ready whenever you are.\n\n[CLAIM YOUR LISTING NOW →]\n\nOr if you want to customize it first:\n\n[PREVIEW AND EDIT →]\n\nNo credit card. No commitment. Just visibility.\n\n{{sender_name}}\nFibonacco\n\nP.S. {{competitor_count}} other {{business_category}} businesses in {{city}} have already claimed their listings. Just saying."
-    },
-    "email_reminder": {
-      "subject": "Your listing is still waiting",
-      "preview_text": "5 minutes to get found",
-      "body": "Hey {{first_name}},\n\nQuick reminder: your {{business_name}} listing is ready and waiting.\n\nI know you're busy running an actual business. So I'll keep this short:\n\n→ 5 minutes to claim\n→ Free forever\n→ Edit anytime\n→ Start being found immediately\n\n[CLAIM IT NOW →]\n\nYour competitors aren't waiting. Neither should you.\n\n{{sender_name}}"
-    }
-  },
-  "personalization": {
-    "required_fields": [
-      "first_name",
-      "business_name",
-      "business_slug",
-      "business_category",
-      "city",
-      "state"
-    ],
-    "optional_fields": [
-      "phone",
-      "website",
-      "address",
-      "hours"
-    ],
-    "auto_generated": [
-      "auto_generated_description",
-      "local_business_count",
-      "avg_monthly_views",
-      "competitor_count",
-      "similar_business_type"
-    ]
-  },
   "connections": {
     "leads_to": [
       "HOWTO-001"

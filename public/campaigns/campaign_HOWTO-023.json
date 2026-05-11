@@ -9,6 +9,36 @@
     "landing_page": "report-generation-guide",
     "template": "tutorial"
   },
+  "landing_page": {
+    "campaign_id": "HOWTO-023",
+    "landing_page_slug": "report-generation-guide",
+    "url": "/learn/report-generation-guide",
+    "template_id": "tutorial",
+    "template_name": "Step-by-Step Tutorial",
+    "slide_count": 8,
+    "duration_seconds": 220,
+    "primary_cta": "start_setup",
+    "secondary_cta": "watch_demo",
+    "ai_persona": "Sarah",
+    "ai_tone": "Clear, patient, hands-on",
+    "ai_goal": "Walk user through setup and configuration",
+    "data_capture_fields": "name, email, business_name",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/report-generation-guide/audio/",
+    "crm_tracking": true,
+    "conversion_goal": "activation",
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week11-how-to",
+    "utm_content": "HOWTO-023"
+  },
+  "template": {
+    "template_id": "tutorial",
+    "name": "Step-by-Step Tutorial",
+    "slides": 8,
+    "duration": 220,
+    "purpose": "tutorial",
+    "audio_required": true
+  },
   "slides": [
     {
       "slide_num": 1,
@@ -18,7 +48,7 @@
         "headline": "Know Your Numbers Without the Work",
         "subhead": "Set up automated business reports"
       },
-      "narration": "How's your business really doing? Automated reports deliver the answers to your inbox—no spreadsheets, no manual tracking, no guessing. Let's set up the reports that matter.",
+      "narration": "How's your business really doing? Automated reports deliver the answers to your inbox\u2014no spreadsheets, no manual tracking, no guessing. Let's set up the reports that matter.",
       "duration_seconds": 15,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -52,7 +82,7 @@
           "Comparison (vs last period, vs goals)"
         ]
       },
-      "narration": "Choose metrics that matter. Traffic and visibility: views, clicks, impressions. Engagement: inquiries, calls, messages. Conversions: bookings, sales, signups. Reputation: reviews and rating trends. Always include comparison—versus last period and versus your goals. Numbers without context are just numbers.",
+      "narration": "Choose metrics that matter. Traffic and visibility: views, clicks, impressions. Engagement: inquiries, calls, messages. Conversions: bookings, sales, signups. Reputation: reviews and rating trends. Always include comparison\u2014versus last period and versus your goals. Numbers without context are just numbers.",
       "duration_seconds": 35,
       "audio_file": "slide-03-metrics.mp3"
     },
@@ -98,7 +128,7 @@
         ],
         "schedule": "Consistent timing builds habit"
       },
-      "narration": "Configure delivery. Email with PDF attachment or inline summary. Dashboard always available for real-time checking. Slack or Teams notification for immediate awareness. Share with team members who need visibility. Pick consistent timing—it builds the habit of checking.",
+      "narration": "Configure delivery. Email with PDF attachment or inline summary. Dashboard always available for real-time checking. Slack or Teams notification for immediate awareness. Share with team members who need visibility. Pick consistent timing\u2014it builds the habit of checking.",
       "duration_seconds": 30,
       "audio_file": "slide-05-delivery.mp3"
     },
@@ -115,7 +145,7 @@
         ],
         "monthly_review": "15 minutes monthly: What improved? What declined? What to try?"
       },
-      "narration": "Use the data—reports without action are just email clutter. Green metrics above goal: double down on what's working. Yellow near goal: minor adjustments needed. Red below goal: investigate and fix. Monthly review takes fifteen minutes: What improved? What declined? What should you try differently?",
+      "narration": "Use the data\u2014reports without action are just email clutter. Green metrics above goal: double down on what's working. Yellow near goal: minor adjustments needed. Red below goal: investigate and fix. Monthly review takes fifteen minutes: What improved? What declined? What should you try differently?",
       "duration_seconds": 35,
       "audio_file": "slide-06-action.mp3"
     },
@@ -125,13 +155,13 @@
       "title": "Pro Tips",
       "content": {
         "tips": [
-          "Less is more—focus on 5-7 key metrics",
+          "Less is more\u2014focus on 5-7 key metrics",
           "Compare same day last year for seasonal businesses",
           "Set realistic goals before tracking against them",
           "Share wins with your team"
         ]
       },
-      "narration": "Reporting pro tips. Less is more—focus on five to seven key metrics, not everything available. Compare same day last year if you're seasonal. Set realistic goals before tracking against them. Share wins with your team—data shouldn't only surface problems.",
+      "narration": "Reporting pro tips. Less is more\u2014focus on five to seven key metrics, not everything available. Compare same day last year if you're seasonal. Set realistic goals before tracking against them. Share wins with your team\u2014data shouldn't only surface problems.",
       "duration_seconds": 25,
       "audio_file": "slide-07-tips.mp3"
     },
@@ -154,13 +184,6 @@
       "audio_file": "slide-08-cta.mp3"
     }
   ],
-  "emails": {
-    "email_1_educational": {
-      "subject": "Generate business reports automatically",
-      "preview_text": "Know your numbers without the work",
-      "body": "Hey {{first_name}},\n\nHow's your business really doing?\n\nAutomated reports deliver:\n✓ Weekly snapshot (Monday inbox)\n✓ Monthly deep dive (trends + recommendations)\n✓ Alert reports (when something important happens)\n\n[SET UP AUTOMATIC REPORTS →]\n\nTip: Focus on 5-7 key metrics. Less is more.\n\n{{sender_name}}"
-    }
-  },
   "connections": {
     "leads_to": [
       "HOWTO-029"

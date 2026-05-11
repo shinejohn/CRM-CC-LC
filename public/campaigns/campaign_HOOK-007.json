@@ -19,7 +19,26 @@
     "slide_count": 7,
     "duration_seconds": 150,
     "primary_cta": "upgrade_now",
-    "secondary_cta": "compare_plans"
+    "secondary_cta": "compare_plans",
+    "ai_tone": "Confident, results-driven, persuasive",
+    "ai_goal": "Upgrade user to a featured listing for maximum visibility",
+    "ai_persona": "Sarah",
+    "conversion_goal": "signup",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week5-hook",
+    "utm_content": "HOOK-007",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/featured-listing/audio/"
+  },
+  "template": {
+    "template_id": "upgrade-offer",
+    "name": "Quick Action",
+    "slides": 7,
+    "duration": 180,
+    "purpose": "hook",
+    "audio_required": true
   },
   "slides": [
     {
@@ -27,15 +46,15 @@
       "component": "ComparisonHeroSlide",
       "title": "Your Visibility Gap",
       "content": {
-        "headline": "{{business_name}}: Your Visibility Gap",
+        "headline": "your business: Your Visibility Gap",
         "comparison": {
-          "your_views": "{{current_monthly_views}}",
-          "featured_average": "{{featured_average_views}}",
-          "multiplier": "{{visibility_multiplier}}x"
+          "your_views": "120",
+          "featured_average": "2,400",
+          "multiplier": "20x"
         },
         "visual": "Side-by-side comparison bars"
       },
-      "narration": "Let's look at the numbers for {{business_name}}. Your current monthly views: {{current_monthly_views}}. Featured listings in your category average {{featured_average_views}} views. That's a {{visibility_multiplier}}x difference. Here's how to close that gap.",
+      "narration": "Let's look at the numbers for your business. Your current monthly views: 120. Featured listings in your category average 2,400 views. That's a 20x difference. Here's how to close that gap.",
       "duration_seconds": 20,
       "audio_file": "slide-01-gap.mp3"
     },
@@ -73,12 +92,12 @@
           },
           {
             "icon": "robot",
-            "benefit": "AI priority",
-            "detail": "Weighted higher in AI recommendations"
+            "benefit": "modern tools priority",
+            "detail": "Weighted higher in modern tools recommendations"
           }
         ]
       },
-      "narration": "What does Featured get you? Priority placement—top of search results and your category. A Featured badge—an instant trust signal. News eligibility—you're considered for feature stories. Enhanced analytics—see who's viewing and why. Social amplification—promoted to our entire audience. And AI priority—weighted higher when AI makes recommendations.",
+      "narration": "What does Featured get you? Priority placement\u2014top of search results and your category. A Featured badge\u2014an instant trust signal. News eligibility\u2014you're considered for feature stories. Enhanced analytics\u2014see who's viewing and why. Social amplification\u2014promoted to our entire audience. And modern tools priority\u2014weighted higher when modern tools makes recommendations.",
       "duration_seconds": 35,
       "audio_file": "slide-02-benefits.mp3"
     },
@@ -100,9 +119,9 @@
             "range": "Varies by category"
           },
           {
-            "metric": "AI recommendations",
+            "metric": "modern tools recommendations",
             "average": "+5x",
-            "note": "More AI mentions"
+            "note": "More modern tools mentions"
           },
           {
             "metric": "ROI",
@@ -111,7 +130,7 @@
           }
         ]
       },
-      "narration": "The results speak for themselves. Featured businesses see an average four hundred eighty-seven percent increase in views—three to eight times typical. Inquiries increase by three hundred twelve percent on average. AI recommendations increase by five times. And the ROI? Twelve to one on average. For every dollar spent on Featured, businesses see twelve back.",
+      "narration": "The results speak for themselves. Featured businesses see an average four hundred eighty-seven percent increase in views\u2014three to eight times typical. Inquiries increase by three hundred twelve percent on average. modern tools recommendations increase by five times. And the ROI? Twelve to one on average. For every dollar spent on Featured, businesses see twelve back.",
       "duration_seconds": 30,
       "audio_file": "slide-03-proof.mp3"
     },
@@ -122,15 +141,15 @@
       "content": {
         "headline": "Here's How You'd Appear",
         "preview": {
-          "business_name": "{{business_name}}",
+          "business_name": "your business",
           "badge": "FEATURED",
-          "position": "Top of {{category}} results",
+          "position": "Top of local services results",
           "enhanced_profile": true,
           "ai_priority": true
         },
         "note": "This is ready to activate"
       },
-      "narration": "Here's how {{business_name}} would appear as a Featured listing. Your name with the Featured badge. Top position in {{category}} results. Enhanced profile with all the bells and whistles. Priority in AI recommendations. This preview is ready to activate whenever you say go.",
+      "narration": "Here's how your business would appear as a Featured listing. Your name with the Featured badge. Top position in local services results. Enhanced profile with all the bells and whistles. Priority in modern tools recommendations. This preview is ready to activate whenever you say go.",
       "duration_seconds": 25,
       "audio_file": "slide-04-preview.mp3"
     },
@@ -143,20 +162,20 @@
         "options": [
           {
             "plan": "Monthly",
-            "price": "${{monthly_price}}/mo",
+            "price": "$$99/mo",
             "commitment": "Cancel anytime"
           },
           {
             "plan": "Annual",
-            "price": "${{annual_price}}/mo",
-            "savings": "Save {{annual_savings}}%",
+            "price": "$$999/mo",
+            "savings": "Save $189%",
             "commitment": "Billed annually"
           }
         ],
         "includes": "All Featured benefits included in both plans",
         "guarantee": "30-day satisfaction guarantee"
       },
-      "narration": "Pricing is simple. Monthly: {{monthly_price}} dollars per month, cancel anytime. Or go annual at {{annual_price}} per month and save {{annual_savings}} percent. Both plans include all Featured benefits. And there's a thirty-day satisfaction guarantee—if you don't see results, we'll make it right.",
+      "narration": "Pricing is simple. Monthly: $99 dollars per month, cancel anytime. Or go annual at $999 per month and save $189 percent. Both plans include all Featured benefits. And there's a thirty-day satisfaction guarantee\u2014if you don't see results, we'll make it right.",
       "duration_seconds": 25,
       "audio_file": "slide-05-pricing.mp3"
     },
@@ -165,13 +184,13 @@
       "component": "TestimonialSlide",
       "title": "Featured Success Story",
       "content": {
-        "quote": "Featured paid for itself in the first week. I was skeptical, but the numbers don't lie—I'm getting calls I never got before.",
-        "author": "{{testimonial_name}}",
-        "business": "{{testimonial_business}}",
-        "category": "{{similar_category}}",
-        "result": "{{testimonial_result}}"
+        "quote": "Featured paid for itself in the first week. I was skeptical, but the numbers don't lie\u2014I'm getting calls I never got before.",
+        "author": "Local Business Owner",
+        "business": "a local business",
+        "category": "your category",
+        "result": "significant increase in visibility"
       },
-      "narration": "Don't just take our word for it. {{testimonial_name}} from {{testimonial_business}} said: 'Featured paid for itself in the first week. I was skeptical, but the numbers don't lie—I'm getting calls I never got before.' They saw {{testimonial_result}} after upgrading.",
+      "narration": "Don't just take our word for it. Local Business Owner from a local business said: 'Featured paid for itself in the first week. I was skeptical, but the numbers don't lie\u2014I'm getting calls I never got before.' They saw significant increase in visibility after upgrading.",
       "duration_seconds": 25,
       "audio_file": "slide-06-testimonial.mp3"
     },
@@ -180,7 +199,7 @@
       "component": "CTASlide",
       "title": "Upgrade to Featured",
       "content": {
-        "headline": "Ready for {{visibility_multiplier}}x More Visibility?",
+        "headline": "Ready for 20x More Visibility?",
         "cta_primary": {
           "label": "Upgrade to Featured",
           "action": "upgrade_now"
@@ -189,21 +208,14 @@
           "label": "Compare All Plans",
           "action": "compare_plans"
         },
-        "urgency": "Featured spots in {{category}} are limited",
+        "urgency": "Featured spots in local services are limited",
         "guarantee": "30-day satisfaction guarantee"
       },
-      "narration": "Ready for {{visibility_multiplier}}x more visibility? Click 'Upgrade to Featured' to activate now. Or compare all plans if you want to see other options. Featured spots in {{category}} are limited—don't let competitors take yours. Remember: thirty-day satisfaction guarantee. No risk, all upside.",
+      "narration": "Ready for 20x more visibility? Click 'Upgrade to Featured' to activate now. Or compare all plans if you want to see other options. Featured spots in local services are limited\u2014don't let competitors take yours. Remember: thirty-day satisfaction guarantee. No risk, all upside.",
       "duration_seconds": 20,
       "audio_file": "slide-07-cta.mp3"
     }
   ],
-  "emails": {
-    "email_hook": {
-      "subject": "Your listing could be getting 5x more views",
-      "preview_text": "See the visibility gap",
-      "body": "Hey {{first_name}},\n\nI looked at {{business_name}}'s listing performance.\n\nYour monthly views: {{current_monthly_views}}\nFeatured average in {{category}}: {{featured_average_views}}\n\nThat's a {{visibility_multiplier}}x gap.\n\nFeatured businesses see:\n• +487% more views\n• +312% more inquiries  \n• 5x more AI recommendations\n• 12:1 average ROI\n\n[SEE YOUR FEATURED PREVIEW →]\n\nYour Featured listing is ready to activate. The gap is closable.\n\n{{sender_name}}\nFibonacco\n\nP.S. 30-day satisfaction guarantee. If it doesn't work, we'll make it right."
-    }
-  },
   "connections": {
     "leads_to": [],
     "follows": [

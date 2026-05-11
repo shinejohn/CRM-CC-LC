@@ -19,7 +19,26 @@
     "slide_count": 6,
     "duration_seconds": 120,
     "primary_cta": "connect_crm",
-    "secondary_cta": "see_integrations"
+    "secondary_cta": "see_integrations",
+    "ai_tone": "Professional, efficient, tech-savvy",
+    "ai_goal": "Get user to connect their CRM for seamless data flow",
+    "ai_persona": "Sarah",
+    "conversion_goal": "signup",
+    "data_capture_fields": "name, email, business_name",
+    "crm_tracking": true,
+    "utm_source": "email",
+    "utm_medium": "outbound",
+    "utm_campaign": "90day-week4-hook",
+    "utm_content": "HOOK-006",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/crm-integration/audio/"
+  },
+  "template": {
+    "template_id": "integration",
+    "name": "Quick Action",
+    "slides": 6,
+    "duration": 130,
+    "purpose": "hook",
+    "audio_required": true
   },
   "slides": [
     {
@@ -85,7 +104,7 @@
         ],
         "note": "Don't see yours? We probably support it."
       },
-      "narration": "We connect with the CRMs you actually use. Salesforce, HubSpot, Zoho, Pipedrive, Monday, Airtable, Google Sheets—and custom API if you have your own system. Don't see yours? We probably support it. Check the full list when you connect.",
+      "narration": "We connect with the CRMs you actually use. Salesforce, HubSpot, Zoho, Pipedrive, Monday, Airtable, Google Sheets\u2014and custom API if you have your own system. Don't see yours? We probably support it. Check the full list when you connect.",
       "duration_seconds": 25,
       "audio_file": "slide-02-integrations.mp3"
     },
@@ -98,7 +117,7 @@
         "sync_items": [
           {
             "item": "New inquiries",
-            "direction": "Fibonacco → Your CRM"
+            "direction": "Fibonacco \u2192 Your CRM"
           },
           {
             "item": "Contact updates",
@@ -110,16 +129,16 @@
           },
           {
             "item": "Conversation history",
-            "direction": "Fibonacco → Your CRM"
+            "direction": "Fibonacco \u2192 Your CRM"
           },
           {
             "item": "Activity timeline",
-            "direction": "Fibonacco → Your CRM"
+            "direction": "Fibonacco \u2192 Your CRM"
           }
         ],
         "benefit": "Your CRM becomes the single source of truth"
       },
-      "narration": "Here's what gets synced automatically. New inquiries flow from Fibonacco to your CRM instantly. Contact updates sync both ways—change it here, it changes there. Lead status stays synchronized. Conversation history and activity timeline flow into your CRM automatically. Your CRM becomes the single source of truth.",
+      "narration": "Here's what gets synced automatically. New inquiries flow from Fibonacco to your CRM instantly. Contact updates sync both ways\u2014change it here, it changes there. Lead status stays synchronized. Conversation history and activity timeline flow into your CRM automatically. Your CRM becomes the single source of truth.",
       "duration_seconds": 30,
       "audio_file": "slide-03-sync.mp3"
     },
@@ -181,7 +200,7 @@
         ],
         "result": "Syncing starts immediately"
       },
-      "narration": "Setup takes two minutes. Step one: select your CRM from the list—thirty seconds. Step two: authorize the connection by logging into your CRM—one minute. Step three: map your fields or just use our smart defaults—thirty seconds. Then syncing starts immediately.",
+      "narration": "Setup takes two minutes. Step one: select your CRM from the list\u2014thirty seconds. Step two: authorize the connection by logging into your CRM\u2014one minute. Step three: map your fields or just use our smart defaults\u2014thirty seconds. Then syncing starts immediately.",
       "duration_seconds": 20,
       "audio_file": "slide-05-process.mp3"
     },
@@ -199,20 +218,13 @@
           "label": "See All Integrations",
           "action": "view_integrations"
         },
-        "reassurance": "Free • 2-minute setup • Disconnect anytime"
+        "reassurance": "Free \u2022 2-minute setup \u2022 Disconnect anytime"
       },
       "narration": "Ready to stop losing leads? Click 'Connect Your CRM' and you'll be syncing in two minutes. Free, simple setup, and you can disconnect anytime. Every lead captured. Every conversation tracked. Never lose another one.",
       "duration_seconds": 15,
       "audio_file": "slide-06-cta.mp3"
     }
   ],
-  "emails": {
-    "email_hook": {
-      "subject": "Connect your CRM and never lose a lead again",
-      "preview_text": "2-minute setup, automatic sync",
-      "body": "Hey {{first_name}},\n\nHow many leads have you lost to manual data entry?\n\nInquiry comes in here. You copy it to your CRM. Maybe. If you remember. If you have time.\n\nWhat if every inquiry automatically synced to your CRM? Zero manual entry. Zero lost leads.\n\n[CONNECT YOUR CRM →]\n\nWe integrate with:\n• Salesforce\n• HubSpot\n• Zoho\n• Pipedrive\n• And 20+ more\n\n2-minute setup. Free. Syncing starts immediately.\n\n{{sender_name}}\nFibonacco"
-    }
-  },
   "connections": {
     "leads_to": [
       "HOWTO-009"
