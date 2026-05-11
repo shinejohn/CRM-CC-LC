@@ -45,7 +45,7 @@ export const FlowSlide: React.FC<FlowSlideProps> = ({
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{item.step}</h3>
                   {item.description && <p className="text-gray-600">{item.description}</p>}
                 </div>
-                {index < content.steps!.length - 1 && (
+                {content.steps && index < content.steps.length - 1 && (
                   <ArrowRight size={24} className="text-gray-400 flex-shrink-0 hidden md:block" />
                 )}
               </React.Fragment>
