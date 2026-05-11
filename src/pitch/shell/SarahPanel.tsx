@@ -29,7 +29,7 @@ export function SarahPanel({
 }: SarahPanelProps) {
   const listRef = useRef<HTMLDivElement>(null);
   const [draft, setDraft] = useState("");
-  const [micActive, setMicActive] = useState(false);
+  const [micActive, setMicActive] = useState(true);
   const [speakerOn, setSpeakerOn] = useState(true);
 
   useEffect(() => {
@@ -92,8 +92,8 @@ export function SarahPanel({
               className={cn(
                 "rounded-lg p-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--p-teal)]",
                 micActive
-                  ? "bg-red-500/20 text-red-400"
-                  : "text-[var(--p-muted)] hover:bg-white/10 hover:text-white"
+                  ? "text-[var(--p-muted)] hover:bg-white/10 hover:text-white"
+                  : "bg-red-500/20 text-red-400"
               )}
               aria-label={micActive ? "Mute microphone" : "Unmute microphone"}
               title={micActive ? "Mic on — click to mute" : "Mic off — click to speak"}
@@ -228,11 +228,11 @@ export function SarahPanel({
             className={cn(
               "shrink-0 rounded-md p-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--p-teal)]",
               micActive
-                ? "bg-red-500/20 text-red-400"
-                : "text-[var(--p-muted)] hover:text-white"
+                ? "text-[var(--p-muted)] hover:text-white"
+                : "bg-red-500/20 text-red-400"
             )}
-            aria-label={micActive ? "Stop recording" : "Start recording"}
-            title={micActive ? "Recording — click to stop" : "Click to speak"}
+            aria-label={micActive ? "Mute microphone" : "Unmute microphone"}
+            title={micActive ? "Mic on — click to mute" : "Mic off — click to speak"}
           >
             {micActive ? (
               <Mic className="w-5 h-5" />

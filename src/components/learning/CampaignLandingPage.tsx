@@ -697,6 +697,23 @@ export default function CampaignLandingPage() {
 
     return (
         <div className="min-h-screen bg-white animate-fade-in">
+            {/* Top nav */}
+            <nav className="flex items-center justify-between px-6 py-3 bg-white border-b border-gray-100">
+                <Link
+                    to="/learn"
+                    className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors"
+                >
+                    <ArrowLeft className="w-4 h-4" />
+                    All Lessons
+                </Link>
+                <Link
+                    to="/command-center"
+                    className="text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
+                >
+                    Command Center
+                </Link>
+            </nav>
+
             {/* Hero */}
             <HeroSection
                 headline={headline}
