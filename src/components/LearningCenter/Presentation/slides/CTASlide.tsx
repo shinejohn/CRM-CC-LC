@@ -1,15 +1,34 @@
 import React from 'react';
 
 interface CTASlideProps {
-  content: {
-    headline: string;
-    subheadline?: string;
-    primaryButton: { text: string; url: string };
-    secondaryButton?: { text: string; url: string };
-    backgroundImage?: string;
-  };
+  content: Record<string, unknown>;
   isActive: boolean;
   theme?: 'blue' | 'green' | 'purple' | 'orange';
+}
+
+/**
+ * Resolve primary CTA from various JSON shapes:
+ * - { primaryButton: { text, url } }
+ * - { cta_primary: { label, action, description } }
+ */
+function resolveCTA(content: Record<string, unknown>): { primary: { text: string; url: string } | null; secondary: { text: string; url: string } | null } {
+  // Standard shape
+  const pb = content.primaryButton as Record<string, unknown> | undefined;
+  const sb = content.secondaryButton as Record<string, unknown> | undefined;
+  if (pb?.text) {
+    return {
+      primary: { text: pb.text as string, url: (pb.url as string) ?? '#' },
+      secondary: sb?.text ? { text: sb.text as string, url: (sb.url as string) ?? '#' } : null,
+    };
+  }
+
+  // Campaign JSON shape: cta_primary / cta_secondary
+  const cp = content.cta_primary as Record<string, unknown> | undefined;
+  const cs = content.cta_secondary as Record<string, unknown> | undefined;
+  return {
+    primary: cp ? { text: (cp.label as string) ?? 'Get Started', url: '#' } : null,
+    secondary: cs ? { text: (cs.label as string) ?? 'Learn More', url: '#' } : null,
+  };
 }
 
 export const CTASlide: React.FC<CTASlideProps> = ({
@@ -24,6 +43,10 @@ export const CTASlide: React.FC<CTASlideProps> = ({
     orange: 'from-orange-600 to-red-700',
   };
 
+  const { primary, secondary } = resolveCTA(content);
+  const subheadline = (content.subheadline as string) ?? (content.subhead as string) ?? (content.time_estimate as string);
+  const urgency = content.urgency as string | undefined;
+
   return (
     <div
       className={`
@@ -34,27 +57,27 @@ export const CTASlide: React.FC<CTASlideProps> = ({
       `}
       style={{
         backgroundImage: content.backgroundImage
-          ? `url(${content.backgroundImage})`
+          ? `url(${content.backgroundImage as string})`
           : undefined,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      {content.backgroundImage && (
+      {typeof content.backgroundImage === 'string' && (
         <div className="absolute inset-0 bg-black bg-opacity-50" />
       )}
       <div className="relative z-10 text-center px-8 max-w-3xl">
         <h2
           className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in"
         >
-          {content.headline}
+          {String(content.headline ?? '')}
         </h2>
-        {content.subheadline && (
+        {subheadline && (
           <p
             className="text-xl md:text-2xl text-white/90 mb-8 animate-fade-in"
             style={{ animationDelay: '0.2s' }}
           >
-            {content.subheadline}
+            {subheadline}
           </p>
         )}
         <div
@@ -62,23 +85,26 @@ export const CTASlide: React.FC<CTASlideProps> = ({
           style={{ animationDelay: '0.4s' }}
         >
           <a
-            href={content.primaryButton.url}
+            href={primary?.url ?? '#'}
             className="px-8 py-4 bg-white text-indigo-600 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg"
           >
-            {content.primaryButton.text}
+            {primary?.text ?? 'Get Started'}
           </a>
-          {content.secondaryButton && (
+          {secondary && (
             <a
-              href={content.secondaryButton.url}
+              href={secondary.url}
               className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-semibold text-lg hover:bg-white hover:text-indigo-600 transition-colors"
             >
-              {content.secondaryButton.text}
+              {secondary.text}
             </a>
           )}
         </div>
+        {urgency && (
+          <p className="mt-6 text-yellow-300 text-sm font-medium animate-fade-in" style={{ animationDelay: '0.6s' }}>
+            {urgency}
+          </p>
+        )}
       </div>
     </div>
   );
 };
-
-

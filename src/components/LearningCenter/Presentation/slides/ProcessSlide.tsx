@@ -2,17 +2,32 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
 interface ProcessSlideProps {
-  content: {
-    title: string;
-    steps: Array<{
-      number: number;
-      title: string;
-      description: string;
-      icon?: string;
-    }>;
-  };
+  content: Record<string, unknown>;
   isActive: boolean;
   theme?: 'blue' | 'green' | 'purple' | 'orange';
+}
+
+interface NormalizedStep {
+  number: number;
+  title: string;
+  description: string;
+}
+
+/**
+ * Normalize steps from various JSON shapes:
+ * - Standard: { number, title, description }
+ * - Variant 1: { num, action, time }
+ * - Variant 2: { num, step, time }
+ */
+function normalizeSteps(raw: unknown[]): NormalizedStep[] {
+  return raw.map((item, idx) => {
+    const r = item as Record<string, unknown>;
+    return {
+      number: (r.number as number) ?? (r.num as number) ?? idx + 1,
+      title: (r.title as string) ?? (r.action as string) ?? (r.step as string) ?? '',
+      description: (r.description as string) ?? (r.time as string) ?? '',
+    };
+  });
 }
 
 export const ProcessSlide: React.FC<ProcessSlideProps> = ({
@@ -34,6 +49,9 @@ export const ProcessSlide: React.FC<ProcessSlideProps> = ({
     orange: 'bg-orange-600 text-white',
   };
 
+  const rawSteps = Array.isArray(content.steps) ? content.steps : [];
+  const steps = normalizeSteps(rawSteps);
+
   return (
     <div
       className={`
@@ -45,10 +63,10 @@ export const ProcessSlide: React.FC<ProcessSlideProps> = ({
     >
       <div className="max-w-6xl mx-auto w-full">
         <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center animate-fade-in">
-          {content.title}
+          {(content.title as string) ?? (content.headline as string) ?? ''}
         </h2>
         <div className="flex items-center justify-between gap-4">
-          {content.steps.map((step, index) => (
+          {steps.map((step, index) => (
             <React.Fragment key={index}>
               <div
                 className="flex-1 text-center animate-fade-in"
@@ -62,7 +80,7 @@ export const ProcessSlide: React.FC<ProcessSlideProps> = ({
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
                 <p className="text-gray-600">{step.description}</p>
               </div>
-              {index < content.steps.length - 1 && (
+              {index < steps.length - 1 && (
                 <ArrowRight size={24} className="text-gray-400 flex-shrink-0" />
               )}
             </React.Fragment>
@@ -72,5 +90,3 @@ export const ProcessSlide: React.FC<ProcessSlideProps> = ({
     </div>
   );
 };
-
-

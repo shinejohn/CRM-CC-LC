@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Component, type ErrorInfo, type ReactNode } from 'react';
 import {
   Play,
   Pause,
@@ -47,6 +47,44 @@ import {
 } from './slides';
 import { AIChatPanel } from './AIChatPanel';
 import type { Presentation, Slide } from '@/types/learning';
+
+/* Slide error boundary — prevents one bad slide from crashing the entire player */
+interface SlideErrorBoundaryProps {
+  children: ReactNode;
+  slideName: string;
+  onNext: () => void;
+}
+interface SlideErrorBoundaryState {
+  hasError: boolean;
+}
+class SlideErrorBoundary extends Component<SlideErrorBoundaryProps, SlideErrorBoundaryState> {
+  state: SlideErrorBoundaryState = { hasError: false };
+  static getDerivedStateFromError(): SlideErrorBoundaryState {
+    return { hasError: true };
+  }
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error(`[FibonaccoPlayer] Slide "${this.props.slideName}" crashed:`, error, info);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-12">
+          <div className="text-center">
+            <p className="text-gray-500 mb-4">This slide couldn&apos;t be displayed.</p>
+            <button
+              type="button"
+              onClick={this.props.onNext}
+              className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 transition-colors"
+            >
+              Continue to next slide
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 interface FibonaccoPlayerProps {
   presentation: Presentation;
@@ -225,11 +263,17 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
       {/* Slide Area */}
       <div className="flex-1 relative overflow-hidden">
         {activeSlide && (
-          <SlideComponent
-            content={activeSlide.content}
-            isActive={true}
-            theme={theme}
-          />
+          <SlideErrorBoundary
+            key={currentSlide}
+            slideName={activeSlide.component}
+            onNext={handleNextSlide}
+          >
+            <SlideComponent
+              content={activeSlide.content}
+              isActive={true}
+              theme={theme}
+            />
+          </SlideErrorBoundary>
         )}
       </div>
 

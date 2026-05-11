@@ -1,20 +1,57 @@
 import React from 'react';
 import { CheckCircle2 } from 'lucide-react';
 
+interface NormalizedPlan {
+  name: string;
+  price: string;
+  period?: string;
+  features: string[];
+  ctaText: string;
+  ctaUrl: string;
+  popular?: boolean;
+}
+
 interface PricingSlideProps {
-  content: {
-    title: string;
-    plans: Array<{
-      name: string;
-      price: string;
-      period?: string;
-      features: string[];
-      cta: { text: string; url: string };
-      popular?: boolean;
-    }>;
-  };
+  content: Record<string, unknown>;
   isActive: boolean;
   theme?: 'blue' | 'green' | 'purple' | 'orange';
+}
+
+/**
+ * Normalize pricing plans from various JSON shapes:
+ * - Standard: { plans: [{ name, price, features[], cta: { text, url } }] }
+ * - Variant: { options: [{ plan, price, commitment, savings }] }
+ */
+function normalizePlans(content: Record<string, unknown>): NormalizedPlan[] {
+  const raw = (content.plans ?? content.options ?? []) as unknown[];
+  if (!Array.isArray(raw)) return [];
+
+  return raw.map((item) => {
+    const r = item as Record<string, unknown>;
+    const cta = r.cta as Record<string, unknown> | undefined;
+
+    // Gather features from various possible field names
+    const features: string[] = [];
+    if (Array.isArray(r.features)) {
+      features.push(...(r.features as string[]));
+    }
+    // If no features array, build from descriptive fields
+    if (features.length === 0) {
+      if (r.commitment) features.push(String(r.commitment));
+      if (r.savings) features.push(String(r.savings));
+      if (r.includes) features.push(String(r.includes));
+    }
+
+    return {
+      name: (r.name as string) ?? (r.plan as string) ?? '',
+      price: (r.price as string) ?? '',
+      period: r.period as string | undefined,
+      features,
+      ctaText: (cta?.text as string) ?? 'Learn More',
+      ctaUrl: (cta?.url as string) ?? '#',
+      popular: r.popular as boolean | undefined,
+    };
+  });
 }
 
 export const PricingSlide: React.FC<PricingSlideProps> = ({
@@ -36,6 +73,12 @@ export const PricingSlide: React.FC<PricingSlideProps> = ({
     orange: 'bg-orange-600',
   };
 
+  const plans = normalizePlans(content);
+
+  // Also render guarantee/includes if present at content level
+  const guarantee = content.guarantee as string | undefined;
+  const includes = content.includes as string | undefined;
+
   return (
     <div
       className={`
@@ -47,10 +90,10 @@ export const PricingSlide: React.FC<PricingSlideProps> = ({
     >
       <div className="max-w-6xl mx-auto w-full">
         <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center animate-fade-in">
-          {content.title}
+          {(content.title as string) ?? (content.headline as string) ?? 'Pricing'}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {content.plans.map((plan, index) => (
+        <div className={`grid grid-cols-1 ${plans.length >= 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'} gap-6`}>
+          {plans.map((plan, index) => (
             <div
               key={index}
               className={`
@@ -74,30 +117,36 @@ export const PricingSlide: React.FC<PricingSlideProps> = ({
                   <span className="text-gray-600 ml-2">/{plan.period}</span>
                 )}
               </div>
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-start gap-2">
-                    <CheckCircle2 size={18} className="text-emerald-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
-                  </li>
-                ))}
-              </ul>
+              {plan.features.length > 0 && (
+                <ul className="space-y-3 mb-8">
+                  {plan.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-start gap-2">
+                      <CheckCircle2 size={18} className="text-emerald-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
               <a
-                href={plan.cta.url}
+                href={plan.ctaUrl}
                 className={`
                   block w-full text-center px-6 py-3 rounded-lg font-semibold
                   ${plan.popular ? accentColors[theme] + ' text-white' : 'bg-gray-100 text-gray-900 hover:bg-gray-200'}
                   transition-colors
                 `}
               >
-                {plan.cta.text}
+                {plan.ctaText}
               </a>
             </div>
           ))}
         </div>
+        {(includes || guarantee) && (
+          <div className="mt-8 text-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            {includes && <p className="text-gray-700 mb-2">{includes}</p>}
+            {guarantee && <p className="text-sm text-gray-500">{guarantee}</p>}
+          </div>
+        )}
       </div>
     </div>
   );
 };
-
-

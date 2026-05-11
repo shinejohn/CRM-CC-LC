@@ -47,7 +47,7 @@ export const TipsSlide: React.FC<TipsSlideProps> = ({
         )}
 
         <div className="space-y-4">
-          {content.tips.map((tip, index) => (
+          {(content.tips ?? []).map((tip, index) => (
             <div
               key={index}
               className="bg-white rounded-lg p-6 shadow-lg flex items-start gap-4 animate-fade-in"

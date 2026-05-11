@@ -51,6 +51,7 @@ export const CouponPreviewSlide: React.FC<CouponPreviewSlideProps> = ({
           {content.headline}
         </h2>
 
+        {content.coupon_preview ? (
         <div className="bg-white rounded-lg shadow-xl p-8 border-4 border-dashed border-gray-300 animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <div className="text-center mb-6">
             <Tag size={64} className={`${accentColors[theme]} mx-auto mb-4 rounded-full p-4`} />
@@ -95,6 +96,9 @@ export const CouponPreviewSlide: React.FC<CouponPreviewSlideProps> = ({
             </div>
           )}
         </div>
+        ) : (
+          <p className="text-center text-gray-500">Coupon preview not available.</p>
+        )}
       </div>
     </div>
   );

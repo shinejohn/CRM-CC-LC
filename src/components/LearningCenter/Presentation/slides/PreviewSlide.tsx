@@ -39,7 +39,7 @@ export const PreviewSlide: React.FC<PreviewSlideProps> = ({
         </h2>
         {content.preview && (
           <div className="bg-white rounded-lg p-8 shadow-xl animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <pre className="text-gray-800 whitespace-pre-wrap">{JSON.stringify(content.preview, null, 2)}</pre>
+            <pre className="text-gray-800 whitespace-pre-wrap overflow-auto max-h-64 text-sm">{JSON.stringify(content.preview, null, 2)}</pre>
           </div>
         )}
         {content.note && (

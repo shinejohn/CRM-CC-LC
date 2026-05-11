@@ -51,6 +51,7 @@ export const ListingPreviewSlide: React.FC<ListingPreviewSlideProps> = ({
           {content.headline}
         </h2>
 
+        {content.listing_preview ? (
         <div className="bg-white rounded-lg shadow-xl p-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
           {content.listing_preview.placeholder_image && (
             <div className="w-full h-48 bg-gray-200 rounded-lg mb-6 flex items-center justify-center">
@@ -97,6 +98,9 @@ export const ListingPreviewSlide: React.FC<ListingPreviewSlideProps> = ({
             </div>
           )}
         </div>
+        ) : (
+          <p className="text-center text-gray-500">Listing preview not available.</p>
+        )}
       </div>
     </div>
   );

@@ -53,7 +53,7 @@ export const StatsSlide: React.FC<StatsSlideProps> = ({
             content.layout === 'list' ? 'grid-cols-1' : 'grid-cols-2 md:grid-cols-4'
           } gap-6`}
         >
-          {content.stats.map((stat, index) => (
+          {(content.stats ?? []).map((stat, index) => (
             <div
               key={index}
               className="bg-white rounded-lg p-6 shadow-lg text-center animate-fade-in"

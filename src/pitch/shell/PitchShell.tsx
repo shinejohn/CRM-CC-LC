@@ -87,10 +87,10 @@ export function PitchShell({
         {/* Left panel — wider in learn variant for slide content */}
         <section
           className={cn(
-            "min-w-0 overflow-y-auto w-full",
+            "min-w-0 w-full",
             isLearn
-              ? "md:flex-[1_1_0%]"
-              : "md:w-[62%] md:flex-[0_0_62%]"
+              ? "md:flex-[1_1_0%] flex flex-col overflow-hidden"
+              : "md:w-[62%] md:flex-[0_0_62%] overflow-y-auto"
           )}
           style={{
             padding: isLearn ? 0 : "var(--p-space-12) var(--p-space-16)",

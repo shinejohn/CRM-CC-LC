@@ -42,27 +42,33 @@ export const TestimonialSlide: React.FC<TestimonialSlideProps> = ({
           <h2 className="text-3xl font-bold mb-8 animate-fade-in">{content.title}</h2>
         )}
         <Quote size={48} className="text-white/30 mx-auto mb-6 animate-fade-in" />
-        <blockquote
-          className="text-2xl md:text-3xl font-medium mb-8 leading-relaxed animate-fade-in"
-          style={{ animationDelay: '0.2s' }}
-        >
-          "{content.testimonial.quote}"
-        </blockquote>
-        <div className="flex items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          {content.testimonial.avatar && (
-            <img
-              src={content.testimonial.avatar}
-              alt={content.testimonial.author}
-              className="w-16 h-16 rounded-full border-2 border-white"
-            />
-          )}
-          <div className="text-left">
-            <div className="font-semibold text-lg">{content.testimonial.author}</div>
-            <div className="text-white/80">
-              {content.testimonial.role} at {content.testimonial.company}
+        {content.testimonial ? (
+          <>
+            <blockquote
+              className="text-2xl md:text-3xl font-medium mb-8 leading-relaxed animate-fade-in"
+              style={{ animationDelay: '0.2s' }}
+            >
+              &ldquo;{content.testimonial.quote}&rdquo;
+            </blockquote>
+            <div className="flex items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              {content.testimonial.avatar && (
+                <img
+                  src={content.testimonial.avatar}
+                  alt={content.testimonial.author}
+                  className="w-16 h-16 rounded-full border-2 border-white"
+                />
+              )}
+              <div className="text-left">
+                <div className="font-semibold text-lg">{content.testimonial.author}</div>
+                <div className="text-white/80">
+                  {content.testimonial.role}{content.testimonial.company ? ` at ${content.testimonial.company}` : ''}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </>
+        ) : (
+          <p className="text-xl text-white/70 text-center animate-fade-in">Testimonial content loading...</p>
+        )}
       </div>
     </div>
   );
