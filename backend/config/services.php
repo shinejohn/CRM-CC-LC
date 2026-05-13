@@ -49,6 +49,15 @@ return [
         'api_key' => env('ANTHROPIC_API_KEY', ''),
     ],
 
+    'tts' => [
+        'default_provider' => env('TTS_PROVIDER', 'openai'),
+        'openai' => [
+            'api_key' => env('OPENAI_API_KEY', ''),
+            'model' => env('OPENAI_TTS_MODEL', 'tts-1-hd'),
+            'voice' => env('OPENAI_TTS_VOICE', 'nova'),
+        ],
+    ],
+
     'openrouter' => [
         'api_key' => env('OPENROUTER_API_KEY', ''),
     ],

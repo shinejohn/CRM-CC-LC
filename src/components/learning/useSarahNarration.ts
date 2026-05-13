@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { SarahMessage } from "@/pitch/types";
 import type { Campaign } from "@/services/types/learning.types";
 
@@ -6,6 +6,8 @@ interface SarahChatResponse {
   response: string;
   suggested_actions: Array<{ label: string; value: string }>;
   session_id: string | null;
+  audio_url?: string | null;
+  source?: "pre_recorded" | "ai";
 }
 
 interface SarahContext {
@@ -92,6 +94,7 @@ export interface UseSarahNarrationReturn {
 interface UseSarahNarrationOptions {
   campaignId?: string;
   campaign?: Campaign;
+  speakerOn?: boolean;
 }
 
 export function useSarahNarration(options: UseSarahNarrationOptions = {}): UseSarahNarrationReturn {
@@ -102,6 +105,30 @@ export function useSarahNarration(options: UseSarahNarrationOptions = {}): UseSa
   const lastNarratedSlideRef = useRef<number>(-1);
   const sessionIdRef = useRef<string | null>(null);
   const currentSlideRef = useRef<{ index: number; slide: SlideData | null }>({ index: 0, slide: null });
+  const chatAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Cleanup chat audio on unmount
+  useEffect(() => {
+    return () => {
+      if (chatAudioRef.current) {
+        chatAudioRef.current.pause();
+        chatAudioRef.current = null;
+      }
+    };
+  }, []);
+
+  const playChatAudio = useCallback((audioUrl: string) => {
+    if (!options.speakerOn) return;
+    // Stop any currently playing chat audio
+    if (chatAudioRef.current) {
+      chatAudioRef.current.pause();
+    }
+    const audio = new Audio(audioUrl);
+    chatAudioRef.current = audio;
+    audio.play().catch(() => {
+      // Browser may block autoplay — silently ignore
+    });
+  }, [options.speakerOn]);
 
   const appendSarah = useCallback((text: string, delay = 800) => {
     setIsTyping(true);
@@ -199,9 +226,20 @@ export function useSarahNarration(options: UseSarahNarrationOptions = {}): UseSa
           }
           setMessages((prev) => [
             ...prev,
-            { id: makeId(), text: data.response, timestamp: timestamp(), type: "sarah" },
+            {
+              id: makeId(),
+              text: data.response,
+              timestamp: timestamp(),
+              type: "sarah",
+              audio_url: data.audio_url ?? undefined,
+            },
           ]);
           setIsTyping(false);
+
+          // Play audio if available and speaker is on
+          if (data.audio_url) {
+            playChatAudio(data.audio_url);
+          }
         })
         .catch(() => {
           setMessages((prev) => [
@@ -216,7 +254,7 @@ export function useSarahNarration(options: UseSarahNarrationOptions = {}): UseSa
           setIsTyping(false);
         });
     },
-    [options.campaign, options.campaignId]
+    [options.campaign, options.campaignId, playChatAudio]
   );
 
   return {

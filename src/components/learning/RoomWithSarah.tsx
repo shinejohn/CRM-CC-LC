@@ -197,6 +197,7 @@ export default function RoomWithSarah({
   const [showShare, setShowShare] = useState(false);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const [speakerOn, setSpeakerOn] = useState(true);
 
   const presentation = useMemo(
     () => campaignToPresentation(campaign, lp),
@@ -212,7 +213,7 @@ export default function RoomWithSarah({
     greet,
     complete,
     handleUserMessage,
-  } = useSarahNarration({ campaignId: campaign.id, campaign });
+  } = useSarahNarration({ campaignId: campaign.id, campaign, speakerOn });
 
   // Greet on mount
   useEffect(() => {
@@ -343,6 +344,8 @@ export default function RoomWithSarah({
           onSend={handleUserMessage}
           onEndSession={onClose}
           suggestedActions={suggestedActions}
+          speakerOn={speakerOn}
+          onSpeakerChange={setSpeakerOn}
         />
       </aside>
 
@@ -386,6 +389,8 @@ export default function RoomWithSarah({
                   onSend={handleUserMessage}
                   onEndSession={onClose}
                   suggestedActions={suggestedActions}
+                  speakerOn={speakerOn}
+                  onSpeakerChange={setSpeakerOn}
                 />
               </div>
             </motion.aside>

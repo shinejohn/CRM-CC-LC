@@ -113,6 +113,7 @@ export interface SarahMessage {
   text: string;
   timestamp: string;
   type?: "sarah" | "system" | "user";
+  audio_url?: string;
 }
 
 export interface FallbackProduct {

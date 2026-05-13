@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Contracts\TTSProvider;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-final class ElevenLabsService
+final class ElevenLabsService implements TTSProvider
 {
     protected string $apiKey;
     protected string $baseUrl = 'https://api.elevenlabs.io/v1';

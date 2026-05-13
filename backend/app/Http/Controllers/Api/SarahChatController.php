@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdvertiserSession;
+use App\Services\Sarah\SarahCommonResponseService;
 use App\Services\Sarah\SarahConversationService;
 use App\Services\Sarah\SarahMessageService;
 use Illuminate\Http\JsonResponse;
@@ -21,6 +22,7 @@ final class SarahChatController extends Controller
     public function __construct(
         private readonly SarahConversationService $conversationService,
         private readonly SarahMessageService $messageService,
+        private readonly SarahCommonResponseService $commonResponseService,
     ) {}
 
     public function chat(Request $request): JsonResponse
@@ -49,13 +51,43 @@ final class SarahChatController extends Controller
         // Resolve or create session lazily
         $session = $this->resolveSession($sessionId, $campaignId, $request);
 
-        // Build context for AI
+        // Record the user's message
+        if ($session) {
+            $this->messageService->recordUserMessage(
+                $session,
+                'chat',
+                $message,
+                ['slide_index' => $slideIndex],
+            );
+        }
+
+        // Check common pre-recorded responses first
+        $commonMatch = $this->commonResponseService->match($message);
+        if ($commonMatch) {
+            if ($session) {
+                $this->messageService->send(
+                    $session,
+                    'chat',
+                    $commonMatch['response'],
+                    ['slide_index' => $slideIndex, 'source' => 'pre_recorded', 'intent_key' => $commonMatch['intent_key']],
+                );
+            }
+
+            return response()->json([
+                'response' => $commonMatch['response'],
+                'suggested_actions' => [],
+                'session_id' => $session?->id,
+                'audio_url' => $commonMatch['audio_url'],
+                'source' => 'pre_recorded',
+            ]);
+        }
+
+        // No common match — call Claude AI
         $context = array_merge($extraContext, [
             'campaign_id' => $campaignId,
             'slide_index' => $slideIndex,
         ]);
 
-        // Get conversation history from the session
         $history = [];
         if ($session) {
             $history = $this->messageService->getConversation($session)
@@ -65,20 +97,10 @@ final class SarahChatController extends Controller
                     'message' => $m->message,
                 ])
                 ->toArray();
-
-            // Record the user's message
-            $this->messageService->recordUserMessage(
-                $session,
-                'chat',
-                $message,
-                ['slide_index' => $slideIndex],
-            );
         }
 
-        // Generate AI response
         $result = $this->conversationService->chat($message, $context, $history);
 
-        // Store Sarah's response
         if ($session) {
             $this->messageService->send(
                 $session,
@@ -92,6 +114,8 @@ final class SarahChatController extends Controller
             'response' => $result['response'],
             'suggested_actions' => $result['suggested_actions'],
             'session_id' => $session?->id,
+            'audio_url' => null,
+            'source' => 'ai',
         ]);
     }
 

@@ -24,6 +24,8 @@ export interface SarahPanelProps {
   onEndSession?: () => void;
   suggestedActions?: SuggestedAction[];
   className?: string;
+  speakerOn?: boolean;
+  onSpeakerChange?: (on: boolean) => void;
 }
 
 export function SarahPanel({
@@ -33,11 +35,23 @@ export function SarahPanel({
   onEndSession,
   suggestedActions,
   className,
+  speakerOn: controlledSpeakerOn,
+  onSpeakerChange,
 }: SarahPanelProps) {
   const listRef = useRef<HTMLDivElement>(null);
   const [draft, setDraft] = useState("");
   const [micActive, setMicActive] = useState(true);
-  const [speakerOn, setSpeakerOn] = useState(true);
+  const [internalSpeakerOn, setInternalSpeakerOn] = useState(true);
+
+  const speakerOn = controlledSpeakerOn ?? internalSpeakerOn;
+  const setSpeakerOn = (value: boolean | ((prev: boolean) => boolean)) => {
+    const next = typeof value === "function" ? value(speakerOn) : value;
+    if (onSpeakerChange) {
+      onSpeakerChange(next);
+    } else {
+      setInternalSpeakerOn(next);
+    }
+  };
 
   useEffect(() => {
     const el = listRef.current;
