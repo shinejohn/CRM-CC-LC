@@ -38,5 +38,19 @@ Route::get('/approve/success/{uuid}', [ApprovalController::class, 'showSuccess']
 Route::post('/approve/upsell', [UpsellController::class, 'acceptUpsell'])->name('approval.upsell.accept');
 Route::post('/approve/upsell/decline', [UpsellController::class, 'declineUpsell'])->name('approval.upsell.decline');
 
+// Serve audio files from public storage (no auth required)
+Route::get('/storage/audio/{path}', function (string $path) {
+    $file = storage_path("app/public/audio/{$path}");
+    if (! file_exists($file)) {
+        abort(404);
+    }
+    return response()->file($file, [
+        'Content-Type' => 'audio/mpeg',
+        'Accept-Ranges' => 'bytes',
+        'Cache-Control' => 'public, max-age=31536000',
+        'Access-Control-Allow-Origin' => '*',
+    ]);
+})->where('path', '.*')->name('audio.serve')->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
+
 // Subscriber verification route (web route for email links)
 Route::get('/subscriber/verify/{token}', [\App\Http\Controllers\Api\SubscriptionController::class, 'verify'])->name('subscriber.verify');

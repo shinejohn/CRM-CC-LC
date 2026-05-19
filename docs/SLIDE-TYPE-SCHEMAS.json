@@ -1,0 +1,1059 @@
+{
+  "_README": "JSON Schema Reference for All 37 Slide Types (34 display + 3 interactive action slides). Each slide in a campaign JSON has: slide_num, component, title, content, narration, duration_seconds, audio_file. The 'component' value must exactly match one of the keys below. The 'content' object must follow the schema shown for that component. Fields marked (required) will show empty/fallback if missing. Fields marked (optional) enhance the slide when present.",
+
+  "slide_wrapper_example": {
+    "_note": "This is the wrapper structure for every slide in a campaign JSON. The 'content' object varies by component type.",
+    "slide_num": 1,
+    "component": "HeroSlide",
+    "title": "Short internal title for this slide",
+    "content": { "_see_below": "component-specific content object" },
+    "narration": "What Sarah says aloud when this slide is displayed. Write conversational, warm, 2-4 sentences.",
+    "duration_seconds": 15,
+    "audio_file": "slide-01-hero.mp3"
+  },
+
+  "HeroSlide": {
+    "_description": "Full-screen cinematic opening slide with gradient or background image. Use as slide 1 of every campaign.",
+    "_background": "Gradient by default; uses backgroundImage URL if provided and starts with http.",
+    "content": {
+      "headline": "(required) Big bold headline, 3-8 words",
+      "subheadline": "(optional) Supporting text, 1-2 sentences",
+      "backgroundImage": "(optional) Full URL to background image (must start with http)",
+      "overlay": "(optional) true to darken background image for text readability",
+      "cta": {
+        "_note": "(optional) Call-to-action buttons",
+        "primary": { "text": "Get Started", "url": "/signup" },
+        "secondary": { "text": "Learn More", "url": "/learn" }
+      }
+    },
+    "example": {
+      "headline": "Your Business Deserves More Customers",
+      "subheadline": "We help local businesses get found, get chosen, and grow revenue.",
+      "backgroundImage": "https://images.unsplash.com/photo-example",
+      "overlay": true,
+      "cta": {
+        "primary": { "text": "Start Free", "url": "/signup" },
+        "secondary": { "text": "Watch Demo", "url": "/demo" }
+      }
+    }
+  },
+
+  "PersonalizedHeroSlide": {
+    "_description": "Hero slide with 'Personalized For You' sparkle badge. Use when the content references the recipient's business.",
+    "_background": "Gradient by default; uses visual URL as background if it starts with http.",
+    "content": {
+      "headline": "(required) Personalized headline, can include business name",
+      "subhead": "(optional) Supporting tagline",
+      "visual": "(optional) URL to background image (must start with http) OR descriptive text (ignored as background)",
+      "personalization": "(optional) Array of field names used for personalization, e.g. ['business_name', 'location']"
+    },
+    "example": {
+      "headline": "We Built This For Your Business",
+      "subhead": "Your listing is live and ready to claim.",
+      "visual": "https://images.unsplash.com/photo-storefront",
+      "personalization": ["business_name", "business_type", "location"]
+    }
+  },
+
+  "ComparisonHeroSlide": {
+    "_description": "Dark gradient hero with a side-by-side comparison (before/after, standard/featured). Great for impact slides.",
+    "content": {
+      "headline": "(required, also accepts 'title') Main headline",
+      "subhead": "(optional) Subtitle text",
+      "comparison": {
+        "_note": "(required) Object with comparison data. Accepts multiple shapes:",
+        "_shape1_before_after": { "before": "3 views/month", "after": "47 views/month" },
+        "_shape2_named": { "your_views": "12/mo", "featured_average": "156/mo", "multiplier": "13x more" },
+        "_shape3_generic": { "any_key": "value1", "any_other_key": "value2", "multiplier": "5x" }
+      }
+    },
+    "example": {
+      "headline": "The Featured Listing Advantage",
+      "subhead": "See what happens when you stand out",
+      "comparison": {
+        "before": "3 views per month, buried on page 4",
+        "after": "47 views per month, top of search results",
+        "multiplier": "15x more visibility"
+      }
+    }
+  },
+
+  "ProblemSlide": {
+    "_description": "Dark gradient slide highlighting a pain point. Use to create urgency before presenting the solution.",
+    "content": {
+      "title": "(required) Problem headline",
+      "problem": "(required) 1-3 sentence description of the pain point",
+      "painPoints": "(optional) Array of specific pain point strings",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example": {
+      "title": "The Invisible Business Problem",
+      "problem": "78% of consumers search online before visiting a local business. If your business doesn't show up, you're losing customers to competitors who do.",
+      "painPoints": [
+        "Customers can't find your hours or location",
+        "Outdated info drives people to competitors",
+        "No reviews means no trust with new customers",
+        "You're paying for ads but your listing is broken"
+      ]
+    }
+  },
+
+  "SolutionSlide": {
+    "_description": "Dark gradient slide presenting the answer to the problem. Pair with ProblemSlide.",
+    "content": {
+      "title": "(required) Solution headline",
+      "solution": "(required) 1-3 sentence description of the solution",
+      "benefits": "(optional) Array of benefit strings",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example": {
+      "title": "Your Complete Online Presence",
+      "solution": "Fibonacco creates and manages your professional business listing across every platform that matters, so customers always find accurate, compelling information about your business.",
+      "benefits": [
+        "Professional listing live in 24 hours",
+        "Synced across Google, Apple Maps, and 40+ directories",
+        "Automated review collection from happy customers",
+        "Monthly performance reports you can actually understand"
+      ]
+    }
+  },
+
+  "ConceptSlide": {
+    "_description": "Versatile teaching slide. Auto-selects dark or light background based on content type. Supports stats, bullet points, comparisons, key points, element grids, and three-pillar layouts.",
+    "_theme_logic": "Uses dark gradient if only points/comparison/key_point. Uses light gradient if stats/elements/three_pillars are present.",
+    "content": {
+      "headline": "(required) Section headline",
+      "stats": "(optional) Array of { value, label } for stat cards",
+      "points": "(optional) Array of bullet point strings",
+      "comparison": "(optional) { before: string, after: string }",
+      "key_point": "(optional) Highlighted takeaway string shown in accent box",
+      "elements": "(optional) Array of { icon, label, desc } cards. Icon values: search, robot, megaphone, chart, check, star, shield, zap, globe, users, mail, phone, file, location, clock, eye, heart, target, award, newspaper, building, share, message, wifi, lock, dollar, trending, lightbulb, badge",
+      "three_pillars": "(optional) Array of { title, desc } for 3-column layout",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example_with_stats": {
+      "headline": "The Numbers Don't Lie",
+      "stats": [
+        { "value": "78%", "label": "Search before visiting" },
+        { "value": "46%", "label": "Choose first result" },
+        { "value": "3.5x", "label": "More calls with reviews" }
+      ]
+    },
+    "example_with_elements": {
+      "headline": "What's Included in Your Listing",
+      "elements": [
+        { "icon": "search", "label": "SEO Optimization", "desc": "Rank higher in local search results" },
+        { "icon": "globe", "label": "Multi-Platform Sync", "desc": "Your info everywhere, always accurate" },
+        { "icon": "star", "label": "Review Management", "desc": "Collect and respond to customer reviews" },
+        { "icon": "chart", "label": "Analytics Dashboard", "desc": "See who's finding you and how" }
+      ]
+    },
+    "example_with_points": {
+      "headline": "Why Local Businesses Fail Online",
+      "points": [
+        "Inconsistent business info across directories",
+        "No strategy for collecting customer reviews",
+        "Zero visibility into how customers find them",
+        "Spending money on ads without fixing the basics"
+      ],
+      "key_point": "Fix your foundation first. Everything else gets easier."
+    },
+    "example_with_three_pillars": {
+      "headline": "The Three Pillars of Local Success",
+      "three_pillars": [
+        { "title": "Be Found", "desc": "Accurate listings across all platforms so customers can find you" },
+        { "title": "Be Chosen", "desc": "Reviews, photos, and compelling descriptions that convert searchers to customers" },
+        { "title": "Be Measured", "desc": "Analytics that show exactly what's working and what needs attention" }
+      ]
+    }
+  },
+
+  "StepSlide": {
+    "_description": "Multi-purpose instructional slide. Supports numbered steps, key fields, content types, metrics, task lists, options, and recommendations. Very flexible — use the sub-sections you need.",
+    "content": {
+      "headline": "(required) Section headline",
+      "location": "(optional) Subtitle or context text",
+      "key_fields": "(optional) Array of { field, tip } for form field explanations",
+      "content_types": "(optional) Array of { type, use_for, time? } for content format cards",
+      "key_metrics": "(optional) Array of { metric, what_it_means } OR { metric, meaning }",
+      "steps": "(optional) Array of { num, action, time? } for numbered process steps",
+      "management_tasks": "(optional) Array of task strings with checkmarks",
+      "options": "(optional) Array of option strings with bullets",
+      "recommendation": "(optional) Highlighted recommendation string in accent banner",
+      "completion_indicator": "(optional) Status/progress text at bottom",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example_with_steps": {
+      "headline": "Claim Your Listing in 3 Steps",
+      "steps": [
+        { "num": 1, "action": "Find your business", "time": "30 seconds" },
+        { "num": 2, "action": "Verify ownership", "time": "1 minute" },
+        { "num": 3, "action": "Customize your listing", "time": "5 minutes" }
+      ],
+      "completion_indicator": "Total time: under 7 minutes"
+    },
+    "example_with_key_fields": {
+      "headline": "Key Fields That Drive Clicks",
+      "location": "Your listing editor",
+      "key_fields": [
+        { "field": "Business Description", "tip": "Write 2-3 sentences that include your top services and location" },
+        { "field": "Business Hours", "tip": "Keep these accurate — wrong hours is the #1 reason for bad reviews" },
+        { "field": "Photos", "tip": "Add at least 5 recent photos — listings with photos get 42% more clicks" },
+        { "field": "Categories", "tip": "Choose your primary category carefully — it affects where you appear in search" }
+      ]
+    },
+    "example_with_metrics": {
+      "headline": "Metrics That Matter",
+      "key_metrics": [
+        { "metric": "Profile Views", "what_it_means": "How many people saw your listing in search results" },
+        { "metric": "Click-Through Rate", "what_it_means": "Percentage of viewers who clicked to learn more" },
+        { "metric": "Direction Requests", "what_it_means": "People who asked for directions to your business" }
+      ],
+      "recommendation": "Check these metrics weekly — small improvements compound over time."
+    }
+  },
+
+  "StatsSlide": {
+    "_description": "Grid of big-number stat cards. Great for impact data and metrics.",
+    "content": {
+      "title": "(optional, also accepts 'headline') Section heading. Defaults to 'Key Stats' if neither provided.",
+      "stats": "(optional) Array of stat objects",
+      "layout": "(optional) 'grid' (default) or 'list' for single-column"
+    },
+    "_stats_item": { "value": "string or number", "label": "description", "icon": "(optional) unused", "trend": "(optional) trend text like '+12% this month'" },
+    "example": {
+      "title": "Your Listing Performance",
+      "stats": [
+        { "value": "2,847", "label": "Monthly Views", "trend": "+23% vs last month" },
+        { "value": "156", "label": "Phone Calls", "trend": "+18% vs last month" },
+        { "value": "4.8", "label": "Average Rating" },
+        { "value": "89%", "label": "Response Rate" }
+      ]
+    }
+  },
+
+  "DataSlide": {
+    "_description": "Similar to StatsSlide but accepts stats as either an array or an object. Flexible data display.",
+    "content": {
+      "title": "(optional, also accepts 'headline') Section heading",
+      "stats": "(required) Array of { value, label, trend? } OR object { key: value } (keys become labels)",
+      "layout": "(optional) 'list' for single-column"
+    },
+    "example_array": {
+      "title": "Market Opportunity",
+      "stats": [
+        { "value": "12,000", "label": "Local Searches/Month", "trend": "Growing 8% yearly" },
+        { "value": "340", "label": "Competitors Listed" },
+        { "value": "67%", "label": "Without Updated Listings" }
+      ]
+    },
+    "example_object": {
+      "headline": "Quick Facts",
+      "stats": {
+        "monthly_searches": "12,000",
+        "active_businesses": "340",
+        "unclaimed_listings": "67%"
+      }
+    }
+  },
+
+  "BenefitsSlide": {
+    "_description": "Card grid showing benefits with icons. Normalizes from multiple JSON shapes.",
+    "content": {
+      "headline": "(required) Section headline",
+      "benefits": "(required) Array of benefit objects. Accepts multiple shapes:",
+      "_shape_standard": { "icon": "search", "title": "SEO Boost", "desc": "Rank higher in local search" },
+      "_shape_stat": { "stat": "42%", "label": "More clicks with photos" },
+      "_shape_benefit_detail": { "icon": "star", "benefit": "Review Collection", "detail": "Automated review requests" },
+      "_shape_pain_solution": { "pain": "Invisible online", "solution": "Listed on 40+ platforms" },
+      "_shape_benefit_reach": { "benefit": "Social Sharing", "reach": "Shared to 5 platforms" }
+    },
+    "_available_icons": "search, robot, megaphone, chart, check, star (defaults to check if icon missing)",
+    "example": {
+      "headline": "Why Businesses Choose Fibonacco",
+      "benefits": [
+        { "icon": "search", "title": "Found Everywhere", "desc": "Your listing synced across 40+ directories automatically" },
+        { "icon": "star", "title": "More Reviews", "desc": "Automated review requests after every customer visit" },
+        { "icon": "chart", "title": "Clear Analytics", "desc": "Monthly reports showing views, clicks, and calls" },
+        { "icon": "shield", "title": "Always Accurate", "desc": "We monitor and fix incorrect info across the web" }
+      ]
+    }
+  },
+
+  "ComparisonSlide": {
+    "_description": "Side-by-side two-column comparison with checkmark/X feature lists. Good for before/after or us-vs-them.",
+    "content": {
+      "title": "(optional, also accepts 'headline') Section heading. Defaults to 'Comparison'",
+      "comparison": {
+        "_note": "(required) Comparison object. Accepts two shapes:",
+        "_shape_standard": {
+          "left": {
+            "title": "Without Fibonacco",
+            "features": [
+              { "text": "Inconsistent business info", "included": false },
+              { "text": "No review strategy", "included": false },
+              { "text": "Manual updates everywhere", "included": false }
+            ]
+          },
+          "right": {
+            "title": "With Fibonacco",
+            "features": [
+              { "text": "Consistent info everywhere", "included": true },
+              { "text": "Automated review collection", "included": true },
+              { "text": "One dashboard, all platforms", "included": true }
+            ]
+          }
+        },
+        "_shape_named_keys": {
+          "disconnected": {
+            "label": "Before",
+            "visibility": "Low",
+            "reviews": "Scattered",
+            "updates": "Manual"
+          },
+          "connected": {
+            "label": "After",
+            "visibility": "High",
+            "reviews": "Managed",
+            "updates": "Automated"
+          }
+        }
+      }
+    },
+    "example": {
+      "title": "The Fibonacco Difference",
+      "comparison": {
+        "left": {
+          "title": "Doing It Yourself",
+          "features": [
+            { "text": "Update 40+ directories manually", "included": false },
+            { "text": "Chase customers for reviews", "included": false },
+            { "text": "No performance data", "included": false },
+            { "text": "Hours of work per month", "included": false }
+          ]
+        },
+        "right": {
+          "title": "With Fibonacco",
+          "features": [
+            { "text": "All directories updated automatically", "included": true },
+            { "text": "Automated review requests", "included": true },
+            { "text": "Monthly analytics dashboard", "included": true },
+            { "text": "Set it and forget it", "included": true }
+          ]
+        }
+      }
+    }
+  },
+
+  "ProcessSlide": {
+    "_description": "Horizontal numbered step flow with arrows between steps. Good for simple 3-5 step processes.",
+    "content": {
+      "title": "(optional, also accepts 'headline') Section heading",
+      "steps": "(required) Array of step objects. Accepts multiple shapes:",
+      "_shape_standard": { "number": 1, "title": "Sign Up", "description": "Create your free account" },
+      "_shape_variant1": { "num": 1, "action": "Sign Up", "time": "30 seconds" },
+      "_shape_variant2": { "num": 1, "step": "Sign Up", "time": "30 seconds" }
+    },
+    "example": {
+      "title": "How It Works",
+      "steps": [
+        { "number": 1, "title": "Claim", "description": "Find and claim your business listing" },
+        { "number": 2, "title": "Customize", "description": "Add photos, hours, and description" },
+        { "number": 3, "title": "Launch", "description": "Go live across 40+ platforms" },
+        { "number": 4, "title": "Grow", "description": "Watch your visibility increase" }
+      ]
+    }
+  },
+
+  "FlowSlide": {
+    "_description": "Similar to ProcessSlide but with card-style steps. Good for workflow visualization.",
+    "content": {
+      "headline": "(required) Section heading",
+      "steps": "(optional) Array of { step, description? }",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example": {
+      "headline": "Your Customer's Journey",
+      "steps": [
+        { "step": "Search", "description": "Customer searches for your type of business" },
+        { "step": "Discover", "description": "They find your optimized listing" },
+        { "step": "Decide", "description": "Reviews and photos build trust" },
+        { "step": "Visit", "description": "They choose you over competitors" }
+      ]
+    }
+  },
+
+  "TestimonialSlide": {
+    "_description": "Dark gradient quote slide with author attribution. Supports nested or flat testimonial data.",
+    "content": {
+      "title": "(optional, also accepts 'headline') Section heading above the quote",
+      "testimonial": {
+        "_note": "(optional) Nested testimonial object",
+        "quote": "(required) The testimonial text",
+        "author": "(required) Person's name",
+        "role": "(optional) Job title",
+        "company": "(optional) Company name — combined as 'role at company'",
+        "business_type": "(optional) Type of business if no role/company",
+        "business": "(optional) Business name if no role/company",
+        "category": "(optional) Business category",
+        "result": "(optional) Outcome badge, e.g. '3x more customers'",
+        "avatar": "(optional) URL to headshot image"
+      },
+      "_flat_alternative": "You can also put quote, author, business_type, business, result directly on content (not nested under testimonial)",
+      "quote": "(alternative) Flat quote field",
+      "author": "(alternative) Flat author field"
+    },
+    "example": {
+      "title": "What Business Owners Say",
+      "testimonial": {
+        "quote": "Within two weeks of claiming our listing, we got 12 new phone calls. I couldn't believe how many people were searching for us and couldn't find us before.",
+        "author": "Maria Rodriguez",
+        "role": "Owner",
+        "company": "Maria's Kitchen",
+        "result": "12 new calls in 2 weeks",
+        "avatar": "https://images.unsplash.com/photo-example"
+      }
+    }
+  },
+
+  "ProofSlide": {
+    "_description": "Case study and/or testimonial display. Shows before/after results with optional quote. Light background.",
+    "content": {
+      "case_study": {
+        "_note": "(optional) Case study data",
+        "business": "(required) Business name",
+        "before": "(required) Before state description",
+        "after": "(required) After state description",
+        "time_change": "(optional) Time frame, e.g. '90 days'",
+        "results": "(required) Summary of results",
+        "quote": "(optional) Owner quote"
+      },
+      "testimonial": {
+        "_note": "(optional) Testimonial (displayed if no case_study or in addition)",
+        "quote": "(required) Quote text",
+        "author": "(required) Author name",
+        "business_type": "(optional) Business type"
+      },
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example": {
+      "case_study": {
+        "business": "Downtown Deli & Bakery",
+        "before": "3 Google reviews, not appearing in local search, relying 100% on foot traffic",
+        "after": "47 Google reviews (4.8 stars), #2 in local search for 'deli near me', 40% of new customers from online",
+        "time_change": "Results achieved in 90 days",
+        "results": "Revenue up 35% with zero additional ad spend",
+        "quote": "I didn't realize how many people were searching for exactly what we offer. We were invisible."
+      }
+    }
+  },
+
+  "SocialProofSlide": {
+    "_description": "Stats grid + testimonial combo. Light background. Good for credibility slides.",
+    "content": {
+      "headline": "(required) Section heading",
+      "stats": "(optional) Array of { value, label } for stat cards",
+      "testimonial": {
+        "_note": "(optional) Testimonial below the stats",
+        "quote": "(required) Quote text",
+        "author": "(required) Author name",
+        "business_type": "(optional) Business type"
+      }
+    },
+    "example": {
+      "headline": "Trusted by Local Businesses",
+      "stats": [
+        { "value": "2,500+", "label": "Active Businesses" },
+        { "value": "4.8/5", "label": "Average Rating" },
+        { "value": "93%", "label": "Renewal Rate" }
+      ],
+      "testimonial": {
+        "quote": "Best investment I've made for my business this year.",
+        "author": "James Chen",
+        "business_type": "Auto Repair Shop Owner"
+      }
+    }
+  },
+
+  "ResultsSlide": {
+    "_description": "Big metric cards in a 3-column grid. Use for outcomes and achievement data.",
+    "content": {
+      "headline": "(required) Section heading",
+      "results": "(required) Array of { metric, label }"
+    },
+    "example": {
+      "headline": "Results Our Clients See",
+      "results": [
+        { "metric": "+340%", "label": "Average increase in listing views" },
+        { "metric": "12x", "label": "More direction requests" },
+        { "metric": "4.6", "label": "Average star rating after 6 months" }
+      ]
+    }
+  },
+
+  "PricingSlide": {
+    "_description": "Pricing plan cards with features and CTAs. Supports popular plan highlighting.",
+    "content": {
+      "title": "(optional, also accepts 'headline') Section heading. Defaults to 'Pricing'",
+      "plans": "(required, also accepts 'options') Array of plan objects",
+      "guarantee": "(optional) Guarantee text below plans",
+      "includes": "(optional) Included items text below plans"
+    },
+    "_plan_standard": {
+      "name": "Professional",
+      "price": "$49",
+      "period": "month",
+      "features": ["Feature 1", "Feature 2", "Feature 3"],
+      "cta": { "text": "Get Started", "url": "/signup" },
+      "popular": true
+    },
+    "_plan_variant": {
+      "plan": "Annual",
+      "price": "$39/mo",
+      "commitment": "12-month commitment",
+      "savings": "Save $120/year"
+    },
+    "example": {
+      "title": "Simple, Transparent Pricing",
+      "plans": [
+        {
+          "name": "Starter",
+          "price": "$29",
+          "period": "month",
+          "features": [
+            "Basic listing on 10 directories",
+            "Monthly performance report",
+            "Email support"
+          ],
+          "cta": { "text": "Start Free Trial", "url": "/signup/starter" }
+        },
+        {
+          "name": "Professional",
+          "price": "$49",
+          "period": "month",
+          "features": [
+            "Premium listing on 40+ directories",
+            "Review management tools",
+            "Weekly performance reports",
+            "Priority support"
+          ],
+          "cta": { "text": "Start Free Trial", "url": "/signup/pro" },
+          "popular": true
+        },
+        {
+          "name": "Enterprise",
+          "price": "$99",
+          "period": "month",
+          "features": [
+            "Everything in Professional",
+            "Multi-location management",
+            "Custom analytics dashboard",
+            "Dedicated account manager"
+          ],
+          "cta": { "text": "Contact Sales", "url": "/contact" }
+        }
+      ],
+      "guarantee": "30-day money-back guarantee. No contracts.",
+      "includes": "All plans include free onboarding and listing setup."
+    }
+  },
+
+  "TipsSlide": {
+    "_description": "Numbered tip cards with lightbulb icons. Good for advice and best-practice slides.",
+    "content": {
+      "headline": "(optional) Section heading",
+      "tips": "(required) Array of tip strings",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example": {
+      "headline": "5 Tips to Maximize Your Listing",
+      "tips": [
+        "Add at least 10 high-quality photos — listings with photos get 42% more direction requests",
+        "Respond to every review within 24 hours, even negative ones — it shows you care",
+        "Update your hours for every holiday — wrong hours are the #1 complaint",
+        "Write a description that includes your location and top 3 services",
+        "Add your menu, service list, or product catalog — it dramatically improves conversion"
+      ]
+    }
+  },
+
+  "OverviewSlide": {
+    "_description": "Section overview with numbered area cards or topic checklist. Light background.",
+    "content": {
+      "headline": "(required) Section heading",
+      "areas": "(optional) Array of { num, name, desc } for numbered overview cards",
+      "topics": "(optional) Array of topic strings for checklist display",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example_with_areas": {
+      "headline": "What We'll Cover Today",
+      "areas": [
+        { "num": 1, "name": "Your Current Visibility", "desc": "Where you stand right now in local search" },
+        { "num": 2, "name": "The Opportunity", "desc": "How many customers are searching for your services" },
+        { "num": 3, "name": "Your Action Plan", "desc": "Exactly what to do to start getting more customers" }
+      ]
+    },
+    "example_with_topics": {
+      "headline": "Today's Agenda",
+      "topics": [
+        "How local search actually works",
+        "Why most businesses are invisible online",
+        "The 3 things that determine your ranking",
+        "Your personalized action plan"
+      ]
+    }
+  },
+
+  "TutorialIntroSlide": {
+    "_description": "Dark gradient intro slide for tutorials/how-tos. Shows time, difficulty, and outcome expectations.",
+    "content": {
+      "headline": "(required) Tutorial title",
+      "subhead": "(optional) Brief description",
+      "expectations": {
+        "_note": "(optional) Set expectations before the tutorial",
+        "time": "(optional) Estimated time, e.g. '15 minutes'",
+        "difficulty": "(optional) Difficulty level, e.g. 'Beginner'",
+        "outcome": "(optional) What they'll learn, e.g. 'Claim and optimize your listing'"
+      },
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example": {
+      "headline": "How to Claim Your Business Listing",
+      "subhead": "A step-by-step guide to getting your business found online",
+      "expectations": {
+        "time": "7 minutes",
+        "difficulty": "Beginner",
+        "outcome": "Your listing live on 40+ directories"
+      }
+    }
+  },
+
+  "ActionSlide": {
+    "_description": "Action-oriented slide with play icon, instruction text, and numbered steps. Good for 'do this now' moments.",
+    "content": {
+      "headline": "(required) Action headline",
+      "action": "(optional) Description of what to do",
+      "steps": "(optional) Array of step strings",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example": {
+      "headline": "Let's Claim Your Listing Now",
+      "action": "Follow these steps to get your business listed in under 5 minutes.",
+      "steps": [
+        "Click the 'Claim Now' button below",
+        "Search for your business name",
+        "Verify your ownership via phone or email",
+        "Review and publish your listing"
+      ]
+    }
+  },
+
+  "CategorySlide": {
+    "_description": "Grid of category tags/labels. Light background with folder icon. Good for showing business types or service categories.",
+    "content": {
+      "headline": "(required) Section heading",
+      "categories": "(optional) Array of category strings",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example": {
+      "headline": "Industries We Serve",
+      "categories": [
+        "Restaurants & Cafes",
+        "Home Services",
+        "Healthcare & Dental",
+        "Auto Repair",
+        "Retail & Boutiques",
+        "Professional Services",
+        "Fitness & Wellness",
+        "Beauty & Salons",
+        "Real Estate"
+      ]
+    }
+  },
+
+  "IdeaSlide": {
+    "_description": "Lightbulb-themed idea list. Light background. Good for brainstorming, suggestions, and creative content.",
+    "content": {
+      "headline": "(required) Section heading",
+      "ideas": "(optional) Array of idea strings",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example": {
+      "headline": "Content Ideas for Your Listing",
+      "ideas": [
+        "Behind-the-scenes photos of your team at work",
+        "Before-and-after photos of your best projects",
+        "Short video tour of your location",
+        "Customer spotlight stories with permission",
+        "Seasonal specials and limited-time offers"
+      ]
+    }
+  },
+
+  "ExampleSlide": {
+    "_description": "Single example display in a white card. Light background. Good for showing sample content, templates, or text examples.",
+    "content": {
+      "headline": "(required) Section heading",
+      "example": "(optional) Example text (supports newlines via \\n)",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example": {
+      "headline": "Example Business Description",
+      "example": "Downtown Deli & Bakery has been serving fresh, made-from-scratch sandwiches and pastries in the heart of Springfield since 1985.\n\nWe specialize in artisan breads, custom cakes, and catering for events of all sizes. Stop by for lunch or call ahead for your next celebration.\n\nOpen Monday-Saturday, 7am-6pm. Free parking available behind the building."
+    }
+  },
+
+  "StorySlide": {
+    "_description": "Narrative text display with book icon. Light background. Good for case narratives, origin stories, and longer-form content.",
+    "content": {
+      "headline": "(required) Section heading",
+      "story": "(optional) Story text (supports newlines via \\n)",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example": {
+      "headline": "How Maria Found Her Customers",
+      "story": "Maria Rodriguez opened her restaurant three years ago in a busy part of town. Despite great food and loyal regulars, new customers were rare.\n\nShe didn't realize that when people searched 'Mexican restaurant near me,' her business didn't show up at all. Her competitor two blocks away had 200 reviews and a complete listing.\n\nAfter claiming and optimizing her Fibonacco listing, Maria went from 3 Google reviews to 47 in just 90 days. New customers started walking in saying 'I found you on Google.'\n\nHer revenue is up 35% — without spending a dollar on advertising."
+    }
+  },
+
+  "ApplicationSlide": {
+    "_description": "Form field preview with file icon. Light background. Shows what fields are needed for an application or signup.",
+    "content": {
+      "headline": "(required) Section heading",
+      "fields": "(optional) Array of { field, required? }",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example": {
+      "headline": "What We'll Need From You",
+      "fields": [
+        { "field": "Business Name", "required": true },
+        { "field": "Business Address", "required": true },
+        { "field": "Phone Number", "required": true },
+        { "field": "Business Hours", "required": true },
+        { "field": "Business Description", "required": false },
+        { "field": "Logo / Photos", "required": false }
+      ]
+    }
+  },
+
+  "IntegrationSlide": {
+    "_description": "Two-column grid of integration/platform cards with link icon. Light background.",
+    "content": {
+      "headline": "(required) Section heading",
+      "integrations": "(optional) Array of { name, description? }",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example": {
+      "headline": "Platforms We Sync With",
+      "integrations": [
+        { "name": "Google Business Profile", "description": "Your listing on Google Search and Maps" },
+        { "name": "Apple Maps", "description": "Reach iPhone and iPad users" },
+        { "name": "Facebook", "description": "Auto-sync your business page info" },
+        { "name": "Yelp", "description": "Maintain accurate Yelp listing data" },
+        { "name": "Bing Places", "description": "Don't miss the 10% who use Bing" },
+        { "name": "Nextdoor", "description": "Connect with your neighborhood" }
+      ]
+    }
+  },
+
+  "DistributionSlide": {
+    "_description": "Two-column grid of distribution channel cards with share icon. Light background.",
+    "content": {
+      "headline": "(required) Section heading",
+      "channels": "(optional) Array of channel name strings",
+      "visual": "(optional, unused visually) Descriptive text"
+    },
+    "example": {
+      "headline": "Where Your Listing Appears",
+      "channels": [
+        "Google Search & Maps",
+        "Apple Maps & Siri",
+        "Facebook & Instagram",
+        "Yelp & TripAdvisor",
+        "Bing & Cortana",
+        "Alexa & Voice Assistants",
+        "Waze Navigation",
+        "Local News Sites"
+      ]
+    }
+  },
+
+  "ListingPreviewSlide": {
+    "_description": "Business listing card preview. Light background. Shows a mockup of what their listing will look like.",
+    "content": {
+      "headline": "(required) Section heading",
+      "listing_preview": {
+        "_note": "(required) Listing preview data",
+        "business_name": "(required) Business name",
+        "category": "(optional) Business category",
+        "location": "(optional) Address or area",
+        "description": "(optional) Business description",
+        "placeholder_image": "(optional) true to show placeholder building icon image",
+        "status": "(optional) Status badge text, e.g. 'Ready to Claim'"
+      },
+      "note": "(optional) Note text below the card"
+    },
+    "example": {
+      "headline": "Your Listing Preview",
+      "listing_preview": {
+        "business_name": "Downtown Deli & Bakery",
+        "category": "Restaurant & Bakery",
+        "location": "123 Main Street, Springfield, IL",
+        "description": "Fresh sandwiches, artisan bread, and custom cakes made daily since 1985. Catering available for events of all sizes.",
+        "placeholder_image": true,
+        "status": "Ready to Claim"
+      },
+      "note": "This is a preview. After claiming, you can customize every detail."
+    }
+  },
+
+  "CouponPreviewSlide": {
+    "_description": "Coupon/offer card with dashed border. Light background. Shows a deal or promotional offer.",
+    "content": {
+      "headline": "(required) Section heading",
+      "coupon_preview": {
+        "_note": "(required) Coupon data",
+        "offer": "(required) Offer headline, e.g. '20% Off Your First Visit'",
+        "value": "(optional) Offer value, e.g. '$50 Value'",
+        "terms": "(optional) Terms text",
+        "expiry": "(optional) Expiration text, e.g. 'Valid through December 31, 2026'",
+        "redemption": "(optional) How to redeem, e.g. 'Show this screen at checkout'",
+        "status": "(optional) Status badge, e.g. 'Limited Time'"
+      },
+      "note": "(optional) Note text below the coupon"
+    },
+    "example": {
+      "headline": "Exclusive Offer for New Listings",
+      "coupon_preview": {
+        "offer": "First Month Free",
+        "value": "$49 Value",
+        "terms": "Available for new business listings only. One per business.",
+        "expiry": "Valid through December 31, 2026",
+        "redemption": "Automatically applied when you claim your listing today",
+        "status": "Limited Time"
+      },
+      "note": "No credit card required to get started."
+    }
+  },
+
+  "EventPreviewSlide": {
+    "_description": "Event card with calendar/clock/location details. Light background. For upcoming events, webinars, or workshops.",
+    "content": {
+      "headline": "(required) Section heading",
+      "event_preview": {
+        "_note": "(optional) Event data",
+        "title": "(required) Event name",
+        "date": "(optional) Date string",
+        "time": "(optional) Time string",
+        "location": "(optional) Venue or 'Online'",
+        "description": "(optional) Event description",
+        "status": "(optional) Status badge, e.g. 'Registration Open'"
+      },
+      "note": "(optional) Note text below the event card"
+    },
+    "example": {
+      "headline": "Join Our Next Workshop",
+      "event_preview": {
+        "title": "Local SEO Masterclass for Small Business Owners",
+        "date": "Thursday, June 15, 2026",
+        "time": "2:00 PM - 3:30 PM CT",
+        "location": "Online via Zoom",
+        "description": "Learn the exact steps to make your business the #1 result in local search. Live Q&A included.",
+        "status": "Registration Open"
+      },
+      "note": "Free for all Fibonacco members. Recording available afterward."
+    }
+  },
+
+  "PreviewSlide": {
+    "_description": "Generic key-value preview card. Light background with eye icon. Renders any object as formatted rows. Good for showing settings, configurations, or feature summaries.",
+    "content": {
+      "headline": "(optional, also accepts 'title') Section heading. Defaults to 'Preview'",
+      "preview": "(optional) Object with key-value pairs to display. Booleans show as check/uncheck. Nested objects render as sub-sections.",
+      "features": "(optional) Array of feature strings shown as checklist below the preview card",
+      "note": "(optional) Note text at bottom"
+    },
+    "example": {
+      "headline": "Your Listing Settings",
+      "preview": {
+        "business_name": "Downtown Deli & Bakery",
+        "visibility": "Public",
+        "reviews_enabled": true,
+        "messaging_enabled": true,
+        "auto_respond": false,
+        "analytics": {
+          "monthly_report": "Enabled",
+          "real_time_dashboard": "Enabled"
+        }
+      },
+      "features": [
+        "Instant publishing to 40+ directories",
+        "Automated review collection",
+        "Monthly performance reports",
+        "Priority customer support"
+      ],
+      "note": "You can change these settings anytime from your dashboard."
+    }
+  },
+
+  "CTASlide": {
+    "_description": "Dark gradient call-to-action slide. Use as the LAST slide of every campaign. Drives conversion.",
+    "content": {
+      "headline": "(required) Action-oriented headline",
+      "subheadline": "(optional, also accepts 'subhead' or 'time_estimate') Supporting text",
+      "primaryButton": {
+        "_note": "(optional) Primary CTA. Also accepts cta_primary shape.",
+        "text": "Get Started Now",
+        "url": "/signup"
+      },
+      "secondaryButton": {
+        "_note": "(optional) Secondary CTA. Also accepts cta_secondary shape.",
+        "text": "Schedule a Call",
+        "url": "/contact"
+      },
+      "_alt_cta_primary": { "label": "Get Started", "action": "signup", "description": "Free to start" },
+      "_alt_cta_secondary": { "label": "Learn More", "action": "learn" },
+      "urgency": "(optional) Urgency text in yellow, e.g. 'Only 47 featured spots remaining in your area'",
+      "backgroundImage": "(optional) URL for background image (must start with http)"
+    },
+    "example": {
+      "headline": "Ready to Get Found?",
+      "subheadline": "It takes less than 5 minutes to claim your listing.",
+      "primaryButton": { "text": "Claim Your Listing Now", "url": "/claim" },
+      "secondaryButton": { "text": "Talk to Our Team", "url": "/contact" },
+      "urgency": "Only 23 featured listing spots remaining in your area"
+    }
+  },
+
+  "QuoteSlide": {
+    "_description": "INTERACTIVE: Displays a professional quote/invoice with line items, totals, and an 'Accept Quote' button. When the user clicks accept, triggers the onAction callback with action='accept_quote'.",
+    "_type": "action",
+    "content": {
+      "headline": "(optional, also accepts 'title') Section heading. Defaults to 'Your Quote'",
+      "quote_number": "(optional) Quote reference number, e.g. 'QT-2026-042'",
+      "prepared_for": "(optional) Client name",
+      "valid_until": "(optional) Expiration date string",
+      "quote_id": "(optional) Backend quote UUID — needed for accept_quote action to work",
+      "line_items": "(required, also accepts 'items') Array of line item objects",
+      "discount": "(optional) Discount amount in dollars, default 0",
+      "tax_rate": "(optional) Tax percentage, default 0",
+      "guarantee": "(optional) Guarantee text below the total",
+      "note": "(optional) Note text",
+      "accept_button_text": "(optional) Button label, default 'Accept Quote'"
+    },
+    "_line_item": {
+      "description": "Premium Listing Package",
+      "detail": "12-month commitment, 40+ directory sync",
+      "quantity": 1,
+      "unit_price": 49,
+      "total": 49
+    },
+    "example": {
+      "headline": "Your Custom Quote",
+      "quote_number": "QT-2026-042",
+      "prepared_for": "Downtown Deli & Bakery",
+      "valid_until": "June 30, 2026",
+      "quote_id": "uuid-from-backend",
+      "line_items": [
+        { "description": "Premium Business Listing", "detail": "40+ directory sync, review management, analytics", "quantity": 1, "unit_price": 49 },
+        { "description": "Featured Placement", "detail": "Top of category in your community", "quantity": 1, "unit_price": 29 },
+        { "description": "Content Marketing Package", "detail": "Monthly blog post + social media content", "quantity": 1, "unit_price": 39 }
+      ],
+      "discount": 20,
+      "tax_rate": 0,
+      "guarantee": "30-day money-back guarantee. Cancel anytime.",
+      "accept_button_text": "Accept & Continue to Payment"
+    }
+  },
+
+  "CheckoutSlide": {
+    "_description": "INTERACTIVE: Stripe payment collection slide. Shows order summary and embedded Stripe Elements payment form. Requires session_id or quote_id to create a PaymentIntent on the backend. Without those IDs, displays a static order summary.",
+    "_type": "action",
+    "content": {
+      "headline": "(optional, also accepts 'title') Section heading. Defaults to 'Complete Your Purchase'",
+      "subheadline": "(optional) Supporting text",
+      "items": "(optional, also accepts 'line_items') Array of { description, price } for order summary",
+      "total": "(optional) Override total — if not provided, sums item prices",
+      "session_id": "(optional) Pitch session UUID — triggers backend PaymentIntent creation",
+      "quote_id": "(optional) Quote UUID — alternative to session_id",
+      "billing_cycle": "(optional) 'monthly' or 'annual', default 'monthly'",
+      "button_text": "(optional) Pay button label, default 'Pay Now'",
+      "success_message": "(optional) Message shown after successful payment"
+    },
+    "example": {
+      "headline": "Complete Your Enrollment",
+      "subheadline": "Secure your featured listing today.",
+      "session_id": "pitch-session-uuid",
+      "items": [
+        { "description": "Premium Business Listing", "price": 49 },
+        { "description": "Featured Placement", "price": 29 }
+      ],
+      "total": 78,
+      "billing_cycle": "monthly",
+      "button_text": "Pay $78/mo",
+      "success_message": "Welcome aboard! Your listing is being set up now."
+    }
+  },
+
+  "FormSlide": {
+    "_description": "INTERACTIVE: Data capture form with configurable fields. Supports text, email, tel, textarea, select, and number inputs. Validates required fields, optionally submits to a backend endpoint, and fires onAction with action='form_submitted'.",
+    "_type": "action",
+    "content": {
+      "headline": "(optional, also accepts 'title') Section heading. Defaults to 'Tell Us About Your Business'",
+      "subheadline": "(optional) Supporting text",
+      "fields": "(required) Array of field definitions",
+      "submit_text": "(optional, also accepts 'button_text') Submit button label, default 'Submit'",
+      "submit_endpoint": "(optional) Backend API path to POST form data to",
+      "form_id": "(optional) Form identifier sent with submission",
+      "success_headline": "(optional) Heading after submit, default 'Submitted Successfully'",
+      "success_message": "(optional) Message after submit, default 'Thank you! We'll be in touch soon.'"
+    },
+    "_field_definition": {
+      "name": "business_name",
+      "label": "Business Name",
+      "type": "text",
+      "required": true,
+      "placeholder": "e.g. Downtown Deli"
+    },
+    "_field_types": "text, email, tel, textarea, select, number",
+    "example": {
+      "headline": "Tell Us About Your Business",
+      "subheadline": "We'll use this to set up your listing.",
+      "form_id": "claim-listing-intake",
+      "submit_endpoint": "/api/v1/contacts",
+      "fields": [
+        { "name": "business_name", "label": "Business Name", "type": "text", "required": true, "placeholder": "e.g. Downtown Deli & Bakery" },
+        { "name": "owner_name", "label": "Your Name", "type": "text", "required": true },
+        { "name": "email", "label": "Email Address", "type": "email", "required": true, "placeholder": "you@example.com" },
+        { "name": "phone", "label": "Phone Number", "type": "tel", "required": false, "placeholder": "(555) 123-4567" },
+        { "name": "business_type", "label": "Business Category", "type": "select", "required": true, "options": ["Restaurant", "Retail", "Home Services", "Healthcare", "Professional Services", "Other"] },
+        { "name": "description", "label": "Brief Description", "type": "textarea", "required": false, "placeholder": "Tell us what makes your business special..." }
+      ],
+      "submit_text": "Get Started",
+      "success_headline": "We're On It!",
+      "success_message": "Sarah will start building your listing right away. Check your email for next steps."
+    }
+  },
+
+  "_GUIDE": {
+    "slide_order_recommendation": [
+      "1. PersonalizedHeroSlide or HeroSlide — Open with impact",
+      "2. ProblemSlide — Create urgency",
+      "3. ConceptSlide (stats) — Back up the problem with data",
+      "4. SolutionSlide — Present the answer",
+      "5. BenefitsSlide or StepSlide — Show value or how it works",
+      "6. ProofSlide or TestimonialSlide — Social proof",
+      "7. PricingSlide (if applicable) — Transparent pricing",
+      "8. CTASlide — Drive action (ALWAYS last)"
+    ],
+    "narration_tips": [
+      "Write as Sarah speaking directly to the business owner",
+      "Keep each narration 2-4 sentences, conversational tone",
+      "Reference what's on screen: 'As you can see here...'",
+      "End CTA narrations with encouragement: 'I'm here if you have questions'",
+      "Avoid jargon — speak like a helpful advisor, not a salesperson"
+    ],
+    "theme_values": ["blue", "green", "purple", "orange"],
+    "audio_file_convention": "slide-{NN}-{type}.mp3 where NN is zero-padded slide number and type is lowercase component name without 'Slide' (e.g., slide-01-hero.mp3, slide-03-concept.mp3)"
+  }
+}

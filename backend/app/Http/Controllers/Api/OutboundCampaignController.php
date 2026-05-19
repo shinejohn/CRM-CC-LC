@@ -179,6 +179,18 @@ final class OutboundCampaignController extends Controller
         $query = Customer::where('tenant_id', $tenantId);
 
         // Apply segmentation filters
+        if (isset($segments['state'])) {
+            $query->where('state', strtoupper($segments['state']));
+        }
+
+        if (isset($segments['city'])) {
+            $query->where('city', $segments['city']);
+        }
+
+        if (isset($segments['pipeline_stage'])) {
+            $query->where('pipeline_stage', $segments['pipeline_stage']);
+        }
+
         if (isset($segments['community_id'])) {
             $query->where('community_id', $segments['community_id']);
         }

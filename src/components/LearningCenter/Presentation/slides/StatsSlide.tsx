@@ -3,8 +3,9 @@ import { TrendingUp } from 'lucide-react';
 
 interface StatsSlideProps {
   content: {
-    title: string;
-    stats: Array<{
+    title?: string;
+    headline?: string;
+    stats?: Array<{
       value: string | number;
       label: string;
       icon?: string;
@@ -46,7 +47,7 @@ export const StatsSlide: React.FC<StatsSlideProps> = ({
     >
       <div className="max-w-6xl mx-auto w-full">
         <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center animate-fade-in">
-          {content.title}
+          {content.title ?? content.headline ?? 'Key Stats'}
         </h2>
         <div
           className={`grid ${

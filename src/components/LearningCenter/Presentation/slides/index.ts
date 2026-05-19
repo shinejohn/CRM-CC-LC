@@ -32,5 +32,7 @@ export { IdeaSlide } from './IdeaSlide';
 export { IntegrationSlide } from './IntegrationSlide';
 export { PreviewSlide } from './PreviewSlide';
 export { StorySlide } from './StorySlide';
-
-
+export { QuoteSlide } from './QuoteSlide';
+export { CheckoutSlide } from './CheckoutSlide';
+export { FormSlide } from './FormSlide';
+export { ProfileBuilderSlide } from './ProfileBuilderSlide';

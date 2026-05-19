@@ -33,14 +33,14 @@ export const PersonalizedHeroSlide: React.FC<PersonalizedHeroSlideProps> = ({
         transition-opacity duration-500
       `}
       style={{
-        backgroundImage: content.visual
+        backgroundImage: content.visual && content.visual.startsWith('http')
           ? `url(${content.visual})`
           : undefined,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      {content.visual && (
+      {content.visual && content.visual.startsWith('http') && (
         <div className="absolute inset-0 bg-black bg-opacity-40" />
       )}
       

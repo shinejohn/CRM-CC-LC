@@ -24,7 +24,7 @@ export const HeroSlide: React.FC<HeroSlideProps> = ({ content, isActive }) => {
         transition-opacity duration-500
       `}
       style={{
-        backgroundImage: content.backgroundImage
+        backgroundImage: content.backgroundImage && content.backgroundImage.startsWith('http')
           ? `url(${content.backgroundImage})`
           : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         backgroundSize: 'cover',

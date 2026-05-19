@@ -49,6 +49,14 @@ final class EmailTemplate extends Model
             }
         }
 
+        // Append unsubscribe footer if not already present and variable is available
+        if (! str_contains($htmlContent, 'unsubscribe') && isset($variables['unsubscribe_url'])) {
+            $htmlContent .= '<p style="margin-top:24px;font-size:12px;color:#999;text-align:center;">You are receiving this because your business is listed in your community\'s Day.News directory. <a href="' . $variables['unsubscribe_url'] . '" style="color:#999;">Unsubscribe</a></p>';
+            if ($textContent) {
+                $textContent .= "\n\n---\nUnsubscribe: " . $variables['unsubscribe_url'];
+            }
+        }
+
         return [
             'subject' => $subject,
             'html' => $htmlContent,

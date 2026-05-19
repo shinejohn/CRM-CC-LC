@@ -259,6 +259,8 @@ class CampaignActionExecutor
 
         $baseUrl = rtrim((string) config('app.url'), '/');
 
+        $unsubscribeUrl = $baseUrl.'/unsubscribe?id='.$customer->id;
+
         return [
             'business_name' => (string) ($customer->business_name ?? ''),
             'community_name' => (string) ($community->name ?? 'Day.News'),
@@ -266,6 +268,7 @@ class CampaignActionExecutor
             'city' => (string) ($customer->city ?? ''),
             'listing_url' => $baseUrl.'/business/'.$customer->slug,
             'customer_name' => (string) ($customer->owner_name ?? $customer->business_name ?? ''),
+            'unsubscribe_url' => $unsubscribeUrl,
         ];
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\SarahChatController;
+use App\Http\Controllers\Api\SarahNotebookController;
 use App\Http\Controllers\Sarah\SarahCampaignController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,12 @@ Route::prefix('sarah')->name('api.sarah.')->group(function (): void {
     Route::get('/sessions/{id}/messages', [SarahCampaignController::class, 'messages'])->name('sessions.messages');
     Route::post('/sessions/{id}/message', [SarahCampaignController::class, 'sendMessage'])->name('sessions.message');
     Route::post('/sessions/{id}/create-campaign', [SarahCampaignController::class, 'createCampaign'])->name('sessions.create-campaign');
+
+    // ── Notebook endpoints (customer profile staging) ──
+    Route::get('/notebooks/{customerId}', [SarahNotebookController::class, 'show'])->name('notebooks.show');
+    Route::put('/notebooks/{customerId}', [SarahNotebookController::class, 'update'])->name('notebooks.update');
+    Route::get('/notebooks/{customerId}/history', [SarahNotebookController::class, 'history'])->name('notebooks.history');
+    Route::post('/notebooks/{customerId}/approve', [SarahNotebookController::class, 'approve'])->name('notebooks.approve');
 
     // ── Authenticated endpoints ──
     Route::middleware('auth:sanctum')->group(function (): void {

@@ -23,6 +23,13 @@ export const FlowSlide: React.FC<FlowSlideProps> = ({
     orange: 'bg-gradient-to-br from-orange-50 to-red-100',
   };
 
+  const accentColors = {
+    blue: 'text-blue-600',
+    green: 'text-emerald-600',
+    purple: 'text-purple-600',
+    orange: 'text-orange-600',
+  };
+
   return (
     <div
       className={`
@@ -41,7 +48,7 @@ export const FlowSlide: React.FC<FlowSlideProps> = ({
             {content.steps.map((item, index) => (
               <React.Fragment key={index}>
                 <div className="flex-1 text-center bg-white rounded-lg p-6 shadow-md animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                  <div className="text-2xl font-bold text-blue-600 mb-2">{index + 1}</div>
+                  <div className={`text-2xl font-bold ${accentColors[theme]} mb-2`}>{index + 1}</div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{item.step}</h3>
                   {item.description && <p className="text-gray-600">{item.description}</p>}
                 </div>

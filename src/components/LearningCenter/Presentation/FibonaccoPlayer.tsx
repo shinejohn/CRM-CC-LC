@@ -44,6 +44,10 @@ import {
   IntegrationSlide,
   PreviewSlide,
   StorySlide,
+  QuoteSlide,
+  CheckoutSlide,
+  FormSlide,
+  ProfileBuilderSlide,
 } from './slides';
 import { AIChatPanel } from './AIChatPanel';
 import type { Presentation, Slide } from '@/types/learning';
@@ -93,6 +97,8 @@ interface FibonaccoPlayerProps {
   onComplete?: () => void;
   /** When true, suppress the built-in narration bar and AI chat toggle (for use inside RoomWithSarah). */
   hideOverlayUI?: boolean;
+  /** Callback for interactive slide actions (quote accept, payment, form submit, etc.). */
+  onAction?: (action: string, payload: Record<string, unknown>) => void;
 }
 
 const slideComponents = {
@@ -130,6 +136,10 @@ const slideComponents = {
   IntegrationSlide,
   PreviewSlide,
   StorySlide,
+  QuoteSlide,
+  CheckoutSlide,
+  FormSlide,
+  ProfileBuilderSlide,
 } as unknown as Record<string, React.ComponentType<Record<string, unknown>>>;
 
 export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
@@ -138,6 +148,7 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
   onSlideChange,
   onComplete,
   hideOverlayUI = false,
+  onAction,
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
@@ -272,6 +283,7 @@ export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({
               content={activeSlide.content}
               isActive={true}
               theme={theme}
+              onAction={onAction}
             />
           </SlideErrorBoundary>
         )}

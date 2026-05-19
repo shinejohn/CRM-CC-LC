@@ -4,13 +4,23 @@ import { Quote } from 'lucide-react';
 interface TestimonialSlideProps {
   content: {
     title?: string;
-    testimonial: {
+    headline?: string;
+    testimonial?: {
       quote: string;
       author: string;
-      role: string;
-      company: string;
+      role?: string;
+      company?: string;
+      business_type?: string;
+      business?: string;
+      category?: string;
+      result?: string;
       avatar?: string;
     };
+    quote?: string;
+    author?: string;
+    business_type?: string;
+    business?: string;
+    result?: string;
   };
   isActive: boolean;
   theme?: 'blue' | 'green' | 'purple' | 'orange';
@@ -38,37 +48,55 @@ export const TestimonialSlide: React.FC<TestimonialSlideProps> = ({
       `}
     >
       <div className="max-w-4xl mx-auto text-white text-center">
-        {content.title && (
-          <h2 className="text-3xl font-bold mb-8 animate-fade-in">{content.title}</h2>
+        {(content.title ?? content.headline) && (
+          <h2 className="text-3xl font-bold mb-8 animate-fade-in">{content.title ?? content.headline}</h2>
         )}
         <Quote size={48} className="text-white/30 mx-auto mb-6 animate-fade-in" />
-        {content.testimonial ? (
-          <>
-            <blockquote
-              className="text-2xl md:text-3xl font-medium mb-8 leading-relaxed animate-fade-in"
-              style={{ animationDelay: '0.2s' }}
-            >
-              &ldquo;{content.testimonial.quote}&rdquo;
-            </blockquote>
-            <div className="flex items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              {content.testimonial.avatar && (
-                <img
-                  src={content.testimonial.avatar}
-                  alt={content.testimonial.author}
-                  className="w-16 h-16 rounded-full border-2 border-white"
-                />
+        {(() => {
+          const t = content.testimonial;
+          const quote = t?.quote ?? content.quote;
+          const author = t?.author ?? content.author ?? 'Business Owner';
+          const subtitle = t?.role
+            ? (t.company ? `${t.role} at ${t.company}` : t.role)
+            : (t?.business_type ?? t?.business ?? content.business_type ?? content.business ?? '');
+          const result = t?.result ?? content.result;
+          const avatar = t?.avatar;
+
+          if (!quote) {
+            return <p className="text-xl text-white/70 text-center animate-fade-in">Testimonial content loading...</p>;
+          }
+
+          return (
+            <>
+              <blockquote
+                className="text-2xl md:text-3xl font-medium mb-8 leading-relaxed animate-fade-in"
+                style={{ animationDelay: '0.2s' }}
+              >
+                &ldquo;{quote}&rdquo;
+              </blockquote>
+              {result && (
+                <div className="mb-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+                  <span className="inline-block bg-white/20 backdrop-blur-sm rounded-full px-5 py-2 text-sm font-semibold">
+                    {result}
+                  </span>
+                </div>
               )}
-              <div className="text-left">
-                <div className="font-semibold text-lg">{content.testimonial.author}</div>
-                <div className="text-white/80">
-                  {content.testimonial.role}{content.testimonial.company ? ` at ${content.testimonial.company}` : ''}
+              <div className="flex items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                {avatar && (
+                  <img
+                    src={avatar}
+                    alt={author}
+                    className="w-16 h-16 rounded-full border-2 border-white"
+                  />
+                )}
+                <div className="text-left">
+                  <div className="font-semibold text-lg">{author}</div>
+                  {subtitle && <div className="text-white/80">{subtitle}</div>}
                 </div>
               </div>
-            </div>
-          </>
-        ) : (
-          <p className="text-xl text-white/70 text-center animate-fade-in">Testimonial content loading...</p>
-        )}
+            </>
+          );
+        })()}
       </div>
     </div>
   );

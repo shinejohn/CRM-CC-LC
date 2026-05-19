@@ -50,11 +50,17 @@ return [
     ],
 
     'tts' => [
-        'default_provider' => env('TTS_PROVIDER', 'openai'),
+        'default_provider' => env('TTS_PROVIDER', 'openrouter'),
+        'base_url' => env('TTS_BASE_URL', 'https://openrouter.ai/api/v1/audio/speech'),
         'openai' => [
             'api_key' => env('OPENAI_API_KEY', ''),
             'model' => env('OPENAI_TTS_MODEL', 'tts-1-hd'),
             'voice' => env('OPENAI_TTS_VOICE', 'nova'),
+        ],
+        'openrouter' => [
+            'api_key' => env('OPENROUTER_API_KEY', ''),
+            'model' => env('OPENROUTER_TTS_MODEL', 'openai/gpt-4o-mini-tts'),
+            'voice' => env('OPENROUTER_TTS_VOICE', 'nova'),
         ],
     ],
 

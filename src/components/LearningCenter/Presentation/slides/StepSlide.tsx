@@ -7,7 +7,7 @@ interface StepSlideProps {
     location?: string;
     key_fields?: Array<{ field: string; tip: string }>;
     content_types?: Array<{ type: string; use_for: string; time?: string }>;
-    key_metrics?: Array<{ metric: string; what_it_means: string }>;
+    key_metrics?: Array<{ metric: string; what_it_means?: string; meaning?: string }>;
     steps?: Array<{ num: number; action: string; time?: string }>;
     management_tasks?: string[];
     options?: string[];
@@ -153,7 +153,7 @@ export const StepSlide: React.FC<StepSlideProps> = ({
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <h3 className="font-bold text-lg text-gray-900 mb-2">{metric.metric}</h3>
-                <p className="text-gray-600">{metric.what_it_means}</p>
+                <p className="text-gray-600">{metric.what_it_means ?? metric.meaning}</p>
               </div>
             ))}
           </div>

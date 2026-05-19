@@ -65,11 +65,11 @@ export const ProcessSlide: React.FC<ProcessSlideProps> = ({
         <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center animate-fade-in">
           {(content.title as string) ?? (content.headline as string) ?? ''}
         </h2>
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {steps.map((step, index) => (
             <React.Fragment key={index}>
               <div
-                className="flex-1 text-center animate-fade-in"
+                className="flex-1 text-center animate-fade-in w-full md:w-auto"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
                 <div
@@ -81,7 +81,7 @@ export const ProcessSlide: React.FC<ProcessSlideProps> = ({
                 <p className="text-gray-600">{step.description}</p>
               </div>
               {index < steps.length - 1 && (
-                <ArrowRight size={24} className="text-gray-400 flex-shrink-0" />
+                <ArrowRight size={24} className="text-gray-400 flex-shrink-0 hidden md:block" />
               )}
             </React.Fragment>
           ))}

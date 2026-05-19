@@ -1,5 +1,22 @@
 import React from 'react';
-import { CheckCircle2, TrendingUp, Lightbulb } from 'lucide-react';
+import {
+  CheckCircle2, TrendingUp, Lightbulb, Search, Bot, Megaphone,
+  BarChart3, Star, Shield, Zap, Globe, Users, Mail, Phone,
+  FileText, MapPin, Clock, Eye, Heart, Target, Award, Newspaper,
+  Building2, Share2, MessageCircle, Wifi, Lock, DollarSign,
+  type LucideIcon,
+} from 'lucide-react';
+
+const iconMap: Record<string, LucideIcon> = {
+  search: Search, robot: Bot, megaphone: Megaphone, chart: BarChart3,
+  check: CheckCircle2, star: Star, shield: Shield, zap: Zap,
+  globe: Globe, users: Users, mail: Mail, phone: Phone,
+  file: FileText, location: MapPin, clock: Clock, eye: Eye,
+  heart: Heart, target: Target, award: Award, newspaper: Newspaper,
+  building: Building2, share: Share2, message: MessageCircle,
+  wifi: Wifi, lock: Lock, dollar: DollarSign, trending: TrendingUp,
+  lightbulb: Lightbulb, badge: Award,
+};
 
 interface ConceptSlideProps {
   content: {
@@ -180,11 +197,18 @@ export const ConceptSlide: React.FC<ConceptSlideProps> = ({
                 }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {element.icon && (
-                  <div className={`text-3xl mb-3 ${textColors[theme]}`}>
-                    {element.icon}
-                  </div>
-                )}
+                {element.icon && (() => {
+                  const IconComp = iconMap[element.icon.toLowerCase()];
+                  return IconComp ? (
+                    <div className={`mb-3 ${textColors[theme]}`}>
+                      <IconComp size={32} />
+                    </div>
+                  ) : (
+                    <div className={`text-3xl mb-3 ${textColors[theme]}`}>
+                      {element.icon}
+                    </div>
+                  );
+                })()}
                 <h3
                   className={`font-bold text-lg mb-2 ${
                     useDarkTheme ? 'text-white' : 'text-gray-900'

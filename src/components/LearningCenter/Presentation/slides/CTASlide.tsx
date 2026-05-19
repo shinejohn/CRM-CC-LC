@@ -56,14 +56,14 @@ export const CTASlide: React.FC<CTASlideProps> = ({
         transition-opacity duration-500
       `}
       style={{
-        backgroundImage: content.backgroundImage
+        backgroundImage: typeof content.backgroundImage === 'string' && (content.backgroundImage as string).startsWith('http')
           ? `url(${content.backgroundImage as string})`
           : undefined,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      {typeof content.backgroundImage === 'string' && (
+      {typeof content.backgroundImage === 'string' && (content.backgroundImage as string).startsWith('http') && (
         <div className="absolute inset-0 bg-black bg-opacity-50" />
       )}
       <div className="relative z-10 text-center px-8 max-w-3xl">

@@ -14,6 +14,7 @@ interface LandingPageData {
   ai_goal?: string;
   duration_seconds?: number;
   audio_base_url?: string;
+  landing_page_slug?: string;
 }
 
 interface SlideData {
@@ -42,17 +43,26 @@ function getSlides(campaign: Campaign): SlideData[] {
   return (raw.slides ?? []) as SlideData[];
 }
 
+function resolveAudioBaseUrl(lp: LandingPageData): string {
+  const slug = lp.landing_page_slug;
+  if (!slug) return "";
+  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+  // Strip /api/v1 suffix if present to get the base server URL
+  const serverBase = apiUrl.replace(/\/api\/v\d+$/, "");
+  return `${serverBase}/storage/audio/presentations/${slug}/audio`;
+}
+
 function campaignToPresentation(
   campaign: Campaign,
   lp: LandingPageData
 ): Presentation {
   const rawSlides = getSlides(campaign);
-  const audioBaseUrl = lp.audio_base_url ?? "";
+  const audioBaseUrl = resolveAudioBaseUrl(lp);
 
   const slides: Slide[] = rawSlides.map((s, idx) => {
     const audioUrl =
       s.audio_file && audioBaseUrl
-        ? `${audioBaseUrl.replace(/\/$/, "")}/${s.audio_file}`
+        ? `${audioBaseUrl}/${s.audio_file}`
         : undefined;
     return {
       id: s.slide_num ?? idx + 1,
@@ -257,6 +267,34 @@ export default function RoomWithSarah({
     }
   }, [campaign, complete, appendSarah, onNavigateCampaign]);
 
+  const handleSlideAction = useCallback(
+    (action: string, payload: Record<string, unknown>) => {
+      switch (action) {
+        case 'accept_quote':
+          appendSarah("Great choice! Let me get the payment set up for you.");
+          break;
+        case 'payment_complete':
+          appendSarah("Payment received! Welcome aboard — I'm excited to get started on your project.");
+          break;
+        case 'form_submitted':
+          appendSarah("Got it, thank you! I'll use this information to personalize everything for your business.");
+          break;
+        case 'profile_field_updated':
+          appendSarah(`Nice, I've updated your ${(payload.field as string) || 'profile'}. Keep going — every detail helps me build a better campaign for you.`);
+          break;
+        case 'profile_approved':
+          appendSarah("Your profile is approved and saved! I'll use this information across all our future conversations.");
+          break;
+        default:
+          break;
+      }
+      // Future: forward to backend via API
+      void action;
+      void payload;
+    },
+    [appendSarah]
+  );
+
   // Contextual suggested actions — use API-returned ones if available, else defaults
   type SuggestedAction = ComponentProps<typeof SarahPanel>["suggestedActions"];
   const suggestedActions = useMemo((): SuggestedAction => {
@@ -327,6 +365,7 @@ export default function RoomWithSarah({
           hideOverlayUI
           onSlideChange={handleSlideChange}
           onComplete={handleComplete}
+          onAction={handleSlideAction}
         />
       </div>
 

@@ -9,6 +9,7 @@ use App\Models\AdvertiserSession;
 use App\Services\Sarah\SarahCommonResponseService;
 use App\Services\Sarah\SarahConversationService;
 use App\Services\Sarah\SarahMessageService;
+use App\Services\Sarah\SarahNotebookService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -23,6 +24,7 @@ final class SarahChatController extends Controller
         private readonly SarahConversationService $conversationService,
         private readonly SarahMessageService $messageService,
         private readonly SarahCommonResponseService $commonResponseService,
+        private readonly SarahNotebookService $notebookService,
     ) {}
 
     public function chat(Request $request): JsonResponse
@@ -87,6 +89,13 @@ final class SarahChatController extends Controller
             'campaign_id' => $campaignId,
             'slide_index' => $slideIndex,
         ]);
+
+        // Inject notebook context so Sarah remembers what she knows about this customer
+        $customerId = $session?->business_id;
+        if ($customerId) {
+            $notebook = $this->notebookService->resolve($customerId);
+            $context['notebook'] = $this->notebookService->getAIContext($notebook);
+        }
 
         $history = [];
         if ($session) {
