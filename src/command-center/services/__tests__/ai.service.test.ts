@@ -1,48 +1,43 @@
-// ============================================
-// AI SERVICE TESTS - Command Center
-// CC-SVC-06: AI Assistant Service
-// ============================================
-
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { aiService } from '../ai.service';
 import type { AIMessage } from '../ai.types';
 
-// Mock fetch globally
-global.fetch = vi.fn();
+// Mock apiClient so tests don't hit the network
+vi.mock('@/services/api', () => ({
+  apiClient: {
+    get: vi.fn(),
+    post: vi.fn(),
+    put: vi.fn(),
+    patch: vi.fn(),
+    delete: vi.fn(),
+  },
+}));
+
+// Mock useAuthStore so aiService.getToken() works
+vi.mock('@/stores/authStore', () => ({
+  useAuthStore: {
+    getState: () => ({ token: 'test-token' }),
+  },
+}));
+
+import { apiClient } from '@/services/api';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const mockClient = apiClient as any;
+
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
 describe('AIService', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-    // Mock localStorage
-    Storage.prototype.getItem = vi.fn(() => JSON.stringify({
-      accessToken: 'test-token',
-      refreshToken: 'refresh-token',
-      expiresAt: Date.now() + 3600000,
-    }));
-  });
-
   describe('chatSync', () => {
     it('sends chat messages successfully', async () => {
-      const mockResponse = {
-        success: true,
-        data: {
-          content: 'Hello! How can I help you?',
-          metadata: { model: 'gpt-4', tokens: { input: 10, output: 15 } },
-        },
-      };
-
-      (global.fetch as any).mockResolvedValueOnce({
-        ok: true,
-        json: async () => mockResponse,
+      // apiClient returns axios response; .data is the response body
+      mockClient.post.mockResolvedValueOnce({
+        data: { content: 'Hello! How can I help you?', metadata: { model: 'gpt-4' } },
       });
 
       const messages: AIMessage[] = [
-        {
-          id: '1',
-          role: 'user',
-          content: 'Hello',
-          timestamp: new Date().toISOString(),
-        },
+        { id: '1', role: 'user', content: 'Hello', timestamp: new Date().toISOString() },
       ];
 
       const result = await aiService.chatSync(messages);
@@ -52,19 +47,10 @@ describe('AIService', () => {
     });
 
     it('handles errors gracefully', async () => {
-      (global.fetch as any).mockResolvedValueOnce({
-        ok: false,
-        status: 500,
-        json: async () => ({ error: { message: 'Server error' } }),
-      });
+      mockClient.post.mockRejectedValueOnce({ message: 'Server error', status: 500 });
 
       const messages: AIMessage[] = [
-        {
-          id: '1',
-          role: 'user',
-          content: 'Hello',
-          timestamp: new Date().toISOString(),
-        },
+        { id: '1', role: 'user', content: 'Hello', timestamp: new Date().toISOString() },
       ];
 
       await expect(aiService.chatSync(messages)).rejects.toThrow();
@@ -73,28 +59,15 @@ describe('AIService', () => {
 
   describe('generate', () => {
     it('generates content successfully', async () => {
-      const mockResponse = {
-        success: true,
+      mockClient.post.mockResolvedValueOnce({
         data: {
           id: 'gen-1',
           content: 'Generated email content',
-          metadata: {
-            type: 'email',
-            tokens: 50,
-            model: 'gpt-4',
-          },
+          metadata: { type: 'email', tokens: 50, model: 'gpt-4' },
         },
-      };
-
-      (global.fetch as any).mockResolvedValueOnce({
-        ok: true,
-        json: async () => mockResponse,
       });
 
-      const result = await aiService.generate({
-        type: 'email',
-        prompt: 'Write an email',
-      });
+      const result = await aiService.generate({ type: 'email', prompt: 'Write an email' });
 
       expect(result.content).toBe('Generated email content');
       expect(result.metadata.type).toBe('email');
@@ -103,8 +76,7 @@ describe('AIService', () => {
 
   describe('getPersonalities', () => {
     it('fetches personalities successfully', async () => {
-      const mockResponse = {
-        success: true,
+      mockClient.get.mockResolvedValueOnce({
         data: [
           {
             id: '1',
@@ -115,11 +87,6 @@ describe('AIService', () => {
             capabilities: ['chat'],
           },
         ],
-      };
-
-      (global.fetch as any).mockResolvedValueOnce({
-        ok: true,
-        json: async () => mockResponse,
       });
 
       const result = await aiService.getPersonalities();
@@ -131,23 +98,12 @@ describe('AIService', () => {
 
   describe('semanticSearch', () => {
     it('performs semantic search successfully', async () => {
-      const mockResponse = {
-        success: true,
+      mockClient.get.mockResolvedValueOnce({
         data: {
           results: [
-            {
-              source: 'Document 1',
-              url: 'https://example.com/doc1',
-              excerpt: 'Relevant excerpt',
-              score: 0.95,
-            },
+            { source: 'Document 1', url: 'https://example.com/doc1', excerpt: 'Relevant excerpt', score: 0.95 },
           ],
         },
-      };
-
-      (global.fetch as any).mockResolvedValueOnce({
-        ok: true,
-        json: async () => mockResponse,
       });
 
       const result = await aiService.semanticSearch('test query');
@@ -158,4 +114,3 @@ describe('AIService', () => {
     });
   });
 });
-

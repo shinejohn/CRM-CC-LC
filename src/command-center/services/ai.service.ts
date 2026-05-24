@@ -4,6 +4,7 @@
 // ============================================
 
 import { apiService } from './api.service';
+import { useAuthStore } from '@/stores/authStore';
 import {
   AIMessage,
   AIPersonality,
@@ -21,19 +22,7 @@ class AIService {
 
   constructor() {
     this.baseUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_ENDPOINT || '/api';
-    // Get token from AuthContext via apiService
-    this.getToken = () => {
-      try {
-        const stored = localStorage.getItem('cc_auth_tokens');
-        if (stored) {
-          const tokens = JSON.parse(stored);
-          return tokens.accessToken || null;
-        }
-      } catch (e) {
-        console.error('Failed to get token from storage', e);
-      }
-      return null;
-    };
+    this.getToken = () => useAuthStore.getState().token;
   }
 
   private get headers() {

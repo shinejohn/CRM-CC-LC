@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { useAuth } from '../core/AuthContext';
+import { useAuthStore } from '@/stores/authStore';
 import { websocketService } from '../services/websocket.service';
-import { ConnectionState, ChannelHandler, WebSocketMessage } from '../services/websocket.types';
+import type { ConnectionState, ChannelHandler } from '../services/websocket.types';
 
 interface UseWebSocketOptions {
   autoConnect?: boolean;
@@ -19,20 +19,20 @@ interface UseWebSocketReturn {
 
 export function useWebSocket(options: UseWebSocketOptions = {}): UseWebSocketReturn {
   const { autoConnect = true } = options;
-  const { tokens, isAuthenticated } = useAuth();
+  const { token, isAuthenticated } = useAuthStore();
   const [connectionState, setConnectionState] = useState<ConnectionState>('disconnected');
   const subscriptionsRef = useRef<(() => void)[]>([]);
 
-  // Connect when authenticated
   useEffect(() => {
-    if (!autoConnect || !isAuthenticated || !tokens?.accessToken) return;
+    if (!autoConnect || !isAuthenticated || !token) return;
 
-    const wsUrl = import.meta.env.VITE_WS_URL || 
+    const wsUrl =
+      import.meta.env.VITE_WS_URL ||
       `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/ws/command-center`;
 
     websocketService.connect({
       url: wsUrl,
-      token: tokens.accessToken,
+      token,
       onOpen: () => {},
       onClose: () => {},
       onError: () => {},
@@ -42,16 +42,13 @@ export function useWebSocket(options: UseWebSocketOptions = {}): UseWebSocketRet
 
     return () => {
       unsubscribe();
-      if (autoConnect) {
-        websocketService.disconnect();
-      }
+      if (autoConnect) websocketService.disconnect();
     };
-  }, [autoConnect, isAuthenticated, tokens?.accessToken]);
+  }, [autoConnect, isAuthenticated, token]);
 
-  // Cleanup subscriptions on unmount
   useEffect(() => {
     return () => {
-      subscriptionsRef.current.forEach(unsub => unsub());
+      subscriptionsRef.current.forEach((unsub) => unsub());
       subscriptionsRef.current = [];
     };
   }, []);
@@ -71,16 +68,12 @@ export function useWebSocket(options: UseWebSocketOptions = {}): UseWebSocketRet
   }, []);
 
   const connect = useCallback(() => {
-    if (!tokens?.accessToken) return;
-    
-    const wsUrl = import.meta.env.VITE_WS_URL || 
+    if (!token) return;
+    const wsUrl =
+      import.meta.env.VITE_WS_URL ||
       `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/ws/command-center`;
-
-    websocketService.connect({
-      url: wsUrl,
-      token: tokens.accessToken,
-    });
-  }, [tokens?.accessToken]);
+    websocketService.connect({ url: wsUrl, token });
+  }, [token]);
 
   const disconnect = useCallback(() => {
     websocketService.disconnect();
@@ -96,4 +89,3 @@ export function useWebSocket(options: UseWebSocketOptions = {}): UseWebSocketRet
     disconnect,
   };
 }
-

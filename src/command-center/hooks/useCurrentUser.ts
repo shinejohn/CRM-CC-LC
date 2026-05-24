@@ -1,30 +1,32 @@
 import { useMemo } from 'react';
-import { useAuth } from '../core/AuthContext';
+import { useAuthStore } from '@/stores/authStore';
 
 export function useCurrentUser() {
-  const { user, business, isAuthenticated } = useAuth();
+  const { user, isAuthenticated } = useAuthStore();
 
-  return useMemo(() => ({
-    user,
-    business,
-    isAuthenticated,
-    
-    // Computed properties
-    fullName: user ? `${user.firstName} ${user.lastName}` : null,
-    initials: user 
-      ? `${user.firstName[0]}${user.lastName[0]}`.toUpperCase() 
-      : null,
-    isOwner: user?.role === 'owner',
-    isAdmin: user?.role === 'owner' || user?.role === 'admin',
-    tierLevel: business?.tier || 'free',
-    
-    // Helper for displaying business context
-    businessContext: business ? {
-      id: business.id,
-      name: business.name,
-      tier: business.tier,
-      timezone: business.settings.timezone,
-    } : null,
-  }), [user, business, isAuthenticated]);
+  return useMemo(() => {
+    const nameParts = user?.name?.trim().split(/\s+/) ?? [];
+    const initials = nameParts.length >= 2
+      ? `${nameParts[0][0]}${nameParts[nameParts.length - 1][0]}`.toUpperCase()
+      : (user?.name?.[0]?.toUpperCase() ?? null);
+
+    return {
+      user,
+      business: null as null,
+      isAuthenticated,
+      fullName: user?.name ?? null,
+      initials,
+      isOwner: user?.role === 'owner',
+      isAdmin: user?.role === 'owner' || user?.role === 'admin',
+      tierLevel: user?.subscription_tier ?? 'free',
+      businessContext: user?.business_name
+        ? {
+            id: user.business_id ?? '',
+            name: user.business_name,
+            tier: user.subscription_tier ?? 'free',
+            timezone: 'UTC',
+          }
+        : null,
+    };
+  }, [user, isAuthenticated]);
 }
-

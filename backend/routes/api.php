@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AdminSubscriberController;
 use App\Http\Controllers\Api\AIController;
+use App\Http\Controllers\Api\AIActionController;
 use App\Http\Controllers\Api\AlertCategoryController;
 use App\Http\Controllers\Api\AlertController;
 use App\Http\Controllers\Api\AlertTrackingController;
@@ -398,11 +399,16 @@ Route::prefix('v1')->group(function () {
             Route::get('/voices', [TTSController::class, 'voices']);
         });
 
-        // AI/OpenRouter API
+        // AI API — backed by PrismAiService (Anthropic SDK)
         Route::prefix('ai')->group(function () {
-            Route::post('/chat', [AIController::class, 'chat']);
-            Route::post('/context', [AIController::class, 'getContext']);
-            Route::get('/models', [AIController::class, 'models']);
+            Route::post('/chat', [AIController::class, 'chat'])->name('api.ai.chat');
+            Route::post('/generate', [AIController::class, 'generate'])->name('api.ai.generate');
+            Route::post('/context', [AIController::class, 'getContext'])->name('api.ai.context');
+            Route::get('/models', [AIController::class, 'models'])->name('api.ai.models');
+            Route::get('/personalities', [AIController::class, 'personalities'])->name('api.ai.personalities');
+            Route::get('/personalities/{id}', [AIController::class, 'personality'])->name('api.ai.personality');
+            Route::post('/personalities/{id}/generate-response', [AIController::class, 'generateWithPersonality'])->name('api.ai.personality.generate');
+            Route::post('/actions/execute', [AIActionController::class, 'execute'])->name('api.ai.actions.execute');
         });
 
         // Services API

@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Sparkles, X, Mic, Send, Terminal, Loader2, CheckCircle2 } from 'lucide-react';
 import { useAccountManager } from '../../hooks/useAccountManager';
 import { ServiceUpsellPrompt } from './ServiceUpsellPrompt';
+import { ActionConfirmation } from './ActionConfirmation';
 
 export function AccountManagerAI({ onClose }: { onClose: () => void }) {
-    const { messages, sendMessage, activeTasks } = useAccountManager();
+    const { messages, sendMessage, activeTasks, isTyping, approveAction, cancelAction } = useAccountManager();
     const [input, setInput] = useState('');
     const [isListening, setIsListening] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -66,12 +67,39 @@ export function AccountManagerAI({ onClose }: { onClose: () => void }) {
                                             ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-tr-sm shadow-md'
                                             : 'bg-white dark:bg-slate-800 border border-slate-200/50 dark:border-slate-700/50 text-slate-800 dark:text-slate-200 rounded-tl-sm shadow-md drop-shadow-sm'
                                         }`}>
-                                        {msg.content}
+                                        {msg.isStreaming && !msg.content ? (
+                                            <span className="inline-flex gap-1">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce [animation-delay:0ms]" />
+                                                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce [animation-delay:150ms]" />
+                                                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce [animation-delay:300ms]" />
+                                            </span>
+                                        ) : (
+                                            msg.content
+                                        )}
                                     </div>
+                                )}
+                                {/* Action confirmation card — shown inline below the AI message */}
+                                {msg.toolCall && (
+                                    <ActionConfirmation
+                                        toolCall={msg.toolCall}
+                                        onApprove={approveAction}
+                                        onCancel={cancelAction}
+                                    />
                                 )}
                             </div>
                         </div>
                     ))}
+                    {isTyping && messages[messages.length - 1]?.role !== 'assistant' && (
+                        <div className="flex justify-start">
+                            <div className="bg-white dark:bg-slate-800 border border-slate-200/50 dark:border-slate-700/50 rounded-2xl rounded-tl-sm px-5 py-3.5 shadow-md">
+                                <span className="inline-flex gap-1">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce [animation-delay:0ms]" />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce [animation-delay:150ms]" />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce [animation-delay:300ms]" />
+                                </span>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 {/* Input */}

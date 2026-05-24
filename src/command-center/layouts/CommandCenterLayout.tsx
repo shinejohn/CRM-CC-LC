@@ -4,12 +4,23 @@ import { NavigationRail } from '../components/layout/NavigationRail';
 import { CommandCenterHeader } from '../components/layout/CommandCenterHeader';
 import { RightSidebar } from '../components/layout/RightSidebar';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AccountManagerProvider } from '../hooks/useAccountManager';
+import { AccountManagerProvider, useAccountManager } from '../hooks/useAccountManager';
 import { AccountManagerBar } from '../components/ai/AccountManagerBar';
+import { ExpandableChat } from '../components/ai/ExpandableChat';
 
 export interface CommandCenterLayoutProps {
     children: React.ReactNode;
     businessName?: string;
+}
+
+/** Floating chat widget — only visible when the full AI overlay is closed */
+function FloatingChatWidget() {
+    const { isOpen } = useAccountManager();
+    const location = useLocation();
+    // Derive zone from pathname: /command-center/{zone}/...
+    const zone = location.pathname.split('/')[2] ?? 'dashboard';
+    if (isOpen) return null;
+    return <ExpandableChat zone={zone} />;
 }
 
 export function CommandCenterLayout({ children, businessName = "Fibonacco" }: CommandCenterLayoutProps) {
@@ -56,6 +67,9 @@ export function CommandCenterLayout({ children, businessName = "Fibonacco" }: Co
                         <RightSidebar onClose={() => setRightSidebarOpen(false)} />
                     )}
                 </AnimatePresence>
+
+                {/* Floating AI chat widget — hidden when full overlay is open */}
+                <FloatingChatWidget />
             </div>
         </AccountManagerProvider>
     );

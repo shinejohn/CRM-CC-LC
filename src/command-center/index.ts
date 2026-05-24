@@ -7,7 +7,6 @@ export { AppProviders } from './AppProviders';
 export { ThemeProvider, useTheme, COLOR_PALETTES } from './core/ThemeProvider';
 export type { ColorScheme } from './core/ThemeProvider';
 export { AppShell } from './core/AppShell';
-export { AuthProvider, useAuth } from './core/AuthContext';
 export { AuthGuard } from './core/AuthGuard';
 export { LayoutProvider, useLayout } from './core/LayoutContext';
 

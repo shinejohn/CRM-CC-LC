@@ -7,11 +7,4 @@ export { AppShell } from './AppShell';
 export { LayoutProvider, useLayout } from './LayoutContext';
 export { ThemeProvider, useTheme, COLOR_PALETTES } from './ThemeProvider';
 export type { ColorScheme } from './ThemeProvider';
-export type {
-  User,
-  Business,
-  BusinessSettings,
-  AuthTokens,
-  LoginCredentials,
-  AuthState,
-} from './auth.types';
+// auth.types are internal to AuthContext shim — not re-exported

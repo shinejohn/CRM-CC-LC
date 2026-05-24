@@ -21,6 +21,7 @@ use App\Services\EmailService;
 use App\Contracts\Emergency\EmergencyBroadcastServiceInterface;
 use App\Services\Emergency\EmergencyBroadcastService;
 use App\Contracts\CampaignOrchestratorInterface;
+use App\Services\AI\PrismAiService;
 use App\Services\CampaignOrchestratorService;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -42,6 +43,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(\App\Contracts\Alert\AlertServiceInterface::class, \App\Services\Alert\AlertService::class);
         $this->app->bind(EmergencyBroadcastServiceInterface::class, EmergencyBroadcastService::class);
         
+        // AI service — singleton so the client is reused across requests
+        $this->app->singleton(PrismAiService::class, fn () => new PrismAiService());
+
         // Campaign Orchestrator service
         $this->app->bind(CampaignOrchestratorInterface::class, CampaignOrchestratorService::class);
         

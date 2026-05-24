@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
-import { useAuth } from '../core/AuthContext';
+import { useAuthStore } from '@/stores/authStore';
 
-type Permission = 
+type Permission =
   | 'customers:read' | 'customers:write' | 'customers:delete'
   | 'content:read' | 'content:write' | 'content:publish'
   | 'campaigns:read' | 'campaigns:write' | 'campaigns:send'
@@ -11,49 +11,38 @@ type Permission =
   | 'settings:read' | 'settings:write';
 
 export function usePermissions() {
-  const { user, hasPermission, hasFeature } = useAuth();
+  const user = useAuthStore((s) => s.user);
 
   const can = useCallback((permission: Permission): boolean => {
-    return hasPermission(permission);
-  }, [hasPermission]);
+    if (!user) return false;
+    if (user.role === 'owner') return true;
+    return (user.permissions ?? []).includes(permission);
+  }, [user]);
 
   const canAny = useCallback((permissions: Permission[]): boolean => {
-    return permissions.some(p => hasPermission(p));
-  }, [hasPermission]);
+    return permissions.some((p) => can(p));
+  }, [can]);
 
   const canAll = useCallback((permissions: Permission[]): boolean => {
-    return permissions.every(p => hasPermission(p));
-  }, [hasPermission]);
+    return permissions.every((p) => can(p));
+  }, [can]);
 
   const permissions = useMemo(() => ({
-    // Customer permissions
     canViewCustomers: can('customers:read'),
     canEditCustomers: can('customers:write'),
     canDeleteCustomers: can('customers:delete'),
-    
-    // Content permissions
     canViewContent: can('content:read'),
     canEditContent: can('content:write'),
     canPublishContent: can('content:publish'),
-    
-    // Campaign permissions
     canViewCampaigns: can('campaigns:read'),
     canEditCampaigns: can('campaigns:write'),
     canSendCampaigns: can('campaigns:send'),
-    
-    // Service permissions
     canViewServices: can('services:read'),
     canEditServices: can('services:write'),
-    
-    // Billing permissions
     canViewBilling: can('billing:read'),
     canManageBilling: can('billing:manage'),
-    
-    // Team permissions
     canViewTeam: can('team:read'),
     canManageTeam: can('team:manage'),
-    
-    // Settings permissions
     canViewSettings: can('settings:read'),
     canEditSettings: can('settings:write'),
   }), [can]);
@@ -62,8 +51,7 @@ export function usePermissions() {
     can,
     canAny,
     canAll,
-    hasFeature,
+    hasFeature: (_feature: string) => false,
     ...permissions,
   };
 }
-
