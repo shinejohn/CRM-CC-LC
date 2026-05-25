@@ -19,3 +19,4 @@ coverage/
 
 # Build output (Vite)
 dist/
+.env
