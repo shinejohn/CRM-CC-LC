@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bell, Search, Settings, LogOut, User, Sparkles, Building2, ChevronDown, Maximize2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -34,6 +34,25 @@ export function CommandCenterHeader({
   const navigate = useNavigate();
   const { toggle, isOpen } = useAccountManager();
   const { user, logout } = useAuthStore();
+  const profileMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!profileMenuOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(e.target as Node)) {
+        setProfileMenuOpen(false);
+      }
+    };
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setProfileMenuOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [profileMenuOpen]);
 
   const displayName = user?.name ?? 'My Account';
   const displayEmail = user?.email ?? '';
@@ -137,7 +156,7 @@ export function CommandCenterHeader({
         )}
 
         {/* Profile Dropdown */}
-        <div className="relative">
+        <div className="relative" ref={profileMenuRef}>
           <button
             type="button"
             onClick={() => setProfileMenuOpen(!profileMenuOpen)}

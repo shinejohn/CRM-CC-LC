@@ -168,8 +168,7 @@ final class AIActionController extends Controller
         $dueDate    = $args['due_date'] ?? now()->addDays(3)->toDateString();
         $notes      = $args['notes'] ?? '';
 
-        $activity = $this->activityService->create([
-            'tenant_id'   => $tenantId,
+        $activity = $this->activityService->create($tenantId, [
             'customer_id' => $customerId,
             'user_id'     => $user?->id,
             'type'        => 'task',
@@ -331,8 +330,7 @@ final class AIActionController extends Controller
         $scheduledAt  = $args['scheduled_at'] ?? now()->addHours(24)->toIso8601String();
         $notes        = $args['notes'] ?? '';
 
-        $activity = $this->activityService->create([
-            'tenant_id'    => $tenantId,
+        $activity = $this->activityService->create($tenantId, [
             'customer_id'  => $customerId,
             'user_id'      => $user?->id,
             'type'         => 'call',

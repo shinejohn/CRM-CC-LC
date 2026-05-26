@@ -110,10 +110,19 @@ export function AIHubPage() {
   );
 }
 
+const QUICK_ACTION_ICON_COLOR: Record<string, string> = {
+  purple: 'text-purple-500',
+  blue:   'text-blue-500',
+  pink:   'text-pink-500',
+  green:  'text-green-500',
+  orange: 'text-orange-500',
+};
+
 function QuickActionButton({ action }: { action: { id: string; label: string; icon: React.ComponentType<{ className?: string }>; color: string } }) {
   const Icon = action.icon;
   return (
     <motion.button
+      type="button"
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className={`
@@ -122,7 +131,7 @@ function QuickActionButton({ action }: { action: { id: string; label: string; ic
         hover:shadow-md transition-all
       `}
     >
-      <Icon className={`w-4 h-4 text-${action.color}-500`} />
+      <Icon className={`w-4 h-4 ${QUICK_ACTION_ICON_COLOR[action.color] ?? 'text-slate-500'}`} />
       <span className="text-sm font-medium text-gray-700 dark:text-slate-300">{action.label}</span>
     </motion.button>
   );

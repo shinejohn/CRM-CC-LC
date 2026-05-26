@@ -43,14 +43,14 @@ export function AccountManagerAI({ onClose }: { onClose: () => void }) {
                             <p className="text-xs text-emerald-600 dark:text-emerald-400 font-bold tracking-widest uppercase">Sarah • Online</p>
                         </div>
                     </div>
-                    <button onClick={onClose} className="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-colors flex items-center gap-2 text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <button type="button" onClick={onClose} className="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-full transition-colors flex items-center gap-2 text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         <span className="text-sm font-bold uppercase tracking-wider hidden sm:block">Close AI</span>
                         <X className="w-5 h-5" />
                     </button>
                 </div>
 
                 {/* Messages */}
-                <div className="flex-1 overflow-y-auto p-8 space-y-6" ref={scrollRef}>
+                <div className="flex-1 overflow-y-auto p-8 space-y-6" ref={scrollRef} aria-live="polite" aria-label="Chat messages">
                     {messages.map((msg) => (
                         <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                             <div className={`max-w-[85%] sm:max-w-[70%] ${msg.role === 'user' ? 'order-1' : 'order-2'}`}>
@@ -106,6 +106,8 @@ export function AccountManagerAI({ onClose }: { onClose: () => void }) {
                 <div className="p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-t border-slate-200 dark:border-slate-800">
                     <div className="relative flex items-center gap-3 max-w-4xl mx-auto">
                         <button
+                            type="button"
+                            aria-label={isListening ? 'Stop recording' : 'Start voice input'}
                             onClick={() => setIsListening(!isListening)}
                             className={`p-3.5 rounded-xl transition-colors ${isListening ? 'bg-rose-100 text-rose-600 shadow-inner' : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-500'}`}
                         >
@@ -120,8 +122,10 @@ export function AccountManagerAI({ onClose }: { onClose: () => void }) {
                             className="flex-1 bg-slate-100/80 dark:bg-slate-800/80 border border-slate-200/50 dark:border-slate-700/50 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 rounded-xl px-5 py-3.5 placeholder:text-slate-400 text-slate-900 dark:text-slate-100 font-medium transition-all"
                         />
                         <button
+                            type="button"
                             onClick={handleSend}
-                            disabled={!input.trim()}
+                            disabled={!input.trim() || isTyping}
+                            aria-label="Send message"
                             className="p-3.5 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl shadow-md disabled:opacity-50 transition-all hover:scale-105 active:scale-95 disabled:hover:scale-100"
                         >
                             <Send className="w-5 h-5" />

@@ -13,6 +13,13 @@ interface AnalysisType {
   color: string;
 }
 
+const ANALYSIS_COLOR_CLASSES: Record<string, { bg: string; text: string }> = {
+  blue:   { bg: 'bg-blue-100 dark:bg-blue-900/30',   text: 'text-blue-600 dark:text-blue-400' },
+  green:  { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-600 dark:text-green-400' },
+  purple: { bg: 'bg-purple-100 dark:bg-purple-900/30', text: 'text-purple-600 dark:text-purple-400' },
+  pink:   { bg: 'bg-pink-100 dark:bg-pink-900/30',   text: 'text-pink-600 dark:text-pink-400' },
+};
+
 const analysisTypes: AnalysisType[] = [
   {
     id: 'customer-engagement',
@@ -80,8 +87,8 @@ export function AIAnalysisPanel() {
               <Card className={`transition-all ${isSelected ? 'ring-2 ring-purple-500' : ''}`}>
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">
-                    <div className={`p-3 bg-${analysis.color}-100 dark:bg-${analysis.color}-900/30 rounded-lg`}>
-                      <Icon className={`w-6 h-6 text-${analysis.color}-600 dark:text-${analysis.color}-400`} />
+                    <div className={`p-3 rounded-lg ${ANALYSIS_COLOR_CLASSES[analysis.color]?.bg ?? 'bg-slate-100 dark:bg-slate-800'}`}>
+                      <Icon className={`w-6 h-6 ${ANALYSIS_COLOR_CLASSES[analysis.color]?.text ?? 'text-slate-600 dark:text-slate-400'}`} />
                     </div>
                     <Badge variant="outline">{analysis.name}</Badge>
                   </div>

@@ -19,6 +19,13 @@ interface MetricsRowProps {
   isLoading: boolean;
 }
 
+const COLOR_CLASSES: Record<string, { bg: string; text: string }> = {
+  emerald: { bg: 'bg-emerald-100 dark:bg-emerald-900/30', text: 'text-emerald-600 dark:text-emerald-400' },
+  blue:    { bg: 'bg-blue-100 dark:bg-blue-900/30',       text: 'text-blue-600 dark:text-blue-400' },
+  purple:  { bg: 'bg-purple-100 dark:bg-purple-900/30',   text: 'text-purple-600 dark:text-purple-400' },
+  orange:  { bg: 'bg-orange-100 dark:bg-orange-900/30',   text: 'text-orange-600 dark:text-orange-400' },
+};
+
 const defaultMetrics: Metric[] = [
   { id: 'revenue', label: 'Revenue', value: '$12,450', change: 12.5, icon: DollarSign, color: 'emerald' },
   { id: 'customers', label: 'Customers', value: 156, change: 8, icon: Users, color: 'blue' },
@@ -67,8 +74,8 @@ export function MetricsRow({ metrics = defaultMetrics, isLoading }: MetricsRowPr
                   <span className="text-sm text-gray-500 dark:text-slate-400">
                     {metric.label}
                   </span>
-                  <div className={`p-2 rounded-lg bg-${metric.color}-100 dark:bg-${metric.color}-900/30`}>
-                    <Icon className={`w-4 h-4 text-${metric.color}-600 dark:text-${metric.color}-400`} />
+                  <div className={`p-2 rounded-lg ${COLOR_CLASSES[metric.color]?.bg ?? 'bg-slate-100 dark:bg-slate-800'}`}>
+                    <Icon className={`w-4 h-4 ${COLOR_CLASSES[metric.color]?.text ?? 'text-slate-600 dark:text-slate-400'}`} />
                   </div>
                 </div>
                 <div className="flex items-end justify-between">
