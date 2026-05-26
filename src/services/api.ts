@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useAuthStore } from "@/stores/authStore";
 
-const API_BASE = import.meta.env.VITE_API_URL || "https://api.fibonacco.com/v1";
+const API_BASE = import.meta.env.VITE_API_URL || "https://api.fibonacco.com";
 
 export const apiClient = axios.create({
   baseURL: API_BASE,

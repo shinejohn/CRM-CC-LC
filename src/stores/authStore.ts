@@ -26,7 +26,7 @@ interface AuthState {
   clearAuth: () => void;
 }
 
-const API_BASE = import.meta.env.VITE_API_URL || "https://api.fibonacco.com/v1";
+const API_BASE = import.meta.env.VITE_API_URL || "https://api.fibonacco.com";
 
 export const useAuthStore = create<AuthState>()(
   persist(
@@ -44,15 +44,19 @@ export const useAuthStore = create<AuthState>()(
             body: JSON.stringify({ email, password }),
           });
           const data = await response.json();
+          if (!response.ok) {
+            set({ isLoading: false });
+            throw new Error(data.message ?? data.error ?? "Login failed");
+          }
           set({
             user: data.user,
             token: data.token,
             isAuthenticated: true,
             isLoading: false,
           });
-        } catch {
+        } catch (err) {
           set({ isLoading: false });
-          throw new Error("Login failed");
+          throw err instanceof Error ? err : new Error("Login failed");
         }
       },
       logout: () =>

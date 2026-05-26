@@ -21,7 +21,7 @@ class AIService {
   private getToken: () => string | null;
 
   constructor() {
-    this.baseUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_ENDPOINT || '/api';
+    this.baseUrl = import.meta.env.VITE_API_URL || 'https://api.fibonacco.com';
     this.getToken = () => useAuthStore.getState().token;
   }
 

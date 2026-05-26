@@ -294,9 +294,12 @@ final class AIController extends Controller
             $lines[] = "BUSINESS CONTEXT: " . json_encode($context['businessContext']);
         }
 
-        // Customer context
+        // Customer context — scoped to tenant to prevent cross-tenant data leaks
         if (!empty($context['customerId'])) {
-            $customer = Customer::find($context['customerId']);
+            $tenantId = $user?->tenant_id ?? $user?->id ?? null;
+            $customer = $tenantId
+                ? Customer::where('tenant_id', $tenantId)->find($context['customerId'])
+                : null;
             if ($customer) {
                 $lines[] = "";
                 $lines[] = "ACTIVE CUSTOMER:";
@@ -399,7 +402,7 @@ ACTIONS;
         }
 
         if ($customerId) {
-            $customer = Customer::find($customerId);
+            $customer = Customer::where('tenant_id', $tenantId)->find($customerId);
             if ($customer) {
                 $context['customer_data'] = [
                     'business_name' => $customer->business_name,
