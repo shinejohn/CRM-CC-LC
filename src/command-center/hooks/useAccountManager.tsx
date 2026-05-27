@@ -4,7 +4,7 @@
 // Messages are backed by real streaming AI via aiService.chat().
 // ============================================
 
-import React, { createContext, useContext, useState, useEffect, useRef, type ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef, useCallback, type ReactNode } from 'react';
 import { aiService } from '../services/ai.service';
 import { getModuleContext } from '../services/ai-context-provider';
 import { parsePendingAction, executeAction, formatToolResult } from '../services/ai-action-executor';
@@ -57,6 +57,8 @@ interface AccountManagerContextType {
 const AccountManagerContext = createContext<AccountManagerContextType | undefined>(undefined);
 
 // ── Provider ──────────────────────────────────────────────────────────────────
+
+const MAX_MESSAGES = 100;
 
 export function AccountManagerProvider({ children }: { children: ReactNode }) {
   const { user } = useAuthStore();
@@ -115,25 +117,9 @@ export function AccountManagerProvider({ children }: { children: ReactNode }) {
 
   // ── Message Sending ─────────────────────────────────────────────────────────
 
-  const sendMessage = (content: string, zone?: string) => {
-    const userMsg: Message = {
-      id: crypto.randomUUID(),
-      role: 'user',
-      content,
-      timestamp: new Date(),
-    };
-
-    // Capture current messages before adding the new one
-    setMessages(prev => {
-      const nextMessages = [...prev, userMsg];
-      // Kick off the async stream with the updated message list
-      streamResponse(nextMessages, zone);
-      return nextMessages;
-    });
-  };
-
-  const streamResponse = (currentMessages: Message[], zone?: string) => {
+  const streamResponse = useCallback((currentMessages: Message[], zone?: string) => {
     const streamId = crypto.randomUUID();
+    let unmounted = false;
 
     // Add placeholder streaming message
     const placeholder: Message = {
@@ -144,7 +130,10 @@ export function AccountManagerProvider({ children }: { children: ReactNode }) {
       isStreaming: true,
     };
 
-    setMessages(prev => [...prev, placeholder]);
+    setMessages(prev => {
+      const next = [...prev, placeholder];
+      return next.length > MAX_MESSAGES ? next.slice(next.length - MAX_MESSAGES) : next;
+    });
     setIsTyping(true);
 
     // Build the AI messages from history (exclude streaming placeholder)
@@ -173,20 +162,28 @@ export function AccountManagerProvider({ children }: { children: ReactNode }) {
 
     const processStream = async () => {
       let fullContent = '';
+      // Guard all state updates: if the component unmounted, skip them
+      const safeSetMessages: typeof setMessages = (updater) => {
+        if (!unmounted) setMessages(updater);
+      };
+      const safeSetIsTyping = (v: boolean) => {
+        if (!unmounted) setIsTyping(v);
+      };
       let pendingToolCallData: Record<string, unknown> | null = null;
 
       try {
         for await (const chunk of aiService.chat(aiMessages, context, personalityIdRef.current)) {
+          if (unmounted) break;
           if (chunk.type === 'text' && chunk.content) {
             fullContent += chunk.content;
-            setMessages(prev =>
+            safeSetMessages(prev =>
               prev.map(m => m.id === streamId ? { ...m, content: fullContent } : m)
             );
           } else if (chunk.type === 'tool_call' && chunk.toolCall) {
             pendingToolCallData = chunk.toolCall as Record<string, unknown>;
           } else if (chunk.type === 'error') {
             fullContent = 'I encountered an issue connecting to the AI service. Please try again.';
-            setMessages(prev =>
+            safeSetMessages(prev =>
               prev.map(m => m.id === streamId ? { ...m, content: fullContent, isStreaming: false } : m)
             );
             return;
@@ -213,7 +210,7 @@ export function AccountManagerProvider({ children }: { children: ReactNode }) {
               const task = addTask(pending.action.label);
               updateTask(task.id, 'pending');
 
-              setMessages(prev =>
+              safeSetMessages(prev =>
                 prev.map(m =>
                   m.id === streamId
                     ? {
@@ -235,7 +232,7 @@ export function AccountManagerProvider({ children }: { children: ReactNode }) {
                 updateTask(task.id, 'completed');
                 const resultText = formatToolResult(pending.action.name, result, true);
 
-                setMessages(prev =>
+                safeSetMessages(prev =>
                   prev.map(m =>
                     m.id === streamId
                       ? {
@@ -249,7 +246,7 @@ export function AccountManagerProvider({ children }: { children: ReactNode }) {
                 );
               } catch {
                 updateTask(task.id, 'error');
-                setMessages(prev =>
+                safeSetMessages(prev =>
                   prev.map(m =>
                     m.id === streamId
                       ? { ...m, content: `${fullContent}\n\n[Action failed — please try again]`, isStreaming: false }
@@ -260,18 +257,18 @@ export function AccountManagerProvider({ children }: { children: ReactNode }) {
             }
           } else {
             // Unknown action — just finalize with text
-            setMessages(prev =>
+            safeSetMessages(prev =>
               prev.map(m => m.id === streamId ? { ...m, content: fullContent, isStreaming: false } : m)
             );
           }
         } else {
           // No tool call — finalize normally
-          setMessages(prev =>
+          safeSetMessages(prev =>
             prev.map(m => m.id === streamId ? { ...m, content: fullContent, isStreaming: false } : m)
           );
         }
       } catch {
-        setMessages(prev =>
+        safeSetMessages(prev =>
           prev.map(m =>
             m.id === streamId
               ? { ...m, content: 'Something went wrong. Please try again.', isStreaming: false }
@@ -279,12 +276,33 @@ export function AccountManagerProvider({ children }: { children: ReactNode }) {
           )
         );
       } finally {
-        setIsTyping(false);
+        safeSetIsTyping(false);
       }
     };
 
     processStream();
-  };
+
+    // Return cleanup so callers can set unmounted = true if needed
+    return () => { unmounted = true; };
+  }, [addTask, updateTask]);
+
+  const sendMessage = useCallback((content: string, zone?: string) => {
+    const userMsg: Message = {
+      id: crypto.randomUUID(),
+      role: 'user',
+      content,
+      timestamp: new Date(),
+    };
+
+    // Capture current messages before adding the new one
+    setMessages(prev => {
+      const next = [...prev, userMsg];
+      const capped = next.length > MAX_MESSAGES ? next.slice(next.length - MAX_MESSAGES) : next;
+      // Kick off the async stream with the updated message list
+      streamResponse(capped, zone);
+      return capped;
+    });
+  }, [streamResponse]);
 
   // ── Confirmation Handlers ───────────────────────────────────────────────────
 

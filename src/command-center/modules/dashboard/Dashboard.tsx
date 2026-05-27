@@ -4,12 +4,14 @@ import { motion } from 'framer-motion';
 import {
   Building2, Megaphone, TrendingUp, Package, BarChart3, Bot,
   ArrowRight, Clock, FileText, Users, CreditCard, Cpu,
-  CheckCircle2, AlertCircle, Calendar,
+  CheckCircle2, AlertCircle, Calendar, Phone, Mail,
 } from 'lucide-react';
 import { PageHeader, DataCard } from '@/components/shared';
 import { useAuthStore } from '@/stores/authStore';
 import { useBusinessMode } from '@/hooks/useBusinessMode';
 import { checkPermission, type Resource, type Role } from '@/hooks/usePermission';
+import { useDashboard } from '../../hooks/useDashboard';
+import type { Activity } from '@/types/command-center';
 
 interface VerbCardProps {
   verb: string;
@@ -68,36 +70,65 @@ function VerbCard({ verb, icon: Icon, metrics, action, delay }: VerbCardProps) {
   );
 }
 
-interface ActivityEntry {
-  icon: React.ElementType;
-  text: string;
-  detail: string;
-  time: string;
-  href: string;
+const ACTIVITY_ICON_MAP: Record<string, React.ElementType> = {
+  phone_call: Phone,
+  email: Mail,
+  sms: Mail,
+  meeting: Calendar,
+  note: FileText,
+  task: CheckCircle2,
+  deal_update: TrendingUp,
+  invoice: CreditCard,
+  content: FileText,
+  customer_added: Users,
+  ai_action: Cpu,
+  workflow: Bot,
+  event: Calendar,
+  alert: AlertCircle,
+};
+
+const ACTIVITY_HREF_MAP: Record<string, string> = {
+  phone_call: '/command-center/sell/customers',
+  email: '/command-center/sell/customers',
+  sms: '/command-center/sell/customers',
+  meeting: '/command-center/sell/customers',
+  note: '/command-center/sell/customers',
+  task: '/command-center/sell/pipeline',
+  deal_update: '/command-center/sell/pipeline',
+  invoice: '/command-center/deliver/billing',
+  content: '/command-center/attract/articles',
+  customer_added: '/command-center/sell/customers',
+  ai_action: '/command-center/automate',
+  workflow: '/command-center/automate/workflows',
+  event: '/command-center/attract/events',
+  alert: '/command-center/deliver/billing',
+};
+
+function formatRelativeTime(timestamp: string): string {
+  const diff = Date.now() - new Date(timestamp).getTime();
+  const minutes = Math.floor(diff / 60000);
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  return `${Math.floor(hours / 24)}d ago`;
 }
 
-// TODO: wire to API — replace with real data from activity feed endpoint
-const mockActivities: ActivityEntry[] = [
-  { icon: FileText, text: 'Article published', detail: '"5 Tips for Local SEO"', time: '2 hours ago', href: '/command-center/attract/articles' },
-  { icon: CreditCard, text: 'Invoice sent', detail: 'Acme Corp — $2,400', time: '4 hours ago', href: '/command-center/deliver/billing' },
-  { icon: Users, text: 'New customer added', detail: 'TechStart Inc', time: '6 hours ago', href: '/command-center/sell/customers' },
-  { icon: Cpu, text: 'AI Employee action', detail: 'Sarah drafted 3 social posts', time: '8 hours ago', href: '/command-center/automate' },
-  { icon: CheckCircle2, text: 'Deal closed', detail: 'Enterprise License — $12,000', time: '1 day ago', href: '/command-center/sell/pipeline' },
-  { icon: Calendar, text: 'Event upcoming', detail: '"Spring Launch Webinar"', time: '1 day ago', href: '/command-center/attract/events' },
-  { icon: AlertCircle, text: 'Invoice overdue', detail: 'Beta Labs — $800', time: '2 days ago', href: '/command-center/deliver/billing' },
-  { icon: FileText, text: 'Campaign launched', detail: '"Q1 Email Blast"', time: '2 days ago', href: '/command-center/attract/campaigns' },
-  { icon: Users, text: 'Customer updated', detail: 'Meridian Corp — health score 92', time: '3 days ago', href: '/command-center/sell/customers' },
-  { icon: Bot, text: 'Workflow completed', detail: 'Onboarding sequence — 5 emails sent', time: '3 days ago', href: '/command-center/automate/workflows' },
-];
+function activityIcon(type: string): React.ElementType {
+  return ACTIVITY_ICON_MAP[type] ?? FileText;
+}
+
+function activityHref(type: string): string {
+  return ACTIVITY_HREF_MAP[type] ?? '/command-center';
+}
 
 export function Dashboard() {
   const user = useAuthStore((s) => s.user);
   const { t } = useBusinessMode();
   const navigate = useNavigate();
+  const { activities, isLoading: activitiesLoading } = useDashboard();
 
   const isFree = user?.subscription_tier === 'free';
 
-  // TODO: wire to API — replace mock metrics with real data
   const verbCards: VerbCardProps[] = [
     {
       verb: 'Define',
@@ -205,28 +236,46 @@ export function Dashboard() {
       >
         <DataCard title="Recent Activity" icon={Clock} subtitle="Last 10 actions across all systems">
           <div className="space-y-4">
-            {mockActivities.map((entry, i) => (
-              <button
-                key={i}
-                onClick={() => navigate(entry.href)}
-                className="w-full flex items-start gap-3 text-left group"
-              >
-                <div className="w-8 h-8 rounded-lg bg-[var(--nexus-bg-secondary)] flex items-center justify-center shrink-0 mt-0.5">
-                  <entry.icon className="w-4 h-4 text-[var(--nexus-text-tertiary)] group-hover:text-[var(--nexus-accent-primary)] transition-colors" />
+            {activitiesLoading ? (
+              Array.from({ length: 5 }).map((_, i) => (
+                <div key={i} className="flex items-start gap-3 animate-pulse">
+                  <div className="w-8 h-8 rounded-lg bg-[var(--nexus-bg-secondary)] shrink-0" />
+                  <div className="flex-1 space-y-1.5">
+                    <div className="h-3 bg-[var(--nexus-bg-secondary)] rounded w-2/3" />
+                    <div className="h-2.5 bg-[var(--nexus-bg-secondary)] rounded w-1/2" />
+                  </div>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-[var(--nexus-text-primary)] group-hover:text-[var(--nexus-accent-primary)] transition-colors">
-                    {entry.text}
-                  </p>
-                  <p className="text-xs text-[var(--nexus-text-secondary)] truncate">
-                    {entry.detail}
-                  </p>
-                </div>
-                <span className="text-xs text-[var(--nexus-text-tertiary)] shrink-0 mt-0.5">
-                  {entry.time}
-                </span>
-              </button>
-            ))}
+              ))
+            ) : activities.length === 0 ? (
+              <p className="text-sm text-[var(--nexus-text-tertiary)] text-center py-4">No recent activity yet.</p>
+            ) : (
+              activities.map((entry: Activity) => {
+                const Icon = activityIcon(entry.type);
+                return (
+                  <button
+                    key={entry.id}
+                    type="button"
+                    onClick={() => navigate(activityHref(entry.type))}
+                    className="w-full flex items-start gap-3 text-left group"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-[var(--nexus-bg-secondary)] flex items-center justify-center shrink-0 mt-0.5">
+                      <Icon className="w-4 h-4 text-[var(--nexus-text-tertiary)] group-hover:text-[var(--nexus-accent-primary)] transition-colors" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-[var(--nexus-text-primary)] group-hover:text-[var(--nexus-accent-primary)] transition-colors">
+                        {entry.title}
+                      </p>
+                      <p className="text-xs text-[var(--nexus-text-secondary)] truncate">
+                        {entry.description}
+                      </p>
+                    </div>
+                    <span className="text-xs text-[var(--nexus-text-tertiary)] shrink-0 mt-0.5">
+                      {formatRelativeTime(entry.timestamp)}
+                    </span>
+                  </button>
+                );
+              })
+            )}
           </div>
         </DataCard>
       </motion.div>

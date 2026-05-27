@@ -11,6 +11,7 @@ import {
     TrendingUp, Shield, Database, Award,
     Building2, Mail, Instagram, Facebook
 } from 'lucide-react';
+import { useSearchParams } from 'react-router';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useIntelligenceHub, IntelligenceHubProvider } from './IntelligenceHubContext';
@@ -570,9 +571,7 @@ function ProfilePageContent() {
 // ── Exported Page (with Provider) ─────────────────────────
 
 export function MyBusinessProfilePage() {
-    // In production, smbId comes from route params or auth context.
-    // For now, read from URL search params or use the active business from CC store.
-    const searchParams = new URLSearchParams(window.location.search);
+    const [searchParams] = useSearchParams();
     const smbId = searchParams.get('smbId') ?? searchParams.get('id') ?? '';
 
     if (!smbId) {
