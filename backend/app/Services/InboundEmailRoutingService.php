@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Enums\PipelineStage;
 use App\Events\InboundEmailReceived;
+use App\Models\CrmActivity;
 use App\Models\Interaction;
 use App\Jobs\SendEmailCampaign;
 use App\Services\AccountManagerService;
@@ -37,7 +39,8 @@ final class InboundEmailRoutingService
             'request' => $this->handleRequest($event),
             'appointment' => $this->handleAppointment($event),
             'support' => $this->handleSupport($event),
-            'pricing' => $this->handlePricing($event),
+            'pricing', 'interested', 'wants_info' => $this->handleInterest($event),
+            'unsubscribe', 'opt_out' => $this->handleOptOut($event),
             default => $this->handleOther($event),
         };
 
@@ -183,20 +186,70 @@ final class InboundEmailRoutingService
         ]);
     }
 
-    protected function handlePricing(InboundEmailReceived $event): void
+    protected function handleInterest(InboundEmailReceived $event): void
     {
-        // Send pricing information
+        $customer = $event->customer;
+
+        // Advance to ENGAGEMENT stage if still in HOOK
+        if ($customer->pipeline_stage === PipelineStage::HOOK) {
+            $customer->advanceToStage(PipelineStage::ENGAGEMENT, 'inbound_interest');
+            Log::info("Inbound interest: advanced customer {$customer->id} to ENGAGEMENT");
+        }
+
+        // Create high-priority CRM activity for the sales rep
+        CrmActivity::create([
+            'tenant_id'   => $customer->tenant_id,
+            'customer_id' => $customer->id,
+            'type'        => 'inbound_interest',
+            'title'       => 'Responded to campaign — interested in pricing',
+            'channel'     => 'email',
+            'status'      => 'pending',
+            'priority'    => 'high',
+            'notes'       => "Subject: {$event->subject}\n\n{$event->body}",
+            'metadata'    => [
+                'intent'       => $event->classifiedIntent,
+                'message_id'   => $event->messageId,
+                'from_email'   => $event->fromEmail,
+            ],
+        ]);
+
+        // Queue the CONV-001 "Your Community Position" presentation as the follow-up
         SendEmailCampaign::dispatch(
             $event->customer,
             null,
-            'pricing_info',
+            'conv_your_community_position',
             [
-                'subject' => 'Pricing Information',
+                'subject'     => 'Here\'s your community position — ' . ($customer->business_name ?? 'your business'),
                 'in_reply_to' => $event->messageId,
             ]
         );
 
-        Log::info("Sent pricing info to customer {$event->customer->id}");
+        Log::info("Inbound interest handled for customer {$customer->id}");
+    }
+
+    protected function handleOptOut(InboundEmailReceived $event): void
+    {
+        $customer = $event->customer;
+
+        $customer->update([
+            'email_opted_in'          => false,
+            'do_not_contact'          => false, // Can still call/SMS if opted-in there
+            'email_suppressed'        => true,
+            'email_suppressed_reason' => 'inbound_opt_out',
+        ]);
+
+        CrmActivity::create([
+            'tenant_id'   => $customer->tenant_id,
+            'customer_id' => $customer->id,
+            'type'        => 'opt_out',
+            'title'       => 'Opted out via email reply',
+            'channel'     => 'email',
+            'status'      => 'completed',
+            'notes'       => "Subject: {$event->subject}\n\n{$event->body}",
+            'metadata'    => ['message_id' => $event->messageId],
+        ]);
+
+        Log::info("Customer {$customer->id} opted out via inbound email reply");
     }
 
     protected function handleOther(InboundEmailReceived $event): void

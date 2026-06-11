@@ -48,6 +48,7 @@ import {
   CheckoutSlide,
   FormSlide,
   ProfileBuilderSlide,
+  PackageSelectionSlide,
 } from './slides';
 import { AIChatPanel } from './AIChatPanel';
 import type { Presentation, Slide } from '@/types/learning';
@@ -140,6 +141,7 @@ const slideComponents = {
   CheckoutSlide,
   FormSlide,
   ProfileBuilderSlide,
+  PackageSelectionSlide,
 } as unknown as Record<string, React.ComponentType<Record<string, unknown>>>;
 
 export const FibonaccoPlayer: React.FC<FibonaccoPlayerProps> = ({

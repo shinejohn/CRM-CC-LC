@@ -32,6 +32,9 @@ const SyndicationDashboardPage = lazy(() => import('./modules/syndication/Syndic
 // ── Simulation: Manifest Destiny Journey Simulator ──
 const JourneySimulatorPage = lazy(() => import('./modules/simulation/JourneySimulatorPage').then(m => ({ default: m.JourneySimulatorPage })));
 
+// ── Campaigns: Manifest Destiny Dashboard ──
+const ManifestDestinyDashboard = lazy(() => import('./modules/campaigns/ManifestDestinyDashboard').then(m => ({ default: m.ManifestDestinyDashboard })));
+
 // ── SELL verb ──
 const SellIndex = lazy(() => import('./pages/SellIndex').then(m => ({ default: m.SellIndex })));
 const PipelinePage = lazy(() => import('@/components/CRM/PipelineDashboard').catch(() => ({ default: () => <div>Pipeline - Coming Soon</div> })));
@@ -166,6 +169,9 @@ export function getCommandCenterRoutes() {
       {/* ── SIMULATION: Manifest Destiny Journey Simulator ── */}
       <Route path="simulation" element={<Suspense fallback={<LoadingScreen />}><JourneySimulatorPage /></Suspense>} />
       <Route path="simulation/:timeline" element={<Suspense fallback={<LoadingScreen />}><JourneySimulatorPage /></Suspense>} />
+
+      {/* ── CAMPAIGNS: Manifest Destiny Campaign Dashboard ── */}
+      <Route path="campaigns/manifest-destiny" element={<Suspense fallback={<LoadingScreen />}><ManifestDestinyDashboard /></Suspense>} />
 
       {/* ── DELIVER: Services, billing & fulfillment ── */}
       <Route path="deliver" element={<Suspense fallback={<LoadingScreen />}><DeliverIndex /></Suspense>} />

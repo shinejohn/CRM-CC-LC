@@ -606,6 +606,20 @@ Route::prefix('v1')->group(function () {
             Route::get('/simulate', [ManifestDestinySimulationController::class, 'simulate'])->name('api.manifest-destiny.simulate');
         });
 
+        // Manifest Destiny Campaign Dashboard API
+        Route::prefix('campaigns/manifest-destiny')->group(function () {
+            Route::get('/stats', [\App\Http\Controllers\Api\ManifestDestinyCampaignController::class, 'stats'])->name('api.campaigns.manifest-destiny.stats');
+            Route::get('/timelines', [\App\Http\Controllers\Api\ManifestDestinyCampaignController::class, 'timelines'])->name('api.campaigns.manifest-destiny.timelines');
+        });
+
+        // Service Bundles API (pricing packages shown on campaign landing pages)
+        Route::prefix('bundles')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Api\ServiceBundleController::class, 'index'])->name('api.bundles.index');
+            Route::get('/{bundle}', [\App\Http\Controllers\Api\ServiceBundleController::class, 'show'])->name('api.bundles.show');
+            Route::post('/{bundle}/quote', [\App\Http\Controllers\Api\ServiceBundleController::class, 'quote'])->name('api.bundles.quote');
+            Route::post('/{bundle}/checkout', [\App\Http\Controllers\Api\ServiceBundleController::class, 'checkout'])->name('api.bundles.checkout');
+        });
+
         // Syndication Partner API
         Route::prefix('syndication')->group(function () {
             Route::post('/register', [\App\Http\Controllers\Api\SyndicationController::class, 'register'])->name('api.syndication.register');

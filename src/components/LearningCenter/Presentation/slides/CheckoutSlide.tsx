@@ -182,9 +182,11 @@ export const CheckoutSlide: React.FC<CheckoutSlideProps> = ({
     [content.total, items]
   );
 
-  // Checkout intent API
+  // Checkout intent API — three paths: session_id, quote_id, or bundle_slug + customer_id
   const session_id = content.session_id as string | undefined;
   const quote_id = content.quote_id as string | undefined;
+  const bundle_slug = content.bundle_slug as string | undefined;
+  const customer_id = content.customer_id as string | undefined;
 
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [paymentIntentId, setPaymentIntentId] = useState<string | null>(null);
@@ -194,24 +196,38 @@ export const CheckoutSlide: React.FC<CheckoutSlideProps> = ({
 
   useEffect(() => {
     if (!isActive || clientSecret || success) return;
-    if (!session_id && !quote_id) return;
+    if (!session_id && !quote_id && !bundle_slug) return;
 
     let cancelled = false;
     async function createIntent() {
       setLoading(true);
       setError('');
       try {
-        const endpoint = session_id
-          ? `/v1/pitch/sessions/${encodeURIComponent(session_id)}/checkout`
-          : `/api/v1/quotes/${encodeURIComponent(quote_id!)}/checkout`;
+        let endpoint: string;
+        let body: Record<string, unknown>;
+
+        if (bundle_slug) {
+          endpoint = `/v1/bundles/${encodeURIComponent(bundle_slug)}/checkout`;
+          body = { customer_id: customer_id ?? '' };
+        } else if (session_id) {
+          endpoint = `/v1/pitch/sessions/${encodeURIComponent(session_id)}/checkout`;
+          body = {
+            total_amount: total,
+            selected_products: items.map((i) => i.description),
+            billing_cycle: (content.billing_cycle as string) ?? 'monthly',
+          };
+        } else {
+          endpoint = `/api/v1/quotes/${encodeURIComponent(quote_id!)}/checkout`;
+          body = {
+            total_amount: total,
+            selected_products: items.map((i) => i.description),
+            billing_cycle: (content.billing_cycle as string) ?? 'monthly',
+          };
+        }
 
         const res = await apiClient.post<{
           data: { client_secret: string; payment_intent_id: string };
-        }>(endpoint, {
-          total_amount: total,
-          selected_products: items.map((i) => i.description),
-          billing_cycle: (content.billing_cycle as string) ?? 'monthly',
-        });
+        }>(endpoint, body);
 
         if (!cancelled) {
           setClientSecret(res.data.data.client_secret);
@@ -230,7 +246,7 @@ export const CheckoutSlide: React.FC<CheckoutSlideProps> = ({
     return () => {
       cancelled = true;
     };
-  }, [isActive, session_id, quote_id, clientSecret, success, total, items, content.billing_cycle]);
+  }, [isActive, session_id, quote_id, bundle_slug, customer_id, clientSecret, success, total, items, content.billing_cycle]);
 
   const handlePaymentComplete = useCallback(
     (intentId: string) => {
@@ -245,8 +261,8 @@ export const CheckoutSlide: React.FC<CheckoutSlideProps> = ({
     [onAction, session_id, quote_id, total]
   );
 
-  // If no session_id or quote_id, show static display with items only (no payment form)
-  const isStaticMode = !session_id && !quote_id;
+  // If no session_id, quote_id, or bundle_slug, show static display with items only (no payment form)
+  const isStaticMode = !session_id && !quote_id && !bundle_slug;
 
   return (
     <div

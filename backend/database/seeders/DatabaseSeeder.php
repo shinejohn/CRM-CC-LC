@@ -34,5 +34,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SlotLimitSeeder::class,
         ]);
+
+        // Service bundles (Starter / Professional / Community Sponsor)
+        $this->call([
+            ServiceBundleSeeder::class,
+        ]);
     }
 }

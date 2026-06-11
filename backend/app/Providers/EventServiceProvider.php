@@ -18,12 +18,14 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\SMB\SMBEngagementChanged::class => [],
         \App\Events\SMB\SMBTierChanged::class => [],
 
-        // Engagement tracking (from other modules)
+        // Engagement tracking
         \App\Events\EmailOpened::class => [
             \App\Listeners\UpdateEngagementOnEmailOpen::class,
+            \App\Listeners\Alert\UpdateAlertOnMessageOpened::class,
         ],
         \App\Events\EmailClicked::class => [
             \App\Listeners\UpdateEngagementOnEmailClick::class,
+            \App\Listeners\Alert\UpdateAlertOnMessageClicked::class,
         ],
         \App\Events\RVMDelivered::class => [
             \App\Listeners\UpdateEngagementOnRVM::class,
@@ -39,16 +41,6 @@ class EventServiceProvider extends ServiceProvider
         ],
         \App\Events\CallbackReceived::class => [
             \App\Listeners\UpdateEngagementOnCallback::class,
-        ],
-        
-        // Alert events
-        \App\Events\EmailOpened::class => [
-            \App\Listeners\UpdateEngagementOnEmailOpen::class,
-            \App\Listeners\Alert\UpdateAlertOnMessageOpened::class,
-        ],
-        \App\Events\EmailClicked::class => [
-            \App\Listeners\UpdateEngagementOnEmailClick::class,
-            \App\Listeners\Alert\UpdateAlertOnMessageClicked::class,
         ],
         
         // Campaign automation events

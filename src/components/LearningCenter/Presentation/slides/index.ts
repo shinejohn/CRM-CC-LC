@@ -36,3 +36,4 @@ export { QuoteSlide } from './QuoteSlide';
 export { CheckoutSlide } from './CheckoutSlide';
 export { FormSlide } from './FormSlide';
 export { ProfileBuilderSlide } from './ProfileBuilderSlide';
+export { PackageSelectionSlide } from './PackageSelectionSlide';

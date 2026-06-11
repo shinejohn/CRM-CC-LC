@@ -19,17 +19,15 @@ final class QueueNextCampaign implements ShouldQueue
         public string $customerId
     ) {}
 
-    public function handle(): void
+    public function handle(\App\Contracts\CampaignOrchestratorInterface $orchestrator): void
     {
         $customer = Customer::find($this->customerId);
-        
-        if (!$customer || $customer->campaign_status !== 'running') {
+
+        if (! $customer) {
             return;
         }
 
-        // TODO: Queue actual campaign send job from Module 2
-        // For now, just advance the day
-        $service = app(\App\Services\SMBCampaignService::class);
-        $service->advanceDay($customer);
+        // Execute today's timeline actions via the orchestrator (email, SMS, phone, stage updates)
+        $orchestrator->executeActionsForCustomer($customer);
     }
 }

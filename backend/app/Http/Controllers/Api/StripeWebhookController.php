@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\PipelineStage;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\CrmActivity;
 use App\Models\Order;
+use App\Models\ServiceBundle;
 use App\Services\StripeService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -201,6 +204,12 @@ final class StripeWebhookController extends Controller
                 $this->fulfillOrder($order);
             });
         }
+
+        // Handle bundle purchase metadata — advance pipeline to SALES/RETENTION
+        $metadata = (array) ($paymentIntent->metadata ?? []);
+        if (!empty($metadata['bundle_slug']) && !empty($metadata['customer_id'])) {
+            $this->handleBundlePurchase($metadata['customer_id'], $metadata['bundle_slug']);
+        }
     }
 
     /**
@@ -388,6 +397,52 @@ final class StripeWebhookController extends Controller
 
         // Mark order as completed after fulfillment
         $order->update(['status' => 'completed']);
+    }
+
+    /**
+     * Advance pipeline stage when a bundle is purchased via campaign landing page.
+     */
+    private function handleBundlePurchase(string $customerId, string $bundleSlug): void
+    {
+        $customer = Customer::find($customerId);
+        if (! $customer) {
+            Log::warning("Bundle purchase: customer {$customerId} not found");
+            return;
+        }
+
+        $bundle = ServiceBundle::where('slug', $bundleSlug)->first();
+
+        // Advance to SALES stage (bundle purchase is a clear buying signal)
+        // If already in SALES or RETENTION, leave at current or advance further
+        $targetStage = PipelineStage::SALES;
+        if ($customer->pipeline_stage === PipelineStage::SALES) {
+            $targetStage = PipelineStage::RETENTION;
+        } elseif ($customer->pipeline_stage === PipelineStage::RETENTION) {
+            // Already retained — just log
+            $targetStage = null;
+        }
+
+        if ($targetStage !== null) {
+            $customer->advanceToStage($targetStage, 'bundle_purchase');
+            Log::info("Bundle purchase: advanced customer {$customerId} to {$targetStage->value}");
+        }
+
+        // Create a high-value CRM activity
+        CrmActivity::create([
+            'tenant_id'   => $customer->tenant_id,
+            'customer_id' => $customer->id,
+            'type'        => 'bundle_purchase',
+            'title'       => 'Bundle Purchased: ' . ($bundle?->name ?? $bundleSlug),
+            'channel'     => 'stripe',
+            'status'      => 'completed',
+            'priority'    => 'high',
+            'notes'       => "Customer selected the {$bundleSlug} package via campaign landing page.",
+            'metadata'    => [
+                'bundle_slug'  => $bundleSlug,
+                'bundle_name'  => $bundle?->name,
+                'price_cents'  => $bundle?->price_cents,
+            ],
+        ]);
     }
 
     /**

@@ -44,3 +44,6 @@ Schedule::job(new \App\Jobs\GenerateDailyContentCards)->dailyAt('05:00');
 
 // Syndication — Weekly earnings recalculation and tier updates
 Schedule::job(new \App\Jobs\RecalculateSyndicationEarnings)->weeklyOn(1, '06:00');
+
+// PP→CC data sync — Pull SMBs, nonprofits, civic entities from Publishing Platform
+Schedule::command('sync:from-publishing-platform')->dailyAt('01:30');
