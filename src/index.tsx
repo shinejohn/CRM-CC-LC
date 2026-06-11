@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import { render } from 'react-dom';
 import { AppProvider } from './providers/AppProvider';
-import { AppRouter } from './app/AppRouter';
+import { AppRouter } from './AppRouter';
 
 render(
   <AppProvider>
