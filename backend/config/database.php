@@ -98,6 +98,23 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        // Publishing Platform (Day.News) read-only replica connection.
+        // Set PP_DB_URL to the Railway Postgres connection URL, or use individual PP_DB_* vars.
+        'publishing' => [
+            'driver' => 'pgsql',
+            'url' => env('PP_DB_URL'),
+            'host' => env('PP_DB_HOST', '127.0.0.1'),
+            'port' => env('PP_DB_PORT', '5432'),
+            'database' => env('PP_DB_DATABASE', 'railway'),
+            'username' => env('PP_DB_USERNAME', 'postgres'),
+            'password' => env('PP_DB_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'search_path' => 'public',
+            'sslmode' => 'prefer',
+        ],
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DB_URL'),

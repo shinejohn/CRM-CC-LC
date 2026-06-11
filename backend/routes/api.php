@@ -846,6 +846,11 @@ Route::prefix('v1')->group(function () {
         // Postal Delivery Webhook (unauthenticated, but signature checked within controller)
         Route::post('/webhook/postal', [\App\Http\Controllers\Api\V1\WebhookController::class, 'handlePostalEvent']);
     });
+    // PP DB status — authenticated CC admin endpoint (not bridge-auth)
+    Route::get('/publishing-bridge/pp-db/status', [PublishingBridgeController::class, 'ppDbStatus'])
+        ->middleware('auth:sanctum')
+        ->name('api.publishing-bridge.pp-db-status');
+
     // Publishing Bridge API (called by Multisite, NOT by frontend)
     Route::prefix('bridge')->middleware('bridge.auth')->group(function () {
         Route::get('/ping', [PublishingBridgeController::class, 'ping']);

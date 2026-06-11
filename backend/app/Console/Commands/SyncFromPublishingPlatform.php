@@ -9,6 +9,7 @@ use App\Models\Community;
 use App\Models\CommunitySubscription;
 use App\Models\Customer;
 use App\Models\SMB;
+use App\Services\PublishingDbService;
 use App\Services\PublishingPlatformService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -42,7 +43,7 @@ final class SyncFromPublishingPlatform extends Command
 
     private int $subscriptionsSynced = 0;
 
-    public function handle(PublishingPlatformService $ppService): int
+    public function handle(PublishingDbService $ppDb, PublishingPlatformService $ppService): int
     {
         $this->info('Starting sync from Publishing Platform...');
         $dryRun = (bool) $this->option('dry-run');
@@ -52,6 +53,59 @@ final class SyncFromPublishingPlatform extends Command
             $this->warn('DRY RUN — no data will be written.');
         }
 
+        // Prefer direct DB connection; fall back to HTTP bridge if DB is not configured
+        if ($ppDb->isReachable()) {
+            $this->info('Using direct Postgres connection to Publishing Platform.');
+            return $this->runWithDb($ppDb, $dryRun, $communitySlug);
+        }
+
+        $this->warn('PP_DB_URL not configured or unreachable — falling back to HTTP bridge.');
+        return $this->runWithHttp($ppService, $dryRun, $communitySlug);
+    }
+
+    private function runWithDb(PublishingDbService $ppDb, bool $dryRun, ?string $communitySlug): int
+    {
+        // Phase 1: Sync communities
+        $this->info('Phase 1: Syncing communities...');
+        $communities = $this->syncCommunitiesFromDb($ppDb, $dryRun, $communitySlug);
+
+        if (empty($communities)) {
+            $this->error('No communities returned from Publishing Platform Postgres. Check PP_DB_URL.');
+            return self::FAILURE;
+        }
+
+        // Phase 2: Sync businesses per community
+        $this->info('Phase 2: Syncing businesses...');
+        foreach ($communities as $community) {
+            $this->syncBusinessesFromDb($ppDb, $community, $dryRun);
+        }
+
+        // Phase 3: Sync civic entities per community
+        $this->info('Phase 3: Syncing civic entities...');
+        foreach ($communities as $community) {
+            $this->syncCivicEntitiesFromDb($ppDb, $community, $dryRun);
+        }
+
+        // Phase 4: Sync nonprofits per community
+        $this->info('Phase 4: Syncing nonprofits...');
+        foreach ($communities as $community) {
+            $this->syncNonprofitsFromDb($ppDb, $community, $dryRun);
+        }
+
+        // Phase 5: Sync subscriptions
+        if (! $this->option('skip-subscriptions')) {
+            $this->info('Phase 5: Syncing subscriptions...');
+            foreach ($communities as $community) {
+                $this->syncSubscriptionsFromDb($ppDb, $community, $dryRun);
+            }
+        }
+
+        $this->printSummary();
+        return self::SUCCESS;
+    }
+
+    private function runWithHttp(PublishingPlatformService $ppService, bool $dryRun, ?string $communitySlug): int
+    {
         // Phase 1: Sync communities
         $this->info('Phase 1: Syncing communities...');
         $communities = $this->syncCommunities($ppService, $dryRun, $communitySlug);
@@ -88,6 +142,12 @@ final class SyncFromPublishingPlatform extends Command
             }
         }
 
+        $this->printSummary();
+        return self::SUCCESS;
+    }
+
+    private function printSummary(): void
+    {
         $this->newLine();
         $this->info('Sync complete.');
         $this->table(
@@ -116,9 +176,272 @@ final class SyncFromPublishingPlatform extends Command
             'nonprofits_synced' => $this->nonprofitsSynced,
             'subscriptions_synced' => $this->subscriptionsSynced,
         ]);
-
-        return self::SUCCESS;
     }
+
+    // ─── Direct DB path ──────────────────────────────────────────────────
+
+    /**
+     * @return array<int, array{id: string, cc_id: string, slug: string}>
+     */
+    private function syncCommunitiesFromDb(PublishingDbService $ppDb, bool $dryRun, ?string $filterSlug): array
+    {
+        $ppCommunities = $ppDb->exportCommunities();
+
+        if (empty($ppCommunities)) {
+            return [];
+        }
+
+        $synced = [];
+
+        foreach ($ppCommunities as $ppComm) {
+            $slug = $ppComm['slug'] ?? '';
+            if ($filterSlug && $slug !== $filterSlug) {
+                continue;
+            }
+
+            $this->line("  Community: {$ppComm['name']} ({$slug})");
+
+            if ($dryRun) {
+                $synced[] = ['id' => (string) $ppComm['id'], 'cc_id' => '', 'slug' => $slug];
+                continue;
+            }
+
+            $existing = Community::where('slug', $slug)->first();
+
+            $data = [
+                'name'     => $ppComm['name'],
+                'slug'     => $slug,
+                'state'    => $ppComm['state'] ?? null,
+                'county'   => $ppComm['county'] ?? null,
+                'population' => $ppComm['population'] ?? null,
+                'timezone' => $ppComm['timezone'] ?? null,
+                'launched_at' => $ppComm['launched_at'] ?? null,
+                'settings' => [
+                    'pp_community_id'     => $ppComm['id'],
+                    'pp_description'      => $ppComm['description'] ?? null,
+                    'pp_hero_image_url'   => $ppComm['hero_image_url'] ?? null,
+                    'pp_logo_url'         => $ppComm['logo_url'] ?? null,
+                ],
+            ];
+
+            if ($existing) {
+                $existing->update($data);
+                $this->communitiesUpdated++;
+                $synced[] = ['id' => (string) $ppComm['id'], 'cc_id' => $existing->id, 'slug' => $slug];
+            } else {
+                $community = Community::create($data);
+                $this->communitiesCreated++;
+                $synced[] = ['id' => (string) $ppComm['id'], 'cc_id' => $community->id, 'slug' => $slug];
+            }
+        }
+
+        $this->info("  Communities: {$this->communitiesCreated} created, {$this->communitiesUpdated} updated");
+
+        return $synced;
+    }
+
+    /**
+     * @param  array{id: string, cc_id: string, slug: string}  $community
+     */
+    private function syncBusinessesFromDb(PublishingDbService $ppDb, array $community, bool $dryRun): void
+    {
+        $ppCommunityId = $community['id'];
+        $ccCommunityId = $community['cc_id'];
+        $page = 1;
+        $totalSynced = 0;
+
+        if (! $ccCommunityId && ! $dryRun) {
+            $ccCommunity = Community::where('slug', $community['slug'])->first();
+            $ccCommunityId = $ccCommunity?->id ?? '';
+        }
+
+        do {
+            $result = $ppDb->exportBusinesses($ppCommunityId, $page);
+            $businesses = $result['data'] ?? [];
+            $meta = $result['meta'] ?? ['current_page' => 1, 'last_page' => 1];
+
+            foreach ($businesses as $biz) {
+                if ($dryRun) {
+                    $totalSynced++;
+                    continue;
+                }
+
+                try {
+                    $this->upsertBusinessAsCustomerAndSmb($biz, $ccCommunityId);
+                    $totalSynced++;
+                } catch (\Throwable $e) {
+                    $bizName = $biz['name'] ?? $biz['id'] ?? 'unknown';
+                    $this->warn("    Skipped business '{$bizName}': {$e->getMessage()}");
+                    Log::warning('SyncFromPublishingPlatform: skipped business', [
+                        'business_id'   => $biz['id'] ?? null,
+                        'business_name' => $biz['name'] ?? null,
+                        'error'         => $e->getMessage(),
+                    ]);
+                }
+            }
+
+            $page++;
+        } while ($page <= ($meta['last_page'] ?? 1));
+
+        $this->line("  {$community['slug']}: {$totalSynced} businesses synced");
+    }
+
+    /**
+     * @param  array{id: string, cc_id: string, slug: string}  $community
+     */
+    private function syncCivicEntitiesFromDb(PublishingDbService $ppDb, array $community, bool $dryRun): void
+    {
+        $ppCommunityId = $community['id'];
+        $ccCommunityId = $this->resolveCcCommunityId($community, $dryRun);
+        $page = 1;
+        $totalSynced = 0;
+
+        do {
+            $result = $ppDb->exportCivicEntities($ppCommunityId, $page);
+            $entities = $result['data'] ?? [];
+            $meta = $result['meta'] ?? ['current_page' => 1, 'last_page' => 1];
+
+            foreach ($entities as $entity) {
+                if ($dryRun) {
+                    $totalSynced++;
+                    continue;
+                }
+
+                try {
+                    $this->upsertCivicEntityAsCustomerAndSmb($entity, $ccCommunityId);
+                    $totalSynced++;
+                } catch (\Throwable $e) {
+                    $name = $entity['legal_name'] ?? $entity['display_name'] ?? $entity['id'] ?? 'unknown';
+                    $this->warn("    Skipped civic entity '{$name}': {$e->getMessage()}");
+                    Log::warning('SyncFromPublishingPlatform: skipped civic entity', [
+                        'entity_id'   => $entity['id'] ?? null,
+                        'entity_name' => $entity['legal_name'] ?? null,
+                        'error'       => $e->getMessage(),
+                    ]);
+                }
+            }
+
+            $page++;
+        } while ($page <= ($meta['last_page'] ?? 1));
+
+        $this->civicEntitiesSynced += $totalSynced;
+
+        if ($totalSynced > 0) {
+            $this->line("  {$community['slug']}: {$totalSynced} civic entities synced");
+        }
+    }
+
+    /**
+     * @param  array{id: string, cc_id: string, slug: string}  $community
+     */
+    private function syncNonprofitsFromDb(PublishingDbService $ppDb, array $community, bool $dryRun): void
+    {
+        $ppCommunityId = $community['id'];
+        $ccCommunityId = $this->resolveCcCommunityId($community, $dryRun);
+        $page = 1;
+        $totalSynced = 0;
+
+        do {
+            $result = $ppDb->exportNonprofits($ppCommunityId, $page);
+            $nonprofits = $result['data'] ?? [];
+            $meta = $result['meta'] ?? ['current_page' => 1, 'last_page' => 1];
+
+            foreach ($nonprofits as $np) {
+                if ($dryRun) {
+                    $totalSynced++;
+                    continue;
+                }
+
+                try {
+                    $this->upsertNonprofitAsCustomerAndSmb($np, $ccCommunityId);
+                    $totalSynced++;
+                } catch (\Throwable $e) {
+                    $name = $np['legal_name'] ?? $np['id'] ?? 'unknown';
+                    $this->warn("    Skipped nonprofit '{$name}': {$e->getMessage()}");
+                    Log::warning('SyncFromPublishingPlatform: skipped nonprofit', [
+                        'nonprofit_id'   => $np['id'] ?? null,
+                        'nonprofit_name' => $np['legal_name'] ?? null,
+                        'error'          => $e->getMessage(),
+                    ]);
+                }
+            }
+
+            $page++;
+        } while ($page <= ($meta['last_page'] ?? 1));
+
+        $this->nonprofitsSynced += $totalSynced;
+
+        if ($totalSynced > 0) {
+            $this->line("  {$community['slug']}: {$totalSynced} nonprofits synced");
+        }
+    }
+
+    /**
+     * @param  array{id: string, cc_id: string, slug: string}  $community
+     */
+    private function syncSubscriptionsFromDb(PublishingDbService $ppDb, array $community, bool $dryRun): void
+    {
+        $ppCommunityId = $community['id'];
+        $ccCommunityId = $community['cc_id'];
+
+        if (! $ccCommunityId && ! $dryRun) {
+            $ccCommunity = Community::where('slug', $community['slug'])->first();
+            $ccCommunityId = $ccCommunity?->id ?? '';
+        }
+
+        $ppSubscriptions = $ppDb->exportBusinessSubscriptions($ppCommunityId);
+
+        foreach ($ppSubscriptions as $ppSub) {
+            if ($dryRun) {
+                $this->subscriptionsSynced++;
+                continue;
+            }
+
+            $ppBusinessId = (string) ($ppSub['business_id'] ?? '');
+            if ($ppBusinessId === '') {
+                continue;
+            }
+
+            $customer = Customer::withoutGlobalScopes()
+                ->where('external_id', $ppBusinessId)
+                ->first();
+
+            if (! $customer) {
+                continue;
+            }
+
+            $tier = $this->mapSubscriptionTier($ppSub['tier'] ?? 'basic');
+
+            CommunitySubscription::updateOrCreate(
+                [
+                    'customer_id' => $customer->id,
+                    'community_id' => $ccCommunityId,
+                ],
+                [
+                    'tier'                   => $tier,
+                    'status'                 => $ppSub['status'] ?? 'active',
+                    'monthly_rate'           => $ppSub['monthly_amount'] ?? null,
+                    'stripe_subscription_id' => $ppSub['stripe_subscription_id'] ?? null,
+                    'stripe_customer_id'     => $ppSub['stripe_customer_id'] ?? null,
+                    'product_slug'           => 'community-' . $tier,
+                ]
+            );
+
+            $customer->update([
+                'subscription_tier' => $tier,
+                'pipeline_stage'    => PipelineStage::RETENTION,
+                'stage_entered_at'  => $ppSub['subscription_started_at'] ?? now(),
+            ]);
+
+            $this->subscriptionsSynced++;
+        }
+
+        if ($this->subscriptionsSynced > 0) {
+            $this->line("  {$community['slug']}: {$this->subscriptionsSynced} subscriptions synced");
+        }
+    }
+
+    // ─── HTTP path ───────────────────────────────────────────────────────
 
     /**
      * @return array<int, array{id: string, cc_id: string, slug: string}>

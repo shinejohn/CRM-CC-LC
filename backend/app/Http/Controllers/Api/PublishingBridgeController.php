@@ -6,14 +6,19 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\CommunitySubscription;
+use App\Models\Customer;
+use App\Services\PublishingDbService;
 use App\Services\Pitch\SlotInventoryService;
+use Illuminate\Http\JsonResponse;
 
 final class PublishingBridgeController extends Controller
 {
     private SlotInventoryService $slotService;
 
-    public function __construct(SlotInventoryService $slotService)
-    {
+    public function __construct(
+        SlotInventoryService $slotService,
+        private readonly PublishingDbService $ppDb,
+    ) {
         $this->slotService = $slotService;
     }
 
@@ -27,6 +32,32 @@ final class PublishingBridgeController extends Controller
             'status' => 'ok',
             'service' => 'command-center',
             'timestamp' => now()->toIso8601String(),
+        ]);
+    }
+
+    /**
+     * GET /v1/publishing-bridge/pp-db/status
+     *
+     * Return counts from the Publishing Platform Postgres and CC's synced records.
+     * Used by the admin UI to decide when to trigger a sync.
+     */
+    public function ppDbStatus(): JsonResponse
+    {
+        $connected = $this->ppDb->isReachable();
+
+        $ppCounts = $connected ? $this->ppDb->getCounts() : null;
+
+        $ccCounts = [
+            'customers' => Customer::withoutGlobalScopes()->count(),
+        ];
+
+        return response()->json([
+            'data' => [
+                'connected'  => $connected,
+                'pp_counts'  => $ppCounts,
+                'cc_counts'  => $ccCounts,
+                'config_set' => ! empty(config('database.connections.publishing.url') ?? config('database.connections.publishing.host')),
+            ],
         ]);
     }
 
