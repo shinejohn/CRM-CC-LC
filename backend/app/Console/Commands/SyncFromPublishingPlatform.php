@@ -100,6 +100,18 @@ final class SyncFromPublishingPlatform extends Command
             }
         }
 
+        // One bulk SQL pass to link smb_id on customers (replaces per-record FK resolution)
+        if (! $dryRun) {
+            $this->info('Linking SMB IDs to customers...');
+            DB::statement("
+                UPDATE customers c SET smb_id = s.id, updated_at = now()
+                FROM smbs s
+                WHERE s.pp_external_id = c.external_id
+                  AND s.community_id = c.community_id
+                  AND (c.smb_id IS NULL OR c.smb_id != s.id)
+            ");
+        }
+
         $this->printSummary();
         return self::SUCCESS;
     }
@@ -260,24 +272,10 @@ final class SyncFromPublishingPlatform extends Command
             $businesses = $result['data'] ?? [];
             $meta = $result['meta'] ?? ['current_page' => 1, 'last_page' => 1];
 
-            foreach ($businesses as $biz) {
-                if ($dryRun) {
-                    $totalSynced++;
-                    continue;
-                }
+            $totalSynced += count($businesses);
 
-                try {
-                    $this->upsertBusinessAsCustomerAndSmb($biz, $ccCommunityId);
-                    $totalSynced++;
-                } catch (\Throwable $e) {
-                    $bizName = $biz['name'] ?? $biz['id'] ?? 'unknown';
-                    $this->warn("    Skipped business '{$bizName}': {$e->getMessage()}");
-                    Log::warning('SyncFromPublishingPlatform: skipped business', [
-                        'business_id'   => $biz['id'] ?? null,
-                        'business_name' => $biz['name'] ?? null,
-                        'error'         => $e->getMessage(),
-                    ]);
-                }
+            if (! $dryRun && ! empty($businesses)) {
+                $this->batchUpsertBusinesses($businesses, $ccCommunityId);
             }
 
             $page++;
@@ -301,24 +299,10 @@ final class SyncFromPublishingPlatform extends Command
             $entities = $result['data'] ?? [];
             $meta = $result['meta'] ?? ['current_page' => 1, 'last_page' => 1];
 
-            foreach ($entities as $entity) {
-                if ($dryRun) {
-                    $totalSynced++;
-                    continue;
-                }
+            $totalSynced += count($entities);
 
-                try {
-                    $this->upsertCivicEntityAsCustomerAndSmb($entity, $ccCommunityId);
-                    $totalSynced++;
-                } catch (\Throwable $e) {
-                    $name = $entity['legal_name'] ?? $entity['display_name'] ?? $entity['id'] ?? 'unknown';
-                    $this->warn("    Skipped civic entity '{$name}': {$e->getMessage()}");
-                    Log::warning('SyncFromPublishingPlatform: skipped civic entity', [
-                        'entity_id'   => $entity['id'] ?? null,
-                        'entity_name' => $entity['legal_name'] ?? null,
-                        'error'       => $e->getMessage(),
-                    ]);
-                }
+            if (! $dryRun && ! empty($entities)) {
+                $this->batchUpsertCivicEntities($entities, $ccCommunityId);
             }
 
             $page++;
@@ -346,24 +330,10 @@ final class SyncFromPublishingPlatform extends Command
             $nonprofits = $result['data'] ?? [];
             $meta = $result['meta'] ?? ['current_page' => 1, 'last_page' => 1];
 
-            foreach ($nonprofits as $np) {
-                if ($dryRun) {
-                    $totalSynced++;
-                    continue;
-                }
+            $totalSynced += count($nonprofits);
 
-                try {
-                    $this->upsertNonprofitAsCustomerAndSmb($np, $ccCommunityId);
-                    $totalSynced++;
-                } catch (\Throwable $e) {
-                    $name = $np['legal_name'] ?? $np['id'] ?? 'unknown';
-                    $this->warn("    Skipped nonprofit '{$name}': {$e->getMessage()}");
-                    Log::warning('SyncFromPublishingPlatform: skipped nonprofit', [
-                        'nonprofit_id'   => $np['id'] ?? null,
-                        'nonprofit_name' => $np['legal_name'] ?? null,
-                        'error'          => $e->getMessage(),
-                    ]);
-                }
+            if (! $dryRun && ! empty($nonprofits)) {
+                $this->batchUpsertNonprofits($nonprofits, $ccCommunityId);
             }
 
             $page++;
@@ -374,6 +344,320 @@ final class SyncFromPublishingPlatform extends Command
         if ($totalSynced > 0) {
             $this->line("  {$community['slug']}: {$totalSynced} nonprofits synced");
         }
+    }
+
+    // ─── Batch upsert helpers (DB path only) ─────────────────────────────
+
+    /** @param  array<int, array<string, mixed>>  $businesses */
+    private function batchUpsertBusinesses(array $businesses, string $ccCommunityId): void
+    {
+        $smbRows = [];
+        $customerRows = [];
+        $now = now()->toDateTimeString();
+
+        foreach ($businesses as $biz) {
+            $externalId = (string) ($biz['id'] ?? '');
+            if ($externalId === '') {
+                continue;
+            }
+
+            $categories = $biz['categories'] ?? [];
+            $category = is_array($categories) ? ($categories[0] ?? null) : null;
+            $coords = ($biz['latitude'] ?? null) && ($biz['longitude'] ?? null)
+                ? json_encode(['lat' => (float) $biz['latitude'], 'lng' => (float) $biz['longitude']])
+                : null;
+
+            $smbRows[] = [
+                'id'             => Str::uuid()->toString(),
+                'community_id'   => $ccCommunityId,
+                'pp_external_id' => $externalId,
+                'business_name'  => $biz['name'] ?? 'Unknown',
+                'category'       => $category,
+                'primary_email'  => $biz['email'] ?? null,
+                'primary_phone'  => $biz['phone'] ?? null,
+                'address'        => $biz['address'] ?? null,
+                'city'           => $biz['city'] ?? null,
+                'state'          => $biz['state'] ?? null,
+                'zip'            => $biz['postal_code'] ?? null,
+                'coordinates'    => $coords,
+                'metadata'       => json_encode([
+                    'pp_business_id'       => $externalId,
+                    'pp_google_place_id'   => $biz['google_place_id'] ?? null,
+                    'pp_organization_type' => $biz['organization_type'] ?? 'business',
+                    'pp_advertising_tier'  => $biz['advertising_tier'] ?? 'basic',
+                    'pp_synced_at'         => $now,
+                ]),
+                'email_opted_in' => true,
+                'sms_opted_in'   => false,
+                'rvm_opted_in'   => false,
+                'phone_opted_in' => false,
+                'do_not_contact' => false,
+                'created_at'     => $now,
+                'updated_at'     => $now,
+            ];
+
+            $customerRows[] = [
+                'id'                   => Str::uuid()->toString(),
+                'tenant_id'            => config('fibonacco.system_tenant_id'),
+                'community_id'         => $ccCommunityId,
+                'external_id'          => $externalId,
+                'slug'                 => Str::slug($biz['name'] ?? 'unknown').'-'.Str::random(6),
+                'business_name'        => $biz['name'] ?? 'Unknown',
+                'category'             => $category,
+                'email'                => $biz['email'] ?? null,
+                'phone'                => $biz['phone'] ?? null,
+                'website'              => $biz['website'] ?? null,
+                'address'              => $biz['address'] ?? null,
+                'city'                 => $biz['city'] ?? null,
+                'state'                => $biz['state'] ?? null,
+                'zip'                  => $biz['postal_code'] ?? null,
+                'coordinates'          => $coords,
+                'google_rating'        => $biz['rating'] ?? null,
+                'google_review_count'  => $biz['reviews_count'] ?? null,
+                'business_description' => $biz['description'] ?? $biz['short_description'] ?? null,
+                'business_hours'       => isset($biz['opening_hours']) ? json_encode($biz['opening_hours']) : null,
+                'pipeline_stage'       => PipelineStage::HOOK->value,
+                'stage_entered_at'     => $now,
+                'lead_source'          => 'publishing_platform_sync',
+                'email_opted_in'       => true,
+                'sms_opted_in'         => false,
+                'rvm_opted_in'         => false,
+                'phone_opted_in'       => false,
+                'do_not_contact'       => false,
+                'data_sources'         => json_encode(['publishing_platform']),
+                'metadata'             => json_encode([
+                    'pp_business_id'     => $externalId,
+                    'pp_google_place_id' => $biz['google_place_id'] ?? null,
+                    'pp_images'          => $biz['images'] ?? null,
+                    'pp_is_advertiser'   => $biz['is_advertiser'] ?? false,
+                    'pp_synced_at'       => $now,
+                ]),
+                'created_at'           => $now,
+                'updated_at'           => $now,
+            ];
+        }
+
+        if (empty($smbRows)) {
+            return;
+        }
+
+        $updateCols = ['business_name', 'category', 'primary_email', 'primary_phone', 'address', 'city', 'state', 'zip', 'coordinates', 'metadata', 'updated_at'];
+        DB::table('smbs')->upsert($smbRows, ['pp_external_id'], $updateCols);
+
+        $updateCols = ['business_name', 'category', 'email', 'phone', 'website', 'address', 'city', 'state', 'zip', 'coordinates', 'google_rating', 'google_review_count', 'business_description', 'business_hours', 'metadata', 'updated_at'];
+        DB::table('customers')->upsert($customerRows, ['external_id'], $updateCols);
+
+        $this->smbsCreated += count($smbRows);
+        $this->customersCreated += count($customerRows);
+    }
+
+    /** @param  array<int, array<string, mixed>>  $entities */
+    private function batchUpsertCivicEntities(array $entities, string $ccCommunityId): void
+    {
+        $smbRows = [];
+        $customerRows = [];
+        $now = now()->toDateTimeString();
+
+        foreach ($entities as $entity) {
+            $rawId = (string) ($entity['id'] ?? '');
+            if ($rawId === '') {
+                continue;
+            }
+
+            $externalId = 'civic:' . $rawId;
+            $entityType = $entity['entity_type'] ?? 'government';
+            $category = match ($entityType) {
+                'school'         => 'Education - ' . ucfirst($entity['entity_subtype'] ?? 'School'),
+                'school_district'=> 'Education - School District',
+                'church'         => 'Religious Organization',
+                'nonprofit'      => 'Nonprofit',
+                default          => 'Government - ' . ucfirst($entity['entity_subtype'] ?? 'Municipal'),
+            };
+            $name = $entity['display_name'] ?? $entity['legal_name'] ?? 'Unknown';
+            $coords = ($entity['lat'] ?? null) && ($entity['lng'] ?? null)
+                ? json_encode(['lat' => (float) $entity['lat'], 'lng' => (float) $entity['lng']])
+                : null;
+
+            $smbRows[] = [
+                'id'             => Str::uuid()->toString(),
+                'community_id'   => $ccCommunityId,
+                'pp_external_id' => $externalId,
+                'business_name'  => $name,
+                'category'       => $category,
+                'primary_email'  => $entity['email'] ?? null,
+                'primary_phone'  => $entity['phone'] ?? null,
+                'address'        => $entity['address'] ?? null,
+                'city'           => $entity['city'] ?? null,
+                'state'          => $entity['state_abbr'] ?? null,
+                'zip'            => $entity['zip'] ?? null,
+                'coordinates'    => $coords,
+                'metadata'       => json_encode([
+                    'pp_civic_entity_id' => $rawId,
+                    'pp_entity_type'     => $entityType,
+                    'pp_entity_subtype'  => $entity['entity_subtype'] ?? null,
+                    'pp_fips_code'       => $entity['fips_code'] ?? null,
+                    'pp_nces_id'         => $entity['nces_id'] ?? null,
+                    'pp_synced_at'       => $now,
+                ]),
+                'email_opted_in' => true,
+                'sms_opted_in'   => false,
+                'rvm_opted_in'   => false,
+                'phone_opted_in' => false,
+                'do_not_contact' => false,
+                'created_at'     => $now,
+                'updated_at'     => $now,
+            ];
+
+            $customerRows[] = [
+                'id'                   => Str::uuid()->toString(),
+                'tenant_id'            => config('fibonacco.system_tenant_id'),
+                'community_id'         => $ccCommunityId,
+                'external_id'          => $externalId,
+                'slug'                 => Str::slug($name).'-'.Str::random(6),
+                'business_name'        => $name,
+                'category'             => $category,
+                'email'                => $entity['email'] ?? null,
+                'phone'                => $entity['phone'] ?? null,
+                'website'              => $entity['website'] ?? null,
+                'address'              => $entity['address'] ?? null,
+                'city'                 => $entity['city'] ?? null,
+                'state'                => $entity['state_abbr'] ?? null,
+                'zip'                  => $entity['zip'] ?? null,
+                'coordinates'          => $coords,
+                'business_description' => $entity['mission_statement'] ?? null,
+                'pipeline_stage'       => PipelineStage::HOOK->value,
+                'stage_entered_at'     => $now,
+                'lead_source'          => 'civic_entity_sync',
+                'email_opted_in'       => true,
+                'sms_opted_in'         => false,
+                'rvm_opted_in'         => false,
+                'phone_opted_in'       => false,
+                'do_not_contact'       => false,
+                'data_sources'         => json_encode(['publishing_platform', 'civic_entities']),
+                'metadata'             => json_encode([
+                    'pp_civic_entity_id' => $rawId,
+                    'pp_entity_type'     => $entityType,
+                    'pp_entity_subtype'  => $entity['entity_subtype'] ?? null,
+                    'pp_synced_at'       => $now,
+                ]),
+                'created_at'           => $now,
+                'updated_at'           => $now,
+            ];
+        }
+
+        if (empty($smbRows)) {
+            return;
+        }
+
+        $updateCols = ['business_name', 'category', 'primary_email', 'primary_phone', 'address', 'city', 'state', 'zip', 'coordinates', 'metadata', 'updated_at'];
+        DB::table('smbs')->upsert($smbRows, ['pp_external_id'], $updateCols);
+
+        $updateCols = ['business_name', 'category', 'email', 'phone', 'website', 'address', 'city', 'state', 'zip', 'coordinates', 'business_description', 'metadata', 'updated_at'];
+        DB::table('customers')->upsert($customerRows, ['external_id'], $updateCols);
+
+        $this->smbsCreated += count($smbRows);
+        $this->customersCreated += count($customerRows);
+    }
+
+    /** @param  array<int, array<string, mixed>>  $nonprofits */
+    private function batchUpsertNonprofits(array $nonprofits, string $ccCommunityId): void
+    {
+        $smbRows = [];
+        $customerRows = [];
+        $now = now()->toDateTimeString();
+
+        foreach ($nonprofits as $np) {
+            $rawId = (string) ($np['id'] ?? '');
+            if ($rawId === '') {
+                continue;
+            }
+
+            $externalId = 'np:' . $rawId;
+            $name = $np['legal_name'] ?? 'Unknown Nonprofit';
+            $category = $this->mapNteeToCategory($np['ntee_code'] ?? '');
+            $coords = ($np['lat'] ?? null) && ($np['lng'] ?? null)
+                ? json_encode(['lat' => (float) $np['lat'], 'lng' => (float) $np['lng']])
+                : null;
+
+            $smbRows[] = [
+                'id'             => Str::uuid()->toString(),
+                'community_id'   => $ccCommunityId,
+                'pp_external_id' => $externalId,
+                'business_name'  => $name,
+                'category'       => $category,
+                'primary_email'  => $np['email'] ?? null,
+                'primary_phone'  => $np['phone'] ?? null,
+                'address'        => $np['street'] ?? null,
+                'city'           => $np['city'] ?? null,
+                'state'          => $np['state_abbr'] ?? null,
+                'zip'            => $np['zip'] ?? null,
+                'coordinates'    => $coords,
+                'metadata'       => json_encode([
+                    'pp_nonprofit_id'     => $rawId,
+                    'pp_ein'              => $np['ein'] ?? null,
+                    'pp_ntee_code'        => $np['ntee_code'] ?? null,
+                    'pp_subsection_code'  => $np['subsection_code'] ?? null,
+                    'pp_annual_revenue'   => $np['income_amount'] ?? null,
+                    'pp_synced_at'        => $now,
+                ]),
+                'email_opted_in' => true,
+                'sms_opted_in'   => false,
+                'rvm_opted_in'   => false,
+                'phone_opted_in' => false,
+                'do_not_contact' => false,
+                'created_at'     => $now,
+                'updated_at'     => $now,
+            ];
+
+            $customerRows[] = [
+                'id'                   => Str::uuid()->toString(),
+                'tenant_id'            => config('fibonacco.system_tenant_id'),
+                'community_id'         => $ccCommunityId,
+                'external_id'          => $externalId,
+                'slug'                 => Str::slug($name).'-'.Str::random(6),
+                'business_name'        => $name,
+                'category'             => $category,
+                'email'                => $np['email'] ?? null,
+                'phone'                => $np['phone'] ?? null,
+                'website'              => $np['website'] ?? null,
+                'address'              => $np['street'] ?? null,
+                'city'                 => $np['city'] ?? null,
+                'state'                => $np['state_abbr'] ?? null,
+                'zip'                  => $np['zip'] ?? null,
+                'coordinates'          => $coords,
+                'business_description' => $np['mission_statement'] ?? null,
+                'pipeline_stage'       => PipelineStage::HOOK->value,
+                'stage_entered_at'     => $now,
+                'lead_source'          => 'nonprofit_sync',
+                'email_opted_in'       => true,
+                'sms_opted_in'         => false,
+                'rvm_opted_in'         => false,
+                'phone_opted_in'       => false,
+                'do_not_contact'       => false,
+                'data_sources'         => json_encode(['publishing_platform', 'nonprofit_organizations']),
+                'metadata'             => json_encode([
+                    'pp_nonprofit_id' => $rawId,
+                    'pp_ein'          => $np['ein'] ?? null,
+                    'pp_ntee_code'    => $np['ntee_code'] ?? null,
+                    'pp_synced_at'    => $now,
+                ]),
+                'created_at'           => $now,
+                'updated_at'           => $now,
+            ];
+        }
+
+        if (empty($smbRows)) {
+            return;
+        }
+
+        $updateCols = ['business_name', 'category', 'primary_email', 'primary_phone', 'address', 'city', 'state', 'zip', 'coordinates', 'metadata', 'updated_at'];
+        DB::table('smbs')->upsert($smbRows, ['pp_external_id'], $updateCols);
+
+        $updateCols = ['business_name', 'category', 'email', 'phone', 'website', 'address', 'city', 'state', 'zip', 'coordinates', 'business_description', 'metadata', 'updated_at'];
+        DB::table('customers')->upsert($customerRows, ['external_id'], $updateCols);
+
+        $this->smbsCreated += count($smbRows);
+        $this->customersCreated += count($customerRows);
     }
 
     /**
