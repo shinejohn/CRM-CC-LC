@@ -16,8 +16,7 @@ return new class extends Migration
         if (! Schema::hasTable('smbs')) {
             Schema::create('smbs', function (Blueprint $table) {
                 $table->uuid('id')->primary();
-                $table->uuid('uuid')->unique();
-                $table->bigInteger('community_id');
+                $table->uuid('community_id')->nullable();
 
                 $table->string('business_name');
                 $table->string('dba_name')->nullable();
@@ -95,9 +94,8 @@ return new class extends Migration
             });
         }
 
-        // FK skipped: community_id is bigInteger here but communities uses UUID PKs,
-        // causing a type mismatch. The sync command uses community_id as a lookup key
-        // without needing a DB-level FK constraint.
+        // No FK constraint added — the sync populates this loosely and the
+        // convert_communities_id_to_uuid migration handles it if upgrading from bigint.
     }
 
     public function down(): void
