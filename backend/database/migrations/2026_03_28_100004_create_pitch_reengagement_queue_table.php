@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('pitch_reengagement_queue', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('session_id');
-            $table->unsignedBigInteger('smb_id')->nullable();
+            $table->uuid('smb_id')->nullable();
             $table->uuid('customer_id')->nullable();
             $table->string('contact_email');
             $table->string('reengagement_type');

@@ -32,14 +32,14 @@ return new class extends Migration
             
             // Source reference
             $table->string('source_type', 50)->nullable()->index();
-            $table->unsignedBigInteger('source_id')->nullable()->index();
-            
+            $table->bigInteger('source_id')->nullable()->index();
+
             // Channel
             $table->string('channel', 20)->index(); // email, sms, push, voice
-            
+
             // Recipient
             $table->string('recipient_type', 20)->nullable(); // subscriber, smb
-            $table->unsignedBigInteger('recipient_id')->nullable();
+            $table->bigInteger('recipient_id')->nullable();
             $table->string('recipient_address', 255)->index(); // email, phone, or device token
             
             // Content (denormalized for speed)
@@ -82,7 +82,7 @@ return new class extends Migration
         
         Schema::create('delivery_events', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('message_queue_id')->index();
+            $table->uuid('message_queue_id')->index();
             
             // Event details
             $table->string('event_type', 50)->index(); // queued, sent, delivered, opened, clicked, bounced, complained, unsubscribed
@@ -186,7 +186,7 @@ return new class extends Migration
             $table->string('source', 100)->nullable(); // Where the suppression came from
             
             // Scope
-            $table->unsignedBigInteger('community_id')->nullable(); // NULL = global, otherwise community-specific
+            $table->bigInteger('community_id')->nullable(); // NULL = global, otherwise community-specific
             
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('expires_at')->nullable()->index(); // NULL = permanent

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('community_id')->nullable()->after('id');
-            $table->unsignedBigInteger('smb_id')->nullable()->after('community_id');
+            $table->uuid('community_id')->nullable()->after('id');
+            $table->uuid('smb_id')->nullable()->after('community_id');
             $table->uuid('tenant_id')->nullable()->after('smb_id');
 
             $table->foreign('smb_id')->references('id')->on('smbs')->nullOnDelete();

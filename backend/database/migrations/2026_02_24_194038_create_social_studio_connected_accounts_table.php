@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('social_studio_connected_accounts', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('smb_id');
+            $table->uuid('smb_id');
             $table->enum('platform', ['facebook', 'instagram', 'x', 'google_biz', 'linkedin', 'pinterest']);
             $table->string('platform_account_id');
             $table->string('display_name')->nullable();

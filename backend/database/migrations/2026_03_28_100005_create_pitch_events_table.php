@@ -12,8 +12,8 @@ return new class extends Migration
         Schema::create('pitch_events', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('session_id');
-            $table->unsignedBigInteger('smb_id')->nullable();
-            $table->unsignedBigInteger('community_id');
+            $table->uuid('smb_id')->nullable();
+            $table->uuid('community_id');
             $table->string('event_type');
             $table->string('step')->nullable();
             $table->string('gate')->nullable();

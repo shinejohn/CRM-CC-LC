@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('social_studio_content', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('smb_id');
+            $table->uuid('smb_id');
             $table->uuid('session_id')->nullable();
             $table->enum('content_type', [
                 'post_copy', 'event_card', 'coupon_card',

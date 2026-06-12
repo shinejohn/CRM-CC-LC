@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cssn_smb_preferences', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('smb_id');
+            $table->uuid('smb_id');
             $table->boolean('auto_distribute_coupons')->default(true);
             $table->boolean('auto_distribute_events')->default(true);
             $table->boolean('auto_distribute_articles')->default(true);

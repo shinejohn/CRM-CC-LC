@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    // Disable transaction wrapping: the FK add can fail (type mismatch) and
+    // we don't want a rolled-back transaction to also undo the CREATE TABLE.
+    public $withinTransaction = false;
+
     public function up(): void
     {
         if (! Schema::hasTable('smbs')) {
@@ -91,20 +95,9 @@ return new class extends Migration
             });
         }
 
-        // Try rotating between bigint and uuid if it fails? No, that's crazy.
-        // Just try adding the constraint explicitly.
-        try {
-            if (\Illuminate\Support\Facades\DB::getDriverName() !== 'sqlite') {
-                \Illuminate\Support\Facades\DB::statement('ALTER TABLE smbs ADD CONSTRAINT smbs_community_id_foreign FOREIGN KEY (community_id) REFERENCES communities(id) ON DELETE CASCADE');
-            }
-        } catch (\Exception $e) {
-            if (str_contains($e->getMessage(), 'already exists')) {
-                // Ignore
-            } else {
-                error_log('FOREIGN KEY ERROR: '.$e->getMessage());
-                // If it fails with "bigint and uuid", one of them is the wrong type.
-            }
-        }
+        // FK skipped: community_id is bigInteger here but communities uses UUID PKs,
+        // causing a type mismatch. The sync command uses community_id as a lookup key
+        // without needing a DB-level FK constraint.
     }
 
     public function down(): void

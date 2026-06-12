@@ -11,9 +11,9 @@ return new class extends Migration
     {
         Schema::create('pitch_sessions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('smb_id')->nullable();
+            $table->uuid('smb_id')->nullable();
             $table->uuid('customer_id')->nullable();
-            $table->unsignedBigInteger('community_id');
+            $table->uuid('community_id');
             $table->uuid('conversation_id')->nullable();
             $table->string('entry_platform');
             $table->string('entry_context')->nullable();

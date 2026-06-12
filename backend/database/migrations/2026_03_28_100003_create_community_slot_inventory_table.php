@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('community_slot_inventory', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('community_id');
+            $table->uuid('community_id');
             $table->string('platform');
             $table->string('slot_type');
             $table->string('category');

@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::table('customers', function (Blueprint $table) {
             if (! Schema::hasColumn('customers', 'smb_id')) {
-                $table->unsignedBigInteger('smb_id')->nullable()->after('community_id');
+                $table->uuid('smb_id')->nullable()->after('community_id');
                 $table->foreign('smb_id')->references('id')->on('smbs')->nullOnDelete();
                 $table->index('smb_id');
             }

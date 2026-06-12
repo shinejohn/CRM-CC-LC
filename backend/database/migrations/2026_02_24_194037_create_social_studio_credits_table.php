@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('social_studio_credits', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('smb_id')->unique();
+            $table->uuid('smb_id')->unique();
             $table->integer('balance')->default(0);
             $table->integer('lifetime_purchased')->default(0);
             $table->integer('lifetime_consumed')->default(0);

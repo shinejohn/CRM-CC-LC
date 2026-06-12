@@ -52,6 +52,12 @@ return new class extends Migration
             return;
         }
 
+        // Skip if communities.id is already UUID (table was created with UUID PK from the start)
+        $col = DB::selectOne("SELECT data_type FROM information_schema.columns WHERE table_name='communities' AND column_name='id'");
+        if ($col && str_contains(strtolower($col->data_type), 'uuid')) {
+            return;
+        }
+
         // Step 1: Drop all foreign key constraints referencing communities.id
         foreach ($this->fkTables() as [$table, $column, $hasFk]) {
             if (! Schema::hasTable($table) || ! Schema::hasColumn($table, $column)) {

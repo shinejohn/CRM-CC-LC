@@ -11,13 +11,13 @@ return new class extends Migration
     {
         Schema::create('business_directory', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('community_id')->nullable();
+            $table->uuid('community_id')->nullable();
             $table->string('business_name');
             $table->string('city')->nullable();
             $table->string('state', 2)->nullable();
             $table->string('category')->nullable();
             $table->string('source', 50)->default('overture');
-            $table->unsignedBigInteger('claimed_smb_id')->nullable();
+            $table->uuid('claimed_smb_id')->nullable();
             $table->timestampTz('claimed_at')->nullable();
             if (DB::getDriverName() === 'pgsql') {
                 $table->jsonb('metadata')->nullable();

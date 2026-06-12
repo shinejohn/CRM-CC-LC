@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('social_studio_scheduled_posts', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('smb_id');
+            $table->uuid('smb_id');
             $table->uuid('content_id');
             $table->uuid('connected_account_id');
             $table->string('platform');

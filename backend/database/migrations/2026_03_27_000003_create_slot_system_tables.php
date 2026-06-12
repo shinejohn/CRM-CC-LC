@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('community_slot_limits', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('community_id');
+            $table->uuid('community_id');
             $table->string('category_group');
             $table->string('category_subtype')->nullable();
             $table->integer('max_influencer_slots');
@@ -24,7 +24,7 @@ return new class extends Migration
 
         Schema::create('influencer_waitlist', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('community_id');
+            $table->uuid('community_id');
             $table->uuid('customer_id');
             $table->string('category_group');
             $table->string('category_subtype')->nullable();

@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('social_studio_credit_transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('smb_id');
+            $table->uuid('smb_id');
             $table->enum('type', ['purchase', 'consume', 'refund', 'bonus', 'expiry']);
             $table->integer('amount'); // positive = credits added, negative = consumed
             $table->integer('balance_after');

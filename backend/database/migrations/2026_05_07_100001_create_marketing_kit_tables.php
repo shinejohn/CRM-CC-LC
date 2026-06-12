@@ -43,7 +43,7 @@ return new class extends Migration
 
         Schema::create('syndication_partners', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->uuid('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->text('name');
             $table->text('email');

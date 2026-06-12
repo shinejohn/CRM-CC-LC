@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('cssn_smb_reports', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('smb_id');
-            $table->unsignedBigInteger('community_id');
+            $table->uuid('smb_id');
+            $table->uuid('community_id');
             $table->date('report_period_start')->nullable();
             $table->date('report_period_end')->nullable();
             $table->integer('total_posts')->default(0);

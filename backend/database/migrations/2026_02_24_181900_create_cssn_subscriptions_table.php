@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('cssn_subscriptions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('smb_id');
-            $table->unsignedBigInteger('community_id');
+            $table->uuid('smb_id');
+            $table->uuid('community_id');
             $table->enum('tier', ['local', 'reach', 'network', 'enterprise']);
             $table->enum('mode', ['subscription', 'campaign'])->default('subscription');
             $table->enum('status', ['active', 'paused', 'cancelled', 'expired']);

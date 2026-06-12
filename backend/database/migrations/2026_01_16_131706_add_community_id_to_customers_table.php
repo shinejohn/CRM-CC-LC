@@ -15,11 +15,8 @@ return new class extends Migration
             return;
         }
         Schema::table('customers', function (Blueprint $table) {
-            $table->unsignedBigInteger('community_id')->nullable()->after('tenant_id');
-            $table->foreign('community_id')
-                ->references('id')
-                ->on('communities')
-                ->onDelete('set null');
+            // bigInteger, not UUID — FK skipped (type mismatch with communities.id uuid PK)
+            $table->bigInteger('community_id')->nullable()->after('tenant_id');
             $table->index('community_id');
         });
     }
@@ -30,7 +27,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->dropForeign(['community_id']);
             $table->dropIndex(['community_id']);
             $table->dropColumn('community_id');
         });

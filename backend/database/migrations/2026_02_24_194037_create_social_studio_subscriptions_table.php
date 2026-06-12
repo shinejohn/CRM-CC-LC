@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('social_studio_subscriptions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('smb_id');
+            $table->uuid('smb_id');
             $table->enum('status', ['active', 'cancelled'])->default('active');
             $table->integer('monthly_credits')->default(200);
             $table->integer('discount_pct')->default(20);
