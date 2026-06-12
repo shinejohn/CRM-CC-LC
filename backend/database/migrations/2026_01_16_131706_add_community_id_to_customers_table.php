@@ -15,8 +15,7 @@ return new class extends Migration
             return;
         }
         Schema::table('customers', function (Blueprint $table) {
-            // bigInteger, not UUID — FK skipped (type mismatch with communities.id uuid PK)
-            $table->bigInteger('community_id')->nullable()->after('tenant_id');
+            $table->uuid('community_id')->nullable()->after('tenant_id');
             $table->index('community_id');
         });
     }
