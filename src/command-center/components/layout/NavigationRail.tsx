@@ -10,7 +10,7 @@ import {
   Kanban, FileCheck, Users, Activity, ChartLine,
   Briefcase, ShoppingCart, CreditCard, Gauge,
   Cpu, Workflow, Cog, Mail, Inbox, ShieldCheck,
-  Gift, LayoutTemplate,
+  Gift, LayoutTemplate, Ticket, Radio, BarChart2,
 } from 'lucide-react';
 import { useBusinessMode } from '@/hooks/useBusinessMode';
 import { useAuthStore } from '@/stores/authStore';
@@ -113,6 +113,17 @@ const useNavSections = (): VerbSection[] => {
         { label: 'Processes', href: '/command-center/automate/processes', icon: Cog, resource: 'ai-employees' },
       ],
     },
+    {
+      verb: 'support',
+      label: 'Support',
+      href: '/command-center/support',
+      icon: Ticket,
+      children: [
+        { label: 'Ticket Queue', href: '/command-center/support', icon: ClipboardList, resource: 'customers' },
+        { label: 'Signals', href: '/command-center/support/signals', icon: Radio, resource: 'customers' },
+        { label: 'Reports', href: '/command-center/support/reporting', icon: BarChart2, resource: 'analytics' },
+      ],
+    },
   ];
 };
 
@@ -133,6 +144,7 @@ export function NavigationRail({ className }: { className?: string }) {
     if (path.includes('/measure')) initial.add('measure');
     if (path.includes('/automate')) initial.add('automate');
     if (path.includes('/pitch')) initial.add('sell');
+    if (path.includes('/support')) initial.add('support');
     return initial;
   });
 

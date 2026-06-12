@@ -93,6 +93,12 @@ const TeamPage = lazy(() => import('./pages/TeamPage').then(m => ({ default: m.T
 const IntegrationsPage = lazy(() => import('./pages/IntegrationsPage').then(m => ({ default: m.IntegrationsPage })));
 const BusinessModePage = lazy(() => import('./pages/BusinessModePage').then(m => ({ default: m.BusinessModePage })));
 
+// ── SUPPORT / TICKETING ──
+const TicketQueuePage = lazy(() => import('./pages/TicketQueuePage').then(m => ({ default: m.TicketQueuePage })));
+const TicketDetailPage = lazy(() => import('./pages/TicketDetailPage').then(m => ({ default: m.TicketDetailPage })));
+const MonitoringSignalsPage = lazy(() => import('./pages/MonitoringSignalsPage').then(m => ({ default: m.MonitoringSignalsPage })));
+const TicketReportingPage = lazy(() => import('./pages/TicketReportingPage').then(m => ({ default: m.TicketReportingPage })));
+
 // ── Other ──
 const CommerceHub = lazy(() => import('./pages/CommerceHubPage').then(m => ({ default: m.CommerceHubPage })).catch(() => ({ default: () => <div>Commerce Hub - Coming Soon</div> })));
 const AIHub = lazy(() => import('./pages/AIHubPage').catch(() => ({ default: () => <div>AI Hub - Coming Soon</div> })));
@@ -208,6 +214,12 @@ export function getCommandCenterRoutes() {
       <Route path="settings/*" element={<Suspense fallback={<LoadingScreen />}><Settings /></Suspense>} />
 
       {/* ── Other ── */}
+      {/* ── Support / Ticketing ── */}
+      <Route path="support" element={<Suspense fallback={<LoadingScreen />}><TicketQueuePage /></Suspense>} />
+      <Route path="support/:id" element={<Suspense fallback={<LoadingScreen />}><TicketDetailPage /></Suspense>} />
+      <Route path="support/signals" element={<Suspense fallback={<LoadingScreen />}><MonitoringSignalsPage /></Suspense>} />
+      <Route path="support/reporting" element={<Suspense fallback={<LoadingScreen />}><TicketReportingPage /></Suspense>} />
+
       <Route path="commerce" element={<Suspense fallback={<LoadingScreen />}><CommerceHub /></Suspense>} />
       <Route path="ai" element={<Suspense fallback={<LoadingScreen />}><AIHub /></Suspense>} />
 

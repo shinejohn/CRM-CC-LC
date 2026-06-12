@@ -49,6 +49,10 @@ use App\Http\Controllers\Api\V1\MessageController;
 use App\Http\Controllers\Api\V1\NotificationController;
 use App\Http\Controllers\Api\V1\QuoteController;
 use App\Http\Controllers\Api\WebhookController;
+use App\Http\Controllers\Api\TicketController;
+use App\Http\Controllers\Api\ImplementationStageController;
+use App\Http\Controllers\Api\MonitoringSignalController;
+use App\Http\Controllers\Api\TicketReportingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -913,6 +917,36 @@ Route::prefix('webhooks')->group(function () {
     Route::post('communication/ses', [\App\Http\Controllers\Api\V1\CommunicationWebhookController::class, 'ses']);
     Route::post('communication/twilio', [\App\Http\Controllers\Api\V1\CommunicationWebhookController::class, 'twilio']);
     Route::post('communication/firebase', [\App\Http\Controllers\Api\V1\CommunicationWebhookController::class, 'firebase']);
+});
+
+// ── Ticketing System ──────────────────────────────────────────────────────────
+// Monitoring signal ingest: authenticated via API key header (monitoring agents)
+Route::post('/v1/monitoring-signals/ingest', [MonitoringSignalController::class, 'ingest'])
+    ->middleware('auth:sanctum')
+    ->name('api.monitoring-signals.ingest');
+
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+    // Tickets
+    Route::get('/tickets', [TicketController::class, 'index'])->name('api.tickets.index');
+    Route::post('/tickets', [TicketController::class, 'store'])->name('api.tickets.store');
+    Route::post('/tickets/bulk', [TicketController::class, 'bulkUpdate'])->name('api.tickets.bulk');
+    Route::get('/tickets/{id}', [TicketController::class, 'show'])->name('api.tickets.show');
+    Route::patch('/tickets/{id}', [TicketController::class, 'update'])->name('api.tickets.update');
+    Route::delete('/tickets/{id}', [TicketController::class, 'destroy'])->name('api.tickets.destroy');
+    Route::post('/tickets/{id}/notes', [TicketController::class, 'addNote'])->name('api.tickets.notes.store');
+
+    // Implementation stages
+    Route::get('/tickets/{ticketId}/stages', [ImplementationStageController::class, 'index'])->name('api.tickets.stages.index');
+    Route::patch('/tickets/{ticketId}/stages/{stageId}', [ImplementationStageController::class, 'update'])->name('api.tickets.stages.update');
+    Route::post('/tickets/{ticketId}/stages/reorder', [ImplementationStageController::class, 'reorder'])->name('api.tickets.stages.reorder');
+
+    // Monitoring signals
+    Route::get('/monitoring-signals', [MonitoringSignalController::class, 'index'])->name('api.monitoring-signals.index');
+    Route::post('/monitoring-signals/{id}/promote', [MonitoringSignalController::class, 'promote'])->name('api.monitoring-signals.promote');
+    Route::post('/monitoring-signals/{id}/dismiss', [MonitoringSignalController::class, 'dismiss'])->name('api.monitoring-signals.dismiss');
+
+    // Reporting
+    Route::get('/tickets/reporting/summary', [TicketReportingController::class, 'summary'])->name('api.tickets.reporting.summary');
 });
 
 // Stripe Webhook (outside v1 prefix, no auth required)
