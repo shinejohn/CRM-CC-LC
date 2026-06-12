@@ -21,7 +21,6 @@ final class SMB extends Model
     protected $table = 'smbs';
 
     protected $fillable = [
-        'uuid',
         'community_id',
         'business_name',
         'dba_name',
