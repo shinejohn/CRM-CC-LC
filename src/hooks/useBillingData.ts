@@ -8,7 +8,7 @@ export function useInvoices() {
 
     useEffect(() => {
         apiClient
-            .get("/billing/invoices")
+            .get("/api/v1/invoices")
             .then((res) => setData(res.data.data))
             .catch(() => setData([]))
             .finally(() => setIsLoading(false));
@@ -23,7 +23,7 @@ export function useOrders() {
 
     useEffect(() => {
         apiClient
-            .get("/billing/orders")
+            .get("/api/v1/orders")
             .then((res) => setData(res.data.data))
             .catch(() => setData([]))
             .finally(() => setIsLoading(false));
@@ -38,7 +38,7 @@ export function useCollectionMetrics() {
 
     useEffect(() => {
         apiClient
-            .get("/billing/collections/metrics")
+            .get("/api/v1/billing/summary")
             .then((res) => setData(res.data.data))
             .catch(() => setData(null))
             .finally(() => setIsLoading(false));

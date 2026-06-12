@@ -14,16 +14,16 @@ import type { ApiResponse } from '../types/common';
 
 export const personalityService = {
   list: () =>
-    apiClient.get<ApiResponse<AiPersonality[]>>('/personalities').then((r: AxiosResponse<ApiResponse<AiPersonality[]>>) => r.data.data ?? r.data),
+    apiClient.get<ApiResponse<AiPersonality[]>>('/api/v1/personalities').then((r: AxiosResponse<ApiResponse<AiPersonality[]>>) => r.data.data ?? r.data),
 
   get: (id: string) =>
     apiClient.get<ApiResponse<AiPersonality>>(`/personalities/${id}`).then((r: AxiosResponse<ApiResponse<AiPersonality>>) => r.data.data),
 
   getAssignments: () =>
-    apiClient.get<ApiResponse<PersonalityAssignment[]>>('/personalities/assignments').then((r: AxiosResponse<ApiResponse<PersonalityAssignment[]>>) => r.data.data ?? r.data),
+    apiClient.get<ApiResponse<PersonalityAssignment[]>>('/api/v1/personalities/assignments').then((r: AxiosResponse<ApiResponse<PersonalityAssignment[]>>) => r.data.data ?? r.data),
 
   assignToCustomer: (personalityId: string, customerId: string) =>
-    apiClient.post<ApiResponse<PersonalityAssignment>>('/personalities/assign', {
+    apiClient.post<ApiResponse<PersonalityAssignment>>('/api/v1/personalities/assign', {
       personality_id: personalityId,
       customer_id: customerId,
     }).then((r: AxiosResponse<ApiResponse<PersonalityAssignment>>) => r.data.data),
@@ -66,8 +66,8 @@ export const personalityService = {
   ): Promise<string> => {
     try {
       const token = localStorage.getItem('auth_token');
-      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
-      const response = await fetch(`${baseUrl}/personalities/${personalityId}/generate-response`, {
+      const baseUrl = import.meta.env.VITE_API_URL || 'https://api.fibonacco.com';
+      const response = await fetch(`${baseUrl}/api/v1/personalities/${personalityId}/generate-response`, {
         method: 'POST',
         headers: {
           Authorization: token ? `Bearer ${token}` : '',

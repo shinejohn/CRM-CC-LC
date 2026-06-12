@@ -8,7 +8,7 @@ export function useCustomers() {
 
     useEffect(() => {
         apiClient
-            .get("/crm/customers")
+            .get("/api/v1/customers")
             .then((res) => setData(res.data.data))
             .catch(() => setData([]))
             .finally(() => setIsLoading(false));
@@ -23,7 +23,7 @@ export function useContacts() {
 
     useEffect(() => {
         apiClient
-            .get("/crm/contacts")
+            .get("/api/v1/crm-contacts")
             .then((res) => setData(res.data.data))
             .catch(() => setData([]))
             .finally(() => setIsLoading(false));
@@ -38,7 +38,7 @@ export function useDeals() {
 
     useEffect(() => {
         apiClient
-            .get("/crm/deals")
+            .get("/api/v1/deals")
             .then((res) => setData(res.data.data))
             .catch(() => setData([]))
             .finally(() => setIsLoading(false));
@@ -53,7 +53,7 @@ export function useActivities() {
 
     useEffect(() => {
         apiClient
-            .get("/crm/activities")
+            .get("/api/v1/crm-activities")
             .then((res) => setData(res.data.data))
             .catch(() => setData([]))
             .finally(() => setIsLoading(false));
