@@ -410,6 +410,20 @@ else
     log "  ${GREEN}✓${NC} No forbidden files staged"
 fi
 
+# Workflow files staged — require 'workflow' scope or push will be rejected by GitHub
+STAGED_WORKFLOWS=$(git diff --cached --name-only 2>/dev/null | grep '^\.github/workflows/' || true)
+if [[ -n "$STAGED_WORKFLOWS" ]]; then
+    GH_SCOPES=$(gh auth status 2>&1 | grep 'Token scopes' || true)
+    if ! echo "$GH_SCOPES" | grep -q 'workflow'; then
+        log "  ${RED}❌ Workflow files staged but gh/git token lacks 'workflow' scope:${NC}"
+        echo "$STAGED_WORKFLOWS" | while read f; do log "     $f"; done
+        log "     ${RED}Push will be rejected. Fix: gh auth refresh -s workflow${NC}"
+        inc_errors
+    else
+        log "  ${GREEN}✓${NC} Workflow scope available for CI changes"
+    fi
+fi
+
 phase_end
 log ""
 
@@ -734,6 +748,50 @@ if [[ -n "$BACKEND_DIR" ]]; then
                 fi
             fi
         fi
+    fi
+
+        # PHP version consistency — CI workflow vs composer.json / nixpacks.toml
+    # Catches: CI using PHP 8.2 while production/dependencies require PHP 8.4
+    if [[ -f "${BACKEND_DIR}/composer.json" ]]; then
+        # Get PHP requirement from composer.json
+        COMPOSER_PHP_REQ=$(php -r '
+            $c = json_decode(file_get_contents("'"${BACKEND_DIR}"'/composer.json"), true);
+            $req = $c["require"]["php"] ?? "";
+            preg_match("/(\d+\.\d+)/", $req, $m);
+            echo $m[1] ?? "";
+        ' 2>/dev/null)
+
+        # Get PHP version from CI workflow(s)
+        for WF_FILE in .github/workflows/*.yml; do
+            [[ -f "$WF_FILE" ]] || continue
+            CI_PHP=$(grep 'php-version:' "$WF_FILE" 2>/dev/null | grep -oE "[0-9]+\.[0-9]+" | head -1)
+            [[ -z "$CI_PHP" ]] && continue
+
+            # Get PHP version from nixpacks.toml if present
+            NX_PHP=""
+            if [[ -n "$NIXPACKS_FILE" ]]; then
+                NX_PHP=$(grep -oE 'php[0-9]+\.[0-9]+' "$NIXPACKS_FILE" 2>/dev/null | grep -oE '[0-9]+\.[0-9]+' | head -1)
+            fi
+
+            # Check CI vs composer.json requirement
+            if [[ -n "$COMPOSER_PHP_REQ" ]]; then
+                # CI PHP must be >= the minimum required
+                if [[ "$(printf '%s\n' "$COMPOSER_PHP_REQ" "$CI_PHP" | sort -V | head -1)" != "$CI_PHP" ]] && [[ "$CI_PHP" != "$COMPOSER_PHP_REQ" ]]; then
+                    log "  ${RED}❌ CI PHP mismatch: $WF_FILE uses PHP ${CI_PHP} but composer.json requires PHP >=${COMPOSER_PHP_REQ}${NC}"
+                    log "     ${RED}Fix: set php-version: '${COMPOSER_PHP_REQ}' in $WF_FILE${NC}"
+                    inc_errors
+                else
+                    log "  ${GREEN}✓${NC} CI PHP (${CI_PHP}) satisfies composer requirement (>=${COMPOSER_PHP_REQ})"
+                fi
+            fi
+
+            # Check CI vs nixpacks (production PHP)
+            if [[ -n "$NX_PHP" && "$CI_PHP" != "$NX_PHP" ]]; then
+                log "  ${YELLOW}⚠️  CI PHP (${CI_PHP}) differs from nixpacks production PHP (${NX_PHP}) in $WF_FILE${NC}"
+                log "     ${YELLOW}Recommend matching them to avoid CI/production divergence${NC}"
+                inc_warnings
+            fi
+        done
     fi
 
     phase_end

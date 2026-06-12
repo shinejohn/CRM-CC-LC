@@ -79,12 +79,18 @@ These live in the publishing platform (`../Day-News/Multisite`) and are producti
    `FourCallsWebhookController`) is the proven pattern for selling/provisioning an external
    AI service with tiers, webhooks, and billing. Copy this pattern for every AI app product.
 
-5. **Coming from the AI platform (coordinate, don't assume):** a provisioning endpoint on
-   `taskjuggler-api` mirroring the Multisite contract is planned but DOES NOT EXIST yet.
-   When the Command Center sells an AI app (Task Juggler, 4Projects, 4Calls, URPA,
-   SiteHealth), it will call that endpoint. Design your checkout/fulfillment flow with a
-   per-product `provisioning_target` (publishing | ai-platform) so adding it later is config,
-   not refactor. The AI-platform session will publish the contract when built.
+5. **AI platform provisioning — NOW BUILT (June 11, 2026).**
+   `POST {TASKJUGGLER_API_URL}/api/provision/subscription`, auth via `X-Provisioning-Secret`
+   header (mirror of the Multisite contract). Full contract:
+   `../taskjuggler/Code/taskjuggler-api/PROVISIONING_CONTRACT.md`.
+   - Payload mirrors Multisite plus optional `app` (which AI app was sold) and
+     `plan_tier` constrained to `free|starter|pro|business|enterprise` (tier gates the
+     platform's modules).
+   - Response returns `team_id` (store it on the CRM order — analog of Multisite's
+     `business_id`).
+   - Keep the per-product `provisioning_target` (publishing | ai-platform) design; both
+     targets are now config, not refactor. Coordinate the `PROVISIONING_SECRET` value with
+     the AI-platform side (set in both Railway environments).
 
 ---
 
