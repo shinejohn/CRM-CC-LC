@@ -315,6 +315,31 @@ export function NavigationRail({ className }: { className?: string }) {
           <Settings className="w-5 h-5 shrink-0" />
           {!collapsed && <span>Settings</span>}
         </NavLink>
+        {!collapsed && isPathActive('/command-center/settings') && (
+          <div className="ml-4 mt-1 space-y-0.5">
+            {[
+              { label: 'General', href: '/command-center/settings' },
+              { label: 'Team', href: '/command-center/settings/team' },
+              { label: 'Integrations', href: '/command-center/settings/integrations' },
+              { label: 'Email Platform', href: '/command-center/settings/email-platform' },
+            ].map((item) => (
+              <NavLink
+                key={item.href}
+                to={item.href}
+                end={item.href === '/command-center/settings'}
+                className={({ isActive }) =>
+                  `flex items-center px-3 py-1.5 rounded-lg text-xs transition-colors ${
+                    isActive
+                      ? 'text-[var(--nexus-accent-primary)] bg-[var(--nexus-nav-active)]'
+                      : 'text-[var(--nexus-text-tertiary)] hover:text-[var(--nexus-text-secondary)] hover:bg-[var(--nexus-bg-secondary)]'
+                  }`
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </div>
+        )}
 
         {/* Collapse Toggle */}
         <button

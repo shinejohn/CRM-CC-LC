@@ -93,6 +93,9 @@ const TeamPage = lazy(() => import('./pages/TeamPage').then(m => ({ default: m.T
 const IntegrationsPage = lazy(() => import('./pages/IntegrationsPage').then(m => ({ default: m.IntegrationsPage })));
 const BusinessModePage = lazy(() => import('./pages/BusinessModePage').then(m => ({ default: m.BusinessModePage })));
 
+// ── EMAIL PLATFORM ──
+const EmailPlatformPage = lazy(() => import('./pages/EmailPlatformPage').then(m => ({ default: m.EmailPlatformPage })));
+
 // ── SUPPORT / TICKETING ──
 const TicketQueuePage = lazy(() => import('./pages/TicketQueuePage').then(m => ({ default: m.TicketQueuePage })));
 const TicketDetailPage = lazy(() => import('./pages/TicketDetailPage').then(m => ({ default: m.TicketDetailPage })));
@@ -211,6 +214,7 @@ export function getCommandCenterRoutes() {
       <Route path="settings/team" element={<Suspense fallback={<LoadingScreen />}><TeamPage /></Suspense>} />
       <Route path="settings/integrations" element={<Suspense fallback={<LoadingScreen />}><IntegrationsPage /></Suspense>} />
       <Route path="settings/mode" element={<Suspense fallback={<LoadingScreen />}><BusinessModePage /></Suspense>} />
+      <Route path="settings/email-platform" element={<Suspense fallback={<LoadingScreen />}><EmailPlatformPage /></Suspense>} />
       <Route path="settings/*" element={<Suspense fallback={<LoadingScreen />}><Settings /></Suspense>} />
 
       {/* ── Other ── */}

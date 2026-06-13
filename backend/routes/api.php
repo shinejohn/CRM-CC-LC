@@ -919,6 +919,17 @@ Route::prefix('webhooks')->group(function () {
     Route::post('communication/firebase', [\App\Http\Controllers\Api\V1\CommunicationWebhookController::class, 'firebase']);
 });
 
+// ── Email Platform Admin ──────────────────────────────────────────────────────
+Route::prefix('v1/email-platform')->middleware('auth:sanctum')->group(function () {
+    Route::get('/status', [\App\Http\Controllers\Api\EmailPlatformController::class, 'status'])->name('api.email-platform.status');
+    Route::get('/pools', [\App\Http\Controllers\Api\EmailPlatformController::class, 'getPools'])->name('api.email-platform.pools.index');
+    Route::put('/pools/{poolType}', [\App\Http\Controllers\Api\EmailPlatformController::class, 'upsertPool'])->name('api.email-platform.pools.upsert');
+    Route::post('/pools/{poolType}/test', [\App\Http\Controllers\Api\EmailPlatformController::class, 'testPool'])->name('api.email-platform.pools.test');
+    Route::get('/senders', [\App\Http\Controllers\Api\EmailPlatformController::class, 'getSenders'])->name('api.email-platform.senders.index');
+    Route::post('/senders', [\App\Http\Controllers\Api\EmailPlatformController::class, 'addSender'])->name('api.email-platform.senders.store');
+    Route::post('/senders/{id}/verify', [\App\Http\Controllers\Api\EmailPlatformController::class, 'verifySender'])->name('api.email-platform.senders.verify');
+});
+
 // ── Ticketing System ──────────────────────────────────────────────────────────
 // Monitoring signal ingest: authenticated via API key header (monitoring agents)
 Route::post('/v1/monitoring-signals/ingest', [MonitoringSignalController::class, 'ingest'])
