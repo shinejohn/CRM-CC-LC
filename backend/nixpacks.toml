@@ -16,6 +16,6 @@ cmds = [
 # Run via: railway run --service "CC API" "php artisan migrate --force"
 
 [start]
-cmd = "php artisan serve --host=0.0.0.0 --port=$PORT"
+cmd = "bash start.sh"
 
 
