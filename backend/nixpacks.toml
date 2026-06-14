@@ -6,10 +6,10 @@ cmds = ["composer install --no-dev --optimize-autoloader --no-scripts"]
 
 [phases.build]
 cmds = [
-  "php artisan package:discover --ansi",
-  "php artisan config:cache",
-  "php artisan route:cache",
-  "php artisan event:cache"
+  "APP_URL=http://localhost php artisan package:discover --ansi",
+  "APP_URL=http://localhost php artisan config:cache",
+  "APP_URL=http://localhost php artisan route:cache",
+  "APP_URL=http://localhost php artisan event:cache"
 ]
 
 # Note: Migrations run separately after environment variables are set
