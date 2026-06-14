@@ -873,6 +873,16 @@ if [[ -n "$BACKEND_DIR" ]]; then
             log "  ${YELLOW}⚠️  nixpacks.toml missing 'route:cache' in build phase${NC}"
             inc_warnings
         fi
+
+        # Check that artisan build commands have APP_URL prefix to prevent "Invalid URI" on cache-miss builds
+        BUILD_ARTISAN=$(grep -A10 '\[phases.build\]' "$NIXPACKS_FILE" 2>/dev/null | grep 'php artisan')
+        if [[ -n "$BUILD_ARTISAN" ]] && ! echo "$BUILD_ARTISAN" | grep -q 'APP_URL='; then
+            log "  ${RED}❌ nixpacks.toml build-phase artisan commands missing APP_URL= prefix${NC}"
+            log "     ${RED}Add 'APP_URL=http://localhost php artisan ...' to prevent Invalid URI on fresh builds${NC}"
+            inc_errors
+        else
+            log "  ${GREEN}✓${NC} Build-phase artisan commands have APP_URL prefix"
+        fi
     elif [[ -f "Dockerfile" ]] || [[ -f "${BACKEND_DIR}/Dockerfile" ]]; then
         log "  ${GREEN}✓${NC} Dockerfile present"
     else
@@ -897,6 +907,28 @@ if [[ -n "$BACKEND_DIR" ]]; then
             inc_warnings
         else
             log "  ${GREEN}✓${NC} .env.example covers config/ env vars"
+        fi
+    fi
+
+    # Railway critical env vars check (requires railway CLI + logged in)
+    if command -v railway &>/dev/null 2>&1; then
+        RAILWAY_API_SERVICE="${RAILWAY_API_SERVICE:-horizon}"
+        RAILWAY_VARS=$(railway variables --service "$RAILWAY_API_SERVICE" 2>/dev/null || true)
+        if [[ -n "$RAILWAY_VARS" ]]; then
+            MISSING_CRITICAL=""
+            for var in APP_KEY APP_URL DATABASE_URL REDIS_URL QUEUE_CONNECTION; do
+                if ! echo "$RAILWAY_VARS" | grep -q "║ ${var} "; then
+                    MISSING_CRITICAL+="$var "
+                fi
+            done
+            if [[ -n "$MISSING_CRITICAL" ]]; then
+                log "  ${RED}❌ Railway service '$RAILWAY_API_SERVICE' missing critical vars: ${MISSING_CRITICAL}${NC}"
+                inc_errors
+            else
+                log "  ${GREEN}✓${NC} Railway '$RAILWAY_API_SERVICE' has all critical env vars"
+            fi
+        else
+            log "  ${CYAN}ℹ${NC}  Could not read Railway vars (not linked or not logged in)"
         fi
     fi
 
