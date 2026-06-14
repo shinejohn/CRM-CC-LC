@@ -47,3 +47,8 @@ Schedule::job(new \App\Jobs\RecalculateSyndicationEarnings)->weeklyOn(1, '06:00'
 
 // PP→CC data sync — Pull SMBs, nonprofits, civic entities from Publishing Platform
 Schedule::command('sync:from-publishing-platform')->dailyAt('01:30');
+
+// ONE-TIME: Bulk enroll all HOOK-stage customers — remove after first successful run
+Schedule::command('campaign:start-customers --stage=hook')->everyFiveMinutes()
+    ->skip(fn () => \App\Models\CampaignRecipient::exists())
+    ->runInBackground();
