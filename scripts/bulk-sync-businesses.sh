@@ -5,8 +5,11 @@
 set -e
 
 PSQL=/opt/homebrew/bin/psql
-PP="postgresql://postgres:***REMOVED***@trolley.proxy.rlwy.net:12043/railway"
-CC="postgresql://postgres:***REMOVED***@trolley.proxy.rlwy.net:53826/railway"
+# Connection strings MUST be supplied via environment, never hardcoded.
+# export PP_DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/railway"
+# export CC_DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/railway"
+PP="${PP_DATABASE_URL:?Set PP_DATABASE_URL (Publishing Platform DB connection string)}"
+CC="${CC_DATABASE_URL:?Set CC_DATABASE_URL (Command Center DB connection string)}"
 
 BATCH=50000
 TOTAL=385799
