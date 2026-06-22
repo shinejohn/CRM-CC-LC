@@ -2,20 +2,56 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import {
   ArrowLeft, Phone, Mail, Building, Clock, Edit,
-  Activity, FileText, Megaphone
+  Handshake, FileText, Receipt,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { DataTable, StatusBadge } from '@/components/shared';
+import type { ColumnDef } from '@/components/shared';
 import { EngagementScoreCard } from './EngagementScoreCard';
-import { CustomerTimeline, type TimelineItem } from './CustomerTimeline';
 import { EditCustomerModal } from './EditCustomerModal';
 import { useCustomer, useUpdateCustomer } from '@/hooks/useCustomers';
-import { useQuery } from '@tanstack/react-query';
-import { apiClient } from '@/services/api';
+import { useCustomerDeals, useCustomerQuotes, useCustomerInvoices } from '@/hooks/useCustomerDetail';
 import { mapApiCustomerToUi, type ApiCustomer } from './customerMap';
-import { SMBPitchTab } from '@/components/pitch';
+import type { Deal } from '@/services/crm/deals-api';
+import type { Quote } from '@/services/crm/quotes-api';
+import type { Invoice } from '@/services/crm/invoices-api';
+
+type BadgeStatus = Parameters<typeof StatusBadge>[0]['status'];
+
+const formatCurrency = (value: string | number | undefined): string =>
+  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
+    Number(value ?? 0) || 0,
+  );
+
+const formatDate = (value?: string): string =>
+  value
+    ? new Date(value).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })
+    : '—';
+
+const DEAL_BADGE: Record<string, BadgeStatus> = {
+  hook: 'draft',
+  engagement: 'pending',
+  sales: 'active',
+  retention: 'active',
+  won: 'completed',
+  lost: 'cancelled',
+};
+
+const DOC_BADGE: Record<string, BadgeStatus> = {
+  draft: 'draft',
+  sent: 'pending',
+  accepted: 'active',
+  declined: 'cancelled',
+  expired: 'overdue',
+  paid: 'completed',
+  partial: 'pending',
+  overdue: 'overdue',
+  void: 'cancelled',
+  cancelled: 'cancelled',
+};
 
 export function CustomerDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -23,41 +59,83 @@ export function CustomerDetailPage() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
 
-  const { data: apiCustomer, isLoading, error, refetch } = useCustomer(id ?? '');
-  const timelineQuery = useQuery({
-    queryKey: ['customers', id, 'timeline'],
-    queryFn: () =>
-      apiClient.get<{ data: TimelineItem[] }>(`/customers/${id}/timeline`).then((r) => r.data.data ?? []),
-    enabled: !!id,
-  });
+  const customerId = id ?? '';
+  const { data: apiCustomer, isLoading, error, refetch } = useCustomer(customerId);
   const updateCustomerMutation = useUpdateCustomer();
 
+  const dealsQuery = useCustomerDeals(customerId);
+  const quotesQuery = useCustomerQuotes(customerId);
+  const invoicesQuery = useCustomerInvoices(customerId);
+
   const customer = apiCustomer ? mapApiCustomerToUi(apiCustomer as unknown as ApiCustomer) : null;
-  const timeline = (timelineQuery.data ?? []) as TimelineItem[];
-  const isLoadingAny = isLoading || timelineQuery.isLoading;
-  const errorMsg = error || timelineQuery.error;
 
-  const refreshCustomer = () => {
-    refetch();
-    timelineQuery.refetch();
-  };
+  const deals = dealsQuery.data?.data ?? [];
+  const quotes = quotesQuery.data?.data ?? [];
+  const invoices = invoicesQuery.data?.data ?? [];
 
-  if (isLoadingAny) {
+  if (isLoading) {
     return <CustomerDetailSkeleton />;
   }
 
-  if (errorMsg || !customer) {
+  if (error || !customer) {
     return (
-      <div className="text-center py-12">
+      <div className="text-center py-12 space-y-4">
         <p className="text-red-500">
-          {errorMsg instanceof Error ? errorMsg.message : String(errorMsg || 'Customer not found')}
+          {error instanceof Error ? error.message : String(error || 'Customer not found')}
         </p>
-        <Button variant="outline" onClick={() => navigate('/command-center/customers')}>
-          Back to Customers
-        </Button>
+        <div className="flex items-center justify-center gap-3">
+          <Button type="button" variant="outline" onClick={() => refetch()}>
+            Retry
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => navigate('/command-center/sell/customers')}
+          >
+            Back to Customers
+          </Button>
+        </div>
       </div>
     );
   }
+
+  const dealColumns: ColumnDef<Deal>[] = [
+    {
+      header: 'Name',
+      cell: (row) => (
+        <span className="font-medium text-[var(--nexus-text-primary)]">{row.name}</span>
+      ),
+    },
+    { header: 'Value', cell: (row) => formatCurrency(row.value) },
+    { header: 'Probability', cell: (row) => `${row.probability ?? 0}%` },
+    { header: 'Expected Close', cell: (row) => formatDate(row.expected_close_at) },
+    { header: 'Stage', cell: (row) => <StatusBadge status={DEAL_BADGE[row.stage] ?? 'draft'} /> },
+  ];
+
+  const quoteColumns: ColumnDef<Quote>[] = [
+    {
+      header: 'Quote #',
+      cell: (row) => (
+        <span className="font-medium text-[var(--nexus-text-primary)]">{row.quote_number}</span>
+      ),
+    },
+    { header: 'Total', cell: (row) => formatCurrency(row.total) },
+    { header: 'Valid Until', cell: (row) => formatDate(row.valid_until) },
+    { header: 'Status', cell: (row) => <StatusBadge status={DOC_BADGE[row.status] ?? 'draft'} /> },
+  ];
+
+  const invoiceColumns: ColumnDef<Invoice>[] = [
+    {
+      header: 'Invoice #',
+      cell: (row) => (
+        <span className="font-medium text-[var(--nexus-text-primary)]">{row.invoice_number}</span>
+      ),
+    },
+    { header: 'Total', cell: (row) => formatCurrency(row.total) },
+    { header: 'Balance Due', cell: (row) => formatCurrency(row.balance_due) },
+    { header: 'Due Date', cell: (row) => formatDate(row.due_date) },
+    { header: 'Status', cell: (row) => <StatusBadge status={DOC_BADGE[row.status] ?? 'draft'} /> },
+  ];
 
   return (
     <div className="space-y-6">
@@ -65,9 +143,11 @@ export function CustomerDetailPage() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Button
+            type="button"
             variant="ghost"
             size="icon"
-            onClick={() => navigate('/command-center/customers')}
+            aria-label="Back to customers"
+            onClick={() => navigate('/command-center/sell/customers')}
           >
             <ArrowLeft className="w-5 h-5" />
           </Button>
@@ -89,13 +169,9 @@ export function CustomerDetailPage() {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="outline" onClick={() => setShowEditModal(true)}>
+          <Button type="button" variant="outline" onClick={() => setShowEditModal(true)}>
             <Edit className="w-4 h-4 mr-2" />
             Edit
-          </Button>
-          <Button>
-            <Phone className="w-4 h-4 mr-2" />
-            Call
           </Button>
         </div>
       </div>
@@ -107,10 +183,9 @@ export function CustomerDetailPage() {
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="timeline">Timeline</TabsTrigger>
-              <TabsTrigger value="pitch">Pitch</TabsTrigger>
-              <TabsTrigger value="content">Content</TabsTrigger>
-              <TabsTrigger value="campaigns">Campaigns</TabsTrigger>
+              <TabsTrigger value="deals">Deals ({deals.length})</TabsTrigger>
+              <TabsTrigger value="quotes">Quotes ({quotes.length})</TabsTrigger>
+              <TabsTrigger value="invoices">Invoices ({invoices.length})</TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview" className="mt-6">
@@ -120,7 +195,7 @@ export function CustomerDetailPage() {
                   <CardTitle>Contact Information</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <InfoRow icon={Mail} label="Email" value={customer.email} />
+                  <InfoRow icon={Mail} label="Email" value={customer.email || '—'} />
                   {customer.phone && (
                     <InfoRow icon={Phone} label="Phone" value={customer.phone} />
                   )}
@@ -136,145 +211,65 @@ export function CustomerDetailPage() {
                   )}
                 </CardContent>
               </Card>
-
-              {/* Notes Card */}
-              <Card className="mt-6">
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <CardTitle>Notes</CardTitle>
-                  <Button variant="ghost" size="sm">
-                    <Edit className="w-4 h-4 mr-1" />
-                    Add Note
-                  </Button>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-500 dark:text-slate-400 italic">
-                    No notes yet. Add your first note.
-                  </p>
-                </CardContent>
-              </Card>
             </TabsContent>
 
-            <TabsContent value="timeline" className="mt-6">
-              <CustomerTimeline timeline={timeline} />
+            <TabsContent value="deals" className="mt-6">
+              {dealsQuery.isError ? (
+                <TabError label="deals" onRetry={() => dealsQuery.refetch()} />
+              ) : (
+                <DataTable<Deal>
+                  columns={dealColumns}
+                  data={deals}
+                  isLoading={dealsQuery.isLoading}
+                  emptyMessage="No deals for this customer yet"
+                />
+              )}
             </TabsContent>
 
-            <TabsContent value="pitch" className="mt-6">
-              <SMBPitchTab
-                businessName={customer.company ?? customer.name}
-                communityName="Clearwater"
-                pitchStatus="in_progress"
-                founderDaysRemaining={9}
-                sessions={[
-                  {
-                    id: 'sess-1',
-                    title: `Pitch — ${customer.company ?? customer.name}`,
-                    status: 'In progress',
-                    startedAt: 'Mar 18, 2026 · 10:12 AM',
-                    events: [
-                      {
-                        id: 'e1',
-                        kind: 'gate',
-                        label: 'Day.News gate: Accepted',
-                        at: '10:14 AM',
-                      },
-                      {
-                        id: 'e2',
-                        kind: 'product',
-                        label: 'Community Influencer: Added',
-                        at: '10:18 AM',
-                      },
-                      {
-                        id: 'e3',
-                        kind: 'proposal',
-                        label: 'Proposal drafted: $300/mo',
-                        at: '10:24 AM',
-                      },
-                    ],
-                  },
-                  {
-                    id: 'sess-0',
-                    title: 'Earlier session (abandoned)',
-                    status: 'Abandoned',
-                    startedAt: 'Feb 2, 2026 · 4:02 PM',
-                    events: [
-                      {
-                        id: 'e0',
-                        kind: 'abandoned',
-                        label: 'Left at: AlphaSite gate',
-                        at: '4:18 PM',
-                      },
-                      {
-                        id: 'e0b',
-                        kind: 'email',
-                        label: 'Resume email sent → Opened',
-                        at: 'Feb 3 · 9:01 AM',
-                      },
-                    ],
-                  },
-                ]}
-                gatesDeferred={[
-                  { id: 'gd1', name: 'AlphaSite', retryDate: 'Apr 12, 2026' },
-                  { id: 'gd2', name: 'Events', retryDate: 'Apr 28, 2026' },
-                ]}
-                productsDeferred={[
-                  { id: 'pd1', name: 'Ticket Sales', retryDate: 'Apr 1, 2026' },
-                ]}
-              />
+            <TabsContent value="quotes" className="mt-6">
+              {quotesQuery.isError ? (
+                <TabError label="quotes" onRetry={() => quotesQuery.refetch()} />
+              ) : (
+                <DataTable<Quote>
+                  columns={quoteColumns}
+                  data={quotes}
+                  isLoading={quotesQuery.isLoading}
+                  emptyMessage="No quotes for this customer yet"
+                />
+              )}
             </TabsContent>
 
-            <TabsContent value="content" className="mt-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Content Sent</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-500">No content sent to this customer yet.</p>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="campaigns" className="mt-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Campaign History</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-500">No campaigns for this customer yet.</p>
-                </CardContent>
-              </Card>
+            <TabsContent value="invoices" className="mt-6">
+              {invoicesQuery.isError ? (
+                <TabError label="invoices" onRetry={() => invoicesQuery.refetch()} />
+              ) : (
+                <DataTable<Invoice>
+                  columns={invoiceColumns}
+                  data={invoices}
+                  isLoading={invoicesQuery.isLoading}
+                  emptyMessage="No invoices for this customer yet"
+                />
+              )}
             </TabsContent>
           </Tabs>
         </div>
 
-        {/* Right Column - Scores & Quick Actions */}
+        {/* Right Column - Scores & Summary */}
         <div className="space-y-6">
           <EngagementScoreCard
             score={customer.engagementScore}
             predictiveScore={customer.predictiveScore}
           />
 
-          {/* Quick Actions */}
+          {/* Activity Summary */}
           <Card>
             <CardHeader>
-              <CardTitle>Quick Actions</CardTitle>
+              <CardTitle>Activity Summary</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              <Button variant="outline" className="w-full justify-start">
-                <Mail className="w-4 h-4 mr-2" />
-                Send Email
-              </Button>
-              <Button variant="outline" className="w-full justify-start">
-                <FileText className="w-4 h-4 mr-2" />
-                Create Content
-              </Button>
-              <Button variant="outline" className="w-full justify-start">
-                <Megaphone className="w-4 h-4 mr-2" />
-                Add to Campaign
-              </Button>
-              <Button variant="outline" className="w-full justify-start">
-                <Activity className="w-4 h-4 mr-2" />
-                Log Activity
-              </Button>
+              <SummaryRow icon={Handshake} label="Open deals" value={deals.length} />
+              <SummaryRow icon={FileText} label="Quotes" value={quotes.length} />
+              <SummaryRow icon={Receipt} label="Invoices" value={invoices.length} />
             </CardContent>
           </Card>
         </div>
@@ -285,13 +280,13 @@ export function CustomerDetailPage() {
           customer={customer}
           open={showEditModal}
           onClose={() => setShowEditModal(false)}
-          onSaved={(updated) => {
+          onSaved={() => {
             setShowEditModal(false);
-            refreshCustomer();
+            refetch();
           }}
-          updateCustomer={async (customerId, data) => {
+          updateCustomer={async (cId, data) => {
             const result = await updateCustomerMutation.mutateAsync({
-              id: customerId,
+              id: cId,
               data: {
                 name: data.name,
                 email: data.email,
@@ -319,6 +314,31 @@ function InfoRow({ icon: Icon, label, value }: { icon: React.ComponentType<{ cla
   );
 }
 
+function SummaryRow({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string }>; label: string; value: number }) {
+  return (
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-slate-300">
+        <Icon className="w-4 h-4 text-gray-400" />
+        {label}
+      </div>
+      <span className="text-sm font-semibold text-gray-900 dark:text-white">{value}</span>
+    </div>
+  );
+}
+
+function TabError({ label, onRetry }: { label: string; onRetry: () => void }) {
+  return (
+    <Card>
+      <CardContent className="p-8 text-center space-y-4">
+        <p className="text-sm text-red-500">Couldn’t load {label}. Please try again.</p>
+        <Button type="button" variant="outline" onClick={onRetry}>
+          Retry
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+
 function CustomerDetailSkeleton() {
   return (
     <div className="space-y-6 animate-pulse">
@@ -332,4 +352,3 @@ function CustomerDetailSkeleton() {
     </div>
   );
 }
-
