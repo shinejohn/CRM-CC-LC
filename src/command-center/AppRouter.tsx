@@ -40,6 +40,7 @@ const SellIndex = lazy(() => import('./pages/SellIndex').then(m => ({ default: m
 const PipelinePage = lazy(() => import('@/components/CRM/PipelineDashboard').catch(() => ({ default: () => <div>Pipeline - Coming Soon</div> })));
 const CustomersPage = lazy(() => import('./pages/CustomersPage').catch(() => ({ default: () => <div>Customers - Coming Soon</div> })));
 const CustomerDetail = lazy(() => import('./pages/CustomerDetailPage').catch(() => ({ default: () => <div>Customer Detail - Coming Soon</div> })));
+const DealDetail = lazy(() => import('@/components/CRM/DealDetailPage').catch(() => ({ default: () => <div>Deal Detail - Coming Soon</div> })));
 const ContactsPage = lazy(() => import('@/components/CRM/ContactsListPage').catch(() => ({ default: () => <div>Contacts - Coming Soon</div> })));
 const ActivitiesPage = lazy(() => import('./pages/ActivitiesPage').catch(() => ({ default: () => <div>Activities - Coming Soon</div> })));
 const ProposalsPage = lazy(() => import('./pages/ProposalsPage').then(m => ({ default: m.ProposalsPage })));
@@ -152,6 +153,7 @@ export function getCommandCenterRoutes() {
       {/* ── SELL: CRM, pipeline & customer management ── */}
       <Route path="sell" element={<Suspense fallback={<LoadingScreen />}><SellIndex /></Suspense>} />
       <Route path="sell/pipeline" element={<Suspense fallback={<LoadingScreen />}><PipelinePage /></Suspense>} />
+      <Route path="sell/deals/:id" element={<Suspense fallback={<LoadingScreen />}><DealDetail /></Suspense>} />
       <Route path="sell/customers" element={<Suspense fallback={<LoadingScreen />}><CustomersPage /></Suspense>} />
       <Route path="sell/customers/:id" element={<Suspense fallback={<LoadingScreen />}><CustomerDetail /></Suspense>} />
       <Route path="sell/contacts" element={<Suspense fallback={<LoadingScreen />}><ContactsPage /></Suspense>} />

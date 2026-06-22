@@ -13,6 +13,13 @@ export const usePipeline = () =>
     queryFn: () => dealsApi.pipeline(),
   });
 
+export const useDeal = (id: string) =>
+  useQuery<Deal>({
+    queryKey: ['deals', id],
+    queryFn: () => dealsApi.get(id),
+    enabled: !!id,
+  });
+
 export const useTransitionDeal = () => {
   const qc = useQueryClient();
   return useMutation({

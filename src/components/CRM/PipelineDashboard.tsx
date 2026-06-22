@@ -177,7 +177,7 @@ export default function PipelineDashboard() {
                       <div className="flex items-start justify-between gap-2 mb-2">
                         <button
                           type="button"
-                          onClick={() => navigate(`/crm/deals/${deal.id}`)}
+                          onClick={() => navigate(`/command-center/sell/deals/${deal.id}`)}
                           className="text-left font-medium text-[var(--nexus-text-primary)] text-sm group-hover:text-[var(--nexus-accent-primary)] transition-colors"
                         >
                           {deal.name}

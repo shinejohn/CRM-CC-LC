@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { apiClient } from "@/services/api";
 import { Invoice, Order, CollectionMetrics } from "@/services/types/billing.types";
 
@@ -6,15 +6,20 @@ export function useInvoices() {
     const [data, setData] = useState<Invoice[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        apiClient
+    const fetchInvoices = useCallback(() => {
+        setIsLoading(true);
+        return apiClient
             .get("/api/v1/invoices")
             .then((res) => setData(res.data.data))
             .catch(() => setData([]))
             .finally(() => setIsLoading(false));
     }, []);
 
-    return { invoices: data, isLoading };
+    useEffect(() => {
+        fetchInvoices();
+    }, [fetchInvoices]);
+
+    return { invoices: data, isLoading, refetch: fetchInvoices };
 }
 
 export function useOrders() {

@@ -16,6 +16,7 @@ export function CreateInvoiceModal({ isOpen, onClose, onSuccess }: CreateInvoice
     const [customer, setCustomer] = useState("");
     const [dueDate, setDueDate] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     if (!isOpen) return null;
 
@@ -34,6 +35,7 @@ export function CreateInvoiceModal({ isOpen, onClose, onSuccess }: CreateInvoice
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setError(null);
         try {
             await apiClient.post('/billing/invoices', {
                 customer_id: customer,
@@ -46,8 +48,12 @@ export function CreateInvoiceModal({ isOpen, onClose, onSuccess }: CreateInvoice
             });
             onSuccess?.();
             onClose();
-        } catch (error) {
-            console.error("Failed to create invoice", error);
+        } catch (err) {
+            const message =
+                err && typeof err === "object" && "message" in err
+                    ? String((err as { message: unknown }).message)
+                    : "Failed to create invoice. Please try again.";
+            setError(message);
         } finally {
             setIsSubmitting(false);
         }
@@ -153,6 +159,9 @@ export function CreateInvoiceModal({ isOpen, onClose, onSuccess }: CreateInvoice
                     </form>
                 </div>
 
+                {error && (
+                    <p className="px-6 pb-2 text-sm text-red-500" role="alert">{error}</p>
+                )}
                 <div className="sticky bottom-0 z-10 flex justify-end gap-3 px-6 py-4 border-t border-[var(--nexus-divider)] bg-[var(--nexus-bg-page)]/95 backdrop-blur-sm rounded-b-2xl">
                     <Button type="button" variant="ghost" onClick={onClose} className="hover:bg-[var(--nexus-bg-secondary)]">Cancel</Button>
                     <Button type="submit" form="invoice-form" disabled={isSubmitting} className="bg-[var(--nexus-button-bg)] text-white hover:bg-[var(--nexus-button-hover)] border-0">
