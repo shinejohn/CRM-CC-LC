@@ -38,11 +38,28 @@ final class CheckoutController extends Controller
             'selected_products.*' => ['string', 'max:200'],
             'total_amount' => ['required', 'numeric', 'min:1'],
             'billing_cycle' => ['required', 'string', 'in:monthly,annual'],
+            'coupon_code' => ['nullable', 'string', 'max:64'],
         ]);
 
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $amountCents = (int) round($data['total_amount'] * 100);
+
+        // Optional coupon: validate redeemability and reduce the charge amount.
+        // Backward compatible — no coupon_code means unchanged behaviour.
+        $couponCode = $data['coupon_code'] ?? null;
+        $discountCents = 0;
+        if ($couponCode !== null && $couponCode !== '') {
+            $coupon = \App\Models\Coupon::query()
+                ->whereRaw('UPPER(code) = ?', [strtoupper($couponCode)])
+                ->first();
+
+            if ($coupon !== null && $coupon->isRedeemable()) {
+                $discountCents = $coupon->discountFor($amountCents);
+                $amountCents = max(50, $amountCents - $discountCents); // Stripe min charge is 50 cents
+                $coupon->increment('uses_count');
+            }
+        }
 
         $community = $session->community;
         $businessName = $session->business_name
@@ -58,6 +75,8 @@ final class CheckoutController extends Controller
                 'business_name' => $businessName,
                 'billing_cycle' => $data['billing_cycle'],
                 'products' => implode(', ', $data['selected_products']),
+                'coupon_code' => $couponCode ?? '',
+                'discount_cents' => (string) $discountCents,
             ],
         ]);
 

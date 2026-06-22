@@ -194,6 +194,53 @@ export const CheckoutSlide: React.FC<CheckoutSlideProps> = ({
   const [error, setError] = useState<string>('');
   const [success, setSuccess] = useState(false);
 
+  // Coupon state
+  const [couponInput, setCouponInput] = useState('');
+  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
+  const [discountCents, setDiscountCents] = useState(0);
+  const [couponError, setCouponError] = useState<string>('');
+  const [couponLoading, setCouponLoading] = useState(false);
+
+  const netTotal = Math.max(0, total - discountCents / 100);
+
+  const handleApplyCoupon = useCallback(async () => {
+    const code = couponInput.trim();
+    if (!code) return;
+    setCouponLoading(true);
+    setCouponError('');
+    try {
+      const res = await apiClient.post<{
+        valid: boolean;
+        discount_cents?: number;
+        message?: string;
+      }>('/v1/coupons/validate', { code, amount: Math.round(total * 100) });
+      if (res.data.valid) {
+        setAppliedCoupon(code);
+        setDiscountCents(res.data.discount_cents ?? 0);
+        // Force the payment intent to be rebuilt with the discount applied.
+        setClientSecret(null);
+        setPaymentIntentId(null);
+      } else {
+        setAppliedCoupon(null);
+        setDiscountCents(0);
+        setCouponError(res.data.message ?? 'That coupon is not valid.');
+      }
+    } catch {
+      setCouponError('Could not validate coupon. Please try again.');
+    } finally {
+      setCouponLoading(false);
+    }
+  }, [couponInput, total]);
+
+  const handleRemoveCoupon = useCallback(() => {
+    setAppliedCoupon(null);
+    setDiscountCents(0);
+    setCouponError('');
+    setCouponInput('');
+    setClientSecret(null);
+    setPaymentIntentId(null);
+  }, []);
+
   useEffect(() => {
     if (!isActive || clientSecret || success) return;
     if (!session_id && !quote_id && !bundle_slug) return;
@@ -215,6 +262,7 @@ export const CheckoutSlide: React.FC<CheckoutSlideProps> = ({
             total_amount: total,
             selected_products: items.map((i) => i.description),
             billing_cycle: (content.billing_cycle as string) ?? 'monthly',
+            ...(appliedCoupon ? { coupon_code: appliedCoupon } : {}),
           };
         } else {
           endpoint = `/api/v1/quotes/${encodeURIComponent(quote_id!)}/checkout`;
@@ -222,6 +270,7 @@ export const CheckoutSlide: React.FC<CheckoutSlideProps> = ({
             total_amount: total,
             selected_products: items.map((i) => i.description),
             billing_cycle: (content.billing_cycle as string) ?? 'monthly',
+            ...(appliedCoupon ? { coupon_code: appliedCoupon } : {}),
           };
         }
 
@@ -246,7 +295,7 @@ export const CheckoutSlide: React.FC<CheckoutSlideProps> = ({
     return () => {
       cancelled = true;
     };
-  }, [isActive, session_id, quote_id, bundle_slug, customer_id, clientSecret, success, total, items, content.billing_cycle]);
+  }, [isActive, session_id, quote_id, bundle_slug, customer_id, clientSecret, success, total, items, content.billing_cycle, appliedCoupon]);
 
   const handlePaymentComplete = useCallback(
     (intentId: string) => {
@@ -318,10 +367,56 @@ export const CheckoutSlide: React.FC<CheckoutSlideProps> = ({
               </div>
             </div>
           ) : clientSecret && paymentIntentId ? (
-            <Elements
-              stripe={stripePromise}
-              options={{
-                clientSecret,
+            <div className="space-y-4">
+              {/* Coupon code */}
+              <div className="bg-white rounded-xl p-5 shadow-md border border-gray-100">
+                <label htmlFor="checkout-coupon-code" className="block text-sm font-semibold text-gray-900 mb-2">
+                  Have a coupon code?
+                </label>
+                {appliedCoupon ? (
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-sm text-emerald-600 font-medium">
+                      {appliedCoupon} applied — {formatCurrency(discountCents / 100)} off
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleRemoveCoupon}
+                      className="text-xs font-semibold text-gray-600 border border-gray-300 rounded-full px-3 py-1 hover:bg-gray-50"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <input
+                      id="checkout-coupon-code"
+                      type="text"
+                      value={couponInput}
+                      onChange={(e) => setCouponInput(e.target.value)}
+                      placeholder="Enter code"
+                      className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleApplyCoupon}
+                      disabled={couponLoading || !couponInput.trim()}
+                      className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50 hover:opacity-90"
+                    >
+                      {couponLoading ? 'Checking...' : 'Apply'}
+                    </button>
+                  </div>
+                )}
+                {couponError ? (
+                  <p className="mt-2 text-xs text-red-600" role="alert">
+                    {couponError}
+                  </p>
+                ) : null}
+              </div>
+
+              <Elements
+                stripe={stripePromise}
+                options={{
+                  clientSecret,
                 appearance: {
                   theme: 'stripe',
                   variables: {
@@ -331,16 +426,17 @@ export const CheckoutSlide: React.FC<CheckoutSlideProps> = ({
                 },
               }}
             >
-              <CheckoutForm
-                paymentIntentId={paymentIntentId}
-                total={total}
-                items={items}
-                buttonText={button_text}
-                theme={theme}
-                onPaymentComplete={handlePaymentComplete}
-                onError={setError}
-              />
-            </Elements>
+                <CheckoutForm
+                  paymentIntentId={paymentIntentId}
+                  total={netTotal}
+                  items={items}
+                  buttonText={button_text}
+                  theme={theme}
+                  onPaymentComplete={handlePaymentComplete}
+                  onError={setError}
+                />
+              </Elements>
+            </div>
           ) : null}
         </div>
       </div>

@@ -335,12 +335,32 @@ export async function createCheckoutIntent(sessionId: string, data: {
   selected_products: string[];
   total_amount: number;
   billing_cycle: 'monthly' | 'annual';
+  coupon_code?: string;
 }): Promise<{ client_secret: string; payment_intent_id: string }> {
   const res = await apiClient.post<{ data: { client_secret: string; payment_intent_id: string } }>(
     pitchApiPath(`/sessions/${encodeURIComponent(sessionId)}/checkout`),
     data,
   );
   return res.data.data;
+}
+
+export interface CouponValidationResult {
+  valid: boolean;
+  discount_cents?: number;
+  message?: string;
+  coupon?: { code: string; type: string; amount: number };
+}
+
+/**
+ * Validate a coupon code against a pre-discount cart total (in cents).
+ */
+export async function validateCoupon(data: {
+  code: string;
+  amount?: number;
+  service_id?: string;
+}): Promise<CouponValidationResult> {
+  const res = await apiClient.post<CouponValidationResult>('/v1/coupons/validate', data);
+  return res.data;
 }
 
 export async function confirmPayment(sessionId: string, paymentIntentId: string): Promise<PitchSession> {

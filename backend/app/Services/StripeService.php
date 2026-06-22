@@ -25,9 +25,12 @@ class StripeService
     }
 
     /**
-     * Create a checkout session for services
+     * Create a checkout session for services.
+     *
+     * Pass a Stripe coupon id (or promotion code id) via $stripeCouponId to
+     * apply a discount. When null, behaviour is unchanged (no discount).
      */
-    public function createCheckoutSession(array $lineItems, string $successUrl, string $cancelUrl, array $metadata = []): Session
+    public function createCheckoutSession(array $lineItems, string $successUrl, string $cancelUrl, array $metadata = [], ?string $stripeCouponId = null): Session
     {
         try {
             $sessionData = [
@@ -39,6 +42,10 @@ class StripeService
 
             if (!empty($metadata)) {
                 $sessionData['metadata'] = $metadata;
+            }
+
+            if ($stripeCouponId !== null && $stripeCouponId !== '') {
+                $sessionData['discounts'] = [['coupon' => $stripeCouponId]];
             }
 
             return $this->stripe->checkout->sessions->create($sessionData);

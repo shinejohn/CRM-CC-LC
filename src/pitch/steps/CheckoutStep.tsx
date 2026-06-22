@@ -9,6 +9,7 @@ import {
 import {
   createCheckoutIntent,
   confirmPayment as confirmPaymentApi,
+  validateCoupon,
 } from "@/pitch/api/pitchApi";
 import type { AcceptedProduct, PitchStepBaseProps } from "../types";
 
@@ -242,6 +243,13 @@ export function CheckoutStep({
   const [intentError, setIntentError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Coupon state
+  const [couponInput, setCouponInput] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
+  const [discountCents, setDiscountCents] = useState(0);
+  const [couponError, setCouponError] = useState<string | null>(null);
+  const [couponLoading, setCouponLoading] = useState(false);
+
   const items: AcceptedProduct[] = session.productsAccepted ?? [];
   const cartTotal = useMemo(
     () =>
@@ -262,23 +270,27 @@ export function CheckoutStep({
     );
   }, [onLogEvent, onSarahMessage]);
 
-  // Create PaymentIntent on mount
+  const chargeAmount = useMemo(
+    () => (founderRate && cartTotal > 300 ? 300 : Math.max(cartTotal, 1)),
+    [founderRate, cartTotal]
+  );
+
+  // Create PaymentIntent on mount and whenever an applied coupon changes.
   useEffect(() => {
     let cancelled = false;
     async function createIntent() {
       try {
         setLoading(true);
         const selectedProducts = items.map((i) => i.product);
-        const amount =
-          founderRate && cartTotal > 300 ? 300 : Math.max(cartTotal, 1);
         const { client_secret, payment_intent_id } =
           await createCheckoutIntent(session.id, {
             selected_products:
               selectedProducts.length > 0
                 ? selectedProducts
                 : ["Community Influencer"],
-            total_amount: amount,
+            total_amount: chargeAmount,
             billing_cycle: billingCycle,
+            ...(appliedCoupon ? { coupon_code: appliedCoupon } : {}),
           });
         if (!cancelled) {
           setClientSecret(client_secret);
@@ -300,7 +312,41 @@ export function CheckoutStep({
     return () => {
       cancelled = true;
     };
-  }, [session.id]);
+  }, [session.id, chargeAmount, appliedCoupon]);
+
+  const handleApplyCoupon = useCallback(async () => {
+    const code = couponInput.trim();
+    if (!code) return;
+    setCouponLoading(true);
+    setCouponError(null);
+    try {
+      const result = await validateCoupon({
+        code,
+        amount: Math.round(chargeAmount * 100),
+      });
+      if (result.valid) {
+        setAppliedCoupon(code);
+        setDiscountCents(result.discount_cents ?? 0);
+      } else {
+        setAppliedCoupon(null);
+        setDiscountCents(0);
+        setCouponError(result.message ?? "That coupon is not valid.");
+      }
+    } catch {
+      setCouponError("Could not validate coupon. Please try again.");
+    } finally {
+      setCouponLoading(false);
+    }
+  }, [couponInput, chargeAmount]);
+
+  const handleRemoveCoupon = useCallback(() => {
+    setAppliedCoupon(null);
+    setDiscountCents(0);
+    setCouponError(null);
+    setCouponInput("");
+  }, []);
+
+  const netTotal = Math.max(0, chargeAmount - discountCents / 100);
 
   if (loading) {
     return (
@@ -351,6 +397,65 @@ export function CheckoutStep({
         </p>
       </div>
 
+      {/* Coupon code */}
+      <div
+        className="mb-6 rounded-[var(--p-radius-lg)] border p-5"
+        style={{ borderColor: "var(--p-border)", backgroundColor: "var(--p-card)" }}
+      >
+        <label
+          htmlFor="pitch-coupon-code"
+          className="mb-2 block text-sm font-semibold"
+          style={{ color: "var(--p-text)" }}
+        >
+          Have a coupon code?
+        </label>
+        {appliedCoupon ? (
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-sm" style={{ color: "var(--p-teal)" }}>
+              {appliedCoupon} applied — ${(discountCents / 100).toFixed(2)} off
+            </span>
+            <button
+              type="button"
+              onClick={handleRemoveCoupon}
+              className="rounded-[var(--p-radius-pill)] border px-3 py-1 text-xs font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--p-teal)]"
+              style={{ borderColor: "var(--p-border-light)", color: "var(--p-text)" }}
+            >
+              Remove
+            </button>
+          </div>
+        ) : (
+          <div className="flex gap-2">
+            <input
+              id="pitch-coupon-code"
+              type="text"
+              value={couponInput}
+              onChange={(e) => setCouponInput(e.target.value)}
+              placeholder="Enter code"
+              className="flex-1 rounded-[var(--p-radius-sm)] border px-3 py-2 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--p-teal)]"
+              style={{
+                borderColor: "var(--p-border-light)",
+                backgroundColor: "var(--p-bg)",
+                color: "var(--p-text)",
+              }}
+            />
+            <button
+              type="button"
+              onClick={handleApplyCoupon}
+              disabled={couponLoading || !couponInput.trim()}
+              className="rounded-[var(--p-radius-pill)] px-4 py-2 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--p-teal)] disabled:opacity-50"
+              style={{ backgroundColor: "var(--p-teal)", color: "var(--p-bg)" }}
+            >
+              {couponLoading ? "Checking…" : "Apply"}
+            </button>
+          </div>
+        )}
+        {couponError ? (
+          <p className="mt-2 text-xs" style={{ color: "var(--p-red)" }} role="alert">
+            {couponError}
+          </p>
+        ) : null}
+      </div>
+
       <Elements
         stripe={stripePromise}
         options={{
@@ -371,7 +476,7 @@ export function CheckoutStep({
         <CheckoutForm
           paymentIntentId={paymentIntentId}
           sessionId={session.id}
-          cartTotal={founderRate && cartTotal > 300 ? 300 : cartTotal}
+          cartTotal={netTotal}
           items={items}
           billingCycle={billingCycle}
           founderRate={founderRate}

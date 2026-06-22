@@ -53,6 +53,7 @@ use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\ImplementationStageController;
 use App\Http\Controllers\Api\MonitoringSignalController;
 use App\Http\Controllers\Api\TicketReportingController;
+use App\Http\Controllers\Api\CouponController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -967,6 +968,10 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
 
     // Reporting
     Route::get('/tickets/reporting/summary', [TicketReportingController::class, 'summary'])->name('api.tickets.reporting.summary');
+
+    // Coupons / discounts
+    Route::post('/coupons', [CouponController::class, 'store'])->name('api.coupons.store');
+    Route::post('/coupons/validate', [CouponController::class, 'validateCoupon'])->name('api.coupons.validate');
 });
 
 // Stripe Webhook (outside v1 prefix, no auth required)
