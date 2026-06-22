@@ -6,6 +6,17 @@ return [
      */
     'system_tenant_id' => env('FIBONACCO_SYSTEM_TENANT_ID', '00000000-0000-0000-0000-000000000001'),
 
+    /**
+     * Invoice "Bill From" branding for generated PDFs.
+     */
+    'invoice' => [
+        'company_name' => env('INVOICE_COMPANY_NAME', 'Fibonacco Platform'),
+        'address_line1' => env('INVOICE_COMPANY_ADDRESS1', '123 Tech Lane'),
+        'address_line2' => env('INVOICE_COMPANY_ADDRESS2', 'San Francisco, CA 94105'),
+        'email' => env('INVOICE_COMPANY_EMAIL', 'billing@fibonacco.com'),
+        'website' => env('INVOICE_COMPANY_WEBSITE', 'fibonacco.com'),
+    ],
+
     'engagement' => [
         'score_weights' => [
             'email_open' => 1,

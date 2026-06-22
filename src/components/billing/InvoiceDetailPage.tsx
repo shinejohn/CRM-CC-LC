@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, Send, CreditCard, AlertCircle } from "lucide-react";
+import { ArrowLeft, Send, CreditCard, AlertCircle, Download } from "lucide-react";
 import {
     PageHeader,
     DataCard,
@@ -10,6 +10,7 @@ import {
 } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { useInvoice, useSendInvoice } from "@/hooks/useInvoices";
+import { invoicesApi } from "@/services/crm/invoices-api";
 import { RecordPaymentModal } from "./RecordPaymentModal";
 
 type BadgeStatus = Parameters<typeof StatusBadge>[0]["status"];
@@ -44,6 +45,19 @@ export default function InvoiceDetailPage() {
 
     const [paymentOpen, setPaymentOpen] = useState(false);
     const [sendOpen, setSendOpen] = useState(false);
+    const [downloading, setDownloading] = useState(false);
+
+    const handleDownloadPdf = async () => {
+        if (!invoice) return;
+        setDownloading(true);
+        try {
+            await invoicesApi.pdf(invoice.id, invoice.invoice_number);
+        } catch {
+            // Surface nothing intrusive; the download simply did not start.
+        } finally {
+            setDownloading(false);
+        }
+    };
 
     if (isLoading) return <LoadingState variant="detail" />;
 
@@ -90,6 +104,16 @@ export default function InvoiceDetailPage() {
                     <ArrowLeft className="w-4 h-4 mr-2" /> Back
                 </Button>
                 <div className="flex gap-3">
+                    <Button
+                        type="button"
+                        variant="outline"
+                        onClick={handleDownloadPdf}
+                        disabled={downloading}
+                        aria-label={`Download invoice ${invoice.invoice_number} as PDF`}
+                        className="text-[var(--nexus-text-primary)] border-[var(--nexus-card-border)] hover:bg-[var(--nexus-bg-secondary)]"
+                    >
+                        <Download className="w-4 h-4 mr-2" /> {downloading ? "Preparing…" : "Download PDF"}
+                    </Button>
                     <Button
                         type="button"
                         variant="outline"

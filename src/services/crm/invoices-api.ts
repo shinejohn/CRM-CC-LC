@@ -119,4 +119,39 @@ export const invoicesApi = {
   delete: async (id: string): Promise<void> => {
     await apiClient.delete(`/api/v1/crm-invoices/${id}`);
   },
+
+  /**
+   * Fetch the invoice PDF as a blob, carrying the Bearer auth + tenant headers
+   * (a plain anchor link would not include these), then trigger a browser
+   * download via an object URL.
+   */
+  pdf: async (id: string, invoiceNumber?: string): Promise<void> => {
+    const baseUrl = import.meta.env.VITE_API_ENDPOINT || '';
+    const headers: Record<string, string> = { Accept: 'application/pdf' };
+
+    const token = localStorage.getItem('auth_token');
+    if (token) headers.Authorization = `Bearer ${token}`;
+
+    const tenantId = localStorage.getItem('tenant_id');
+    if (tenantId) headers['X-Tenant-ID'] = tenantId;
+
+    const response = await fetch(`${baseUrl}/api/v1/crm-invoices/${id}/pdf`, {
+      method: 'GET',
+      headers,
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to download invoice PDF (${response.status})`);
+    }
+
+    const blob = await response.blob();
+    const objectUrl = window.URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = objectUrl;
+    anchor.download = `${invoiceNumber ?? id}.pdf`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    window.URL.revokeObjectURL(objectUrl);
+  },
 };

@@ -266,6 +266,7 @@ Route::prefix('v1')->group(function () {
             Route::get('/', [InvoiceController::class, 'index']);
             Route::post('/', [InvoiceController::class, 'store']);
             Route::get('/{id}', [InvoiceController::class, 'show']);
+            Route::get('/{id}/pdf', [InvoiceController::class, 'pdf'])->name('api.crm-invoices.pdf');
             Route::put('/{id}', [InvoiceController::class, 'update']);
             Route::post('/{id}/record-payment', [InvoiceController::class, 'recordPayment']);
             Route::post('/{id}/send', [InvoiceController::class, 'send']);

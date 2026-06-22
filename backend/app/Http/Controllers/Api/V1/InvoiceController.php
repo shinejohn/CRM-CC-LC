@@ -8,9 +8,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Models\Invoice;
+use App\Services\InvoicePdfService;
 use App\Services\InvoiceService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 final class InvoiceController extends Controller
 {
@@ -149,6 +151,24 @@ final class InvoiceController extends Controller
         }
 
         return response()->json(['data' => $invoice]);
+    }
+
+    /**
+     * Download the invoice as a branded PDF.
+     */
+    public function pdf(Request $request, string $id, InvoicePdfService $pdfService): Response
+    {
+        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        if (!$tenantId) {
+            return response()->json(['error' => 'Tenant ID required'], 400);
+        }
+
+        $invoice = Invoice::where('tenant_id', $tenantId)
+            ->with(['customer', 'items', 'payments'])
+            ->findOrFail($id);
+
+        return $pdfService->render($invoice)
+            ->download($pdfService->filename($invoice));
     }
 
     /**
