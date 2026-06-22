@@ -239,6 +239,24 @@ Route::prefix('v1')->group(function () {
             // Customer intelligence (upsell context, recommendations)
             Route::get('/{customerId}/intelligence', [CustomerIntelligenceController::class, 'show'])
                 ->name('api.customers.intelligence');
+
+            // Customer notes
+            Route::get('/{id}/notes', [\App\Http\Controllers\Api\CustomerNoteController::class, 'index'])
+                ->name('api.customers.notes.index');
+            Route::post('/{id}/notes', [\App\Http\Controllers\Api\CustomerNoteController::class, 'store'])
+                ->name('api.customers.notes.store');
+            Route::delete('/{id}/notes/{noteId}', [\App\Http\Controllers\Api\CustomerNoteController::class, 'destroy'])
+                ->name('api.customers.notes.destroy');
+
+            // Customer file attachments
+            Route::get('/{id}/files', [\App\Http\Controllers\Api\CustomerFileController::class, 'index'])
+                ->name('api.customers.files.index');
+            Route::post('/{id}/files', [\App\Http\Controllers\Api\CustomerFileController::class, 'store'])
+                ->name('api.customers.files.store');
+            Route::get('/{id}/files/{fileId}/download', [\App\Http\Controllers\Api\CustomerFileController::class, 'download'])
+                ->name('api.customers.files.download');
+            Route::delete('/{id}/files/{fileId}', [\App\Http\Controllers\Api\CustomerFileController::class, 'destroy'])
+                ->name('api.customers.files.destroy');
         });
 
         // CRM API - Deals Pipeline

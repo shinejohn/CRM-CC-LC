@@ -300,6 +300,22 @@ final class Customer extends Model
     }
 
     /**
+     * Get notes for this customer
+     */
+    public function customerNotes(): HasMany
+    {
+        return $this->hasMany(CustomerNote::class);
+    }
+
+    /**
+     * Get file attachments for this customer
+     */
+    public function files(): HasMany
+    {
+        return $this->hasMany(CustomerFile::class);
+    }
+
+    /**
      * Scope: Active campaign customers
      */
     public function scopeActive($query)
