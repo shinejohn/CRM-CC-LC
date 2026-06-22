@@ -6,10 +6,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Enums\PipelineStage;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendOrderConfirmationEmail;
+use App\Jobs\SendPaymentReminder;
+use App\Jobs\SendWelcomeEmail;
 use App\Models\Customer;
 use App\Models\CrmActivity;
 use App\Models\Order;
 use App\Models\ServiceBundle;
+use App\Models\ServiceSubscription;
 use App\Services\StripeService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -72,6 +76,8 @@ final class StripeWebhookController extends Controller
                 'charge.refunded' => $this->handleChargeRefunded($eventData),
                 'customer.subscription.deleted' => $this->handleSubscriptionDeleted($eventData),
                 'customer.subscription.updated' => $this->handleSubscriptionUpdated($eventData),
+                'invoice.payment_succeeded' => $this->handleInvoicePaymentSucceeded($eventData),
+                'invoice.payment_failed' => $this->handleInvoicePaymentFailed($eventData),
                 default => Log::info('Unhandled Stripe webhook event: '.$eventType),
             };
 
@@ -357,6 +363,8 @@ final class StripeWebhookController extends Controller
     {
         $order->load('items.service');
 
+        $firstSubscription = null;
+
         foreach ($order->items as $item) {
             $service = $item->service;
 
@@ -367,7 +375,7 @@ final class StripeWebhookController extends Controller
             // If service is a subscription, create subscription record
             if ($service->is_subscription && $order->customer_id) {
                 try {
-                    \App\Models\ServiceSubscription::create([
+                    $subscription = ServiceSubscription::create([
                         'tenant_id' => $order->tenant_id,
                         'customer_id' => $order->customer_id,
                         'user_id' => $order->user_id,
@@ -382,8 +390,11 @@ final class StripeWebhookController extends Controller
                         'auto_renew' => true,
                         'monthly_amount' => $service->price,
                         'billing_cycle' => $service->billing_period === 'annual' ? 'annual' : 'monthly',
-                        'stripe_subscription_id' => $session->subscription ?? null,
                     ]);
+
+                    if (! $firstSubscription) {
+                        $firstSubscription = $subscription;
+                    }
 
                     Log::info('Service subscription created', [
                         'order_id' => $order->id,
@@ -397,6 +408,16 @@ final class StripeWebhookController extends Controller
 
         // Mark order as completed after fulfillment
         $order->update(['status' => 'completed']);
+
+        // Send post-purchase emails
+        SendOrderConfirmationEmail::dispatch($order);
+
+        if ($order->customer_id) {
+            $customer = Customer::find($order->customer_id);
+            if ($customer) {
+                SendWelcomeEmail::dispatch($customer, $firstSubscription)->delay(now()->addHour());
+            }
+        }
     }
 
     /**
@@ -469,7 +490,7 @@ final class StripeWebhookController extends Controller
     {
         Log::info('Stripe subscription updated', ['subscription_id' => $subscription->id]);
 
-        $serviceSubscription = \App\Models\ServiceSubscription::where('stripe_subscription_id', $subscription->id)->first();
+        $serviceSubscription = ServiceSubscription::where('stripe_subscription_id', $subscription->id)->first();
         if ($serviceSubscription) {
             $status = $subscription->status === 'active' ? 'active' : ($subscription->status === 'past_due' ? 'suspended' : ($subscription->status === 'canceled' ? 'cancelled' : 'active'));
             $serviceSubscription->update([
@@ -478,5 +499,90 @@ final class StripeWebhookController extends Controller
                 'subscription_expires_at' => \Carbon\Carbon::createFromTimestamp($subscription->current_period_end),
             ]);
         }
+    }
+
+    /**
+     * Handle invoice.payment_succeeded for Stripe-managed subscriptions.
+     * Extends the local subscription period when Stripe auto-renews.
+     */
+    private function handleInvoicePaymentSucceeded(object $invoice): void
+    {
+        $stripeSubscriptionId = $invoice->subscription ?? null;
+
+        if (! $stripeSubscriptionId) {
+            return;
+        }
+
+        Log::info('Stripe invoice payment succeeded', [
+            'invoice_id' => $invoice->id,
+            'subscription_id' => $stripeSubscriptionId,
+        ]);
+
+        $serviceSubscription = ServiceSubscription::where('stripe_subscription_id', $stripeSubscriptionId)->first();
+
+        if (! $serviceSubscription) {
+            return;
+        }
+
+        $periodEnd = $invoice->lines->data[0]->period->end ?? null;
+
+        $newExpiry = $periodEnd
+            ? \Carbon\Carbon::createFromTimestamp($periodEnd)
+            : ($serviceSubscription->billing_cycle === 'annual'
+                ? now()->addYear()
+                : now()->addMonth());
+
+        $serviceSubscription->update([
+            'status' => 'active',
+            'subscription_expires_at' => $newExpiry,
+            'renewal_attempts' => 0,
+            'renewal_failure_reason' => null,
+            'last_renewal_attempt_at' => now(),
+        ]);
+
+        Log::info('Stripe-managed subscription renewed', [
+            'subscription_id' => $serviceSubscription->id,
+            'new_expires_at' => $newExpiry->toIso8601String(),
+        ]);
+    }
+
+    /**
+     * Handle invoice.payment_failed for Stripe-managed subscriptions.
+     * Increments retry counter and sends dunning emails.
+     */
+    private function handleInvoicePaymentFailed(object $invoice): void
+    {
+        $stripeSubscriptionId = $invoice->subscription ?? null;
+
+        if (! $stripeSubscriptionId) {
+            return;
+        }
+
+        Log::info('Stripe invoice payment failed', [
+            'invoice_id' => $invoice->id,
+            'subscription_id' => $stripeSubscriptionId,
+        ]);
+
+        $serviceSubscription = ServiceSubscription::where('stripe_subscription_id', $stripeSubscriptionId)->first();
+
+        if (! $serviceSubscription) {
+            return;
+        }
+
+        $attempts = $serviceSubscription->renewal_attempts + 1;
+
+        $serviceSubscription->update([
+            'renewal_attempts' => $attempts,
+            'renewal_failure_reason' => 'Stripe invoice payment failed: ' . ($invoice->id ?? 'unknown'),
+            'last_renewal_attempt_at' => now(),
+            'status' => $attempts >= 3 ? 'suspended' : 'active',
+        ]);
+
+        SendPaymentReminder::dispatch($serviceSubscription, 'payment_failed');
+
+        Log::info('Dunning email dispatched for Stripe subscription', [
+            'subscription_id' => $serviceSubscription->id,
+            'attempt' => $attempts,
+        ]);
     }
 }

@@ -16,17 +16,18 @@ return new class extends Migration
             $table->text('pp_external_id')->nullable();
         });
 
-        // Backfill from metadata->>'pp_business_id'
-        DB::statement("UPDATE smbs SET pp_external_id = metadata->>'pp_business_id' WHERE pp_external_id IS NULL AND metadata IS NOT NULL");
+        // Backfill and deduplicate (PostgreSQL-specific; skip for SQLite in tests)
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement("UPDATE smbs SET pp_external_id = metadata->>'pp_business_id' WHERE pp_external_id IS NULL AND metadata IS NOT NULL");
 
-        // Deduplicate before adding unique constraint (keep newest row per pp_external_id)
-        DB::statement("
-            DELETE FROM smbs a
-            USING smbs b
-            WHERE a.pp_external_id IS NOT NULL
-              AND a.pp_external_id = b.pp_external_id
-              AND a.created_at < b.created_at
-        ");
+            DB::statement("
+                DELETE FROM smbs a
+                USING smbs b
+                WHERE a.pp_external_id IS NOT NULL
+                  AND a.pp_external_id = b.pp_external_id
+                  AND a.created_at < b.created_at
+            ");
+        }
 
         Schema::table('smbs', function (Blueprint $table) {
             $table->unique('pp_external_id');
@@ -37,8 +38,10 @@ return new class extends Migration
             $table->unique('external_id');
         });
 
-        // Drop the now-redundant expression index
-        DB::statement('DROP INDEX IF EXISTS smbs_metadata_pp_business_id_idx');
+        // Drop the now-redundant expression index (PostgreSQL only)
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('DROP INDEX IF EXISTS smbs_metadata_pp_business_id_idx');
+        }
     }
 
     public function down(): void
@@ -52,7 +55,9 @@ return new class extends Migration
             $table->dropUnique(['external_id']);
         });
 
-        // Restore expression index
-        DB::statement("CREATE INDEX IF NOT EXISTS smbs_metadata_pp_business_id_idx ON smbs ((metadata->>'pp_business_id'))");
+        // Restore expression index (PostgreSQL only)
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement("CREATE INDEX IF NOT EXISTS smbs_metadata_pp_business_id_idx ON smbs ((metadata->>'pp_business_id'))");
+        }
     }
 };

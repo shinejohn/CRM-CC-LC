@@ -9,12 +9,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // Expression index on metadata->>'pp_business_id' for fast targeted sync lookups
-        DB::statement("CREATE INDEX IF NOT EXISTS smbs_metadata_pp_business_id_idx ON smbs ((metadata->>'pp_business_id'))");
+        // Expression index on metadata->>'pp_business_id' for fast targeted sync lookups (PostgreSQL only)
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement("CREATE INDEX IF NOT EXISTS smbs_metadata_pp_business_id_idx ON smbs ((metadata->>'pp_business_id'))");
+        }
     }
 
     public function down(): void
     {
-        DB::statement('DROP INDEX IF EXISTS smbs_metadata_pp_business_id_idx');
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement('DROP INDEX IF EXISTS smbs_metadata_pp_business_id_idx');
+        }
     }
 };

@@ -76,6 +76,19 @@ class Kernel extends ConsoleKernel
         // Manifest Destiny — daily 9 AM run across all active timelines
         $schedule->command('manifest-destiny:run')->dailyAt('09:00');
 
+        // Subscription renewal — process expired self-managed subscriptions daily at 6 AM
+        $schedule->job(new \App\Jobs\RenewExpiredSubscriptions)->dailyAt('06:00');
+
+        // Mark overdue invoices daily at 7 AM
+        $schedule->call(static function () {
+            app(\App\Services\InvoiceService::class)->markOverdue();
+        })->dailyAt('07:00');
+
+        // Expire stale quotes daily at 7 AM
+        $schedule->call(static function () {
+            app(\App\Services\QuoteService::class)->expireStaleQuotes();
+        })->dailyAt('07:00');
+
         // Readership analytics sync — pull PP metrics nightly
         $schedule->job(new \App\Jobs\ReadershipSyncJob)->dailyAt('01:00');
 

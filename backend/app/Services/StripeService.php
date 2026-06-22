@@ -137,4 +137,91 @@ class StripeService
             throw $e;
         }
     }
+
+    /**
+     * Create a SetupIntent for saving payment methods
+     */
+    public function createSetupIntent(string $customerId, array $options = []): \Stripe\SetupIntent
+    {
+        try {
+            return $this->stripe->setupIntents->create(array_merge([
+                'customer' => $customerId,
+                'payment_method_types' => ['card'],
+            ], $options));
+        } catch (Exception $e) {
+            Log::error('Stripe SetupIntent creation failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
+     * List payment methods for a customer
+     */
+    public function listPaymentMethods(string $customerId, string $type = 'card'): \Stripe\Collection
+    {
+        try {
+            return $this->stripe->customers->allPaymentMethods($customerId, [
+                'type' => $type,
+            ]);
+        } catch (Exception $e) {
+            Log::error('Stripe list payment methods failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
+     * Retrieve a single payment method
+     */
+    public function retrievePaymentMethod(string $paymentMethodId): \Stripe\PaymentMethod
+    {
+        try {
+            return $this->stripe->paymentMethods->retrieve($paymentMethodId);
+        } catch (Exception $e) {
+            Log::error('Stripe retrieve payment method failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
+     * Detach a payment method from its customer
+     */
+    public function detachPaymentMethod(string $paymentMethodId): \Stripe\PaymentMethod
+    {
+        try {
+            return $this->stripe->paymentMethods->detach($paymentMethodId);
+        } catch (Exception $e) {
+            Log::error('Stripe detach payment method failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
+     * Set the default payment method for a customer
+     */
+    public function setDefaultPaymentMethod(string $customerId, string $paymentMethodId): \Stripe\Customer
+    {
+        try {
+            return $this->stripe->customers->update($customerId, [
+                'invoice_settings' => [
+                    'default_payment_method' => $paymentMethodId,
+                ],
+            ]);
+        } catch (Exception $e) {
+            Log::error('Stripe set default payment method failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
+     * Retrieve a Stripe customer
+     */
+    public function retrieveCustomer(string $customerId): \Stripe\Customer
+    {
+        try {
+            return $this->stripe->customers->retrieve($customerId);
+        } catch (Exception $e) {
+            Log::error('Stripe retrieve customer failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
 }

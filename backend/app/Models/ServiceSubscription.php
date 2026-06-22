@@ -34,6 +34,9 @@ final class ServiceSubscription extends Model
         'billing_cycle', // 'monthly', 'annual'
         'ai_services_enabled',
         'cancelled_at',
+        'renewal_attempts',
+        'last_renewal_attempt_at',
+        'renewal_failure_reason',
     ];
 
     public function customer(): BelongsTo
@@ -88,7 +91,9 @@ final class ServiceSubscription extends Model
             'subscription_started_at' => 'datetime',
             'subscription_expires_at' => 'datetime',
             'cancelled_at' => 'datetime',
+            'last_renewal_attempt_at' => 'datetime',
             'auto_renew' => 'boolean',
+            'renewal_attempts' => 'integer',
             'monthly_amount' => 'decimal:2',
             'ai_services_enabled' => 'array',
         ];

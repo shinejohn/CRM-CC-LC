@@ -444,6 +444,14 @@ Route::prefix('v1')->group(function () {
             Route::delete('/{id}', [ServiceSubscriptionController::class, 'destroy']);
         });
 
+        // Payment Methods
+        Route::prefix('payment-methods')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Api\PaymentMethodController::class, 'index'])->name('api.payment-methods.index');
+            Route::post('/setup-intent', [\App\Http\Controllers\Api\PaymentMethodController::class, 'createSetupIntent'])->name('api.payment-methods.setup-intent');
+            Route::post('/default', [\App\Http\Controllers\Api\PaymentMethodController::class, 'setDefault'])->name('api.payment-methods.set-default');
+            Route::delete('/{paymentMethodId}', [\App\Http\Controllers\Api\PaymentMethodController::class, 'destroy'])->name('api.payment-methods.destroy');
+        });
+
         // Billing API
         Route::prefix('billing')->group(function () {
             Route::get('/summary', [BillingController::class, 'summary']);
