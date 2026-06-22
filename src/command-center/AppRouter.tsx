@@ -66,6 +66,8 @@ const BillingDashboard = lazy(() => import('@/pages/LearningCenter/Services/Bill
 const InvoicesPage = lazy(() => import('@/components/billing/InvoicesListPage').catch(() => ({ default: () => <div>Invoices - Coming Soon</div> })));
 const InvoiceDetail = lazy(() => import('@/components/billing/InvoiceDetailPage').catch(() => ({ default: () => <div>Invoice Detail - Coming Soon</div> })));
 const CollectionsPage = lazy(() => import('@/components/billing/CollectionsDashboard').catch(() => ({ default: () => <div>Collections - Coming Soon</div> })));
+const PlanComparisonPage = lazy(() => import('@/pages/billing/PlanComparisonPage').then(m => ({ default: m.PlanComparisonPage })));
+const PlanUpgradeFlow = lazy(() => import('@/pages/billing/PlanUpgradeFlow').then(m => ({ default: m.PlanUpgradeFlow })));
 const PlatformsPage = lazy(() => import('./pages/PlatformsPage').then(m => ({ default: m.PlatformsPage })));
 
 // ── MEASURE verb ──
@@ -192,6 +194,8 @@ export function getCommandCenterRoutes() {
       <Route path="deliver" element={<Suspense fallback={<LoadingScreen />}><DeliverIndex /></Suspense>} />
       <Route path="deliver/orders" element={<Suspense fallback={<LoadingScreen />}><OrdersPage /></Suspense>} />
       <Route path="deliver/billing" element={<Suspense fallback={<LoadingScreen />}><BillingDashboard /></Suspense>} />
+      <Route path="deliver/plans" element={<Suspense fallback={<LoadingScreen />}><PlanComparisonPage /></Suspense>} />
+      <Route path="deliver/plans/change/:serviceId" element={<Suspense fallback={<LoadingScreen />}><PlanUpgradeFlow /></Suspense>} />
       <Route path="deliver/invoices" element={<Suspense fallback={<LoadingScreen />}><InvoicesPage /></Suspense>} />
       <Route path="deliver/invoices/:id" element={<Suspense fallback={<LoadingScreen />}><InvoiceDetail /></Suspense>} />
       <Route path="deliver/collections" element={<Suspense fallback={<LoadingScreen />}><CollectionsPage /></Suspense>} />

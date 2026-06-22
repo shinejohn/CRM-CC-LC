@@ -467,8 +467,11 @@ Route::prefix('v1')->group(function () {
 
         // Service Subscriptions (active subscriptions for SMB/tenant)
         Route::prefix('subscriptions')->group(function () {
-            Route::get('/', [ServiceSubscriptionController::class, 'index']);
-            Route::delete('/{id}', [ServiceSubscriptionController::class, 'destroy']);
+            Route::get('/', [ServiceSubscriptionController::class, 'index'])->name('api.subscriptions.index');
+            Route::get('/active', [ServiceSubscriptionController::class, 'active'])->name('api.subscriptions.active');
+            Route::post('/{id}/upgrade', [ServiceSubscriptionController::class, 'upgrade'])->name('api.subscriptions.upgrade');
+            Route::post('/{id}/downgrade', [ServiceSubscriptionController::class, 'downgrade'])->name('api.subscriptions.downgrade');
+            Route::delete('/{id}', [ServiceSubscriptionController::class, 'destroy'])->name('api.subscriptions.destroy');
         });
 
         // Payment Methods
@@ -481,7 +484,8 @@ Route::prefix('v1')->group(function () {
 
         // Billing API
         Route::prefix('billing')->group(function () {
-            Route::get('/summary', [BillingController::class, 'summary']);
+            Route::get('/summary', [BillingController::class, 'summary'])->name('api.billing.summary');
+            Route::get('/prorate', [BillingController::class, 'prorate'])->name('api.billing.prorate');
         });
 
         Route::get('/invoices', [BillingController::class, 'invoices']);

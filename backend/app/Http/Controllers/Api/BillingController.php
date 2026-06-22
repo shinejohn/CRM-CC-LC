@@ -6,15 +6,65 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Service;
 use App\Models\ServiceSubscription;
+use App\Services\ProrationService;
 use App\Services\StripeService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+
 final class BillingController extends Controller
 {
     public function __construct(
-        private StripeService $stripeService
+        private StripeService $stripeService,
+        private ProrationService $prorationService,
     ) {}
+
+    /**
+     * Proration preview for switching the acting customer's active
+     * subscription to the given target plan.
+     */
+    public function prorate(Request $request): JsonResponse
+    {
+        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+
+        if (! $tenantId) {
+            return response()->json(['error' => 'Tenant ID required'], 400);
+        }
+
+        $validated = $request->validate([
+            'target_service_id' => ['required', 'string'],
+        ]);
+
+        $subQuery = ServiceSubscription::where('tenant_id', $tenantId)
+            ->where('status', 'active')
+            ->with('service');
+
+        if ($request->user()) {
+            $subQuery->where(function ($q) use ($request) {
+                $q->where('user_id', $request->user()->id)
+                    ->orWhere('customer_id', $request->user()->customer_id ?? null);
+            });
+        }
+
+        $subscription = $subQuery->orderBy('subscription_started_at', 'desc')->first();
+
+        if (! $subscription) {
+            return response()->json(['error' => 'No active subscription found'], 404);
+        }
+
+        $targetService = Service::where('tenant_id', $tenantId)
+            ->where('id', $validated['target_service_id'])
+            ->first();
+
+        if (! $targetService) {
+            return response()->json(['error' => 'Target plan not found'], 404);
+        }
+
+        $preview = $this->prorationService->preview($subscription, $targetService);
+
+        return response()->json(['data' => $preview]);
+    }
 
     /**
      * Get billing summary for the tenant
@@ -23,7 +73,7 @@ final class BillingController extends Controller
     {
         $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
 
-        if (!$tenantId) {
+        if (! $tenantId) {
             return response()->json(['error' => 'Tenant ID required'], 400);
         }
 
@@ -85,7 +135,7 @@ final class BillingController extends Controller
     {
         $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
 
-        if (!$tenantId) {
+        if (! $tenantId) {
             return response()->json(['error' => 'Tenant ID required'], 400);
         }
 
@@ -144,7 +194,7 @@ final class BillingController extends Controller
     {
         $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
 
-        if (!$tenantId) {
+        if (! $tenantId) {
             return response()->json(['error' => 'Tenant ID required'], 400);
         }
 
@@ -168,7 +218,7 @@ final class BillingController extends Controller
             'quantity' => $item->quantity,
         ])->toArray();
 
-        $successUrl = $request->input('success_url', url('/learning/services/orders/' . $order->id . '/success'));
+        $successUrl = $request->input('success_url', url('/learning/services/orders/'.$order->id.'/success'));
         $cancelUrl = $request->input('cancel_url', url('/learning/services/billing'));
 
         $session = $this->stripeService->createCheckoutSession(

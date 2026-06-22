@@ -70,9 +70,18 @@ export const BillingDashboardPage: React.FC = () => {
   return (
     <LearningLayout title="Billing & Subscription" breadcrumbs={breadcrumbs}>
       <div className="max-w-5xl mx-auto space-y-8">
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-          Billing & Subscription
-        </h1>
+        <div className="flex items-center justify-between gap-4">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
+            Billing & Subscription
+          </h1>
+          <Link
+            to="/command-center/deliver/plans"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors"
+          >
+            <CreditCard className="w-4 h-4" />
+            Change Plan
+          </Link>
+        </div>
 
         {/* Summary Cards */}
         {summary && (

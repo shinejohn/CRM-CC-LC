@@ -133,6 +133,63 @@ class StripeService
     }
 
     /**
+     * Preview the proration for switching a subscription to a new price.
+     *
+     * Uses Stripe's upcoming-invoice preview with the target subscription item
+     * swapped to the new price and proration enabled. No invoice is created.
+     */
+    public function previewProration(string $customerId, string $subscriptionId, string $newPriceId): \Stripe\Invoice
+    {
+        try {
+            $subscription = $this->stripe->subscriptions->retrieve($subscriptionId, []);
+            $itemId = $subscription->items->data[0]->id ?? null;
+
+            $params = [
+                'customer' => $customerId,
+                'subscription' => $subscriptionId,
+                'subscription_details' => [
+                    'proration_behavior' => 'create_prorations',
+                    'items' => [
+                        array_filter([
+                            'id' => $itemId,
+                            'price' => $newPriceId,
+                        ]),
+                    ],
+                ],
+            ];
+
+            return $this->stripe->invoices->createPreview($params);
+        } catch (Exception $e) {
+            Log::error('Stripe proration preview failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
+     * Update a subscription's price (upgrade/downgrade) with proration.
+     */
+    public function updateSubscriptionPrice(string $subscriptionId, string $newPriceId): \Stripe\Subscription
+    {
+        try {
+            $subscription = $this->stripe->subscriptions->retrieve($subscriptionId, []);
+            $itemId = $subscription->items->data[0]->id ?? null;
+
+            return $this->stripe->subscriptions->update($subscriptionId, [
+                'items' => [
+                    array_filter([
+                        'id' => $itemId,
+                        'price' => $newPriceId,
+                    ]),
+                ],
+                'proration_behavior' => 'create_prorations',
+            ]);
+        } catch (Exception $e) {
+            Log::error('Stripe subscription price update failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
      * Cancel a Stripe subscription
      */
     public function cancelSubscription(string $subscriptionId): \Stripe\Subscription
