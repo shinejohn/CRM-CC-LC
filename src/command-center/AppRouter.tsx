@@ -7,6 +7,7 @@ import { LoadingScreen } from '@/components/ui/LoadingScreen';
 // ── Core ──
 const Dashboard = lazy(() => import('./modules/dashboard/Dashboard').then(m => ({ default: m.Dashboard })));
 const LoginPage = lazy(() => import('./pages/LoginPage').then(m => ({ default: m.LoginPage })));
+const OnboardingChecklist = lazy(() => import('./pages/OnboardingChecklist').then(m => ({ default: m.OnboardingChecklist })));
 
 // ── DEFINE verb ──
 const DefineIndex = lazy(() => import('./pages/DefineIndex').then(m => ({ default: m.DefineIndex })));
@@ -131,6 +132,9 @@ export function getCommandCenterRoutes() {
 
       {/* Dashboard */}
       <Route path="dashboard" element={<Suspense fallback={<LoadingScreen />}><Dashboard /></Suspense>} />
+
+      {/* Post-purchase onboarding checklist */}
+      <Route path="onboarding" element={<Suspense fallback={<LoadingScreen />}><OnboardingChecklist /></Suspense>} />
 
       {/* ── DEFINE: Business identity & profile ── */}
       <Route path="define" element={<Suspense fallback={<LoadingScreen />}><DefineIndex /></Suspense>} />

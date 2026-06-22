@@ -14,6 +14,7 @@ use App\Models\CrmActivity;
 use App\Models\Order;
 use App\Models\ServiceBundle;
 use App\Models\ServiceSubscription;
+use App\Services\OnboardingService;
 use App\Services\StripeService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -26,7 +27,8 @@ use Stripe\Webhook;
 final class StripeWebhookController extends Controller
 {
     public function __construct(
-        private StripeService $stripeService
+        private StripeService $stripeService,
+        private OnboardingService $onboardingService
     ) {}
 
     /**
@@ -144,6 +146,9 @@ final class StripeWebhookController extends Controller
 
             if ($customer) {
                 $order->update(['customer_id' => $customer->id]);
+
+                // Seed the post-purchase onboarding checklist (idempotent).
+                $this->onboardingService->seedFor($customer);
             }
 
             // Track purchase in CRM

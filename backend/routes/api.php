@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\NewsletterController;
 use App\Http\Controllers\Api\NewsletterScheduleController;
 use App\Http\Controllers\Api\NewsletterTemplateController;
 use App\Http\Controllers\Api\NewsletterTrackingController;
+use App\Http\Controllers\Api\OnboardingController;
 use App\Http\Controllers\Api\PresentationController;
 use App\Http\Controllers\Api\ProductCatalogController;
 use App\Http\Controllers\Api\ProvisioningTaskController;
@@ -260,6 +261,12 @@ Route::prefix('v1')->group(function () {
             Route::post('/{id}/send', [QuoteController::class, 'send']);
             Route::post('/{id}/convert-to-invoice', [QuoteController::class, 'convertToInvoice']);
             Route::delete('/{id}', [QuoteController::class, 'destroy']);
+        });
+
+        // Post-purchase onboarding checklist (current customer)
+        Route::prefix('onboarding')->group(function () {
+            Route::get('/', [OnboardingController::class, 'index'])->name('api.onboarding.index');
+            Route::post('/{step}/complete', [OnboardingController::class, 'complete'])->name('api.onboarding.complete');
         });
 
         // CRM API - Invoices (full CRUD; billing/invoices is for order payment)

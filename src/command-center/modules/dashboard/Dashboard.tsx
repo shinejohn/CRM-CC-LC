@@ -1,16 +1,17 @@
 import React from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 import { motion } from 'framer-motion';
 import {
   Building2, Megaphone, TrendingUp, Package, BarChart3, Bot,
   ArrowRight, Clock, FileText, Users, CreditCard, Cpu,
-  CheckCircle2, AlertCircle, Calendar, Phone, Mail,
+  CheckCircle2, AlertCircle, Calendar, Phone, Mail, ListChecks,
 } from 'lucide-react';
 import { PageHeader, DataCard } from '@/components/shared';
 import { useAuthStore } from '@/stores/authStore';
 import { useBusinessMode } from '@/hooks/useBusinessMode';
 import { checkPermission, type Resource, type Role } from '@/hooks/usePermission';
 import { useDashboard } from '../../hooks/useDashboard';
+import { useOnboarding } from '@/hooks/useOnboarding';
 import type { Activity } from '@/types/command-center';
 
 interface VerbCardProps {
@@ -126,8 +127,10 @@ export function Dashboard() {
   const { t } = useBusinessMode();
   const navigate = useNavigate();
   const { activities, isLoading: activitiesLoading } = useDashboard();
+  const { data: onboarding } = useOnboarding();
 
   const isFree = user?.subscription_tier === 'free';
+  const showOnboardingBanner = onboarding?.complete === false;
 
   const verbCards: VerbCardProps[] = [
     {
@@ -220,6 +223,32 @@ export function Dashboard() {
           </span>
         </div>
       </motion.div>
+
+      {/* Onboarding banner — auto-hides once onboarding is complete */}
+      {showOnboardingBanner && (
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <Link
+            to="/command-center/onboarding"
+            className="flex items-center gap-4 rounded-xl border border-[var(--nexus-card-border)] bg-[var(--nexus-bg-secondary)] p-4 transition-colors hover:border-[var(--nexus-accent-primary)]"
+          >
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--nexus-card-bg)]">
+              <ListChecks className="h-5 w-5 text-[var(--nexus-accent-primary)]" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-[var(--nexus-text-primary)]">
+                Finish setting up your account
+              </p>
+              <p className="text-xs text-[var(--nexus-text-secondary)]">
+                You&apos;re {onboarding?.percent ?? 0}% through onboarding — complete the remaining steps to get the most out of your account.
+              </p>
+            </div>
+            <ArrowRight className="h-4 w-4 shrink-0 text-[var(--nexus-accent-primary)]" />
+          </Link>
+        </motion.div>
+      )}
 
       {/* Six Verb Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
