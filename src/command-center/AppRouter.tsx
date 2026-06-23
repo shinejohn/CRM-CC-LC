@@ -26,6 +26,8 @@ const DiagnosticPage = lazy(() => import('./pages/DiagnosticPage').then(m => ({ 
 // ── ATTRACT verb (marketing kit + content cards) ──
 const MarketingKitPage = lazy(() => import('./modules/marketing-kit/MarketingKitPage').then(m => ({ default: m.MarketingKitPage })));
 const ContentCardsPage = lazy(() => import('./modules/marketing-kit').then(m => ({ default: m.ContentCardsPage })));
+const EmailTemplatesPage = lazy(() => import('./pages/EmailTemplatesPage').then(m => ({ default: m.EmailTemplatesPage })).catch(() => ({ default: () => <div>Email Templates - Coming Soon</div> })));
+const EmailTemplateEditorPage = lazy(() => import('./pages/EmailTemplateEditorPage').then(m => ({ default: m.EmailTemplateEditorPage })).catch(() => ({ default: () => <div>Email Template Editor - Coming Soon</div> })));
 
 // ── Syndication ──
 const SyndicationDashboardPage = lazy(() => import('./modules/syndication/SyndicationDashboardPage').then(m => ({ default: m.SyndicationDashboardPage })));
@@ -155,6 +157,9 @@ export function getCommandCenterRoutes() {
       <Route path="attract/marketing-kit" element={<Suspense fallback={<LoadingScreen />}><MarketingKitPage /></Suspense>} />
       <Route path="attract/marketing-kit/:tool" element={<Suspense fallback={<LoadingScreen />}><MarketingKitPage /></Suspense>} />
       <Route path="attract/content-cards" element={<Suspense fallback={<LoadingScreen />}><ContentCardsPage /></Suspense>} />
+      <Route path="attract/templates" element={<Suspense fallback={<LoadingScreen />}><EmailTemplatesPage /></Suspense>} />
+      <Route path="attract/templates/new" element={<Suspense fallback={<LoadingScreen />}><EmailTemplateEditorPage /></Suspense>} />
+      <Route path="attract/templates/:id" element={<Suspense fallback={<LoadingScreen />}><EmailTemplateEditorPage /></Suspense>} />
 
       {/* ── SELL: CRM, pipeline & customer management ── */}
       <Route path="sell" element={<Suspense fallback={<LoadingScreen />}><SellIndex /></Suspense>} />

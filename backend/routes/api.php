@@ -610,6 +610,17 @@ Route::prefix('v1')->group(function () {
                 Route::post('/templates', [\App\Http\Controllers\Api\EmailCampaignController::class, 'createTemplate']);
             });
 
+            // Email Template Builder (full CRUD + preview)
+            Route::prefix('email-templates')->group(function () {
+                Route::get('/', [\App\Http\Controllers\Api\EmailTemplateController::class, 'index'])->name('api.email-templates.index');
+                Route::post('/', [\App\Http\Controllers\Api\EmailTemplateController::class, 'store'])->name('api.email-templates.store');
+                Route::post('/preview', [\App\Http\Controllers\Api\EmailTemplateController::class, 'previewRaw'])->name('api.email-templates.preview-raw');
+                Route::get('/{id}', [\App\Http\Controllers\Api\EmailTemplateController::class, 'show'])->name('api.email-templates.show');
+                Route::put('/{id}', [\App\Http\Controllers\Api\EmailTemplateController::class, 'update'])->name('api.email-templates.update');
+                Route::delete('/{id}', [\App\Http\Controllers\Api\EmailTemplateController::class, 'destroy'])->name('api.email-templates.destroy');
+                Route::post('/{id}/preview', [\App\Http\Controllers\Api\EmailTemplateController::class, 'preview'])->name('api.email-templates.preview');
+            });
+
             // Phone Campaigns
             Route::prefix('phone')->group(function () {
                 Route::get('/campaigns', [\App\Http\Controllers\Api\PhoneCampaignController::class, 'index']);
