@@ -101,6 +101,7 @@ export function AppRouter() {
         <Route path="/business-profile" element={<BusinessProfilePage />} />
         <Route path="/data-analytics" element={<DataAnalyticsPage />} />
         <Route path="/client-proposal" element={<ClientProposalPage />} />
+        <Route path="/client-proposal/:token" element={<ClientProposalPage />} />
         <Route path="/ai-workflow" element={<AIWorkflowPage />} />
         <Route path="/files" element={<FilesPage />} />
         <Route path="/login" element={<LoginPage />} />

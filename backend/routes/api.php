@@ -77,6 +77,13 @@ Route::prefix('v1')->group(function () {
         Route::get('/unsubscribe/{token}', [SubscriptionController::class, 'unsubscribe']);
     });
 
+    // Public quote acceptance (token-gated, NO auth — customer-facing proposal links)
+    Route::prefix('public/quotes')->group(function () {
+        Route::get('/{token}', [\App\Http\Controllers\Api\PublicQuoteController::class, 'show'])->name('api.public.quotes.show');
+        Route::post('/{token}/accept', [\App\Http\Controllers\Api\PublicQuoteController::class, 'accept'])->name('api.public.quotes.accept');
+        Route::post('/{token}/decline', [\App\Http\Controllers\Api\PublicQuoteController::class, 'decline'])->name('api.public.quotes.decline');
+    });
+
     // Knowledge/FAQ API — public reads, authenticated writes
     Route::prefix('knowledge')->group(function () {
         Route::get('/', [KnowledgeController::class, 'index']);

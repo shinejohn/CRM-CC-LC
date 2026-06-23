@@ -94,6 +94,7 @@ final class QuoteService
                 'customer_id' => $data['customer_id'],
                 'deal_id' => $data['deal_id'] ?? null,
                 'quote_number' => $this->generateQuoteNumber($tenantId),
+                'public_token' => Quote::generatePublicToken(),
                 'status' => 'draft',
                 'tax_rate' => $data['tax_rate'] ?? 0,
                 'discount' => $data['discount'] ?? 0,
@@ -163,6 +164,9 @@ final class QuoteService
         if ($quote->status !== 'draft') {
             throw new \InvalidArgumentException('Only draft quotes can be sent');
         }
+
+        // Ensure a public token exists at send time so the customer link works.
+        $quote->ensurePublicToken();
 
         $quote->update([
             'status' => 'sent',

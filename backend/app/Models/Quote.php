@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 final class Quote extends Model
 {
@@ -19,6 +20,7 @@ final class Quote extends Model
         'customer_id',
         'deal_id',
         'quote_number',
+        'public_token',
         'status',
         'subtotal',
         'tax',
@@ -69,5 +71,35 @@ final class Quote extends Model
         }
 
         return now()->isAfter($this->valid_until);
+    }
+
+    /**
+     * Whether the quote has passed its validity window, regardless of status.
+     */
+    public function isPastValidUntil(): bool
+    {
+        return $this->valid_until !== null && now()->isAfter($this->valid_until);
+    }
+
+    /**
+     * Generate a unique secure public token if one is not already set.
+     */
+    public function ensurePublicToken(): string
+    {
+        if (empty($this->public_token)) {
+            $this->public_token = self::generatePublicToken();
+            $this->save();
+        }
+
+        return $this->public_token;
+    }
+
+    public static function generatePublicToken(): string
+    {
+        do {
+            $token = Str::random(48);
+        } while (self::withoutGlobalScopes()->where('public_token', $token)->exists());
+
+        return $token;
     }
 }
