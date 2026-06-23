@@ -1,4 +1,4 @@
-import { AlertCircle, Loader2 } from 'lucide-react';
+import { AlertCircle, Loader2, Trophy } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -6,8 +6,15 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet';
-import { useOutboundCampaignAnalytics } from '@/hooks/useOutboundCampaigns';
-import type { OutboundCampaign } from '@/services/crm/outbound-campaigns-api';
+import { Button } from '@/components/ui/button';
+import {
+  useDeclareCampaignWinner,
+  useOutboundCampaignAnalytics,
+} from '@/hooks/useOutboundCampaigns';
+import type {
+  CampaignVariantStats,
+  OutboundCampaign,
+} from '@/services/crm/outbound-campaigns-api';
 
 interface CampaignAnalyticsPanelProps {
   campaign: OutboundCampaign | null;
@@ -18,10 +25,14 @@ interface CampaignAnalyticsPanelProps {
 const pct = (value: number): string => `${value.toFixed(1)}%`;
 
 export function CampaignAnalyticsPanel({ campaign, open, onOpenChange }: CampaignAnalyticsPanelProps) {
-  const { data, isLoading, isError } = useOutboundCampaignAnalytics(open ? campaign?.id ?? null : null);
+  const activeId = open ? campaign?.id ?? null : null;
+  const { data, isLoading, isError } = useOutboundCampaignAnalytics(activeId);
+  const declareWinner = useDeclareCampaignWinner(activeId);
 
   const isEmail = campaign?.type === 'email';
   const isVoice = campaign?.type === 'phone';
+  const variants = data?.variants ?? [];
+  const hasVariants = variants.length > 0;
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -74,6 +85,38 @@ export function CampaignAnalyticsPanel({ campaign, open, onOpenChange }: Campaig
                 {isEmail && <Rate label="Click rate" value={pct(data.click_rate)} />}
               </div>
 
+              {hasVariants && (
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-sm font-semibold text-[var(--nexus-text-primary)]">
+                      A/B variants
+                    </h4>
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      disabled={declareWinner.isPending}
+                      onClick={() => declareWinner.mutate(data.ab_winner_metric ?? undefined)}
+                      className="border-[var(--nexus-card-border)] text-[var(--nexus-text-secondary)] hover:bg-[var(--nexus-bg-secondary)]"
+                    >
+                      <Trophy className="w-3.5 h-3.5 mr-1.5" />
+                      {declareWinner.isPending ? 'Deciding…' : 'Declare winner'}
+                    </Button>
+                  </div>
+                  {data.ab_winner_metric && (
+                    <p className="text-xs text-[var(--nexus-text-tertiary)]">
+                      Winner is decided by{' '}
+                      {data.ab_winner_metric === 'open_rate' ? 'open rate' : 'click rate'}.
+                    </p>
+                  )}
+                  <div className="space-y-2">
+                    {variants.map((variant) => (
+                      <VariantRow key={variant.id} variant={variant} isEmail={isEmail} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {Object.keys(data.status_breakdown).length > 0 && (
                 <div className="space-y-2">
                   <h4 className="text-sm font-semibold text-[var(--nexus-text-primary)]">
@@ -97,6 +140,65 @@ export function CampaignAnalyticsPanel({ campaign, open, onOpenChange }: Campaig
         </div>
       </SheetContent>
     </Sheet>
+  );
+}
+
+function VariantRow({
+  variant,
+  isEmail,
+}: {
+  variant: CampaignVariantStats;
+  isEmail: boolean;
+}) {
+  return (
+    <div
+      className={`rounded-lg border px-3 py-2.5 ${
+        variant.is_winner
+          ? 'border-emerald-500 bg-emerald-500/5'
+          : 'border-[var(--nexus-card-border)]'
+      }`}
+    >
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-semibold text-[var(--nexus-text-primary)]">
+            Variant {variant.label}
+          </span>
+          {variant.is_winner && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 px-2 py-0.5 text-xs font-medium text-emerald-500">
+              <Trophy className="w-3 h-3" aria-hidden="true" /> Winner
+            </span>
+          )}
+        </div>
+        <span className="text-xs text-[var(--nexus-text-tertiary)]">{variant.weight}% split</span>
+      </div>
+      {variant.subject && (
+        <p className="mt-1 truncate text-xs text-[var(--nexus-text-secondary)]">
+          {variant.subject}
+        </p>
+      )}
+      <div className="mt-2 grid grid-cols-3 gap-2 text-xs">
+        <div>
+          <p className="text-[var(--nexus-text-tertiary)]">Sent</p>
+          <p className="font-medium text-[var(--nexus-text-primary)]">{variant.sent_count}</p>
+        </div>
+        {isEmail && (
+          <div>
+            <p className="text-[var(--nexus-text-tertiary)]">Open rate</p>
+            <p className="font-medium text-[var(--nexus-text-primary)]">
+              {pct(variant.open_rate)}
+            </p>
+          </div>
+        )}
+        {isEmail && (
+          <div>
+            <p className="text-[var(--nexus-text-tertiary)]">Click rate</p>
+            <p className="font-medium text-[var(--nexus-text-primary)]">
+              {pct(variant.click_rate)}
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 

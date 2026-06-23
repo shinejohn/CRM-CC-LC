@@ -37,6 +37,9 @@ final class OutboundCampaign extends Model
         'voicemail_count',
         'metadata',
         'notes',
+        'ab_test_enabled',
+        'ab_winner_metric',
+        'ab_test_size',
     ];
 
     protected function casts(): array
@@ -57,12 +60,24 @@ final class OutboundCampaign extends Model
             'replied_count' => 'integer',
             'answered_count' => 'integer',
             'voicemail_count' => 'integer',
+            'ab_test_enabled' => 'boolean',
+            'ab_test_size' => 'integer',
         ];
     }
 
     public function recipients(): HasMany
     {
         return $this->hasMany(CampaignRecipient::class, 'campaign_id');
+    }
+
+    public function variants(): HasMany
+    {
+        return $this->hasMany(CampaignVariant::class, 'outbound_campaign_id');
+    }
+
+    public function hasVariants(): bool
+    {
+        return $this->variants()->exists();
     }
 
     public function isDraft(): bool

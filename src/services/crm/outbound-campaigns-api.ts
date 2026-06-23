@@ -64,6 +64,31 @@ export interface OutboundCampaign {
   updated_at: string;
 }
 
+export type AbWinnerMetric = 'open_rate' | 'click_rate';
+
+export interface CampaignVariantInput {
+  label?: string;
+  subject?: string;
+  message?: string;
+  template_id?: string;
+  /** Split percentage 0-100. */
+  weight?: number;
+}
+
+export interface CampaignVariantStats {
+  id: string;
+  label: string;
+  subject: string | null;
+  weight: number;
+  recipients_count: number;
+  sent_count: number;
+  open_count: number;
+  click_count: number;
+  open_rate: number;
+  click_rate: number;
+  is_winner: boolean;
+}
+
 export interface OutboundCampaignAnalytics {
   campaign_id: string;
   total_recipients: number;
@@ -79,6 +104,9 @@ export interface OutboundCampaignAnalytics {
   open_rate: number;
   click_rate: number;
   status_breakdown: Record<string, number>;
+  ab_test_enabled: boolean;
+  ab_winner_metric: AbWinnerMetric | null;
+  variants: CampaignVariantStats[];
 }
 
 export interface CreateOutboundCampaignInput {
@@ -91,6 +119,13 @@ export interface CreateOutboundCampaignInput {
   recipient_segments?: RecipientSegments;
   template_id?: string;
   template_variables?: Record<string, unknown>;
+  /** When true with variants[], the campaign runs as an A/B split. */
+  ab_test_enabled?: boolean;
+  ab_winner_metric?: AbWinnerMetric;
+  /** Optional % of audience to include in the A/B test. */
+  ab_test_size?: number;
+  /** Two or more variants; only used when ab_test_enabled is true. */
+  variants?: CampaignVariantInput[];
 }
 
 export type UpdateOutboundCampaignInput = Partial<{
@@ -171,5 +206,16 @@ export const outboundCampaignsApi = {
 
   delete: async (id: string): Promise<void> => {
     await apiClient.delete(`/api/v1/outbound/campaigns/${id}`);
+  },
+
+  declareWinner: async (
+    id: string,
+    metric?: AbWinnerMetric,
+  ): Promise<CampaignVariantStats> => {
+    const res = await apiClient.post<{ data: CampaignVariantStats }>(
+      `/api/v1/outbound/campaigns/${id}/variants/winner`,
+      metric ? { metric } : {},
+    );
+    return res.data;
   },
 };

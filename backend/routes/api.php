@@ -600,6 +600,8 @@ Route::prefix('v1')->group(function () {
                 Route::get('/{id}/recipients', [\App\Http\Controllers\Api\OutboundCampaignController::class, 'getRecipients']);
                 Route::post('/{id}/start', [\App\Http\Controllers\Api\OutboundCampaignController::class, 'start']);
                 Route::get('/{id}/analytics', [\App\Http\Controllers\Api\OutboundCampaignController::class, 'analytics']);
+                Route::post('/{id}/variants/winner', [\App\Http\Controllers\Api\OutboundCampaignController::class, 'declareWinner'])
+                    ->name('api.outbound.campaigns.variants.winner');
             });
 
             // Email Campaigns

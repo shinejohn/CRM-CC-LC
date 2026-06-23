@@ -121,6 +121,7 @@ final class PostalWebhookController extends Controller
                 }
                 if ($shouldIncrement) {
                     $campaign?->increment('opened_count');
+                    $recipient->variant?->increment('open_count');
 
                     // Fire EmailOpened event
                     if ($recipient->customer_id && $campaign) {
@@ -144,9 +145,11 @@ final class PostalWebhookController extends Controller
                 $updates['status'] = 'clicked';
                 if ($shouldIncrementClick) {
                     $campaign?->increment('clicked_count');
+                    $recipient->variant?->increment('click_count');
                 }
                 if ($shouldIncrementOpen) {
                     $campaign?->increment('opened_count');
+                    $recipient->variant?->increment('open_count');
                 }
                 if ($shouldIncrementOpen && $recipient->customer_id && $campaign) {
                     event(new EmailOpened(

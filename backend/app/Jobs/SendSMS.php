@@ -31,12 +31,17 @@ final class SendSMS implements ShouldQueue
             $recipient = $this->recipient;
             $campaign = $this->campaign;
 
+            // A/B variant overrides the campaign message when assigned.
+            $variant = $recipient->variant_id ? $recipient->variant : null;
+
             // Prepare SMS message
-            $message = $campaign->message;
+            $message = $variant?->message ?? $campaign->message;
+
+            $templateId = $variant?->template_id ?? $campaign->template_id;
 
             // If template is used, render it
-            if ($campaign->template_id) {
-                $template = \App\Models\SmsTemplate::find($campaign->template_id);
+            if ($templateId) {
+                $template = \App\Models\SmsTemplate::find($templateId);
                 if ($template) {
                     $variables = array_merge(
                         $campaign->template_variables ?? [],
@@ -71,6 +76,9 @@ final class SendSMS implements ShouldQueue
                 ]);
 
                 $campaign->increment('sent_count');
+                if ($variant) {
+                    $variant->increment('sent_count');
+                }
             } else {
                 $recipient->update([
                     'status' => 'failed',

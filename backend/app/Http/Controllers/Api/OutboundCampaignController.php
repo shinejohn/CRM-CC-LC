@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOutboundCampaignRequest;
 use App\Jobs\CampaignPreFlightJob;
 use App\Models\CampaignRecipient;
+use App\Models\CampaignVariant;
 use App\Models\Customer;
 use App\Models\OutboundCampaign;
 use Illuminate\Http\JsonResponse;
@@ -81,23 +82,94 @@ final class OutboundCampaignController extends Controller
 
         $validated = $request->validated();
 
-        $campaign = OutboundCampaign::create([
-            'tenant_id' => $tenantId,
-            'name' => $validated['name'],
-            'type' => $validated['type'],
-            'status' => $validated['scheduled_at'] ?? false ? 'scheduled' : 'draft',
-            'subject' => $validated['subject'] ?? null,
-            'message' => $validated['message'],
-            'template_id' => $validated['template_id'] ?? null,
-            'template_variables' => $validated['template_variables'] ?? [],
-            'scheduled_at' => $validated['scheduled_at'] ?? null,
-            'recipient_segments' => $validated['recipient_segments'] ?? [],
-        ]);
+        $variants = $validated['variants'] ?? [];
+        $abEnabled = ! empty($variants) && (bool) ($validated['ab_test_enabled'] ?? true);
+
+        $campaign = DB::transaction(function () use ($tenantId, $validated, $variants, $abEnabled) {
+            $campaign = OutboundCampaign::create([
+                'tenant_id' => $tenantId,
+                'name' => $validated['name'],
+                'type' => $validated['type'],
+                'status' => $validated['scheduled_at'] ?? false ? 'scheduled' : 'draft',
+                'subject' => $validated['subject'] ?? null,
+                'message' => $validated['message'],
+                'template_id' => $validated['template_id'] ?? null,
+                'template_variables' => $validated['template_variables'] ?? [],
+                'scheduled_at' => $validated['scheduled_at'] ?? null,
+                'recipient_segments' => $validated['recipient_segments'] ?? [],
+                'ab_test_enabled' => $abEnabled,
+                'ab_winner_metric' => $abEnabled ? ($validated['ab_winner_metric'] ?? 'open_rate') : null,
+                'ab_test_size' => $abEnabled ? ($validated['ab_test_size'] ?? null) : null,
+            ]);
+
+            if ($abEnabled) {
+                $this->syncVariants($campaign, $variants);
+            }
+
+            return $campaign;
+        });
 
         return response()->json([
-            'data' => $campaign,
+            'data' => $campaign->load('variants'),
             'message' => 'Campaign created successfully',
         ], 201);
+    }
+
+    /**
+     * Replace a campaign's variants with the supplied set.
+     *
+     * @param  array<int, array<string, mixed>>  $variants
+     */
+    private function syncVariants(OutboundCampaign $campaign, array $variants): void
+    {
+        $campaign->variants()->delete();
+
+        $defaultLabels = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+        foreach (array_values($variants) as $index => $variant) {
+            CampaignVariant::create([
+                'outbound_campaign_id' => $campaign->id,
+                'label' => $variant['label'] ?? ($defaultLabels[$index] ?? (string) ($index + 1)),
+                'subject' => $variant['subject'] ?? null,
+                'message' => $variant['message'] ?? null,
+                'template_id' => $variant['template_id'] ?? null,
+                'weight' => isset($variant['weight']) ? (int) $variant['weight'] : 50,
+            ]);
+        }
+    }
+
+    /**
+     * Deterministically assign a recipient to a variant, honoring weights.
+     *
+     * Uses a stable hash of the recipient key mapped into [0,100) and walks the
+     * cumulative weight buckets. Stable: the same key always lands in the same
+     * variant, so re-runs are reproducible.
+     *
+     * @param  \Illuminate\Support\Collection<int, CampaignVariant>  $variants
+     */
+    private function assignVariant($variants, string $key): CampaignVariant
+    {
+        $totalWeight = (int) $variants->sum('weight');
+
+        if ($totalWeight <= 0) {
+            // No usable weights — fall back to a stable even split.
+            $index = (int) (hexdec(substr(md5($key), 0, 8)) % $variants->count());
+
+            return $variants->values()[$index];
+        }
+
+        // 0..(totalWeight-1) bucket from a stable hash.
+        $bucket = (int) (hexdec(substr(md5($key), 0, 8)) % $totalWeight);
+
+        $cumulative = 0;
+        foreach ($variants as $variant) {
+            $cumulative += (int) $variant->weight;
+            if ($bucket < $cumulative) {
+                return $variant;
+            }
+        }
+
+        return $variants->last();
     }
 
     /**
@@ -280,10 +352,19 @@ final class OutboundCampaignController extends Controller
             // Get recipients
             $recipients = $this->buildRecipientList($tenantId, $campaign->type, $campaign->recipient_segments ?? []);
 
+            // Resolve A/B variants once. Empty when the campaign has none — the
+            // no-variant path below assigns variant_id = null (unchanged behavior).
+            $variants = $campaign->variants()->orderBy('created_at')->get();
+
             // Create recipient records
             foreach ($recipients as $recipientData) {
+                $variantId = $variants->isNotEmpty()
+                    ? $this->assignVariant($variants, (string) ($recipientData['customer_id'] ?? uniqid('r_', true)))->id
+                    : null;
+
                 CampaignRecipient::create([
                     'campaign_id' => $campaign->id,
+                    'variant_id' => $variantId,
                     'customer_id' => $recipientData['customer_id'] ?? null,
                     'tenant_id' => $tenantId,
                     'email' => $recipientData['email'] ?? null,
@@ -291,6 +372,19 @@ final class OutboundCampaignController extends Controller
                     'name' => $recipientData['name'] ?? null,
                     'status' => 'pending',
                 ]);
+            }
+
+            // Tally per-variant recipient counts.
+            if ($variants->isNotEmpty()) {
+                $counts = CampaignRecipient::where('campaign_id', $campaign->id)
+                    ->whereNotNull('variant_id')
+                    ->selectRaw('variant_id, count(*) as c')
+                    ->groupBy('variant_id')
+                    ->pluck('c', 'variant_id');
+
+                foreach ($variants as $variant) {
+                    $variant->update(['recipients_count' => (int) ($counts[$variant->id] ?? 0)]);
+                }
             }
 
             // Update campaign
@@ -340,6 +434,22 @@ final class OutboundCampaignController extends Controller
 
         $statusCounts = $recipients->countBy('status')->toArray();
 
+        $variants = $campaign->variants()->orderBy('created_at')->get();
+
+        $variantStats = $variants->map(fn (CampaignVariant $v) => [
+            'id' => $v->id,
+            'label' => $v->label,
+            'subject' => $v->subject,
+            'weight' => $v->weight,
+            'recipients_count' => $v->recipients_count,
+            'sent_count' => $v->sent_count,
+            'open_count' => $v->open_count,
+            'click_count' => $v->click_count,
+            'open_rate' => round($v->open_rate, 1),
+            'click_rate' => round($v->click_rate, 1),
+            'is_winner' => $v->is_winner,
+        ])->values()->toArray();
+
         return response()->json([
             'data' => [
                 'campaign_id' => $campaign->id,
@@ -356,7 +466,53 @@ final class OutboundCampaignController extends Controller
                 'open_rate' => $campaign->open_rate,
                 'click_rate' => $campaign->click_rate,
                 'status_breakdown' => $statusCounts,
+                'ab_test_enabled' => (bool) $campaign->ab_test_enabled,
+                'ab_winner_metric' => $campaign->ab_winner_metric,
+                'variants' => $variantStats,
             ],
+        ]);
+    }
+
+    /**
+     * Pick the winning variant by the campaign's configured metric and mark it.
+     */
+    public function declareWinner(Request $request, string $id): JsonResponse
+    {
+        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+
+        $campaign = OutboundCampaign::where('tenant_id', $tenantId)->findOrFail($id);
+
+        $variants = $campaign->variants()->get();
+
+        if ($variants->isEmpty()) {
+            return response()->json(['error' => 'Campaign has no variants'], 400);
+        }
+
+        $metric = $request->input('metric', $campaign->ab_winner_metric ?? 'open_rate');
+        if (! in_array($metric, ['open_rate', 'click_rate'], true)) {
+            $metric = 'open_rate';
+        }
+
+        // Highest rate wins; ties broken by raw count then sent volume.
+        $winner = $variants->sort(function (CampaignVariant $a, CampaignVariant $b) use ($metric) {
+            $cmp = $b->{$metric} <=> $a->{$metric};
+            if ($cmp !== 0) {
+                return $cmp;
+            }
+            $countKey = $metric === 'click_rate' ? 'click_count' : 'open_count';
+            $cmp = $b->{$countKey} <=> $a->{$countKey};
+
+            return $cmp !== 0 ? $cmp : ($b->sent_count <=> $a->sent_count);
+        })->first();
+
+        DB::transaction(function () use ($campaign, $winner) {
+            $campaign->variants()->update(['is_winner' => false]);
+            $winner->update(['is_winner' => true]);
+        });
+
+        return response()->json([
+            'data' => $winner->fresh(),
+            'message' => "Variant {$winner->label} declared winner",
         ]);
     }
 }

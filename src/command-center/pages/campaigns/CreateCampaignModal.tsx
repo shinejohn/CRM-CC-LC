@@ -12,6 +12,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useCreateOutboundCampaign } from '@/hooks/useOutboundCampaigns';
 import type {
+  AbWinnerMetric,
+  CampaignVariantInput,
   CreateOutboundCampaignInput,
   OutboundCampaignType,
   RecipientSegments,
@@ -61,6 +63,15 @@ export function CreateCampaignModal({ open, onOpenChange, onCreated }: CreateCam
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
 
+  // A/B testing
+  const [abEnabled, setAbEnabled] = useState(false);
+  const [winnerMetric, setWinnerMetric] = useState<AbWinnerMetric>('open_rate');
+  const [splitA, setSplitA] = useState(50);
+  const [variantASubject, setVariantASubject] = useState('');
+  const [variantAMessage, setVariantAMessage] = useState('');
+  const [variantBSubject, setVariantBSubject] = useState('');
+  const [variantBMessage, setVariantBMessage] = useState('');
+
   // Schedule
   const [scheduledAt, setScheduledAt] = useState('');
 
@@ -88,6 +99,13 @@ export function CreateCampaignModal({ open, onOpenChange, onCreated }: CreateCam
     setRequireContact(true);
     setSubject('');
     setMessage('');
+    setAbEnabled(false);
+    setWinnerMetric('open_rate');
+    setSplitA(50);
+    setVariantASubject('');
+    setVariantAMessage('');
+    setVariantBSubject('');
+    setVariantBMessage('');
     setScheduledAt('');
     setError(null);
   };
@@ -103,6 +121,12 @@ export function CreateCampaignModal({ open, onOpenChange, onCreated }: CreateCam
     if (key === 'content') {
       if (type === 'email' && subject.trim() === '') return 'A subject line is required for email campaigns.';
       if (message.trim() === '') return 'The message body cannot be empty.';
+      if (abEnabled) {
+        if (variantAMessage.trim() === '' || variantBMessage.trim() === '')
+          return 'Both variants need a message.';
+        if (type === 'email' && (variantASubject.trim() === '' || variantBSubject.trim() === ''))
+          return 'Both variants need a subject line for email campaigns.';
+      }
     }
     return null;
   };
@@ -140,6 +164,26 @@ export function CreateCampaignModal({ open, onOpenChange, onCreated }: CreateCam
     if (type === 'email') payload.subject = subject.trim();
     if (scheduledAt) payload.scheduled_at = new Date(scheduledAt).toISOString();
     if (Object.keys(segments).length > 0) payload.recipient_segments = segments;
+
+    if (abEnabled) {
+      const variantA: CampaignVariantInput = {
+        label: 'A',
+        message: variantAMessage.trim(),
+        weight: splitA,
+      };
+      const variantB: CampaignVariantInput = {
+        label: 'B',
+        message: variantBMessage.trim(),
+        weight: 100 - splitA,
+      };
+      if (type === 'email') {
+        variantA.subject = variantASubject.trim();
+        variantB.subject = variantBSubject.trim();
+      }
+      payload.ab_test_enabled = true;
+      payload.ab_winner_metric = winnerMetric;
+      payload.variants = [variantA, variantB];
+    }
 
     try {
       const campaign = await createCampaign.mutateAsync(payload);
@@ -335,7 +379,98 @@ export function CreateCampaignModal({ open, onOpenChange, onCreated }: CreateCam
                   }
                   className={fieldClass}
                 />
+                {abEnabled && (
+                  <p className="text-xs text-[var(--nexus-text-tertiary)]">
+                    This is the default content. With A/B testing on, recipients receive
+                    Variant A or B below instead.
+                  </p>
+                )}
               </div>
+
+              {/* A/B test toggle */}
+              <div className="flex items-center justify-between rounded-lg border border-[var(--nexus-card-border)] px-4 py-3">
+                <div>
+                  <span className={fieldLabel}>A/B test</span>
+                  <p className="text-xs text-[var(--nexus-text-tertiary)]">
+                    Split the audience between two versions and pick a winner.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={abEnabled}
+                  aria-label="Toggle A/B testing"
+                  onClick={() => setAbEnabled((v) => !v)}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                    abEnabled
+                      ? 'bg-[var(--nexus-accent-primary)]'
+                      : 'bg-[var(--nexus-bg-secondary)]'
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                      abEnabled ? 'translate-x-6' : 'translate-x-1'
+                    }`}
+                  />
+                </button>
+              </div>
+
+              {abEnabled && (
+                <div className="space-y-4">
+                  <VariantEditor
+                    title="Variant A"
+                    showSubject={type === 'email'}
+                    subject={variantASubject}
+                    onSubject={setVariantASubject}
+                    message={variantAMessage}
+                    onMessage={setVariantAMessage}
+                    fieldClass={fieldClass}
+                    fieldLabel={fieldLabel}
+                  />
+                  <VariantEditor
+                    title="Variant B"
+                    showSubject={type === 'email'}
+                    subject={variantBSubject}
+                    onSubject={setVariantBSubject}
+                    message={variantBMessage}
+                    onMessage={setVariantBMessage}
+                    fieldClass={fieldClass}
+                    fieldLabel={fieldLabel}
+                  />
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="ab-split" className={fieldLabel}>
+                      Split: {splitA}% A / {100 - splitA}% B
+                    </label>
+                    <input
+                      id="ab-split"
+                      type="range"
+                      min={10}
+                      max={90}
+                      step={5}
+                      value={splitA}
+                      onChange={(e) => setSplitA(Number(e.target.value))}
+                      className="w-full"
+                      aria-label="Audience split percentage for Variant A"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="ab-metric" className={fieldLabel}>
+                      Winner decided by
+                    </label>
+                    <select
+                      id="ab-metric"
+                      value={winnerMetric}
+                      onChange={(e) => setWinnerMetric(e.target.value as AbWinnerMetric)}
+                      className={fieldClass}
+                    >
+                      <option value="open_rate">Open rate</option>
+                      <option value="click_rate">Click rate</option>
+                    </select>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -369,6 +504,12 @@ export function CreateCampaignModal({ open, onOpenChange, onCreated }: CreateCam
                 label="Message"
                 value={message ? `${message.slice(0, 120)}${message.length > 120 ? '…' : ''}` : '—'}
               />
+              {abEnabled && (
+                <ReviewRow
+                  label="A/B test"
+                  value={`${splitA}% A / ${100 - splitA}% B · winner by ${winnerMetric === 'open_rate' ? 'open rate' : 'click rate'}`}
+                />
+              )}
               <ReviewRow
                 label="Schedule"
                 value={scheduledAt ? new Date(scheduledAt).toLocaleString() : 'Save as draft'}
@@ -410,6 +551,63 @@ export function CreateCampaignModal({ open, onOpenChange, onCreated }: CreateCam
         </DialogFooter>
       </DialogContent>
     </Dialog>
+  );
+}
+
+interface VariantEditorProps {
+  title: string;
+  showSubject: boolean;
+  subject: string;
+  onSubject: (value: string) => void;
+  message: string;
+  onMessage: (value: string) => void;
+  fieldClass: string;
+  fieldLabel: string;
+}
+
+function VariantEditor({
+  title,
+  showSubject,
+  subject,
+  onSubject,
+  message,
+  onMessage,
+  fieldClass,
+  fieldLabel,
+}: VariantEditorProps) {
+  const idBase = title.toLowerCase().replace(/\s+/g, '-');
+  return (
+    <div className="space-y-3 rounded-lg border border-[var(--nexus-card-border)] px-4 py-3">
+      <h4 className="text-sm font-semibold text-[var(--nexus-text-primary)]">{title}</h4>
+      {showSubject && (
+        <div className="space-y-1.5">
+          <label htmlFor={`${idBase}-subject`} className={fieldLabel}>
+            Subject line
+          </label>
+          <Input
+            id={`${idBase}-subject`}
+            value={subject}
+            onChange={(e) => onSubject(e.target.value)}
+            placeholder={`${title} subject`}
+            maxLength={255}
+            autoComplete="off"
+          />
+        </div>
+      )}
+      <div className="space-y-1.5">
+        <label htmlFor={`${idBase}-message`} className={fieldLabel}>
+          Message
+        </label>
+        <textarea
+          id={`${idBase}-message`}
+          value={message}
+          onChange={(e) => onMessage(e.target.value)}
+          rows={4}
+          placeholder={`${title} message`}
+          className={fieldClass}
+        />
+      </div>
+    </div>
   );
 }
 

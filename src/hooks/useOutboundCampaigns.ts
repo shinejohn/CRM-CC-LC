@@ -7,6 +7,8 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   outboundCampaignsApi,
+  type AbWinnerMetric,
+  type CampaignVariantStats,
   type CreateOutboundCampaignInput,
   type OutboundCampaign,
   type OutboundCampaignListParams,
@@ -49,5 +51,17 @@ export const useDeleteOutboundCampaign = () => {
   return useMutation({
     mutationFn: (id: string): Promise<void> => outboundCampaignsApi.delete(id),
     onSuccess: () => qc.invalidateQueries({ queryKey: [KEY] }),
+  });
+};
+
+export const useDeclareCampaignWinner = (campaignId: string | null) => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (metric?: AbWinnerMetric): Promise<CampaignVariantStats> =>
+      outboundCampaignsApi.declareWinner(campaignId as string, metric),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: [KEY, campaignId, 'analytics'] });
+      qc.invalidateQueries({ queryKey: [KEY] });
+    },
   });
 };

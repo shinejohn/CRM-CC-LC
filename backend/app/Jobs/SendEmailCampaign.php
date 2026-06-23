@@ -22,6 +22,7 @@ final class SendEmailCampaign implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public int $tries = 3;
+
     public int $backoff = 60;
 
     public function __construct(
@@ -35,7 +36,7 @@ final class SendEmailCampaign implements ShouldQueue
     {
         try {
             $recipient = $this->recipient->fresh();
-            $campaign  = $this->campaign->fresh();
+            $campaign = $this->campaign->fresh();
 
             if (! $recipient || ! $campaign) {
                 return;
@@ -46,12 +47,18 @@ final class SendEmailCampaign implements ShouldQueue
                 return;
             }
 
-            // Render template if set
-            $subject = $campaign->subject ?? 'No Subject';
-            $html    = $campaign->message ?? '';
+            // Resolve content. If the recipient was assigned an A/B variant,
+            // its subject/message override the campaign's own. No variant →
+            // unchanged behavior (campaign subject/message).
+            $variant = $recipient->variant_id ? $recipient->variant : null;
 
-            if ($campaign->template_id) {
-                $template = \App\Models\EmailTemplate::find($campaign->template_id);
+            $subject = $variant?->subject ?? $campaign->subject ?? 'No Subject';
+            $html = $variant?->message ?? $campaign->message ?? '';
+
+            $templateId = $variant?->template_id ?? $campaign->template_id;
+
+            if ($templateId) {
+                $template = \App\Models\EmailTemplate::find($templateId);
                 if ($template) {
                     $variables = array_merge(
                         $campaign->template_variables ?? [],
@@ -62,8 +69,8 @@ final class SendEmailCampaign implements ShouldQueue
                         ]
                     );
                     $rendered = $template->render($variables);
-                    $subject  = $rendered['subject'];
-                    $html     = $rendered['html'];
+                    $subject = $rendered['subject'];
+                    $html = $rendered['html'];
                 }
             }
 
@@ -77,6 +84,9 @@ final class SendEmailCampaign implements ShouldQueue
             if ($sent) {
                 $recipient->update(['status' => 'sent', 'sent_at' => now()]);
                 $campaign->increment('sent_count');
+                if ($variant) {
+                    $variant->increment('sent_count');
+                }
             } else {
                 $recipient->update(['status' => 'failed', 'error_message' => 'All send paths failed']);
                 $campaign->increment('failed_count');
@@ -84,12 +94,12 @@ final class SendEmailCampaign implements ShouldQueue
         } catch (\Exception $e) {
             Log::error('SendEmailCampaign job failed', [
                 'recipient_id' => $this->recipient->id,
-                'campaign_id'  => $this->campaign->id,
-                'error'        => $e->getMessage(),
+                'campaign_id' => $this->campaign->id,
+                'error' => $e->getMessage(),
             ]);
 
             $this->recipient->update([
-                'status'        => 'failed',
+                'status' => 'failed',
                 'error_message' => $e->getMessage(),
             ]);
 
@@ -121,9 +131,9 @@ final class SendEmailCampaign implements ShouldQueue
         // Build a transient EmailMessage-like object for PostalService
         $message = new \App\Models\EmailMessage([
             'to_address' => $to,
-            'subject'    => $subject,
+            'subject' => $subject,
             'payload_log' => [
-                'html_body'  => $html,
+                'html_body' => $html,
                 'plain_body' => strip_tags($html),
             ],
         ]);
@@ -141,8 +151,8 @@ final class SendEmailCampaign implements ShouldQueue
 
         $recipient->update([
             'external_id' => $messageId,
-            'metadata'    => array_merge($recipient->metadata ?? [], [
-                'provider'  => 'postal_pool',
+            'metadata' => array_merge($recipient->metadata ?? [], [
+                'provider' => 'postal_pool',
                 'pool_type' => 'smb_campaign',
             ]),
         ]);
@@ -162,18 +172,18 @@ final class SendEmailCampaign implements ShouldQueue
         OutboundCampaign $campaign
     ): bool {
         $result = $emailService->send($to, $subject, $html, null, [
-            'campaign_id'  => $campaign->id,
+            'campaign_id' => $campaign->id,
             'recipient_id' => $recipient->id,
-            'ip_pool'      => 'smb_campaign',
-            'track_opens'  => true,
+            'ip_pool' => 'smb_campaign',
+            'track_opens' => true,
         ]);
 
         if ($result && ($result['success'] ?? false)) {
             $recipient->update([
                 'external_id' => $result['message_id'] ?? null,
-                'metadata'    => array_merge($recipient->metadata ?? [], [
+                'metadata' => array_merge($recipient->metadata ?? [], [
                     'provider' => $result['provider'] ?? 'legacy',
-                    'ip_pool'  => $result['ip_pool'] ?? null,
+                    'ip_pool' => $result['ip_pool'] ?? null,
                 ]),
             ]);
 
