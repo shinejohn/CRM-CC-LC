@@ -26,3 +26,16 @@ export interface LoginResponse {
   token: string;
   user: User;
 }
+
+export interface RegisterRequest {
+  name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+  /** Optional campaign slug the user signed up through */
+  campaign?: string;
+  /** Optional origin of the lead (e.g. landing-page) */
+  lead_source?: string;
+}
+
+export type RegisterResponse = LoginResponse;

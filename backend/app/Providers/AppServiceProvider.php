@@ -71,6 +71,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Use the UUID-keyed personal access token model (matches users.id type).
+        \Laravel\Sanctum\Sanctum::usePersonalAccessTokenModel(\App\Models\PersonalAccessToken::class);
+
         $this->configureRateLimiting();
         $this->registerPolicies();
     }

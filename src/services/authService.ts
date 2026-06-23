@@ -5,7 +5,13 @@
 import axios from 'axios';
 import { apiClient } from './api';
 import { env } from '../config/env';
-import type { User, LoginRequest, LoginResponse } from '../types/auth';
+import type {
+  User,
+  LoginRequest,
+  LoginResponse,
+  RegisterRequest,
+  RegisterResponse,
+} from '../types/auth';
 
 /** Auth client for login (uses base URL; Sanctum login at /login) */
 const authClient = axios.create({
@@ -20,6 +26,23 @@ export const login = async (credentials: LoginRequest): Promise<LoginResponse> =
   // await getCsrfCookie();
   const { data } = await authClient.post<{ data?: LoginResponse } & LoginResponse>('/login', credentials);
   const response = (data.data ?? data) as LoginResponse;
+  const token = response.token;
+  let user = response.user;
+  if (token) localStorage.setItem('auth_token', token);
+  if (!user && token) user = await getCurrentUser();
+  return { token, user };
+};
+
+/**
+ * Register a new account. Mirrors login(): hits the API, persists the issued
+ * Sanctum token to localStorage, and returns the same { token, user } shape.
+ */
+export const register = async (payload: RegisterRequest): Promise<RegisterResponse> => {
+  const { data } = await apiClient.post<{ data?: RegisterResponse } & RegisterResponse>(
+    '/auth/register',
+    payload,
+  );
+  const response = (data.data ?? data) as RegisterResponse;
   const token = response.token;
   let user = response.user;
   if (token) localStorage.setItem('auth_token', token);
@@ -49,6 +72,7 @@ export const refreshToken = async (): Promise<string> => {
 
 export const authService = {
   login,
+  register,
   logout,
   getCurrentUser,
   refreshToken,

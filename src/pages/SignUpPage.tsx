@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate, useSearchParams } from 'react-router';
 import { UserPlusIcon, EyeIcon, EyeOffIcon, AlertCircleIcon, CheckCircleIcon } from 'lucide-react';
+import { authService } from '@/services/authService';
+import { useAuthStore } from '@/stores/authStore';
+
+interface ApiError {
+  message?: string;
+  status?: number;
+  errors?: Record<string, string[] | string>;
+}
+
+const isApiError = (value: unknown): value is ApiError =>
+  typeof value === 'object' && value !== null && ('errors' in value || 'message' in value);
+
 export const SignUpPage = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -13,8 +25,16 @@ export const SignUpPage = () => {
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [passwordStrength, setPasswordStrength] = useState(0);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const setAuth = useAuthStore((state) => state.setAuth);
+
+  // Campaign attribution captured from the URL (?campaign=slug&lead_source=...)
+  const campaign = searchParams.get('campaign') ?? undefined;
+  const leadSource = searchParams.get('lead_source') ?? searchParams.get('source') ?? undefined;
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       name,
@@ -37,17 +57,18 @@ export const SignUpPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    // Validation
+    setFieldErrors({});
+    // Client-side validation
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.password) {
       setError('Please fill in all required fields');
       return;
     }
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setFieldErrors({ confirmPassword: 'Passwords do not match' });
       return;
     }
     if (passwordStrength < 3) {
-      setError('Please use a stronger password');
+      setFieldErrors({ password: 'Please use a stronger password' });
       return;
     }
     if (!agreeToTerms) {
@@ -55,13 +76,43 @@ export const SignUpPage = () => {
       return;
     }
     setIsLoading(true);
-    // Simulate API call
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      // Mock successful registration
-      navigate('/login');
-    } catch (err) {
-      setError('An error occurred. Please try again.');
+      const { token, user } = await authService.register({
+        name: `${formData.firstName.trim()} ${formData.lastName.trim()}`.trim(),
+        email: formData.email,
+        password: formData.password,
+        password_confirmation: formData.confirmPassword,
+        ...(campaign ? { campaign } : {}),
+        ...(leadSource ? { lead_source: leadSource } : {})
+      });
+      // Persist the session the same way login does, then go to the app.
+      if (token && user) {
+        setAuth(user, token);
+      }
+      navigate('/dashboard');
+    } catch (err: unknown) {
+      if (isApiError(err)) {
+        const serverErrors = err.errors ?? {};
+        const mapped: Record<string, string> = {};
+        for (const [key, messages] of Object.entries(serverErrors)) {
+          const text = Array.isArray(messages) ? messages[0] : messages;
+          // Map backend field names onto the form's field names.
+          if (key === 'name') {
+            mapped.firstName = text;
+          } else if (key === 'password') {
+            mapped.password = text;
+          } else {
+            mapped[key] = text;
+          }
+        }
+        if (Object.keys(mapped).length > 0) {
+          setFieldErrors(mapped);
+        } else {
+          setError(err.message ?? 'An error occurred. Please try again.');
+        }
+      } else {
+        setError('An error occurred. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -129,19 +180,21 @@ export const SignUpPage = () => {
                 Email address
               </label>
               <div className="mt-1">
-                <input id="email" name="email" type="email" autoComplete="email" required value={formData.email} onChange={handleChange} className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="you@example.com" />
+                <input id="email" name="email" type="email" autoComplete="email" required value={formData.email} onChange={handleChange} aria-invalid={fieldErrors.email ? true : undefined} aria-describedby={fieldErrors.email ? 'email-error' : undefined} className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${fieldErrors.email ? 'border-red-500' : 'border-gray-300'}`} placeholder="you@example.com" />
               </div>
+              {fieldErrors.email && <p id="email-error" className="mt-1 text-xs text-red-600">{fieldErrors.email}</p>}
             </div>
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
               <div className="mt-1 relative">
-                <input id="password" name="password" type={showPassword ? 'text' : 'password'} autoComplete="new-password" required value={formData.password} onChange={handleChange} className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="••••••••" />
+                <input id="password" name="password" type={showPassword ? 'text' : 'password'} autoComplete="new-password" required value={formData.password} onChange={handleChange} aria-invalid={fieldErrors.password ? true : undefined} aria-describedby={fieldErrors.password ? 'password-error' : undefined} className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${fieldErrors.password ? 'border-red-500' : 'border-gray-300'}`} placeholder="••••••••" />
                 <button type="button" className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-500" onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <EyeOffIcon size={18} /> : <EyeIcon size={18} />}
                 </button>
               </div>
+              {fieldErrors.password && <p id="password-error" className="mt-1 text-xs text-red-600">{fieldErrors.password}</p>}
               {formData.password && <div className="mt-2">
                   <div className="flex items-center justify-between mb-1">
                     <div className="text-xs text-gray-500">
@@ -183,7 +236,7 @@ export const SignUpPage = () => {
                 Confirm password
               </label>
               <div className="mt-1 relative">
-                <input id="confirmPassword" name="confirmPassword" type={showPassword ? 'text' : 'password'} autoComplete="new-password" required value={formData.confirmPassword} onChange={handleChange} className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="••••••••" />
+                <input id="confirmPassword" name="confirmPassword" type={showPassword ? 'text' : 'password'} autoComplete="new-password" required value={formData.confirmPassword} onChange={handleChange} aria-invalid={fieldErrors.confirmPassword ? true : undefined} aria-describedby={fieldErrors.confirmPassword ? 'confirm-password-error' : undefined} className={`appearance-none block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${fieldErrors.confirmPassword ? 'border-red-500' : 'border-gray-300'}`} placeholder="••••••••" />
               </div>
               {formData.password && formData.confirmPassword && <div className="mt-1 flex items-center">
                   {formData.password === formData.confirmPassword ? <>
@@ -198,6 +251,7 @@ export const SignUpPage = () => {
                       </span>
                     </>}
                 </div>}
+              {fieldErrors.confirmPassword && <p id="confirm-password-error" className="mt-1 text-xs text-red-600">{fieldErrors.confirmPassword}</p>}
             </div>
             <div className="flex items-center">
               <input id="terms" name="terms" type="checkbox" checked={agreeToTerms} onChange={() => setAgreeToTerms(!agreeToTerms)} className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />

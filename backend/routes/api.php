@@ -84,6 +84,29 @@ Route::prefix('v1')->group(function () {
         Route::post('/{token}/decline', [\App\Http\Controllers\Api\PublicQuoteController::class, 'decline'])->name('api.public.quotes.decline');
     });
 
+    // Authentication (SPA token auth via Sanctum personal access tokens)
+    Route::prefix('auth')->group(function () {
+        // Public — register + login (rate limited against brute force)
+        Route::post('/register', [\App\Http\Controllers\Api\AuthController::class, 'register'])
+            ->middleware('throttle:auth')
+            ->name('api.auth.register');
+        Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login'])
+            ->middleware('throttle:auth')
+            ->name('api.auth.login');
+
+        // Authenticated
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::get('/me', [\App\Http\Controllers\Api\AuthController::class, 'me'])->name('api.auth.me');
+            Route::post('/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout'])->name('api.auth.logout');
+        });
+    });
+
+    // SPA session helpers (paths the frontend auth client expects)
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/user', [\App\Http\Controllers\Api\AuthController::class, 'me'])->name('api.auth.user');
+        Route::post('/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout'])->name('api.auth.logout.alias');
+    });
+
     // Knowledge/FAQ API — public reads, authenticated writes
     Route::prefix('knowledge')->group(function () {
         Route::get('/', [KnowledgeController::class, 'index']);
