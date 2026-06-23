@@ -72,7 +72,7 @@ final class PhoneService
             ]);
 
             return null;
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             Log::error('Twilio call error', ['error' => $e->getMessage()]);
             return null;
         }
@@ -133,7 +133,7 @@ final class PhoneService
             }
 
             return null;
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             Log::error('Twilio get call status error', ['error' => $e->getMessage()]);
             return null;
         }

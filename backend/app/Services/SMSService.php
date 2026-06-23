@@ -68,7 +68,7 @@ final class SMSService
             ]);
 
             return null;
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             Log::error('Twilio SMS error', ['error' => $e->getMessage()]);
             return null;
         }
@@ -117,7 +117,7 @@ final class SMSService
             }
 
             return null;
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             Log::error('Twilio get message status error', ['error' => $e->getMessage()]);
             return null;
         }

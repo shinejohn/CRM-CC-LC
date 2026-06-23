@@ -143,17 +143,33 @@ class CampaignActionExecutor
         }
 
         $body = $smsTemplate->render($this->buildMergeData($customer));
-        $result = $this->smsService->send($customer->phone, $body, [
-            'status_callback' => $params['status_callback'] ?? null,
-        ]);
+
+        try {
+            $result = $this->smsService->send($customer->phone, $body, [
+                'status_callback' => $params['status_callback'] ?? null,
+            ]);
+        } catch (\Throwable $e) {
+            Log::error('Timeline send_sms: gateway threw', [
+                'customer_id' => $customer->id,
+                'action_id' => $action->id,
+                'error' => $e->getMessage(),
+            ]);
+            $result = null;
+        }
 
         $ok = is_array($result) && ($result['success'] ?? false);
+
+        $this->recordChannelSend($customer, $action, 'sms', $ok, [
+            'template_slug' => $smsTemplate->slug ?? $slug,
+            'message_sid' => is_array($result) ? ($result['message_sid'] ?? null) : null,
+            'provider' => is_array($result) ? ($result['provider'] ?? null) : null,
+        ]);
 
         return [
             'type' => 'sms',
             'dispatched' => $ok,
-            'message_sid' => $result['message_sid'] ?? null,
-            'provider' => $result['provider'] ?? null,
+            'message_sid' => is_array($result) ? ($result['message_sid'] ?? null) : null,
+            'provider' => is_array($result) ? ($result['provider'] ?? null) : null,
         ];
     }
 
@@ -187,18 +203,74 @@ class CampaignActionExecutor
             $scriptText = $params['script_text'] ?? 'Hello from Day.News. We wanted to reach out about your free listing in the community.';
         }
 
-        $result = $this->phoneService->makeCall($customer->phone, $scriptText, [
-            'use_tts' => true,
-        ]);
+        try {
+            $result = $this->phoneService->makeCall($customer->phone, $scriptText, [
+                'use_tts' => true,
+                'status_callback' => $params['status_callback'] ?? null,
+            ]);
+        } catch (\Throwable $e) {
+            Log::error('Timeline make_call: gateway threw', [
+                'customer_id' => $customer->id,
+                'action_id' => $action->id,
+                'error' => $e->getMessage(),
+            ]);
+            $result = null;
+        }
 
         $ok = is_array($result) && ($result['success'] ?? false);
+
+        $this->recordChannelSend($customer, $action, 'phone', $ok, [
+            'script_id' => $scriptId,
+            'call_sid' => is_array($result) ? ($result['call_sid'] ?? null) : null,
+            'provider' => is_array($result) ? ($result['provider'] ?? null) : null,
+        ]);
 
         return [
             'type' => 'phone',
             'dispatched' => $ok,
-            'call_sid' => $result['call_sid'] ?? null,
-            'provider' => $result['provider'] ?? null,
+            'call_sid' => is_array($result) ? ($result['call_sid'] ?? null) : null,
+            'provider' => is_array($result) ? ($result['provider'] ?? null) : null,
         ];
+    }
+
+    /**
+     * Record an SMS/phone send attempt as a customer interaction so the
+     * outcome is persisted consistently with the email path.
+     *
+     * @param  array<string, mixed>  $meta
+     */
+    protected function recordChannelSend(
+        Customer $customer,
+        CampaignTimelineAction $action,
+        string $channel,
+        bool $dispatched,
+        array $meta = []
+    ): void {
+        try {
+            $customer->interactions()->create([
+                'tenant_id' => $customer->tenant_id,
+                'type' => $channel === 'sms' ? 'sms_sent' : 'call_placed',
+                'title' => $channel === 'sms'
+                    ? ($dispatched ? 'SMS sent' : 'SMS send failed')
+                    : ($dispatched ? 'Call placed' : 'Call failed'),
+                'entry_point' => 'campaign',
+                'status' => 'completed',
+                'outcome' => $dispatched ? 'dispatched' : 'failed',
+                'metadata' => array_merge([
+                    'timeline_action_id' => $action->id,
+                    'channel' => $channel,
+                    'dispatched' => $dispatched,
+                ], $meta),
+            ]);
+        } catch (\Throwable $e) {
+            // Recording must never break the campaign run.
+            Log::warning('Failed to record channel send interaction', [
+                'customer_id' => $customer->id,
+                'action_id' => $action->id,
+                'channel' => $channel,
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 
     protected function resolveEmailTemplate(Customer $customer, string $slug): ?EmailTemplate
