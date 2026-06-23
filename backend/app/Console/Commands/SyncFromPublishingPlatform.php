@@ -404,6 +404,8 @@ final class SyncFromPublishingPlatform extends Command
                 'slug'                 => Str::slug($biz['name'] ?? 'unknown').'-'.Str::random(6),
                 'business_name'        => $biz['name'] ?? 'Unknown',
                 'category'             => $category,
+                'org_type'             => $this->normalizeBusinessOrgType($biz['organization_type'] ?? null),
+                'org_subtype'          => $biz['organization_category'] ?? null,
                 'email'                => $biz['email'] ?? null,
                 'phone'                => $biz['phone'] ?? null,
                 'website'              => $biz['website'] ?? null,
@@ -444,7 +446,7 @@ final class SyncFromPublishingPlatform extends Command
         $updateCols = ['business_name', 'category', 'primary_email', 'primary_phone', 'address', 'city', 'state', 'zip', 'coordinates', 'metadata', 'updated_at'];
         DB::table('smbs')->upsert($smbRows, ['pp_external_id'], $updateCols);
 
-        $updateCols = ['business_name', 'category', 'email', 'phone', 'website', 'address', 'city', 'state', 'zip', 'coordinates', 'google_rating', 'google_review_count', 'business_description', 'business_hours', 'metadata', 'updated_at'];
+        $updateCols = ['business_name', 'category', 'org_type', 'org_subtype', 'email', 'phone', 'website', 'address', 'city', 'state', 'zip', 'coordinates', 'google_rating', 'google_review_count', 'business_description', 'business_hours', 'metadata', 'updated_at'];
         DB::table('customers')->upsert($customerRows, ['external_id'], $updateCols);
 
         $this->smbsCreated += count($smbRows);
@@ -516,6 +518,8 @@ final class SyncFromPublishingPlatform extends Command
                 'slug'                 => Str::slug($name).'-'.Str::random(6),
                 'business_name'        => $name,
                 'category'             => $category,
+                'org_type'             => $this->civicEntityOrgType($entityType),
+                'org_subtype'          => $entity['entity_subtype'] ?? null,
                 'email'                => $entity['email'] ?? null,
                 'phone'                => $entity['phone'] ?? null,
                 'website'              => $entity['website'] ?? null,
@@ -552,7 +556,7 @@ final class SyncFromPublishingPlatform extends Command
         $updateCols = ['business_name', 'category', 'primary_email', 'primary_phone', 'address', 'city', 'state', 'zip', 'coordinates', 'metadata', 'updated_at'];
         DB::table('smbs')->upsert($smbRows, ['pp_external_id'], $updateCols);
 
-        $updateCols = ['business_name', 'category', 'email', 'phone', 'website', 'address', 'city', 'state', 'zip', 'coordinates', 'business_description', 'metadata', 'updated_at'];
+        $updateCols = ['business_name', 'category', 'org_type', 'org_subtype', 'email', 'phone', 'website', 'address', 'city', 'state', 'zip', 'coordinates', 'business_description', 'metadata', 'updated_at'];
         DB::table('customers')->upsert($customerRows, ['external_id'], $updateCols);
 
         $this->smbsCreated += count($smbRows);
@@ -617,6 +621,8 @@ final class SyncFromPublishingPlatform extends Command
                 'slug'                 => Str::slug($name).'-'.Str::random(6),
                 'business_name'        => $name,
                 'category'             => $category,
+                'org_type'             => 'nonprofit',
+                'org_subtype'          => $np['ntee_code'] ?? null,
                 'email'                => $np['email'] ?? null,
                 'phone'                => $np['phone'] ?? null,
                 'website'              => $np['website'] ?? null,
@@ -653,7 +659,7 @@ final class SyncFromPublishingPlatform extends Command
         $updateCols = ['business_name', 'category', 'primary_email', 'primary_phone', 'address', 'city', 'state', 'zip', 'coordinates', 'metadata', 'updated_at'];
         DB::table('smbs')->upsert($smbRows, ['pp_external_id'], $updateCols);
 
-        $updateCols = ['business_name', 'category', 'email', 'phone', 'website', 'address', 'city', 'state', 'zip', 'coordinates', 'business_description', 'metadata', 'updated_at'];
+        $updateCols = ['business_name', 'category', 'org_type', 'org_subtype', 'email', 'phone', 'website', 'address', 'city', 'state', 'zip', 'coordinates', 'business_description', 'metadata', 'updated_at'];
         DB::table('customers')->upsert($customerRows, ['external_id'], $updateCols);
 
         $this->smbsCreated += count($smbRows);
@@ -911,6 +917,8 @@ final class SyncFromPublishingPlatform extends Command
                 'external_id' => $externalId,
                 'business_name' => $biz['name'] ?? 'Unknown',
                 'category' => $primaryCategory,
+                'org_type' => $this->normalizeBusinessOrgType($biz['organization_type'] ?? null),
+                'org_subtype' => $biz['organization_category'] ?? null,
                 'email' => $biz['email'] ?? null,
                 'phone' => $biz['phone'] ?? null,
                 'website' => $biz['website'] ?? null,
@@ -1085,6 +1093,8 @@ final class SyncFromPublishingPlatform extends Command
                 'external_id' => 'civic:' . $externalId,
                 'business_name' => $name,
                 'category' => $category,
+                'org_type' => $this->civicEntityOrgType($entityType ?? null),
+                'org_subtype' => $entity['entity_subtype'] ?? null,
                 'email' => $entity['email'] ?? null,
                 'phone' => $entity['phone'] ?? null,
                 'website' => $entity['website'] ?? null,
@@ -1246,6 +1256,8 @@ final class SyncFromPublishingPlatform extends Command
                 'external_id' => 'np:' . $externalId,
                 'business_name' => $name,
                 'category' => $category,
+                'org_type' => 'nonprofit',
+                'org_subtype' => $np['ntee_code'] ?? null,
                 'email' => $np['email'] ?? null,
                 'phone' => $np['phone'] ?? null,
                 'website' => $np['website'] ?? null,
@@ -1297,6 +1309,29 @@ final class SyncFromPublishingPlatform extends Command
         }
 
         return $ccCommunityId;
+    }
+
+    private function normalizeBusinessOrgType(?string $ppType): string
+    {
+        return match (strtolower((string) $ppType)) {
+            '', 'business' => 'smb',
+            'non_profit', 'nonprofit' => 'nonprofit',
+            'government' => 'government',
+            'religious' => 'religious',
+            'educational', 'education' => 'education',
+            'healthcare' => 'healthcare',
+            default => strtolower((string) $ppType),
+        };
+    }
+
+    private function civicEntityOrgType(?string $entityType): string
+    {
+        return match (strtolower((string) $entityType)) {
+            'school', 'school_district' => 'education',
+            'church' => 'religious',
+            'nonprofit' => 'nonprofit',
+            default => 'government',
+        };
     }
 
     private function mapNteeToCategory(string $nteeCode): string

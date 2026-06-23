@@ -36,6 +36,8 @@ final class Customer extends Model
         'dba_name',
         'business_type',
         'category',
+        'org_type',
+        'org_subtype',
         'owner_name',
         'primary_contact_name',
         'primary_email',
