@@ -889,6 +889,56 @@ if [[ -n "$BACKEND_DIR" ]]; then
         log "  ${CYAN}ℹ${NC}  No nixpacks.toml or Dockerfile (Railway auto-detect)"
     fi
 
+    # ── Runtime start command must not fetch npm packages at boot (npx <pkg> not pinned) ──
+    # Root-causes the kind of transient deploy crash where `npx serve dist` fetches `serve`
+    # from the npm registry on every cold start ("package was not found and will be installed").
+    # If that fetch stalls inside the healthcheck window the container never binds $PORT,
+    # Railway marks the deploy crashed, then auto-retries (ON_FAILURE) — a flaky, registry-
+    # dependent boot. Anything run at startup must be a pinned dependency, not an npx fetch.
+    if [[ -f "package.json" ]] && command -v node >/dev/null 2>&1; then
+        START_CMDS=""
+        if [[ -f "railway.json" ]]; then
+            SC=$(node -e 'try{const c=require("./railway.json");process.stdout.write(String((c.deploy&&c.deploy.startCommand)||c.startCommand||""))}catch(e){}' 2>/dev/null)
+            [[ -n "$SC" ]] && START_CMDS+="$SC"$'\n'
+        fi
+        for tf in railway.toml nixpacks.toml "${BACKEND_DIR}/nixpacks.toml"; do
+            [[ -f "$tf" ]] || continue
+            SC=$(grep -A3 '\[start\]' "$tf" 2>/dev/null | grep -iE 'cmd|startcommand' | head -1)
+            [[ -n "$SC" ]] && START_CMDS+="$SC"$'\n'
+        done
+        [[ -f "Procfile" ]] && START_CMDS+="$(grep -E '^[a-zA-Z_-]+:' Procfile 2>/dev/null)"$'\n'
+        SC=$(node -e 'try{process.stdout.write(String((require("./package.json").scripts||{}).start||""))}catch(e){}' 2>/dev/null)
+        [[ -n "$SC" ]] && START_CMDS+="$SC"$'\n'
+
+        # Pull the package invoked by `npx <pkg>` / `npm exec <pkg>`, skipping flag tokens.
+        NPX_PKGS=$(printf '%s' "$START_CMDS" | awk '{
+            for (i=1; i<=NF; i++) {
+                if ($i=="npx" || ($i=="npm" && $(i+1)=="exec")) {
+                    j = ($i=="npx") ? i+1 : i+2
+                    while (j<=NF && substr($j,1,1)=="-") j++
+                    if (j<=NF) print $j
+                }
+            }
+        }' | sort -u)
+
+        if [[ -n "$NPX_PKGS" ]]; then
+            UNPINNED=""
+            for pkg in $NPX_PKGS; do
+                name=$(printf '%s' "$pkg" | sed -E 's/(.+)@[^@/]+$/\1/')   # strip @version, keep @scope/pkg
+                present=$(node -e 'try{const p=require("./package.json");const d=Object.assign({},p.dependencies,p.devDependencies);process.stdout.write(d[process.argv[1]]?"1":"")}catch(e){}' "$name" 2>/dev/null)
+                [[ -z "$present" ]] && UNPINNED+="$name "
+            done
+            if [[ -n "$UNPINNED" ]]; then
+                log "  ${RED}❌ Start command fetches unpinned package(s) via npx at boot: ${UNPINNED}${NC}"
+                log "     ${RED}These download from npm on every cold start → flaky healthcheck → crashed deploys.${NC}"
+                log "     ${RED}Pin them in package.json: npm i --save-exact ${UNPINNED}${NC}"
+                inc_errors
+            else
+                log "  ${GREEN}✓${NC} Start command has no unpinned npx package fetches"
+            fi
+        fi
+    fi
+
     # .env.example sync
     if [[ -f "${BACKEND_DIR}/.env.example" && -d "${BACKEND_DIR}/config" ]]; then
         CONFIG_ENVS=$(grep -rohE "env\(\s*'([A-Z_]+)'" "${BACKEND_DIR}/config/" 2>/dev/null | grep -oE "'[A-Z_]+'" | tr -d "'" | sort -u)
