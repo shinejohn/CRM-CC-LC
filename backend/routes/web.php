@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApprovalController;
+use App\Http\Controllers\UnsubscribeController;
 use App\Http\Controllers\UpsellController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,15 @@ Route::get('/storage/audio/{path}', function (string $path) {
         'Access-Control-Allow-Origin' => '*',
     ]);
 })->where('path', '.*')->name('audio.serve')->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
+
+// Customer unsubscribe (CAN-SPAM / RFC 8058). Signed links — tamper-proof, no auth.
+Route::get('/unsubscribe/{customer}', [UnsubscribeController::class, 'show'])
+    ->middleware('signed')
+    ->name('public.unsubscribe');
+Route::post('/unsubscribe/{customer}', [UnsubscribeController::class, 'oneClick'])
+    ->middleware('signed')
+    ->name('public.unsubscribe.oneclick')
+    ->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
 
 // Subscriber verification route (web route for email links)
 Route::get('/subscriber/verify/{token}', [\App\Http\Controllers\Api\SubscriptionController::class, 'verify'])->name('subscriber.verify');

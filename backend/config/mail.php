@@ -115,4 +115,17 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Unsubscribe Mailbox
+    |--------------------------------------------------------------------------
+    |
+    | The mailto address advertised in the RFC 8058 List-Unsubscribe header.
+    | Bulk senders (Gmail/Yahoo) require a working mailto unsubscribe option
+    | in addition to the one-click HTTPS endpoint.
+    |
+    */
+
+    'unsubscribe_mailto' => env('MAIL_UNSUBSCRIBE_MAILTO', 'unsubscribe@day.news'),
+
 ];

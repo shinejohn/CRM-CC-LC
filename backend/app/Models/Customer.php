@@ -398,6 +398,7 @@ final class Customer extends Model
     {
         return $this->email_opted_in
             && ! $this->do_not_contact
+            && ! $this->email_suppressed
             && ! empty($this->email);
     }
 

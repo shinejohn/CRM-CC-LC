@@ -9,6 +9,7 @@ use App\Models\EmailSuppression;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 
 final class EmailService
 {
@@ -86,6 +87,11 @@ final class EmailService
                 ];
             }
 
+            // Custom headers (List-Unsubscribe, etc.)
+            if (! empty($options['headers'])) {
+                $payload['headers'] = $options['headers'];
+            }
+
             $response = Http::withHeaders([
                 'Authorization' => "Bearer {$this->sendgridApiKey}",
                 'Content-Type' => 'application/json',
@@ -147,7 +153,7 @@ final class EmailService
                 $payload['ip_pool'] = $ipPool;
             }
 
-            $headers = [];
+            $headers = $options['headers'] ?? [];
             if (! empty($options['campaign_id'])) {
                 $headers['X-Fibonacco-Campaign-ID'] = (string) $options['campaign_id'];
             }
@@ -237,14 +243,32 @@ final class EmailService
             ];
         }
 
-        // Also check ZeroBounce suppression on the customer record
-        $customer = Customer::where('email', $to)->orWhere('primary_email', $to)->first();
+        // Also check ZeroBounce / unsubscribe suppression on the customer record.
+        // Bypass tenant global scope: send() is called from queued jobs with no auth context.
+        $customer = Customer::withoutGlobalScopes()
+            ->where(function ($q) use ($to) {
+                $q->where('email', $to)->orWhere('primary_email', $to);
+            })
+            ->first();
         if ($customer && $customer->email_suppressed) {
             return [
                 'success' => false,
                 'provider' => 'suppression',
-                'error' => "Suppressed by ZeroBounce: {$customer->email_suppressed_reason}",
+                'error' => "Suppressed: {$customer->email_suppressed_reason}",
             ];
+        }
+
+        // Resolve a signed, tamper-proof unsubscribe URL and guarantee that the
+        // visible footer + List-Unsubscribe headers are present on EVERY email
+        // (CAN-SPAM / Gmail-Yahoo bulk-sender compliance), regardless of how the
+        // caller rendered the body.
+        $unsubscribeUrl = $this->resolveUnsubscribeUrl($options, $customer);
+        if ($unsubscribeUrl) {
+            [$htmlContent, $textContent] = $this->injectUnsubscribeFooter($htmlContent, $textContent, $unsubscribeUrl);
+            $options['headers'] = array_merge(
+                $options['headers'] ?? [],
+                $this->unsubscribeHeaders($unsubscribeUrl)
+            );
         }
 
         if ($this->provider === 'postal') {
@@ -285,5 +309,64 @@ final class EmailService
         }
 
         return $results;
+    }
+
+    /**
+     * Resolve the signed unsubscribe URL for this send. Priority:
+     *   1. An explicit unsubscribe_url passed in options.
+     *   2. A customer_id (or customer) passed in options.
+     *   3. The customer matched by recipient email address.
+     */
+    protected function resolveUnsubscribeUrl(array $options, ?Customer $customer): ?string
+    {
+        if (! empty($options['unsubscribe_url'])) {
+            return (string) $options['unsubscribe_url'];
+        }
+
+        $customerOpt = $options['customer'] ?? null;
+        $customerId = $options['customer_id']
+            ?? ($customerOpt instanceof Customer ? $customerOpt->id : $customerOpt)
+            ?? $customer?->id;
+
+        if (! $customerId) {
+            return null;
+        }
+
+        return URL::signedRoute('public.unsubscribe', ['customer' => (string) $customerId]);
+    }
+
+    /**
+     * Ensure a visible unsubscribe footer is present in both the HTML and text
+     * bodies. Mirrors EmailTemplate::render() so the styling stays consistent.
+     *
+     * @return array{0: string, 1: ?string}
+     */
+    protected function injectUnsubscribeFooter(string $htmlContent, ?string $textContent, string $unsubscribeUrl): array
+    {
+        if (! str_contains($htmlContent, 'unsubscribe') && ! str_contains($htmlContent, $unsubscribeUrl)) {
+            $htmlContent .= '<p style="margin-top:24px;font-size:12px;color:#999;text-align:center;">You are receiving this because your business is listed in your community\'s Day.News directory. <a href="'.$unsubscribeUrl.'" style="color:#999;">Unsubscribe</a></p>';
+        }
+
+        $textContent = $textContent ?? strip_tags($htmlContent);
+        if (! str_contains($textContent, 'Unsubscribe:') && ! str_contains($textContent, $unsubscribeUrl)) {
+            $textContent .= "\n\n---\nUnsubscribe: ".$unsubscribeUrl;
+        }
+
+        return [$htmlContent, $textContent];
+    }
+
+    /**
+     * Build the RFC 8058 one-click List-Unsubscribe headers.
+     *
+     * @return array<string, string>
+     */
+    protected function unsubscribeHeaders(string $unsubscribeUrl): array
+    {
+        $mailto = (string) config('mail.unsubscribe_mailto');
+
+        return [
+            'List-Unsubscribe' => "<{$unsubscribeUrl}>, <mailto:{$mailto}>",
+            'List-Unsubscribe-Post' => 'List-Unsubscribe=One-Click',
+        ];
     }
 }

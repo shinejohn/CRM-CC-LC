@@ -29,10 +29,17 @@ final class PostalService
         ];
 
         // Attach custom ID to track webhooks back to this message
+        $headers = [];
         if (isset($message->id)) {
-            $payload['headers'] = [
-                'X-Fibonacco-Message-ID' => $message->id,
-            ];
+            $headers['X-Fibonacco-Message-ID'] = $message->id;
+        }
+        // Merge any per-message custom headers (e.g. List-Unsubscribe for one-click unsubscribe).
+        $customHeaders = $message->payload_log['headers'] ?? [];
+        if (is_array($customHeaders)) {
+            $headers = array_merge($headers, $customHeaders);
+        }
+        if ($headers !== []) {
+            $payload['headers'] = $headers;
         }
 
         $response = Http::withHeaders([

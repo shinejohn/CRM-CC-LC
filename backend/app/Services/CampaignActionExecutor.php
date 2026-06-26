@@ -331,7 +331,10 @@ class CampaignActionExecutor
 
         $baseUrl = rtrim((string) config('app.url'), '/');
 
-        $unsubscribeUrl = $baseUrl.'/unsubscribe?id='.$customer->id;
+        $unsubscribeUrl = \Illuminate\Support\Facades\URL::signedRoute(
+            'public.unsubscribe',
+            ['customer' => $customer->id]
+        );
 
         return [
             'business_name' => (string) ($customer->business_name ?? ''),

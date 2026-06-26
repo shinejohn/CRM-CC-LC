@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Models\EmailTemplate;
+use App\Models\PhoneScript;
 use App\Models\SmsTemplate;
 use Illuminate\Database\Seeder;
 
@@ -253,6 +254,43 @@ final class ManifestDestinyEmailTemplateSeeder extends Seeder
                 'is_active' => true,
             ]
         );
+
+        // ─── Phone scripts (Hook stage call follow-ups) ──────────
+        // Spoken text rendered to Twilio <Say> TwiML. Calls only fire for
+        // customers who passed canContactViaPhone() (opted in, not DNC), so
+        // each script still carries a brief opt-out line for compliance.
+        $phoneScripts = [
+            [
+                'slug' => 'md_welcome_call',
+                'name' => 'MD — Welcome / claim call',
+                'script' => 'Hi, this is a quick courtesy call from Day dot News for {{business_name}}. Your community, {{community_name}}, now has its own local news site, and we have already set up a free listing for your business. Visit your dashboard at {{listing_url}} to claim it and add your hours. If you would prefer we do not call, just let us know and we will take you off the list. Thanks, {{customer_name}}!',
+                'variables' => ['business_name', 'community_name', 'customer_name', 'listing_url'],
+            ],
+            [
+                'slug' => 'md_claim_followup_call',
+                'name' => 'MD — Claim follow-up call',
+                'script' => 'Hi {{customer_name}}, this is Day dot News following up about the free listing for {{business_name}} on the {{community_name}} community site. It only takes a minute to claim it at {{listing_url}}, and it helps neighbors find you. If you would rather we do not call again, just let us know and we will take you off the list. Thank you!',
+                'variables' => ['business_name', 'community_name', 'customer_name', 'listing_url'],
+            ],
+            [
+                'slug' => 'md_founder_call',
+                'name' => 'MD — Founder pricing call',
+                'script' => 'Hi {{customer_name}}, a quick call from Day dot News for {{business_name}}. The founder pricing window for {{community_name}} is closing soon, and we wanted to make sure you had the chance to lock in the lowest rate we will ever offer. You can review the details at {{listing_url}}. If you would prefer we do not call, just let us know and we will take you off the list. Thanks!',
+                'variables' => ['business_name', 'community_name', 'customer_name', 'listing_url'],
+            ],
+        ];
+
+        foreach ($phoneScripts as $ps) {
+            PhoneScript::withoutGlobalScopes()->updateOrCreate(
+                ['slug' => $ps['slug'], 'tenant_id' => $tenantId],
+                [
+                    'name' => $ps['name'],
+                    'script' => $ps['script'],
+                    'variables' => $ps['variables'],
+                    'is_active' => true,
+                ]
+            );
+        }
     }
 
     /**
@@ -268,8 +306,8 @@ final class ManifestDestinyEmailTemplateSeeder extends Seeder
                 'slug' => $d['slug'],
                 'name' => $d['name'],
                 'subject' => $d['subject'],
-                'html_content' => '<p>Hi {{customer_name}},</p><p>' . $d['body'] . '</p><p><a href="{{listing_url}}">Learn more</a></p><p>— The Day.News team</p>',
-                'text_content' => "Hi {{customer_name}},\n\n" . strip_tags($d['body']) . "\n\nDetails: {{listing_url}}\n\n— Day.News",
+                'html_content' => '<p>Hi {{customer_name}},</p><p>'.$d['body'].'</p><p><a href="{{listing_url}}">Learn more</a></p><p>— The Day.News team</p>',
+                'text_content' => "Hi {{customer_name}},\n\n".strip_tags($d['body'])."\n\nDetails: {{listing_url}}\n\n— Day.News",
             ];
         }
 

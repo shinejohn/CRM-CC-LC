@@ -128,6 +128,16 @@ final class SendEmailCampaign implements ShouldQueue
             return false;
         }
 
+        // One-click unsubscribe headers (RFC 8058 / Gmail-Yahoo bulk-sender requirement).
+        // The signed unsubscribe URL is already computed into the campaign's merge vars.
+        $headers = [];
+        $unsubscribeUrl = $campaign->template_variables['unsubscribe_url'] ?? null;
+        if (is_string($unsubscribeUrl) && $unsubscribeUrl !== '') {
+            $mailto = (string) config('mail.unsubscribe_mailto', 'unsubscribe@day.news');
+            $headers['List-Unsubscribe'] = '<'.$unsubscribeUrl.'>, <mailto:'.$mailto.'>';
+            $headers['List-Unsubscribe-Post'] = 'List-Unsubscribe=One-Click';
+        }
+
         // Build a transient EmailMessage-like object for PostalService
         $message = new \App\Models\EmailMessage([
             'to_address' => $to,
@@ -135,6 +145,7 @@ final class SendEmailCampaign implements ShouldQueue
             'payload_log' => [
                 'html_body' => $html,
                 'plain_body' => strip_tags($html),
+                'headers' => $headers,
             ],
         ]);
         // Inject sender and pool as relations
@@ -174,6 +185,7 @@ final class SendEmailCampaign implements ShouldQueue
         $result = $emailService->send($to, $subject, $html, null, [
             'campaign_id' => $campaign->id,
             'recipient_id' => $recipient->id,
+            'customer_id' => $recipient->customer_id,
             'ip_pool' => 'smb_campaign',
             'track_opens' => true,
         ]);

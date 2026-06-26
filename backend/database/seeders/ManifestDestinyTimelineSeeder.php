@@ -43,11 +43,15 @@ final class ManifestDestinyTimelineSeeder extends Seeder
             // Week 1: Claim + Event
             ['day_number' => 1, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'welcome_community_launch', 'campaign_id' => 'HOOK-001', 'conditions' => null, 'parameters' => ['subject' => 'Your business is already in our directory - claim it now', 'landing_page' => 'claim-your-listing']],
             ['day_number' => 1, 'channel' => 'internal', 'action_type' => 'send_notification', 'template_type' => null, 'campaign_id' => null, 'conditions' => null, 'parameters' => ['notification_type' => 'new_lead_batch_internal'], 'delay_hours' => 1, 'priority' => 10],
+            // Phone follow-up to the Day-1 welcome email: only call those who did not open it within 24h.
+            ['day_number' => 2, 'channel' => 'phone', 'action_type' => 'make_call', 'template_type' => null, 'campaign_id' => null, 'conditions' => ['if' => 'email_opened', 'within_hours' => 24, 'then' => 'skip'], 'parameters' => ['script_id' => 'md_welcome_call'], 'priority' => 3],
             ['day_number' => 3, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'your_business_featured', 'campaign_id' => null, 'conditions' => ['if' => 'email_opened', 'within_hours' => 48, 'then' => 'proceed']],
             ['day_number' => 5, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'hook_post_event', 'campaign_id' => 'HOOK-002', 'conditions' => null, 'parameters' => ['subject' => 'Got an event coming up? Post it free to 10,000+ locals', 'landing_page' => 'post-your-event']],
 
             // Week 2: Coupon + Engagement check
             ['day_number' => 7, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'free_listing_claim', 'campaign_id' => null, 'conditions' => null],
+            // Phone follow-up to the Day-7 "claim your free listing" email: skip if the business is already engaged.
+            ['day_number' => 8, 'channel' => 'phone', 'action_type' => 'make_call', 'template_type' => null, 'campaign_id' => null, 'conditions' => ['if' => 'engagement_score_above', 'threshold' => 20, 'then' => 'skip'], 'parameters' => ['script_id' => 'md_claim_followup_call'], 'priority' => 3],
             ['day_number' => 10, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'hook_create_coupon', 'campaign_id' => 'HOOK-003', 'conditions' => null, 'parameters' => ['subject' => 'We drafted a coupon for {{business_name}} - publish it?', 'landing_page' => 'create-coupon']],
             ['day_number' => 10, 'channel' => 'sms', 'action_type' => 'send_sms', 'template_type' => 'listing_reminder_sms', 'campaign_id' => null, 'conditions' => ['if' => 'email_opened', 'within_hours' => 72, 'then' => 'skip'], 'priority' => 5],
 
@@ -61,6 +65,8 @@ final class ManifestDestinyTimelineSeeder extends Seeder
             ['day_number' => 21, 'channel' => 'system', 'action_type' => 'check_engagement', 'template_type' => null, 'campaign_id' => null, 'conditions' => null, 'parameters' => ['threshold' => 20]],
             ['day_number' => 24, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'founder_pricing_urgency', 'campaign_id' => null, 'conditions' => ['if' => 'founder_window_open']],
             ['day_number' => 25, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'hook_crm_integration', 'campaign_id' => 'HOOK-006', 'conditions' => null, 'parameters' => ['subject' => 'Connect your CRM and never lose a lead again', 'landing_page' => 'crm-integration']],
+            // Phone follow-up to the Day-24/28 founder urgency emails: call while the founder window is still open.
+            ['day_number' => 26, 'channel' => 'phone', 'action_type' => 'make_call', 'template_type' => null, 'campaign_id' => null, 'conditions' => ['if' => 'founder_window_open'], 'parameters' => ['script_id' => 'md_founder_call'], 'priority' => 3],
             ['day_number' => 28, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'last_chance_founder', 'campaign_id' => null, 'conditions' => ['if' => 'founder_window_open']],
 
             // Week 5: Featured listing upsell
