@@ -1064,3 +1064,5 @@ Route::post('/outbound/email/postal/webhook', [\App\Http\Controllers\Api\PostalW
 require __DIR__.'/api-ops.php';
 require __DIR__.'/api-email-health.php';
 require __DIR__.'/api-crm-extra.php';
+require __DIR__.'/api-dashboard.php';
+require __DIR__.'/api-training.php';
