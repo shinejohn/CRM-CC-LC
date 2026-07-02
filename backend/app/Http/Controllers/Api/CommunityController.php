@@ -24,7 +24,9 @@ final class CommunityController extends Controller
             $query->where('state', $request->input('state'));
         }
 
-        $communities = $query->withCount('customers')->paginate($request->input('per_page', 20));
+        // Cap per_page so ?per_page=100000000 can't force an unbounded query.
+        $perPage = min((int) $request->input('per_page', 20), 100);
+        $communities = $query->withCount('customers')->paginate($perPage);
 
         return response()->json([
             'data' => $communities->items(),
@@ -125,7 +127,9 @@ final class CommunityController extends Controller
             $query->where('profile_completeness', '>=', $request->input('profile_completeness_min'));
         }
 
-        $customers = $query->paginate($request->input('per_page', 20));
+        // Cap per_page — this paginates the ~12.9M-row customers table.
+        $perPage = min((int) $request->input('per_page', 20), 100);
+        $customers = $query->paginate($perPage);
 
         return response()->json([
             'data' => $customers->items(),

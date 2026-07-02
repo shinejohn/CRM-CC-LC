@@ -43,6 +43,10 @@ Schedule::command('embeddings:generate-pending')->hourly()->withoutOverlapping()
 Schedule::command('cleanup:old-data')->daily();
 Schedule::job(new \App\Jobs\CleanupExpiredTokens)->dailyAt('01:00');
 
+// Horizon metrics snapshots — without this the Horizon "Metrics" dashboard
+// (throughput/runtime per job & queue) stays empty. Recommended cadence.
+Schedule::command('horizon:snapshot')->everyFiveMinutes();
+
 /*
 |--------------------------------------------------------------------------
 | CRM & Campaigns

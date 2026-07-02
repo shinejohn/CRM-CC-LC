@@ -10,17 +10,37 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 final class RecalculateDataQuality implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    /** Heavy full-table pass over ~12.9M rows — runs on the maintenance queue. */
+    public function __construct()
+    {
+        $this->onQueue('maintenance');
+    }
+
+    public int $timeout = 3600;
+
+    public int $tries = 1;
+
     public function handle(): void
     {
-        Customer::chunk(100, function ($customers) {
+        // chunkById (not chunk) — chunk() uses a growing OFFSET which is O(n^2) over ~12.9M rows.
+        Customer::chunkById(500, function ($customers) {
             foreach ($customers as $customer) {
-                $score = $this->calculateDataQuality($customer);
-                $customer->update(['data_quality_score' => $score]);
+                try {
+                    $score = $this->calculateDataQuality($customer);
+                    $customer->update(['data_quality_score' => $score]);
+                } catch (\Throwable $e) {
+                    // A single bad row must not abort the whole run.
+                    Log::warning('RecalculateDataQuality: skipped customer', [
+                        'customer_id' => $customer->id,
+                        'error' => $e->getMessage(),
+                    ]);
+                }
             }
         });
     }

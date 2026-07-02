@@ -115,7 +115,7 @@ final class ProcessMessage implements ShouldQueue
             // Re-dispatch with delay
             dispatch(new self($message->id))
                 ->delay(now()->addSeconds($delay))
-                ->onQueue("messages-{$message->priority}");
+                ->onQueue('messages-'.strtolower((string) $message->priority));
         }
     }
     

@@ -88,8 +88,8 @@ final class CustomerController extends Controller
             });
         }
         
-        // Pagination
-        $perPage = $request->input('per_page', 20);
+        // Pagination — cap per_page; this paginates the ~12.9M-row customers table.
+        $perPage = min((int) $request->input('per_page', 20), 100);
         $customers = $query->orderBy('created_at', 'desc')->paginate($perPage);
         
         return response()->json([

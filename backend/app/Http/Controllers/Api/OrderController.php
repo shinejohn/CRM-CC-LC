@@ -51,7 +51,8 @@ final class OrderController extends Controller
             $query->where('payment_status', $request->input('payment_status'));
         }
         
-        $perPage = $request->input('per_page', 20);
+        // Cap per_page so ?per_page=100000000 can't force an unbounded query.
+        $perPage = min((int) $request->input('per_page', 20), 100);
         $orders = $query->latest()->paginate($perPage);
         
         return response()->json([

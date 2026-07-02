@@ -21,10 +21,11 @@ export default function CustomerDetailPage() {
             setIsLoading(true);
             try {
                 const [custRes, contRes, dealRes, actRes] = await Promise.all([
-                    apiClient.get(`/crm/customers/${id}`).catch(() => ({ data: { data: null } })),
-                    apiClient.get(`/crm/customers/${id}/contacts`).catch(() => ({ data: { data: [] } })),
-                    apiClient.get(`/crm/customers/${id}/deals`).catch(() => ({ data: { data: [] } })),
-                    apiClient.get(`/crm/customers/${id}/activities`).catch(() => ({ data: { data: [] } })),
+                    apiClient.get(`/v1/customers/${id}`).catch(() => ({ data: { data: null } })),
+                    // TODO: no backend route (CustomerDetailPage — no nested /customers/{id}/contacts|deals|activities; use flat /v1/crm-contacts, /v1/deals, /v1/crm-activities with customer_id filter)
+                    apiClient.get(`/v1/customers/${id}/contacts`).catch(() => ({ data: { data: [] } })),
+                    apiClient.get(`/v1/customers/${id}/deals`).catch(() => ({ data: { data: [] } })),
+                    apiClient.get(`/v1/customers/${id}/activities`).catch(() => ({ data: { data: [] } })),
                 ]);
 
                 // Use realistic mock fallback if API returns null/empty during dev wire-up.

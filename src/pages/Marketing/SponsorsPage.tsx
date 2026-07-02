@@ -22,7 +22,7 @@ export const SponsorsPage: React.FC = () => {
       setIsLoading(true);
       try {
         const { apiClient } = await import('@/services/api');
-        const res = await apiClient.get('/marketing/sponsors').catch(() => ({ data: { data: [] } }));
+        const res = await apiClient.get('/v1/sponsors').catch(() => ({ data: { data: [] } }));
         setCurrentSponsorships(res.data.data || []);
       } catch (error) {
         console.error("Failed to fetch sponsorships", error);

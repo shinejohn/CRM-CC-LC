@@ -24,7 +24,8 @@ export function CreateAlertDialog({ isOpen, onClose, onSuccess }: CreateAlertDia
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            await apiClient.post('/alerts/dispatch', {
+            // TODO: no backend route (ops CreateAlertDialog — /v1/alerts has no /dispatch; create is POST /v1/alerts)
+            await apiClient.post('/v1/alerts/dispatch', {
                 title,
                 description,
                 severity,

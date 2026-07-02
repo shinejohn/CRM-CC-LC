@@ -116,7 +116,7 @@ export const ProfileBuilderSlide: React.FC<ProfileBuilderSlideProps> = ({
     if (!isActive || !customerId || notebook) return;
     setLoading(true);
     apiClient
-      .get(`/sarah/notebooks/${customerId}`)
+      .get(`/v1/sarah/notebooks/${customerId}`)
       .then((res) => {
         setNotebook(res.data.data as NotebookData);
         if ((res.data.data as NotebookData).status === 'approved') {
@@ -146,7 +146,7 @@ export const ProfileBuilderSlide: React.FC<ProfileBuilderSlideProps> = ({
     if (!editingField || !customerId) return;
     setSaving(true);
     try {
-      const res = await apiClient.put(`/sarah/notebooks/${customerId}`, {
+      const res = await apiClient.put(`/v1/sarah/notebooks/${customerId}`, {
         fields: { [editingField]: editValue },
         source: 'user',
       });
@@ -179,7 +179,7 @@ export const ProfileBuilderSlide: React.FC<ProfileBuilderSlideProps> = ({
     if (!customerId) return;
     setApproving(true);
     try {
-      await apiClient.post(`/sarah/notebooks/${customerId}/approve`);
+      await apiClient.post(`/v1/sarah/notebooks/${customerId}/approve`);
       setApproved(true);
       onAction?.('profile_approved', { customer_id: customerId });
     } catch {
