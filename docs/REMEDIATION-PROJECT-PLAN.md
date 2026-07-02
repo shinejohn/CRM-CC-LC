@@ -40,8 +40,36 @@ No two agents in the same phase may edit the same file. Shared files (`routes/ap
 `npm run verify` green **and** `composer test` green (target: 356 passing, 0 failing) before the phase is committed. Each phase = one focused commit.
 
 ## Status
-- [ ] Phase 0
-- [ ] Phase 1 (A1–A4)
-- [ ] Phase 2 (B1–B4)
-- [ ] Phase 3
-- [ ] Phase 4
+- [x] Phase 0 — trivial fixes (in commit a1cdaa2c)
+- [x] Phase 1 (A1–A4 + A2b + test reconcile) — commit `a1cdaa2c`
+- [x] Phase 2 (B1–B4 + test migration) — commit `ef136661`
+- [x] Phase 3 (C1–C2 frontend contract) — commit `f29f1462`
+- [x] Phase 4 (D1/D2/D4 infra+jobs+paths) — commit `f8a90c8e`
+
+Each phase committed only after `composer test` (356 passed / 0 failed) **and**
+`npm run verify` (all 8 checks) were green.
+
+## Remaining follow-ups (NOT bugs fixed here — tracked for later)
+
+**Feature-builds (frontend calls a page that needs a NEW backend route):**
+- Email Health / Contact Health / Inbound Inbox pages (`email-engine-api` health/contacts/inbound endpoints)
+- Ops dashboard sub-resources (ai-sessions, infrastructure-components, metric snapshots, cost-tracking, incident create/update, FOA chat) — backend exposes only 9 aggregate GETs
+- CRM Kanban customer pipeline-stage endpoint; dashboard widgets/activity-feed + widget-position persistence
+- AI generate-faq / process-actions; presentations index; the entire `training-*` surface (datasets/train/validation)
+- Nested CRM sub-resources (`/customers/{id}/{contacts,deals,activities}`) — use the flat filtered routes or add nested ones
+These are marked `// TODO: no backend route` in the code and degrade to empty/placeholder via existing `.catch` fallbacks.
+
+**Content copyedit:** after the Education campaign slug realignment, a few EDU email
+subject lines no longer match their campaign topic (e.g. EDU-009 subject "Local SEO"
+now maps to `voice-ai-guide`). Needs a human copy pass over the seeder subjects.
+
+**Operational (set in Railway dashboard, code-ready):**
+- `RUN_SCHEDULER=1` on exactly ONE service (the horizon service)
+- Real `APP_URL`, `QUEUE_CONNECTION=redis`, a real broadcaster (`reverb`/`pusher` — none installed yet), `REDIS_QUEUE_RETRY_AFTER` inherits the safe 7800 default
+- Run the new migrations: `stripe_webhook_events`, the bigint→uuid ALTER, `revenue_records`, the users tenant backfill
+- Prod HTTP still uses `php artisan serve` (no prod server in the Nixpacks image) — consider FrankenPHP/php-fpm later
+
+**Long-tail MEDIUM/LOW** from the assessment not in scope of the CRITICAL/HIGH passes
+(fabricated-data-as-live placeholder pages, remaining accessibility/`type="button"`
+gaps, duplicate parallel service layers, remaining `failed()` handlers on lower-risk
+jobs) — enumerated in `docs/FULL-CODE-ASSESSMENT-2026-07-01.md` §5.
