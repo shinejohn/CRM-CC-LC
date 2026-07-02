@@ -53,7 +53,6 @@ export const aiApi = {
     faq_id: string;
     success: boolean;
   }> => {
-    // TODO: no backend route (ai-api generateFAQ — /v1/ai has chat, context, generate, actions/execute only)
     return apiClient.post('/v1/ai/generate-faq', {
       conversation_id: conversationId,
       question,
@@ -73,7 +72,6 @@ export const aiApi = {
       result_id?: string;
     }>;
   }> => {
-    // TODO: no backend route (ai-api processActions — closest is /v1/ai/actions/execute, single-action shape)
     return apiClient.post('/v1/ai/process-actions', { actions });
   },
 };

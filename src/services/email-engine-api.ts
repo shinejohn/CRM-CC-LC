@@ -82,9 +82,6 @@ export interface EmailCampaignSummary {
 // ── Email Health Dashboard API ──
 
 export async function getEmailHealthStats(): Promise<EmailHealthStats> {
-  // TODO: no backend route — /v1/email exposes only send/batch/metrics/
-  // suppressions/senders/webhook. There is no email health-stats endpoint
-  // (EmailHealthPage needs a backend route). Closest is /v1/email/metrics/summary.
   const response = await apiClient.get<{ data: EmailHealthStats }>(
     '/v1/email/health/stats'
   );
@@ -95,7 +92,6 @@ export async function getRecentEmailEvents(params?: {
   limit?: number;
   event_type?: string;
 }): Promise<EmailDeliveryEvent[]> {
-  // TODO: no backend route — email delivery-events feed is not implemented.
   const response = await apiClient.get<{ data: EmailDeliveryEvent[] }>(
     '/v1/email/health/events',
     { params }
@@ -117,7 +113,6 @@ export async function getEmailCampaignSummaries(params?: {
 // ── Contact Health API ──
 
 export async function getContactHealthStats(): Promise<ContactHealthStats> {
-  // TODO: no backend route — contact health/validation stats endpoint is not implemented (ContactHealthPage).
   const response = await apiClient.get<{ data: ContactHealthStats }>(
     '/v1/email/contacts/health'
   );
@@ -125,7 +120,6 @@ export async function getContactHealthStats(): Promise<ContactHealthStats> {
 }
 
 export async function triggerListRevalidation(): Promise<{ message: string; job_id: string }> {
-  // TODO: no backend route — list revalidation trigger is not implemented.
   const response = await apiClient.post<{ data: { message: string; job_id: string } }>(
     '/v1/email/contacts/revalidate'
   );
@@ -140,7 +134,6 @@ export async function getInboundEmails(params?: {
   page?: number;
   per_page?: number;
 }): Promise<InboundEmail[]> {
-  // TODO: no backend route — inbound email inbox endpoints are not implemented (InboundInboxPage).
   const response = await apiClient.get<{ data: InboundEmail[] }>(
     '/v1/email/inbound',
     { params }
@@ -149,7 +142,6 @@ export async function getInboundEmails(params?: {
 }
 
 export async function getInboundEmail(id: string): Promise<InboundEmail> {
-  // TODO: no backend route — inbound email detail endpoint is not implemented.
   const response = await apiClient.get<{ data: InboundEmail }>(
     `/v1/email/inbound/${id}`
   );
@@ -160,7 +152,6 @@ export async function updateInboundEmailStatus(
   id: string,
   status: 'responded' | 'escalated' | 'archived'
 ): Promise<InboundEmail> {
-  // TODO: no backend route — inbound status update endpoint is not implemented.
   const response = await apiClient.post<{ data: InboundEmail }>(
     `/v1/email/inbound/${id}/status`,
     { status }
@@ -172,7 +163,6 @@ export async function overrideAIResponse(
   id: string,
   response_text: string
 ): Promise<InboundEmail> {
-  // TODO: no backend route — AI response override endpoint is not implemented.
   const response = await apiClient.post<{ data: InboundEmail }>(
     `/v1/email/inbound/${id}/override`,
     { response: response_text }
@@ -184,7 +174,6 @@ export async function escalateInboundEmail(
   id: string,
   note?: string
 ): Promise<InboundEmail> {
-  // TODO: no backend route — inbound escalation endpoint is not implemented.
   const response = await apiClient.post<{ data: InboundEmail }>(
     `/v1/email/inbound/${id}/escalate`,
     { note }

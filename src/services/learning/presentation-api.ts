@@ -7,8 +7,9 @@ import type { Presentation } from '@/types/learning';
 
 export const presentationApi = {
   getPresentations: async (): Promise<Presentation[]> => {
-    // TODO: no backend route (presentation-api getPresentations — /v1/presentations has no index, only templates/{id})
-    return apiClient.get<Presentation[]>('/v1/presentations');
+    // Index returns the { data, meta } envelope; unwrap to the presentations array.
+    const response = await apiClient.get<{ data: Presentation[] }>('/v1/presentations');
+    return response.data;
   },
 
   getPresentation: async (id: string): Promise<Presentation> => {

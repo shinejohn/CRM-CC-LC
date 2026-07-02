@@ -29,16 +29,10 @@ import type {
   DateRangeParams,
 } from '@/types/operations';
 
-// The real backend ops surface is the `/v1/ops/*` group (backend/routes/api.php),
-// which only exposes aggregate GET endpoints: metrics, health, queues, costs,
-// incidents, pipeline, actions, metric-definitions, system-status.
-// TODO: no backend route — most sub-resources used below (metric-snapshots,
-// metric-aggregates, ai-sessions, ai-recommendations, ai-context-memory,
-// infrastructure-components, health-checks, email-ip-reputation, queue-metrics,
-// revenue-snapshots, cost-tracking, pipeline-metrics, action-definitions,
-// action-executions, alert-rules, alerts, development-milestones, feature-flags,
-// dashboard/snapshot) do NOT exist under /v1/ops and will 404 until the backend
-// ops resource API is built. Base fixed to remove the double `/api` prefix.
+// All sub-resources below are served by the `/v1/ops/*` group (see
+// backend/routes/api-ops.php + OpsResourceController): list endpoints return the
+// `{ data, meta }` envelope with camelCase keys, single/action endpoints return
+// `{ data }`. Base is `/v1/ops` (apiClient already prepends the `/api` origin).
 const BASE_PATH = '/v1/ops';
 
 const serializeDate = (value?: Date): string | undefined => (value ? value.toISOString() : undefined);

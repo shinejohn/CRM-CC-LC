@@ -427,9 +427,11 @@ Route::prefix('v1')->group(function () {
         // Training API
         Route::prefix('training')->group(function () {
             Route::get('/', [TrainingController::class, 'index']);
-            Route::get('/{id}', [TrainingController::class, 'show']);
-            Route::post('/{id}/helpful', [TrainingController::class, 'markHelpful']);
-            Route::post('/{id}/not-helpful', [TrainingController::class, 'markNotHelpful']);
+            // Constrain {id} to a UUID so literal segments (e.g. /training/datasets
+            // from api-training.php) are not shadowed by this catch-all show route.
+            Route::get('/{id}', [TrainingController::class, 'show'])->whereUuid('id');
+            Route::post('/{id}/helpful', [TrainingController::class, 'markHelpful'])->whereUuid('id');
+            Route::post('/{id}/not-helpful', [TrainingController::class, 'markNotHelpful'])->whereUuid('id');
         });
 
         // AI Account Manager Routes

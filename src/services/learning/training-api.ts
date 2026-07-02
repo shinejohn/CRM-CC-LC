@@ -9,8 +9,9 @@ import type {
   AgentKnowledgeConfig,
 } from '@/types/learning';
 
-// TODO: no backend routes — /v1/training only exposes index/{id}/helpful/not-helpful.
-// The datasets, validation/queue, validation/{id}/*, and agents/* endpoints below are unbuilt on the backend.
+// Backed by backend/routes/api-training.php + TrainingDatasetController.
+// These endpoints return bare JSON (arrays / objects), NOT a { data } envelope,
+// which is why the calls below consume the response directly.
 export const trainingApi = {
   // Datasets
   getDatasets: async (): Promise<TrainingDataset[]> => {

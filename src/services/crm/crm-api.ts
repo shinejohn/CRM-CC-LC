@@ -279,10 +279,8 @@ export const customerApi = {
     stage: PipelineStage,
     trigger: string = 'manual'
   ): Promise<Customer> => {
-    // TODO: no backend route — there is no customer pipeline-stage transition
-    // endpoint. UpdateCustomerRequest does not allow `pipeline_stage`, and the
-    // deals `/transition` route applies to deals, not customers. The CRM Kanban
-    // customer drag-and-drop will 404 until a backend endpoint is added.
+    // Backed by PUT /v1/customers/{id}/pipeline-stage (api-crm-extra.php →
+    // CustomerController@updatePipelineStage, guarded by PipelineTransitionService).
     const response = await apiClient.put<{ data: Customer; message?: string }>(
       `/v1/customers/${id}/pipeline-stage`,
       { pipeline_stage: stage, trigger }
