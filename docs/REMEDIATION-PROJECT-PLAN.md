@@ -49,7 +49,17 @@ No two agents in the same phase may edit the same file. Shared files (`routes/ap
 Each phase committed only after `composer test` (356 passed / 0 failed) **and**
 `npm run verify` (all 8 checks) were green.
 
-## Remaining follow-ups (NOT bugs fixed here — tracked for later)
+## Follow-ups — DONE (Waves 1–3, commits 98faaf4d / d59b246a / b7d4db28)
+- [x] Ops dashboard: 30+ endpoints wired over existing Operations models (+ real Incident index, FOA chat via PrismAiService)
+- [x] Email Health / Contact Health / Inbound Inbox endpoints; inbound pipeline now writes EmailConversation so the inbox populates; email_conversations.status added
+- [x] CRM Kanban customer pipeline-stage (guarded transition); dashboard widgets + real recent-activity feed
+- [x] AI generate-faq / process-actions; presentations index; nested CRM sub-resources
+- [x] Training data layer (datasets/examples/validation/approve/reject/merge, agent knowledge-config, real test-query) — model TRAINING itself is an honest placeholder (no ML backend in repo)
+- [x] Education email subjects realigned to campaigns
+- [x] Frontend wired to all the above (useDashboard + services de-stubbed); presentation-api unwrap fix; training route-shadow fixed (whereUuid)
+- [x] 17 smoke tests over the new endpoints — suite now 373 passed / 0 failed
+
+## Still remaining (genuinely out of code scope / deliberate backlog)
 
 **Feature-builds (frontend calls a page that needs a NEW backend route):**
 - Email Health / Contact Health / Inbound Inbox pages (`email-engine-api` health/contacts/inbound endpoints)
