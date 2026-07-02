@@ -23,7 +23,7 @@ final class ProcessMessage implements ShouldQueue
     public $tries = 1; // Fail fast, handle retries in code
 
     public function __construct(
-        public int $messageId
+        public string $messageId
     ) {}
     
     public function handle(ChannelFactory $channelFactory): void

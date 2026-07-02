@@ -25,17 +25,22 @@ final class WebhookController extends Controller
      */
     public function handlePostalEvent(Request $request): JsonResponse
     {
-        // 1. Verify Signature
+        // 1. Verify Signature — fail closed. Reject when the signing key is not
+        // configured or the signature header is absent/invalid.
         $signature = $request->header('X-Postal-Signature');
-
         $signingKey = config('services.postal.webhook_signing_key');
-        if ($signingKey) {
-            $expectedSignature = base64_encode(hash_hmac('sha256', $request->getContent(), $signingKey, true));
-            if (! hash_equals($expectedSignature, $signature ?? '')) {
-                Log::warning('Postal Webhook: Invalid signature.');
 
-                return response()->json(['error' => 'Invalid signature'], 403);
-            }
+        if (! $signingKey || ! $signature) {
+            Log::warning('Postal Webhook: missing signing key or signature.');
+
+            return response()->json(['error' => 'Invalid signature'], 403);
+        }
+
+        $expectedSignature = base64_encode(hash_hmac('sha256', $request->getContent(), $signingKey, true));
+        if (! hash_equals($expectedSignature, $signature)) {
+            Log::warning('Postal Webhook: Invalid signature.');
+
+            return response()->json(['error' => 'Invalid signature'], 403);
         }
 
         // 2. Parse Event

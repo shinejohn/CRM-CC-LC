@@ -60,7 +60,7 @@ final class AlertService implements AlertServiceInterface
         return $alert;
     }
     
-    public function submitForApproval(int $alertId): Alert
+    public function submitForApproval(string $alertId): Alert
     {
         $alert = Alert::findOrFail($alertId);
         
@@ -75,7 +75,7 @@ final class AlertService implements AlertServiceInterface
         return $alert->fresh();
     }
     
-    public function approve(int $alertId, int $approvedBy): Alert
+    public function approve(string $alertId, string $approvedBy): Alert
     {
         $alert = Alert::findOrFail($alertId);
         
@@ -99,7 +99,7 @@ final class AlertService implements AlertServiceInterface
         return $alert->fresh();
     }
     
-    public function send(int $alertId): array
+    public function send(string $alertId): array
     {
         $alert = Alert::findOrFail($alertId);
         
@@ -372,7 +372,7 @@ final class AlertService implements AlertServiceInterface
         return $message;
     }
     
-    private function getSubscriberPreferences(int $subscriberId, string $category): array
+    private function getSubscriberPreferences(string $subscriberId, string $category): array
     {
         $pref = \App\Models\Subscriber\SubscriberAlertPreference::where('subscriber_id', $subscriberId)
             ->where('category_slug', $category)
@@ -395,7 +395,7 @@ final class AlertService implements AlertServiceInterface
         ];
     }
     
-    public function cancel(int $alertId): bool
+    public function cancel(string $alertId): bool
     {
         $alert = Alert::findOrFail($alertId);
         
@@ -410,7 +410,7 @@ final class AlertService implements AlertServiceInterface
         return true;
     }
     
-    public function estimateRecipients(int $alertId): int
+    public function estimateRecipients(string $alertId): int
     {
         $alert = Alert::findOrFail($alertId);
         return $this->targeting->estimateCount($alert);

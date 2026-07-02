@@ -117,7 +117,7 @@ final class EmergencyBroadcastService implements EmergencyBroadcastServiceInterf
         return $admin;
     }
     
-    public function send(int $broadcastId): array
+    public function send(string $broadcastId): array
     {
         $broadcast = EmergencyBroadcast::findOrFail($broadcastId);
         
@@ -189,7 +189,7 @@ final class EmergencyBroadcastService implements EmergencyBroadcastServiceInterf
             ->toArray();
     }
     
-    public function getDeliveryStatus(int $broadcastId): array
+    public function getDeliveryStatus(string $broadcastId): array
     {
         $broadcast = EmergencyBroadcast::findOrFail($broadcastId);
         
@@ -231,7 +231,7 @@ final class EmergencyBroadcastService implements EmergencyBroadcastServiceInterf
         ];
     }
     
-    public function sendTest(int $broadcastId, array $testRecipients): array
+    public function sendTest(string $broadcastId, array $testRecipients): array
     {
         $broadcast = EmergencyBroadcast::findOrFail($broadcastId);
         
@@ -309,7 +309,7 @@ final class EmergencyBroadcastService implements EmergencyBroadcastServiceInterf
 </html>';
     }
     
-    public function cancel(int $broadcastId, string $reason): bool
+    public function cancel(string $broadcastId, string $reason): bool
     {
         $broadcast = EmergencyBroadcast::findOrFail($broadcastId);
         

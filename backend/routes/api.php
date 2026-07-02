@@ -407,6 +407,11 @@ Route::prefix('v1')->group(function () {
         Route::prefix('interactions')->group(function () {
             Route::get('/', [\App\Http\Controllers\Api\InteractionController::class, 'index']);
             Route::post('/', [\App\Http\Controllers\Api\InteractionController::class, 'store']);
+
+            // Templates (literal segment — must be registered before the /{id} wildcard)
+            Route::get('/templates', [\App\Http\Controllers\Api\InteractionController::class, 'templates']);
+            Route::post('/templates', [\App\Http\Controllers\Api\InteractionController::class, 'createTemplate']);
+
             Route::get('/{id}', [\App\Http\Controllers\Api\InteractionController::class, 'show']);
             Route::put('/{id}', [\App\Http\Controllers\Api\InteractionController::class, 'update']);
             Route::post('/{id}/complete', [\App\Http\Controllers\Api\InteractionController::class, 'complete']);
@@ -417,10 +422,6 @@ Route::prefix('v1')->group(function () {
             Route::get('/customers/{customerId}/next', [\App\Http\Controllers\Api\InteractionController::class, 'getNextPending']);
             Route::get('/customers/{customerId}/pending', [\App\Http\Controllers\Api\InteractionController::class, 'getPending']);
             Route::get('/customers/{customerId}/overdue', [\App\Http\Controllers\Api\InteractionController::class, 'getOverdue']);
-
-            // Templates
-            Route::get('/templates', [\App\Http\Controllers\Api\InteractionController::class, 'templates']);
-            Route::post('/templates', [\App\Http\Controllers\Api\InteractionController::class, 'createTemplate']);
         });
 
         // Training API
@@ -806,6 +807,10 @@ Route::prefix('v1')->group(function () {
         // Alert CRUD
         Route::get('/', [AlertController::class, 'index']);
         Route::post('/', [AlertController::class, 'create']);
+
+        // Categories (literal segment — must be registered before the /{id} wildcard)
+        Route::get('/categories', [AlertCategoryController::class, 'index']);
+
         Route::get('/{id}', [AlertController::class, 'show']);
         Route::put('/{id}', [AlertController::class, 'update']);
         Route::delete('/{id}', [AlertController::class, 'destroy']);
@@ -821,9 +826,6 @@ Route::prefix('v1')->group(function () {
 
         // Stats
         Route::get('/{id}/stats', [AlertController::class, 'stats']);
-
-        // Categories
-        Route::get('/categories', [AlertCategoryController::class, 'index']);
     });
 
     // Subscriber alert preferences (for subscribers to manage)
@@ -837,6 +839,10 @@ Route::prefix('v1')->group(function () {
         // Broadcast management
         Route::get('/', [EmergencyBroadcastController::class, 'index']);
         Route::post('/', [EmergencyBroadcastController::class, 'create']);
+
+        // Categories (literal segment — must be registered before the /{id} wildcard)
+        Route::get('/categories', [EmergencyBroadcastController::class, 'categories']);
+
         Route::get('/{id}', [EmergencyBroadcastController::class, 'show']);
 
         // Actions
@@ -846,9 +852,6 @@ Route::prefix('v1')->group(function () {
 
         // Real-time status
         Route::get('/{id}/status', [EmergencyBroadcastController::class, 'status']);
-
-        // Categories
-        Route::get('/categories', [EmergencyBroadcastController::class, 'categories']);
 
         // Audit log
         Route::get('/{id}/audit', [EmergencyBroadcastController::class, 'auditLog']);
@@ -867,14 +870,17 @@ Route::prefix('v1')->group(function () {
         Route::get('/system-status', [\App\Http\Controllers\Api\V1\Ops\OpsController::class, 'getSystemStatus']);
     });
 
-    // Municipal Admin management (super admin only)
-    Route::prefix('municipal-admins')->middleware(['auth:sanctum'])->group(function () {
-        Route::get('/', [MunicipalAdminController::class, 'index']);
-        Route::post('/', [MunicipalAdminController::class, 'create']);
-        Route::put('/{id}', [MunicipalAdminController::class, 'update']);
-        Route::delete('/{id}', [MunicipalAdminController::class, 'destroy']);
-        Route::post('/{id}/verify', [MunicipalAdminController::class, 'verify']);
-    });
+    // Municipal Admin management (admin only — gated behind MunicipalAdminMiddleware,
+    // the same admin-only stack used by the emergency/ops route groups).
+    Route::prefix('municipal-admins')
+        ->middleware(['auth:sanctum', \App\Http\Middleware\MunicipalAdminMiddleware::class])
+        ->group(function () {
+            Route::get('/', [MunicipalAdminController::class, 'index']);
+            Route::post('/', [MunicipalAdminController::class, 'create']);
+            Route::put('/{id}', [MunicipalAdminController::class, 'update']);
+            Route::delete('/{id}', [MunicipalAdminController::class, 'destroy']);
+            Route::post('/{id}/verify', [MunicipalAdminController::class, 'verify']);
+        });
 
     // Communication Infrastructure (Module 0B) - Message Management
     Route::prefix('messages')->middleware('auth:sanctum')->group(function () {

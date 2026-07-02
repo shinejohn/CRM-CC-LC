@@ -21,7 +21,7 @@ final class SendEmergencyPush implements ShouldQueue
     public $tries = 1;
     
     public function __construct(
-        private int $broadcastId,
+        private string $broadcastId,
         private array $recipients,
     ) {}
     
@@ -41,31 +41,14 @@ final class SendEmergencyPush implements ShouldQueue
         
         $totalTokens = collect($pushRecipients)->sum(fn($r) => count($r['device_tokens']));
         $broadcast->update(['push_queued' => $totalTokens]);
-        
-        $sent = 0;
-        $failed = 0;
-        
-        // TODO: Integrate with Firebase Cloud Messaging (FCM) or Apple Push Notification Service (APNs)
-        // For now, we'll mark as queued but not implement full push logic
-        foreach ($pushRecipients as $recipient) {
-            foreach ($recipient['device_tokens'] as $token) {
-                try {
-                    // This would call FCM/APNs API
-                    // For now, we'll simulate success
-                    $sent++;
-                } catch (\Exception $e) {
-                    Log::error('Failed to send emergency push', [
-                        'broadcast_id' => $broadcast->id,
-                        'recipient_id' => $recipient['id'],
-                        'token' => $token,
-                        'error' => $e->getMessage(),
-                    ]);
-                    $failed++;
-                }
-            }
-        }
-        
-        $broadcast->increment('push_sent', $sent);
+
+        // Push delivery is not implemented yet (no FCM / APNs integration).
+        // Do NOT increment push_sent here — that must reflect real deliveries only.
+        // Device tokens remain counted in push_queued as un-sent.
+        Log::warning('Emergency push delivery not implemented — tokens queued but not sent', [
+            'broadcast_id' => $broadcast->id,
+            'push_queued' => $totalTokens,
+        ]);
     }
 }
 

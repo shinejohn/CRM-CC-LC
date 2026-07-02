@@ -40,33 +40,51 @@ final class StripeWebhookController extends Controller
         $sigHeader = $request->header('Stripe-Signature');
         $webhookSecret = config('services.stripe.webhook_secret');
 
+        // Fail closed: without a configured signing secret we cannot verify the
+        // payload's authenticity, so reject rather than act on unsigned input.
+        if (! $webhookSecret) {
+            Log::error('Stripe webhook secret not configured — rejecting webhook');
+
+            return response()->json(['error' => 'Webhook not configured'], 500);
+        }
+
+        $eventId = null;
         $eventType = null;
         $eventData = null;
 
-        if ($webhookSecret) {
-            try {
-                $event = Webhook::constructEvent($payload, $sigHeader, $webhookSecret);
-                $eventType = $event->type;
-                $eventData = $event->data->object;
-            } catch (SignatureVerificationException $e) {
-                Log::error('Stripe webhook signature verification failed: '.$e->getMessage());
+        try {
+            $event = Webhook::constructEvent($payload, $sigHeader ?? '', $webhookSecret);
+            $eventId = $event->id;
+            $eventType = $event->type;
+            $eventData = $event->data->object;
+        } catch (SignatureVerificationException $e) {
+            Log::error('Stripe webhook signature verification failed: '.$e->getMessage());
 
-                return response()->json(['error' => 'Invalid signature'], 400);
-            } catch (Exception $e) {
-                Log::error('Stripe webhook error: '.$e->getMessage());
+            return response()->json(['error' => 'Invalid signature'], 400);
+        } catch (Exception $e) {
+            Log::error('Stripe webhook error: '.$e->getMessage());
 
-                return response()->json(['error' => 'Webhook error'], 400);
-            }
-        } else {
-            // No webhook secret configured — parse payload directly (non-production fallback)
-            Log::warning('Stripe webhook secret not configured, skipping signature verification');
-            $decoded = json_decode($payload, true);
-            $eventType = $decoded['type'] ?? null;
-            $eventData = (object) ($decoded['data']['object'] ?? []);
+            return response()->json(['error' => 'Webhook error'], 400);
         }
 
         if (! $eventType) {
             return response()->json(['error' => 'Missing event type'], 400);
+        }
+
+        // Idempotency guard: atomically claim this Stripe event id. If it already
+        // exists, we've processed (or are processing) it — acknowledge without
+        // re-running any handlers.
+        if ($eventId) {
+            $record = \App\Models\StripeWebhookEvent::firstOrCreate(
+                ['stripe_event_id' => $eventId],
+                ['type' => $eventType, 'processed_at' => now()],
+            );
+
+            if (! $record->wasRecentlyCreated) {
+                Log::info('Stripe webhook already processed, skipping', ['event_id' => $eventId]);
+
+                return response()->json(['status' => 'duplicate']);
+            }
         }
 
         // Handle the event

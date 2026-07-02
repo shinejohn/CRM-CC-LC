@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('chat_messages', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('session_id');
-            $table->unsignedBigInteger('smb_id')->nullable();
+            $table->uuid('smb_id')->nullable();
 
             $table->string('role', 20);
             $table->text('content');

@@ -39,15 +39,15 @@ final class CrmDashboardController extends Controller
             ->count();
         
         $customersByLeadScore = Customer::where('tenant_id', $tenantId)
-            ->selectRaw('
-                CASE 
-                    WHEN lead_score >= 80 THEN "high"
-                    WHEN lead_score >= 50 THEN "medium"
-                    WHEN lead_score >= 25 THEN "low"
-                    ELSE "cold"
+            ->selectRaw("
+                CASE
+                    WHEN lead_score >= 80 THEN 'high'
+                    WHEN lead_score >= 50 THEN 'medium'
+                    WHEN lead_score >= 25 THEN 'low'
+                    ELSE 'cold'
                 END as score_category,
                 COUNT(*) as count
-            ')
+            ")
             ->groupBy('score_category')
             ->get()
             ->pluck('count', 'score_category')

@@ -23,7 +23,7 @@ final class SendEmergencySms implements ShouldQueue
     public $tries = 1;
     
     public function __construct(
-        private int $broadcastId,
+        private string $broadcastId,
         private array $recipients,
     ) {}
     

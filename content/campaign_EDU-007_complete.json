@@ -5,20 +5,20 @@
     "day": 36,
     "type": "Educational",
     "title": "How We Create Content About Your Business",
-    "subject": "modern tools writes. You approve. Content happens.",
-    "landing_page": "reputation-modern tools-age",
+    "subject": "AI writes. You approve. Content happens.",
+    "landing_page": "reputation-ai-age",
     "template": "educational",
     "description": "How content is created, reviewed, and published about participating businesses"
   },
   "landing_page": {
     "campaign_id": "EDU-007",
-    "landing_page_slug": "reputation-modern tools-age",
-    "url": "/learn/reputation-modern tools-age",
+    "landing_page_slug": "reputation-ai-age",
+    "url": "/learn/reputation-ai-age",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
     "duration_seconds": 180,
-    "primary_cta": "activate_modern tools_content",
+    "primary_cta": "activate_ai_content",
     "secondary_cta": "download_article",
     "ai_persona": "Sarah",
     "ai_tone": "Professional, practical, outcome-focused",
@@ -30,7 +30,7 @@
     "utm_medium": "outbound",
     "utm_campaign": "90day-week6-educational",
     "utm_content": "EDU-007",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/reputation-modern tools-age/audio/"
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/reputation-ai-age/audio/"
   },
   "template": {
     "template_id": "educational",
@@ -57,13 +57,13 @@
     {
       "slide_num": 2,
       "component": "ConceptSlide",
-      "title": "modern tools Writes. You Approve.",
+      "title": "AI Writes. You Approve.",
       "content": {
         "headline": "The New Content Model",
         "flow": [
           {
             "step": 1,
-            "action": "modern tools drafts content based on your business",
+            "action": "ai drafts content based on your business",
             "you": "Nothing"
           },
           {
@@ -84,7 +84,7 @@
         ],
         "result": "Consistent content without the time drain"
       },
-      "narration": "Here's the new model. modern tools drafts content based on your business\u2014you do nothing. You review it in two minutes\u2014quick scan. Click approve or make quick edits\u2014one click. Content publishes automatically\u2014you do nothing. The result: consistent content without the time drain. You stay visible without becoming a full-time content creator.",
+      "narration": "Here's the new model. AI drafts content based on your business\u2014you do nothing. You review it in two minutes\u2014quick scan. Click approve or make quick edits\u2014one click. Content publishes automatically\u2014you do nothing. The result: consistent content without the time drain. You stay visible without becoming a full-time content creator.",
       "duration_seconds": 30,
       "audio_file": "slide-02-model.mp3"
     },
@@ -93,7 +93,7 @@
       "component": "ConceptSlide",
       "title": "What your account team can Create",
       "content": {
-        "headline": "modern tools Creates All Types of Content",
+        "headline": "AI Creates All Types of Content",
         "content_types": [
           {
             "type": "Social posts",
@@ -127,7 +127,7 @@
           }
         ]
       },
-      "narration": "your account team can create all types of content. Social posts\u2014daily, two-minute review. Blog articles\u2014weekly, five minutes to review. Email newsletters\u2014weekly or monthly, five minutes. Announcements, event descriptions, service descriptions\u2014as needed, quick review. The modern tools adapts to your voice, your business, your audience. You just approve or adjust.",
+      "narration": "your account team can create all types of content. Social posts\u2014daily, two-minute review. Blog articles\u2014weekly, five minutes to review. Email newsletters\u2014weekly or monthly, five minutes. Announcements, event descriptions, service descriptions\u2014as needed, quick review. The AI adapts to your voice, your business, your audience. You just approve or adjust.",
       "duration_seconds": 35,
       "audio_file": "slide-03-types.mp3"
     },
@@ -160,7 +160,7 @@
       "component": "ConceptSlide",
       "title": "How the system learns Your Voice",
       "content": {
-        "headline": "modern tools Sounds Like You (Not a Robot)",
+        "headline": "AI Sounds Like You (Not a Robot)",
         "training": [
           {
             "source": "Your website",
@@ -181,7 +181,7 @@
         ],
         "result": "Content that sounds authentically like your business"
       },
-      "narration": "But does content creation sound robotic? Not anymore. the system learns your voice from your website\u2014your terminology, services, approach. From past content\u2014your tone and style. From your feedback\u2014what you like and don't like. From industry context\u2014what resonates in your field. After a few rounds of feedback, modern tools produces content that sounds authentically like your business. Not generic. Not robotic. Yours.",
+      "narration": "But does content creation sound robotic? Not anymore. the system learns your voice from your website\u2014your terminology, services, approach. From past content\u2014your tone and style. From your feedback\u2014what you like and don't like. From industry context\u2014what resonates in your field. After a few rounds of feedback, AI produces content that sounds authentically like your business. Not generic. Not robotic. Yours.",
       "duration_seconds": 30,
       "audio_file": "slide-05-voice.mp3"
     },
@@ -210,7 +210,7 @@
         "headline": "Ready to Post Consistently Without the Work?",
         "cta_primary": {
           "label": "Activate content creation",
-          "action": "enable_modern tools_content"
+          "action": "enable_ai_content"
         },
         "cta_secondary": {
           "label": "Download: The Business That Posts Every Day",

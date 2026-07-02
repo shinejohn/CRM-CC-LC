@@ -13,6 +13,8 @@ final class TicketStatusHistory extends Model
 {
     use HasUuids, HasFactory;
 
+    protected $table = 'ticket_status_history';
+
     public $timestamps = false;
 
     protected $fillable = [

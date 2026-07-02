@@ -13,7 +13,7 @@ return new class extends Migration
         }
         Schema::create('email_conversations', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedBigInteger('smb_id')->nullable();
+            $table->uuid('smb_id')->nullable();
 
             $table->string('direction', 10);
             $table->string('from_email');

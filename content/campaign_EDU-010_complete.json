@@ -49,7 +49,7 @@
         "headline": "your account team can Write Your Marketing",
         "subhead": "But there's a right way and a wrong way"
       },
-      "narration": "your account team can write your marketing content. Blog posts, social media, emails, descriptions\u2014all of it. But here's what nobody tells you: there's a right way and a wrong way to use modern tools for content. The wrong way sounds generic and robotic. The right way sounds like you, but takes a fraction of the time.",
+      "narration": "your account team can write your marketing content. Blog posts, social media, emails, descriptions\u2014all of it. But here's what nobody tells you: there's a right way and a wrong way to use AI for content. The wrong way sounds generic and robotic. The right way sounds like you, but takes a fraction of the time.",
       "duration_seconds": 20,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -80,7 +80,7 @@
         "example_bad": "We are committed to providing excellent service to our valued customers...",
         "example_good": "We've been fixing cars in Springfield since 1987. My dad started this shop, and we still treat every customer like family."
       },
-      "narration": "Why does most content creation sound the same? No context\u2014the modern tools doesn't know your business, so it writes generic content. No voice guidance\u2014it defaults to corporate-speak instead of your personality. No specifics\u2014vague claims instead of real details. No editing\u2014first drafts published as final. 'We are committed to providing excellent service' could be anyone. 'We've been fixing cars in Springfield since 1987, my dad started this shop'\u2014that's you.",
+      "narration": "Why does most content creation sound the same? No context\u2014the AI doesn't know your business, so it writes generic content. No voice guidance\u2014it defaults to corporate-speak instead of your personality. No specifics\u2014vague claims instead of real details. No editing\u2014first drafts published as final. 'We are committed to providing excellent service' could be anyone. 'We've been fixing cars in Springfield since 1987, my dad started this shop'\u2014that's you.",
       "duration_seconds": 40,
       "audio_file": "slide-02-problem.mp3"
     },
@@ -109,7 +109,7 @@
           }
         ]
       },
-      "narration": "Here's the right way. Train it on your business\u2014feed it your best existing content, your FAQs, your story. Give it your voice\u2014examples of how you actually talk, words you use, words you don't. Provide specifics\u2014real customer names with permission, real numbers, real stories. Review and refine\u2014spend two to five minutes adding your personal touch. modern tools writes the draft, you make it yours.",
+      "narration": "Here's the right way. Train it on your business\u2014feed it your best existing content, your FAQs, your story. Give it your voice\u2014examples of how you actually talk, words you use, words you don't. Provide specifics\u2014real customer names with permission, real numbers, real stories. Review and refine\u2014spend two to five minutes adding your personal touch. AI writes the draft, you make it yours.",
       "duration_seconds": 35,
       "audio_file": "slide-03-method.mp3"
     },
@@ -118,7 +118,7 @@
       "component": "ConceptSlide",
       "title": "The 80/20 Rule",
       "content": {
-        "headline": "modern tools Does 80%, You Do 20%",
+        "headline": "AI Does 80%, You Do 20%",
         "breakdown": {
           "ai_does": [
             "Research and outline",
@@ -139,14 +139,14 @@
           "with_ai": "20-30 minutes per blog post"
         }
       },
-      "narration": "Think of it as eighty-twenty. modern tools does eighty percent: research, outline, first draft, variations, formatting, SEO optimization. You do twenty percent: add personal stories, include specific details only you know, adjust the tone, give final approval. Without modern tools, a blog post takes two to four hours. With modern tools, twenty to thirty minutes. Same quality. Fraction of the time.",
+      "narration": "Think of it as eighty-twenty. AI does eighty percent: research, outline, first draft, variations, formatting, SEO optimization. You do twenty percent: add personal stories, include specific details only you know, adjust the tone, give final approval. Without AI, a blog post takes two to four hours. With AI, twenty to thirty minutes. Same quality. Fraction of the time.",
       "duration_seconds": 30,
       "audio_file": "slide-04-ratio.mp3"
     },
     {
       "slide_num": 5,
       "component": "ConceptSlide",
-      "title": "Content Types modern tools Handles",
+      "title": "Content Types AI Handles",
       "content": {
         "headline": "What your account team can Write for Your Business",
         "content_types": [
@@ -182,7 +182,7 @@
           }
         ]
       },
-      "narration": "What can modern tools write for your business? Social media posts\u2014daily content, five minutes to review. Blog articles\u2014weekly content, fifteen to twenty minutes to review. Email newsletters\u2014weekly or monthly, ten minutes. Service descriptions\u2014write once, update occasionally. FAQ answers\u2014build a library, five minutes each. Review responses\u2014as needed, two minutes each. Your entire content operation, streamlined.",
+      "narration": "What can AI write for your business? Social media posts\u2014daily content, five minutes to review. Blog articles\u2014weekly content, fifteen to twenty minutes to review. Email newsletters\u2014weekly or monthly, ten minutes. Service descriptions\u2014write once, update occasionally. FAQ answers\u2014build a library, five minutes each. Review responses\u2014as needed, two minutes each. Your entire content operation, streamlined.",
       "duration_seconds": 35,
       "audio_file": "slide-05-types.mp3"
     },
@@ -197,22 +197,22 @@
           "after": "4 blog posts per month, daily social posts",
           "time_change": "From 8 hours/month to 3 hours/month",
           "results": "Website traffic up 156%, inquiries up 43%",
-          "quote": "The modern tools learned our voice. People comment that they love our personality online\u2014they don't know it's modern tools-assisted."
+          "quote": "The AI learned our voice. People comment that they love our personality online\u2014they don't know it's AI-assisted."
         }
       },
-      "narration": "Real example. Home cleaning service. Before modern tools: one blog post a month, two social posts a week, eight hours of work. After modern tools: four blog posts a month, daily social posts, three hours of work. Results: website traffic up one hundred fifty-six percent, inquiries up forty-three percent. The owner told us: 'The modern tools learned our voice. People comment that they love our personality online\u2014they don't know it's modern tools-assisted.'",
+      "narration": "Real example. Home cleaning service. Before AI: one blog post a month, two social posts a week, eight hours of work. After AI: four blog posts a month, daily social posts, three hours of work. Results: website traffic up one hundred fifty-six percent, inquiries up forty-three percent. The owner told us: 'The AI learned our voice. People comment that they love our personality online\u2014they don't know it's AI-assisted.'",
       "duration_seconds": 35,
       "audio_file": "slide-06-proof.mp3"
     },
     {
       "slide_num": 7,
       "component": "CTASlide",
-      "title": "Start Creating with modern tools",
+      "title": "Start Creating with AI",
       "content": {
         "headline": "Ready to Create More Content in Less Time?",
         "cta_primary": {
           "label": "Set Up content creation",
-          "action": "setup_content_modern tools"
+          "action": "setup_content_ai"
         },
         "cta_secondary": {
           "label": "See Sample Content",

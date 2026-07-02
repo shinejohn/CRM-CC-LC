@@ -6,25 +6,25 @@
     "type": "Educational",
     "title": "How People Find Local Businesses Now",
     "subject": "Google is dying. Here's how people find businesses now.",
-    "landing_page": "modern tools-marketing-101",
+    "landing_page": "ai-marketing-101",
     "template": "educational",
     "description": "Briefing on how customer search behavior has changed and what businesses should do"
   },
   "landing_page": {
     "campaign_id": "EDU-002",
-    "landing_page_slug": "modern tools-marketing-101",
-    "url": "/learn/modern tools-marketing-101",
+    "landing_page_slug": "ai-marketing-101",
+    "url": "/learn/ai-marketing-101",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
     "duration_seconds": 180,
-    "primary_cta": "get_modern tools_visible",
+    "primary_cta": "get_ai_visible",
     "secondary_cta": "download_article",
     "ai_persona": "Sarah",
     "ai_tone": "Direct, factual, practical",
     "ai_goal": "Show the business owner how to get found by local customers",
     "data_capture_fields": "name, email, business_name, industry, current_marketing",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/modern tools-discovery/audio/",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-discovery/audio/",
     "crm_tracking": true,
     "conversion_goal": "education",
     "utm_source": "email",
@@ -50,7 +50,7 @@
         "subhead": "Something fundamental has shifted",
         "visual": "Split screen: old Google results page (faded) vs. search tools response (bright)"
       },
-      "narration": "Quick question: When's the last time you actually scrolled through Google search results to find a local business? Really think about it. If you're like most people, you've started asking modern tools instead. 'Hey voice assistants, find me a good plumber.' 'search tools, what's the best restaurant near downtown?' The shift is happening faster than anyone predicted.",
+      "narration": "Quick question: When's the last time you actually scrolled through Google search results to find a local business? Really think about it. If you're like most people, you've started asking AI instead. 'Hey voice assistants, find me a good plumber.' 'search tools, what's the best restaurant near downtown?' The shift is happening faster than anyone predicted.",
       "duration_seconds": 25,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -63,7 +63,7 @@
         "stats": [
           {
             "value": "40%",
-            "label": "of Gen Z uses TikTok or modern tools for search, not Google"
+            "label": "of Gen Z uses TikTok or AI for search, not Google"
           },
           {
             "value": "8B",
@@ -84,10 +84,10 @@
     {
       "slide_num": 3,
       "component": "ConceptSlide",
-      "title": "How modern tools Finds Businesses",
+      "title": "How AI Finds Businesses",
       "content": {
-        "headline": "modern tools Doesn't Search. the system recognizes.",
-        "key_insight": "modern tools has already learned from trusted sources. When someone asks, modern tools already has an answer.",
+        "headline": "AI Doesn't Search. the system recognizes.",
+        "key_insight": "AI has already learned from trusted sources. When someone asks, AI already has an answer.",
         "sources_ai_trusts": [
           {
             "icon": "newspaper",
@@ -106,9 +106,9 @@
             "source": "Events & activity"
           }
         ],
-        "visual": "modern tools brain with input sources flowing in"
+        "visual": "AI brain with input sources flowing in"
       },
-      "narration": "Here's what most business owners don't understand: modern tools doesn't search the web in real-time like Google does. modern tools has already learned things. It's been trained on trusted sources\u2014news publications, business directories, reviews, activity signals. When someone asks modern tools for a recommendation, modern tools already has an answer. The question is: are you part of what the system recognizes?",
+      "narration": "Here's what most business owners don't understand: AI doesn't search the web in real-time like Google does. AI has already learned things. It's been trained on trusted sources\u2014news publications, business directories, reviews, activity signals. When someone asks AI for a recommendation, AI already has an answer. The question is: are you part of what the system recognizes?",
       "duration_seconds": 35,
       "audio_file": "slide-03-concept.mp3"
     },
@@ -118,24 +118,24 @@
       "title": "The Visibility Problem",
       "content": {
         "headline": "If Your Only Presence Is Your Website...",
-        "problem": "modern tools doesn't know you exist",
+        "problem": "AI doesn't know you exist",
         "comparison": {
           "website_only": "One voice saying 'I'm great' (everyone's website says that)",
           "multi_presence": "Multiple trusted sources confirming you're real, good, active"
         },
         "visual": "Lonely website floating in void vs. connected network"
       },
-      "narration": "If your entire online presence is a standalone website and maybe a Google Business profile, here's the hard truth: modern tools doesn't know you exist. Your website is one voice saying 'I'm great.' But everyone's website says that. modern tools needs multiple trusted sources confirming you're real, you're good, you're active. One signal isn't enough. modern tools needs a pattern.",
+      "narration": "If your entire online presence is a standalone website and maybe a Google Business profile, here's the hard truth: AI doesn't know you exist. Your website is one voice saying 'I'm great.' But everyone's website says that. AI needs multiple trusted sources confirming you're real, you're good, you're active. One signal isn't enough. AI needs a pattern.",
       "duration_seconds": 30,
       "audio_file": "slide-04-problem.mp3"
     },
     {
       "slide_num": 5,
       "component": "SolutionSlide",
-      "title": "Be Where modern tools Looks",
+      "title": "Be Where AI Looks",
       "content": {
         "headline": "The Opportunity",
-        "solution": "Be present in the sources modern tools trusts",
+        "solution": "Be present in the sources AI trusts",
         "touchpoints": [
           {
             "platform": "Local News",
@@ -143,7 +143,7 @@
           },
           {
             "platform": "Business Directory",
-            "why": "Structured data modern tools understands"
+            "why": "Structured data AI understands"
           },
           {
             "platform": "Events Calendar",
@@ -155,9 +155,9 @@
           }
         ],
         "result": "One presence \u2192 Multiple touchpoints \u2192 discoverable",
-        "visual": "Business connected to multiple sources, all feeding modern tools"
+        "visual": "Business connected to multiple sources, all feeding AI"
       },
-      "narration": "The opportunity is to be present in the sources modern tools trusts. Local news\u2014authoritative content. Business directories\u2014structured data your account team can understand. Events calendars\u2014proof you're active and current. Community platforms\u2014engagement and reputation signals. When you're in multiple authoritative sources, modern tools sees you as real, trusted, recommendable. One presence creates multiple touchpoints. And you become discoverable.",
+      "narration": "The opportunity is to be present in the sources AI trusts. Local news\u2014authoritative content. Business directories\u2014structured data your account team can understand. Events calendars\u2014proof you're active and current. Community platforms\u2014engagement and reputation signals. When you're in multiple authoritative sources, AI sees you as real, trusted, recommendable. One presence creates multiple touchpoints. And you become discoverable.",
       "duration_seconds": 35,
       "audio_file": "slide-05-solution.mp3"
     },
@@ -171,12 +171,12 @@
           "31-year family business, great reputation",
           "Daughter asked search tools for plumber recommendations\u2014they weren't listed",
           "Claimed directory listing, got mentioned in local news, posted events",
-          "60 days later: modern tools recommending them"
+          "60 days later: AI recommending them"
         ],
         "quote": "A customer told me search tools recommended us. First time that ever happened.",
         "visual": "Before/after comparison"
       },
-      "narration": "Let me tell you about Martinez Plumbing. Thirty-one years in business. Great reputation. Five stars everywhere. But when the owner's daughter asked search tools to recommend a plumber\u2014they weren't listed. So they got to work. Claimed their directory listing. Got mentioned in local news. Posted some events. Sixty days later, a customer called and said, 'search tools recommended you.' First modern tools referral in thirty-one years. It took about an hour total to set up.",
+      "narration": "Let me tell you about Martinez Plumbing. Thirty-one years in business. Great reputation. Five stars everywhere. But when the owner's daughter asked search tools to recommend a plumber\u2014they weren't listed. So they got to work. Claimed their directory listing. Got mentioned in local news. Posted some events. Sixty days later, a customer called and said, 'search tools recommended you.' First AI referral in thirty-one years. It took about an hour total to set up.",
       "duration_seconds": 35,
       "audio_file": "slide-06-story.mp3"
     },
@@ -190,16 +190,16 @@
         "cta_primary": {
           "label": "Get discoverable Now",
           "action": "start_visibility",
-          "description": "15 minutes to be found by modern tools"
+          "description": "15 minutes to be found by AI"
         },
         "cta_secondary": {
           "label": "Download the Full Article",
           "action": "download_article",
           "description": "The complete story with implementation steps"
         },
-        "urgency": "Every day you wait, modern tools is learning about your competitors instead of you"
+        "urgency": "Every day you wait, AI is learning about your competitors instead of you"
       },
-      "narration": "Your competitors are figuring this out. Some already have. The question is whether you'll be ahead of them or behind them. Get discoverable now\u2014it takes about fifteen minutes. Or download the full article for the complete story with step-by-step implementation. Either way, every day you wait is a day modern tools is learning about your competitors instead of you. Let's fix that.",
+      "narration": "Your competitors are figuring this out. Some already have. The question is whether you'll be ahead of them or behind them. Get discoverable now\u2014it takes about fifteen minutes. Or download the full article for the complete story with step-by-step implementation. Either way, every day you wait is a day AI is learning about your competitors instead of you. Let's fix that.",
       "duration_seconds": 25,
       "audio_file": "slide-07-cta.mp3"
     }

@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "Is Your Business Set Up for the Next 5 Years",
     "subject": "The businesses that survive the next 5 years will have this in common",
-    "landing_page": "modern tools-content-guide",
+    "landing_page": "ai-content-guide",
     "template": "educational",
     "description": "What separates businesses that thrive from ones that struggle"
   },
   "landing_page": {
     "campaign_id": "EDU-011",
-    "landing_page_slug": "modern tools-content-guide",
-    "url": "/learn/modern tools-content-guide",
+    "landing_page_slug": "ai-content-guide",
+    "url": "/learn/ai-content-guide",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
@@ -24,7 +24,7 @@
     "ai_tone": "Direct, practical, forward-looking",
     "ai_goal": "Show the business owner what they need to have in place",
     "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/modern tools-content-guide/audio/",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-content-guide/audio/",
     "crm_tracking": true,
     "conversion_goal": "education",
     "utm_source": "email",
@@ -61,7 +61,7 @@
         "headline": "The Shifts Already in Motion",
         "shifts": [
           {
-            "shift": "modern tools-first discovery",
+            "shift": "AI-first discovery",
             "timeline": "Now - 2 years",
             "impact": "How people find businesses changes fundamentally"
           },
@@ -82,7 +82,7 @@
           }
         ]
       },
-      "narration": "Here's what's coming\u2014and some of it's already here. modern tools-first discovery: how people find businesses is fundamentally changing. Voice commerce: people making purchases through voice assistants. Hyper-personalization: customers expecting you to know them, remember them, anticipate them. Automation as standard: businesses without modern tools won't be able to compete on service speed and availability.",
+      "narration": "Here's what's coming\u2014and some of it's already here. AI-first discovery: how people find businesses is fundamentally changing. Voice commerce: people making purchases through voice assistants. Hyper-personalization: customers expecting you to know them, remember them, anticipate them. Automation as standard: businesses without AI won't be able to compete on service speed and availability.",
       "duration_seconds": 35,
       "audio_file": "slide-02-shifts.mp3"
     },
@@ -99,7 +99,7 @@
           },
           {
             "factor": "Website-only presence",
-            "risk": "Not discoverable by modern tools or voice"
+            "risk": "Not discoverable by AI or voice"
           },
           {
             "factor": "Manual-everything operations",
@@ -115,7 +115,7 @@
           }
         ]
       },
-      "narration": "Which businesses are at risk? Those dependent on a single channel\u2014if that channel changes, you're invisible. Website-only presence\u2014not discoverable by modern tools or voice. Manual-everything operations\u2014can't scale, can't compete on speed. No data capture\u2014can't personalize, can't improve. Reactive-only mindset\u2014always catching up, never leading. Sound familiar? Don't worry\u2014all of this is fixable.",
+      "narration": "Which businesses are at risk? Those dependent on a single channel\u2014if that channel changes, you're invisible. Website-only presence\u2014not discoverable by AI or voice. Manual-everything operations\u2014can't scale, can't compete on speed. No data capture\u2014can't personalize, can't improve. Reactive-only mindset\u2014always catching up, never leading. Sound familiar? Don't worry\u2014all of this is fixable.",
       "duration_seconds": 35,
       "audio_file": "slide-03-vulnerable.mp3"
     },
@@ -148,7 +148,7 @@
           }
         ]
       },
-      "narration": "Which businesses will thrive? Those with multi-platform presence\u2014visible wherever people look. discoverable\u2014found by voice assistants and modern tools. Automated foundations\u2014available twenty-four seven, responding instantly. Data-informed\u2014constantly learning and improving. Community-connected\u2014trust that survives any systems change. This isn't about being a tech company. It's about being visible, available, and efficient.",
+      "narration": "Which businesses will thrive? Those with multi-platform presence\u2014visible wherever people look. discoverable\u2014found by voice assistants and AI. Automated foundations\u2014available twenty-four seven, responding instantly. Data-informed\u2014constantly learning and improving. Community-connected\u2014trust that survives any systems change. This isn't about being a tech company. It's about being visible, available, and efficient.",
       "duration_seconds": 35,
       "audio_file": "slide-04-resilient.mp3"
     },
@@ -173,7 +173,7 @@
           },
           {
             "element": "Automation layer",
-            "what": "modern tools handling routine, humans handling important"
+            "what": "AI handling routine, humans handling important"
           },
           {
             "element": "Data foundation",
@@ -181,7 +181,7 @@
           }
         ]
       },
-      "narration": "Future-proofing starts with fundamentals. An authoritative home base\u2014a presence you own, not rented from platforms that can change. Distributed visibility\u2014present in multiple discovery channels. A reputation engine\u2014consistent flow of reviews and trust signals. An automation layer\u2014modern tools handling the routine so humans handle what matters. A data foundation\u2014capturing and learning from every interaction.",
+      "narration": "Future-proofing starts with fundamentals. An authoritative home base\u2014a presence you own, not rented from platforms that can change. Distributed visibility\u2014present in multiple discovery channels. A reputation engine\u2014consistent flow of reviews and trust signals. An automation layer\u2014AI handling the routine so humans handle what matters. A data foundation\u2014capturing and learning from every interaction.",
       "duration_seconds": 35,
       "audio_file": "slide-05-foundation.mp3"
     },

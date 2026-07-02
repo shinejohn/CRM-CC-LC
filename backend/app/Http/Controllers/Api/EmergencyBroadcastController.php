@@ -91,7 +91,7 @@ final class EmergencyBroadcastController extends Controller
     /**
      * Get emergency broadcast
      */
-    public function show(int $id): JsonResponse
+    public function show(string $id): JsonResponse
     {
         $broadcast = EmergencyBroadcast::with(['authorizer', 'auditLogs.user'])
             ->findOrFail($id);
@@ -104,7 +104,7 @@ final class EmergencyBroadcastController extends Controller
     /**
      * Send emergency broadcast
      */
-    public function send(int $id): JsonResponse
+    public function send(string $id): JsonResponse
     {
         try {
             $result = $this->emergencyService->send($id);
@@ -123,7 +123,7 @@ final class EmergencyBroadcastController extends Controller
     /**
      * Cancel emergency broadcast
      */
-    public function cancel(Request $request, int $id): JsonResponse
+    public function cancel(Request $request, string $id): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'reason' => 'required|string|max:500',
@@ -149,7 +149,7 @@ final class EmergencyBroadcastController extends Controller
     /**
      * Send test broadcast
      */
-    public function sendTest(Request $request, int $id): JsonResponse
+    public function sendTest(Request $request, string $id): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'test_recipients' => 'required|array|max:5',
@@ -177,7 +177,7 @@ final class EmergencyBroadcastController extends Controller
     /**
      * Get delivery status
      */
-    public function status(int $id): JsonResponse
+    public function status(string $id): JsonResponse
     {
         $status = $this->emergencyService->getDeliveryStatus($id);
 
@@ -199,7 +199,7 @@ final class EmergencyBroadcastController extends Controller
     /**
      * Get audit log
      */
-    public function auditLog(int $id): JsonResponse
+    public function auditLog(string $id): JsonResponse
     {
         $broadcast = EmergencyBroadcast::findOrFail($id);
         $auditLogs = $broadcast->auditLogs()

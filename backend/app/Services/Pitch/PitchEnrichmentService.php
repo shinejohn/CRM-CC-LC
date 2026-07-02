@@ -9,7 +9,6 @@ use App\Models\ConversationMessage;
 use App\Models\Customer;
 use App\Models\PitchSession;
 use App\Models\SMB;
-use Illuminate\Support\Str;
 
 final class PitchEnrichmentService
 {
@@ -39,7 +38,6 @@ final class PitchEnrichmentService
             : new SMB;
 
         if (! $smb->exists) {
-            $smb->uuid = (string) Str::uuid();
             $smb->community_id = $session->community_id;
             $smb->business_name = $payload['business_name'] ?? 'Unknown business';
             if (! empty($payload['category'])) {

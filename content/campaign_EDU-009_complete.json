@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "Getting Found in Your Community",
     "subject": "Local SEO isn't dead\u2014it evolved. Here's what works now.",
-    "landing_page": "voice-modern tools-guide",
+    "landing_page": "voice-ai-guide",
     "template": "educational",
     "description": "What determines local visibility and how to maximize it"
   },
   "landing_page": {
     "campaign_id": "EDU-009",
-    "landing_page_slug": "voice-modern tools-guide",
-    "url": "/learn/voice-modern tools-guide",
+    "landing_page_slug": "voice-ai-guide",
+    "url": "/learn/voice-ai-guide",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
@@ -24,7 +24,7 @@
     "ai_tone": "Practical, factual, actionable",
     "ai_goal": "Show what drives local visibility and how to improve it",
     "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/voice-modern tools-guide/audio/",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/voice-ai-guide/audio/",
     "crm_tracking": true,
     "conversion_goal": "education",
     "utm_source": "email",
@@ -147,33 +147,33 @@
     {
       "slide_num": 5,
       "component": "ConceptSlide",
-      "title": "The modern tools Connection",
+      "title": "The AI Connection",
       "content": {
         "headline": "Local SEO + digital discovery = Maximum Visibility",
         "connection": "The same signals that help Google also help search tools",
         "overlap": [
           {
             "signal": "Multi-platform presence",
-            "helps": "Both Google and modern tools"
+            "helps": "Both Google and AI"
           },
           {
             "signal": "Reviews and reputation",
-            "helps": "Both Google and modern tools"
+            "helps": "Both Google and AI"
           },
           {
             "signal": "Authoritative mentions",
-            "helps": "Both Google and modern tools"
+            "helps": "Both Google and AI"
           },
           {
             "signal": "Fresh activity",
-            "helps": "Both Google and modern tools"
+            "helps": "Both Google and AI"
           }
         ],
         "insight": "One strategy, two discovery channels"
       },
-      "narration": "Here's the connection most people miss: local SEO and digital discovery aren't separate strategies. They're the same strategy. Multi-platform presence helps both Google and modern tools. Reviews and reputation matter to both. Authoritative mentions matter to both. Fresh activity matters to both. One strategy, two discovery channels. Get your presence right, and you're visible everywhere.",
+      "narration": "Here's the connection most people miss: local SEO and digital discovery aren't separate strategies. They're the same strategy. Multi-platform presence helps both Google and AI. Reviews and reputation matter to both. Authoritative mentions matter to both. Fresh activity matters to both. One strategy, two discovery channels. Get your presence right, and you're visible everywhere.",
       "duration_seconds": 30,
-      "audio_file": "slide-05-modern tools.mp3"
+      "audio_file": "slide-05-ai.mp3"
     },
     {
       "slide_num": 6,

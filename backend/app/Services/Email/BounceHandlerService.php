@@ -13,7 +13,6 @@ final class BounceHandlerService
 
     public function __construct(SuppressionService $suppressor)
     {
-        $this->suppressor = $offset; // wait typo, let's fix it later. Ah I am writing it now.
         $this->suppressor = $suppressor;
     }
 

@@ -19,7 +19,7 @@ return new class extends Migration
             
             // Scope
             $table->string('scope', 50); // all, community, newsletter, alerts
-            $table->unsignedBigInteger('scope_id')->nullable(); // community_id if scope is community
+            $table->uuid('scope_id')->nullable(); // community_id if scope is community
             
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('used_at')->nullable();

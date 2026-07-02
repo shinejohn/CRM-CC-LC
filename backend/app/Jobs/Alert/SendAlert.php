@@ -16,7 +16,7 @@ final class SendAlert implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public function __construct(
-        public int $alertId
+        public string $alertId
     ) {
         $this->onQueue('alerts');
     }
