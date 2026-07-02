@@ -37,8 +37,6 @@ final class ManifestDestinyTimelineSeeder extends Seeder
             ]
         );
 
-        CampaignTimelineAction::where('campaign_timeline_id', $timeline->id)->delete();
-
         $actions = [
             // Week 1: Claim + Event
             ['day_number' => 1, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'welcome_community_launch', 'campaign_id' => 'HOOK-001', 'conditions' => null, 'parameters' => ['subject' => 'Your business is already in our directory - claim it now', 'landing_page' => 'claim-your-listing']],
@@ -119,27 +117,25 @@ final class ManifestDestinyTimelineSeeder extends Seeder
             ]
         );
 
-        CampaignTimelineAction::where('campaign_timeline_id', $timeline->id)->delete();
-
         $actions = [
-            ['day_number' => 2, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_the_new_day', 'campaign_id' => 'EDU-001', 'conditions' => null, 'parameters' => ['subject' => 'Something is happening in local marketing', 'landing_page' => 'the-new-day']],
-            ['day_number' => 6, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_ai_discovery', 'campaign_id' => 'EDU-002', 'conditions' => null, 'parameters' => ['subject' => 'Google is dying. Here\'s how people find businesses now.', 'landing_page' => 'ai-discovery']],
+            ['day_number' => 2, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_the_new_day', 'campaign_id' => 'EDU-001', 'conditions' => null, 'parameters' => ['subject' => 'Something is happening in local marketing', 'landing_page' => 'seo-reality-check']],
+            ['day_number' => 6, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_ai_discovery', 'campaign_id' => 'EDU-002', 'conditions' => null, 'parameters' => ['subject' => 'Google is dying. Here\'s how people find businesses now.', 'landing_page' => 'ai-marketing-101']],
             ['day_number' => 10, 'channel' => 'system', 'action_type' => 'check_engagement', 'template_type' => null, 'campaign_id' => null, 'conditions' => null, 'parameters' => ['threshold' => 15]],
-            ['day_number' => 12, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_publishing_network', 'campaign_id' => 'EDU-003', 'conditions' => null, 'parameters' => ['subject' => 'One listing. Found everywhere. Here\'s how.', 'landing_page' => 'publishing-network']],
-            ['day_number' => 16, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_community_marketing', 'campaign_id' => 'EDU-004', 'conditions' => null, 'parameters' => ['subject' => 'Why \'community marketing\' beats \'digital marketing\'', 'landing_page' => 'community-marketing']],
-            ['day_number' => 20, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_reputation_ai', 'campaign_id' => 'EDU-005', 'conditions' => null, 'parameters' => ['subject' => 'Your reputation is now your algorithm', 'landing_page' => 'reputation-ai-age']],
-            ['day_number' => 24, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_ai_employee', 'campaign_id' => 'EDU-006', 'conditions' => null, 'parameters' => ['subject' => 'The employee you couldn\'t afford just became free', 'landing_page' => 'ai-employee']],
-            ['day_number' => 28, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_ai_content', 'campaign_id' => 'EDU-007', 'conditions' => null, 'parameters' => ['subject' => 'AI writes. You approve. Content happens.', 'landing_page' => 'ai-content']],
+            ['day_number' => 12, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_publishing_network', 'campaign_id' => 'EDU-003', 'conditions' => null, 'parameters' => ['subject' => 'One listing. Found everywhere. Here\'s how.', 'landing_page' => 'ai-marketing-assistant']],
+            ['day_number' => 16, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_community_marketing', 'campaign_id' => 'EDU-004', 'conditions' => null, 'parameters' => ['subject' => 'Why \'community marketing\' beats \'digital marketing\'', 'landing_page' => 'ai-operations-guide']],
+            ['day_number' => 20, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_reputation_ai', 'campaign_id' => 'EDU-005', 'conditions' => null, 'parameters' => ['subject' => 'Your reputation is now your algorithm', 'landing_page' => 'ai-search-visibility']],
+            ['day_number' => 24, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_ai_employee', 'campaign_id' => 'EDU-006', 'conditions' => null, 'parameters' => ['subject' => 'The employee you couldn\'t afford just became free', 'landing_page' => 'community-marketing']],
+            ['day_number' => 28, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_ai_content', 'campaign_id' => 'EDU-007', 'conditions' => null, 'parameters' => ['subject' => 'AI writes. You approve. Content happens.', 'landing_page' => 'reputation-ai-age']],
             ['day_number' => 30, 'channel' => 'system', 'action_type' => 'check_engagement', 'template_type' => null, 'campaign_id' => null, 'conditions' => null, 'parameters' => ['threshold' => 25]],
-            ['day_number' => 32, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_voice_ai', 'campaign_id' => 'EDU-008', 'conditions' => null, 'parameters' => ['subject' => 'Your phone can answer itself now', 'landing_page' => 'voice-ai']],
-            ['day_number' => 36, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_local_seo', 'campaign_id' => 'EDU-009', 'conditions' => null, 'parameters' => ['subject' => 'Local SEO isn\'t dead—it evolved', 'landing_page' => 'local-seo-guide']],
-            ['day_number' => 40, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_ai_content_guide', 'campaign_id' => 'EDU-010', 'conditions' => null, 'parameters' => ['subject' => 'AI can write your marketing. Here\'s how to make it actually good.', 'landing_page' => 'ai-content-guide']],
-            ['day_number' => 44, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_future_proof', 'campaign_id' => 'EDU-011', 'conditions' => null, 'parameters' => ['subject' => 'The businesses that survive the next 5 years will have this in common', 'landing_page' => 'future-proof-guide']],
-            ['day_number' => 48, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_data_privacy', 'campaign_id' => 'EDU-012', 'conditions' => null, 'parameters' => ['subject' => 'Your customers care about privacy', 'landing_page' => 'data-privacy-guide']],
-            ['day_number' => 52, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_competitive_intel', 'campaign_id' => 'EDU-013', 'conditions' => null, 'parameters' => ['subject' => 'What your competitors know about you', 'landing_page' => 'competitive-intelligence']],
-            ['day_number' => 55, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_ai_customer_service', 'campaign_id' => 'EDU-014', 'conditions' => null, 'parameters' => ['subject' => 'Your customers expect instant responses', 'landing_page' => 'ai-customer-service']],
+            ['day_number' => 32, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_voice_ai', 'campaign_id' => 'EDU-008', 'conditions' => null, 'parameters' => ['subject' => 'Your phone can answer itself now', 'landing_page' => 'ai-customer-service']],
+            ['day_number' => 36, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_local_seo', 'campaign_id' => 'EDU-009', 'conditions' => null, 'parameters' => ['subject' => 'Local SEO isn\'t dead—it evolved', 'landing_page' => 'voice-ai-guide']],
+            ['day_number' => 40, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_ai_content_guide', 'campaign_id' => 'EDU-010', 'conditions' => null, 'parameters' => ['subject' => 'AI can write your marketing. Here\'s how to make it actually good.', 'landing_page' => 'local-seo-guide']],
+            ['day_number' => 44, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_future_proof', 'campaign_id' => 'EDU-011', 'conditions' => null, 'parameters' => ['subject' => 'The businesses that survive the next 5 years will have this in common', 'landing_page' => 'ai-content-guide']],
+            ['day_number' => 48, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_data_privacy', 'campaign_id' => 'EDU-012', 'conditions' => null, 'parameters' => ['subject' => 'Your customers care about privacy', 'landing_page' => 'future-proof-guide']],
+            ['day_number' => 52, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_competitive_intel', 'campaign_id' => 'EDU-013', 'conditions' => null, 'parameters' => ['subject' => 'What your competitors know about you', 'landing_page' => 'data-privacy-guide']],
+            ['day_number' => 55, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_ai_customer_service', 'campaign_id' => 'EDU-014', 'conditions' => null, 'parameters' => ['subject' => 'Your customers expect instant responses', 'landing_page' => 'competitive-intelligence']],
             ['day_number' => 58, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'edu_ai_employees', 'campaign_id' => 'EDU-015', 'conditions' => null, 'parameters' => ['subject' => 'Meet your new AI employees', 'landing_page' => 'ai-employees-explained']],
-            ['day_number' => 60, 'channel' => 'system', 'action_type' => 'update_stage', 'template_type' => null, 'campaign_id' => null, 'conditions' => null, 'parameters' => ['new_stage' => 'active']],
+            ['day_number' => 60, 'channel' => 'system', 'action_type' => 'update_stage', 'template_type' => null, 'campaign_id' => null, 'conditions' => null, 'parameters' => ['new_stage' => 'sales']],
         ];
 
         $this->createActions($timeline->id, $actions);
@@ -162,8 +158,6 @@ final class ManifestDestinyTimelineSeeder extends Seeder
                 'is_active' => true,
             ]
         );
-
-        CampaignTimelineAction::where('campaign_timeline_id', $timeline->id)->delete();
 
         $actions = [
             ['day_number' => 1, 'channel' => 'email', 'action_type' => 'send_email', 'template_type' => 'howto_cc_basics', 'campaign_id' => 'HOWTO-001', 'conditions' => null, 'parameters' => ['subject' => 'Your Command Center is ready', 'landing_page' => 'command-center-basics']],
@@ -205,23 +199,38 @@ final class ManifestDestinyTimelineSeeder extends Seeder
 
     /**
      * Persist timeline action rows with sensible defaults.
+     *
+     * IDEMPOTENCY: actions are matched on a STABLE natural key
+     * (campaign_timeline_id + day_number + channel + action_type) via
+     * updateOrCreate, NOT delete-and-recreate. This preserves each action's
+     * HasUuids primary key across re-runs, so the ~385K enrolled customers'
+     * `completed_actions` arrays (which store action UUIDs) stay valid and a
+     * re-seed can never orphan them into a mass re-send. Only the mutable
+     * payload (templates, parameters, priority, etc.) is refreshed.
+     *
+     * Each timeline uses a unique (day_number, channel, action_type) per step,
+     * so this natural key uniquely identifies every row.
      */
     private function createActions(string $timelineId, array $actions): void
     {
-        foreach ($actions as $idx => $row) {
-            CampaignTimelineAction::create([
-                'campaign_timeline_id' => $timelineId,
-                'day_number' => $row['day_number'],
-                'channel' => $row['channel'],
-                'action_type' => $row['action_type'],
-                'template_type' => $row['template_type'] ?? null,
-                'campaign_id' => $row['campaign_id'] ?? null,
-                'conditions' => $row['conditions'] ?? null,
-                'parameters' => $row['parameters'] ?? [],
-                'delay_hours' => $row['delay_hours'] ?? 0,
-                'priority' => $row['priority'] ?? 0,
-                'is_active' => true,
-            ]);
+        foreach ($actions as $row) {
+            CampaignTimelineAction::updateOrCreate(
+                [
+                    'campaign_timeline_id' => $timelineId,
+                    'day_number' => $row['day_number'],
+                    'channel' => $row['channel'],
+                    'action_type' => $row['action_type'],
+                ],
+                [
+                    'template_type' => $row['template_type'] ?? null,
+                    'campaign_id' => $row['campaign_id'] ?? null,
+                    'conditions' => $row['conditions'] ?? null,
+                    'parameters' => $row['parameters'] ?? [],
+                    'delay_hours' => $row['delay_hours'] ?? 0,
+                    'priority' => $row['priority'] ?? 0,
+                    'is_active' => true,
+                ]
+            );
         }
     }
 }

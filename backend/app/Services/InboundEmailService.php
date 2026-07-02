@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Events\InboundEmailReceived;
+use App\Jobs\ProcessInboundEmailJob;
 use App\Models\Conversation;
 use App\Models\Customer;
 use App\Models\EmailSuppression;
@@ -18,26 +19,65 @@ final class InboundEmailService
     ) {}
 
     /**
-     * Detect opt-out keywords in email body and subject.
+     * Detect an explicit opt-out request in an inbound reply.
      *
-     * Uses word boundary matching to avoid false positives
-     * (e.g. "unstoppable" should not match "stop").
+     * IMPORTANT: only the recipient's OWN new text is scanned. The quoted original
+     * message is stripped first, because every outbound email carries an injected
+     * "Unsubscribe" footer + List-Unsubscribe copy — scanning the quote would flag
+     * every single reply as an opt-out. Patterns require explicit intent; a bare
+     * "stop" embedded in prose does NOT trigger (only phrases like "stop emailing").
      */
     public function detectOptOut(string $body, string $subject): bool
     {
-        $keywords = [
-            'stop',
-            'unsubscribe',
-            'remove me',
-            'opt out',
-            'opt-out',
-            'do not contact',
-            'cancel subscription',
+        $scannable = $this->stripQuotedReply($body);
+
+        // Explicit opt-out intent only. No bare "stop".
+        $patterns = [
+            '/\bunsubscribe\b/i',
+            '/\bremove me\b/i',
+            '/\btake me off\b/i',
+            '/\bopt[\s-]?out\b/i',
+            '/\bdo(?:\s+not|n\'?t)\s+(?:contact|email|message|mail)\b/i',
+            '/\bstop\s+(?:emailing|e-mailing|contacting|messaging|mailing|sending|texting)\b/i',
+            '/\bcancel(?:\s+my)?\s+subscription\b/i',
+            '/\bno\s+more\s+emails?\b/i',
         ];
 
-        $pattern = '/\b('.implode('|', array_map('preg_quote', $keywords)).')\b/i';
+        foreach ($patterns as $pattern) {
+            if (preg_match($pattern, $scannable) || preg_match($pattern, $subject)) {
+                return true;
+            }
+        }
 
-        return (bool) preg_match($pattern, $body) || (bool) preg_match($pattern, $subject);
+        return false;
+    }
+
+    /**
+     * Return only the recipient's newly-written text, cutting the reply at the first
+     * quoted/original-message delimiter so the injected unsubscribe footer (and any
+     * older opt-out language) in the quoted thread is not scanned.
+     */
+    public function stripQuotedReply(string $body): string
+    {
+        $delimiters = [
+            '/^>.*/m',                              // quoted lines ("> ...")
+            '/^\s*On\b.{0,200}\bwrote:/mi',         // Gmail / Apple Mail attribution
+            '/-{2,}\s*Original Message\s*-{2,}/i',  // Outlook
+            '/-{2,}\s*Forwarded message\s*-{2,}/i', // forwarded threads
+            '/^\s*From:\s.+$/mi',                    // Outlook header block start
+            '/^_{5,}\s*$/m',                         // Outlook underscore separator
+            '/^\s*Sent from my \w+/mi',             // mobile signatures preceding quotes
+        ];
+
+        $cut = strlen($body);
+
+        foreach ($delimiters as $delimiter) {
+            if (preg_match($delimiter, $body, $matches, PREG_OFFSET_CAPTURE)) {
+                $cut = min($cut, $matches[0][1]);
+            }
+        }
+
+        return trim(substr($body, 0, $cut));
     }
 
     /**
@@ -58,15 +98,22 @@ final class InboundEmailService
                 'do_not_contact' => true,
             ]);
 
-            EmailSuppression::create([
-                'email_address' => $fromEmail,
-                'reason' => 'unsubscribe',
-                'source' => 'inbound_email',
-            ]);
+            $suppressEmail = ProcessInboundEmailJob::normalizeEmail($fromEmail);
+
+            EmailSuppression::updateOrCreate(
+                [
+                    'email_address' => $suppressEmail,
+                    'email_client_id' => null,
+                ],
+                [
+                    'reason' => 'unsubscribe',
+                    'source' => 'inbound_email',
+                ]
+            );
 
             Log::info('Opt-out detected from inbound email', [
                 'customer_id' => $customer->id,
-                'email' => $fromEmail,
+                'email' => $suppressEmail,
                 'subject' => $subject,
             ]);
 

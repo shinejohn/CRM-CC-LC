@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 
@@ -37,13 +38,20 @@ final class AuthController extends Controller
             'lead_source' => ['nullable', 'string', 'max:255'],
         ]);
 
-        $user = User::create([
+        $user = new User([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'signup_campaign' => $validated['campaign'] ?? null,
             'lead_source' => $validated['lead_source'] ?? null,
         ]);
+
+        // Every self-registered user gets their OWN unique tenant. They therefore
+        // see none of the platform's existing (system-tenant) customers. Never the
+        // system tenant, never null. tenant_id is set directly (it is not in the
+        // model's $fillable) so it cannot be spoofed via the request body.
+        $user->tenant_id = (string) Str::uuid();
+        $user->save();
 
         $token = $user->createToken('spa')->plainTextToken;
 

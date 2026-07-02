@@ -13,6 +13,7 @@ use App\Models\EmailPool;
 use App\Models\OutboundCampaign;
 use App\Services\Email\PostalService;
 use App\Services\EmailService;
+use App\Services\ZeroBounceService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
@@ -39,6 +40,10 @@ class CampaignAbTestTest extends TestCase
                 'owner_name' => "Owner {$i}",
                 'email' => "biz{$i}@example.com",
                 'pipeline_stage' => 'hook',
+                // Pass the mandatory email-health filter applied on start/send.
+                'email_opted_in' => true,
+                'email_suppressed' => false,
+                'do_not_contact' => false,
             ]);
         }
     }
@@ -77,6 +82,8 @@ class CampaignAbTestTest extends TestCase
             'status' => 'draft',
             'subject' => 'Original Subject',
             'message' => 'Original body',
+            // Non-empty segment now required to start a campaign.
+            'recipient_segments' => ['pipeline_stage' => 'hook'],
         ]);
 
         $this->postJson("/api/v1/outbound/campaigns/{$campaign->id}/start", [])
@@ -98,7 +105,7 @@ class CampaignAbTestTest extends TestCase
 
         $this->fakePostalPool();
         (new SendEmailCampaign($recipient, $campaign))
-            ->handle(app(PostalService::class), app(EmailService::class));
+            ->handle(app(PostalService::class), app(EmailService::class), app(ZeroBounceService::class));
 
         // The outbound payload carried the campaign's own subject/body.
         Http::assertSent(function ($request) {
@@ -150,6 +157,8 @@ class CampaignAbTestTest extends TestCase
             'message' => 'Default',
             'ab_test_enabled' => true,
             'ab_winner_metric' => 'open_rate',
+            // Non-empty segment now required to start a campaign.
+            'recipient_segments' => ['pipeline_stage' => 'hook'],
         ]);
 
         $variantA = CampaignVariant::create([
@@ -188,7 +197,7 @@ class CampaignAbTestTest extends TestCase
         $r = $recipients->firstWhere('variant_id', $variantA->id);
         $this->fakePostalPool();
         (new SendEmailCampaign($r, $campaign))
-            ->handle(app(PostalService::class), app(EmailService::class));
+            ->handle(app(PostalService::class), app(EmailService::class), app(ZeroBounceService::class));
 
         Http::assertSent(function ($request) {
             $body = $request->data();
@@ -226,7 +235,7 @@ class CampaignAbTestTest extends TestCase
 
         $this->fakePostalPool();
         (new SendEmailCampaign($recipient, $campaign))
-            ->handle(app(PostalService::class), app(EmailService::class));
+            ->handle(app(PostalService::class), app(EmailService::class), app(ZeroBounceService::class));
 
         $this->assertSame(1, $variant->fresh()->sent_count);
         $this->assertSame(1, $campaign->fresh()->sent_count);

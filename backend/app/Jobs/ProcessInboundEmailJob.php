@@ -44,14 +44,27 @@ final class ProcessInboundEmailJob implements ShouldQueue
                 return;
             }
 
-            // Find customer by email address
-            $customer = Customer::where('email', $toEmail)
-                ->orWhere('primary_email', $toEmail)
+            // Inbound replies must be matched by the SENDER's FROM address — the To
+            // address is Fibonacco's own inbox. Normalize (strip display name, lower,
+            // trim) before matching so "Jane Doe <Jane@Example.com >" lines up with a
+            // stored, lowercased customer email.
+            $normalizedFrom = self::normalizeEmail($fromEmail);
+
+            if ($normalizedFrom === '') {
+                Log::warning('ProcessInboundEmailJob: unparseable from address', [
+                    'from' => $fromEmail,
+                ]);
+
+                return;
+            }
+
+            $customer = Customer::where('email', $normalizedFrom)
+                ->orWhere('primary_email', $normalizedFrom)
                 ->first();
 
             if (! $customer) {
                 Log::warning('ProcessInboundEmailJob: unknown customer', [
-                    'to_email' => $toEmail,
+                    'from_email' => $normalizedFrom,
                 ]);
 
                 return;
@@ -61,7 +74,7 @@ final class ProcessInboundEmailJob implements ShouldQueue
             if ($customer->email_opted_in === false) {
                 Log::info('ProcessInboundEmailJob: customer opted out', [
                     'customer_id' => $customer->id,
-                    'from' => $fromEmail,
+                    'from' => $normalizedFrom,
                 ]);
 
                 return;
@@ -70,7 +83,7 @@ final class ProcessInboundEmailJob implements ShouldQueue
             // Process email through InboundEmailService
             $result = app(InboundEmailService::class)->process(
                 customer: $customer,
-                fromEmail: $fromEmail,
+                fromEmail: $normalizedFrom,
                 subject: $subject,
                 body: $body,
                 messageId: $messageId,
@@ -79,7 +92,7 @@ final class ProcessInboundEmailJob implements ShouldQueue
 
             Log::info('ProcessInboundEmailJob: email processed', [
                 'customer_id' => $customer->id,
-                'from' => $fromEmail,
+                'from' => $normalizedFrom,
                 'subject' => $subject,
                 'intent' => $result['intent']['intent'] ?? 'unknown',
                 'sentiment' => $result['sentiment'] ?? 'unknown',
@@ -94,5 +107,25 @@ final class ProcessInboundEmailJob implements ShouldQueue
 
             throw $e;
         }
+    }
+
+    /**
+     * Normalize an email header value to a bare, lowercased address.
+     * Handles RFC 5322 display-name form: `"Jane Doe" <jane@example.com>`.
+     */
+    public static function normalizeEmail(?string $raw): string
+    {
+        if ($raw === null) {
+            return '';
+        }
+
+        $value = trim($raw);
+
+        // Extract the address inside angle brackets, if present.
+        if (preg_match('/<([^>]+)>/', $value, $matches)) {
+            $value = $matches[1];
+        }
+
+        return strtolower(trim($value));
     }
 }

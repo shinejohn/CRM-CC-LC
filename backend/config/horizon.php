@@ -159,12 +159,35 @@ return [
                 'tries' => 3,
                 'timeout' => 300,
             ],
-            'supervisor-rvm' => [
+            // Campaign orchestration jobs (ProcessCampaignTimelines fan-out,
+            // AdvanceCampaignDays, Manifest Destiny per-customer actions).
+            'supervisor-campaigns' => [
                 'connection' => 'redis',
-                'queue' => ['rvm'],
+                'queue' => ['campaigns'],
+                'balance' => 'auto',
+                'minProcesses' => 3,
+                'maxProcesses' => 15,
+                'tries' => 3,
+                'timeout' => 300,
+            ],
+            // Priority message bus (Communication Module 0B). Queues are listed
+            // p0..p4 so lower-numbered (higher-priority) work is preferred.
+            'supervisor-messages' => [
+                'connection' => 'redis',
+                'queue' => ['messages-p0', 'messages-p1', 'messages-p2', 'messages-p3', 'messages-p4'],
+                'balance' => 'auto',
+                'minProcesses' => 4,
+                'maxProcesses' => 20,
+                'tries' => 3,
+                'timeout' => 120,
+            ],
+            // Telephony / voice: ringless voicemail, SMS, outbound calls, voicemail.
+            'supervisor-telephony' => [
+                'connection' => 'redis',
+                'queue' => ['rvm', 'sms', 'calls', 'voicemail'],
                 'balance' => 'auto',
                 'minProcesses' => 2,
-                'maxProcesses' => 10,
+                'maxProcesses' => 12,
                 'tries' => 3,
                 'timeout' => 120,
             ],
@@ -176,6 +199,16 @@ return [
                 'maxProcesses' => 15,
                 'tries' => 2,
                 'timeout' => 60,
+            ],
+            // Alerts + emergency broadcasts. Emergency listed first for priority.
+            'supervisor-alerts' => [
+                'connection' => 'redis',
+                'queue' => ['emergency', 'alerts'],
+                'balance' => 'auto',
+                'minProcesses' => 2,
+                'maxProcesses' => 10,
+                'tries' => 3,
+                'timeout' => 120,
             ],
             'supervisor-default' => [
                 'connection' => 'redis',
@@ -197,9 +230,27 @@ return [
                 'tries' => 3,
                 'timeout' => 300,
             ],
-            'supervisor-rvm' => [
+            'supervisor-campaigns' => [
                 'connection' => 'redis',
-                'queue' => ['rvm'],
+                'queue' => ['campaigns'],
+                'balance' => 'auto',
+                'minProcesses' => 1,
+                'maxProcesses' => 3,
+                'tries' => 3,
+                'timeout' => 300,
+            ],
+            'supervisor-messages' => [
+                'connection' => 'redis',
+                'queue' => ['messages-p0', 'messages-p1', 'messages-p2', 'messages-p3', 'messages-p4'],
+                'balance' => 'auto',
+                'minProcesses' => 1,
+                'maxProcesses' => 3,
+                'tries' => 3,
+                'timeout' => 120,
+            ],
+            'supervisor-telephony' => [
+                'connection' => 'redis',
+                'queue' => ['rvm', 'sms', 'calls', 'voicemail'],
                 'balance' => 'auto',
                 'minProcesses' => 1,
                 'maxProcesses' => 2,
@@ -214,6 +265,15 @@ return [
                 'maxProcesses' => 2,
                 'tries' => 2,
                 'timeout' => 60,
+            ],
+            'supervisor-alerts' => [
+                'connection' => 'redis',
+                'queue' => ['emergency', 'alerts'],
+                'balance' => 'auto',
+                'minProcesses' => 1,
+                'maxProcesses' => 2,
+                'tries' => 3,
+                'timeout' => 120,
             ],
             'supervisor-default' => [
                 'connection' => 'redis',

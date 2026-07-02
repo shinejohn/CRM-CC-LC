@@ -207,7 +207,9 @@ final class StripeWebhookController extends Controller
                 $order->update([
                     'payment_status' => 'paid',
                     'status' => 'processing',
-                    'stripe_charge_id' => $paymentIntent->charges->data[0]->id ?? null,
+                    // Basil API (stripe-php v19): PaymentIntent no longer embeds a
+                    // `charges` list — the charge id is exposed as `latest_charge`.
+                    'stripe_charge_id' => $paymentIntent->latest_charge ?? null,
                     'paid_at' => now(),
                 ]);
 
@@ -516,12 +518,45 @@ final class StripeWebhookController extends Controller
         $serviceSubscription = ServiceSubscription::where('stripe_subscription_id', $subscription->id)->first();
         if ($serviceSubscription) {
             $status = $subscription->status === 'active' ? 'active' : ($subscription->status === 'past_due' ? 'suspended' : ($subscription->status === 'canceled' ? 'cancelled' : 'active'));
-            $serviceSubscription->update([
+
+            $update = [
                 'status' => $status,
                 'auto_renew' => ! $subscription->cancel_at_period_end,
-                'subscription_expires_at' => \Carbon\Carbon::createFromTimestamp($subscription->current_period_end),
-            ]);
+            ];
+
+            // Basil API (stripe-php v19): `current_period_end` moved off the
+            // subscription and onto each subscription item. Only write an expiry
+            // when we actually have a timestamp — never turn a missing value into
+            // a 1970 date via createFromTimestamp(null).
+            $firstItem = $subscription->items->data[0] ?? null;
+            $periodEnd = ($firstItem->current_period_end ?? null)
+                ?? ($subscription->current_period_end ?? null);
+
+            if ($periodEnd) {
+                $update['subscription_expires_at'] = \Carbon\Carbon::createFromTimestamp($periodEnd);
+            } else {
+                Log::warning('Stripe subscription.updated missing current_period_end — leaving expiry unchanged', [
+                    'subscription_id' => $subscription->id,
+                ]);
+            }
+
+            $serviceSubscription->update($update);
         }
+    }
+
+    /**
+     * Extract the subscription id from an invoice across API versions.
+     *
+     * Basil API (stripe-php v19) moved the subscription reference from the
+     * top-level `invoice.subscription` to
+     * `invoice.parent.subscription_details.subscription`.
+     */
+    private function subscriptionIdFromInvoice(object $invoice): ?string
+    {
+        $parent = $invoice->parent ?? null;
+
+        return $invoice->subscription
+            ?? ($parent?->subscription_details?->subscription ?? null);
     }
 
     /**
@@ -530,7 +565,7 @@ final class StripeWebhookController extends Controller
      */
     private function handleInvoicePaymentSucceeded(object $invoice): void
     {
-        $stripeSubscriptionId = $invoice->subscription ?? null;
+        $stripeSubscriptionId = $this->subscriptionIdFromInvoice($invoice);
 
         if (! $stripeSubscriptionId) {
             return;
@@ -575,7 +610,7 @@ final class StripeWebhookController extends Controller
      */
     private function handleInvoicePaymentFailed(object $invoice): void
     {
-        $stripeSubscriptionId = $invoice->subscription ?? null;
+        $stripeSubscriptionId = $this->subscriptionIdFromInvoice($invoice);
 
         if (! $stripeSubscriptionId) {
             return;

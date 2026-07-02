@@ -71,6 +71,12 @@ final class CommunitySubscriptionService
                 $customer->update(['stripe_customer_id' => $stripeCustomerId]);
             }
 
+            // Attach the collected payment method to the customer and make it
+            // the default so Stripe can actually charge the subscription. Without
+            // this the subscription stays unpayable (default_incomplete) forever.
+            $this->stripeService->attachPaymentMethod($paymentMethodId, $stripeCustomerId);
+            $this->stripeService->setDefaultPaymentMethod($stripeCustomerId, $paymentMethodId);
+
             $stripeSubscription = $this->stripeService->createSubscription(
                 $stripeCustomerId,
                 $stripePriceId,
@@ -82,6 +88,12 @@ final class CommunitySubscriptionService
                 ]
             );
 
+            // Reflect the ACTUAL Stripe subscription status. With
+            // payment_behavior=default_incomplete this is typically 'incomplete'
+            // until the first invoice is paid — we must not report 'active' until
+            // Stripe confirms an active/paid state (the webhook flips it later).
+            $stripeStatus = $stripeSubscription->status ?? 'incomplete';
+
             $now = now();
             $commitmentEnds = $now->copy()->addMonths(12);
             $bonusStarts = $commitmentEnds->copy();
@@ -92,7 +104,7 @@ final class CommunitySubscriptionService
                 'community_id' => $communityId,
                 'product_slug' => $productSlug,
                 'tier' => $tier,
-                'status' => 'active',
+                'status' => $stripeStatus,
                 'monthly_rate' => $rate,
                 'stripe_subscription_id' => $stripeSubscription->id,
                 'stripe_customer_id' => $stripeCustomerId,

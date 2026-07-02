@@ -7,9 +7,11 @@ namespace App\Jobs;
 use App\Enums\PoolType;
 use App\Models\CampaignRecipient;
 use App\Models\EmailPool;
+use App\Models\EmailSuppression;
 use App\Models\OutboundCampaign;
 use App\Services\Email\PostalService;
 use App\Services\EmailService;
+use App\Services\ZeroBounceService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -32,81 +34,175 @@ final class SendEmailCampaign implements ShouldQueue
         $this->onQueue('emails');
     }
 
-    public function handle(PostalService $postalService, EmailService $emailService): void
+    public function handle(PostalService $postalService, EmailService $emailService, ZeroBounceService $zeroBounce): void
     {
-        try {
-            $recipient = $this->recipient->fresh();
-            $campaign = $this->campaign->fresh();
+        $recipient = $this->recipient->fresh();
+        $campaign = $this->campaign->fresh();
 
-            if (! $recipient || ! $campaign) {
-                return;
-            }
-
-            // Skip already sent/failed recipients
-            if (in_array($recipient->status, ['sent', 'delivered', 'opened', 'clicked', 'replied'], true)) {
-                return;
-            }
-
-            // Resolve content. If the recipient was assigned an A/B variant,
-            // its subject/message override the campaign's own. No variant →
-            // unchanged behavior (campaign subject/message).
-            $variant = $recipient->variant_id ? $recipient->variant : null;
-
-            $subject = $variant?->subject ?? $campaign->subject ?? 'No Subject';
-            $html = $variant?->message ?? $campaign->message ?? '';
-
-            $templateId = $variant?->template_id ?? $campaign->template_id;
-
-            if ($templateId) {
-                $template = \App\Models\EmailTemplate::find($templateId);
-                if ($template) {
-                    $variables = array_merge(
-                        $campaign->template_variables ?? [],
-                        [
-                            'customer_name' => $recipient->name ?? 'Customer',
-                            'business_name' => $recipient->customer?->business_name ?? '',
-                            'community_name' => $recipient->customer?->community?->name ?? '',
-                        ]
-                    );
-                    $rendered = $template->render($variables);
-                    $subject = $rendered['subject'];
-                    $html = $rendered['html'];
-                }
-            }
-
-            $sent = $this->sendViaPool($postalService, $recipient->email, $subject, $html, $recipient, $campaign);
-
-            if (! $sent) {
-                // Fallback to legacy EmailService (env-var Postal or SendGrid)
-                $sent = $this->sendViaLegacy($emailService, $recipient->email, $subject, $html, $recipient, $campaign);
-            }
-
-            if ($sent) {
-                $recipient->update(['status' => 'sent', 'sent_at' => now()]);
-                $campaign->increment('sent_count');
-                if ($variant) {
-                    $variant->increment('sent_count');
-                }
-            } else {
-                $recipient->update(['status' => 'failed', 'error_message' => 'All send paths failed']);
-                $campaign->increment('failed_count');
-            }
-        } catch (\Exception $e) {
-            Log::error('SendEmailCampaign job failed', [
-                'recipient_id' => $this->recipient->id,
-                'campaign_id' => $this->campaign->id,
-                'error' => $e->getMessage(),
-            ]);
-
-            $this->recipient->update([
-                'status' => 'failed',
-                'error_message' => $e->getMessage(),
-            ]);
-
-            $this->campaign->increment('failed_count');
-
-            throw $e;
+        if (! $recipient || ! $campaign) {
+            return;
         }
+
+        // (c) IDEMPOTENCY: if this recipient was already sent (or advanced past
+        // sent), never re-send. Protects against a worker dying AFTER the Postal
+        // accept but BEFORE the job acked — the retry lands here and no-ops.
+        if (in_array($recipient->status, ['sent', 'delivered', 'opened', 'clicked', 'replied', 'answered', 'voicemail'], true)) {
+            return;
+        }
+
+        // Pre-flight gate: another agent's CampaignPreFlightJob sets status='held'
+        // when >3% of the list looks risky. Do NOT send while held. Leave the
+        // recipient 'pending'; the un-hold / re-dispatch path re-queues sends.
+        if ($campaign->status === 'held') {
+            Log::info('SendEmailCampaign skipped: campaign held by pre-flight gate', [
+                'recipient_id' => $recipient->id,
+                'campaign_id' => $campaign->id,
+            ]);
+
+            return;
+        }
+
+        // (a) SUPPRESSION: mirror EmailService / Customer::canContactViaEmail +
+        // scopeCanReceiveEmail. Skip (mark 'suppressed', do not count as failure)
+        // rather than mailing a suppressed / opted-out / DNC / invalid address.
+        $suppressionReason = $this->suppressionReason($recipient, $zeroBounce);
+        if ($suppressionReason !== null) {
+            $recipient->update([
+                'status' => 'suppressed',
+                'error_message' => $suppressionReason,
+            ]);
+            Log::info('SendEmailCampaign skipped: recipient suppressed', [
+                'recipient_id' => $recipient->id,
+                'campaign_id' => $campaign->id,
+                'reason' => $suppressionReason,
+            ]);
+
+            return;
+        }
+
+        // Resolve content. If the recipient was assigned an A/B variant,
+        // its subject/message override the campaign's own. No variant →
+        // unchanged behavior (campaign subject/message).
+        $variant = $recipient->variant_id ? $recipient->variant : null;
+
+        $subject = $variant?->subject ?? $campaign->subject ?? 'No Subject';
+        $html = $variant?->message ?? $campaign->message ?? '';
+
+        $templateId = $variant?->template_id ?? $campaign->template_id;
+
+        if ($templateId) {
+            $template = \App\Models\EmailTemplate::find($templateId);
+            if ($template) {
+                $variables = array_merge(
+                    $campaign->template_variables ?? [],
+                    [
+                        'customer_name' => $recipient->name ?? 'Customer',
+                        'business_name' => $recipient->customer?->business_name ?? '',
+                        'community_name' => $recipient->customer?->community?->name ?? '',
+                    ]
+                );
+                $rendered = $template->render($variables);
+                $subject = $rendered['subject'];
+                $html = $rendered['html'];
+            }
+        }
+
+        $sent = $this->sendViaPool($postalService, $recipient->email, $subject, $html, $recipient, $campaign);
+
+        if (! $sent) {
+            // Fallback to legacy EmailService (env-var Postal or SendGrid)
+            $sent = $this->sendViaLegacy($emailService, $recipient->email, $subject, $html, $recipient, $campaign);
+        }
+
+        // (b) Only advance state AFTER the provider actually accepted the message.
+        if ($sent) {
+            $recipient->update(['status' => 'sent', 'sent_at' => now()]);
+            $campaign->increment('sent_count');
+            if ($variant) {
+                $variant->increment('sent_count');
+            }
+
+            return;
+        }
+
+        // Provider rejected / not configured on all paths. Throw so the queue
+        // retries (tries=3). Failure accounting happens once in failed(), NOT
+        // here — otherwise every retry would double-count failed_count.
+        throw new \RuntimeException('SendEmailCampaign: all send paths failed for recipient '.$recipient->id);
+    }
+
+    /**
+     * Final-failure hook: runs once after retries are exhausted (or on a
+     * non-retryable throw). Marks the recipient failed and counts it a single
+     * time. Never overwrites a recipient that already made it to 'sent'.
+     */
+    public function failed(\Throwable $e): void
+    {
+        $recipient = $this->recipient->fresh();
+
+        if (! $recipient) {
+            return;
+        }
+
+        if (in_array($recipient->status, ['sent', 'delivered', 'opened', 'clicked', 'replied', 'answered', 'voicemail', 'suppressed'], true)) {
+            return;
+        }
+
+        Log::error('SendEmailCampaign permanently failed', [
+            'recipient_id' => $recipient->id,
+            'campaign_id' => $this->campaign->id,
+            'error' => $e->getMessage(),
+        ]);
+
+        $recipient->update([
+            'status' => 'failed',
+            'error_message' => $e->getMessage(),
+        ]);
+
+        $this->campaign->increment('failed_count');
+    }
+
+    /**
+     * Determine whether this recipient must be skipped, and why.
+     * Returns a human-readable reason string, or null when clear to send.
+     */
+    private function suppressionReason(CampaignRecipient $recipient, ZeroBounceService $zeroBounce): ?string
+    {
+        $email = $recipient->email;
+
+        if (! is_string($email) || $email === '') {
+            return 'No email address';
+        }
+
+        // Global suppression list (bounces / complaints / manual).
+        if (EmailSuppression::where('email_address', $email)->exists()) {
+            return 'On suppression list';
+        }
+
+        $customer = $recipient->customer;
+
+        if ($customer) {
+            if ($customer->do_not_contact) {
+                return 'Customer flagged do_not_contact';
+            }
+
+            if ($customer->email_suppressed) {
+                return 'Customer email suppressed: '.($customer->email_suppressed_reason ?? 'unknown');
+            }
+
+            if (! $customer->email_opted_in) {
+                return 'Customer not opted in to email';
+            }
+
+            // ZeroBounce status — only block when we have a status and it is
+            // known-unsendable (invalid / spamtrap / abuse / do_not_mail).
+            $zbStatus = $customer->zb_status;
+            if (is_string($zbStatus) && $zbStatus !== '' && ! $zeroBounce->isSendable($zbStatus)) {
+                return 'ZeroBounce status unsendable: '.$zbStatus;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -154,11 +250,39 @@ final class SendEmailCampaign implements ShouldQueue
         $message->setRelation('pool', $pool);
         $message->id = $recipient->id; // Used for X-Fibonacco-Message-ID header for webhook tracking
 
-        $response = $postalService->send($message);
+        try {
+            $response = $postalService->send($message);
+        } catch (\Throwable $e) {
+            // HTTP/transport error talking to Postal. Return false so the legacy
+            // path can be attempted; if that also fails the job retries.
+            Log::warning('SendEmailCampaign: Postal send threw', [
+                'recipient_id' => $recipient->id,
+                'error' => $e->getMessage(),
+            ]);
 
+            return false;
+        }
+
+        // Postal returns {"status":"success","data":{"message_id":...}} on accept
+        // and {"status":"error",...} on rejection. Only treat an explicit success
+        // WITH a message id as sent — never advance state on an ambiguous response.
+        $status = data_get($response, 'status');
         $messageId = data_get($response, 'data.message_id')
             ?? data_get($response, 'messages.0.id')
+            ?? data_get($response, 'data.messages.0.id')
             ?? null;
+
+        $accepted = ($status === 'success' || $status === null) && $messageId !== null;
+
+        if (! $accepted) {
+            Log::warning('SendEmailCampaign: Postal did not accept message', [
+                'recipient_id' => $recipient->id,
+                'status' => $status,
+                'response' => $response,
+            ]);
+
+            return false;
+        }
 
         $recipient->update([
             'external_id' => $messageId,

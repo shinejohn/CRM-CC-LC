@@ -16,10 +16,9 @@ class CustomerApiTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->createAndAuthenticateUser();
-
         // Generate a test tenant ID
         $this->tenantId = (string) Str::uuid();
+        $this->createAndAuthenticateUser($this->tenantId);
 
         // Set tenant ID in config for tests
         config(['app.default_tenant_id' => $this->tenantId]);
@@ -277,12 +276,14 @@ class CustomerApiTest extends TestCase
             'lead_score' => 0,
         ]);
 
-        $response = $this->deleteJson("/api/v1/customers/{$customer->id}", [], $this->getHeaders());
+        // Destructive action now requires explicit confirmation and performs a
+        // soft delete (the row remains with a non-null deleted_at).
+        $response = $this->deleteJson("/api/v1/customers/{$customer->id}", ['confirm' => true], $this->getHeaders());
 
         $response->assertStatus(200)
             ->assertJson(['message' => 'Customer deleted successfully']);
 
-        $this->assertDatabaseMissing('customers', ['id' => $customer->id]);
+        $this->assertSoftDeleted('customers', ['id' => $customer->id]);
     }
 
     /** @test */

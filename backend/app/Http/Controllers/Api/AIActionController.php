@@ -8,6 +8,7 @@ use App\Events\AiTaskCompleted;
 use App\Events\AiTaskFailed;
 use App\Events\AiTaskProgress;
 use App\Events\AiTaskStarted;
+use App\Enums\DealStage;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Deal;
@@ -57,6 +58,12 @@ final class AIActionController extends Controller
         $arguments  = $request->input('arguments', []);
         $taskId     = $request->input('task_id') ?? Str::uuid()->toString();
         $user       = $request->user();
+
+        // Tenant is derived strictly from the authenticated user. A user with no
+        // tenant is denied outright — never fall back to their user id or ''.
+        if (! $user || empty($user->tenant_id)) {
+            return response()->json(['error' => 'Forbidden: no tenant assigned to this account.'], 403);
+        }
 
         // Broadcast: task started
         if ($user) {
@@ -112,7 +119,8 @@ final class AIActionController extends Controller
 
     private function dispatch(string $action, array $args, ?object $user): mixed
     {
-        $tenantId = $user?->tenant_id ?? $user?->id ?? '';
+        // execute() has already guaranteed a non-empty tenant_id on the user.
+        $tenantId = (string) $user->tenant_id;
 
         return match ($action) {
             'lookup_customer'       => $this->lookupCustomer($args, $tenantId),
@@ -234,13 +242,29 @@ final class AIActionController extends Controller
             throw new \InvalidArgumentException('deal_id and stage are required');
         }
 
+        // Validate against the allowed stage set — never trust a raw string.
+        $allowedStages = array_map(static fn (DealStage $s): string => $s->value, DealStage::cases());
+        if (!in_array($newStage, $allowedStages, true)) {
+            throw new \InvalidArgumentException(
+                'Invalid deal stage: ' . $newStage . '. Allowed: ' . implode(', ', $allowedStages)
+            );
+        }
+
         $deal = Deal::where('tenant_id', $tenantId)->findOrFail($dealId);
-        $deal->update(['stage' => $newStage]);
+
+        // Route through DealService so transition guards (loss reason, terminal
+        // handling, activity logging, won→retention) are applied — same path as
+        // the legitimate DealController::transition endpoint.
+        $deal = $this->dealService->transitionStage(
+            $deal,
+            $newStage,
+            $args['loss_reason'] ?? null
+        );
 
         return [
             'updated'   => true,
             'deal_id'   => $dealId,
-            'new_stage' => $newStage,
+            'new_stage' => $deal->stage,
             'deal_name' => $deal->name,
         ];
     }

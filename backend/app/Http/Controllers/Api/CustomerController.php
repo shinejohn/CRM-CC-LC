@@ -16,16 +16,27 @@ use Illuminate\Validation\Rule;
 final class CustomerController extends Controller
 {
     /**
+     * Resolve the active tenant strictly from the authenticated user.
+     *
+     * Tenant identity is NEVER read from a client-supplied header or request
+     * body. A user with no tenant_id is denied (403) — they match nothing.
+     */
+    private function tenantId(Request $request): string
+    {
+        $tenantId = $request->user()?->tenant_id;
+
+        abort_if(empty($tenantId), 403, 'Forbidden: no tenant assigned to this account.');
+
+        return (string) $tenantId;
+    }
+
+    /**
      * List all customers for the tenant
      */
     public function index(Request $request): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
-        
+        $tenantId = $this->tenantId($request);
+
         $query = Customer::where('tenant_id', $tenantId);
         
         // Apply filters
@@ -97,7 +108,7 @@ final class CustomerController extends Controller
      */
     public function show(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $tenantId = $this->tenantId($request);
         
         $customer = Customer::where('tenant_id', $tenantId)
             ->with(['conversations', 'pendingQuestions', 'faqs'])
@@ -111,7 +122,7 @@ final class CustomerController extends Controller
      */
     public function showBySlug(Request $request, string $slug): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $tenantId = $this->tenantId($request);
         
         $customer = Customer::where('tenant_id', $tenantId)
             ->where('slug', $slug)
@@ -126,12 +137,8 @@ final class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request): JsonResponse
     {
-        $tenantId = $request->getTenantId();
-        
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
-        
+        $tenantId = $this->tenantId($request);
+
         $validated = $request->validated();
         $validated['tenant_id'] = $tenantId;
 
@@ -166,7 +173,7 @@ final class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, string $id): JsonResponse
     {
-        $tenantId = $request->getTenantId();
+        $tenantId = $this->tenantId($request);
         
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
 
@@ -189,10 +196,18 @@ final class CustomerController extends Controller
      */
     public function destroy(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        
+        $tenantId = $this->tenantId($request);
+
+        // Destructive action — require explicit confirmation.
+        if (! $request->boolean('confirm')) {
+            return response()->json([
+                'error' => 'Deletion must be explicitly confirmed (pass confirm=true).',
+            ], 422);
+        }
+
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
-        $customer->forceDelete();
+        // Soft delete (Customer uses SoftDeletes) — never a hard forceDelete().
+        $customer->delete();
 
         return response()->json([
             'message' => 'Customer deleted successfully'
@@ -204,7 +219,7 @@ final class CustomerController extends Controller
      */
     public function updateBusinessContext(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $tenantId = $this->tenantId($request);
         
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
         
@@ -235,7 +250,7 @@ final class CustomerController extends Controller
      */
     public function getAiContext(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $tenantId = $this->tenantId($request);
         
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
         
@@ -281,7 +296,7 @@ final class CustomerController extends Controller
      */
     public function engagementHistory(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $tenantId = $this->tenantId($request);
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
 
         // Get engagement timeline
@@ -314,7 +329,7 @@ final class CustomerController extends Controller
      */
     public function scoreHistory(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $tenantId = $this->tenantId($request);
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
 
         // TODO: Query engagement_score_history table if exists
@@ -332,7 +347,7 @@ final class CustomerController extends Controller
      */
     public function timeline(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $tenantId = $this->tenantId($request);
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
 
         $interactions = $customer->interactions()
@@ -395,7 +410,7 @@ final class CustomerController extends Controller
      */
     public function startCampaign(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $tenantId = $this->tenantId($request);
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
 
         $orchestrator = app(\App\Services\CampaignOrchestratorService::class);
@@ -425,7 +440,7 @@ final class CustomerController extends Controller
      */
     public function pauseCampaign(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $tenantId = $this->tenantId($request);
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
 
         $orchestrator = app(\App\Services\CampaignOrchestratorService::class);
@@ -451,7 +466,7 @@ final class CustomerController extends Controller
      */
     public function resumeCampaign(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $tenantId = $this->tenantId($request);
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
 
         $orchestrator = app(\App\Services\CampaignOrchestratorService::class);
@@ -478,7 +493,7 @@ final class CustomerController extends Controller
      */
     public function recommendations(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
+        $tenantId = $this->tenantId($request);
         $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
 
         $analytics = app(\App\Services\CrmAdvancedAnalyticsService::class);

@@ -21,8 +21,8 @@ class InvoicePdfTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->createAndAuthenticateUser();
         $this->tenantId = (string) Str::uuid();
+        $this->createAndAuthenticateUser($this->tenantId);
     }
 
     private function getHeaders(): array
@@ -33,11 +33,12 @@ class InvoicePdfTest extends TestCase
         ];
     }
 
-    private function makeInvoice(): Invoice
+    private function makeInvoice(?string $tenantId = null): Invoice
     {
+        $tenantId ??= $this->tenantId;
         $customer = Customer::create([
             'id' => (string) Str::uuid(),
-            'tenant_id' => $this->tenantId,
+            'tenant_id' => $tenantId,
             'business_name' => 'Acme Widgets',
             'slug' => 'acme-widgets-' . Str::random(6),
             'primary_email' => 'owner@acme.test',
@@ -49,7 +50,7 @@ class InvoicePdfTest extends TestCase
 
         $invoice = Invoice::create([
             'id' => (string) Str::uuid(),
-            'tenant_id' => $this->tenantId,
+            'tenant_id' => $tenantId,
             'customer_id' => $customer->id,
             'invoice_number' => 'INV-TEST-0001',
             'status' => 'partial',
@@ -102,10 +103,11 @@ class InvoicePdfTest extends TestCase
     /** @test */
     public function it_does_not_leak_invoices_across_tenants(): void
     {
-        $invoice = $this->makeInvoice();
+        // Invoice belongs to a DIFFERENT tenant than the authenticated user.
+        // Tenant is derived from the user, so the scoped lookup yields 404.
+        $invoice = $this->makeInvoice((string) Str::uuid());
 
         $response = $this->get("/api/v1/crm-invoices/{$invoice->id}/pdf", [
-            'X-Tenant-ID' => (string) Str::uuid(),
             'Accept' => 'application/pdf',
         ]);
 

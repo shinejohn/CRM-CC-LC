@@ -32,13 +32,25 @@ final class BounceHandlerService
         }
 
         if ($event === 'MessageBounced') {
-            $bounceType = $payload['payload']['bounce']['type'] ?? 'hard'; // check if it's hard or soft
+            // The caller (WebhookController@handlePostalEvent) already unwraps the
+            // Postal envelope and passes `$request->input('payload')`, so the bounce
+            // detail lives at `payload.bounce.*` — NOT `payload.payload.bounce.*`.
+            // Postal classifies delivery failures as `HardFail` / `SoftFail`
+            // (see PostalWebhookController). Anything we cannot positively identify
+            // as a genuine hard failure is treated as a SOFT bounce so a transient
+            // problem (greylist, mailbox full, temporary outage) never permanently
+            // suppresses a real contact.
+            $bounceType = (string) (
+                data_get($payload, 'bounce.type')
+                ?? data_get($payload, 'status')
+                ?? ''
+            );
 
-            if ($bounceType === 'hard') {
-                $message->update(['status' => EmailStatus::Bounced, 'error_message' => 'Hard bounce']);
+            if ($this->isHardBounce($bounceType)) {
+                $message->update(['status' => EmailStatus::Bounced, 'error_message' => 'Hard bounce: '.$bounceType]);
                 $this->suppressor->addSuppression($email, 'hard_bounce', 'postal_webhook');
             } else {
-                $message->update(['status' => EmailStatus::Bounced, 'error_message' => 'Soft bounce']);
+                $message->update(['status' => EmailStatus::Bounced, 'error_message' => 'Soft bounce: '.($bounceType !== '' ? $bounceType : 'unknown')]);
 
                 // Retrieve count of recent soft bounces.
                 $softBounces = EmailMessage::where('to_address', $email)
@@ -56,5 +68,22 @@ final class BounceHandlerService
                 }
             }
         }
+    }
+
+    /**
+     * Decide whether a Postal bounce classification represents a genuine, permanent
+     * (hard) failure. Unknown/empty classifications are deliberately treated as soft
+     * so we never permanently suppress a contact on ambiguous webhook data.
+     */
+    private function isHardBounce(string $type): bool
+    {
+        $normalized = strtolower(trim($type));
+
+        if ($normalized === '') {
+            return false;
+        }
+
+        // Postal reports `HardFail`; also accept generic "hard"/"permanent" spellings.
+        return str_contains($normalized, 'hard') || str_contains($normalized, 'permanent');
     }
 }

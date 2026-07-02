@@ -14,13 +14,47 @@ use Illuminate\Support\Facades\Bus;
 final class SMBBulkController extends Controller
 {
     /**
+     * Columns an operator is allowed to set via bulk update.
+     *
+     * Deliberately excludes tenant_id, id, and any suppression / consent /
+     * pipeline privilege fields (email_suppressed, do_not_contact,
+     * pipeline_stage, opt-in flags) so they can never be mass-assigned here.
+     */
+    private const BULK_UPDATABLE_COLUMNS = [
+        'engagement_tier',
+        'campaign_status',
+        'current_campaign_id',
+        'service_model',
+        'subscription_tier',
+        'assigned_rep',
+        'lead_source',
+        'lead_score',
+        'notes',
+        'tags',
+    ];
+
+    /**
+     * Resolve the active tenant strictly from the authenticated user.
+     * Never trust a client-supplied header or request body for tenant identity.
+     */
+    private function tenantId(Request $request): string
+    {
+        $tenantId = $request->user()?->tenant_id;
+
+        abort_if(empty($tenantId), 403, 'Forbidden: no tenant assigned to this account.');
+
+        return (string) $tenantId;
+    }
+
+    /**
      * Bulk import SMBs
      */
     public function import(Request $request): JsonResponse
     {
+        $tenantId = $this->tenantId($request);
+
         $validated = $request->validate([
             'file' => 'required|file|mimes:csv,txt,json',
-            'tenant_id' => 'required|uuid',
             'community_id' => 'nullable|uuid',
             'options' => 'nullable|array',
         ]);
@@ -30,7 +64,7 @@ final class SMBBulkController extends Controller
 
         $job = new ImportSMBs(
             $path,
-            $validated['tenant_id'],
+            $tenantId,
             $validated['community_id'] ?? null,
             $validated['options'] ?? []
         );
@@ -74,13 +108,28 @@ final class SMBBulkController extends Controller
      */
     public function bulkUpdate(Request $request): JsonResponse
     {
+        $tenantId = $this->tenantId($request);
+
         $validated = $request->validate([
-            'tenant_id' => 'required|uuid',
             'filters' => 'required|array',
             'updates' => 'required|array',
         ]);
 
-        $query = Customer::where('tenant_id', $validated['tenant_id']);
+        // Whitelist updatable columns — anything not explicitly allowed
+        // (tenant_id, id, suppression / consent / pipeline fields, …) is dropped.
+        $updates = array_intersect_key(
+            $validated['updates'],
+            array_flip(self::BULK_UPDATABLE_COLUMNS)
+        );
+
+        if (empty($updates)) {
+            return response()->json([
+                'error' => 'No updatable columns provided. Allowed columns: '
+                    . implode(', ', self::BULK_UPDATABLE_COLUMNS),
+            ], 422);
+        }
+
+        $query = Customer::where('tenant_id', $tenantId);
 
         // Apply filters
         if (isset($validated['filters']['community_id'])) {
@@ -95,7 +144,7 @@ final class SMBBulkController extends Controller
             $query->where('campaign_status', $validated['filters']['campaign_status']);
         }
 
-        $count = $query->update($validated['updates']);
+        $count = $query->update($updates);
 
         return response()->json([
             'data' => [

@@ -19,9 +19,9 @@ class ConversationApiTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->createAndAuthenticateUser();
-
         $this->tenantId = (string) Str::uuid();
+        $this->createAndAuthenticateUser($this->tenantId);
+
         $this->customer = Customer::create([
             'id' => (string) Str::uuid(),
             'tenant_id' => $this->tenantId,

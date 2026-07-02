@@ -225,6 +225,12 @@ final class OutboundCampaignController extends Controller
     }
 
     /**
+     * Hard cap on the number of recipients returned by the preview endpoint.
+     * The real send path (start()) streams via chunkById and is not capped here.
+     */
+    private const RECIPIENT_PREVIEW_CAP = 1000;
+
+    /**
      * Get campaign recipients based on segments
      */
     public function getRecipients(Request $request, string $id): JsonResponse
@@ -233,20 +239,89 @@ final class OutboundCampaignController extends Controller
 
         $campaign = OutboundCampaign::where('tenant_id', $tenantId)->findOrFail($id);
 
-        $recipients = $this->buildRecipientList($tenantId, $campaign->type, $campaign->recipient_segments ?? []);
+        $segments = $campaign->recipient_segments ?? [];
+
+        if ($this->segmentsAreEmpty($segments)) {
+            return response()->json([
+                'error' => 'At least one recipient segment is required. Refusing to target the entire customer table.',
+            ], 422);
+        }
+
+        $query = $this->recipientQuery($tenantId, $campaign->type, $segments);
+
+        // Full count without materializing 12.9M rows, plus a capped preview.
+        $total = (clone $query)->count();
+        $recipients = $this->buildRecipientList($query, $campaign->type, self::RECIPIENT_PREVIEW_CAP);
 
         return response()->json([
             'data' => [
-                'total' => count($recipients),
+                'total' => $total,
+                'preview_count' => count($recipients),
+                'preview_capped' => $total > self::RECIPIENT_PREVIEW_CAP,
                 'recipients' => $recipients,
             ],
         ]);
     }
 
     /**
-     * Build recipient list based on segmentation criteria
+     * True when no usable segmentation filter is present. An empty segment set
+     * would otherwise target the entire (12.9M row) customer table.
      */
-    private function buildRecipientList(string $tenantId, string $type, array $segments): array
+    private function segmentsAreEmpty(array $segments): bool
+    {
+        foreach ($segments as $value) {
+            if ($value !== null && $value !== '' && $value !== []) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Apply the mandatory email/SMS/phone health filter for the channel so we
+     * never dispatch to opted-out, do-not-contact, suppressed, or contactless
+     * customers — regardless of what the segments say.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder<Customer>  $query
+     */
+    private function applyHealthFilter($query, string $type): void
+    {
+        if ($type === 'email') {
+            $query->where('email_opted_in', true)
+                ->where('do_not_contact', false)
+                ->where('email_suppressed', false)
+                ->whereNotNull('email')
+                ->where('email', '!=', '');
+
+            return;
+        }
+
+        if ($type === 'sms') {
+            $query->where('sms_opted_in', true)
+                ->where('do_not_contact', false)
+                ->whereNotNull('phone')
+                ->where('phone', '!=', '');
+
+            return;
+        }
+
+        if ($type === 'phone') {
+            $query->where('phone_opted_in', true)
+                ->where('do_not_contact', false)
+                ->whereNotNull('phone')
+                ->where('phone', '!=', '');
+        }
+    }
+
+    /**
+     * Build the filtered Customer query for a campaign's segments + channel
+     * health filter. Returns a query builder so callers can count, cap, or
+     * stream (chunkById) without loading everything into memory.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder<Customer>
+     */
+    private function recipientQuery(string $tenantId, string $type, array $segments)
     {
         $query = Customer::where('tenant_id', $tenantId);
 
@@ -312,7 +387,24 @@ final class OutboundCampaignController extends Controller
             $query->whereNotNull('phone')->where('phone', '!=', '');
         }
 
-        $customers = $query->get();
+        // Mandatory channel health filter — always applied, never optional.
+        $this->applyHealthFilter($query, $type);
+
+        return $query;
+    }
+
+    /**
+     * Materialize a capped preview array from a recipient query.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder<Customer>  $query
+     * @return array<int, array<string, mixed>>
+     */
+    private function buildRecipientList($query, string $type, int $cap): array
+    {
+        $customers = (clone $query)
+            ->select(['id', 'owner_name', 'business_name', 'email', 'phone'])
+            ->limit($cap)
+            ->get();
 
         $recipients = [];
         foreach ($customers as $customer) {
@@ -324,7 +416,7 @@ final class OutboundCampaignController extends Controller
             if ($type === 'email' && $customer->email) {
                 $recipient['email'] = $customer->email;
                 $recipients[] = $recipient;
-            } elseif (in_array($type, ['phone', 'sms']) && $customer->phone) {
+            } elseif (in_array($type, ['phone', 'sms'], true) && $customer->phone) {
                 $recipient['phone'] = $customer->phone;
                 $recipients[] = $recipient;
             }
@@ -348,70 +440,93 @@ final class OutboundCampaignController extends Controller
             ], 400);
         }
 
-        DB::transaction(function () use ($campaign, $tenantId) {
-            // Get recipients
-            $recipients = $this->buildRecipientList($tenantId, $campaign->type, $campaign->recipient_segments ?? []);
+        $segments = $campaign->recipient_segments ?? [];
 
-            // Resolve A/B variants once. Empty when the campaign has none — the
-            // no-variant path below assigns variant_id = null (unchanged behavior).
-            $variants = $campaign->variants()->orderBy('created_at')->get();
+        if ($this->segmentsAreEmpty($segments)) {
+            return response()->json([
+                'error' => 'At least one recipient segment is required. Refusing to start a campaign targeting the entire customer table.',
+            ], 422);
+        }
 
-            // Create recipient records
-            foreach ($recipients as $recipientData) {
-                $variantId = $variants->isNotEmpty()
-                    ? $this->assignVariant($variants, (string) ($recipientData['customer_id'] ?? uniqid('r_', true)))->id
-                    : null;
+        $query = $this->recipientQuery($tenantId, $campaign->type, $segments);
 
-                CampaignRecipient::create([
-                    'campaign_id' => $campaign->id,
-                    'variant_id' => $variantId,
-                    'customer_id' => $recipientData['customer_id'] ?? null,
-                    'tenant_id' => $tenantId,
-                    'email' => $recipientData['email'] ?? null,
-                    'phone' => $recipientData['phone'] ?? null,
-                    'name' => $recipientData['name'] ?? null,
-                    'status' => 'pending',
-                ]);
-            }
+        // Resolve A/B variants once. Empty when the campaign has none — the
+        // no-variant path assigns variant_id = null (unchanged behavior).
+        $variants = $campaign->variants()->orderBy('created_at')->get();
 
-            // Tally per-variant recipient counts.
-            if ($variants->isNotEmpty()) {
-                $counts = CampaignRecipient::where('campaign_id', $campaign->id)
-                    ->whereNotNull('variant_id')
-                    ->selectRaw('variant_id, count(*) as c')
-                    ->groupBy('variant_id')
-                    ->pluck('c', 'variant_id');
-
-                foreach ($variants as $variant) {
-                    $variant->update(['recipients_count' => (int) ($counts[$variant->id] ?? 0)]);
-                }
-            }
-
-            // Update campaign
+        // Flip to running + kick off pre-flight in a short transaction. Recipient
+        // creation and job dispatch happen OUTSIDE this transaction, chunked, so
+        // we never hold a DB transaction open across hundreds of thousands of
+        // inserts (the old code did the entire fan-out inside one transaction).
+        DB::transaction(function () use ($campaign): void {
             $campaign->update([
                 'status' => 'running',
-                'total_recipients' => count($recipients),
                 'started_at' => now(),
             ]);
 
-            // For email campaigns, run pre-flight ZeroBounce validation first
+            // For email campaigns, run pre-flight ZeroBounce validation. It may
+            // set status='held' (>3% risk); the send path below and the send
+            // jobs both respect that hold.
             if ($campaign->type === 'email') {
                 CampaignPreFlightJob::dispatch($campaign);
             }
-
-            // Queue jobs for sending
-            $recipients = CampaignRecipient::where('campaign_id', $campaign->id)
-                ->where('status', 'pending')
-                ->get();
-
-            foreach ($recipients as $recipient) {
-                match ($campaign->type) {
-                    'email' => \App\Jobs\SendEmailCampaign::dispatch($recipient, $campaign),
-                    'phone' => \App\Jobs\MakePhoneCall::dispatch($recipient, $campaign),
-                    'sms' => \App\Jobs\SendSMS::dispatch($recipient, $campaign),
-                };
-            }
         });
+
+        // Respect the pre-flight gate: if the campaign is (or becomes) held, we
+        // still create the recipient rows but do NOT dispatch sends. A held
+        // campaign's sends are released by the un-hold path, not here.
+        $variantCounts = [];
+        $total = 0;
+
+        $query->select(['id', 'owner_name', 'business_name', 'email', 'phone'])
+            ->chunkById(1000, function ($customers) use ($campaign, $tenantId, $variants, &$variantCounts, &$total): void {
+                $dispatchSends = $campaign->fresh()?->status !== 'held';
+
+                foreach ($customers as $customer) {
+                    $isEmail = $campaign->type === 'email';
+                    $contact = $isEmail ? $customer->email : $customer->phone;
+
+                    if (! $contact) {
+                        continue;
+                    }
+
+                    $variant = $variants->isNotEmpty()
+                        ? $this->assignVariant($variants, (string) $customer->id)
+                        : null;
+
+                    if ($variant) {
+                        $variantCounts[$variant->id] = ($variantCounts[$variant->id] ?? 0) + 1;
+                    }
+
+                    $recipient = CampaignRecipient::create([
+                        'campaign_id' => $campaign->id,
+                        'variant_id' => $variant?->id,
+                        'customer_id' => $customer->id,
+                        'tenant_id' => $tenantId,
+                        'email' => $isEmail ? $customer->email : null,
+                        'phone' => $isEmail ? null : $customer->phone,
+                        'name' => $customer->owner_name ?? $customer->business_name,
+                        'status' => 'pending',
+                    ]);
+
+                    $total++;
+
+                    if ($dispatchSends) {
+                        match ($campaign->type) {
+                            'email' => \App\Jobs\SendEmailCampaign::dispatch($recipient, $campaign),
+                            'phone' => \App\Jobs\MakePhoneCall::dispatch($recipient, $campaign),
+                            'sms' => \App\Jobs\SendSMS::dispatch($recipient, $campaign),
+                        };
+                    }
+                }
+            }, 'id');
+
+        // Persist per-variant recipient counts + campaign total.
+        foreach ($variants as $variant) {
+            $variant->update(['recipients_count' => (int) ($variantCounts[$variant->id] ?? 0)]);
+        }
+
+        $campaign->update(['total_recipients' => $total]);
 
         return response()->json([
             'data' => $campaign->fresh(),

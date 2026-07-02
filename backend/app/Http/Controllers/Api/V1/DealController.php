@@ -19,14 +19,24 @@ final class DealController extends Controller
     ) {}
 
     /**
+     * Resolve the active tenant strictly from the authenticated user.
+     * Never trust a client-supplied header or request body for tenant identity.
+     */
+    private function tenantId(Request $request): string
+    {
+        $tenantId = $request->user()?->tenant_id;
+
+        abort_if(empty($tenantId), 403, 'Forbidden: no tenant assigned to this account.');
+
+        return (string) $tenantId;
+    }
+
+    /**
      * List deals (paginated, filterable).
      */
     public function index(Request $request): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $filters = $request->only(['stage', 'customer_id', 'search', 'date_from', 'date_to', 'sort_by', 'sort_dir']);
         $perPage = min((int) $request->input('per_page', 20), 100);
@@ -49,10 +59,7 @@ final class DealController extends Controller
      */
     public function pipeline(Request $request): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $byStage = $this->dealService->getByStage($tenantId);
 
@@ -64,10 +71,7 @@ final class DealController extends Controller
      */
     public function store(StoreDealRequest $request): JsonResponse
     {
-        $tenantId = $request->getTenantId();
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $deal = $this->dealService->create($tenantId, $request->validated());
 
@@ -79,10 +83,7 @@ final class DealController extends Controller
      */
     public function show(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $deal = Deal::where('tenant_id', $tenantId)
             ->with(['customer', 'contact', 'activities'])
@@ -96,10 +97,7 @@ final class DealController extends Controller
      */
     public function update(UpdateDealRequest $request, string $id): JsonResponse
     {
-        $tenantId = $request->getTenantId();
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $deal = Deal::where('tenant_id', $tenantId)->findOrFail($id);
         $deal = $this->dealService->update($deal, $request->validated());
@@ -112,10 +110,7 @@ final class DealController extends Controller
      */
     public function transition(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $request->validate([
             'stage' => 'required|in:hook,engagement,sales,retention,won,lost',
@@ -142,10 +137,7 @@ final class DealController extends Controller
      */
     public function destroy(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $deal = Deal::where('tenant_id', $tenantId)->findOrFail($id);
         $deal->delete();

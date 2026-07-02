@@ -21,7 +21,7 @@ class SMSWebhookTest extends TestCase
 
         $customer = Customer::create([
             'id' => (string) Str::uuid(),
-            'tenant_id' => (string) \Illuminate\Support\Str::uuid(), 'business_name' => 'Test Business',
+            'tenant_id' => '00000000-0000-0000-0000-000000000000', 'business_name' => 'Test Business',
             'slug' => 'test-business-' . Str::random(6),
             'phone' => '+1234567890',
             'sms_opted_in' => true,
