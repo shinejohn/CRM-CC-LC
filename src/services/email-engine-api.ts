@@ -82,8 +82,11 @@ export interface EmailCampaignSummary {
 // ── Email Health Dashboard API ──
 
 export async function getEmailHealthStats(): Promise<EmailHealthStats> {
+  // TODO: no backend route — /v1/email exposes only send/batch/metrics/
+  // suppressions/senders/webhook. There is no email health-stats endpoint
+  // (EmailHealthPage needs a backend route). Closest is /v1/email/metrics/summary.
   const response = await apiClient.get<{ data: EmailHealthStats }>(
-    '/api/v1/email/health/stats'
+    '/v1/email/health/stats'
   );
   return response.data;
 }
@@ -92,8 +95,9 @@ export async function getRecentEmailEvents(params?: {
   limit?: number;
   event_type?: string;
 }): Promise<EmailDeliveryEvent[]> {
+  // TODO: no backend route — email delivery-events feed is not implemented.
   const response = await apiClient.get<{ data: EmailDeliveryEvent[] }>(
-    '/api/v1/email/health/events',
+    '/v1/email/health/events',
     { params }
   );
   return response.data;
@@ -104,7 +108,7 @@ export async function getEmailCampaignSummaries(params?: {
   limit?: number;
 }): Promise<EmailCampaignSummary[]> {
   const response = await apiClient.get<{ data: EmailCampaignSummary[] }>(
-    '/api/v1/outbound/campaigns',
+    '/v1/outbound/campaigns',
     { params: { ...params, type: 'email' } }
   );
   return response.data;
@@ -113,15 +117,17 @@ export async function getEmailCampaignSummaries(params?: {
 // ── Contact Health API ──
 
 export async function getContactHealthStats(): Promise<ContactHealthStats> {
+  // TODO: no backend route — contact health/validation stats endpoint is not implemented (ContactHealthPage).
   const response = await apiClient.get<{ data: ContactHealthStats }>(
-    '/api/v1/email/contacts/health'
+    '/v1/email/contacts/health'
   );
   return response.data;
 }
 
 export async function triggerListRevalidation(): Promise<{ message: string; job_id: string }> {
+  // TODO: no backend route — list revalidation trigger is not implemented.
   const response = await apiClient.post<{ data: { message: string; job_id: string } }>(
-    '/api/v1/email/contacts/revalidate'
+    '/v1/email/contacts/revalidate'
   );
   return response.data;
 }
@@ -134,16 +140,18 @@ export async function getInboundEmails(params?: {
   page?: number;
   per_page?: number;
 }): Promise<InboundEmail[]> {
+  // TODO: no backend route — inbound email inbox endpoints are not implemented (InboundInboxPage).
   const response = await apiClient.get<{ data: InboundEmail[] }>(
-    '/api/v1/email/inbound',
+    '/v1/email/inbound',
     { params }
   );
   return response.data;
 }
 
 export async function getInboundEmail(id: string): Promise<InboundEmail> {
+  // TODO: no backend route — inbound email detail endpoint is not implemented.
   const response = await apiClient.get<{ data: InboundEmail }>(
-    `/api/v1/email/inbound/${id}`
+    `/v1/email/inbound/${id}`
   );
   return response.data;
 }
@@ -152,8 +160,9 @@ export async function updateInboundEmailStatus(
   id: string,
   status: 'responded' | 'escalated' | 'archived'
 ): Promise<InboundEmail> {
+  // TODO: no backend route — inbound status update endpoint is not implemented.
   const response = await apiClient.post<{ data: InboundEmail }>(
-    `/api/v1/email/inbound/${id}/status`,
+    `/v1/email/inbound/${id}/status`,
     { status }
   );
   return response.data;
@@ -163,8 +172,9 @@ export async function overrideAIResponse(
   id: string,
   response_text: string
 ): Promise<InboundEmail> {
+  // TODO: no backend route — AI response override endpoint is not implemented.
   const response = await apiClient.post<{ data: InboundEmail }>(
-    `/api/v1/email/inbound/${id}/override`,
+    `/v1/email/inbound/${id}/override`,
     { response: response_text }
   );
   return response.data;
@@ -174,8 +184,9 @@ export async function escalateInboundEmail(
   id: string,
   note?: string
 ): Promise<InboundEmail> {
+  // TODO: no backend route — inbound escalation endpoint is not implemented.
   const response = await apiClient.post<{ data: InboundEmail }>(
-    `/api/v1/email/inbound/${id}/escalate`,
+    `/v1/email/inbound/${id}/escalate`,
     { note }
   );
   return response.data;

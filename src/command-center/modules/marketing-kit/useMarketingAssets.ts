@@ -38,26 +38,26 @@ interface EmailSignatureResponse {
 }
 
 async function fetchMarketingAssets(): Promise<MarketingAsset[]> {
-  const { data } = await apiClient.get<MarketingAsset[]>('/marketing-kit/assets');
+  const { data } = await apiClient.get<MarketingAsset[]>('/v1/marketing-kit/assets');
   return data;
 }
 
 async function saveAsset(payload: SaveAssetPayload): Promise<MarketingAsset> {
-  const { data } = await apiClient.post<MarketingAsset>('/marketing-kit/assets', payload);
+  const { data } = await apiClient.post<MarketingAsset>('/v1/marketing-kit/assets', payload);
   return data;
 }
 
 async function deleteAsset(id: string): Promise<void> {
-  await apiClient.delete(`/marketing-kit/assets/${id}`);
+  await apiClient.delete(`/v1/marketing-kit/assets/${id}`);
 }
 
 async function fetchEmbedCode(id: string): Promise<EmbedCodeResponse> {
-  const { data } = await apiClient.get<EmbedCodeResponse>(`/marketing-kit/embed/${id}`);
+  const { data } = await apiClient.get<EmbedCodeResponse>(`/v1/marketing-kit/embed/${id}`);
   return data;
 }
 
 async function generateEmailSignature(payload: EmailSignaturePayload): Promise<EmailSignatureResponse> {
-  const { data } = await apiClient.post<EmailSignatureResponse>('/marketing-kit/email-signature', payload);
+  const { data } = await apiClient.post<EmailSignatureResponse>('/v1/marketing-kit/email-signature', payload);
   return data;
 }
 

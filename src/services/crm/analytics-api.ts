@@ -107,7 +107,7 @@ export interface CampaignPerformance {
  * Get interest monitoring analytics
  */
 export async function getInterestAnalytics(days: number = 30): Promise<InterestAnalytics> {
-  const response = await apiClient.get<{ data: InterestAnalytics }>('/api/v1/crm/analytics/interest', {
+  const response = await apiClient.get<{ data: InterestAnalytics }>('/v1/crm/analytics/interest', {
     params: { days },
   });
   return response.data;
@@ -117,7 +117,7 @@ export async function getInterestAnalytics(days: number = 30): Promise<InterestA
  * Get purchase tracking analytics
  */
 export async function getPurchaseAnalytics(days: number = 30): Promise<PurchaseAnalytics> {
-  const response = await apiClient.get<{ data: PurchaseAnalytics }>('/api/v1/crm/analytics/purchases', {
+  const response = await apiClient.get<{ data: PurchaseAnalytics }>('/v1/crm/analytics/purchases', {
     params: { days },
   });
   return response.data;
@@ -127,7 +127,7 @@ export async function getPurchaseAnalytics(days: number = 30): Promise<PurchaseA
  * Get learning analytics
  */
 export async function getLearningAnalytics(days: number = 30): Promise<LearningAnalytics> {
-  const response = await apiClient.get<{ data: LearningAnalytics }>('/api/v1/crm/analytics/learning', {
+  const response = await apiClient.get<{ data: LearningAnalytics }>('/v1/crm/analytics/learning', {
     params: { days },
   });
   return response.data;
@@ -137,7 +137,7 @@ export async function getLearningAnalytics(days: number = 30): Promise<LearningA
  * Get campaign performance metrics
  */
 export async function getCampaignPerformance(days: number = 30): Promise<CampaignPerformance> {
-  const response = await apiClient.get<{ data: CampaignPerformance }>('/api/v1/crm/analytics/campaign-performance', {
+  const response = await apiClient.get<{ data: CampaignPerformance }>('/v1/crm/analytics/campaign-performance', {
     params: { days },
   });
   return response.data;

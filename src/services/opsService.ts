@@ -1,6 +1,6 @@
 // ============================================
 // OPS DASHBOARD (POD) API CLIENT
-// API client for /api/v1/ops/* and /api/v1/operations/* endpoints
+// API client for /v1/ops/* and /v1/operations/* endpoints
 // ============================================
 
 import { apiClient } from '@/services/api';
@@ -76,12 +76,14 @@ export const opsService = {
 
   /** Incidents CRUD */
   createIncident: async (payload: Partial<Incident>): Promise<Incident> => {
-    const res = await apiClient.post<{ data: Incident }>('/operations/incidents', payload);
+    // TODO: no backend route — /v1/ops/incidents is GET-only; incident create is not implemented.
+    const res = await apiClient.post<{ data: Incident }>('/v1/ops/incidents', payload);
     return res.data.data;
   },
 
   updateIncident: async (id: string, payload: Partial<Incident>): Promise<Incident> => {
-    const res = await apiClient.put<{ data: Incident }>(`/operations/incidents/${id}`, payload);
+    // TODO: no backend route — /v1/ops/incidents/{id} PUT is not implemented.
+    const res = await apiClient.put<{ data: Incident }>(`/v1/ops/incidents/${id}`, payload);
     return res.data.data;
   },
 
@@ -96,9 +98,10 @@ export const opsService = {
     return operationsApi.getCostTracking(params);
   },
 
-  /** FOA Chat - POST /operations/ai-sessions/chat */
+  /** FOA Chat - POST /v1/ops/ai-sessions/chat */
   foaChat: async (payload: FOAChatRequest): Promise<FOAChatResponse> => {
-    const res = await apiClient.post<{ data: FOAChatResponse }>('/operations/ai-sessions/chat', payload);
+    // TODO: no backend route — FOA (ai-sessions/chat) endpoint is not implemented under /v1/ops.
+    const res = await apiClient.post<{ data: FOAChatResponse }>('/v1/ops/ai-sessions/chat', payload);
     return res.data.data;
   },
 

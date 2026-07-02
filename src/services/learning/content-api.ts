@@ -3,6 +3,7 @@
 // ============================================
 
 import { apiClient } from './api-client';
+import { getAuthToken } from '@/services/api';
 
 export interface Content {
   id: number;
@@ -169,8 +170,7 @@ export const contentApi = {
         method: 'GET',
         headers: {
           'Accept': 'application/pdf',
-          'Authorization': `Bearer ${localStorage.getItem('auth_token') || ''}`,
-          'X-Tenant-ID': localStorage.getItem('tenant_id') || '',
+          'Authorization': `Bearer ${getAuthToken() || ''}`,
         },
       }
     );

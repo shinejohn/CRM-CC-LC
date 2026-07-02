@@ -34,15 +34,16 @@ export function useDashboard(): UseDashboardReturn {
     setError(null);
     
     try {
-      const [metricsRes, widgetsRes, activitiesRes] = await Promise.all([
-        apiService.get('/v1/dashboard/metrics'),
-        apiService.get('/v1/dashboard/widgets'),
-        apiService.get('/v1/dashboard/recent-activity', { params: { limit: 10 } }),
-      ]);
+      // The only real dashboard endpoint is the CRM analytics aggregate.
+      // It returns summary stats (customers, revenue, conversations) — NOT a
+      // pre-built widget layout or an activity feed.
+      // TODO: no backend route for dashboard widgets or a recent-activity feed;
+      // metrics/widgets/activities stay empty until dedicated endpoints exist.
+      await apiService.get('/v1/crm/dashboard/analytics', { params: { days: 30 } });
 
-      setMetrics(Array.isArray(metricsRes.data) ? metricsRes.data : []);
-      setWidgets(Array.isArray(widgetsRes.data) ? widgetsRes.data : []);
-      setActivities(Array.isArray(activitiesRes.data) ? activitiesRes.data : []);
+      setMetrics([]);
+      setWidgets([]);
+      setActivities([]);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load dashboard');
       // Set default data on error
@@ -62,14 +63,11 @@ export function useDashboard(): UseDashboardReturn {
     widgetId: string,
     position: { row: number; col: number }
   ) => {
-    try {
-      await apiService.put(`/v1/dashboard/widgets/${widgetId}`, { position });
-      setWidgets(prev =>
-        prev.map(w => (w.id === widgetId ? { ...w, position } : w))
-      );
-    } catch (err) {
-      console.error('Failed to update widget position:', err);
-    }
+    // TODO: no backend route for persisting dashboard widget positions.
+    // Update local state only until a dashboard-widgets endpoint exists.
+    setWidgets(prev =>
+      prev.map(w => (w.id === widgetId ? { ...w, position } : w))
+    );
   }, []);
 
   return {

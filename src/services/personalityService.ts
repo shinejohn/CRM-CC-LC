@@ -3,7 +3,7 @@
  */
 
 import type { AxiosResponse } from 'axios';
-import { apiClient } from '@/services/api';
+import { apiClient, getAuthToken } from '@/services/api';
 import type {
   AiPersonality,
   PersonalityAssignment,
@@ -14,22 +14,22 @@ import type { ApiResponse } from '../types/common';
 
 export const personalityService = {
   list: () =>
-    apiClient.get<ApiResponse<AiPersonality[]>>('/api/v1/personalities').then((r: AxiosResponse<ApiResponse<AiPersonality[]>>) => r.data.data ?? r.data),
+    apiClient.get<ApiResponse<AiPersonality[]>>('/v1/personalities').then((r: AxiosResponse<ApiResponse<AiPersonality[]>>) => r.data.data ?? r.data),
 
   get: (id: string) =>
-    apiClient.get<ApiResponse<AiPersonality>>(`/personalities/${id}`).then((r: AxiosResponse<ApiResponse<AiPersonality>>) => r.data.data),
+    apiClient.get<ApiResponse<AiPersonality>>(`/v1/personalities/${id}`).then((r: AxiosResponse<ApiResponse<AiPersonality>>) => r.data.data),
 
   getAssignments: () =>
-    apiClient.get<ApiResponse<PersonalityAssignment[]>>('/api/v1/personalities/assignments').then((r: AxiosResponse<ApiResponse<PersonalityAssignment[]>>) => r.data.data ?? r.data),
+    apiClient.get<ApiResponse<PersonalityAssignment[]>>('/v1/personalities/assignments').then((r: AxiosResponse<ApiResponse<PersonalityAssignment[]>>) => r.data.data ?? r.data),
 
   assignToCustomer: (personalityId: string, customerId: string) =>
-    apiClient.post<ApiResponse<PersonalityAssignment>>('/api/v1/personalities/assign', {
+    apiClient.post<ApiResponse<PersonalityAssignment>>('/v1/personalities/assign', {
       personality_id: personalityId,
       customer_id: customerId,
     }).then((r: AxiosResponse<ApiResponse<PersonalityAssignment>>) => r.data.data),
 
   getCustomerPersonality: (customerId: string) =>
-    apiClient.get<ApiResponse<AiPersonality | null>>(`/personalities/customers/${customerId}/personality`).then((r: AxiosResponse<ApiResponse<AiPersonality | null>>) => r.data.data),
+    apiClient.get<ApiResponse<AiPersonality | null>>(`/v1/personalities/customers/${customerId}/personality`).then((r: AxiosResponse<ApiResponse<AiPersonality | null>>) => r.data.data),
 
   /**
    * Generate AI response using personality. Uses non-streaming (backend does not support SSE yet).
@@ -44,7 +44,7 @@ export const personalityService = {
       customer_id: params.customer_id,
     };
     const response = await apiClient.post<ApiResponse<GenerateResponseResult>>(
-      `/personalities/${personalityId}/generate-response`,
+      `/v1/personalities/${personalityId}/generate-response`,
       body
     );
     const data = response.data.data ?? (response.data as unknown as GenerateResponseResult);
@@ -65,9 +65,9 @@ export const personalityService = {
     options?: { customerId?: string; conversationContext?: Array<{ role: string; content: string }> }
   ): Promise<string> => {
     try {
-      const token = localStorage.getItem('auth_token');
-      const baseUrl = import.meta.env.VITE_API_URL || 'https://api.fibonacco.com';
-      const response = await fetch(`${baseUrl}/api/v1/personalities/${personalityId}/generate-response`, {
+      const token = getAuthToken();
+      const baseUrl = import.meta.env.VITE_API_URL || 'https://api.fibonacco.com/api';
+      const response = await fetch(`${baseUrl}/v1/personalities/${personalityId}/generate-response`, {
         method: 'POST',
         headers: {
           Authorization: token ? `Bearer ${token}` : '',

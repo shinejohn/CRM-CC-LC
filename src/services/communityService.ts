@@ -62,15 +62,15 @@ export interface CommunityBusinessFilters {
 export const communityService = {
   list: (filters?: CommunityListFilters) =>
     apiClient
-      .get<PaginatedResponse<Community>>('/communities', { params: filters })
+      .get<PaginatedResponse<Community>>('/v1/communities', { params: filters })
       .then((r: AxiosResponse<PaginatedResponse<Community>>) => r.data),
 
   get: (id: string) =>
-    apiClient.get<ApiResponse<Community>>(`/communities/${id}`).then((r: AxiosResponse<ApiResponse<Community>>) => r.data.data),
+    apiClient.get<ApiResponse<Community>>(`/v1/communities/${id}`).then((r: AxiosResponse<ApiResponse<Community>>) => r.data.data),
 
   getBusinesses: (communityId: string, filters?: CommunityBusinessFilters) =>
     apiClient
-      .get<PaginatedResponse<CommunityBusiness>>(`/communities/${communityId}/businesses`, {
+      .get<PaginatedResponse<CommunityBusiness>>(`/v1/communities/${communityId}/businesses`, {
         params: filters,
       })
       .then((r: AxiosResponse<PaginatedResponse<CommunityBusiness>>) => r.data),

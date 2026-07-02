@@ -57,7 +57,7 @@ export async function listPhoneCampaigns(params?: {
   page?: number;
 }): Promise<PhoneCampaign[]> {
   const response = await apiClient.get<PaginatedResponse<PhoneCampaign>>(
-    '/api/v1/outbound/phone/campaigns',
+    '/v1/outbound/phone/campaigns',
     { params }
   );
   return response.data;
@@ -68,7 +68,7 @@ export async function listPhoneCampaigns(params?: {
  */
 export async function getPhoneCampaign(id: string): Promise<PhoneCampaign> {
   const response = await apiClient.get<{ data: PhoneCampaign }>(
-    `/api/v1/outbound/campaigns/${id}`
+    `/v1/outbound/campaigns/${id}`
   );
   return response.data;
 }
@@ -80,7 +80,7 @@ export async function createPhoneCampaign(
   request: CreatePhoneCampaignRequest
 ): Promise<PhoneCampaign> {
   const response = await apiClient.post<{ data: PhoneCampaign }>(
-    '/api/v1/outbound/phone/campaigns',
+    '/v1/outbound/phone/campaigns',
     request
   );
   return response.data;
@@ -91,7 +91,7 @@ export async function createPhoneCampaign(
  */
 export async function getPhoneScripts(): Promise<PhoneScript[]> {
   const response = await apiClient.get<{ data: PhoneScript[] }>(
-    '/api/v1/outbound/phone/scripts'
+    '/v1/outbound/phone/scripts'
   );
   return response.data;
 }
@@ -105,7 +105,7 @@ export async function createPhoneScript(request: {
   variables?: string[];
 }): Promise<PhoneScript> {
   const response = await apiClient.post<{ data: PhoneScript }>(
-    '/api/v1/outbound/phone/scripts',
+    '/v1/outbound/phone/scripts',
     request
   );
   return response.data;

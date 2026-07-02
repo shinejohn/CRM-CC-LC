@@ -1,7 +1,17 @@
 import axios from "axios";
 import { useAuthStore } from "@/stores/authStore";
 
-const API_BASE = import.meta.env.VITE_API_URL || "https://api.fibonacco.com";
+// THE CONVENTION: VITE_API_URL is the API origin INCLUDING `/api` but NOT `/v1`.
+// Every request PATH in code starts with `/v1/...` (never include `/api` — it's in the base).
+// Dev default: http://localhost:8000/api
+const API_BASE = import.meta.env.VITE_API_URL || "https://api.fibonacco.com/api";
+
+/**
+ * Single source of truth for the auth token: the Zustand auth store
+ * (persisted under `fibonacco-auth`). Other clients import this helper
+ * instead of reading localStorage directly.
+ */
+export const getAuthToken = (): string | null => useAuthStore.getState().token;
 
 export const apiClient = axios.create({
   baseURL: API_BASE,
@@ -9,9 +19,9 @@ export const apiClient = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-// Request interceptor — injects auth token
+// Request interceptor — injects auth token from the store
 apiClient.interceptors.request.use((config) => {
-  const token = useAuthStore.getState().token;
+  const token = getAuthToken();
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });

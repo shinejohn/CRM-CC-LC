@@ -5,6 +5,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { getAuthToken } from '../services/api';
 import { notificationsApi } from '../services/crm/notifications-api';
 import { POLL_INTERVALS } from '../services/realtime';
 import { isRealtimeConnected } from '../services/realtime';
@@ -12,7 +13,7 @@ import { isRealtimeConnected } from '../services/realtime';
 const NOTIFICATIONS_QUERY_KEY = ['notifications', 'list'] as const;
 
 function hasAuthToken(): boolean {
-  return !!localStorage.getItem('auth_token') || !!localStorage.getItem('cc_auth_tokens');
+  return !!getAuthToken() || !!localStorage.getItem('cc_auth_tokens');
 }
 
 export function useNotificationBadge() {

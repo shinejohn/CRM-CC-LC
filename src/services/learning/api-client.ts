@@ -1,8 +1,16 @@
 // ============================================
 // API CLIENT - Learning Center Services
 // ============================================
+//
+// THE CONVENTION: base = VITE_API_URL (API origin INCLUDING `/api`, NOT `/v1`).
+// Every endpoint passed to this client must start with `/v1/...`.
+// VITE_API_ENDPOINT is deprecated — aliased to VITE_API_URL for back-compat.
+import { getAuthToken } from '@/services/api';
 
-const API_BASE_URL = import.meta.env.VITE_API_ENDPOINT || '';
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL ||
+  import.meta.env.VITE_API_ENDPOINT ||
+  'http://localhost:8000/api';
 
 export interface ApiResponse<T> {
   data: T;
@@ -43,16 +51,10 @@ class ApiClient {
       'Content-Type': 'application/json',
     };
 
-    // Add auth token if available
-    const token = localStorage.getItem('auth_token');
+    // Add auth token if available (single source of truth: Zustand auth store)
+    const token = getAuthToken();
     if (token) {
       defaultHeaders['Authorization'] = `Bearer ${token}`;
-    }
-
-    // Add tenant ID if available
-    const tenantId = localStorage.getItem('tenant_id');
-    if (tenantId) {
-      defaultHeaders['X-Tenant-ID'] = tenantId;
     }
 
     const config: RequestInit = {
@@ -109,7 +111,7 @@ class ApiClient {
     }
   }
 
-  async get<T>(endpoint: string, options?: { params?: Record<string, any> }): Promise<T> {
+  async get<T>(endpoint: string, options?: { params?: Record<string, unknown> }): Promise<T> {
     let url = endpoint;
     if (options?.params) {
       const searchParams = new URLSearchParams();
@@ -146,12 +148,10 @@ class ApiClient {
 
   async upload<T>(endpoint: string, formData: FormData): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
-    const token = localStorage.getItem('auth_token');
-    const tenantId = localStorage.getItem('tenant_id');
+    const token = getAuthToken();
 
     const headers: HeadersInit = {};
     if (token) headers['Authorization'] = `Bearer ${token}`;
-    if (tenantId) headers['X-Tenant-ID'] = tenantId;
 
     const response = await fetch(url, {
       method: 'POST',

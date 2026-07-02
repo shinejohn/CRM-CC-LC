@@ -1,6 +1,6 @@
 /**
  * Customer file attachment hooks: list + upload + delete + download.
- * Backed by customerFilesApi → /api/v1/customers/{id}/files.
+ * Backed by customerFilesApi → /v1/customers/{id}/files.
  */
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';

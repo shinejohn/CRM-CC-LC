@@ -3,6 +3,7 @@
 // ============================================
 
 import { apiClient } from './api-client';
+import { getAuthToken } from '@/services/api';
 import { generateCampaignSlides } from '@/utils/campaign-content-generator';
 import type { Presentation, SlideComponentType } from '@/types/learning';
 
@@ -361,21 +362,16 @@ export const campaignApi = {
       const url = `${API_BASE_URL}/v1/learning/campaigns/${campaignId}/guide`;
       
       // Call backend API endpoint
-      const token = localStorage.getItem('auth_token');
-      const tenantId = localStorage.getItem('tenant_id');
-      
+      const token = getAuthToken();
+
       const headers: HeadersInit = {
         'Accept': 'application/pdf',
       };
-      
+
       if (token) {
         headers['Authorization'] = `Bearer ${token}`;
       }
-      
-      if (tenantId) {
-        headers['X-Tenant-ID'] = tenantId;
-      }
-      
+
       const response = await fetch(url, {
         method: 'GET',
         headers,

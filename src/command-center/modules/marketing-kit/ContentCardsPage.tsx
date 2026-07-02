@@ -38,12 +38,12 @@ const CONTENT_TYPES: Array<{
 ];
 
 async function fetchTodayCard(): Promise<ContentCard> {
-  const { data } = await apiClient.get<ContentCard>('/content-cards/today');
+  const { data } = await apiClient.get<ContentCard>('/v1/content-cards/today');
   return data;
 }
 
 async function fetchPreviewCard(type: ContentCardType): Promise<ContentCard> {
-  const { data } = await apiClient.get<ContentCard>(`/content-cards/preview/${type}`);
+  const { data } = await apiClient.get<ContentCard>(`/v1/content-cards/preview/${type}`);
   return data;
 }
 

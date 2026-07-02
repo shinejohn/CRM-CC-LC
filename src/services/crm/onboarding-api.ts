@@ -20,8 +20,8 @@ export interface OnboardingSummary {
 
 export const onboardingApi = {
   get: (): Promise<OnboardingSummary> =>
-    apiClient.get<OnboardingSummary>('/api/v1/onboarding'),
+    apiClient.get<OnboardingSummary>('/v1/onboarding'),
 
   completeStep: (step: string): Promise<OnboardingSummary> =>
-    apiClient.post<OnboardingSummary>(`/api/v1/onboarding/${encodeURIComponent(step)}/complete`, {}),
+    apiClient.post<OnboardingSummary>(`/v1/onboarding/${encodeURIComponent(step)}/complete`, {}),
 };

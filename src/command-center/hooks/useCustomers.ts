@@ -64,7 +64,8 @@ export function useCustomers(filters: CustomerFilters) {
   }, []);
 
   const deleteCustomer = useCallback(async (id: string) => {
-    const response = await apiService.delete(`/v1/customers/${id}`);
+    // Customer DELETE is a confirmed soft-delete — backend requires { confirm: true }.
+    const response = await apiService.delete(`/v1/customers/${id}`, { data: { confirm: true } });
     if (response.success) {
       setCustomers(prev => prev.filter(c => c.id !== id));
     } else {

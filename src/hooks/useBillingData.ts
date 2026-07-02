@@ -9,7 +9,7 @@ export function useInvoices() {
     const fetchInvoices = useCallback(() => {
         setIsLoading(true);
         return apiClient
-            .get("/api/v1/invoices")
+            .get("/v1/invoices")
             .then((res) => setData(res.data.data))
             .catch(() => setData([]))
             .finally(() => setIsLoading(false));
@@ -28,7 +28,7 @@ export function useOrders() {
 
     useEffect(() => {
         apiClient
-            .get("/api/v1/orders")
+            .get("/v1/orders")
             .then((res) => setData(res.data.data))
             .catch(() => setData([]))
             .finally(() => setIsLoading(false));
@@ -43,7 +43,7 @@ export function useCollectionMetrics() {
 
     useEffect(() => {
         apiClient
-            .get("/api/v1/billing/summary")
+            .get("/v1/billing/summary")
             .then((res) => setData(res.data.data))
             .catch(() => setData(null))
             .finally(() => setIsLoading(false));

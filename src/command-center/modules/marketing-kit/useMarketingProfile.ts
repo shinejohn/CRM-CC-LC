@@ -40,7 +40,7 @@ export interface MarketingProfile {
 }
 
 async function fetchMarketingProfile(): Promise<MarketingProfile> {
-  const { data } = await apiClient.get<MarketingProfile>('/marketing-kit/profile');
+  const { data } = await apiClient.get<MarketingProfile>('/v1/marketing-kit/profile');
   return data;
 }
 

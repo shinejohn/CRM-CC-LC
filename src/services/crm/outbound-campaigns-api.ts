@@ -1,7 +1,7 @@
 // ============================================
 // OUTBOUND CAMPAIGNS API
 // Email / phone / SMS broadcast campaigns
-// Backend: /api/v1/outbound/campaigns
+// Backend: /v1/outbound/campaigns
 // ============================================
 
 import { apiClient } from '../learning/api-client';
@@ -159,20 +159,20 @@ export const outboundCampaignsApi = {
     });
     const query = searchParams.toString();
     return apiClient.get<PaginatedCampaigns>(
-      `/api/v1/outbound/campaigns${query ? `?${query}` : ''}`,
+      `/v1/outbound/campaigns${query ? `?${query}` : ''}`,
     );
   },
 
   get: async (id: string): Promise<OutboundCampaign> => {
     const res = await apiClient.get<{ data: OutboundCampaign }>(
-      `/api/v1/outbound/campaigns/${id}`,
+      `/v1/outbound/campaigns/${id}`,
     );
     return res.data;
   },
 
   create: async (data: CreateOutboundCampaignInput): Promise<OutboundCampaign> => {
     const res = await apiClient.post<{ data: OutboundCampaign }>(
-      '/api/v1/outbound/campaigns',
+      '/v1/outbound/campaigns',
       data,
     );
     return res.data;
@@ -183,7 +183,7 @@ export const outboundCampaignsApi = {
     data: UpdateOutboundCampaignInput,
   ): Promise<OutboundCampaign> => {
     const res = await apiClient.put<{ data: OutboundCampaign }>(
-      `/api/v1/outbound/campaigns/${id}`,
+      `/v1/outbound/campaigns/${id}`,
       data,
     );
     return res.data;
@@ -191,7 +191,7 @@ export const outboundCampaignsApi = {
 
   start: async (id: string): Promise<OutboundCampaign> => {
     const res = await apiClient.post<{ data: OutboundCampaign }>(
-      `/api/v1/outbound/campaigns/${id}/start`,
+      `/v1/outbound/campaigns/${id}/start`,
       {},
     );
     return res.data;
@@ -199,13 +199,13 @@ export const outboundCampaignsApi = {
 
   analytics: async (id: string): Promise<OutboundCampaignAnalytics> => {
     const res = await apiClient.get<{ data: OutboundCampaignAnalytics }>(
-      `/api/v1/outbound/campaigns/${id}/analytics`,
+      `/v1/outbound/campaigns/${id}/analytics`,
     );
     return res.data;
   },
 
   delete: async (id: string): Promise<void> => {
-    await apiClient.delete(`/api/v1/outbound/campaigns/${id}`);
+    await apiClient.delete(`/v1/outbound/campaigns/${id}`);
   },
 
   declareWinner: async (
@@ -213,7 +213,7 @@ export const outboundCampaignsApi = {
     metric?: AbWinnerMetric,
   ): Promise<CampaignVariantStats> => {
     const res = await apiClient.post<{ data: CampaignVariantStats }>(
-      `/api/v1/outbound/campaigns/${id}/variants/winner`,
+      `/v1/outbound/campaigns/${id}/variants/winner`,
       metric ? { metric } : {},
     );
     return res.data;

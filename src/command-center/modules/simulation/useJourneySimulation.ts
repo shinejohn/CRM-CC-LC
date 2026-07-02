@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '@/services/api';
 import type {
-  TimelinesResponse,
+  TimelineListItem,
   SimulationResult,
   SimulationParams,
 } from './types';
@@ -26,10 +26,11 @@ export function useTimelineList() {
   return useQuery({
     queryKey: keys.timelines(),
     queryFn: async () => {
-      const { data } = await apiClient.get<TimelinesResponse>(
-        '/manifest-destiny/timelines',
+      // Controller wraps the list in { data: [...] }
+      const { data } = await apiClient.get<{ data: TimelineListItem[] }>(
+        '/v1/manifest-destiny/timelines',
       );
-      return data.timelines;
+      return data.data;
     },
     staleTime: 5 * 60 * 1000, // timelines rarely change
   });
@@ -40,8 +41,9 @@ export function useSimulation(params: SimulationParams) {
   return useQuery({
     queryKey: keys.simulation(params),
     queryFn: async () => {
-      const { data } = await apiClient.get<SimulationResult>(
-        '/manifest-destiny/simulate',
+      // Controller wraps the result in { data: {...} }
+      const { data } = await apiClient.get<{ data: SimulationResult }>(
+        '/v1/manifest-destiny/simulate',
         {
           params: {
             timeline: params.timeline,
@@ -51,7 +53,7 @@ export function useSimulation(params: SimulationParams) {
           },
         },
       );
-      return data;
+      return data.data;
     },
     enabled: !!params.timeline,
     staleTime: 2 * 60 * 1000,

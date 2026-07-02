@@ -152,7 +152,7 @@ const contentTypeConfig: Record<string, { icon: React.ComponentType<{ className?
 function TodaysPostCard({ isDarkMode }: { isDarkMode: boolean }) {
   const { data, isLoading } = useQuery({
     queryKey: ['content-cards', 'today'],
-    queryFn: () => apiClient.get('/content-cards/today').then(r => r.data),
+    queryFn: () => apiClient.get('/v1/content-cards/today').then(r => r.data),
     staleTime: 5 * 60 * 1000,
     retry: false,
   });

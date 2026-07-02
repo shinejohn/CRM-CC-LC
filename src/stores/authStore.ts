@@ -26,7 +26,8 @@ interface AuthState {
   clearAuth: () => void;
 }
 
-const API_BASE = import.meta.env.VITE_API_URL || "https://api.fibonacco.com";
+// VITE_API_URL = API origin INCLUDING `/api` but NOT `/v1`. Paths start with `/v1/...`.
+const API_BASE = import.meta.env.VITE_API_URL || "https://api.fibonacco.com/api";
 
 export const useAuthStore = create<AuthState>()(
   persist(
@@ -38,7 +39,7 @@ export const useAuthStore = create<AuthState>()(
       login: async (email, password) => {
         set({ isLoading: true });
         try {
-          const response = await fetch(`${API_BASE}/auth/login`, {
+          const response = await fetch(`${API_BASE}/v1/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
@@ -59,13 +60,29 @@ export const useAuthStore = create<AuthState>()(
           throw err instanceof Error ? err : new Error("Login failed");
         }
       },
-      logout: () =>
-        set({ user: null, token: null, isAuthenticated: false }),
+      logout: () => {
+        // Defensive cleanup of any legacy token location so stale tokens don't linger.
+        try {
+          localStorage.removeItem("auth_token");
+        } catch {
+          // ignore (e.g. SSR / restricted storage)
+        }
+        set({ user: null, token: null, isAuthenticated: false });
+      },
       setUser: (user) => set({ user, isAuthenticated: true }),
       setToken: (token) => set({ token }),
       setAuth: (user, token) => set({ user, token, isAuthenticated: true }),
       clearAuth: () => set({ user: null, token: null, isAuthenticated: false }),
     }),
-    { name: "fibonacco-auth" }
+    {
+      name: "fibonacco-auth",
+      // Persist only durable auth state — never transient flags like `isLoading`
+      // (a tab closed mid-login must not rehydrate a permanent loading state).
+      partialize: (state) => ({
+        user: state.user,
+        token: state.token,
+        isAuthenticated: state.isAuthenticated,
+      }),
+    }
   )
 );

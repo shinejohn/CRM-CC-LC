@@ -187,7 +187,7 @@ export const customerApi = {
     });
 
     return apiClient.get<PaginatedResponse<Customer>>(
-      `/api/v1/customers?${params.toString()}`
+      `/v1/customers?${params.toString()}`
     );
   },
 
@@ -195,7 +195,7 @@ export const customerApi = {
    * Get customer by ID
    */
   get: async (id: string): Promise<Customer> => {
-    const response = await apiClient.get<{ data: Customer }>(`/api/v1/customers/${id}`);
+    const response = await apiClient.get<{ data: Customer }>(`/v1/customers/${id}`);
     return response.data;
   },
 
@@ -203,7 +203,7 @@ export const customerApi = {
    * Get customer by slug
    */
   getBySlug: async (slug: string): Promise<Customer> => {
-    const response = await apiClient.get<{ data: Customer }>(`/api/v1/customers/slug/${slug}`);
+    const response = await apiClient.get<{ data: Customer }>(`/v1/customers/slug/${slug}`);
     return response.data;
   },
 
@@ -212,7 +212,7 @@ export const customerApi = {
    */
   create: async (data: Partial<Customer>): Promise<Customer> => {
     const response = await apiClient.post<{ data: Customer; message?: string }>(
-      '/api/v1/customers',
+      '/v1/customers',
       data
     );
     return response.data;
@@ -223,7 +223,7 @@ export const customerApi = {
    */
   update: async (id: string, data: Partial<Customer>): Promise<Customer> => {
     const response = await apiClient.put<{ data: Customer; message?: string }>(
-      `/api/v1/customers/${id}`,
+      `/v1/customers/${id}`,
       data
     );
     return response.data;
@@ -233,7 +233,9 @@ export const customerApi = {
    * Delete customer
    */
   delete: async (id: string): Promise<void> => {
-    await apiClient.delete<{ message: string }>(`/api/v1/customers/${id}`);
+    // Customer DELETE is a confirmed soft-delete — backend requires confirm=true
+    // (read via $request->boolean('confirm'), which accepts a query param).
+    await apiClient.delete<{ message: string }>(`/v1/customers/${id}?confirm=true`);
   },
 
   /**
@@ -244,7 +246,7 @@ export const customerApi = {
     context: Partial<Customer>
   ): Promise<Customer> => {
     const response = await apiClient.put<{ data: Customer; message?: string }>(
-      `/api/v1/customers/${id}/business-context`,
+      `/v1/customers/${id}/business-context`,
       context
     );
     return response.data;
@@ -255,7 +257,7 @@ export const customerApi = {
    */
   getAiContext: async (id: string): Promise<Record<string, unknown>> => {
     const response = await apiClient.get<{ data: Record<string, unknown> }>(
-      `/api/v1/customers/${id}/ai-context`
+      `/v1/customers/${id}/ai-context`
     );
     return response.data;
   },
@@ -265,7 +267,7 @@ export const customerApi = {
    */
   getCustomersByStage: async (stage: PipelineStage): Promise<PaginatedResponse<Customer>> => {
     return apiClient.get<PaginatedResponse<Customer>>(
-      `/api/v1/customers?pipeline_stage=${stage}`
+      `/v1/customers?pipeline_stage=${stage}`
     );
   },
 
@@ -277,8 +279,12 @@ export const customerApi = {
     stage: PipelineStage,
     trigger: string = 'manual'
   ): Promise<Customer> => {
+    // TODO: no backend route — there is no customer pipeline-stage transition
+    // endpoint. UpdateCustomerRequest does not allow `pipeline_stage`, and the
+    // deals `/transition` route applies to deals, not customers. The CRM Kanban
+    // customer drag-and-drop will 404 until a backend endpoint is added.
     const response = await apiClient.put<{ data: Customer; message?: string }>(
-      `/api/v1/customers/${id}/pipeline-stage`,
+      `/v1/customers/${id}/pipeline-stage`,
       { pipeline_stage: stage, trigger }
     );
     return response.data;
@@ -309,7 +315,7 @@ export const conversationApi = {
     });
 
     return apiClient.get<PaginatedResponse<Conversation>>(
-      `/api/v1/conversations?${params.toString()}`
+      `/v1/conversations?${params.toString()}`
     );
   },
 
@@ -317,7 +323,7 @@ export const conversationApi = {
    * Get conversation by ID
    */
   get: async (id: string): Promise<Conversation> => {
-    const response = await apiClient.get<{ data: Conversation }>(`/api/v1/conversations/${id}`);
+    const response = await apiClient.get<{ data: Conversation }>(`/v1/conversations/${id}`);
     return response.data;
   },
 
@@ -326,7 +332,7 @@ export const conversationApi = {
    */
   create: async (data: Partial<Conversation>): Promise<Conversation> => {
     const response = await apiClient.post<{ data: Conversation; message?: string }>(
-      '/api/v1/conversations',
+      '/v1/conversations',
       data
     );
     return response.data;
@@ -337,7 +343,7 @@ export const conversationApi = {
    */
   update: async (id: string, data: Partial<Conversation>): Promise<Conversation> => {
     const response = await apiClient.put<{ data: Conversation; message?: string }>(
-      `/api/v1/conversations/${id}`,
+      `/v1/conversations/${id}`,
       data
     );
     return response.data;
@@ -348,7 +354,7 @@ export const conversationApi = {
    */
   end: async (id: string): Promise<Conversation> => {
     const response = await apiClient.post<{ data: Conversation; message?: string }>(
-      `/api/v1/conversations/${id}/end`,
+      `/v1/conversations/${id}/end`,
       {}
     );
     return response.data;
@@ -362,7 +368,7 @@ export const conversationApi = {
     message: Partial<ConversationMessage>
   ): Promise<ConversationMessage> => {
     const response = await apiClient.post<{ data: ConversationMessage; message?: string }>(
-      `/api/v1/conversations/${id}/messages`,
+      `/v1/conversations/${id}/messages`,
       message
     );
     return response.data;
@@ -373,7 +379,7 @@ export const conversationApi = {
    */
   getMessages: async (id: string): Promise<ConversationMessage[]> => {
     const response = await apiClient.get<{ data: ConversationMessage[] }>(
-      `/api/v1/conversations/${id}/messages`
+      `/v1/conversations/${id}/messages`
     );
     return response.data;
   },

@@ -41,29 +41,29 @@ export const notificationsApi = {
     return apiClient.get<{
       data: Notification[];
       meta: { current_page: number; last_page: number; per_page: number; total: number; unread_count: number };
-    }>(`/api/v1/notifications${query ? `?${query}` : ''}`);
+    }>(`/v1/notifications${query ? `?${query}` : ''}`);
   },
 
   markRead: async (id: string): Promise<Notification> => {
-    const res = await apiClient.post<{ data: Notification }>(`/api/v1/notifications/${id}/mark-read`, {});
+    const res = await apiClient.post<{ data: Notification }>(`/v1/notifications/${id}/mark-read`, {});
     return res.data;
   },
 
   markAllRead: async (): Promise<void> => {
-    await apiClient.post('/api/v1/notifications/mark-all-read', {});
+    await apiClient.post('/v1/notifications/mark-all-read', {});
   },
 
   toggleImportant: async (id: string): Promise<Notification> => {
-    const res = await apiClient.post<{ data: Notification }>(`/api/v1/notifications/${id}/toggle-important`, {});
+    const res = await apiClient.post<{ data: Notification }>(`/v1/notifications/${id}/toggle-important`, {});
     return res.data;
   },
 
   archive: async (id: string): Promise<Notification> => {
-    const res = await apiClient.post<{ data: Notification }>(`/api/v1/notifications/${id}/archive`, {});
+    const res = await apiClient.post<{ data: Notification }>(`/v1/notifications/${id}/archive`, {});
     return res.data;
   },
 
   delete: async (id: string): Promise<void> => {
-    await apiClient.delete(`/api/v1/notifications/${id}`);
+    await apiClient.delete(`/v1/notifications/${id}`);
   },
 };

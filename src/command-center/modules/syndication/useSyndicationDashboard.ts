@@ -133,7 +133,7 @@ export function useSyndicationDashboard() {
     queryKey: keys.dashboard(),
     queryFn: async () => {
       const { data } = await apiClient.get<SyndicationDashboardData>(
-        '/syndication/dashboard',
+        '/v1/syndication/dashboard',
       );
       return data;
     },
@@ -145,7 +145,7 @@ export function useSyndicationQueue() {
   return useQuery({
     queryKey: keys.queue(),
     queryFn: async () => {
-      const { data } = await apiClient.get<QueueCard[]>('/syndication/queue');
+      const { data } = await apiClient.get<QueueCard[]>('/v1/syndication/queue');
       return data;
     },
   });
@@ -156,7 +156,7 @@ export function useSyndicationCommunities() {
     queryKey: keys.communities(),
     queryFn: async () => {
       const { data } = await apiClient.get<SyndicationCommunity[]>(
-        '/syndication/communities',
+        '/v1/syndication/communities',
       );
       return data;
     },
@@ -168,7 +168,7 @@ export function useSyndicationSponsors() {
     queryKey: keys.sponsors(),
     queryFn: async () => {
       const { data } = await apiClient.get<SyndicationSponsor[]>(
-        '/syndication/sponsors',
+        '/v1/syndication/sponsors',
       );
       return data;
     },
@@ -181,7 +181,7 @@ export function useSyndicationEarnings(period?: string) {
     queryFn: async () => {
       const params = period ? { period } : undefined;
       const { data } = await apiClient.get<SyndicationEarnings>(
-        '/syndication/earnings',
+        '/v1/syndication/earnings',
         { params },
       );
       return data;
@@ -194,7 +194,7 @@ export function useCurrentEarnings() {
     queryKey: keys.currentEarnings(),
     queryFn: async () => {
       const { data } = await apiClient.get<CurrentEarnings>(
-        '/syndication/earnings/current',
+        '/v1/syndication/earnings/current',
       );
       return data;
     },
@@ -211,7 +211,7 @@ export function useRegisterPartner() {
   return useMutation({
     mutationFn: async (payload: RegisterPartnerPayload) => {
       const { data } = await apiClient.post<SyndicationDashboardData>(
-        '/syndication/register',
+        '/v1/syndication/register',
         payload,
       );
       return data;
@@ -228,7 +228,7 @@ export function useAddCommunity() {
   return useMutation({
     mutationFn: async (payload: AddCommunityPayload) => {
       const { data } = await apiClient.post<SyndicationCommunity>(
-        '/syndication/communities',
+        '/v1/syndication/communities',
         payload,
       );
       return data;
@@ -245,7 +245,7 @@ export function useRemoveCommunity() {
 
   return useMutation({
     mutationFn: async (id: string) => {
-      await apiClient.delete(`/syndication/communities/${id}`);
+      await apiClient.delete(`/v1/syndication/communities/${id}`);
     },
     onSuccess: () => {
       void qc.invalidateQueries({ queryKey: keys.communities() });
@@ -260,7 +260,7 @@ export function useMarkPosted() {
   return useMutation({
     mutationFn: async (cardId: string) => {
       const { data } = await apiClient.post<QueueCard>(
-        `/syndication/posted/${cardId}`,
+        `/v1/syndication/posted/${cardId}`,
       );
       return data;
     },

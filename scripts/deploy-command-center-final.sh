@@ -98,8 +98,9 @@ API_DOMAIN=$(railway variables --service "$API_SERVICE" --json | jq -r '.[] | se
 FRONTENDS=("$FRONTEND_SERVICE" "$FOA_SERVICE")
 for fe in "${FRONTENDS[@]}"; do
     echo "--- Configuring $fe ---"
-    set_var "$fe" "VITE_API_URL" "https://$API_DOMAIN/api/v1"
-    set_var "$fe" "VITE_API_ENDPOINT" "https://$API_DOMAIN/api/v1"
+    # Convention: VITE_API_URL = origin + /api (NOT /v1). Paths in code add /v1.
+    set_var "$fe" "VITE_API_URL" "https://$API_DOMAIN/api"
+    set_var "$fe" "VITE_API_ENDPOINT" "https://$API_DOMAIN/api"
     set_var "$fe" "NODE_ENV" "production"
     set_var "$fe" "VITE_APP_NAME" "Command Center"
 done

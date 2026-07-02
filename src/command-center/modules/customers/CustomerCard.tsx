@@ -50,7 +50,7 @@ export function CustomerCard({ customer, isSelected, onSelect, onDelete }: Custo
           cursor-pointer hover:shadow-lg transition-all
           ${isSelected ? 'ring-2 ring-purple-500' : ''}
         `}
-        onClick={() => navigate(`/command-center/customers/${customer.id}`)}
+        onClick={() => navigate(`/command-center/sell/customers/${customer.id}`)}
       >
         <CardContent className="p-4">
           {/* Header */}
@@ -88,7 +88,7 @@ export function CustomerCard({ customer, isSelected, onSelect, onDelete }: Custo
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => navigate(`/command-center/customers/${customer.id}`)}>
+                <DropdownMenuItem onClick={() => navigate(`/command-center/sell/customers/${customer.id}`)}>
                   View Details
                 </DropdownMenuItem>
                 {onDelete && (

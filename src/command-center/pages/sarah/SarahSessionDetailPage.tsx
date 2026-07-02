@@ -115,7 +115,7 @@ export function SarahSessionDetailPage() {
   useEffect(() => {
     if (!id) return;
     apiClient
-      .get<{ data: SessionDetail }>(`/sarah/sessions/${id}`)
+      .get<{ data: SessionDetail }>(`/v1/sarah/sessions/${id}`)
       .then((res) => setSession(res.data.data))
       .catch(() => setSession(null))
       .finally(() => setLoading(false));

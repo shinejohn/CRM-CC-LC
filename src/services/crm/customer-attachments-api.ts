@@ -1,9 +1,10 @@
 // ============================================
 // CUSTOMER ATTACHMENTS API - Notes & Files
-// Backs /api/v1/customers/{id}/notes and /files
+// Backs /v1/customers/{id}/notes and /files
 // ============================================
 
 import { apiClient } from '../learning/api-client';
+import { getAuthToken } from '@/services/api';
 
 export interface CustomerNoteAuthor {
   id: string;
@@ -33,28 +34,28 @@ export interface CustomerFile {
 export const customerNotesApi = {
   list: async (customerId: string): Promise<CustomerNote[]> => {
     const res = await apiClient.get<{ data: CustomerNote[] }>(
-      `/api/v1/customers/${customerId}/notes`,
+      `/v1/customers/${customerId}/notes`,
     );
     return res.data;
   },
 
   create: async (customerId: string, body: string): Promise<CustomerNote> => {
     const res = await apiClient.post<{ data: CustomerNote }>(
-      `/api/v1/customers/${customerId}/notes`,
+      `/v1/customers/${customerId}/notes`,
       { body },
     );
     return res.data;
   },
 
   delete: async (customerId: string, noteId: string): Promise<void> => {
-    await apiClient.delete(`/api/v1/customers/${customerId}/notes/${noteId}`);
+    await apiClient.delete(`/v1/customers/${customerId}/notes/${noteId}`);
   },
 };
 
 export const customerFilesApi = {
   list: async (customerId: string): Promise<CustomerFile[]> => {
     const res = await apiClient.get<{ data: CustomerFile[] }>(
-      `/api/v1/customers/${customerId}/files`,
+      `/v1/customers/${customerId}/files`,
     );
     return res.data;
   },
@@ -63,14 +64,14 @@ export const customerFilesApi = {
     const formData = new FormData();
     formData.append('file', file);
     const res = await apiClient.upload<{ data: CustomerFile }>(
-      `/api/v1/customers/${customerId}/files`,
+      `/v1/customers/${customerId}/files`,
       formData,
     );
     return res.data;
   },
 
   delete: async (customerId: string, fileId: string): Promise<void> => {
-    await apiClient.delete(`/api/v1/customers/${customerId}/files/${fileId}`);
+    await apiClient.delete(`/v1/customers/${customerId}/files/${fileId}`);
   },
 
   /**
@@ -82,14 +83,11 @@ export const customerFilesApi = {
     const baseUrl = import.meta.env.VITE_API_ENDPOINT || '';
     const headers: Record<string, string> = {};
 
-    const token = localStorage.getItem('auth_token');
+    const token = getAuthToken();
     if (token) headers.Authorization = `Bearer ${token}`;
 
-    const tenantId = localStorage.getItem('tenant_id');
-    if (tenantId) headers['X-Tenant-ID'] = tenantId;
-
     const response = await fetch(
-      `${baseUrl}/api/v1/customers/${customerId}/files/${fileId}/download`,
+      `${baseUrl}/v1/customers/${customerId}/files/${fileId}/download`,
       { method: 'GET', headers },
     );
 

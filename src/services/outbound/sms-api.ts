@@ -57,7 +57,7 @@ export async function listSmsCampaigns(params?: {
   page?: number;
 }): Promise<SmsCampaign[]> {
   const response = await apiClient.get<PaginatedResponse<SmsCampaign>>(
-    '/api/v1/outbound/sms/campaigns',
+    '/v1/outbound/sms/campaigns',
     { params }
   );
   return response.data;
@@ -68,7 +68,7 @@ export async function listSmsCampaigns(params?: {
  */
 export async function getSmsCampaign(id: string): Promise<SmsCampaign> {
   const response = await apiClient.get<{ data: SmsCampaign }>(
-    `/api/v1/outbound/campaigns/${id}`
+    `/v1/outbound/campaigns/${id}`
   );
   return response.data;
 }
@@ -80,7 +80,7 @@ export async function createSmsCampaign(
   request: CreateSmsCampaignRequest
 ): Promise<SmsCampaign> {
   const response = await apiClient.post<{ data: SmsCampaign }>(
-    '/api/v1/outbound/sms/campaigns',
+    '/v1/outbound/sms/campaigns',
     request
   );
   return response.data;
@@ -91,7 +91,7 @@ export async function createSmsCampaign(
  */
 export async function getSmsTemplates(): Promise<SmsTemplate[]> {
   const response = await apiClient.get<{ data: SmsTemplate[] }>(
-    '/api/v1/outbound/sms/templates'
+    '/v1/outbound/sms/templates'
   );
   return response.data;
 }
@@ -105,7 +105,7 @@ export async function createSmsTemplate(request: {
   variables?: string[];
 }): Promise<SmsTemplate> {
   const response = await apiClient.post<{ data: SmsTemplate }>(
-    '/api/v1/outbound/sms/templates',
+    '/v1/outbound/sms/templates',
     request
   );
   return response.data;

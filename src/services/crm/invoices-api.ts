@@ -3,6 +3,7 @@
 // ============================================
 
 import { apiClient } from '../learning/api-client';
+import { getAuthToken } from '@/services/api';
 
 export interface InvoiceItem {
   id?: string;
@@ -66,12 +67,12 @@ export const invoicesApi = {
     });
     const query = searchParams.toString();
     return apiClient.get<{ data: Invoice[]; meta: { current_page: number; last_page: number; per_page: number; total: number } }>(
-      `/api/v1/crm-invoices${query ? `?${query}` : ''}`
+      `/v1/crm-invoices${query ? `?${query}` : ''}`
     );
   },
 
   get: async (id: string): Promise<Invoice> => {
-    const res = await apiClient.get<{ data: Invoice }>(`/api/v1/crm-invoices/${id}`);
+    const res = await apiClient.get<{ data: Invoice }>(`/v1/crm-invoices/${id}`);
     return res.data;
   },
 
@@ -84,7 +85,7 @@ export const invoicesApi = {
     notes?: string;
     items: { description: string; quantity: number; unit_price: number }[];
   }): Promise<Invoice> => {
-    const res = await apiClient.post<{ data: Invoice }>('/api/v1/crm-invoices', data);
+    const res = await apiClient.post<{ data: Invoice }>('/v1/crm-invoices', data);
     return res.data;
   },
 
@@ -97,7 +98,7 @@ export const invoicesApi = {
     notes: string;
     items: { description: string; quantity: number; unit_price: number }[];
   }>): Promise<Invoice> => {
-    const res = await apiClient.put<{ data: Invoice }>(`/api/v1/crm-invoices/${id}`, data);
+    const res = await apiClient.put<{ data: Invoice }>(`/v1/crm-invoices/${id}`, data);
     return res.data;
   },
 
@@ -107,17 +108,17 @@ export const invoicesApi = {
     reference?: string;
     notes?: string;
   }): Promise<Invoice> => {
-    const res = await apiClient.post<{ data: Invoice }>(`/api/v1/crm-invoices/${id}/record-payment`, data);
+    const res = await apiClient.post<{ data: Invoice }>(`/v1/crm-invoices/${id}/record-payment`, data);
     return res.data;
   },
 
   send: async (id: string): Promise<Invoice> => {
-    const res = await apiClient.post<{ data: Invoice }>(`/api/v1/crm-invoices/${id}/send`, {});
+    const res = await apiClient.post<{ data: Invoice }>(`/v1/crm-invoices/${id}/send`, {});
     return res.data;
   },
 
   delete: async (id: string): Promise<void> => {
-    await apiClient.delete(`/api/v1/crm-invoices/${id}`);
+    await apiClient.delete(`/v1/crm-invoices/${id}`);
   },
 
   /**
@@ -129,13 +130,10 @@ export const invoicesApi = {
     const baseUrl = import.meta.env.VITE_API_ENDPOINT || '';
     const headers: Record<string, string> = { Accept: 'application/pdf' };
 
-    const token = localStorage.getItem('auth_token');
+    const token = getAuthToken();
     if (token) headers.Authorization = `Bearer ${token}`;
 
-    const tenantId = localStorage.getItem('tenant_id');
-    if (tenantId) headers['X-Tenant-ID'] = tenantId;
-
-    const response = await fetch(`${baseUrl}/api/v1/crm-invoices/${id}/pdf`, {
+    const response = await fetch(`${baseUrl}/v1/crm-invoices/${id}/pdf`, {
       method: 'GET',
       headers,
     });

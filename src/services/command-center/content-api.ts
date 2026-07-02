@@ -72,7 +72,7 @@ export async function listContent(params?: {
   page?: number;
 }): Promise<GeneratedContent[]> {
   const response = await apiClient.get<PaginatedResponse<GeneratedContent>>(
-    '/api/v1/generated-content',
+    '/v1/generated-content',
     { params }
   );
   return (response as { data: GeneratedContent[] }).data;
@@ -83,7 +83,7 @@ export async function listContent(params?: {
  */
 export async function getContent(id: string): Promise<GeneratedContent> {
   const response = await apiClient.get<{ data: GeneratedContent }>(
-    `/api/v1/generated-content/${id}`
+    `/v1/generated-content/${id}`
   );
   return (response as { data: GeneratedContent }).data;
 }
@@ -95,7 +95,7 @@ export async function generateContent(
   request: GenerateContentRequest
 ): Promise<GeneratedContent> {
   const response = await apiClient.post<{ data: GeneratedContent }>(
-    '/api/v1/generated-content/generate',
+    '/v1/generated-content/generate',
     request
   );
   return (response as { data: GeneratedContent }).data;
@@ -108,7 +108,7 @@ export async function generateFromCampaign(
   request: GenerateFromCampaignRequest
 ): Promise<GeneratedContent> {
   const response = await apiClient.post<{ data: GeneratedContent }>(
-    '/api/v1/generated-content/generate-from-campaign',
+    '/v1/generated-content/generate-from-campaign',
     request
   );
   return (response as { data: GeneratedContent }).data;
@@ -132,7 +132,7 @@ export async function updateContent(
   }
 ): Promise<GeneratedContent> {
   const response = await apiClient.put<{ data: GeneratedContent }>(
-    `/api/v1/generated-content/${id}`,
+    `/v1/generated-content/${id}`,
     updates
   );
   return (response as { data: GeneratedContent }).data;
@@ -158,7 +158,7 @@ export async function getContentVersions(id: string): Promise<Array<{
     excerpt: string | null;
     change_notes: string | null;
     created_at: string;
-  }> }>(`/api/v1/generated-content/${id}/versions`);
+  }> }>(`/v1/generated-content/${id}/versions`);
   const res = response as { data: Array<{
     id: string;
     version_number: number;
@@ -180,7 +180,7 @@ export async function updateContentStatus(
   notes?: string
 ): Promise<GeneratedContent> {
   const response = await apiClient.post<{ data: GeneratedContent }>(
-    `/api/v1/generated-content/${id}/status`,
+    `/v1/generated-content/${id}/status`,
     { status, notes }
   );
   return (response as { data: GeneratedContent }).data;
@@ -193,7 +193,7 @@ export async function getContentTemplates(params?: {
   type?: string;
 }): Promise<ContentTemplate[]> {
   const response = await apiClient.get<{ data: ContentTemplate[] }>(
-    '/api/v1/generated-content/templates',
+    '/v1/generated-content/templates',
     { params }
   );
   return (response as { data: ContentTemplate[] }).data;
@@ -211,7 +211,7 @@ export async function createContentTemplate(request: {
   structure?: Record<string, unknown>;
 }): Promise<ContentTemplate> {
   const response = await apiClient.post<{ data: ContentTemplate }>(
-    '/api/v1/generated-content/templates',
+    '/v1/generated-content/templates',
     request
   );
   return (response as { data: ContentTemplate }).data;

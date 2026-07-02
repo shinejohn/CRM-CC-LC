@@ -1,7 +1,7 @@
 /**
  * Deal pipeline hooks: pipeline (kanban), transition (stage change / won / lost),
  * create, update, delete.
- * Backed by dealsApi (src/services/crm/deals-api.ts) → /api/v1/deals.
+ * Backed by dealsApi (src/services/crm/deals-api.ts) → /v1/deals.
  */
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';

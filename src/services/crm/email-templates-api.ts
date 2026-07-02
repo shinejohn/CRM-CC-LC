@@ -1,6 +1,6 @@
 // ============================================
 // EMAIL TEMPLATES API - Builder CRUD + preview
-// Backed by /api/v1/outbound/email-templates
+// Backed by /v1/outbound/email-templates
 // ============================================
 
 import { apiClient } from '../learning/api-client';
@@ -42,7 +42,7 @@ export interface EmailTemplateInput {
   is_active?: boolean;
 }
 
-const BASE = '/api/v1/outbound/email-templates';
+const BASE = '/v1/outbound/email-templates';
 
 export const emailTemplatesApi = {
   list: async (params?: {

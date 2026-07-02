@@ -192,9 +192,9 @@ export function useSarahNarration(options: UseSarahNarrationOptions = {}): UseSa
       const currentSlide = currentSlideRef.current;
       const rawSlides = campaign ? ((campaign as Record<string, unknown>).slides as SlideData[] | undefined) : undefined;
 
-      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000/api/v1";
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 
-      fetch(`${apiUrl}/sarah/chat`, {
+      fetch(`${apiUrl}/v1/sarah/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

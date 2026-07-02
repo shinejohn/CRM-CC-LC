@@ -11,7 +11,7 @@ export function useCrossModule() {
 
   // Navigate to customer and optionally open action
   const goToCustomer = useCallback((customerId: string, action?: 'call' | 'email' | 'activity') => {
-    navigate(`/command-center/customers/${customerId}`);
+    navigate(`/command-center/sell/customers/${customerId}`);
     if (action) {
       // Emit event for customer page to handle
       setTimeout(() => {
@@ -38,7 +38,7 @@ export function useCrossModule() {
 
   // Start campaign for customer segment
   const startCampaign = useCallback((audienceFilter?: Record<string, any>) => {
-    navigate('/command-center/campaigns');
+    navigate('/command-center/attract/campaigns');
     setTimeout(() => {
       eventBus.emit('campaign.create', { audience: audienceFilter });
     }, 100);

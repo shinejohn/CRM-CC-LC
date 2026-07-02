@@ -13,6 +13,7 @@ function buildConfig(config?: RequestConfig): AxiosRequestConfig {
     headers: config?.headers,
     signal: config?.signal,
     timeout: config?.timeout,
+    data: config?.data,
   };
 }
 

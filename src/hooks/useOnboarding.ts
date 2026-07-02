@@ -1,6 +1,6 @@
 /**
  * Onboarding hooks: fetch the post-purchase checklist + mark a step complete.
- * Backed by onboardingApi (src/services/crm/onboarding-api.ts) → /api/v1/onboarding.
+ * Backed by onboardingApi (src/services/crm/onboarding-api.ts) → /v1/onboarding.
  */
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
