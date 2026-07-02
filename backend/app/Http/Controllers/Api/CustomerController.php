@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\PipelineStage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
+use App\Services\PipelineTransitionService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
@@ -547,5 +549,111 @@ final class CustomerController extends Controller
         }
 
         return response()->json(['data' => $recommendations]);
+    }
+
+    /**
+     * Update the customer's pipeline stage (CRM Kanban drag-and-drop).
+     *
+     * PUT /v1/customers/{id}/pipeline-stage
+     *
+     * The transition is routed through PipelineTransitionService::transition()
+     * — the same guarded path used elsewhere — which validates the move against
+     * PipelineStage::nextStage() (only the adjacent forward stage, or churn, or
+     * an initial set are allowed), advances via Customer::advanceToStage()
+     * (stamping stage_history / stage_entered_at), and fires PipelineStageChanged.
+     * An illegal jump returns 422 rather than silently writing the column.
+     */
+    public function updatePipelineStage(Request $request, string $id): JsonResponse
+    {
+        $tenantId = $this->tenantId($request);
+
+        $allowed = array_map(
+            static fn (PipelineStage $s): string => $s->value,
+            PipelineStage::cases()
+        );
+
+        $validated = $request->validate([
+            'pipeline_stage' => ['required', 'string', Rule::in($allowed)],
+            'trigger'        => ['nullable', 'string', 'max:100'],
+        ]);
+
+        $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
+
+        $newStage = PipelineStage::from($validated['pipeline_stage']);
+        $trigger  = $validated['trigger'] ?? 'manual';
+
+        // No-op if already in the target stage.
+        if ($customer->pipeline_stage === $newStage) {
+            return response()->json([
+                'data'    => $customer->fresh(),
+                'message' => 'Customer already in stage ' . $newStage->value,
+            ]);
+        }
+
+        $transitioned = app(PipelineTransitionService::class)
+            ->transition($customer, $newStage, $trigger);
+
+        if (! $transitioned) {
+            return response()->json([
+                'error' => 'Invalid pipeline transition from '
+                    . ($customer->pipeline_stage?->value ?? 'none')
+                    . ' to ' . $newStage->value . '.',
+            ], 422);
+        }
+
+        return response()->json([
+            'data'    => $customer->fresh(),
+            'message' => 'Pipeline stage updated successfully',
+        ]);
+    }
+
+    /**
+     * List CRM contacts for a customer.
+     * GET /v1/customers/{id}/contacts
+     */
+    public function contacts(Request $request, string $id): JsonResponse
+    {
+        $tenantId = $this->tenantId($request);
+        $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
+
+        $contacts = $customer->crmContacts()
+            ->orderBy('is_primary', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json(['data' => $contacts]);
+    }
+
+    /**
+     * List deals for a customer.
+     * GET /v1/customers/{id}/deals
+     */
+    public function deals(Request $request, string $id): JsonResponse
+    {
+        $tenantId = $this->tenantId($request);
+        $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
+
+        $deals = $customer->deals()
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json(['data' => $deals]);
+    }
+
+    /**
+     * List CRM activities for a customer.
+     * GET /v1/customers/{id}/activities
+     */
+    public function activities(Request $request, string $id): JsonResponse
+    {
+        $tenantId = $this->tenantId($request);
+        $customer = Customer::where('tenant_id', $tenantId)->findOrFail($id);
+
+        $activities = $customer->crmActivities()
+            ->orderBy('created_at', 'desc')
+            ->limit(100)
+            ->get();
+
+        return response()->json(['data' => $activities]);
     }
 }

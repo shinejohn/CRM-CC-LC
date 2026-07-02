@@ -129,8 +129,23 @@ final class InboundEmailService
         // Analyze sentiment
         $sentiment = $this->sentimentAnalyzer->analyze($body);
 
-        // Log conversation
+        // Log conversation (generic conversations table)
         $conversation = $this->logConversation($customer, $subject, $body, $intent, $sentiment, $inReplyTo);
+
+        // Also record it in email_conversations so the Inbound Inbox surfaces it.
+        \App\Models\EmailConversation::create([
+            'smb_id' => $customer->smb_id,
+            'direction' => 'inbound',
+            'from_email' => $fromEmail,
+            'to_email' => (string) (config('mail.from.address') ?: 'inbound@fibonacco.com'),
+            'subject' => $subject,
+            'body' => $body,
+            'in_reply_to' => $inReplyTo,
+            'intent' => $intent['intent'] ?? null,
+            'sentiment' => $sentiment,
+            'ai_responded' => false,
+            'status' => 'pending',
+        ]);
 
         // Fire event with classified intent and sentiment
         event(new InboundEmailReceived(

@@ -115,6 +115,114 @@ final class AIActionController extends Controller
         }
     }
 
+    /**
+     * POST /v1/ai/process-actions
+     *
+     * Execute a batch of AI actions. Each item is delegated to the SAME
+     * private dispatch() used by execute() — no action logic is reimplemented.
+     * Accepts either the {action, arguments} shape or the frontend's
+     * {type, data} shape. Confirmation-required actions run only when
+     * confirmed (per-item `confirmed` or a top-level `confirmed` flag);
+     * otherwise they are returned as needs_confirmation rather than executed.
+     */
+    public function processBatch(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'actions'             => 'required|array|min:1',
+            'actions.*.type'      => 'nullable|string',
+            'actions.*.action'    => 'nullable|string',
+            'actions.*.data'      => 'nullable|array',
+            'actions.*.arguments' => 'nullable|array',
+            'actions.*.confirmed' => 'nullable|boolean',
+            'confirmed'           => 'nullable|boolean',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $user = $request->user();
+        if (! $user || empty($user->tenant_id)) {
+            return response()->json(['error' => 'Forbidden: no tenant assigned to this account.'], 403);
+        }
+
+        $batchConfirmed = $request->boolean('confirmed');
+        $results = [];
+        $allOk   = true;
+
+        foreach ($request->input('actions', []) as $item) {
+            $actionName = $item['action'] ?? $item['type'] ?? null;
+            $arguments  = $item['arguments'] ?? $item['data'] ?? [];
+            $confirmed  = $batchConfirmed || (bool) ($item['confirmed'] ?? false);
+
+            if (! $actionName) {
+                $allOk = false;
+                $results[] = [
+                    'action_type' => null,
+                    'success'     => false,
+                    'error'       => 'Missing action name',
+                ];
+                continue;
+            }
+
+            if (! $confirmed) {
+                $allOk = false;
+                $results[] = [
+                    'action_type' => $actionName,
+                    'success'     => false,
+                    'status'      => 'needs_confirmation',
+                    'error'       => 'Action must be explicitly confirmed',
+                ];
+                continue;
+            }
+
+            try {
+                $result = $this->dispatch($actionName, is_array($arguments) ? $arguments : [], $user);
+
+                $results[] = [
+                    'action_type' => $actionName,
+                    'success'     => true,
+                    'result_id'   => $this->extractResultId($result),
+                    'result'      => $result,
+                ];
+            } catch (\Throwable $e) {
+                $allOk = false;
+                Log::error('AIActionController::processBatch error', [
+                    'action' => $actionName,
+                    'error'  => $e->getMessage(),
+                ]);
+                $results[] = [
+                    'action_type' => $actionName,
+                    'success'     => false,
+                    'error'       => $e->getMessage(),
+                ];
+            }
+        }
+
+        return response()->json([
+            'success' => $allOk,
+            'results' => $results,
+        ]);
+    }
+
+    /**
+     * Best-effort extraction of a created resource id from an action result.
+     */
+    private function extractResultId(mixed $result): ?string
+    {
+        if (! is_array($result)) {
+            return null;
+        }
+
+        foreach (['task_id', 'activity_id', 'deal_id', 'faq_id', 'id'] as $key) {
+            if (! empty($result[$key])) {
+                return (string) $result[$key];
+            }
+        }
+
+        return null;
+    }
+
     // ── Action Dispatcher ──────────────────────────────────────────────────────
 
     private function dispatch(string $action, array $args, ?object $user): mixed

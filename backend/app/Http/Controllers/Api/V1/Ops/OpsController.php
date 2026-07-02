@@ -51,13 +51,20 @@ final class OpsController extends Controller
             ->get());
     }
 
-    public function getIncidents(): JsonResponse
+    public function getIncidents(\Illuminate\Http\Request $request): JsonResponse
     {
-        return $this->tryQuery(fn () => DB::table('action_executions')
-            ->where('status', 'failed')
-            ->orderBy('created_at', 'desc')
-            ->limit(50)
-            ->get());
+        return $this->tryQuery(function () use ($request) {
+            $query = \App\Models\Operations\Incident::query()->orderByDesc('created_at');
+
+            if ($request->filled('status')) {
+                $query->where('status', $request->string('status'));
+            }
+            if ($request->filled('severity')) {
+                $query->where('severity', $request->string('severity'));
+            }
+
+            return $query->paginate(min((int) $request->input('per_page', 25), 100));
+        });
     }
 
     public function getPipelineMetrics(): JsonResponse

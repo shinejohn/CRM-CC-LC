@@ -123,6 +123,131 @@ final class AIController extends Controller
     }
 
     /**
+     * POST /v1/ai/generate-faq
+     *
+     * Two modes, driven by the request body:
+     *  1. question + answer present → persist a captured Q/A pair as a FAQ
+     *     (CustomerFaq when customer_id is given, else a tenant Knowledge entry)
+     *     and return its faq_id.
+     *  2. topic/content/input present → generate FAQ Q/A pairs from that text
+     *     via the real AI service (PrismAiService::generateStructured).
+     */
+    public function generateFaq(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'conversation_id' => 'nullable|string',
+            'question'        => 'nullable|string',
+            'answer'          => 'nullable|string',
+            'topic'           => 'nullable|string',
+            'content'         => 'nullable|string',
+            'input'           => 'nullable|string',
+            'customer_id'     => 'nullable|uuid',
+            'count'           => 'nullable|integer|min:1|max:10',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $user     = $request->user();
+        $tenantId = $user?->tenant_id;
+        if (empty($tenantId)) {
+            return response()->json(['error' => 'Forbidden: no tenant assigned to this account.'], 403);
+        }
+
+        $question = trim((string) $request->input('question', ''));
+        $answer   = trim((string) $request->input('answer', ''));
+
+        // ── Mode 1: persist a specific Q/A pair ──────────────────────────────
+        if ($question !== '' && $answer !== '') {
+            $customerId = $request->input('customer_id');
+
+            if ($customerId) {
+                $customer = Customer::where('tenant_id', $tenantId)->find($customerId);
+                if (! $customer) {
+                    return response()->json(['error' => 'Customer not found'], 404);
+                }
+
+                $faq = \App\Models\CustomerFaq::create([
+                    'tenant_id'              => $tenantId,
+                    'customer_id'            => $customerId,
+                    'question'               => $question,
+                    'answer'                 => $answer,
+                    'category'               => 'general',
+                    'source'                 => 'ai_conversation',
+                    'source_conversation_id' => $request->input('conversation_id'),
+                    'confidence'             => 'ai_generated',
+                    'is_active'              => true,
+                ]);
+                $faqId = $faq->id;
+            } else {
+                $knowledge = Knowledge::create([
+                    'tenant_id' => $tenantId,
+                    'title'     => $question,
+                    'content'   => $answer,
+                    'category'  => 'faq',
+                    'is_public' => true,
+                    'source'    => 'ai_conversation',
+                ]);
+                $faqId = $knowledge->id;
+            }
+
+            return response()->json([
+                'data' => [
+                    'faq_id'  => $faqId,
+                    'success' => true,
+                    'faqs'    => [['question' => $question, 'answer' => $answer]],
+                ],
+                'faq_id'  => $faqId,
+                'success' => true,
+            ]);
+        }
+
+        // ── Mode 2: generate FAQ pairs from a topic/content ──────────────────
+        $topic = trim((string) (
+            $request->input('topic')
+            ?? $request->input('content')
+            ?? $request->input('input')
+            ?? ''
+        ));
+
+        if ($topic === '') {
+            return response()->json([
+                'error' => 'Provide either question+answer to save, or topic/content to generate FAQs.',
+            ], 422);
+        }
+
+        $count = (int) $request->input('count', 5);
+
+        try {
+            $result = $this->aiService->generateStructured(
+                "Generate {$count} frequently asked questions with concise, accurate answers "
+                . "about the following topic/content for a local business audience:\n\n{$topic}",
+                [
+                    'faqs' => [
+                        ['question' => 'string', 'answer' => 'string'],
+                    ],
+                ],
+                'You are a knowledge base expert for Fibonacco. Produce clear, non-redundant FAQ entries.'
+            );
+
+            $faqs = $result['faqs'] ?? [];
+
+            return response()->json([
+                'data' => [
+                    'success' => true,
+                    'faqs'    => $faqs,
+                ],
+                'success' => true,
+                'faqs'    => $faqs,
+            ]);
+        } catch (\Exception $e) {
+            Log::error('AIController::generateFaq error', ['error' => $e->getMessage()]);
+            return response()->json(['error' => 'FAQ generation failed'], 500);
+        }
+    }
+
+    /**
      * GET /v1/ai/personalities
      */
     public function personalities(): JsonResponse

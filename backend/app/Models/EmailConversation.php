@@ -26,6 +26,7 @@ final class EmailConversation extends Model
         'sentiment',
         'ai_responded',
         'ai_response',
+        'status',
     ];
 
     protected $casts = [

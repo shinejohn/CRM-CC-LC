@@ -77,6 +77,30 @@ final class ContactController extends Controller
     }
 
     /**
+     * List activities for a contact.
+     * GET /v1/crm-contacts/{id}/activities
+     *
+     * Tenant is derived strictly from the authenticated user (these nested
+     * reads run under auth:sanctum), never a client-supplied header.
+     */
+    public function activities(Request $request, string $id): JsonResponse
+    {
+        $tenantId = $request->user()?->tenant_id;
+        if (! $tenantId) {
+            return response()->json(['error' => 'Forbidden: no tenant assigned to this account.'], 403);
+        }
+
+        $contact = CrmContact::where('tenant_id', $tenantId)->findOrFail($id);
+
+        $activities = $contact->activities()
+            ->orderBy('created_at', 'desc')
+            ->limit(100)
+            ->get();
+
+        return response()->json(['data' => $activities]);
+    }
+
+    /**
      * Update a contact.
      */
     public function update(UpdateContactRequest $request, string $id): JsonResponse

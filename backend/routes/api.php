@@ -1059,3 +1059,8 @@ Route::post('/stripe/webhook', [\App\Http\Controllers\Api\StripeWebhookControlle
 Route::post('/outbound/phone/campaigns/{id}/call-status', [\App\Http\Controllers\Api\PhoneCampaignController::class, 'callStatus']);
 Route::post('/outbound/sms/campaigns/{id}/sms-status', [\App\Http\Controllers\Api\SMSCampaignController::class, 'smsStatus']);
 Route::post('/outbound/email/postal/webhook', [\App\Http\Controllers\Api\PostalWebhookController::class, 'handle']);
+
+// Wave-1 feature endpoints (self-prefixed with v1/..., so required at top level).
+require __DIR__.'/api-ops.php';
+require __DIR__.'/api-email-health.php';
+require __DIR__.'/api-crm-extra.php';

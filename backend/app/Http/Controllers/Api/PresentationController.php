@@ -31,6 +31,44 @@ final class PresentationController extends Controller
     }
 
     /**
+     * List generated presentations for the tenant (paginated).
+     * GET /v1/presentations
+     *
+     * Tenant is derived strictly from the authenticated user (auth:sanctum).
+     * Matches the {data, meta} envelope used across the CRM list endpoints.
+     */
+    public function index(Request $request): JsonResponse
+    {
+        $tenantId = $request->user()?->tenant_id;
+        if (! $tenantId) {
+            return response()->json(['error' => 'Forbidden: no tenant assigned to this account.'], 403);
+        }
+
+        $query = GeneratedPresentation::where('tenant_id', $tenantId)->with('template');
+
+        if ($request->filled('customer_id')) {
+            $query->where('customer_id', $request->input('customer_id'));
+        }
+
+        if ($request->filled('template_id')) {
+            $query->where('template_id', $request->input('template_id'));
+        }
+
+        $perPage = min((int) $request->input('per_page', 20), 100);
+        $presentations = $query->orderBy('created_at', 'desc')->paginate($perPage);
+
+        return response()->json([
+            'data' => $presentations->items(),
+            'meta' => [
+                'current_page' => $presentations->currentPage(),
+                'last_page'    => $presentations->lastPage(),
+                'per_page'     => $presentations->perPage(),
+                'total'        => $presentations->total(),
+            ],
+        ]);
+    }
+
+    /**
      * List presentation templates
      */
     public function templates(Request $request): JsonResponse
