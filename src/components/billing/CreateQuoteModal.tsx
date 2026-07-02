@@ -35,7 +35,7 @@ export function CreateQuoteModal({ isOpen, onClose, onSuccess }: CreateQuoteModa
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            await apiClient.post('/billing/quotes', {
+            await apiClient.post('/v1/quotes', {
                 customer_id: customer, // Ideally this is a select dropdown value
                 valid_until: validUntil,
                 items: items.map(i => ({

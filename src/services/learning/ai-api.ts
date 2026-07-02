@@ -40,12 +40,12 @@ export interface AIContextResponse {
 export const aiApi = {
   // Send a message to the AI
   sendMessage: async (request: AIConversationRequest): Promise<AIConversationResponse> => {
-    return apiClient.post<AIConversationResponse>('/learning/ai/chat', request);
+    return apiClient.post<AIConversationResponse>('/v1/ai/chat', request);
   },
 
   // Get AI context for a customer
   getContext: async (request: AIContextRequest): Promise<AIContextResponse> => {
-    return apiClient.post<AIContextResponse>('/learning/ai/context', request);
+    return apiClient.post<AIContextResponse>('/v1/ai/context', request);
   },
 
   // Generate FAQ from conversation
@@ -53,7 +53,7 @@ export const aiApi = {
     faq_id: string;
     success: boolean;
   }> => {
-    return apiClient.post('/learning/ai/generate-faq', {
+    return apiClient.post('/v1/ai/generate-faq', {
       conversation_id: conversationId,
       question,
       answer,
@@ -72,7 +72,7 @@ export const aiApi = {
       result_id?: string;
     }>;
   }> => {
-    return apiClient.post('/learning/ai/process-actions', { actions });
+    return apiClient.post('/v1/ai/process-actions', { actions });
   },
 };
 

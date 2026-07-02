@@ -123,8 +123,9 @@ echo "--- Configuring Frontend ---"
 API_URL=$(railway variables --service "$API_SERVICE" --json | jq -r '.[] | select(.name=="RAILWAY_PUBLIC_DOMAIN") | .value' 2>/dev/null || echo "api.up.railway.app")
 
 set_var "$FRONTEND_SERVICE" "VITE_APP_NAME" "$APP_NAME"
-set_var "$FRONTEND_SERVICE" "VITE_API_URL" "https://$API_URL/api/v1"
-set_var "$FRONTEND_SERVICE" "VITE_API_ENDPOINT" "https://$API_URL/api/v1"
+# Convention: VITE_API_URL = origin + /api (NOT /v1). Paths in code add /v1.
+set_var "$FRONTEND_SERVICE" "VITE_API_URL" "https://$API_URL/api"
+set_var "$FRONTEND_SERVICE" "VITE_API_ENDPOINT" "https://$API_URL/api"
 set_var "$FRONTEND_SERVICE" "NODE_ENV" "production"
 
 echo ""

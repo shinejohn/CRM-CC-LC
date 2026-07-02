@@ -21,7 +21,7 @@ final class SendEmergencyVoice implements ShouldQueue
     public $tries = 1;
     
     public function __construct(
-        private int $broadcastId,
+        private string $broadcastId,
         private array $recipients,
     ) {}
     
@@ -40,33 +40,14 @@ final class SendEmergencyVoice implements ShouldQueue
             ->toArray();
         
         $broadcast->update(['voice_queued' => count($voiceRecipients)]);
-        
-        $sent = 0;
-        $answered = 0;
-        $failed = 0;
-        
-        // TODO: Integrate with Twilio Voice API or similar
-        // Voice broadcasts would use TTS to generate audio and call recipients
-        // For now, we'll mark as queued but not implement full voice logic
-        foreach ($voiceRecipients as $recipient) {
-            try {
-                // This would call Twilio Voice API or similar
-                // For now, we'll simulate success
-                $sent++;
-                // If call is answered, increment answered
-                $answered++;
-            } catch (\Exception $e) {
-                Log::error('Failed to send emergency voice', [
-                    'broadcast_id' => $broadcast->id,
-                    'recipient_id' => $recipient['id'],
-                    'error' => $e->getMessage(),
-                ]);
-                $failed++;
-            }
-        }
-        
-        $broadcast->increment('voice_sent', $sent);
-        $broadcast->increment('voice_answered', $answered);
+
+        // Voice delivery is not implemented yet (no Twilio Voice / TTS integration).
+        // Do NOT increment voice_sent / voice_answered here — those must reflect real
+        // deliveries only. Recipients remain counted in voice_queued as un-sent.
+        Log::warning('Emergency voice delivery not implemented — recipients queued but not sent', [
+            'broadcast_id' => $broadcast->id,
+            'voice_queued' => count($voiceRecipients),
+        ]);
     }
 }
 

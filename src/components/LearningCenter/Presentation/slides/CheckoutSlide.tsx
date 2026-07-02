@@ -265,7 +265,7 @@ export const CheckoutSlide: React.FC<CheckoutSlideProps> = ({
             ...(appliedCoupon ? { coupon_code: appliedCoupon } : {}),
           };
         } else {
-          endpoint = `/api/v1/quotes/${encodeURIComponent(quote_id!)}/checkout`;
+          endpoint = `/v1/quotes/${encodeURIComponent(quote_id!)}/checkout`;
           body = {
             total_amount: total,
             selected_products: items.map((i) => i.description),

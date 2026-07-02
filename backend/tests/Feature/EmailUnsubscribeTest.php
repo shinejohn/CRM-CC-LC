@@ -47,7 +47,14 @@ final class EmailUnsubscribeTest extends TestCase
 
         $url = URL::signedRoute('public.unsubscribe', ['customer' => $customer->id]);
 
-        $response = $this->get($url);
+        // GET renders a confirmation page and must NOT mutate (mail scanners
+        // prefetch links). The suppression happens on POST to the same signed URL.
+        $getResponse = $this->get($url);
+        $getResponse->assertStatus(200);
+        $customer->refresh();
+        $this->assertFalse((bool) $customer->email_suppressed);
+
+        $response = $this->post($url);
 
         $response->assertStatus(200);
         $response->assertSee('unsubscribed', false);

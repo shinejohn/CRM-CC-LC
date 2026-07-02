@@ -186,7 +186,7 @@ return new class extends Migration
             $table->string('source', 100)->nullable(); // Where the suppression came from
             
             // Scope
-            $table->bigInteger('community_id')->nullable(); // NULL = global, otherwise community-specific
+            $table->uuid('community_id')->nullable(); // NULL = global, otherwise community-specific
             
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('expires_at')->nullable()->index(); // NULL = permanent

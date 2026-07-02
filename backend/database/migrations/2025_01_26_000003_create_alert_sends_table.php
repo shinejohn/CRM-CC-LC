@@ -19,11 +19,11 @@ return new class extends Migration
             
             // Channels used
             $table->boolean('email_sent')->default(false);
-            $table->unsignedBigInteger('email_message_id')->nullable(); // Reference to message_queue (if exists)
+            $table->uuid('email_message_id')->nullable(); // Reference to message_queue (if exists)
             $table->boolean('sms_sent')->default(false);
-            $table->unsignedBigInteger('sms_message_id')->nullable();
+            $table->uuid('sms_message_id')->nullable();
             $table->boolean('push_sent')->default(false);
-            $table->unsignedBigInteger('push_message_id')->nullable();
+            $table->uuid('push_message_id')->nullable();
             
             // Engagement
             $table->timestamp('opened_at')->nullable();

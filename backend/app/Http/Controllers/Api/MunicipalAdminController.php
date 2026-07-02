@@ -92,13 +92,16 @@ final class MunicipalAdminController extends Controller
     {
         $admin = MunicipalAdmin::findOrFail($id);
 
+        // NOTE: is_active (and any other privilege field) is intentionally NOT
+        // accepted here. Activation is only possible through verify(), which
+        // requires an explicit admin verification step. This prevents an admin
+        // from self-activating via a plain update.
         $validator = Validator::make($request->all(), [
             'title' => 'sometimes|string|max:255',
             'department' => 'nullable|string|max:255',
             'can_send_emergency' => 'boolean',
             'can_send_test' => 'boolean',
             'phone' => 'sometimes|string|max:50',
-            'is_active' => 'boolean',
         ]);
 
         if ($validator->fails()) {

@@ -89,7 +89,7 @@ export function SarahCampaignDetailPage() {
   useEffect(() => {
     if (!id) return;
     apiClient
-      .get<{ data: CampaignDetail }>(`/sarah/campaigns/${id}`)
+      .get<{ data: CampaignDetail }>(`/v1/sarah/campaigns/${id}`)
       .then((res) => setCampaign(res.data.data))
       .catch(() => setCampaign(null))
       .finally(() => setLoading(false));

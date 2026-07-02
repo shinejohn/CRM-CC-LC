@@ -1,6 +1,6 @@
 /**
  * Customer notes hooks: list + create + delete.
- * Backed by customerNotesApi → /api/v1/customers/{id}/notes.
+ * Backed by customerNotesApi → /v1/customers/{id}/notes.
  */
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';

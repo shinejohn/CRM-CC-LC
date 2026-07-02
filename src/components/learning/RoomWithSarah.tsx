@@ -46,9 +46,9 @@ function getSlides(campaign: Campaign): SlideData[] {
 function resolveAudioBaseUrl(lp: LandingPageData): string {
   const slug = lp.landing_page_slug;
   if (!slug) return "";
-  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
-  // Strip /api/v1 suffix if present to get the base server URL
-  const serverBase = apiUrl.replace(/\/api\/v\d+$/, "");
+  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
+  // Strip the trailing /api (and optional /vN) to get the base server URL
+  const serverBase = apiUrl.replace(/\/api(\/v\d+)?$/, "");
   return `${serverBase}/storage/audio/presentations/${slug}/audio`;
 }
 

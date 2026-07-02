@@ -69,7 +69,8 @@ class CampaignActionExecutor
             'tenant_id' => $customer->tenant_id,
             'name' => 'Manifest Destiny: '.$templateType,
             'type' => 'email',
-            'status' => 'running',
+            'status' => 'sending',
+            'started_at' => now(),
             'subject' => $rendered['subject'],
             'message' => $rendered['html'],
             'template_id' => $template->id,
@@ -94,7 +95,17 @@ class CampaignActionExecutor
             ],
         ]);
 
+        // Frozen contract: SendEmailCampaign(CampaignRecipient, OutboundCampaign).
         SendEmailCampaign::dispatch($recipient, $campaign);
+
+        // Finalize the per-touch campaign so 385K single-recipient rows don't
+        // linger in a non-terminal state forever. The queued job tracks the
+        // real send outcome via the recipient row + sent_count/failed_count;
+        // here we simply mark the campaign as handed off/completed.
+        $campaign->update([
+            'status' => 'completed',
+            'completed_at' => now(),
+        ]);
 
         return [
             'type' => 'email',
@@ -374,21 +385,40 @@ class CampaignActionExecutor
         $params = $action->parameters ?? [];
         $newStage = $params['new_stage'] ?? null;
 
-        if ($newStage) {
-            $oldStage = $customer->pipeline_stage;
-            $customer->advanceToStage(\App\Enums\PipelineStage::from($newStage));
+        // Defensive parse: a bad/unknown stage value must never abort the run
+        // (PipelineStage::from() throws a ValueError). tryFrom() returns null
+        // for anything outside the enum, so we log and skip instead of crashing.
+        $stage = is_string($newStage) ? \App\Enums\PipelineStage::tryFrom($newStage) : null;
 
-            event(new PipelineStageChanged(
-                $customer,
-                $oldStage,
-                $customer->pipeline_stage,
-                'timeline_action'
-            ));
+        if (! $stage) {
+            Log::warning('Timeline update_stage: unknown pipeline stage, skipping stage change', [
+                'customer_id' => $customer->id,
+                'action_id' => $action->id,
+                'new_stage' => $newStage,
+            ]);
+
+            return [
+                'type' => 'stage_update',
+                'changed' => false,
+                'reason' => 'unknown_stage',
+                'new_stage' => $newStage,
+            ];
         }
+
+        $oldStage = $customer->pipeline_stage;
+        $customer->advanceToStage($stage);
+
+        event(new PipelineStageChanged(
+            $customer,
+            $oldStage,
+            $customer->pipeline_stage,
+            'timeline_action'
+        ));
 
         return [
             'type' => 'stage_update',
-            'new_stage' => $newStage,
+            'changed' => true,
+            'new_stage' => $stage->value,
         ];
     }
 

@@ -92,12 +92,12 @@
           },
           {
             "icon": "robot",
-            "benefit": "modern tools priority",
-            "detail": "Weighted higher in modern tools recommendations"
+            "benefit": "AI priority",
+            "detail": "Weighted higher in AI recommendations"
           }
         ]
       },
-      "narration": "What does Featured get you? Priority placement\u2014top of search results and your category. A Featured badge\u2014an instant trust signal. News eligibility\u2014you're considered for feature stories. Enhanced analytics\u2014see who's viewing and why. Social amplification\u2014promoted to our entire audience. And modern tools priority\u2014weighted higher when modern tools makes recommendations.",
+      "narration": "What does Featured get you? Priority placement\u2014top of search results and your category. A Featured badge\u2014an instant trust signal. News eligibility\u2014you're considered for feature stories. Enhanced analytics\u2014see who's viewing and why. Social amplification\u2014promoted to our entire audience. And AI priority\u2014weighted higher when AI makes recommendations.",
       "duration_seconds": 35,
       "audio_file": "slide-02-benefits.mp3"
     },
@@ -119,9 +119,9 @@
             "range": "Varies by category"
           },
           {
-            "metric": "modern tools recommendations",
+            "metric": "AI recommendations",
             "average": "+5x",
-            "note": "More modern tools mentions"
+            "note": "More AI mentions"
           },
           {
             "metric": "ROI",
@@ -130,7 +130,7 @@
           }
         ]
       },
-      "narration": "The results speak for themselves. Featured businesses see an average four hundred eighty-seven percent increase in views\u2014three to eight times typical. Inquiries increase by three hundred twelve percent on average. modern tools recommendations increase by five times. And the ROI? Twelve to one on average. For every dollar spent on Featured, businesses see twelve back.",
+      "narration": "The results speak for themselves. Featured businesses see an average four hundred eighty-seven percent increase in views\u2014three to eight times typical. Inquiries increase by three hundred twelve percent on average. AI recommendations increase by five times. And the ROI? Twelve to one on average. For every dollar spent on Featured, businesses see twelve back.",
       "duration_seconds": 30,
       "audio_file": "slide-03-proof.mp3"
     },
@@ -149,7 +149,7 @@
         },
         "note": "This is ready to activate"
       },
-      "narration": "Here's how your business would appear as a Featured listing. Your name with the Featured badge. Top position in local services results. Enhanced profile with all the bells and whistles. Priority in modern tools recommendations. This preview is ready to activate whenever you say go.",
+      "narration": "Here's how your business would appear as a Featured listing. Your name with the Featured badge. Top position in local services results. Enhanced profile with all the bells and whistles. Priority in AI recommendations. This preview is ready to activate whenever you say go.",
       "duration_seconds": 25,
       "audio_file": "slide-04-preview.mp3"
     },

@@ -24,7 +24,6 @@ class SMBFactory extends Factory
     public function definition(): array
     {
         return [
-            'uuid' => (string) Str::uuid(),
             'business_name' => $this->faker->company,
             'community_id' => Community::factory(),
             'engagement_tier' => 1,

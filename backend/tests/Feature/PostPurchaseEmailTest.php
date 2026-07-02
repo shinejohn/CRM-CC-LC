@@ -13,10 +13,13 @@ use App\Models\Service;
 use App\Models\ServiceSubscription;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Queue;
+use Tests\Concerns\SignsStripeWebhooks;
 use Tests\TestCase;
 
 final class PostPurchaseEmailTest extends TestCase
 {
+    use SignsStripeWebhooks;
+
     public function test_checkout_webhook_dispatches_order_confirmation_email(): void
     {
         Queue::fake();
@@ -42,6 +45,7 @@ final class PostPurchaseEmailTest extends TestCase
         ]);
 
         $payload = [
+            'id' => 'evt_checkout_confirm_1',
             'type' => 'checkout.session.completed',
             'data' => [
                 'object' => [
@@ -51,7 +55,7 @@ final class PostPurchaseEmailTest extends TestCase
             ],
         ];
 
-        $response = $this->postJson('/api/stripe/webhook', $payload);
+        $response = $this->postSignedStripeWebhook($payload);
         $response->assertOk();
 
         Queue::assertPushed(SendOrderConfirmationEmail::class, function ($job) use ($order) {
@@ -91,6 +95,7 @@ final class PostPurchaseEmailTest extends TestCase
         ]);
 
         $payload = [
+            'id' => 'evt_checkout_welcome_1',
             'type' => 'checkout.session.completed',
             'data' => [
                 'object' => [
@@ -100,7 +105,7 @@ final class PostPurchaseEmailTest extends TestCase
             ],
         ];
 
-        $response = $this->postJson('/api/stripe/webhook', $payload);
+        $response = $this->postSignedStripeWebhook($payload);
         $response->assertOk();
 
         Queue::assertPushed(SendWelcomeEmail::class);
@@ -201,14 +206,30 @@ final class PostPurchaseEmailTest extends TestCase
     {
         Queue::fake();
 
-        $order = Order::factory()->create([
-            'customer_email' => 'dupe@example.com',
-            'stripe_session_id' => 'cs_dupe_test',
-            'payment_status' => 'paid',
-            'status' => 'completed',
+        $service = Service::factory()->create([
+            'is_subscription' => true,
+            'price' => 49.99,
+            'billing_period' => 'monthly',
         ]);
 
+        $order = Order::factory()->create([
+            'customer_email' => 'dupe@example.com',
+            'customer_name' => 'Dupe Buyer',
+            'stripe_session_id' => 'cs_dupe_test',
+            'payment_status' => 'pending',
+            'status' => 'pending',
+        ]);
+
+        OrderItem::factory()->create([
+            'order_id' => $order->id,
+            'service_id' => $service->id,
+            'service_name' => $service->name,
+        ]);
+
+        // Same Stripe event id in both deliveries — the idempotency guard must
+        // ensure the second delivery is acknowledged without reprocessing.
         $payload = [
+            'id' => 'evt_dupe_same_1',
             'type' => 'checkout.session.completed',
             'data' => [
                 'object' => [
@@ -218,10 +239,13 @@ final class PostPurchaseEmailTest extends TestCase
             ],
         ];
 
-        $response = $this->postJson('/api/stripe/webhook', $payload);
-        $response->assertOk();
+        $first = $this->postSignedStripeWebhook($payload);
+        $first->assertOk();
 
-        Queue::assertNotPushed(SendOrderConfirmationEmail::class);
-        Queue::assertNotPushed(SendWelcomeEmail::class);
+        $second = $this->postSignedStripeWebhook($payload);
+        $second->assertOk();
+
+        // The confirmation email fires exactly once despite two deliveries.
+        Queue::assertPushed(SendOrderConfirmationEmail::class, 1);
     }
 }

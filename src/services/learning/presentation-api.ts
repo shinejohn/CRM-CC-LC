@@ -7,20 +7,22 @@ import type { Presentation } from '@/types/learning';
 
 export const presentationApi = {
   getPresentations: async (): Promise<Presentation[]> => {
-    return apiClient.get<Presentation[]>('/learning/presentations');
+    // Index returns the { data, meta } envelope; unwrap to the presentations array.
+    const response = await apiClient.get<{ data: Presentation[] }>('/v1/presentations');
+    return response.data;
   },
 
   getPresentation: async (id: string): Promise<Presentation> => {
-    return apiClient.get<Presentation>(`/learning/presentations/${id}`);
+    return apiClient.get<Presentation>(`/v1/presentations/${id}`);
   },
 
   createPresentation: async (data: Partial<Presentation>): Promise<Presentation> => {
-    return apiClient.post<Presentation>('/learning/presentations', data);
+    return apiClient.post<Presentation>('/v1/presentations/generate', data);
   },
 
   generateAudio: async (id: string): Promise<{ job_id: string; status: string }> => {
     return apiClient.post<{ job_id: string; status: string }>(
-      `/learning/presentations/${id}/generate-audio`
+      `/v1/presentations/${id}/audio`
     );
   },
 };

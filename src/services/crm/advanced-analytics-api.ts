@@ -41,7 +41,7 @@ export async function getEngagementScore(
   customerId: string
 ): Promise<EngagementScore> {
   const response = await apiClient.get<{ data: EngagementScore }>(
-    `/api/v1/crm/customers/${customerId}/engagement-score`
+    `/v1/crm/customers/${customerId}/engagement-score`
   );
   return response.data;
 }
@@ -54,7 +54,7 @@ export async function getCampaignROI(
   days: number = 30
 ): Promise<CampaignROI> {
   const response = await apiClient.get<{ data: CampaignROI }>(
-    `/api/v1/crm/campaigns/${campaignId}/roi`,
+    `/v1/crm/campaigns/${campaignId}/roi`,
     { params: { days } }
   );
   return response.data;
@@ -67,7 +67,7 @@ export async function getPredictiveScore(
   customerId: string
 ): Promise<PredictiveScore> {
   const response = await apiClient.get<{ data: PredictiveScore }>(
-    `/api/v1/crm/customers/${customerId}/predictive-score`
+    `/v1/crm/customers/${customerId}/predictive-score`
   );
   return response.data;
 }

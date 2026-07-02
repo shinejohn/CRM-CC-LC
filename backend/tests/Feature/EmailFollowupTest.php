@@ -25,9 +25,9 @@ class EmailFollowupTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->createAndAuthenticateUser();
-
         $this->tenantId = (string) Str::uuid();
+        $this->createAndAuthenticateUser($this->tenantId);
+
         $this->customer = Customer::create([
             'id' => (string) Str::uuid(),
             'tenant_id' => $this->tenantId,
@@ -75,7 +75,7 @@ class EmailFollowupTest extends TestCase
 
         $customer = Customer::create([
             'id' => (string) Str::uuid(),
-            'tenant_id' => (string) \Illuminate\Support\Str::uuid(),
+            'tenant_id' => $this->tenantId,
             'business_name' => 'Test Business',
             'slug' => 'test-business-' . Str::random(6),
             'email' => 'test@example.com',
@@ -106,7 +106,7 @@ class EmailFollowupTest extends TestCase
     {
         $customer = Customer::create([
             'id' => (string) Str::uuid(),
-            'tenant_id' => (string) \Illuminate\Support\Str::uuid(),
+            'tenant_id' => $this->tenantId,
             'business_name' => 'Test Business',
             'slug' => 'test-business-' . Str::random(6),
             'email' => 'test@example.com',
@@ -144,7 +144,7 @@ class EmailFollowupTest extends TestCase
     {
         $customer = Customer::create([
             'id' => (string) Str::uuid(),
-            'tenant_id' => (string) \Illuminate\Support\Str::uuid(),
+            'tenant_id' => $this->tenantId,
             'business_name' => 'Test Business',
             'slug' => 'test-business-' . Str::random(6),
             'email' => 'test@example.com',

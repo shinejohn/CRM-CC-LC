@@ -60,7 +60,7 @@ export const EventsPage: React.FC = () => {
       if (search) params.search = search;
       if (statusFilter) params.status = statusFilter;
       const { data } = await api.get<{ data: Event[]; meta: PaginatedEvents['meta'] }>(
-        '/events',
+        '/v1/events',
         { params }
       );
       const response = data as unknown as { data: Event[]; meta?: PaginatedEvents['meta'] };
@@ -81,7 +81,7 @@ export const EventsPage: React.FC = () => {
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this event?')) return;
     try {
-      await api.delete(`/events/${id}`);
+      await api.delete(`/v1/events/${id}`);
       loadEvents();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to delete event');
@@ -263,7 +263,7 @@ export const EventsPage: React.FC = () => {
                     <button
                       onClick={async () => {
                         try {
-                          await api.put(`/events/${event.id}`, { status: 'published' });
+                          await api.put(`/v1/events/${event.id}`, { status: 'published' });
                           loadEvents();
                         } catch (err) {
                           setError(err instanceof Error ? err.message : 'Failed to publish');
@@ -369,9 +369,9 @@ const EventEditorModal: React.FC<EventEditorModalProps> = ({
         status,
       };
       if (event) {
-        await api.put(`/events/${event.id}`, payload);
+        await api.put(`/v1/events/${event.id}`, payload);
       } else {
-        await api.post('/events', payload);
+        await api.post('/v1/events', payload);
       }
       onSave();
     } catch (err) {

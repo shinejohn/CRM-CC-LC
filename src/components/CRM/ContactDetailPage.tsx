@@ -19,8 +19,9 @@ export default function ContactDetailPage() {
             setIsLoading(true);
             try {
                 const [contRes, actRes] = await Promise.all([
-                    apiClient.get(`/crm/contacts/${id}`).catch(() => ({ data: { data: null } })),
-                    apiClient.get(`/crm/contacts/${id}/activities`).catch(() => ({ data: { data: [] } })),
+                    apiClient.get(`/v1/crm-contacts/${id}`).catch(() => ({ data: { data: null } })),
+                    // TODO: no backend route (ContactDetailPage — /v1/crm-contacts has no nested /activities; use /v1/crm-activities?contact_id=)
+                    apiClient.get(`/v1/crm-contacts/${id}/activities`).catch(() => ({ data: { data: [] } })),
                 ]);
 
                 setContact(contRes.data.data || {

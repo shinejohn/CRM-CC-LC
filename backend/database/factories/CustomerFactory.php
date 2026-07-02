@@ -24,7 +24,11 @@ class CustomerFactory extends Factory
         
         return [
             'id' => (string) Str::uuid(),
-            'tenant_id' => (string) Str::uuid(),
+            // Default to the all-zeros tenant shared by the authenticated test
+            // user (see TestCase::createAndAuthenticateUser) so tenant-scoped
+            // controllers resolve factory customers. Tests needing isolation
+            // pass an explicit tenant_id.
+            'tenant_id' => '00000000-0000-0000-0000-000000000000',
             'slug' => Str::slug($businessName) . '-' . Str::random(6),
             'business_name' => $businessName,
             'owner_name' => $this->faker->name(),

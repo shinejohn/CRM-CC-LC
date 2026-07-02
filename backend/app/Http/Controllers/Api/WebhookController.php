@@ -92,10 +92,12 @@ final class WebhookController extends Controller
         $signature = $request->header('X-Postal-Signature');
         $payload = $request->getContent();
 
+        // Fail closed: if the secret is not configured or the signature is
+        // missing, reject the request rather than trusting an unsigned payload.
         if (! $secret || ! $signature) {
-            // If signature verification is not configured, allow the request
-            // In production, this should be required
-            return true;
+            Log::warning('Postal inbound webhook rejected: missing secret or signature');
+
+            return false;
         }
 
         $expected = base64_encode(hash_hmac('sha1', $payload, $secret, true));

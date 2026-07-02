@@ -8,6 +8,7 @@ use App\Events\AiTaskCompleted;
 use App\Events\AiTaskFailed;
 use App\Events\AiTaskProgress;
 use App\Events\AiTaskStarted;
+use App\Enums\DealStage;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Deal;
@@ -57,6 +58,12 @@ final class AIActionController extends Controller
         $arguments  = $request->input('arguments', []);
         $taskId     = $request->input('task_id') ?? Str::uuid()->toString();
         $user       = $request->user();
+
+        // Tenant is derived strictly from the authenticated user. A user with no
+        // tenant is denied outright — never fall back to their user id or ''.
+        if (! $user || empty($user->tenant_id)) {
+            return response()->json(['error' => 'Forbidden: no tenant assigned to this account.'], 403);
+        }
 
         // Broadcast: task started
         if ($user) {
@@ -108,11 +115,120 @@ final class AIActionController extends Controller
         }
     }
 
+    /**
+     * POST /v1/ai/process-actions
+     *
+     * Execute a batch of AI actions. Each item is delegated to the SAME
+     * private dispatch() used by execute() — no action logic is reimplemented.
+     * Accepts either the {action, arguments} shape or the frontend's
+     * {type, data} shape. Confirmation-required actions run only when
+     * confirmed (per-item `confirmed` or a top-level `confirmed` flag);
+     * otherwise they are returned as needs_confirmation rather than executed.
+     */
+    public function processBatch(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'actions'             => 'required|array|min:1',
+            'actions.*.type'      => 'nullable|string',
+            'actions.*.action'    => 'nullable|string',
+            'actions.*.data'      => 'nullable|array',
+            'actions.*.arguments' => 'nullable|array',
+            'actions.*.confirmed' => 'nullable|boolean',
+            'confirmed'           => 'nullable|boolean',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $user = $request->user();
+        if (! $user || empty($user->tenant_id)) {
+            return response()->json(['error' => 'Forbidden: no tenant assigned to this account.'], 403);
+        }
+
+        $batchConfirmed = $request->boolean('confirmed');
+        $results = [];
+        $allOk   = true;
+
+        foreach ($request->input('actions', []) as $item) {
+            $actionName = $item['action'] ?? $item['type'] ?? null;
+            $arguments  = $item['arguments'] ?? $item['data'] ?? [];
+            $confirmed  = $batchConfirmed || (bool) ($item['confirmed'] ?? false);
+
+            if (! $actionName) {
+                $allOk = false;
+                $results[] = [
+                    'action_type' => null,
+                    'success'     => false,
+                    'error'       => 'Missing action name',
+                ];
+                continue;
+            }
+
+            if (! $confirmed) {
+                $allOk = false;
+                $results[] = [
+                    'action_type' => $actionName,
+                    'success'     => false,
+                    'status'      => 'needs_confirmation',
+                    'error'       => 'Action must be explicitly confirmed',
+                ];
+                continue;
+            }
+
+            try {
+                $result = $this->dispatch($actionName, is_array($arguments) ? $arguments : [], $user);
+
+                $results[] = [
+                    'action_type' => $actionName,
+                    'success'     => true,
+                    'result_id'   => $this->extractResultId($result),
+                    'result'      => $result,
+                ];
+            } catch (\Throwable $e) {
+                $allOk = false;
+                Log::error('AIActionController::processBatch error', [
+                    'action' => $actionName,
+                    'error'  => $e->getMessage(),
+                ]);
+                $results[] = [
+                    'action_type' => $actionName,
+                    'success'     => false,
+                    'error'       => $e->getMessage(),
+                ];
+            }
+        }
+
+        return response()->json([
+            'success' => $allOk,
+            'results' => $results,
+        ]);
+    }
+
+    /**
+     * Best-effort extraction of a created resource id from an action result.
+     */
+    private function extractResultId(mixed $result): ?string
+    {
+        if (! is_array($result)) {
+            return null;
+        }
+
+        foreach (['task_id', 'activity_id', 'deal_id', 'faq_id', 'id'] as $key) {
+            if (! empty($result[$key])) {
+                return (string) $result[$key];
+            }
+        }
+
+        return null;
+    }
+
     // ── Action Dispatcher ──────────────────────────────────────────────────────
 
     private function dispatch(string $action, array $args, ?object $user): mixed
     {
-        $tenantId = $user?->tenant_id ?? $user?->id ?? '';
+        // execute() has already guaranteed a non-empty tenant_id on the user.
+        $tenantId = (string) $user->tenant_id;
 
         return match ($action) {
             'lookup_customer'       => $this->lookupCustomer($args, $tenantId),
@@ -234,13 +350,29 @@ final class AIActionController extends Controller
             throw new \InvalidArgumentException('deal_id and stage are required');
         }
 
+        // Validate against the allowed stage set — never trust a raw string.
+        $allowedStages = array_map(static fn (DealStage $s): string => $s->value, DealStage::cases());
+        if (!in_array($newStage, $allowedStages, true)) {
+            throw new \InvalidArgumentException(
+                'Invalid deal stage: ' . $newStage . '. Allowed: ' . implode(', ', $allowedStages)
+            );
+        }
+
         $deal = Deal::where('tenant_id', $tenantId)->findOrFail($dealId);
-        $deal->update(['stage' => $newStage]);
+
+        // Route through DealService so transition guards (loss reason, terminal
+        // handling, activity logging, won→retention) are applied — same path as
+        // the legitimate DealController::transition endpoint.
+        $deal = $this->dealService->transitionStage(
+            $deal,
+            $newStage,
+            $args['loss_reason'] ?? null
+        );
 
         return [
             'updated'   => true,
             'deal_id'   => $dealId,
-            'new_stage' => $newStage,
+            'new_stage' => $deal->stage,
             'deal_name' => $deal->name,
         ];
     }

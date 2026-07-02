@@ -2,7 +2,7 @@
 // Ops Cost Tracker - Budget vs actual costs
 // ============================================
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useOpsDashboard } from '@/hooks/ops/useOpsDashboard';
 import { useOpsCosts as useCosts } from '@/hooks/ops/useOpsCosts';
 import { OpsCostChart } from '@/components/ops/OpsCostChart';
@@ -11,9 +11,13 @@ export function OpsCostTracker() {
   const { data: snapshot } = useOpsDashboard(60_000);
   const [period, setPeriod] = useState<'daily' | 'weekly' | 'monthly'>('monthly');
 
-  const startDate = new Date();
-  startDate.setMonth(startDate.getMonth() - 1);
-  const endDate = new Date();
+  // Compute the date range once — building `new Date()` in render feeds the
+  // TanStack queryKey and would otherwise trigger an infinite refetch loop.
+  const { startDate, endDate } = useMemo(() => {
+    const start = new Date();
+    start.setMonth(start.getMonth() - 1);
+    return { startDate: start, endDate: new Date() };
+  }, []);
 
   const { data: costsData } = useCosts({
     periodType: period,

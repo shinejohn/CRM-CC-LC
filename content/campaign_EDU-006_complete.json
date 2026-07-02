@@ -18,13 +18,13 @@
     "template_name": "Educational Content",
     "slide_count": 7,
     "duration_seconds": 180,
-    "primary_cta": "activate_modern tools",
+    "primary_cta": "activate_ai",
     "secondary_cta": "download_article",
     "ai_persona": "Sarah",
     "ai_tone": "Professional, reassuring, specific",
     "ai_goal": "Show the business owner they have people and systems working for them",
     "data_capture_fields": "name, email, business_name, industry, current_pain_points",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/modern tools-employee/audio/",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-employee/audio/",
     "conversion_goal": "education",
     "crm_tracking": true,
     "utm_source": "email",
@@ -54,19 +54,19 @@
           "Handled repetitive tasks flawlessly",
           "Cost almost nothing"
         ],
-        "punchline": "That employee exists now. It's modern tools.",
+        "punchline": "That employee exists now. It's AI.",
         "visual": "Friendly search tools helping business owner"
       },
-      "narration": "What if you had an employee who worked twenty-four seven without breaks? Who answered every inquiry within seconds? Who never forgot a follow-up? Who handled all the repetitive tasks flawlessly? And who cost you almost nothing? That employee exists now. It's called modern tools. And it's no longer just for big corporations. Let me show you.",
+      "narration": "What if you had an employee who worked twenty-four seven without breaks? Who answered every inquiry within seconds? Who never forgot a follow-up? Who handled all the repetitive tasks flawlessly? And who cost you almost nothing? That employee exists now. It's called AI. And it's no longer just for big corporations. Let me show you.",
       "duration_seconds": 25,
       "audio_file": "slide-01-intro.mp3"
     },
     {
       "slide_num": 2,
       "component": "ConceptSlide",
-      "title": "The Small Business modern tools Gap",
+      "title": "The Small Business AI Gap",
       "content": {
-        "headline": "Big Companies Have Been Using modern tools for Years",
+        "headline": "Big Companies Have Been Using AI for Years",
         "examples": [
           {
             "company": "Amazon",
@@ -85,10 +85,10 @@
             "use": "Dynamic pricing"
           }
         ],
-        "problem": "Small businesses couldn't afford modern tools. Until now.",
+        "problem": "Small businesses couldn't afford AI. Until now.",
         "shift": "The same technology is now accessible to everyone."
       },
-      "narration": "Big companies have been using modern tools for years. Amazon's personalized recommendations? modern tools. Netflix suggesting what to watch? modern tools. Banks catching fraud? modern tools. Airlines pricing flights? modern tools. Small businesses couldn't afford this technology. It required massive budgets, technical teams, custom development. Until now. The same technology that powers billion-dollar companies is now accessible to you.",
+      "narration": "Big companies have been using AI for years. Amazon's personalized recommendations? AI. Netflix suggesting what to watch? AI. Banks catching fraud? AI. Airlines pricing flights? AI. Small businesses couldn't afford this technology. It required massive budgets, technical teams, custom development. Until now. The same technology that powers billion-dollar companies is now accessible to you.",
       "duration_seconds": 30,
       "audio_file": "slide-02-gap.mp3"
     },
@@ -124,16 +124,16 @@
             "detail": "Schedule posts, respond to comments"
           }
         ],
-        "key_point": "modern tools handles the volume. You handle the relationships."
+        "key_point": "AI handles the volume. You handle the relationships."
       },
-      "narration": "What can your your account team actually do? Customer inquiries\u2014answer questions twenty-four seven, route the complex ones to you. Content creation\u2014write posts, emails, descriptions that sound like you. Scheduling\u2014book appointments and send reminders automatically. Follow-ups\u2014never let a lead go cold again. Data entry\u2014update records and sync platforms without you touching it. Social media\u2014schedule posts and respond to comments. modern tools handles the volume. You handle the relationships.",
+      "narration": "What can your your account team actually do? Customer inquiries\u2014answer questions twenty-four seven, route the complex ones to you. Content creation\u2014write posts, emails, descriptions that sound like you. Scheduling\u2014book appointments and send reminders automatically. Follow-ups\u2014never let a lead go cold again. Data entry\u2014update records and sync platforms without you touching it. Social media\u2014schedule posts and respond to comments. AI handles the volume. You handle the relationships.",
       "duration_seconds": 35,
       "audio_file": "slide-03-capabilities.mp3"
     },
     {
       "slide_num": 4,
       "component": "ConceptSlide",
-      "title": "modern tools + Human = Superpower",
+      "title": "AI + Human = Superpower",
       "content": {
         "headline": "You're Not Being Replaced. You're Being Amplified.",
         "equation": {
@@ -153,9 +153,9 @@
           ],
           "together": "10x what either could do alone"
         },
-        "visual": "Human and modern tools as collaborative partners"
+        "visual": "Human and AI as collaborative partners"
       },
-      "narration": "Let me be clear: you're not being replaced. You're being amplified. modern tools brings speed, consistency, volume, availability, perfect memory. You bring judgment, creativity, real relationships, complex decision-making, genuine care. Together, you're ten times what either could be alone. The business owner who resists modern tools will be outcompeted. The one who partners with modern tools becomes unstoppable.",
+      "narration": "Let me be clear: you're not being replaced. You're being amplified. AI brings speed, consistency, volume, availability, perfect memory. You bring judgment, creativity, real relationships, complex decision-making, genuine care. Together, you're ten times what either could be alone. The business owner who resists AI will be outcompeted. The one who partners with AI becomes unstoppable.",
       "duration_seconds": 30,
       "audio_file": "slide-04-superpower.mp3"
     },
@@ -164,7 +164,7 @@
       "component": "ConceptSlide",
       "title": "The Math",
       "content": {
-        "headline": "What modern tools Saves You",
+        "headline": "What AI Saves You",
         "calculations": [
           {
             "task": "Answering routine inquiries",
@@ -206,10 +206,10 @@
           "business": "Landscaping company, owner worked 70 hours/week",
           "problem": "Couldn't step away\u2014everything depended on him",
           "ai_implementation": [
-            "modern tools handles initial customer inquiries",
-            "modern tools schedules estimates automatically",
-            "modern tools sends follow-ups and reminders",
-            "modern tools creates weekly social content"
+            "AI handles initial customer inquiries",
+            "AI schedules estimates automatically",
+            "AI sends follow-ups and reminders",
+            "AI creates weekly social content"
           ],
           "result": {
             "hours": "70/week \u2192 45/week",
@@ -218,20 +218,20 @@
           }
         }
       },
-      "narration": "Real story. Landscaping company owner. Worked seventy hours a week. Couldn't step away because everything depended on him. He implemented modern tools: handling initial inquiries, scheduling estimates, sending follow-ups, creating social content. Result: seventy hours down to forty-five. Revenue up fifteen percent because he had capacity for more jobs. And this year? He took his first real vacation in eight years. His your account team kept things running while he was gone.",
+      "narration": "Real story. Landscaping company owner. Worked seventy hours a week. Couldn't step away because everything depended on him. He implemented AI: handling initial inquiries, scheduling estimates, sending follow-ups, creating social content. Result: seventy hours down to forty-five. Revenue up fifteen percent because he had capacity for more jobs. And this year? He took his first real vacation in eight years. His your account team kept things running while he was gone.",
       "duration_seconds": 35,
       "audio_file": "slide-06-proof.mp3"
     },
     {
       "slide_num": 7,
       "component": "CTASlide",
-      "title": "Activate Your modern tools",
+      "title": "Activate Your AI",
       "content": {
         "headline": "Your your account team Is Ready",
-        "subhead": "The question isn't whether to use modern tools. It's how soon.",
+        "subhead": "The question isn't whether to use AI. It's how soon.",
         "cta_primary": {
           "label": "Activate Your your account team",
-          "action": "modern tools_setup"
+          "action": "ai_setup"
         },
         "cta_secondary": {
           "label": "Download: The Owner Who Finally Took a Vacation",
@@ -239,7 +239,7 @@
         },
         "assurance": "Start free. See results in days. Scale when ready."
       },
-      "narration": "Your your account team is ready. The question isn't whether to use modern tools\u2014that's already decided. The question is how soon you'll start. Activate your your account team now. Start free, see results in days, scale when you're ready. Or download the full article about the owner who finally took a vacation. Your competitors are figuring this out. Don't be the last one still doing everything manually.",
+      "narration": "Your your account team is ready. The question isn't whether to use AI\u2014that's already decided. The question is how soon you'll start. Activate your your account team now. Start free, see results in days, scale when you're ready. Or download the full article about the owner who finally took a vacation. Your competitors are figuring this out. Don't be the last one still doing everything manually.",
       "duration_seconds": 25,
       "audio_file": "slide-07-cta.mp3"
     }

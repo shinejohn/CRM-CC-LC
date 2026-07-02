@@ -5,6 +5,15 @@ Single-app platform: Learning Center with campaign management, CRM, knowledge ba
 
 Stack: **Laravel 12 API** + **React 18 SPA** + **TypeScript**, deployed on **Railway** (Nixpacks) with **PostgreSQL**.
 
+## 📖 The Bible — the single source of truth (read this first)
+
+**`docs/Fibonacco-Command-Center-Bible.md`** is the canonical reference for this repo — the *why* behind the architecture, data model, campaign engine, billing, auth, conventions, and deploy. `CLAUDE.md` (this file) governs *how* you work; the Bible explains *what was built and why*. They are paired: this is the sibling of the Publishing Platform's `docs/Fibonacco-Content-Bible.md`.
+
+**How to use it:**
+- **Before touching a subsystem, read its Part in the Bible.** Never modify anything touching **customers vs. users** (Part 3), the **Manifest Destiny campaign engine** (Part 4), **billing/Stripe** (Part 5), or **auth/the PP↔CC bridge** (Part 6) without reading that Part first — the *why* there prevents breaking something that took a week to get right.
+- **For "what currently exists" questions**, the live code is the final authority (see the STOP rule below); the Bible is the map, the code is the territory.
+- **Keep it current:** when you change a subsystem, update the relevant Bible section in the same change (append/correct, don't let it drift). If the Bible and the code disagree, fix the Bible.
+
 ## STOP — READ THIS BEFORE ANY CODE REVIEW OR GAP ANALYSIS
 
 **This mistake has been made multiple times and must not happen again.**

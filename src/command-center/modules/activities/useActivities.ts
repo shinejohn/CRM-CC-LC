@@ -64,7 +64,10 @@ export function useActivities(filters: UseActivitiesFilters): UseActivitiesRetur
     } finally {
       setIsLoading(false);
     }
-  }, [filters]);
+    // Key on primitive filter values, not the object identity — callers often
+    // pass a fresh object literal each render, which would otherwise loop.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters.type, filters.priority, filters.customerId, filters.status]);
 
   // Initial fetch
   useEffect(() => {

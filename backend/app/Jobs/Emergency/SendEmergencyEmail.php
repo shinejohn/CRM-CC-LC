@@ -22,7 +22,7 @@ final class SendEmergencyEmail implements ShouldQueue
     public $tries = 1; // No retries - must succeed first time
     
     public function __construct(
-        private int $broadcastId,
+        private string $broadcastId,
         private array $recipients,
     ) {}
     

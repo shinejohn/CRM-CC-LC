@@ -47,11 +47,14 @@ final class PitchProvisioningService
         $tasks = [];
 
         if (! $customer || ! $community) {
-            Log::error('PitchProvisioning: missing customer or community', [
+            // Do NOT silently no-op: the payment has already been captured, so a
+            // silent return means money taken with zero fulfilment. Throw so the
+            // caller surfaces a real failure (and can refund / not convert).
+            Log::error('PitchProvisioning: missing customer or community — cannot provision', [
                 'session_id' => $session->id,
             ]);
 
-            return ['subscription' => null, 'tasks' => [], 'errors' => ['Missing customer or community']];
+            throw new \RuntimeException('Cannot provision pitch session: missing customer or community.');
         }
 
         $categoryGroup = $smb?->category_group ?? $session->business_category ?? null;

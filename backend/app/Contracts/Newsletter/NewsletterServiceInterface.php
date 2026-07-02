@@ -25,7 +25,7 @@ interface NewsletterServiceInterface
     /**
      * Send newsletter immediately
      */
-    public function send(int $newsletterId): array;
+    public function send(string $newsletterId): array;
     
     /**
      * Get newsletter with stats

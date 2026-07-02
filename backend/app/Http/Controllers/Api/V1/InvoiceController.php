@@ -21,14 +21,24 @@ final class InvoiceController extends Controller
     ) {}
 
     /**
+     * Resolve the active tenant strictly from the authenticated user.
+     * Never trust a client-supplied header or request body for tenant identity.
+     */
+    private function tenantId(Request $request): string
+    {
+        $tenantId = $request->user()?->tenant_id;
+
+        abort_if(empty($tenantId), 403, 'Forbidden: no tenant assigned to this account.');
+
+        return (string) $tenantId;
+    }
+
+    /**
      * List invoices (paginated, filterable).
      */
     public function index(Request $request): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $filters = $request->only(['status', 'customer_id', 'search', 'date_from', 'date_to', 'sort_by', 'sort_dir']);
         $perPage = min((int) $request->input('per_page', 20), 100);
@@ -51,10 +61,7 @@ final class InvoiceController extends Controller
      */
     public function store(StoreInvoiceRequest $request): JsonResponse
     {
-        $tenantId = $request->getTenantId();
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $invoice = $this->invoiceService->create($tenantId, $request->validated());
 
@@ -66,10 +73,7 @@ final class InvoiceController extends Controller
      */
     public function show(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $invoice = Invoice::where('tenant_id', $tenantId)
             ->with(['customer', 'quote', 'items', 'payments'])
@@ -83,10 +87,7 @@ final class InvoiceController extends Controller
      */
     public function update(UpdateInvoiceRequest $request, string $id): JsonResponse
     {
-        $tenantId = $request->getTenantId();
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $invoice = Invoice::where('tenant_id', $tenantId)->findOrFail($id);
 
@@ -105,10 +106,7 @@ final class InvoiceController extends Controller
      */
     public function recordPayment(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $request->validate([
             'amount' => 'required|numeric|min:0.01',
@@ -137,10 +135,7 @@ final class InvoiceController extends Controller
      */
     public function send(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $invoice = Invoice::where('tenant_id', $tenantId)->findOrFail($id);
 
@@ -158,10 +153,7 @@ final class InvoiceController extends Controller
      */
     public function pdf(Request $request, string $id, InvoicePdfService $pdfService): Response
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $invoice = Invoice::where('tenant_id', $tenantId)
             ->with(['customer', 'items', 'payments'])
@@ -176,10 +168,7 @@ final class InvoiceController extends Controller
      */
     public function destroy(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $invoice = Invoice::where('tenant_id', $tenantId)->findOrFail($id);
         $invoice->delete();

@@ -41,10 +41,27 @@ Route::post('/approve/upsell/decline', [UpsellController::class, 'declineUpsell'
 
 // Serve audio files from public storage (no auth required)
 Route::get('/storage/audio/{path}', function (string $path) {
-    $file = storage_path("app/public/audio/{$path}");
-    if (! file_exists($file)) {
+    // Path-traversal containment: reject any traversal sequences outright, then
+    // resolve the real path and confirm it stays inside the audio base directory.
+    if (str_contains($path, '..') || str_contains($path, "\0")) {
         abort(404);
     }
+
+    $baseDir = realpath(storage_path('app/public/audio'));
+    if ($baseDir === false) {
+        abort(404);
+    }
+
+    $file = realpath(storage_path("app/public/audio/{$path}"));
+    if ($file === false || ! is_file($file)) {
+        abort(404);
+    }
+
+    // Ensure the resolved file is still contained within the audio base directory.
+    if (! str_starts_with($file, $baseDir.DIRECTORY_SEPARATOR)) {
+        abort(404);
+    }
+
     return response()->file($file, [
         'Content-Type' => 'audio/mpeg',
         'Accept-Ranges' => 'bytes',

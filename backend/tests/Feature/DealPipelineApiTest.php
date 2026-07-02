@@ -21,8 +21,8 @@ class DealPipelineApiTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->createAndAuthenticateUser();
         $this->tenantId = (string) Str::uuid();
+        $this->createAndAuthenticateUser($this->tenantId);
     }
 
     private function getHeaders(): array

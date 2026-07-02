@@ -30,7 +30,9 @@ final class SponsorController extends Controller
             $query->where('is_active', $request->boolean('is_active'));
         }
 
-        $sponsors = $query->orderBy('name')->paginate($request->get('per_page', 20));
+        // Cap per_page so ?per_page=100000000 can't force an unbounded query.
+        $perPage = min((int) $request->get('per_page', 20), 100);
+        $sponsors = $query->orderBy('name')->paginate($perPage);
 
         return response()->json($sponsors);
     }
@@ -129,6 +131,15 @@ final class SponsorController extends Controller
         $validator = Validator::make($request->all(), [
             'sponsorship_type' => 'required|in:newsletter_header,newsletter_section,alert_sponsor',
             'community_id' => 'nullable|exists:communities,id',
+            // advertiser_name and campaign_name are NOT NULL in the sponsorships table —
+            // without them the insert fails at runtime, so require them here.
+            'advertiser_name' => 'required|string|max:255',
+            'campaign_name' => 'required|string|max:255',
+            'advertiser_url' => 'nullable|url|max:255',
+            'logo_path' => 'nullable|string|max:255',
+            'display_copy' => 'nullable|string',
+            'cta_text' => 'nullable|string|max:50',
+            'total_budget_cents' => 'nullable|integer|min:0',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
             'impressions_purchased' => 'required|integer|min:1',

@@ -9,10 +9,13 @@ use App\Models\Customer;
 use App\Models\Service;
 use App\Models\ServiceSubscription;
 use Illuminate\Support\Facades\Queue;
+use Tests\Concerns\SignsStripeWebhooks;
 use Tests\TestCase;
 
 final class DunningTest extends TestCase
 {
+    use SignsStripeWebhooks;
+
     public function test_invoice_payment_failed_webhook_increments_renewal_attempts(): void
     {
         Queue::fake();
@@ -28,6 +31,7 @@ final class DunningTest extends TestCase
         ]);
 
         $payload = [
+            'id' => 'evt_dunning_fail_1',
             'type' => 'invoice.payment_failed',
             'data' => [
                 'object' => [
@@ -37,7 +41,7 @@ final class DunningTest extends TestCase
             ],
         ];
 
-        $response = $this->postJson('/api/stripe/webhook', $payload);
+        $response = $this->postSignedStripeWebhook($payload);
         $response->assertOk();
 
         $sub->refresh();
@@ -65,6 +69,7 @@ final class DunningTest extends TestCase
         ]);
 
         $payload = [
+            'id' => 'evt_dunning_fail_3',
             'type' => 'invoice.payment_failed',
             'data' => [
                 'object' => [
@@ -74,7 +79,7 @@ final class DunningTest extends TestCase
             ],
         ];
 
-        $response = $this->postJson('/api/stripe/webhook', $payload);
+        $response = $this->postSignedStripeWebhook($payload);
         $response->assertOk();
 
         $sub->refresh();
@@ -99,6 +104,7 @@ final class DunningTest extends TestCase
         $periodEnd = now()->addMonth()->getTimestamp();
 
         $payload = [
+            'id' => 'evt_dunning_success_1',
             'type' => 'invoice.payment_succeeded',
             'data' => [
                 'object' => [
@@ -117,7 +123,7 @@ final class DunningTest extends TestCase
             ],
         ];
 
-        $response = $this->postJson('/api/stripe/webhook', $payload);
+        $response = $this->postSignedStripeWebhook($payload);
         $response->assertOk();
 
         $sub->refresh();
@@ -130,6 +136,7 @@ final class DunningTest extends TestCase
     public function test_invoice_payment_succeeded_ignores_non_subscription_invoices(): void
     {
         $payload = [
+            'id' => 'evt_no_sub_1',
             'type' => 'invoice.payment_succeeded',
             'data' => [
                 'object' => [
@@ -139,7 +146,7 @@ final class DunningTest extends TestCase
             ],
         ];
 
-        $response = $this->postJson('/api/stripe/webhook', $payload);
+        $response = $this->postSignedStripeWebhook($payload);
         $response->assertOk();
     }
 

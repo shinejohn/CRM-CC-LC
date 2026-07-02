@@ -169,7 +169,9 @@ final class SubscriptionRenewalTest extends TestCase
         $job->handle($mock);
 
         $sub->refresh();
-        $this->assertSame(1, $sub->renewal_attempts);
+        // A subscription with no Stripe customer is skipped (reminder sent) and
+        // does NOT increment renewal_attempts — it is not a failed charge.
+        $this->assertSame(0, $sub->renewal_attempts);
         $this->assertStringContainsString('No Stripe customer ID', $sub->renewal_failure_reason);
 
         Queue::assertPushed(SendPaymentReminder::class, function ($job) {

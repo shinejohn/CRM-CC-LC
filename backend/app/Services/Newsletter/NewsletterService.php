@@ -94,7 +94,7 @@ final class NewsletterService implements NewsletterServiceInterface
         return $newsletter->fresh();
     }
     
-    public function send(int $newsletterId): array
+    public function send(string $newsletterId): array
     {
         $newsletter = Newsletter::findOrFail($newsletterId);
         

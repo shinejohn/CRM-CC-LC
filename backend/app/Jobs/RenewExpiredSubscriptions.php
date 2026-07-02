@@ -89,22 +89,28 @@ final class RenewExpiredSubscriptions implements ShouldQueue
         $stripeCustomerId = $customer->stripe_customer_id ?? $subscription->stripe_customer_id;
 
         if (! $stripeCustomerId) {
-            DB::transaction(function () use ($subscription) {
-                $subscription->update([
-                    'renewal_failure_reason' => 'No Stripe customer ID — cannot charge automatically',
-                    'renewal_attempts' => $subscription->renewal_attempts + 1,
-                    'last_renewal_attempt_at' => now(),
-                ]);
-
-                if ($subscription->renewal_attempts + 1 >= self::MAX_RENEWAL_ATTEMPTS) {
-                    $subscription->update(['status' => 'suspended']);
-                }
-            });
+            // No Stripe customer means we can't auto-charge — but this is NOT a
+            // payment failure. Do not increment attempts or suspend an otherwise
+            // paid subscription; just record the reason and nudge the customer.
+            $subscription->update([
+                'renewal_failure_reason' => 'No Stripe customer ID — cannot charge automatically',
+                'last_renewal_attempt_at' => now(),
+            ]);
 
             SendPaymentReminder::dispatch($subscription, 'missing_payment_method');
 
+            Log::info('Subscription renewal skipped — no Stripe customer', [
+                'subscription_id' => $subscription->id,
+            ]);
+
             return;
         }
+
+        // Deterministic idempotency key: a retry after a mid-run crash reuses the
+        // same key so Stripe returns the original PaymentIntent instead of
+        // charging the customer a second time for the same billing period.
+        $periodKey = optional($subscription->subscription_expires_at)->timestamp ?? 'no-expiry';
+        $idempotencyKey = "renew_{$subscription->id}_{$periodKey}";
 
         try {
             $paymentIntent = $stripeService->createPaymentIntent($amountCents, 'usd', [
@@ -112,7 +118,7 @@ final class RenewExpiredSubscriptions implements ShouldQueue
                 'subscription_id' => $subscription->id,
                 'service_id' => $service->id,
                 'renewal' => 'true',
-            ]);
+            ], $idempotencyKey);
 
             if ($paymentIntent->status === 'succeeded') {
                 DB::transaction(function () use ($subscription, $paymentIntent) {

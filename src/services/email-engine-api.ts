@@ -83,7 +83,7 @@ export interface EmailCampaignSummary {
 
 export async function getEmailHealthStats(): Promise<EmailHealthStats> {
   const response = await apiClient.get<{ data: EmailHealthStats }>(
-    '/api/v1/email/health/stats'
+    '/v1/email/health/stats'
   );
   return response.data;
 }
@@ -93,7 +93,7 @@ export async function getRecentEmailEvents(params?: {
   event_type?: string;
 }): Promise<EmailDeliveryEvent[]> {
   const response = await apiClient.get<{ data: EmailDeliveryEvent[] }>(
-    '/api/v1/email/health/events',
+    '/v1/email/health/events',
     { params }
   );
   return response.data;
@@ -104,7 +104,7 @@ export async function getEmailCampaignSummaries(params?: {
   limit?: number;
 }): Promise<EmailCampaignSummary[]> {
   const response = await apiClient.get<{ data: EmailCampaignSummary[] }>(
-    '/api/v1/outbound/campaigns',
+    '/v1/outbound/campaigns',
     { params: { ...params, type: 'email' } }
   );
   return response.data;
@@ -114,14 +114,14 @@ export async function getEmailCampaignSummaries(params?: {
 
 export async function getContactHealthStats(): Promise<ContactHealthStats> {
   const response = await apiClient.get<{ data: ContactHealthStats }>(
-    '/api/v1/email/contacts/health'
+    '/v1/email/contacts/health'
   );
   return response.data;
 }
 
 export async function triggerListRevalidation(): Promise<{ message: string; job_id: string }> {
   const response = await apiClient.post<{ data: { message: string; job_id: string } }>(
-    '/api/v1/email/contacts/revalidate'
+    '/v1/email/contacts/revalidate'
   );
   return response.data;
 }
@@ -135,7 +135,7 @@ export async function getInboundEmails(params?: {
   per_page?: number;
 }): Promise<InboundEmail[]> {
   const response = await apiClient.get<{ data: InboundEmail[] }>(
-    '/api/v1/email/inbound',
+    '/v1/email/inbound',
     { params }
   );
   return response.data;
@@ -143,7 +143,7 @@ export async function getInboundEmails(params?: {
 
 export async function getInboundEmail(id: string): Promise<InboundEmail> {
   const response = await apiClient.get<{ data: InboundEmail }>(
-    `/api/v1/email/inbound/${id}`
+    `/v1/email/inbound/${id}`
   );
   return response.data;
 }
@@ -153,7 +153,7 @@ export async function updateInboundEmailStatus(
   status: 'responded' | 'escalated' | 'archived'
 ): Promise<InboundEmail> {
   const response = await apiClient.post<{ data: InboundEmail }>(
-    `/api/v1/email/inbound/${id}/status`,
+    `/v1/email/inbound/${id}/status`,
     { status }
   );
   return response.data;
@@ -164,7 +164,7 @@ export async function overrideAIResponse(
   response_text: string
 ): Promise<InboundEmail> {
   const response = await apiClient.post<{ data: InboundEmail }>(
-    `/api/v1/email/inbound/${id}/override`,
+    `/v1/email/inbound/${id}/override`,
     { response: response_text }
   );
   return response.data;
@@ -175,7 +175,7 @@ export async function escalateInboundEmail(
   note?: string
 ): Promise<InboundEmail> {
   const response = await apiClient.post<{ data: InboundEmail }>(
-    `/api/v1/email/inbound/${id}/escalate`,
+    `/v1/email/inbound/${id}/escalate`,
     { note }
   );
   return response.data;

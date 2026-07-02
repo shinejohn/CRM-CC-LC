@@ -23,7 +23,7 @@ final class ProcessMessage implements ShouldQueue
     public $tries = 1; // Fail fast, handle retries in code
 
     public function __construct(
-        public int $messageId
+        public string $messageId
     ) {}
     
     public function handle(ChannelFactory $channelFactory): void
@@ -115,7 +115,7 @@ final class ProcessMessage implements ShouldQueue
             // Re-dispatch with delay
             dispatch(new self($message->id))
                 ->delay(now()->addSeconds($delay))
-                ->onQueue("messages-{$message->priority}");
+                ->onQueue('messages-'.strtolower((string) $message->priority));
         }
     }
     

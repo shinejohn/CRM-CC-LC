@@ -97,7 +97,7 @@ export async function listPersonalities(params?: {
   page?: number;
 }): Promise<AiPersonality[]> {
   const response = await apiClient.get<PaginatedResponse<AiPersonality>>(
-    '/api/v1/personalities',
+    '/v1/personalities',
     { params }
   );
   return response.data;
@@ -108,7 +108,7 @@ export async function listPersonalities(params?: {
  */
 export async function getPersonality(id: string): Promise<AiPersonality> {
   const response = await apiClient.get<{ data: AiPersonality }>(
-    `/api/v1/personalities/${id}`
+    `/v1/personalities/${id}`
   );
   return response.data;
 }
@@ -120,7 +120,7 @@ export async function createPersonality(
   request: CreatePersonalityRequest
 ): Promise<AiPersonality> {
   const response = await apiClient.post<{ data: AiPersonality }>(
-    '/api/v1/personalities',
+    '/v1/personalities',
     request
   );
   return response.data;
@@ -134,7 +134,7 @@ export async function updatePersonality(
   updates: Partial<CreatePersonalityRequest & { is_active?: boolean }>
 ): Promise<AiPersonality> {
   const response = await apiClient.put<{ data: AiPersonality }>(
-    `/api/v1/personalities/${id}`,
+    `/v1/personalities/${id}`,
     updates
   );
   return response.data;
@@ -144,7 +144,7 @@ export async function updatePersonality(
  * Delete personality
  */
 export async function deletePersonality(id: string): Promise<void> {
-  await apiClient.delete(`/api/v1/personalities/${id}`);
+  await apiClient.delete(`/v1/personalities/${id}`);
 }
 
 /**
@@ -156,7 +156,7 @@ export async function assignToCustomer(request: {
   rules?: Record<string, unknown>;
 }): Promise<PersonalityAssignment> {
   const response = await apiClient.post<{ data: PersonalityAssignment }>(
-    '/api/v1/personalities/assign',
+    '/v1/personalities/assign',
     request
   );
   return response.data;
@@ -169,7 +169,7 @@ export async function getCustomerPersonality(
   customerId: string
 ): Promise<PersonalityAssignment | null> {
   const response = await apiClient.get<{ data: PersonalityAssignment | null }>(
-    `/api/v1/personalities/customers/${customerId}/personality`
+    `/v1/personalities/customers/${customerId}/personality`
   );
   return response.data;
 }
@@ -184,7 +184,7 @@ export async function listAssignments(params?: {
   page?: number;
 }): Promise<PersonalityAssignment[]> {
   const response = await apiClient.get<PaginatedResponse<PersonalityAssignment>>(
-    '/api/v1/personalities/assignments',
+    '/v1/personalities/assignments',
     { params }
   );
   return response.data;
@@ -203,6 +203,6 @@ export async function generateResponse(
 ): Promise<{ response: string; personality_id: string; personality_name: string }> {
   const response = await apiClient.post<{
     data: { response: string; personality_id: string; personality_name: string };
-  }>(`/api/v1/personalities/${personalityId}/generate-response`, request);
+  }>(`/v1/personalities/${personalityId}/generate-response`, request);
   return response.data;
 }

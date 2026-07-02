@@ -6,12 +6,6 @@
 import { apiClient } from './api-client';
 import type { SearchResult } from '@/types/learning';
 
-const DEFAULT_TENANT_ID = '00000000-0000-0000-0000-000000000000';
-
-function getTenantId(): string {
-  return localStorage.getItem('tenant_id') || DEFAULT_TENANT_ID;
-}
-
 export interface SearchApiResponse {
   data: Array<{
     id: string;
@@ -50,7 +44,6 @@ export const searchApi = {
   ): Promise<SearchResult[]> => {
     const response = await apiClient.post<SearchApiResponse>('/v1/search', {
       query,
-      tenant_id: getTenantId(),
       limit: options?.limit ?? 10,
       threshold: options?.threshold ?? 0.7,
     });
@@ -66,7 +59,6 @@ export const searchApi = {
   ): Promise<SearchResult[]> => {
     const response = await apiClient.post<SearchApiResponse>('/v1/search/fulltext', {
       query,
-      tenant_id: getTenantId(),
       limit: options?.limit ?? 10,
     });
     return (response.data ?? []).map((item, i) =>
@@ -86,7 +78,6 @@ export const searchApi = {
   ): Promise<SearchResult[]> => {
     const response = await apiClient.post<SearchApiResponse>('/v1/search/hybrid', {
       query,
-      tenant_id: getTenantId(),
       limit: options?.limit ?? 10,
       threshold: options?.threshold ?? 0.7,
       semantic_weight: options?.semantic_weight ?? 0.7,

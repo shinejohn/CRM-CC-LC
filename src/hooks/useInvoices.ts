@@ -1,6 +1,6 @@
 /**
  * Invoice hooks: get, record payment, send.
- * Backed by invoicesApi (src/services/crm/invoices-api.ts) → /api/v1/crm-invoices.
+ * Backed by invoicesApi (src/services/crm/invoices-api.ts) → /v1/crm-invoices.
  */
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';

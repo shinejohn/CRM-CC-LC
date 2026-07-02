@@ -1,7 +1,7 @@
 /**
  * Outbound campaign hooks: list, get, create, start, delete, analytics.
  * Backed by outboundCampaignsApi (src/services/crm/outbound-campaigns-api.ts)
- * → /api/v1/outbound/campaigns.
+ * → /v1/outbound/campaigns.
  */
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';

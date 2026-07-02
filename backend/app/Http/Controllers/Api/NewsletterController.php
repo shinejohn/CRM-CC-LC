@@ -74,7 +74,7 @@ final class NewsletterController extends Controller
     /**
      * Get newsletter
      */
-    public function show(int $id): JsonResponse
+    public function show(string $id): JsonResponse
     {
         $newsletter = $this->newsletterService->getWithStats($id);
 
@@ -86,7 +86,7 @@ final class NewsletterController extends Controller
     /**
      * Update newsletter
      */
-    public function update(Request $request, int $id): JsonResponse
+    public function update(Request $request, string $id): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'subject' => 'sometimes|string|max:255',
@@ -112,7 +112,7 @@ final class NewsletterController extends Controller
     /**
      * Delete newsletter
      */
-    public function destroy(int $id): JsonResponse
+    public function destroy(string $id): JsonResponse
     {
         $newsletter = Newsletter::findOrFail($id);
         $newsletter->delete();
@@ -125,7 +125,7 @@ final class NewsletterController extends Controller
     /**
      * Build newsletter content
      */
-    public function build(int $id): JsonResponse
+    public function build(string $id): JsonResponse
     {
         $newsletter = $this->newsletterService->build($id);
 
@@ -138,7 +138,7 @@ final class NewsletterController extends Controller
     /**
      * Schedule newsletter
      */
-    public function schedule(Request $request, int $id): JsonResponse
+    public function schedule(Request $request, string $id): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'scheduled_for' => 'required|date|after:now',
@@ -162,7 +162,7 @@ final class NewsletterController extends Controller
     /**
      * Send newsletter
      */
-    public function send(int $id): JsonResponse
+    public function send(string $id): JsonResponse
     {
         $result = $this->newsletterService->send($id);
 
@@ -175,7 +175,7 @@ final class NewsletterController extends Controller
     /**
      * Cancel newsletter
      */
-    public function cancel(int $id): JsonResponse
+    public function cancel(string $id): JsonResponse
     {
         $success = $this->newsletterService->cancel($id);
 
@@ -193,7 +193,7 @@ final class NewsletterController extends Controller
     /**
      * Preview newsletter
      */
-    public function preview(int $id): JsonResponse
+    public function preview(string $id): JsonResponse
     {
         $newsletter = Newsletter::with(['community', 'contentItems'])->findOrFail($id);
 
@@ -206,7 +206,7 @@ final class NewsletterController extends Controller
     /**
      * Test send newsletter
      */
-    public function testSend(Request $request, int $id): JsonResponse
+    public function testSend(Request $request, string $id): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
@@ -225,7 +225,7 @@ final class NewsletterController extends Controller
     /**
      * Get newsletter stats
      */
-    public function stats(int $id): JsonResponse
+    public function stats(string $id): JsonResponse
     {
         $newsletter = $this->newsletterService->getWithStats($id);
 
@@ -262,7 +262,7 @@ final class NewsletterController extends Controller
     /**
      * Unsubscribe handler (public)
      */
-    public function unsubscribe(Request $request, int $community, string $token): \Illuminate\View\View
+    public function unsubscribe(Request $request, string $community, string $token): \Illuminate\View\View
     {
         // TODO: Implement unsubscribe logic with token validation
         return view('newsletters.unsubscribe', [

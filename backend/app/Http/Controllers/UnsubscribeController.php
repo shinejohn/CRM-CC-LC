@@ -18,24 +18,33 @@ final class UnsubscribeController extends Controller
      * reach this method the signature has already been verified. Unauthenticated
      * visitors have no tenant context, so the customer lookup must bypass the
      * tenant global scope.
+     *
+     * CRITICAL: GET must NOT mutate. Mail clients and security scanners (Outlook
+     * SafeLinks, Proofpoint, Barracuda, etc.) silently prefetch/GET every link in
+     * a message — suppressing on GET would unsubscribe recipients who never clicked.
+     * We render a confirmation page whose button POSTs back to the same signed URL;
+     * the suppression happens there.
      */
     public function show(Request $request, string $customer): Response
     {
         $model = $this->resolveCustomer($customer);
 
-        if ($model) {
-            $this->suppress($model);
-        }
-
         return response()->view('unsubscribe', [
+            'confirmed' => false,
             'businessName' => $model?->business_name,
             'mailto' => (string) config('mail.unsubscribe_mailto'),
+            // Same signed URL — the signature is method-agnostic, so the confirm
+            // button can POST to it. Route is CSRF-exempt for mailbox providers.
+            'actionUrl' => $request->fullUrl(),
         ]);
     }
 
     /**
-     * POST handler backing the RFC 8058 one-click List-Unsubscribe-Post header.
-     * Returns a bare 200 with no body, as mailbox providers expect.
+     * POST handler. Performs the actual suppression. Backs both:
+     *   - the RFC 8058 one-click List-Unsubscribe-Post header (mailbox providers),
+     *     which send `List-Unsubscribe=One-Click` in the body and expect a bare 200;
+     *   - the human confirmation button rendered by show(), which gets a friendly
+     *     confirmation page.
      */
     public function oneClick(Request $request, string $customer): Response
     {
@@ -45,7 +54,18 @@ final class UnsubscribeController extends Controller
             $this->suppress($model);
         }
 
-        return response('', 200);
+        // RFC 8058 one-click from a mailbox provider — bare 200, no body.
+        if ($request->input('List-Unsubscribe') === 'One-Click') {
+            return response('', 200);
+        }
+
+        // Genuine human click on the confirmation button — show the result page.
+        return response()->view('unsubscribe', [
+            'confirmed' => true,
+            'businessName' => $model?->business_name,
+            'mailto' => (string) config('mail.unsubscribe_mailto'),
+            'actionUrl' => $request->fullUrl(),
+        ]);
     }
 
     /**

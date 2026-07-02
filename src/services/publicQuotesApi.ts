@@ -77,19 +77,19 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
 export const publicQuotesApi = {
   get: (token: string): Promise<PublicQuoteResponse> =>
-    request<PublicQuoteResponse>(`/api/v1/public/quotes/${encodeURIComponent(token)}`, {
+    request<PublicQuoteResponse>(`/v1/public/quotes/${encodeURIComponent(token)}`, {
       method: 'GET',
     }),
 
   accept: (token: string): Promise<PublicQuoteAcceptResponse> =>
     request<PublicQuoteAcceptResponse>(
-      `/api/v1/public/quotes/${encodeURIComponent(token)}/accept`,
+      `/v1/public/quotes/${encodeURIComponent(token)}/accept`,
       { method: 'POST' }
     ),
 
   decline: (token: string, reason?: string): Promise<PublicQuoteResponse> =>
     request<PublicQuoteResponse>(
-      `/api/v1/public/quotes/${encodeURIComponent(token)}/decline`,
+      `/v1/public/quotes/${encodeURIComponent(token)}/decline`,
       {
         method: 'POST',
         body: JSON.stringify(reason ? { reason } : {}),

@@ -14,27 +14,27 @@ interface AlertServiceInterface
     /**
      * Submit alert for approval
      */
-    public function submitForApproval(int $alertId): Alert;
+    public function submitForApproval(string $alertId): Alert;
     
     /**
      * Approve alert (triggers send if not scheduled)
      */
-    public function approve(int $alertId, int $approvedBy): Alert;
+    public function approve(string $alertId, string $approvedBy): Alert;
     
     /**
      * Send alert immediately
      */
-    public function send(int $alertId): array;
+    public function send(string $alertId): array;
     
     /**
      * Cancel alert
      */
-    public function cancel(int $alertId): bool;
+    public function cancel(string $alertId): bool;
     
     /**
      * Get recipient count estimate
      */
-    public function estimateRecipients(int $alertId): int;
+    public function estimateRecipients(string $alertId): int;
 }
 
 

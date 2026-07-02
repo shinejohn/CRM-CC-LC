@@ -1,6 +1,6 @@
 /**
  * Email template builder hooks: list + get + create + update + delete + preview.
- * Backed by emailTemplatesApi → /api/v1/outbound/email-templates.
+ * Backed by emailTemplatesApi → /v1/outbound/email-templates.
  */
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';

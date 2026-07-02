@@ -58,7 +58,7 @@ export const SubscriptionsPage: React.FC = () => {
     setIsLoading(true);
     try {
       const { apiClient } = await import('@/services/api');
-      const res = await apiClient.get('/community-subscriptions');
+      const res = await apiClient.get('/v1/community-subscriptions');
       setSubscriptions(res.data.data || []);
     } catch {
       setSubscriptions([]);
@@ -73,7 +73,7 @@ export const SubscriptionsPage: React.FC = () => {
     setError(null);
     try {
       const { apiClient } = await import('@/services/api');
-      await apiClient.delete(`/community-subscriptions/${selectedSubForCancel.id}`, {
+      await apiClient.delete(`/v1/community-subscriptions/${selectedSubForCancel.id}`, {
         data: { reason: 'Customer requested cancellation' },
       });
       setCancelDialogOpen(false);

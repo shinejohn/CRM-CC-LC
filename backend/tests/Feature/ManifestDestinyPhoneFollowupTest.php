@@ -35,9 +35,11 @@ class ManifestDestinyPhoneFollowupTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->createAndAuthenticateUser();
 
+        // Records + executor use the system tenant; authenticate the user under
+        // the same tenant so tenant-scoped reads (interactions) resolve.
         $this->systemTenantId = (string) config('fibonacco.system_tenant_id');
+        $this->createAndAuthenticateUser($this->systemTenantId);
 
         config([
             'services.twilio.account_sid' => 'ACtestsid',

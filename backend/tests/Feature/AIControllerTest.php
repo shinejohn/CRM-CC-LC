@@ -31,7 +31,9 @@ class AIControllerTest extends TestCase
 
         $data = [
             'tenant_id' => '00000000-0000-0000-0000-000000000000',
-            'message' => 'Hello, how can you help?',
+            'messages' => [
+                ['role' => 'user', 'content' => 'Hello, how can you help?'],
+            ],
             'context' => [],
         ];
 
@@ -68,6 +70,6 @@ class AIControllerTest extends TestCase
         $response = $this->postJson('/api/v1/ai/chat', []);
 
         $response->assertStatus(422)
-            ->assertJsonValidationErrors(['message']);
+            ->assertJsonValidationErrors(['messages']);
     }
 }

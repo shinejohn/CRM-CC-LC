@@ -14,22 +14,22 @@ interface EmergencyBroadcastServiceInterface
     /**
      * Send broadcast immediately (P0 priority)
      */
-    public function send(int $broadcastId): array;
+    public function send(string $broadcastId): array;
     
     /**
      * Cancel broadcast (if not yet sent)
      */
-    public function cancel(int $broadcastId, string $reason): bool;
+    public function cancel(string $broadcastId, string $reason): bool;
     
     /**
      * Get real-time delivery status
      */
-    public function getDeliveryStatus(int $broadcastId): array;
+    public function getDeliveryStatus(string $broadcastId): array;
     
     /**
      * Send test broadcast (limited recipients)
      */
-    public function sendTest(int $broadcastId, array $testRecipients): array;
+    public function sendTest(string $broadcastId, array $testRecipients): array;
 }
 
 

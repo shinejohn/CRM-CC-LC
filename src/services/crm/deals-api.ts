@@ -39,7 +39,7 @@ export interface PipelineByStage {
 export const dealsApi = {
   /** Get deals grouped by stage for kanban pipeline */
   pipeline: async (): Promise<PipelineByStage> => {
-    const res = await apiClient.get<{ data: PipelineByStage }>('/api/v1/deals/pipeline');
+    const res = await apiClient.get<{ data: PipelineByStage }>('/v1/deals/pipeline');
     return res.data;
   },
 
@@ -61,36 +61,36 @@ export const dealsApi = {
     });
     const query = searchParams.toString();
     return apiClient.get<{ data: Deal[]; meta: { current_page: number; last_page: number; per_page: number; total: number } }>(
-      `/api/v1/deals${query ? `?${query}` : ''}`
+      `/v1/deals${query ? `?${query}` : ''}`
     );
   },
 
   /** Get single deal */
   get: async (id: string): Promise<Deal> => {
-    const res = await apiClient.get<{ data: Deal }>(`/api/v1/deals/${id}`);
+    const res = await apiClient.get<{ data: Deal }>(`/v1/deals/${id}`);
     return res.data;
   },
 
   /** Create deal */
   create: async (data: { customer_id: string; contact_id?: string; name: string; value?: number; stage?: DealStage; notes?: string; expected_close_at?: string }): Promise<Deal> => {
-    const res = await apiClient.post<{ data: Deal }>('/api/v1/deals', data);
+    const res = await apiClient.post<{ data: Deal }>('/v1/deals', data);
     return res.data;
   },
 
   /** Update deal */
   update: async (id: string, data: Partial<{ contact_id: string; name: string; value: number; notes: string; expected_close_at: string }>): Promise<Deal> => {
-    const res = await apiClient.put<{ data: Deal }>(`/api/v1/deals/${id}`, data);
+    const res = await apiClient.put<{ data: Deal }>(`/v1/deals/${id}`, data);
     return res.data;
   },
 
   /** Transition deal stage (for drag-drop, won, lost) */
   transition: async (id: string, stage: DealStage, loss_reason?: string): Promise<Deal> => {
-    const res = await apiClient.post<{ data: Deal }>(`/api/v1/deals/${id}/transition`, { stage, loss_reason });
+    const res = await apiClient.post<{ data: Deal }>(`/v1/deals/${id}/transition`, { stage, loss_reason });
     return res.data;
   },
 
   /** Delete deal */
   delete: async (id: string): Promise<void> => {
-    await apiClient.delete(`/api/v1/deals/${id}`);
+    await apiClient.delete(`/v1/deals/${id}`);
   },
 };

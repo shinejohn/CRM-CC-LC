@@ -16,12 +16,22 @@ final class TenantScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        if (Auth::check()) {
-            $user = Auth::user();
-
-            if (! empty($user->tenant_id)) {
-                $builder->where($model->getTable().'.tenant_id', $user->tenant_id);
-            }
+        if (! Auth::check()) {
+            return;
         }
+
+        $user = Auth::user();
+
+        if (! empty($user->tenant_id)) {
+            // Constrain to the authenticated user's tenant.
+            $builder->where($model->getTable().'.tenant_id', $user->tenant_id);
+
+            return;
+        }
+
+        // Deny-by-default: an authenticated user with NO tenant must match
+        // nothing, never the whole (untenanted) table. Leaving the query
+        // unfiltered here would leak every tenant's rows.
+        $builder->whereRaw('1 = 0');
     }
 }

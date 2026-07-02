@@ -104,7 +104,7 @@ export async function generateCampaign(
   request: GenerateCampaignRequest
 ): Promise<CampaignData> {
   const response = await apiClient.post<GenerateCampaignResponse>(
-    '/api/v1/campaigns/generate',
+    '/v1/campaigns/generate',
     request
   );
   return response.data;
@@ -114,7 +114,7 @@ export async function generateCampaign(
  * Get available campaign templates
  */
 export async function getCampaignTemplates(): Promise<CampaignTemplate[]> {
-  const response = await apiClient.get<TemplatesResponse>('/api/v1/campaigns/templates');
+  const response = await apiClient.get<TemplatesResponse>('/v1/campaigns/templates');
   return response.data;
 }
 
@@ -124,7 +124,7 @@ export async function getCampaignTemplates(): Promise<CampaignTemplate[]> {
 export async function getCampaignSuggestions(
   customerId: string
 ): Promise<CampaignSuggestion[]> {
-  const response = await apiClient.post<SuggestionsResponse>('/api/v1/campaigns/suggestions', {
+  const response = await apiClient.post<SuggestionsResponse>('/v1/campaigns/suggestions', {
     customer_id: customerId,
   });
   return response.data;

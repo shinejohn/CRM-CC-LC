@@ -70,8 +70,13 @@ final class ProcessMessages implements ShouldQueue
         
         // If we processed a full batch, there might be more
         if ($messages->count() === $this->batchSize) {
+            // Normalize to lowercase: the DB stores priority UPPERCASE (e.g. "P3") but the
+            // supervised Horizon queues are lowercase ("messages-p3"). Without strtolower the
+            // continuation lands on an unsupervised "messages-P3" queue and stalls.
+            $queue = 'messages-' . strtolower($this->priority);
+
             dispatch(new self($this->priority, $this->batchSize))
-                ->onQueue("messages-{$this->priority}");
+                ->onQueue($queue);
         }
     }
     

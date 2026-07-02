@@ -139,31 +139,31 @@ export function AppRouter() {
         {/* CRM Routes (standalone, no CC layout)
             Canonical CRM paths are /command-center/sell/* (CC layout, auth-guarded).
             These /crm/* routes are kept for backward compatibility and direct-link access. */}
-        <Route path="/crm" element={<CrmDashboardPage />} />
-        <Route path="/crm/dashboard" element={<CrmDashboardPage />} />
-        <Route path="/crm/customers" element={<CustomerListPage />} />
-        <Route path="/crm/customers/:id" element={<CustomerDetailPage />} />
-        <Route path="/crm/pipeline" element={<KanbanBoard />} />
-        <Route path="/crm/analytics/interest" element={<InterestAnalyticsPage />} />
-        <Route path="/crm/analytics/purchases" element={<PurchaseAnalyticsPage />} />
-        <Route path="/crm/analytics/learning" element={<LearningAnalyticsPage />} />
-        <Route path="/crm/campaigns" element={<CampaignListPage />} />
+        <Route path="/crm" element={<ProtectedRoute requireAuth><CrmDashboardPage /></ProtectedRoute>} />
+        <Route path="/crm/dashboard" element={<ProtectedRoute requireAuth><CrmDashboardPage /></ProtectedRoute>} />
+        <Route path="/crm/customers" element={<ProtectedRoute requireAuth><CustomerListPage /></ProtectedRoute>} />
+        <Route path="/crm/customers/:id" element={<ProtectedRoute requireAuth><CustomerDetailPage /></ProtectedRoute>} />
+        <Route path="/crm/pipeline" element={<ProtectedRoute requireAuth><KanbanBoard /></ProtectedRoute>} />
+        <Route path="/crm/analytics/interest" element={<ProtectedRoute requireAuth><InterestAnalyticsPage /></ProtectedRoute>} />
+        <Route path="/crm/analytics/purchases" element={<ProtectedRoute requireAuth><PurchaseAnalyticsPage /></ProtectedRoute>} />
+        <Route path="/crm/analytics/learning" element={<ProtectedRoute requireAuth><LearningAnalyticsPage /></ProtectedRoute>} />
+        <Route path="/crm/campaigns" element={<ProtectedRoute requireAuth><CampaignListPage /></ProtectedRoute>} />
 
         {/* Outbound Campaign Routes (standalone, no CC layout — backward compatibility).
             No canonical CC equivalent exists yet; these are the primary outbound routes. */}
-        <Route path="/outbound" element={<StandaloneOutboundDashboard />} />
-        <Route path="/outbound/email/create" element={<StandaloneCreateEmailCampaign />} />
-        <Route path="/outbound/phone/create" element={<StandaloneCreatePhoneCampaign />} />
-        <Route path="/outbound/sms/create" element={<StandaloneCreateSmsCampaign />} />
+        <Route path="/outbound" element={<ProtectedRoute requireAuth><StandaloneOutboundDashboard /></ProtectedRoute>} />
+        <Route path="/outbound/email/create" element={<ProtectedRoute requireAuth><StandaloneCreateEmailCampaign /></ProtectedRoute>} />
+        <Route path="/outbound/phone/create" element={<ProtectedRoute requireAuth><StandaloneCreatePhoneCampaign /></ProtectedRoute>} />
+        <Route path="/outbound/sms/create" element={<ProtectedRoute requireAuth><StandaloneCreateSmsCampaign /></ProtectedRoute>} />
 
         {/* Command Center Routes */}
         {getCommandCenterRoutes()}
 
         {/* AI Personalities Routes */}
-        <Route path="/ai-personalities" element={<AIPersonalitiesDashboardPage />} />
-        <Route path="/ai-personalities/:id" element={<AIPersonalityDetailPage />} />
-        <Route path="/ai-personalities/assign" element={<AIPersonalityAssignPage />} />
-        <Route path="/ai-personalities/contacts" element={<AIPersonalityContactsPage />} />
+        <Route path="/ai-personalities" element={<ProtectedRoute requireAuth><AIPersonalitiesDashboardPage /></ProtectedRoute>} />
+        <Route path="/ai-personalities/:id" element={<ProtectedRoute requireAuth><AIPersonalityDetailPage /></ProtectedRoute>} />
+        <Route path="/ai-personalities/assign" element={<ProtectedRoute requireAuth><AIPersonalityAssignPage /></ProtectedRoute>} />
+        <Route path="/ai-personalities/contacts" element={<ProtectedRoute requireAuth><AIPersonalityContactsPage /></ProtectedRoute>} />
 
         {/* Learning Center Routes - Landing Page CMS */}
         <Route path="/learning" element={<LearningCenterIndexPage />} />
@@ -240,21 +240,21 @@ export function AppRouter() {
 
         {/* Campaign Landing Pages */}
         <Route path="/learning/campaigns" element={<LearningCampaignListPage />} />
-        <Route path="/learning/campaigns/review" element={<ReviewDashboard />} />
+        <Route path="/learning/campaigns/review" element={<ProtectedRoute requireAuth><ReviewDashboard /></ProtectedRoute>} />
         {/* Short aliases — canonical paths are /learning/campaigns and /learning/campaigns/review above */}
         <Route path="/campaigns" element={<LearningCampaignListPage />} />
-        <Route path="/campaigns/review" element={<ReviewDashboard />} />
+        <Route path="/campaigns/review" element={<ProtectedRoute requireAuth><ReviewDashboard /></ProtectedRoute>} />
 
         {/* Service Catalog Routes */}
         <Route path="/learning/services" element={<ServiceCatalogPage />} />
-        <Route path="/learning/services/billing" element={<BillingDashboardPage />} />
-        <Route path="/learning/services/orders" element={<OrderHistoryPage />} />
-        <Route path="/learning/services/checkout" element={<ServiceCheckoutPage />} />
+        <Route path="/learning/services/billing" element={<ProtectedRoute requireAuth><BillingDashboardPage /></ProtectedRoute>} />
+        <Route path="/learning/services/orders" element={<ProtectedRoute requireAuth><OrderHistoryPage /></ProtectedRoute>} />
+        <Route path="/learning/services/checkout" element={<ProtectedRoute requireAuth><ServiceCheckoutPage /></ProtectedRoute>} />
         <Route path="/learning/services/:id" element={<ServiceDetailPage />} />
         <Route path="/learning/services/orders/:id/success" element={<OrderConfirmationPage />} />
 
         {/* Service Purchase Wizard */}
-        <Route path="/command-center/services/buy" element={<ServicePurchaseWizardPage />} />
+        <Route path="/command-center/services/buy" element={<ProtectedRoute requireAuth><ServicePurchaseWizardPage /></ProtectedRoute>} />
 
         {/* Ops Dashboard (POD) - Admin only */}
         <Route

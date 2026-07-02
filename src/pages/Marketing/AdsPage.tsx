@@ -34,7 +34,7 @@ export const AdsPage: React.FC = () => {
       setIsLoading(true);
       try {
         const { apiClient } = await import('@/services/api');
-        const res = await apiClient.get('/marketing/ads').catch(() => ({ data: { data: [] } }));
+        const res = await apiClient.get('/v1/ads').catch(() => ({ data: { data: [] } }));
         setCampaigns(res.data.data || []);
       } catch (error) {
         console.error("Failed to fetch campaigns", error);

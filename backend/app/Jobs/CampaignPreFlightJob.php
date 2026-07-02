@@ -23,20 +23,42 @@ final class CampaignPreFlightJob implements ShouldQueue
      */
     private const MAX_RISK_RATE = 0.03;
 
+    /**
+     * Recipients processed per DB page. Keeps memory flat regardless of list size.
+     */
+    private const CHUNK_SIZE = 250;
+
+    /**
+     * Blocking, HTTP-bound job over potentially large recipient lists.
+     */
+    public int $timeout = 1800;
+
+    public int $tries = 3;
+
     public function __construct(
         public OutboundCampaign $campaign
     ) {
         $this->onQueue('emails');
     }
 
+    /**
+     * Progressive backoff (seconds) between retries.
+     *
+     * @return array<int, int>
+     */
+    public function backoff(): array
+    {
+        return [60, 300, 900];
+    }
+
     public function handle(ZeroBounceService $zeroBounce): void
     {
         try {
-            $recipients = $this->campaign->recipients()
-                ->where('status', 'pending')
-                ->get();
+            $baseQuery = $this->campaign->recipients()->where('status', 'pending');
 
-            if ($recipients->isEmpty()) {
+            $totalCount = (clone $baseQuery)->count();
+
+            if ($totalCount === 0) {
                 Log::info('CampaignPreFlightJob: no pending recipients', [
                     'campaign_id' => $this->campaign->id,
                 ]);
@@ -44,79 +66,108 @@ final class CampaignPreFlightJob implements ShouldQueue
                 return;
             }
 
-            $totalCount = $recipients->count();
+            // riskCount   = addresses we could positively assess as undeliverable/harmful
+            //               (ZeroBounce suppress statuses only — genuinely invalid).
+            // assessed    = addresses that returned a definitive status (fresh or cached);
+            //               the risk-rate denominator. API errors are NOT assessed.
+            // apiErrors   = transient ZeroBounce failures — tracked but excluded from risk
+            //               so an outage can never falsely HOLD a healthy campaign.
             $riskCount = 0;
             $suppressedCount = 0;
+            $assessed = 0;
+            $apiErrors = 0;
 
-            foreach ($recipients as $recipient) {
-                $customer = $recipient->customer;
-                $email = $recipient->email;
+            // chunkById (NOT chunk / get): we mutate `status` (a WHERE-clause column)
+            // inside the loop, and we avoid loading the whole recipient list into memory.
+            $baseQuery->chunkById(
+                self::CHUNK_SIZE,
+                function ($recipients) use ($zeroBounce, &$riskCount, &$suppressedCount, &$assessed, &$apiErrors) {
+                    foreach ($recipients as $recipient) {
+                        $customer = $recipient->customer;
+                        $email = ProcessInboundEmailJob::normalizeEmail($recipient->email ?? '');
 
-                // Skip if already validated recently (within 90 days)
-                if ($customer && $customer->zb_checked_at && $customer->zb_checked_at->gt(now()->subDays(90))) {
-                    if ($customer->email_suppressed) {
-                        $suppressedCount++;
-                        $recipient->update([
-                            'status' => 'failed',
-                            'error_message' => "Suppressed: {$customer->email_suppressed_reason}",
-                        ]);
-                    }
-                    if (in_array($customer->zb_status, ['invalid', 'unknown', 'catch-all'])) {
-                        $riskCount++;
-                    }
+                        // Skip if already validated recently (within 90 days)
+                        if ($customer && $customer->zb_checked_at && $customer->zb_checked_at->gt(now()->subDays(90))) {
+                            $assessed++;
+                            if ($customer->email_suppressed) {
+                                $suppressedCount++;
+                                $recipient->update([
+                                    'status' => 'failed',
+                                    'error_message' => "Suppressed: {$customer->email_suppressed_reason}",
+                                ]);
+                            }
+                            if ($zeroBounce->shouldSuppress((string) $customer->zb_status)) {
+                                $riskCount++;
+                            }
 
-                    continue;
-                }
+                            continue;
+                        }
 
-                // Validate via ZeroBounce
-                try {
-                    $result = $zeroBounce->validate($email);
-                    $status = strtolower($result['status'] ?? 'unknown');
+                        if ($email === '') {
+                            // No usable address — fail the recipient, count as risk.
+                            $assessed++;
+                            $riskCount++;
+                            $recipient->update([
+                                'status' => 'failed',
+                                'error_message' => 'Missing/invalid email address',
+                            ]);
 
-                    // Update customer ZB fields
-                    if ($customer) {
-                        $customer->update([
-                            'zb_status' => $status,
-                            'zb_sub_status' => $result['sub_status'] ?? null,
-                            'zb_checked_at' => now(),
-                        ]);
-                    }
+                            continue;
+                        }
 
-                    // Suppress bad addresses immediately
-                    if ($zeroBounce->shouldSuppress($status)) {
-                        $suppressedCount++;
-                        if ($customer) {
-                            $customer->update([
-                                'email_suppressed' => true,
-                                'email_suppressed_reason' => $status,
+                        // Validate via ZeroBounce
+                        try {
+                            $result = $zeroBounce->validate($email);
+                            $status = strtolower($result['status'] ?? 'unknown');
+                            $assessed++;
+
+                            // Update customer ZB fields
+                            if ($customer) {
+                                $customer->update([
+                                    'zb_status' => $status,
+                                    'zb_sub_status' => $result['sub_status'] ?? null,
+                                    'zb_checked_at' => now(),
+                                ]);
+                            }
+
+                            // Suppress genuinely-bad addresses immediately (and count as risk).
+                            if ($zeroBounce->shouldSuppress($status)) {
+                                $riskCount++;
+                                $suppressedCount++;
+                                if ($customer) {
+                                    $customer->update([
+                                        'email_suppressed' => true,
+                                        'email_suppressed_reason' => $status,
+                                    ]);
+                                }
+                                $recipient->update([
+                                    'status' => 'failed',
+                                    'error_message' => "ZeroBounce: {$status}",
+                                ]);
+                            }
+                        } catch (\Exception $e) {
+                            // Transient ZB/API failure — do NOT treat as risk. An outage
+                            // must not falsely hold the campaign.
+                            $apiErrors++;
+                            Log::warning('CampaignPreFlightJob: ZB validation failed for recipient', [
+                                'email' => $email,
+                                'error' => $e->getMessage(),
                             ]);
                         }
-                        $recipient->update([
-                            'status' => 'failed',
-                            'error_message' => "ZeroBounce: {$status}",
-                        ]);
                     }
-
-                    // Count risky addresses
-                    if (in_array($status, ['invalid', 'unknown', 'catch-all'])) {
-                        $riskCount++;
-                    }
-                } catch (\Exception $e) {
-                    Log::warning('CampaignPreFlightJob: ZB validation failed for recipient', [
-                        'email' => $email,
-                        'error' => $e->getMessage(),
-                    ]);
-                    $riskCount++; // Count failures as risky
                 }
-            }
+            );
 
-            $riskRate = $totalCount > 0 ? $riskCount / $totalCount : 0;
+            // Guard divide-by-zero; denominator is only the definitively-assessed set.
+            $riskRate = $assessed > 0 ? $riskCount / $assessed : 0.0;
 
             Log::info('CampaignPreFlightJob: validation complete', [
                 'campaign_id' => $this->campaign->id,
                 'total_recipients' => $totalCount,
+                'assessed' => $assessed,
                 'risk_count' => $riskCount,
                 'suppressed_count' => $suppressedCount,
+                'api_errors' => $apiErrors,
                 'risk_rate' => round($riskRate * 100, 2).'%',
             ]);
 

@@ -4,10 +4,28 @@ nixPkgs = ["php84", "php84Packages.composer", "php84Extensions.pdo_pgsql", "php8
 [phases.install]
 cmds = ["composer install --no-dev --optimize-autoloader --no-scripts"]
 
+# NOTE ON APP_URL + config:cache
+# -------------------------------------------------------------------------
+# `config:cache` is deliberately NOT run here. Running it at build time bakes
+# whatever APP_URL is present during the build into the cached config that
+# production then reads. Railway's dashboard env vars (the real APP_URL) are
+# NOT reliably available during the Nixpacks build, so we previously set
+# `APP_URL=http://localhost` just to stop an Invalid-URI crash while the cache
+# compiled. That localhost value then got frozen into config('app.url'), so
+# every url() call — including the Twilio SMS/call status callbacks — pointed
+# at http://localhost in production.
+#
+# Fix: config:cache now runs in start.sh at BOOT time, where Railway has
+# already injected the real APP_URL. See start.sh.
+#
+# The localhost prefix is still applied to package:discover / route:cache /
+# event:cache below only to guarantee the app can BOOT during these commands
+# (a null APP_URL can crash provider boot). Those commands do NOT persist
+# app.url into their caches (routes/events are serialized, not config values),
+# so the localhost value is never carried into production for them.
 [phases.build]
 cmds = [
   "APP_URL=http://localhost php artisan package:discover --ansi",
-  "APP_URL=http://localhost php artisan config:cache",
   "APP_URL=http://localhost php artisan route:cache",
   "APP_URL=http://localhost php artisan event:cache"
 ]

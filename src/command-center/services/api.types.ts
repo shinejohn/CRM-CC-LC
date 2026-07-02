@@ -26,6 +26,8 @@ export interface RequestConfig {
   headers?: Record<string, string>;
   signal?: AbortSignal;
   timeout?: number;
+  // Request body for methods that carry one via config (e.g. DELETE with a payload).
+  data?: unknown;
 }
 
 export interface PaginationParams {

@@ -37,7 +37,7 @@ export function CreateInvoiceModal({ isOpen, onClose, onSuccess }: CreateInvoice
         setIsSubmitting(true);
         setError(null);
         try {
-            await apiClient.post('/billing/invoices', {
+            await apiClient.post('/v1/crm-invoices', {
                 customer_id: customer,
                 due_date: dueDate,
                 items: items.map(i => ({

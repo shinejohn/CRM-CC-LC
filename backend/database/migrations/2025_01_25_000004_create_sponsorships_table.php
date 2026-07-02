@@ -18,7 +18,28 @@ return new class extends Migration
             } else {
                 $table->foreignUuid('community_id')->nullable();
             }
-            
+
+            // Sponsor relationship
+            if (Schema::hasTable('sponsors')) {
+                $table->foreignUuid('sponsor_id')->nullable()->constrained('sponsors')->onDelete('cascade');
+            } else {
+                $table->uuid('sponsor_id')->nullable();
+            }
+
+            // Placement / pricing
+            $table->string('sponsorship_type', 50)->nullable()->comment('newsletter_header, newsletter_section, alert_sponsor');
+            $table->integer('impressions_purchased')->default(0);
+            $table->integer('impressions_delivered')->default(0);
+            if (DB::getDriverName() === 'pgsql') {
+                $table->jsonb('creative_json')->nullable();
+            } else {
+                $table->json('creative_json')->nullable();
+            }
+            $table->string('rate_type', 20)->nullable()->comment('cpm, flat, cpc');
+            $table->integer('rate_cents')->default(0);
+            $table->integer('total_value_cents')->default(0);
+            $table->integer('click_count')->default(0);
+
             // Client/Advertiser
             $table->string('advertiser_name', 255);
             $table->string('advertiser_url', 255)->nullable();

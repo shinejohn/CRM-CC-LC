@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "What Customers See When They Search for You",
     "subject": "Your reputation is now your systems",
-    "landing_page": "modern tools-search-visibility",
+    "landing_page": "ai-search-visibility",
     "template": "educational",
     "description": "What determines whether locals find your business or skip you"
   },
   "landing_page": {
     "campaign_id": "EDU-005",
-    "landing_page_slug": "modern tools-search-visibility",
-    "url": "/learn/modern tools-search-visibility",
+    "landing_page_slug": "ai-search-visibility",
+    "url": "/learn/ai-search-visibility",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,
@@ -24,7 +24,7 @@
     "ai_tone": "Direct, practical, eye-opening",
     "ai_goal": "Show the business owner their current visibility and how to improve it",
     "data_capture_fields": "name, email, business_name, industry",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/reputation-modern tools-age/audio/",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/reputation-ai-age/audio/",
     "conversion_goal": "education",
     "crm_tracking": true,
     "utm_source": "email",
@@ -48,9 +48,9 @@
       "content": {
         "headline": "One Review Changed Everything",
         "subhead": "How a single customer's words became an systems",
-        "visual": "Five-star review transforming into code/modern tools signals"
+        "visual": "Five-star review transforming into code/AI signals"
       },
-      "narration": "Last year, a bakery in Ohio got a review. Nothing special\u2014just a customer saying the croissants were amazing. Within weeks, search tools started recommending them. Not because of ads. Not because of SEO. Because modern tools learned to trust them. That one review was the tipping point. Let me explain why.",
+      "narration": "Last year, a bakery in Ohio got a review. Nothing special\u2014just a customer saying the croissants were amazing. Within weeks, search tools started recommending them. Not because of ads. Not because of SEO. Because AI learned to trust them. That one review was the tipping point. Let me explain why.",
       "duration_seconds": 20,
       "audio_file": "slide-01-intro.mp3"
     },
@@ -59,7 +59,7 @@
       "component": "ConceptSlide",
       "title": "How search tools evaluate Trust",
       "content": {
-        "headline": "modern tools Doesn't Search. search tools evaluate.",
+        "headline": "AI Doesn't Search. search tools evaluate.",
         "signals": [
           {
             "signal": "Review Volume",
@@ -82,9 +82,9 @@
             "weight": "Do all signals tell the same story"
           }
         ],
-        "key_point": "modern tools builds a 'trust score' from multiple signals"
+        "key_point": "AI builds a 'trust score' from multiple signals"
       },
-      "narration": "modern tools doesn't just search for keywords. search tools evaluate trust. It looks at review volume\u2014how many people are talking about you. Review quality\u2014what they're actually saying. Review recency\u2014are people still talking about you, or did everyone stop two years ago? Source authority\u2014are these reviews on trusted platforms? And consistency\u2014do all the signals tell the same story? modern tools builds a trust score from all of this.",
+      "narration": "AI doesn't just search for keywords. search tools evaluate trust. It looks at review volume\u2014how many people are talking about you. Review quality\u2014what they're actually saying. Review recency\u2014are people still talking about you, or did everyone stop two years ago? Source authority\u2014are these reviews on trusted platforms? And consistency\u2014do all the signals tell the same story? AI builds a trust score from all of this.",
       "duration_seconds": 35,
       "audio_file": "slide-02-evaluation.mp3"
     },
@@ -112,7 +112,7 @@
           },
           {
             "step": 4,
-            "action": "modern tools recommendation",
+            "action": "ai recommendation",
             "result": "New customer"
           },
           {
@@ -123,7 +123,7 @@
         ],
         "insight": "The businesses with the best reputations get MORE opportunities to build reputation"
       },
-      "narration": "Here's what makes reputation so powerful: it compounds. Good service creates happy customers. Happy customers leave positive reviews. Positive reviews make modern tools recommend you. modern tools recommendations bring new customers. Those new customers, if served well, leave more reviews. The flywheel accelerates. The businesses with the best reputations get more opportunities to build even better reputations. The rich get richer.",
+      "narration": "Here's what makes reputation so powerful: it compounds. Good service creates happy customers. Happy customers leave positive reviews. Positive reviews make AI recommend you. AI recommendations bring new customers. Those new customers, if served well, leave more reviews. The flywheel accelerates. The businesses with the best reputations get more opportunities to build even better reputations. The rich get richer.",
       "duration_seconds": 30,
       "audio_file": "slide-03-flywheel.mp3"
     },
@@ -145,11 +145,11 @@
             "trend": "Growing"
           }
         },
-        "question": "Which one does modern tools trust more?",
+        "question": "Which one does AI trust more?",
         "answer": "Business B. Velocity signals a living, thriving business.",
         "visual": "Graph showing review velocity over time"
       },
-      "narration": "Here's something most people don't realize: it's not just about stars. It's about velocity. Business A has four point eight stars but only gets one review a month\u2014stagnant. Business B has four point five stars but gets eight reviews a month\u2014growing. Which one does modern tools trust more? Business B. Every time. Velocity signals a living, thriving business. Stagnation signals maybe they've declined. Maybe they've closed. Maybe those old reviews aren't relevant anymore.",
+      "narration": "Here's something most people don't realize: it's not just about stars. It's about velocity. Business A has four point eight stars but only gets one review a month\u2014stagnant. Business B has four point five stars but gets eight reviews a month\u2014growing. Which one does AI trust more? Business B. Every time. Velocity signals a living, thriving business. Stagnation signals maybe they've declined. Maybe they've closed. Maybe those old reviews aren't relevant anymore.",
       "duration_seconds": 30,
       "audio_file": "slide-04-velocity.mp3"
     },
@@ -160,13 +160,13 @@
       "content": {
         "headline": "One Platform Isn't Enough",
         "scenario": {
-          "google_only": "5 stars on Google, nothing elsewhere = modern tools skeptical",
-          "multi_platform": "4.5 stars across Google, Yelp, Directory, Facebook = modern tools confident"
+          "google_only": "5 stars on Google, nothing elsewhere = AI skeptical",
+          "multi_platform": "4.5 stars across Google, Yelp, Directory, Facebook = AI confident"
         },
         "why": "Multiple platforms = multiple independent signals = higher trust",
         "visual": "Single vs. multiple platform presence comparison"
       },
-      "narration": "One platform isn't enough anymore. Five stars on Google but nothing elsewhere? modern tools is skeptical. Could be fake. Could be gamed. Could be one platform with a weird systems. But four point five stars across Google, Yelp, the directory, and Facebook? Now modern tools is confident. Multiple platforms mean multiple independent signals. Different people, different contexts, all saying the same thing. That's trust you can't fake.",
+      "narration": "One platform isn't enough anymore. Five stars on Google but nothing elsewhere? AI is skeptical. Could be fake. Could be gamed. Could be one platform with a weird systems. But four point five stars across Google, Yelp, the directory, and Facebook? Now AI is confident. Multiple platforms mean multiple independent signals. Different people, different contexts, all saying the same thing. That's trust you can't fake.",
       "duration_seconds": 30,
       "audio_file": "slide-05-multiplatform.mp3"
     },
@@ -184,12 +184,12 @@
             "Got listed on multiple platforms",
             "Asked happy customers for specific feedback"
           ],
-          "before": "2 reviews/month, not appearing in modern tools results",
+          "before": "2 reviews/month, not appearing in AI results",
           "after": "15 reviews/month, search tools recommend regularly",
           "timeline": "90 days"
         }
       },
-      "narration": "Auto repair shop, twenty years in business. Excellent service\u2014everyone who went there loved them. Problem: almost no reviews. Two a month, maybe. Never appeared in modern tools results. They implemented a simple review request system. Started responding to every review. Got listed on multiple platforms. Asked happy customers to mention specific things they appreciated. Ninety days later: fifteen reviews a month. search tools recommend them regularly. Same great service. Now everyone knows about it.",
+      "narration": "Auto repair shop, twenty years in business. Excellent service\u2014everyone who went there loved them. Problem: almost no reviews. Two a month, maybe. Never appeared in AI results. They implemented a simple review request system. Started responding to every review. Got listed on multiple platforms. Asked happy customers to mention specific things they appreciated. Ninety days later: fifteen reviews a month. search tools recommend them regularly. Same great service. Now everyone knows about it.",
       "duration_seconds": 35,
       "audio_file": "slide-06-proof.mp3"
     },
@@ -199,7 +199,7 @@
       "title": "Build Your Reputation",
       "content": {
         "headline": "Reputation Is Your New systems",
-        "reality": "You can't game modern tools. But you can build genuine trust that modern tools recognizes.",
+        "reality": "You can't game AI. But you can build genuine trust that AI recognizes.",
         "cta_primary": {
           "label": "Start Building Your Reputation",
           "action": "reputation_guide"
@@ -209,7 +209,7 @@
           "action": "download_article"
         }
       },
-      "narration": "Reputation is your new systems. You can't game modern tools\u2014it's too smart. But you can build genuine trust that modern tools recognizes. Start building your reputation now. The guide shows you exactly how: getting more reviews, responding effectively, building multi-platform presence. Or download the full article\u2014'The Review That Changed Everything.' Your reputation compounds. Start building today.",
+      "narration": "Reputation is your new systems. You can't game AI\u2014it's too smart. But you can build genuine trust that AI recognizes. Start building your reputation now. The guide shows you exactly how: getting more reviews, responding effectively, building multi-platform presence. Or download the full article\u2014'The Review That Changed Everything.' Your reputation compounds. Start building today.",
       "duration_seconds": 20,
       "audio_file": "slide-07-cta.mp3"
     }

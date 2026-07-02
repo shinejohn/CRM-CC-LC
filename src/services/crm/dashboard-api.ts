@@ -106,7 +106,7 @@ export interface CrmAnalyticsResponse {
  * Get CRM dashboard analytics
  */
 export async function getCrmAnalytics(days: number = 30): Promise<CrmAnalytics> {
-  const response = await apiClient.get<CrmAnalyticsResponse>('/api/v1/crm/dashboard/analytics', {
+  const response = await apiClient.get<CrmAnalyticsResponse>('/v1/crm/dashboard/analytics', {
     params: { days },
   });
   return response.data;

@@ -16,7 +16,7 @@ class PostalWebhookTest extends TestCase
     {
         config(['services.postal.webhook_secret' => 'test-secret']);
 
-        $tenantId = (string) Str::uuid();
+        $tenantId = '00000000-0000-0000-0000-000000000000';
         $campaign = OutboundCampaign::create([
             'tenant_id' => $tenantId,
             'name' => 'Test Campaign',
@@ -72,7 +72,7 @@ class PostalWebhookTest extends TestCase
     {
         config(['services.postal.webhook_secret' => 'test-secret']);
 
-        $tenantId = (string) Str::uuid();
+        $tenantId = '00000000-0000-0000-0000-000000000000';
         $campaign = OutboundCampaign::create([
             'tenant_id' => $tenantId,
             'name' => 'Bounce Campaign',

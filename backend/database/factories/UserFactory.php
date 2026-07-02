@@ -29,6 +29,11 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            // Default tenant matches the all-zeros value used across factories
+            // and test query params, so an authenticated factory user is never
+            // accidentally tenant-less (controllers now 403 on that) and shares
+            // the tenant of the records tests create.
+            'tenant_id' => '00000000-0000-0000-0000-000000000000',
         ];
     }
 

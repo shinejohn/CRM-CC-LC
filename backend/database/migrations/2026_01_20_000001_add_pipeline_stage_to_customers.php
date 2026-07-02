@@ -31,6 +31,7 @@ return new class extends Migration {
                 'stage_entered_at',
                 'trial_started_at',
                 'trial_ends_at',
+                'trial_active',
                 'days_in_stage',
                 'stage_history'
             ]);

@@ -79,7 +79,7 @@ export async function getPublishingDashboard(params?: {
   end_date?: string;
 }): Promise<PublishingDashboard> {
   const response = await apiClient.get<{ data: PublishingDashboard }>(
-    '/api/v1/publishing/dashboard',
+    '/v1/publishing/dashboard',
     { params }
   );
   return response.data;
@@ -93,7 +93,7 @@ export async function getPublishingCalendar(params?: {
   end_date?: string;
 }): Promise<PublishingCalendar> {
   const response = await apiClient.get<{ data: PublishingCalendar }>(
-    '/api/v1/publishing/calendar',
+    '/v1/publishing/calendar',
     { params }
   );
   return response.data;
@@ -107,7 +107,7 @@ export async function getPublishingAnalytics(params?: {
   end_date?: string;
 }): Promise<PublishingAnalytics> {
   const response = await apiClient.get<{ data: PublishingAnalytics }>(
-    '/api/v1/publishing/analytics',
+    '/v1/publishing/analytics',
     { params }
   );
   return response.data;
@@ -124,5 +124,5 @@ export async function publishContent(
     notes?: string;
   }
 ): Promise<void> {
-  await apiClient.post(`/api/v1/publishing/content/${id}/publish`, options || {});
+  await apiClient.post(`/v1/publishing/content/${id}/publish`, options || {});
 }

@@ -19,14 +19,24 @@ final class QuoteController extends Controller
     ) {}
 
     /**
+     * Resolve the active tenant strictly from the authenticated user.
+     * Never trust a client-supplied header or request body for tenant identity.
+     */
+    private function tenantId(Request $request): string
+    {
+        $tenantId = $request->user()?->tenant_id;
+
+        abort_if(empty($tenantId), 403, 'Forbidden: no tenant assigned to this account.');
+
+        return (string) $tenantId;
+    }
+
+    /**
      * List quotes (paginated, filterable).
      */
     public function index(Request $request): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $filters = $request->only(['status', 'customer_id', 'search', 'date_from', 'date_to', 'sort_by', 'sort_dir']);
         $perPage = min((int) $request->input('per_page', 20), 100);
@@ -49,10 +59,7 @@ final class QuoteController extends Controller
      */
     public function store(StoreQuoteRequest $request): JsonResponse
     {
-        $tenantId = $request->getTenantId();
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $quote = $this->quoteService->create($tenantId, $request->validated());
 
@@ -64,10 +71,7 @@ final class QuoteController extends Controller
      */
     public function show(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $quote = Quote::where('tenant_id', $tenantId)
             ->with(['customer', 'deal', 'items'])
@@ -81,10 +85,7 @@ final class QuoteController extends Controller
      */
     public function update(UpdateQuoteRequest $request, string $id): JsonResponse
     {
-        $tenantId = $request->getTenantId();
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $quote = Quote::where('tenant_id', $tenantId)->findOrFail($id);
         $quote = $this->quoteService->update($quote, $request->validated());
@@ -97,10 +98,7 @@ final class QuoteController extends Controller
      */
     public function send(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $quote = Quote::where('tenant_id', $tenantId)->findOrFail($id);
 
@@ -118,10 +116,7 @@ final class QuoteController extends Controller
      */
     public function convertToInvoice(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $quote = Quote::where('tenant_id', $tenantId)->findOrFail($id);
 
@@ -139,10 +134,7 @@ final class QuoteController extends Controller
      */
     public function destroy(Request $request, string $id): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $quote = Quote::where('tenant_id', $tenantId)->findOrFail($id);
         $quote->delete();

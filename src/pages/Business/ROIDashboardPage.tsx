@@ -88,7 +88,7 @@ export const ROIDashboardPage: React.FC = () => {
       setError(null);
       try {
         const { apiClient } = await import("@/services/api");
-        const subRes = await apiClient.get<{ data: CommunitySubscriptionRow[] }>("/community-subscriptions");
+        const subRes = await apiClient.get<{ data: CommunitySubscriptionRow[] }>("/v1/community-subscriptions");
         const rows = subRes.data.data || [];
         const active = rows.find((r) => r.status === "active");
         if (!active?.customer_id) {

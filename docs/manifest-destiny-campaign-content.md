@@ -11,12 +11,12 @@ Three sequential timelines by pipeline stage:
 
 | Timeline | Stage | Length | Touchpoints |
 |---|---|---|---|
-| **Hook** | HOOK | 90 days | 15 emails · **1 SMS** (day 10) · internal/system checks |
+| **Hook** | HOOK | 90 days | 15 emails · **1 SMS** (day 10) · **3 phone calls** (day 2/8/26, opt-in gated) · internal/system checks |
 | **Education** | ENGAGEMENT | 60 days | 15 emails |
 | **How-To** | SALES | 90 days | 30 emails |
 
 **Channels used: email (60 templates) + SMS (1).**
-**Phone calls: 0. Voicemails (RVM): 0.** — The engine *supports* phone/SMS/RVM, but the seeded Manifest Destiny sequence schedules **no phone or voicemail steps**. Nothing is hidden; there is no phone/voicemail content to show because none is defined. (If you want phone/voicemail in the sequence, that's a content + timeline addition — flagged at the end.)
+**Phone calls: 3 (Hook day 2/8/26 — added June 2026). Voicemails (RVM): 0.** — The Hook stage now includes three opt-in-gated phone follow-ups (`md_welcome_call`, `md_claim_followup_call`, `md_founder_call`); scripts are in `ManifestDestinyEmailTemplateSeeder`. Calls only dial customers with `phone_opted_in = true` (TCPA), which is rare on the PP-synced base until consent is captured. Voicemail/RVM is engine-supported but not yet scheduled.
 
 Every email links to a **landing page** (`/learn/<slug>`) which is a narrated slide presentation hosted by the **Sarah/Emma AI** (Part 2).
 
@@ -292,5 +292,5 @@ Each email's landing page is a **narrated slide presentation** (FibonaccoPlayer 
 4. **AI note:** slide content + pre-recorded narration load from the static campaign JSONs (frontend only). The **live AI chat/narration** (Sarah answering typed questions) calls the backend AI endpoints — start the API (`horizon` service / local `php artisan serve` + `VITE_API_URL`) for full conversational AI; the deck + scripted narration play without it.
 
 ## Gaps / honest notes
-- **No phone or voicemail** is defined in the Manifest Destiny sequence (email + 1 SMS only). The platform engine supports `send_sms` / `make_call` / RVM, but the timeline schedules none — so there is no phone/voicemail content to provide. Adding them = new `SmsTemplate`/phone-script content + timeline actions.
+- **Phone calls** now run at Hook day 2/8/26 (opt-in gated); **voicemail/RVM** is still engine-supported but unscheduled — adding it = an RVM script + `make_call`/RVM timeline actions.
 - Email **landing-page slugs** in a few timeline steps (e.g. `influencer-program`, `holiday-events`, `business-nomination`, `social-posting-trial`) don't all have an exact entry in the 60-page registry — those CTAs may 404 until a matching presentation is added. The 60 in the table below are the built experiences.

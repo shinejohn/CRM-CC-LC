@@ -48,7 +48,7 @@ export const CommunityInfluencerPage: React.FC = () => {
     const fetchCommunities = async () => {
       try {
         const { apiClient } = await import('@/services/api');
-        const res = await apiClient.get('/communities');
+        const res = await apiClient.get('/v1/communities');
         setCommunities(res.data.data || []);
       } catch {
         setError('Unable to load communities.');
@@ -69,8 +69,8 @@ export const CommunityInfluencerPage: React.FC = () => {
       try {
         const { apiClient } = await import('@/services/api');
         const [slotsRes, founderRes] = await Promise.all([
-          apiClient.get(`/community-subscriptions/slot-availability/${selectedCommunity}`),
-          apiClient.get(`/community-subscriptions/founder-check/${selectedCommunity}`),
+          apiClient.get(`/v1/community-subscriptions/slot-availability/${selectedCommunity}`),
+          apiClient.get(`/v1/community-subscriptions/founder-check/${selectedCommunity}`),
         ]);
         setSlotData(slotsRes.data.data);
         setFounderData(founderRes.data.data);
@@ -92,7 +92,7 @@ export const CommunityInfluencerPage: React.FC = () => {
       const { apiClient } = await import('@/services/api');
       const [categoryGroup, categorySubtype] = selectedCategory.split('::');
 
-      await apiClient.post('/community-subscriptions', {
+      await apiClient.post('/v1/community-subscriptions', {
         community_id: selectedCommunity,
         product_slug: 'community-influencer',
         payment_method_id: 'pm_placeholder', // Will be replaced with Stripe Elements
@@ -101,7 +101,7 @@ export const CommunityInfluencerPage: React.FC = () => {
       });
 
       // Refresh slot data
-      const slotsRes = await apiClient.get(`/community-subscriptions/slot-availability/${selectedCommunity}`);
+      const slotsRes = await apiClient.get(`/v1/community-subscriptions/slot-availability/${selectedCommunity}`);
       setSlotData(slotsRes.data.data);
       setSelectedCategory('');
     } catch (err: unknown) {

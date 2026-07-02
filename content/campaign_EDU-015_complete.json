@@ -6,15 +6,15 @@
     "type": "Educational",
     "title": "Meet Your Account Team",
     "subject": "Meet your new your account team (they don't need coffee breaks)",
-    "landing_page": "modern tools-employees-explained",
-    "template": "modern tools-intro",
+    "landing_page": "ai-employees-explained",
+    "template": "ai-intro",
     "description": "Who handles what for your business \u2014 the team and systems working for you"
   },
   "landing_page": {
     "campaign_id": "EDU-015",
-    "landing_page_slug": "modern tools-employees-explained",
-    "url": "/learn/modern tools-employees-explained",
-    "template_id": "modern tools-intro",
+    "landing_page_slug": "ai-employees-explained",
+    "url": "/learn/ai-employees-explained",
+    "template_id": "ai-intro",
     "template_name": "Educational Content",
     "slide_count": 9,
     "duration_seconds": 290,
@@ -24,7 +24,7 @@
     "ai_tone": "Professional, personable, specific",
     "ai_goal": "Show the business owner the people and systems behind the scenes",
     "data_capture_fields": "name, email, business_name",
-    "audio_base_url": "https://cdn.fibonacco.com/presentations/modern tools-employees-explained/audio/",
+    "audio_base_url": "https://cdn.fibonacco.com/presentations/ai-employees-explained/audio/",
     "crm_tracking": true,
     "conversion_goal": "education",
     "utm_source": "email",
@@ -33,7 +33,7 @@
     "utm_content": "EDU-015"
   },
   "template": {
-    "template_id": "modern tools-intro",
+    "template_id": "ai-intro",
     "name": "Educational Content",
     "slides": 9,
     "duration": 290,
@@ -58,8 +58,8 @@
       "component": "ConceptSlide",
       "title": "What Are your account team?",
       "content": {
-        "headline": "modern tools That Works Like a Team Member",
-        "definition": "your account team are specialized modern tools systems trained to handle specific roles in your business",
+        "headline": "AI That Works Like a Team Member",
+        "definition": "your account team are specialized AI systems trained to handle specific roles in your business",
         "not_chatbots": "These aren't simple chatbots\u2014they're sophisticated systems that learn your business, your voice, and your preferences",
         "examples": [
           {
@@ -80,7 +80,7 @@
           }
         ]
       },
-      "narration": "What are your account team? They're specialized modern tools systems trained to handle specific roles in your business. These aren't simple chatbots\u2014they're sophisticated systems that learn your business, your voice, and your preferences. You might have an automated receptionist handling calls and scheduling. An modern marketing Assistant creating content and managing campaigns. An customer response Rep handling support and reviews. An lead management Assistant qualifying leads and following up. Each one specialized, each one trained for their role.",
+      "narration": "What are your account team? They're specialized AI systems trained to handle specific roles in your business. These aren't simple chatbots\u2014they're sophisticated systems that learn your business, your voice, and your preferences. You might have an automated receptionist handling calls and scheduling. An modern marketing Assistant creating content and managing campaigns. An customer response Rep handling support and reviews. An lead management Assistant qualifying leads and following up. Each one specialized, each one trained for their role.",
       "duration_seconds": 40,
       "audio_file": "slide-02-what.mp3"
     },
@@ -97,24 +97,24 @@
           },
           {
             "stage": "Launch",
-            "what": "modern tools starts handling tasks with supervision"
+            "what": "AI starts handling tasks with supervision"
           },
           {
             "stage": "Learning",
-            "what": "modern tools improves from every interaction"
+            "what": "AI improves from every interaction"
           },
           {
             "stage": "Autonomy",
-            "what": "modern tools handles routine independently, escalates exceptions"
+            "what": "AI handles routine independently, escalates exceptions"
           },
           {
             "stage": "Evolution",
-            "what": "modern tools adapts as your business grows"
+            "what": "AI adapts as your business grows"
           }
         ],
         "key_point": "They get better over time\u2014unlike human employees who need constant retraining"
       },
-      "narration": "How do your account team work? Training: you provide your business info, preferences, and examples of how you'd handle things. Launch: modern tools starts handling tasks with your supervision. Learning: modern tools improves from every interaction\u2014what worked, what didn't. Autonomy: modern tools handles routine independently, escalates exceptions to you. Evolution: modern tools adapts as your business grows and changes. The key point? They get better over time. Unlike human employees who need constant retraining, your account team accumulate knowledge.",
+      "narration": "How do your account team work? Training: you provide your business info, preferences, and examples of how you'd handle things. Launch: AI starts handling tasks with your supervision. Learning: AI improves from every interaction\u2014what worked, what didn't. Autonomy: AI handles routine independently, escalates exceptions to you. Evolution: AI adapts as your business grows and changes. The key point? They get better over time. Unlike human employees who need constant retraining, your account team accumulate knowledge.",
       "duration_seconds": 40,
       "audio_file": "slide-03-how.mp3"
     },
@@ -123,7 +123,7 @@
       "component": "ConceptSlide",
       "title": "Working Together",
       "content": {
-        "headline": "modern tools + Human = Best Results",
+        "headline": "AI + Human = Best Results",
         "collaboration": [
           {
             "ai_does": "Handle volume",
@@ -148,7 +148,7 @@
         ],
         "result": "Each does what they do best"
       },
-      "narration": "your account team work best alongside humans, not replacing them. modern tools handles volume, humans handle complexity. modern tools provides instant responses, humans make nuanced decisions. modern tools executes consistently, humans create strategy. modern tools analyzes data, humans interpret and act. modern tools provides twenty-four seven availability, humans build high-touch relationships. Each does what they do best. Together, they're unstoppable.",
+      "narration": "your account team work best alongside humans, not replacing them. AI handles volume, humans handle complexity. AI provides instant responses, humans make nuanced decisions. AI executes consistently, humans create strategy. AI analyzes data, humans interpret and act. AI provides twenty-four seven availability, humans build high-touch relationships. Each does what they do best. Together, they're unstoppable.",
       "duration_seconds": 35,
       "audio_file": "slide-04-together.mp3"
     },
@@ -228,12 +228,12 @@
         "headline": "Questions You Might Have",
         "qa": [
           {
-            "q": "Will customers know it's modern tools?",
-            "a": "Many won't. But transparency is fine too\u2014people accept modern tools help."
+            "q": "Will customers know it's AI?",
+            "a": "Many won't. But transparency is fine too\u2014people accept AI help."
           },
           {
             "q": "What about mistakes?",
-            "a": "modern tools is trained on your info and improves. Mistakes decrease over time."
+            "a": "AI is trained on your info and improves. Mistakes decrease over time."
           },
           {
             "q": "Is my data safe?",
@@ -245,7 +245,7 @@
           }
         ]
       },
-      "narration": "Questions you might have. Will customers know it's modern tools? Many won't notice. But transparency is fine too\u2014people increasingly accept modern tools assistance. What about mistakes? modern tools is trained on your info and improves with every interaction. Mistakes decrease over time. Is my data safe? Yes\u2014encrypted, private, not used to train other people's modern tools. What if I need to change something? You're always in control. Change settings, update training anytime.",
+      "narration": "Questions you might have. Will customers know it's AI? Many won't notice. But transparency is fine too\u2014people increasingly accept AI assistance. What about mistakes? AI is trained on your info and improves with every interaction. Mistakes decrease over time. Is my data safe? Yes\u2014encrypted, private, not used to train other people's AI. What if I need to change something? You're always in control. Change settings, update training anytime.",
       "duration_seconds": 35,
       "audio_file": "slide-07-concerns.mp3"
     },
@@ -281,7 +281,7 @@
       "component": "CTASlide",
       "title": "Hire Your First your account team",
       "content": {
-        "headline": "Ready to Build Your modern tools Team?",
+        "headline": "Ready to Build Your AI Team?",
         "cta_primary": {
           "label": "Hire Your First your account team",
           "action": "start_hiring"
@@ -292,7 +292,7 @@
         },
         "assurance": "Start with one role. See results in days, not months."
       },
-      "narration": "Ready to build your modern tools team? Hire your first your account team now\u2014start with the role that will save you the most time. Or see your account team in action with live demos. Start with one role. See results in days, not months. Your new team members are ready to work.",
+      "narration": "Ready to build your AI team? Hire your first your account team now\u2014start with the role that will save you the most time. Or see your account team in action with live demos. Start with one role. See results in days, not months. Your new team members are ready to work.",
       "duration_seconds": 20,
       "audio_file": "slide-09-cta.mp3"
     }

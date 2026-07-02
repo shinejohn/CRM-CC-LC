@@ -17,15 +17,24 @@ use Carbon\Carbon;
 final class CrmDashboardController extends Controller
 {
     /**
+     * Resolve the active tenant strictly from the authenticated user.
+     * Never trust a client-supplied header or request body for tenant identity.
+     */
+    private function tenantId(Request $request): string
+    {
+        $tenantId = $request->user()?->tenant_id;
+
+        abort_if(empty($tenantId), 403, 'Forbidden: no tenant assigned to this account.');
+
+        return (string) $tenantId;
+    }
+
+    /**
      * Get CRM dashboard analytics
      */
     public function analytics(Request $request): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-        
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         // Date range (default to last 30 days)
         $days = (int) ($request->input('days', 30));
@@ -39,15 +48,15 @@ final class CrmDashboardController extends Controller
             ->count();
         
         $customersByLeadScore = Customer::where('tenant_id', $tenantId)
-            ->selectRaw('
-                CASE 
-                    WHEN lead_score >= 80 THEN "high"
-                    WHEN lead_score >= 50 THEN "medium"
-                    WHEN lead_score >= 25 THEN "low"
-                    ELSE "cold"
+            ->selectRaw("
+                CASE
+                    WHEN lead_score >= 80 THEN 'high'
+                    WHEN lead_score >= 50 THEN 'medium'
+                    WHEN lead_score >= 25 THEN 'low'
+                    ELSE 'cold'
                 END as score_category,
                 COUNT(*) as count
-            ')
+            ")
             ->groupBy('score_category')
             ->get()
             ->pluck('count', 'score_category')
@@ -226,11 +235,7 @@ final class CrmDashboardController extends Controller
      */
     public function recommendations(Request $request): JsonResponse
     {
-        $tenantId = $request->header('X-Tenant-ID') ?? $request->input('tenant_id');
-
-        if (!$tenantId) {
-            return response()->json(['error' => 'Tenant ID required'], 400);
-        }
+        $tenantId = $this->tenantId($request);
 
         $recommendations = [];
 

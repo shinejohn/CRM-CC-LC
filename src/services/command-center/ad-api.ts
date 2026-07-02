@@ -84,7 +84,7 @@ export async function listAds(params?: {
   page?: number;
 }): Promise<GeneratedAd[]> {
   const response = await apiClient.get<PaginatedResponse<GeneratedAd>>(
-    '/api/v1/ads',
+    '/v1/ads',
     { params }
   );
   return response.data;
@@ -95,7 +95,7 @@ export async function listAds(params?: {
  */
 export async function getAd(id: string): Promise<GeneratedAd> {
   const response = await apiClient.get<{ data: GeneratedAd }>(
-    `/api/v1/ads/${id}`
+    `/v1/ads/${id}`
   );
   return response.data;
 }
@@ -107,7 +107,7 @@ export async function generateFromCampaign(
   request: GenerateFromCampaignRequest
 ): Promise<GeneratedAd> {
   const response = await apiClient.post<{ data: GeneratedAd }>(
-    '/api/v1/ads/generate-from-campaign',
+    '/v1/ads/generate-from-campaign',
     request
   );
   return response.data;
@@ -120,7 +120,7 @@ export async function generateFromContent(
   request: GenerateFromContentRequest
 ): Promise<GeneratedAd> {
   const response = await apiClient.post<{ data: GeneratedAd }>(
-    '/api/v1/ads/generate-from-content',
+    '/v1/ads/generate-from-content',
     request
   );
   return response.data;
@@ -146,7 +146,7 @@ export async function updateAd(
   }
 ): Promise<GeneratedAd> {
   const response = await apiClient.put<{ data: GeneratedAd }>(
-    `/api/v1/ads/${id}`,
+    `/v1/ads/${id}`,
     updates
   );
   return response.data;
@@ -160,7 +160,7 @@ export async function getAdTemplates(params?: {
   ad_type?: string;
 }): Promise<AdTemplate[]> {
   const response = await apiClient.get<{ data: AdTemplate[] }>(
-    '/api/v1/ads/templates',
+    '/v1/ads/templates',
     { params }
   );
   return response.data;
@@ -180,7 +180,7 @@ export async function createAdTemplate(request: {
   specs?: Record<string, any>;
 }): Promise<AdTemplate> {
   const response = await apiClient.post<{ data: AdTemplate }>(
-    '/api/v1/ads/templates',
+    '/v1/ads/templates',
     request
   );
   return response.data;

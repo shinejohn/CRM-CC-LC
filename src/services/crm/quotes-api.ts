@@ -54,12 +54,12 @@ export const quotesApi = {
     });
     const query = searchParams.toString();
     return apiClient.get<{ data: Quote[]; meta: { current_page: number; last_page: number; per_page: number; total: number } }>(
-      `/api/v1/quotes${query ? `?${query}` : ''}`
+      `/v1/quotes${query ? `?${query}` : ''}`
     );
   },
 
   get: async (id: string): Promise<Quote> => {
-    const res = await apiClient.get<{ data: Quote }>(`/api/v1/quotes/${id}`);
+    const res = await apiClient.get<{ data: Quote }>(`/v1/quotes/${id}`);
     return res.data;
   },
 
@@ -72,7 +72,7 @@ export const quotesApi = {
     notes?: string;
     items: { description: string; quantity: number; unit_price: number }[];
   }): Promise<Quote> => {
-    const res = await apiClient.post<{ data: Quote }>('/api/v1/quotes', data);
+    const res = await apiClient.post<{ data: Quote }>('/v1/quotes', data);
     return res.data;
   },
 
@@ -85,21 +85,21 @@ export const quotesApi = {
     notes: string;
     items: { description: string; quantity: number; unit_price: number }[];
   }>): Promise<Quote> => {
-    const res = await apiClient.put<{ data: Quote }>(`/api/v1/quotes/${id}`, data);
+    const res = await apiClient.put<{ data: Quote }>(`/v1/quotes/${id}`, data);
     return res.data;
   },
 
   send: async (id: string): Promise<Quote> => {
-    const res = await apiClient.post<{ data: Quote }>(`/api/v1/quotes/${id}/send`, {});
+    const res = await apiClient.post<{ data: Quote }>(`/v1/quotes/${id}/send`, {});
     return res.data;
   },
 
   convertToInvoice: async (id: string): Promise<unknown> => {
-    const res = await apiClient.post<{ data: unknown }>(`/api/v1/quotes/${id}/convert-to-invoice`, {});
+    const res = await apiClient.post<{ data: unknown }>(`/v1/quotes/${id}/convert-to-invoice`, {});
     return res.data;
   },
 
   delete: async (id: string): Promise<void> => {
-    await apiClient.delete(`/api/v1/quotes/${id}`);
+    await apiClient.delete(`/v1/quotes/${id}`);
   },
 };

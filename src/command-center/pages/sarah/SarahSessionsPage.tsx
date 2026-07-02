@@ -98,7 +98,7 @@ export function SarahSessionsPage() {
     }
 
     apiClient
-      .get<PaginatedResponse>(`/sarah/sessions?${params.toString()}`)
+      .get<PaginatedResponse>(`/v1/sarah/sessions?${params.toString()}`)
       .then((res) => setResponse(res.data))
       .catch(() => setResponse({ data: [], current_page: 1, last_page: 1, total: 0 }))
       .finally(() => setLoading(false));

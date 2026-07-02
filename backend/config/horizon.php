@@ -159,12 +159,54 @@ return [
                 'tries' => 3,
                 'timeout' => 300,
             ],
-            'supervisor-rvm' => [
+            // Campaign orchestration jobs (ProcessCampaignTimelines fan-out,
+            // AdvanceCampaignDays, Manifest Destiny per-customer actions).
+            // Chunked big-table iteration → generous timeout + per-worker memory.
+            // NOTE: worker `timeout` must stay BELOW the redis connection's
+            // retry_after (env REDIS_QUEUE_RETRY_AFTER; see .env.example) or a
+            // still-running job gets re-reserved and double-processed.
+            'supervisor-campaigns' => [
                 'connection' => 'redis',
-                'queue' => ['rvm'],
+                'queue' => ['campaigns'],
+                'balance' => 'auto',
+                'minProcesses' => 3,
+                'maxProcesses' => 15,
+                'tries' => 3,
+                'timeout' => 300,
+                'memory' => 256,
+            ],
+            // Heavy periodic recalcs / cross-DB syncs (engagement-score, tier,
+            // data-quality, readership sync, contact re-scrub). These can run
+            // well over 60s, so they get their own long-timeout supervisor.
+            // Jobs should be dispatched with ->onQueue('maintenance').
+            'supervisor-maintenance' => [
+                'connection' => 'redis',
+                'queue' => ['maintenance'],
+                'balance' => 'auto',
+                'minProcesses' => 1,
+                'maxProcesses' => 3,
+                'tries' => 1,
+                'timeout' => 7200,
+                'memory' => 512,
+            ],
+            // Priority message bus (Communication Module 0B). Queues are listed
+            // p0..p4 so lower-numbered (higher-priority) work is preferred.
+            'supervisor-messages' => [
+                'connection' => 'redis',
+                'queue' => ['messages-p0', 'messages-p1', 'messages-p2', 'messages-p3', 'messages-p4'],
+                'balance' => 'auto',
+                'minProcesses' => 4,
+                'maxProcesses' => 20,
+                'tries' => 3,
+                'timeout' => 120,
+            ],
+            // Telephony / voice: ringless voicemail, SMS, outbound calls, voicemail.
+            'supervisor-telephony' => [
+                'connection' => 'redis',
+                'queue' => ['rvm', 'sms', 'calls', 'voicemail'],
                 'balance' => 'auto',
                 'minProcesses' => 2,
-                'maxProcesses' => 10,
+                'maxProcesses' => 12,
                 'tries' => 3,
                 'timeout' => 120,
             ],
@@ -177,6 +219,19 @@ return [
                 'tries' => 2,
                 'timeout' => 60,
             ],
+            // Alerts + emergency broadcasts. Emergency listed first for priority.
+            'supervisor-alerts' => [
+                'connection' => 'redis',
+                'queue' => ['emergency', 'alerts'],
+                'balance' => 'auto',
+                'minProcesses' => 2,
+                'maxProcesses' => 10,
+                'tries' => 3,
+                'timeout' => 120,
+            ],
+            // The `default` queue currently also receives several heavy periodic
+            // jobs (until they are moved to the `maintenance` queue), so its
+            // timeout/memory are kept generous. Stays below REDIS_QUEUE_RETRY_AFTER.
             'supervisor-default' => [
                 'connection' => 'redis',
                 'queue' => ['default'],
@@ -184,7 +239,8 @@ return [
                 'minProcesses' => 2,
                 'maxProcesses' => 10,
                 'tries' => 3,
-                'timeout' => 60,
+                'timeout' => 300,
+                'memory' => 256,
             ],
         ],
         'local' => [
@@ -197,9 +253,38 @@ return [
                 'tries' => 3,
                 'timeout' => 300,
             ],
-            'supervisor-rvm' => [
+            'supervisor-campaigns' => [
                 'connection' => 'redis',
-                'queue' => ['rvm'],
+                'queue' => ['campaigns'],
+                'balance' => 'auto',
+                'minProcesses' => 1,
+                'maxProcesses' => 3,
+                'tries' => 3,
+                'timeout' => 300,
+                'memory' => 256,
+            ],
+            'supervisor-maintenance' => [
+                'connection' => 'redis',
+                'queue' => ['maintenance'],
+                'balance' => 'auto',
+                'minProcesses' => 1,
+                'maxProcesses' => 1,
+                'tries' => 1,
+                'timeout' => 7200,
+                'memory' => 512,
+            ],
+            'supervisor-messages' => [
+                'connection' => 'redis',
+                'queue' => ['messages-p0', 'messages-p1', 'messages-p2', 'messages-p3', 'messages-p4'],
+                'balance' => 'auto',
+                'minProcesses' => 1,
+                'maxProcesses' => 3,
+                'tries' => 3,
+                'timeout' => 120,
+            ],
+            'supervisor-telephony' => [
+                'connection' => 'redis',
+                'queue' => ['rvm', 'sms', 'calls', 'voicemail'],
                 'balance' => 'auto',
                 'minProcesses' => 1,
                 'maxProcesses' => 2,
@@ -215,6 +300,15 @@ return [
                 'tries' => 2,
                 'timeout' => 60,
             ],
+            'supervisor-alerts' => [
+                'connection' => 'redis',
+                'queue' => ['emergency', 'alerts'],
+                'balance' => 'auto',
+                'minProcesses' => 1,
+                'maxProcesses' => 2,
+                'tries' => 3,
+                'timeout' => 120,
+            ],
             'supervisor-default' => [
                 'connection' => 'redis',
                 'queue' => ['default'],
@@ -222,7 +316,8 @@ return [
                 'minProcesses' => 1,
                 'maxProcesses' => 2,
                 'tries' => 3,
-                'timeout' => 60,
+                'timeout' => 300,
+                'memory' => 256,
             ],
         ],
     ],

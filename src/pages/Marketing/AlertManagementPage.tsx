@@ -32,8 +32,9 @@ export const AlertManagementPage: React.FC = () => {
       try {
         const { apiClient } = await import('@/services/api');
         const [activeRes, pendingRes] = await Promise.all([
-           apiClient.get('/alerts/active').catch(() => ({ data: { data: [] } })),
-           apiClient.get('/alerts/pending').catch(() => ({ data: { data: [] } }))
+           // TODO: no backend route (AlertManagementPage — /v1/alerts has no /active or /pending; index supports status filter instead)
+           apiClient.get('/v1/alerts/active').catch(() => ({ data: { data: [] } })),
+           apiClient.get('/v1/alerts/pending').catch(() => ({ data: { data: [] } }))
         ]);
         setActiveAlerts(activeRes.data.data || []);
         setPendingApprovals(pendingRes.data.data || []);

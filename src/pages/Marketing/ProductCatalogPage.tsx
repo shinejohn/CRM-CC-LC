@@ -66,7 +66,7 @@ export const ProductCatalogPage: React.FC = () => {
       setLoadError(null);
       try {
         const { apiClient } = await import('@/services/api');
-        const res = await apiClient.get('/products');
+        const res = await apiClient.get('/v1/products');
         setProducts(res.data.data || []);
       } catch {
         setProducts([]);

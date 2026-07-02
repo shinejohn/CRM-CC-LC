@@ -20,7 +20,26 @@ class OutboundCampaignApiTest extends TestCase
             'status' => 'draft',
             'message' => 'Test message body',
             'subject' => 'Test subject',
+            // Non-empty segment: campaigns now reject empty recipient_segments
+            // (refusing to target the entire customer table).
+            'recipient_segments' => ['state' => 'TX'],
         ], $overrides));
+    }
+
+    /**
+     * A customer that passes the email health filter (opted-in, not suppressed,
+     * not do-not-contact, has an email) and matches the default TX segment.
+     */
+    private function createSendableCustomer(): \App\Models\Customer
+    {
+        return \App\Models\Customer::factory()->create([
+            'tenant_id' => '00000000-0000-0000-0000-000000000000',
+            'state' => 'TX',
+            'email' => 'sendable-' . \Illuminate\Support\Str::random(6) . '@example.com',
+            'email_opted_in' => true,
+            'email_suppressed' => false,
+            'do_not_contact' => false,
+        ]);
     }
 
     public function test_can_list_outbound_campaigns(): void
@@ -79,6 +98,7 @@ class OutboundCampaignApiTest extends TestCase
     public function test_can_get_campaign_recipients(): void
     {
         $campaign = $this->createCampaign();
+        $this->createSendableCustomer();
 
         $response = $this->getJson("/api/v1/outbound/campaigns/{$campaign->id}/recipients");
 
@@ -94,6 +114,7 @@ class OutboundCampaignApiTest extends TestCase
     public function test_can_start_campaign(): void
     {
         $campaign = $this->createCampaign();
+        $this->createSendableCustomer();
 
         $response = $this->postJson("/api/v1/outbound/campaigns/{$campaign->id}/start", []);
 

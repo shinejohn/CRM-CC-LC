@@ -69,7 +69,7 @@ export function SarahDashboardPage() {
 
   useEffect(() => {
     apiClient
-      .get<{ data: DashboardData }>("/sarah/dashboard")
+      .get<{ data: DashboardData }>("/v1/sarah/dashboard")
       .then((res) => setData(res.data.data))
       .catch(() => {
         // Fall back to empty state

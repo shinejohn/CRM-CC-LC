@@ -1,6 +1,6 @@
 /**
  * Quote (Proposal) hooks: list, get, create, update, send, convert, delete.
- * Backed by quotesApi (src/services/crm/quotes-api.ts) → /api/v1/quotes.
+ * Backed by quotesApi (src/services/crm/quotes-api.ts) → /v1/quotes.
  */
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';

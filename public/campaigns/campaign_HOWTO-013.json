@@ -82,7 +82,7 @@
           "Community/Local"
         ]
       },
-      "narration": "First, set up content categories. Educational content like tips and how-tos. Behind-the-scenes showing your work. Customer spotlights and testimonials. Promotional content about offers. Community and local connection posts. modern tools will rotate through these for variety.",
+      "narration": "First, set up content categories. Educational content like tips and how-tos. Behind-the-scenes showing your work. Customer spotlights and testimonials. Promotional content about offers. Community and local connection posts. AI will rotate through these for variety.",
       "duration_seconds": 35,
       "audio_file": "slide-03-categories.mp3"
     },
@@ -97,9 +97,9 @@
           "5x per week",
           "3x per week"
         ],
-        "timing": "modern tools picks optimal times based on your audience"
+        "timing": "AI picks optimal times based on your audience"
       },
-      "narration": "Set your posting frequency. Daily is recommended for maximum visibility. Five times per week if that feels like too much. Three times per week as a minimum. Don't worry about picking times\u2014modern tools analyzes when your audience is active and posts then.",
+      "narration": "Set your posting frequency. Daily is recommended for maximum visibility. Five times per week if that feels like too much. Three times per week as a minimum. Don't worry about picking times\u2014AI analyzes when your audience is active and posts then.",
       "duration_seconds": 30,
       "audio_file": "slide-04-schedule.mp3"
     },
@@ -123,9 +123,9 @@
     {
       "slide_num": 6,
       "component": "StepSlide",
-      "title": "Step 4: Train Your modern tools",
+      "title": "Step 4: Train Your AI",
       "content": {
-        "action": "Feed modern tools Your Voice",
+        "action": "Feed ai Your Voice",
         "inputs": [
           "Your best past posts",
           "Competitor examples you like",
@@ -133,7 +133,7 @@
           "Topics to avoid"
         ]
       },
-      "narration": "Train the modern tools on your voice. Share your best past posts as examples. Show competitor examples you like the style of. List words and phrases you commonly use. Specify topics to avoid. The more you train, the better the content matches your voice.",
+      "narration": "Train the AI on your voice. Share your best past posts as examples. Show competitor examples you like the style of. List words and phrases you commonly use. Specify topics to avoid. The more you train, the better the content matches your voice.",
       "duration_seconds": 30,
       "audio_file": "slide-06-train.mp3"
     },

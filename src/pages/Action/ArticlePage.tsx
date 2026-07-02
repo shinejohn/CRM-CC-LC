@@ -57,7 +57,7 @@ export const ArticlePage: React.FC = () => {
       if (search) params.search = search;
       if (statusFilter) params.status = statusFilter;
       const { data } = await api.get<{ data: Article[]; meta: PaginatedArticles['meta'] }>(
-        '/articles',
+        '/v1/articles',
         { params }
       );
       const response = data as unknown as { data: Article[]; meta?: PaginatedArticles['meta'] };
@@ -78,7 +78,7 @@ export const ArticlePage: React.FC = () => {
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this article?')) return;
     try {
-      await api.delete(`/articles/${id}`);
+      await api.delete(`/v1/articles/${id}`);
       loadArticles();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to delete article');
@@ -87,7 +87,7 @@ export const ArticlePage: React.FC = () => {
 
   const handlePublish = async (article: Article) => {
     try {
-      await api.put(`/articles/${article.id}`, { status: 'published' });
+      await api.put(`/v1/articles/${article.id}`, { status: 'published' });
       loadArticles();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to publish article');
@@ -305,7 +305,7 @@ const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
     setError(null);
     try {
       if (article) {
-        await api.put(`/articles/${article.id}`, {
+        await api.put(`/v1/articles/${article.id}`, {
           title,
           excerpt: excerpt || undefined,
           content: content || undefined,
@@ -313,7 +313,7 @@ const ArticleEditorModal: React.FC<ArticleEditorModalProps> = ({
           status,
         });
       } else {
-        await api.post('/articles', {
+        await api.post('/v1/articles', {
           title,
           excerpt: excerpt || undefined,
           content: content || undefined,

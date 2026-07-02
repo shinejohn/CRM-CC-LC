@@ -134,11 +134,17 @@ final class CampaignOrchestratorService implements CampaignOrchestratorInterface
                 
                 Log::info("Executed action {$action->id} for customer {$customer->id}", $result);
                 
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
+                // Catch Throwable (not just Exception) so a ValueError/Error/TypeError
+                // in ONE customer's action does not abort the entire batch run. This
+                // is what previously killed the Manifest Destiny run around day 60 —
+                // a single malformed action threw an Error and every remaining
+                // customer went unprocessed. Log, record, and continue.
                 Log::error("Failed to execute action {$action->id} for customer {$customer->id}", [
                     'error' => $e->getMessage(),
+                    'exception' => $e::class,
                 ]);
-                
+
                 $results[] = [
                     'action_id' => $action->id,
                     'status' => 'failed',
@@ -197,21 +203,35 @@ final class CampaignOrchestratorService implements CampaignOrchestratorInterface
     public function processAllDueCustomers(): array
     {
         $results = [];
-        
-        // Get all active progress records
-        $activeProgress = CustomerTimelineProgress::where('status', 'active')
+
+        // There can be ~385K active progress rows. An unbounded ->get() would try
+        // to hydrate all of them (plus eager-loaded customer + timeline) into
+        // memory at once and OOM the worker. chunkById streams them in bounded
+        // batches, keeping memory flat. chunkById (not chunk) is safe here even
+        // though we mutate rows inside the loop — it paginates on the primary key
+        // rather than an OFFSET, so advancing/completing rows can't shift the
+        // window and skip records.
+        CustomerTimelineProgress::where('status', 'active')
             ->with(['customer', 'timeline'])
-            ->get();
-            
-        foreach ($activeProgress as $progress) {
-            $customerResults = $this->executeActionsForDay($progress);
-            $this->checkAndAdvanceDay($progress);
-            
-            if (!empty($customerResults)) {
-                $results[$progress->customer_id] = $customerResults;
-            }
-        }
-        
+            ->chunkById(500, function ($batch) use (&$results): void {
+                foreach ($batch as $progress) {
+                    try {
+                        $customerResults = $this->executeActionsForDay($progress);
+                        $this->checkAndAdvanceDay($progress);
+
+                        if (! empty($customerResults)) {
+                            $results[$progress->customer_id] = $customerResults;
+                        }
+                    } catch (\Throwable $e) {
+                        // Never let one bad progress row abort the whole run.
+                        Log::error("processAllDueCustomers: failed for progress {$progress->id}", [
+                            'error' => $e->getMessage(),
+                            'exception' => $e::class,
+                        ]);
+                    }
+                }
+            }, 'id');
+
         return $results;
     }
     

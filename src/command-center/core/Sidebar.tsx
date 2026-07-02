@@ -18,20 +18,24 @@ interface SidebarProps {
   activeItem?: string;
 }
 
+// NOTE: This Sidebar + AppShell is legacy/unmounted — the live Command Center
+// nav is NavigationRail via command-center/AppRouter. Paths below are corrected
+// to the real routes so this file is accurate if it is ever remounted.
 const navItems: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, path: '/command-center' },
-  { id: 'activities', label: 'Activities', icon: Activity, path: '/command-center/activities', badge: 'dynamic' },
-  { id: 'customers', label: 'Customers', icon: Users, path: '/command-center/customers' },
-  { id: 'content', label: 'Content', icon: FileText, path: '/command-center/content' },
-  { id: 'campaigns', label: 'Campaigns', icon: Megaphone, path: '/command-center/campaigns' },
+  { id: 'activities', label: 'Activities', icon: Activity, path: '/command-center/sell/activities', badge: 'dynamic' },
+  { id: 'customers', label: 'Customers', icon: Users, path: '/command-center/sell/customers' },
+  { id: 'content', label: 'Content', icon: FileText, path: '/command-center/attract' },
+  { id: 'campaigns', label: 'Campaigns', icon: Megaphone, path: '/command-center/attract/campaigns' },
   { id: 'commerce', label: 'Promote & Advertise', icon: Megaphone, path: '/command-center/commerce' },
-  { id: 'services', label: 'Services', icon: ShoppingBag, path: '/command-center/services' },
-  { id: 'ai-hub', label: 'AI Hub', icon: Sparkles, path: '/command-center/ai-hub' },
-  { id: 'intelligence-hub', label: 'Intelligence Hub', icon: Brain, path: '/command-center/intelligence-hub' },
-  { id: 'calendar', label: 'Calendar', icon: Calendar, path: '/command-center/calendar' },
-  { id: 'messages', label: 'Messages', icon: MessageSquare, path: '/command-center/messages', badge: 'dynamic' },
-  { id: 'loyalty', label: 'Loyalty', icon: Sparkles, path: '/command-center/loyalty', featureFlag: 'loyalty_program' },
-  { id: 'job-board', label: 'Job Board', icon: FileText, path: '/command-center/job-board', featureFlag: 'job_board' },
+  { id: 'services', label: 'Services', icon: ShoppingBag, path: '/command-center/commerce' },
+  { id: 'ai-hub', label: 'AI Hub', icon: Sparkles, path: '/command-center/ai' },
+  { id: 'intelligence-hub', label: 'Intelligence Hub', icon: Brain, path: '/command-center/define/profile' },
+  // TODO: no matching route yet — calendar/messages/loyalty/job-board pages are not built.
+  { id: 'calendar', label: 'Calendar', icon: Calendar, path: '/command-center/dashboard' },
+  { id: 'messages', label: 'Messages', icon: MessageSquare, path: '/command-center/dashboard', badge: 'dynamic' },
+  { id: 'loyalty', label: 'Loyalty', icon: Sparkles, path: '/command-center/dashboard', featureFlag: 'loyalty_program' },
+  { id: 'job-board', label: 'Job Board', icon: FileText, path: '/command-center/dashboard', featureFlag: 'job_board' },
   { id: 'ops', label: 'Operations', icon: Shield, path: '/ops', adminOnly: true },
 ];
 

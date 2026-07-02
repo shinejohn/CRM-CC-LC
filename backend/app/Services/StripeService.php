@@ -56,18 +56,53 @@ class StripeService
     }
 
     /**
-     * Create a payment intent for direct charges
+     * Create a payment intent for direct charges.
+     *
+     * Pass $idempotencyKey to make the create request safely retryable — Stripe
+     * returns the original PaymentIntent for a repeated key instead of creating
+     * (and charging) a second one.
      */
-    public function createPaymentIntent(int $amount, string $currency = 'usd', array $metadata = []): PaymentIntent
+    public function createPaymentIntent(int $amount, string $currency = 'usd', array $metadata = [], ?string $idempotencyKey = null): PaymentIntent
     {
         try {
+            $options = [];
+            if ($idempotencyKey !== null && $idempotencyKey !== '') {
+                $options['idempotency_key'] = $idempotencyKey;
+            }
+
             return $this->stripe->paymentIntents->create([
                 'amount' => $amount,
                 'currency' => $currency,
                 'metadata' => $metadata,
-            ]);
+            ], $options);
         } catch (Exception $e) {
             Log::error('Stripe payment intent creation failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
+     * Refund a payment intent (full refund).
+     */
+    public function refundPaymentIntent(string $paymentIntentId): \Stripe\Refund
+    {
+        try {
+            return $this->stripe->refunds->create(['payment_intent' => $paymentIntentId]);
+        } catch (Exception $e) {
+            Log::error('Stripe refund failed: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    /**
+     * Attach a payment method to a customer.
+     */
+    public function attachPaymentMethod(string $paymentMethodId, string $customerId): \Stripe\PaymentMethod
+    {
+        try {
+            return $this->stripe->paymentMethods->attach($paymentMethodId, ['customer' => $customerId]);
+        } catch (Exception $e) {
+            Log::error('Stripe attach payment method failed: ' . $e->getMessage());
             throw $e;
         }
     }

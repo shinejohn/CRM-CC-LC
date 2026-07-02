@@ -32,13 +32,16 @@ final class ScheduleWeeklyNewsletters implements ShouldQueue
                     continue;
                 }
                 
-                // Calculate send time in community's timezone
-                $sendTime = $today
+                // Calculate send time in community's timezone.
+                // ->copy() is critical: Carbon mutates in place, so without it $sendTime,
+                // $weekStart and $today would all be the SAME instance — startOfWeek() below
+                // would rewind $sendTime to the past and blast the newsletter immediately.
+                $sendTime = $today->copy()
                     ->setTimeFromTimeString($schedule->weekly_send_time)
                     ->setTimezone('UTC');
-                
+
                 // Check if newsletter already exists for this week
-                $weekStart = $today->startOfWeek();
+                $weekStart = $today->copy()->startOfWeek();
                 $exists = Newsletter::where('community_id', $schedule->community_id)
                     ->where('newsletter_type', 'weekly')
                     ->where('issue_date', '>=', $weekStart)

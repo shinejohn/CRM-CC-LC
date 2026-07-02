@@ -29,7 +29,11 @@ import type {
   DateRangeParams,
 } from '@/types/operations';
 
-const BASE_PATH = '/api/v1/operations';
+// All sub-resources below are served by the `/v1/ops/*` group (see
+// backend/routes/api-ops.php + OpsResourceController): list endpoints return the
+// `{ data, meta }` envelope with camelCase keys, single/action endpoints return
+// `{ data }`. Base is `/v1/ops` (apiClient already prepends the `/api` origin).
+const BASE_PATH = '/v1/ops';
 
 const serializeDate = (value?: Date): string | undefined => (value ? value.toISOString() : undefined);
 

@@ -20,21 +20,24 @@ final class CommunicationWebhookController extends Controller
 {
     public function postal(Request $request): JsonResponse
     {
+        // Verify signature — fail closed (mirrors PostalWebhookController).
+        if (! $this->verifyPostalSignature($request)) {
+            return response()->json(['error' => 'Invalid signature'], 401);
+        }
+
         $payload = $request->all();
-        
+
         // Postal webhook format
         $eventType = $payload['event'] ?? null;
         $messageId = $payload['message_id'] ?? null;
-        
+
         if (!$messageId) {
             return response()->json(['error' => 'Missing message_id'], 400);
         }
-        
-        // Find message by external_id
-        $message = MessageQueue::where('external_id', $messageId)
-            ->orWhere('external_id', 'like', "%{$messageId}%")
-            ->first();
-        
+
+        // Find message by exact external_id match.
+        $message = MessageQueue::where('external_id', $messageId)->first();
+
         if (!$message) {
             Log::warning("Postal webhook: Message not found", ['message_id' => $messageId]);
             return response()->json(['error' => 'Message not found'], 404);
@@ -128,6 +131,26 @@ final class CommunicationWebhookController extends Controller
         return response()->json(['success' => true]);
     }
     
+    /**
+     * Verify the Postal webhook HMAC signature. Fails closed: rejects when the
+     * secret is unconfigured or the signature header is absent/invalid.
+     */
+    private function verifyPostalSignature(Request $request): bool
+    {
+        $secret = config('services.postal.webhook_secret');
+        $signature = $request->header('X-Postal-Signature');
+
+        if (! $secret || ! $signature) {
+            Log::warning('Postal webhook rejected: missing secret or signature');
+
+            return false;
+        }
+
+        $expected = base64_encode(hash_hmac('sha1', $request->getContent(), $secret, true));
+
+        return hash_equals($expected, $signature);
+    }
+
     private function processEvent(MessageQueue $message, ?string $eventType, array $payload, string $source): void
     {
         if (!$eventType) {

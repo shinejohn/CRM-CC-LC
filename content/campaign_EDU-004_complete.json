@@ -6,14 +6,14 @@
     "type": "Educational",
     "title": "Why Community Media Beats Advertising",
     "subject": "Why 'community marketing' beats 'digital marketing'",
-    "landing_page": "modern tools-operations-guide",
+    "landing_page": "ai-operations-guide",
     "template": "educational",
     "description": "Why being part of the community story beats running ads"
   },
   "landing_page": {
     "campaign_id": "EDU-004",
-    "landing_page_slug": "modern tools-operations-guide",
-    "url": "/learn/modern tools-operations-guide",
+    "landing_page_slug": "ai-operations-guide",
+    "url": "/learn/ai-operations-guide",
     "template_id": "educational",
     "template_name": "Educational Content",
     "slide_count": 7,

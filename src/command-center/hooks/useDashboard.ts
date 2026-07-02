@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Users, UserPlus, DollarSign, TrendingUp } from 'lucide-react';
 import { apiService } from '../services/api.service';
 import { DashboardCard, Activity } from '@/types/command-center';
 
@@ -12,6 +13,17 @@ interface DashboardMetric {
   color: string;
 }
 
+/**
+ * Subset of the /v1/crm/dashboard/analytics payload the dashboard metrics use.
+ * The endpoint returns much more (industry/outcome breakdowns, revenue series),
+ * but the header metric tiles only need these aggregates.
+ */
+interface DashboardAnalytics {
+  customers?: { total?: number; new?: number };
+  orders?: { total_revenue?: number; recent_revenue?: number };
+  conversion?: { rate?: number };
+}
+
 interface UseDashboardReturn {
   metrics: DashboardMetric[];
   widgets: DashboardCard[];
@@ -20,6 +32,50 @@ interface UseDashboardReturn {
   error: string | null;
   refreshDashboard: () => Promise<void>;
   updateWidgetPosition: (widgetId: string, position: { row: number; col: number }) => Promise<void>;
+}
+
+const currency = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  maximumFractionDigits: 0,
+});
+
+function buildMetrics(analytics: DashboardAnalytics): DashboardMetric[] {
+  const totalCustomers = analytics.customers?.total ?? 0;
+  const newCustomers = analytics.customers?.new ?? 0;
+  const revenue = analytics.orders?.total_revenue ?? 0;
+  const conversionRate = analytics.conversion?.rate ?? 0;
+
+  return [
+    {
+      id: 'customers',
+      label: 'Customers',
+      value: totalCustomers.toLocaleString(),
+      icon: Users,
+      color: 'lavender',
+    },
+    {
+      id: 'new-customers',
+      label: 'New (30d)',
+      value: newCustomers.toLocaleString(),
+      icon: UserPlus,
+      color: 'mint',
+    },
+    {
+      id: 'revenue',
+      label: 'Revenue',
+      value: currency.format(revenue),
+      icon: DollarSign,
+      color: 'sky',
+    },
+    {
+      id: 'conversion',
+      label: 'Conversion',
+      value: `${conversionRate}%`,
+      icon: TrendingUp,
+      color: 'peach',
+    },
+  ];
 }
 
 export function useDashboard(): UseDashboardReturn {
@@ -32,20 +88,32 @@ export function useDashboard(): UseDashboardReturn {
   const fetchDashboardData = useCallback(async () => {
     setIsLoading(true);
     setError(null);
-    
+
     try {
-      const [metricsRes, widgetsRes, activitiesRes] = await Promise.all([
-        apiService.get('/v1/dashboard/metrics'),
-        apiService.get('/v1/dashboard/widgets'),
-        apiService.get('/v1/dashboard/recent-activity', { params: { limit: 10 } }),
+      // Three independent sources, fetched in parallel:
+      //  - widget layout (persisted per-user, seeds defaults on first load)
+      //  - recent-activity feed (CRM interactions + activities, tenant-scoped)
+      //  - CRM analytics aggregate (drives the header metric tiles)
+      const [widgetsRes, activityRes, analyticsRes] = await Promise.all([
+        apiService.get<DashboardCard[]>('/v1/dashboard/widgets'),
+        apiService.get<Activity[]>('/v1/dashboard/recent-activity', { params: { limit: 10 } }),
+        apiService.get<DashboardAnalytics>('/v1/crm/dashboard/analytics', { params: { days: 30 } }),
       ]);
 
-      setMetrics(Array.isArray(metricsRes.data) ? metricsRes.data : []);
-      setWidgets(Array.isArray(widgetsRes.data) ? widgetsRes.data : []);
-      setActivities(Array.isArray(activitiesRes.data) ? activitiesRes.data : []);
+      setWidgets(widgetsRes.success && widgetsRes.data ? widgetsRes.data : []);
+      setActivities(activityRes.success && activityRes.data ? activityRes.data : []);
+      setMetrics(analyticsRes.success && analyticsRes.data ? buildMetrics(analyticsRes.data) : []);
+
+      if (!widgetsRes.success || !activityRes.success || !analyticsRes.success) {
+        setError(
+          widgetsRes.error?.message ??
+            activityRes.error?.message ??
+            analyticsRes.error?.message ??
+            'Failed to load dashboard'
+        );
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load dashboard');
-      // Set default data on error
       setMetrics([]);
       setWidgets([]);
       setActivities([]);
@@ -62,13 +130,19 @@ export function useDashboard(): UseDashboardReturn {
     widgetId: string,
     position: { row: number; col: number }
   ) => {
-    try {
-      await apiService.put(`/v1/dashboard/widgets/${widgetId}`, { position });
-      setWidgets(prev =>
-        prev.map(w => (w.id === widgetId ? { ...w, position } : w))
-      );
-    } catch (err) {
-      console.error('Failed to update widget position:', err);
+    // Optimistic local update, then persist the single widget's position.
+    setWidgets(prev =>
+      prev.map(w => (w.id === widgetId ? { ...w, position } : w))
+    );
+
+    const res = await apiService.put<DashboardCard>(
+      `/v1/dashboard/widgets/${widgetId}`,
+      { position }
+    );
+
+    // Reconcile with the server's canonical card (keeps size/config in sync).
+    if (res.success && res.data) {
+      setWidgets(prev => prev.map(w => (w.id === widgetId ? res.data as DashboardCard : w)));
     }
   }, []);
 
@@ -82,4 +156,3 @@ export function useDashboard(): UseDashboardReturn {
     updateWidgetPosition,
   };
 }
-

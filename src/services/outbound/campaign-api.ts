@@ -49,7 +49,7 @@ export interface RecipientList {
  */
 export async function getCampaignRecipients(campaignId: string): Promise<RecipientList> {
   const response = await apiClient.get<{ data: RecipientList }>(
-    `/api/v1/outbound/campaigns/${campaignId}/recipients`
+    `/v1/outbound/campaigns/${campaignId}/recipients`
   );
   return response.data;
 }
@@ -58,7 +58,7 @@ export async function getCampaignRecipients(campaignId: string): Promise<Recipie
  * Start campaign
  */
 export async function startCampaign(campaignId: string): Promise<void> {
-  await apiClient.post(`/api/v1/outbound/campaigns/${campaignId}/start`);
+  await apiClient.post(`/v1/outbound/campaigns/${campaignId}/start`);
 }
 
 /**
@@ -66,7 +66,7 @@ export async function startCampaign(campaignId: string): Promise<void> {
  */
 export async function getCampaignAnalytics(campaignId: string): Promise<CampaignAnalytics> {
   const response = await apiClient.get<{ data: CampaignAnalytics }>(
-    `/api/v1/outbound/campaigns/${campaignId}/analytics`
+    `/v1/outbound/campaigns/${campaignId}/analytics`
   );
   return response.data;
 }

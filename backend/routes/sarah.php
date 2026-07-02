@@ -34,14 +34,14 @@ Route::prefix('sarah')->name('api.sarah.')->group(function (): void {
     Route::post('/sessions/{id}/message', [SarahCampaignController::class, 'sendMessage'])->name('sessions.message');
     Route::post('/sessions/{id}/create-campaign', [SarahCampaignController::class, 'createCampaign'])->name('sessions.create-campaign');
 
-    // ── Notebook endpoints (customer profile staging) ──
-    Route::get('/notebooks/{customerId}', [SarahNotebookController::class, 'show'])->name('notebooks.show');
-    Route::put('/notebooks/{customerId}', [SarahNotebookController::class, 'update'])->name('notebooks.update');
-    Route::get('/notebooks/{customerId}/history', [SarahNotebookController::class, 'history'])->name('notebooks.history');
-    Route::post('/notebooks/{customerId}/approve', [SarahNotebookController::class, 'approve'])->name('notebooks.approve');
-
     // ── Authenticated endpoints ──
     Route::middleware('auth:sanctum')->group(function (): void {
+
+        // Notebook endpoints (customer profile staging — write customer PII by UUID)
+        Route::get('/notebooks/{customerId}', [SarahNotebookController::class, 'show'])->name('notebooks.show');
+        Route::put('/notebooks/{customerId}', [SarahNotebookController::class, 'update'])->name('notebooks.update');
+        Route::get('/notebooks/{customerId}/history', [SarahNotebookController::class, 'history'])->name('notebooks.history');
+        Route::post('/notebooks/{customerId}/approve', [SarahNotebookController::class, 'approve'])->name('notebooks.approve');
 
         // Checkout
         Route::post('/campaigns/{id}/checkout', [SarahCampaignController::class, 'checkout'])->name('campaigns.checkout');
